@@ -11,7 +11,7 @@ import scala.slick.driver.MySQLDriver.simple._
  * description:用于类的说明
  */
 
-case class ManagerRole (
+case class AdministratorRole (
                          id:Option[Long]=None,
                          email: String,
                          passwd: String,

@@ -15,7 +15,7 @@ import java.sql.{Timestamp }
  * description:用于类的说明
  */
 
-case class Manager (
+case class Administrator (
                      id:Option[Long]=None,
                      email: String,
                      passwd: String,
@@ -32,7 +32,7 @@ case class Manager (
                      )
 
 
-object Managers extends Table[Manager]("manager") {
+object Administrators extends Table[Administrator]("administrator") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def email = column[String]("email")
   def passwd = column[String]("passwd")
@@ -48,7 +48,7 @@ object Managers extends Table[Manager]("manager") {
   def roleName=column[String]("role_name")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ email ~ passwd ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Manager, Manager.unapply _)
+  def * = id.? ~ email ~ passwd ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Administrator, Administrator.unapply _)
 
 
 }
