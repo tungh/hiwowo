@@ -17,13 +17,13 @@ import models.Page._
  * description:用于类的说明  用户喜欢的话题
  */
 
-case class UserLoveSitePost (
+case class UserLovePost (
                            id: Option[Long],
                            uid:Long,
                            pid:Long,
                            addTime:Option[Timestamp]
                            )
-object UserLoveSitePosts extends Table[UserLoveSitePost]("user_love_site_post") {
+object UserLovePosts extends Table[UserLovePost]("user_love_site_post") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def pid = column[Long]("pid")

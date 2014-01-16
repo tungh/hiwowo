@@ -6,7 +6,7 @@ import scala.slick.driver.MySQLDriver.simple._
 /*
 * status 0 草稿  1 发布 2 优质
 * */
-case  class  SitePost(
+case  class  SiteBlog(
                   id: Option[Long],
                   uid:Long,
                   sid:Long,
@@ -29,7 +29,7 @@ case  class  SitePost(
                   addTime:Option[Timestamp]
                   )
 
-object SitePosts extends Table[SitePost]("site_post") {
+object SiteBlogs extends Table[SiteBlog]("site_blog") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def sid = column[Long]("sid")
@@ -52,8 +52,8 @@ object SitePosts extends Table[SitePost]("site_post") {
   def addTime=column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ sid ~ cid ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(SitePost, SitePost.unapply _)
-  def autoInc = id.? ~ uid ~ sid ~ cid ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(SitePost, SitePost.unapply _) returning id
+  def * = id.? ~ uid ~ sid ~ cid ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(SiteBlog, SiteBlog.unapply _)
+  def autoInc = id.? ~ uid ~ sid ~ cid ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(SiteBlog, SiteBlog.unapply _) returning id
   def autoInc2 = uid ~ sid ~ cid ~ title ~ pic.? ~ content ~ tags.? ~ status ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  returning id
 
 }

@@ -5,7 +5,7 @@ import scala.slick.driver.MySQLDriver.simple._
  /*
  * reply type 0 帖子回复 1 宝贝回复 2 主题回复
  * */
-case class ReplyMsg(
+case class DiscussMsg(
                      id: Option[Long],
                      replierId:Long,
                      replierName: String,
@@ -16,7 +16,7 @@ case class ReplyMsg(
                      addTime:Option[Timestamp]
                      )
 
-object ReplyMsgs extends Table[ReplyMsg]("reply_msg") {
+object DiscussMsgs extends Table[DiscussMsg]("discuss_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def replierId =column[Long]("replier_id")
   def replierName =column[String]("replier_name")
@@ -25,7 +25,7 @@ object ReplyMsgs extends Table[ReplyMsg]("reply_msg") {
   def content = column[String]("content")
   def ownerId = column[Long]("owner_id")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(ReplyMsg, ReplyMsg.unapply _)
-  def autoInc =id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(ReplyMsg, ReplyMsg.unapply _) returning id
+  def * = id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(DiscussMsg, DiscussMsg.unapply _)
+  def autoInc =id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(DiscussMsg, DiscussMsg.unapply _) returning id
   def autoInc2 =replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   returning id
 }
