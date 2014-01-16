@@ -17,19 +17,19 @@ import models.Page._
  * description:用于类的说明  用户喜欢的话题
  */
 
-case class UserLovePost (
+case class UserLoveBlog (
                            id: Option[Long],
                            uid:Long,
                            pid:Long,
                            addTime:Option[Timestamp]
                            )
-object UserLovePosts extends Table[UserLovePost]("user_love_site_post") {
+object UserLoveBlogs extends Table[UserLoveBlog]("user_love_blog") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def pid = column[Long]("pid")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ pid  ~ addTime.?  <>(UserLoveSitePost, UserLoveSitePost.unapply _)
+  def * = id.? ~ uid  ~ pid  ~ addTime.?  <>(UserLoveBlog, UserLoveBlog.unapply _)
 
   def autoInc = uid  ~ pid   returning id
 

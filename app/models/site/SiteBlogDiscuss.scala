@@ -20,7 +20,7 @@ case class SiteBlogDiscuss (
                           addTime:Option[Timestamp]
                           )
 
-object SitePostDiscusses extends Table[SiteBlogDiscuss]("site_blog_discuss") {
+object SiteBlogDiscusses extends Table[SiteBlogDiscuss]("site_blog_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def pid = column[Long]("pid")

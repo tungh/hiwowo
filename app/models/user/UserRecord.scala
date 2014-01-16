@@ -20,7 +20,7 @@ import play.api.Play.current
 */
 
 
-case class UserTrend (
+case class UserRecord (
 id: Option[Long],
 uid: Long,
 actionName:String,
@@ -30,7 +30,7 @@ actionContent:String,
 addTime: Option[Timestamp]
 )
 
-object UserTrends extends Table[UserTrend]("user_trend") {
+object UserRecords extends Table[UserRecord]("user_record") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def actionName = column[String]("action_name")
@@ -38,8 +38,8 @@ object UserTrends extends Table[UserTrend]("user_trend") {
   def actionUrl = column[String]("action_url")
   def actionContent = column[String]("action_content")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserTrend, UserTrend.unapply _)
-  def autoInc =id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserTrend, UserTrend.unapply _) returning id
+  def * = id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _)
+  def autoInc =id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _) returning id
 
   /* 根据id 查找 */
   def findById(id:Long)(implicit session: Session):Option[UserTrend] = {
