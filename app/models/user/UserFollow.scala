@@ -29,7 +29,7 @@ object UserFollows extends Table[UserFollow]("user_follow") {
   def uid = column[Long]("uid")
   def fansId = column[Long]("fans_id")
   def addTime = column[Timestamp]("add_time")
-  // Every table needs a * projection with the same type as the table's type parameter
+
   def * = id.? ~ uid  ~ fansId  ~ addTime.?  <> (UserFollow, UserFollow.unapply _)
   def autoInc = uid ~ fansId returning id
 

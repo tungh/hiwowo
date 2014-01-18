@@ -14,34 +14,26 @@ import models.Page._
  * Date: 12-9-20
  * Time: 下午2:36
  * ***********************
- * description:用于类的说明  用户喜欢的话题
+ * description:用于类的说明  用户喜欢的日志
  */
 
 case class UserLoveBlog (
                            id: Option[Long],
                            uid:Long,
-                           pid:Long,
+                           blogId:Long,
                            addTime:Option[Timestamp]
                            )
 object UserLoveBlogs extends Table[UserLoveBlog]("user_love_blog") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def pid = column[Long]("pid")
+  def blogId = column[Long]("blogId")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ pid  ~ addTime.?  <>(UserLoveBlog, UserLoveBlog.unapply _)
+  def * = id.? ~ uid  ~ blogId  ~ addTime.?  <>(UserLoveBlog, UserLoveBlog.unapply _)
 
-  def autoInc = uid  ~ pid   returning id
+  def autoInc = uid  ~ blogId   returning id
 
-  def insert(uid:Long,pid:Long)(implicit session: Session)={
-    UserLovePosts.autoInc.insert(uid,pid)
-  }
-  def find(uid:Long,pid:Long)(implicit session: Session)={
-    (for(c<-UserLovePosts if c.uid===uid  if c.pid ===pid  )yield c).firstOption
-  }
-  def delete(uid:Long,pid:Long)(implicit session: Session)={
-    (for(c<-UserLovePosts if c.uid===uid  if c.pid === pid  )yield c).delete
-  }
+
 }
 
 

@@ -20,11 +20,9 @@ case class UserProfile (
                          id: Option[Long],
                          uid: Long,
                          inviteId: Option[Long],
-                         inviteName: Option[String],
                          gender: Int,
                          birth: Option[String],
                          weixin: Option[String],
-                         qq: Option[String],
                          receiver: Option[String],
                          province: Option[String],
                          city: Option[String],
@@ -42,11 +40,9 @@ object UserProfiles extends Table[UserProfile]("user_profile") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def inviteId = column[Long]("invite_id")
-  def inviteName = column[String]("invite_name")
   def gender = column[Int]("gender")
   def birth = column[String]("birth")
   def weixin = column[String]("weixin")
-  def qq = column[String]("qq")
   def receiver = column[String]("receiver")
   def province = column[String]("province")
   def city = column[String]("city")
@@ -59,8 +55,8 @@ object UserProfiles extends Table[UserProfile]("user_profile") {
   def loginNum=column[Int]("login_num")
   def loginIP = column[String]("login_ip")
   def registTime = column[Timestamp]("regist_time")
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ inviteId.? ~ inviteName.? ~ gender  ~ birth.? ~ weixin.? ~ qq.? ~ receiver.? ~ province.? ~ city.? ~ town.? ~ street.? ~ postCode.? ~ phone.? ~ blog.? ~ loginTime.? ~ loginNum ~ loginIP.? ~ registTime.? <>(UserProfile, UserProfile.unapply _)
+
+  def * = id.? ~ uid ~ inviteId.?  ~ gender  ~ birth.? ~ weixin.?  ~ receiver.? ~ province.? ~ city.? ~ town.? ~ street.? ~ postCode.? ~ phone.? ~ blog.? ~ loginTime.? ~ loginNum ~ loginIP.? ~ registTime.? <>(UserProfile, UserProfile.unapply _)
 
   def autoInc = uid ~ inviteId ~ loginTime  ~ registTime~ loginIP  returning id
 

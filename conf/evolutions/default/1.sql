@@ -24,7 +24,7 @@
      name       用户昵称
      password   用户密码
      email      用户邮箱
-     credit    用户积分
+     credits    用户积分
      intro      简介
      pic       用户头像
      status      用户状态 例如正常状态、拉黑状态、活跃用户等    0:邮箱未验证 1：正常用户 2 拉黑 3 活跃
@@ -40,17 +40,18 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `name`                varchar(64) NOT NULL ,
-  `passwd`              varchar(64) NOT NULL default '0',
+  `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
-  `credits`              smallint(10) not null default '0',
+  `credit`              smallint(10) not null default '0',
   `pic`                 varchar(255) NOT NULL default '/images/user/default.jpg',
-  `daren`               tinyint not null default '0',
+  `title`                varchar(64),
+  `intro`                varchar(250),
   `status`                tinyint    not null default '0',
   `come_from`              tinyint    not null default '0',
   `open_id`               varchar(64),
   `province`            varchar(20),
   `tags`                    varchar(250) ,
-
+  `modify_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -58,8 +59,8 @@ CREATE TABLE `user` (
   /*数据表  User  用户的基本信息和常用信息
      id               表D
      uid             用户ID
-     invite_uid      邀请者ID
-     regist_time     注册时间
+     invite_id      邀请者ID
+     register_time     注册时间
      login_time     上次登录时间
      login_ip        用户登录的IP
      gender          用户性别  0 女  1 男 2 保密
@@ -76,9 +77,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) NOT NULL ,
   `invite_id`           int(10) ,
-  `invite_name`         varchar(50),
   `gender`              tinyint(4) not null DEFAULT '2',
-  `intro`               varchar(200),
   `birth`                varchar(16) ,
   `weixin`                varchar(64) ,
   `receiver`            varchar(20) ,
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `login_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `login_num`           smallint(10) NOT NULL default '1',
   `login_ip`            varchar(32) DEFAULT '0',
-  `regist_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `register_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -112,7 +111,6 @@ CREATE TABLE `user_stats` (
   `uid`                 int(10) NOT NULL ,
   `fans_num`                  smallint(11) DEFAULT '0',
   `follow_num`                smallint(11) DEFAULT '0',
-  `record_num`                 smallint(10) DEFAULT '0',
   `love_site_num`           smallint(11) DEFAULT '0',
   `love_blog_num`            smallint(11) DEFAULT '0',
   `love_pic_num`            smallint(11) DEFAULT '0',
@@ -187,7 +185,7 @@ DROP TABLE IF EXISTS `user_check_in`;
 CREATE TABLE `user_check_in` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
-  `credits`             smallint (10) ,
+  `credit`             smallint (10) ,
   `days`      smallint (10) ,
   `month`     int(10) unsigned ,
   `history`   varchar(200),
@@ -402,20 +400,137 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
 
 
 /************************************************************
- * site ，主要有
- * goods 表                   宝贝的常用的、基本信息
- * goods_profile 表           宝贝的详细信息
- * goods_assess 表            宝贝的评价、鉴定等
- * goods_tag 表               宝贝的标签
- *   shop   表                宝贝店铺
-  * goods_shop 表              可以购买的宝贝店铺，一个宝贝可以有从多个店铺购买
+ * shop ，主要有
+  * shop 表                    小店
+ * shop_discuss 表            小店讨论
+ * shop_style   表          小店样式
+ * goods 表                   宝贝
+ * goods_discuss 表           宝贝讨论
 
- **************************************************************/
+
+ -- --------------------------------------------------------
+/*
+  -- 表的结构 `shop `
+     id                 表的ID
+     name              专题组名称
+     intro             介绍
+     is_visible       是否显示
+     uid         作者id
+     cid          分类  线上店铺 线下店铺
+     tags              标签组      2012.11.04 新增，用于简化处理shop_tag,
+     love_num        喜欢的人
+     pic               主题封面
+     seo_title       用户的名称
+     seo_keywords     seo 关键词
+     seo_desc          seo 描述
+     modify_time      修改
+     add_time  添加时间
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `shop`;
+CREATE TABLE IF NOT EXISTS `shop`(
+  `id`                      int(10) NOT NULL AUTO_INCREMENT,
+  `name`                    varchar(128) not null default '',
+  `intro`                   varchar(255) ,
+  `is_visible`              tinyint(1) not null default '0',
+  `uid`                int(10) not null default '0',
+  `pic`                varchar(128) not null default '/images/shop/default.jpg',
+  `cid`                tinyint default '5' ,
+  `tags`                   varchar(128),
+  `love_num`              smallint(10) not null default '1' ,
+  `reply_num`              smallint(10) not null default '0' ,
+  `goods_num`              smallint(10) not null default '0' ,
+  `province`             varchar(20),
+  `city`                 varchar(20) ,
+  `town`                 varchar(20),
+  `street`               varchar(50) ,
+  `seo_title`               varchar(128) ,
+  `seo_keywords`            varchar(255) ,
+  `seo_desc`                varchar(255) ,
+  `modify_time`             timestamp,
+  `add_time`                timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `shop_discuss `
+     id                 表的ID
+     content            评论内容
+     shop_id              专题ID
+     uid                    评论人ID
+     is_delete              是否删除
+     add_time  添加时间
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `shop_discuss`;
+CREATE TABLE IF NOT EXISTS `shop_discuss`(
+  `id`                          int(10) NOT NULL AUTO_INCREMENT,
+  `shop_id`                      int(10) NOT NULL ,
+  `uid`                           int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                     text,
+  `check_state`          tinyint NOT NULL DEFAULT '0',
+  `add_time`                      timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `theme_style `
+    <style>
+body{
+	background-color:#F9F9EF;
+	 backgroup-image:url();
+	background-repeat:no-repeat;
+	background-position:center top;
+	background-attachment:fixed;
+}
+.banner {
+	height:70px;
+	background-color:#fafafa;
+	 background-image:url();
+	 	background-repeat:repeat;
+	background-position:center top;
+	max-height:600px;
+	min-heihgt:80px;
+	overflow:hidden;
+}
+.banner .banner-title .subtitle {
+	color : #666;
+}
+</style>
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `shop_style`;
+CREATE TABLE IF NOT EXISTS `shop_style`(
+  `shop_id`                      int(10) NOT NULL ,
+  `page_bg_color`                      varchar (16) NOT NULL default'#F9F9EF',
+  `page_bg_image`                      varchar (128) NOT NULL default '',
+  `page_bg_repeat`                      varchar (32) NOT NULL default 'no-repeat',
+  `page_bg_position`                      varchar (32) NOT NULL default 'center top',
+  `page_bg_attachment`                      varchar (16) NOT NULL  default 'scroll',
+  `banner_height`                      varchar (16) NOT NULL  default '70',
+  `banner_color`                      varchar (16) NOT NULL  default '#f666',
+  `banner_bg_color`                      varchar (16) NOT NULL default '#fafafa',
+  `banner_bg_image`                      varchar (128) NOT NULL  default '',
+  `banner_bg_repeat`                      varchar (32) NOT NULL default 'no-repeat',
+  `banner_bg_position`                      varchar (32) NOT NULL  default 'scroll',
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`shop_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
   -- --------------------------------------------------------
 /*
   -- 表的结构 `goods `
      id                 表的ID
-	 num_iid             商品ID
+     shop_id            店铺Id
+	  num_iid             商品ID
 	 track_iid            跟踪ID  商品ID 和 跟踪Id 至少有一个存在，如果track_iid 存在，则优先使用。
      name              商品名称
      intro              商品介绍
@@ -423,15 +538,11 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
      price              价格
      pic                 主图片
 	 item_pics            所有图片
-	 nick                  卖家昵称
-	 food_security         生产许可号|产品标准号|配料表|储藏方法|保质期|食品添加剂|供货商|生产日期
 	 detail_url           商品的销售网址
      love_num           喜欢的人数
-	 volume            最近30天销售额
      `status`            商品状态、上架 、下架 、审核
      `is_member`            是否是会员专享
-     `hot_index`            热门指数
-      collect_time        采集时间
+      modify_time        采集时间
       add_time            修改时间
 --
 */
@@ -443,6 +554,7 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
    DROP TABLE IF EXISTS `goods`;
 CREATE TABLE IF NOT EXISTS `goods`(
    `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `shop_id`               int (10) not null,
    `num_iid`               bigint (20) not null,
    `track_iid`             varchar(32),
   `name`                    varchar(128) not null  ,
@@ -451,56 +563,22 @@ CREATE TABLE IF NOT EXISTS `goods`(
   `price`                    varchar(16) not null ,
   `pic`                      varchar(128) not null ,
   `item_pics`                varchar(500),
-  `nick`                     varchar(32),
-  `food_security`            varchar(500),
   `detail_url`               varchar(128),
   `love_num`                 smallint(10) not null  DEFAULT '1',
-   `volume`                  smallint(10) default '0',
   `status`                   tinyint  not null default '1'   ,
   `is_member`                  tinyint(1) not null default '0',
   `hot_index`                   smallint(10) not null default '0',
-  `collect_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `modify_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `add_time`                 timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*
-  -- 表的结构 `shop `
-   `id`
-   nick	        	卖家昵称
-   title	     	店铺标题
-   item_score	 String	 否	60	商品描述评分
-   service_score	 String	 否	100	服务态度评分
-   delivery_score	 String	 否	90	发货速度评分
-   created	         Date	 	   开店时间。格式：yyyy-MM-dd HH:mm:ss
-   credits            卖家信用
-   grade              店铺级别
-   note               备注
---
-*/
--- ------------------------------------------------------------
- DROP TABLE IF EXISTS `shop`;
-CREATE TABLE IF NOT EXISTS `shop`(
-      `id`                  int(10) NOT NULL AUTO_INCREMENT,
-      `nick`                 varchar(32) not null ,
-      `title`               varchar(128) ,
-     `detail_url`               varchar(128) ,
-      `item_score`           varchar(10)  not null default '0',
-      `service_score`        varchar(10)  not null default '0',
-      `delivery_score`       varchar(10)  not null default '0',
-      `created`             varchar(32) ,
-      `credits`             smallint(10),
-     `grade`              varchar(10),
-      `status`              tinyint default '0',
-      `note`               varchar (250),
-  `collect_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
    -- --------------------------------------------------------
 /*
-  -- 表的结构 `goods_assess `
+  -- 表的结构 `goods_discuss `
      id                 表的ID
      gid               商品名称
      uid               用户的ID
@@ -512,15 +590,13 @@ CREATE TABLE IF NOT EXISTS `shop`(
 --
 */
 -- ------------------------------------------------------------
- DROP TABLE IF EXISTS `goods_assess`;
-CREATE TABLE IF NOT EXISTS `goods_assess`(
+ DROP TABLE IF EXISTS `goods_discuss`;
+CREATE TABLE IF NOT EXISTS `goods_discuss`(
    `id` int(10) NOT NULL AUTO_INCREMENT,
   `goods_id`                       int(10) not null,
   `uid`                          int(10) not null,
-  `uname`                       varchar (32) not null,
-  `content`                       varchar (255) not null,
-  `is_worth`                      tinyint(1) not null default '0',
-  `is_bought`                      tinyint(1) not null default '0',
+  `quote_content`             text,
+  `content`                    text,
   `check_state`             tinyint  not null default '0',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
@@ -621,24 +697,7 @@ CREATE TABLE IF NOT EXISTS `tag_group`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  -- --------------------------------------------------------
-/*
-  -- 表的结构 `tag_goods `
-     id                 表的ID
-     tag_name           标签名称
-     check_state        审核状态  未审核、审核通过 审核未通过
-     add_time           添加时间
---
-*/
--- ------------------------------------------------------------
-    DROP TABLE IF EXISTS `tag_goods`;
-CREATE TABLE IF NOT EXISTS `tag_goods`(
-       `id`                 int(10) NOT NULL AUTO_INCREMENT,
-  `tag_name`                varchar(32) not null ,
-  `goods_id`                int (10)  not null ,
-  `add_num`                 int(10) not null default '1',
-  `check_state`             tinyint  not null default '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
@@ -850,7 +909,7 @@ DROP TABLE IF EXISTS `site`;
 CREATE TABLE `site` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
-  `title`                  varchar(64) not null,
+  `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
   `intro`             varchar(250) ,
   `tags`             varchar(250) ,
@@ -864,15 +923,15 @@ CREATE TABLE `site` (
 
 
 /*
-  site_pic         相册-图片
-    sid               小镇
+  site_pic         小站-图片
+    sid               小站
     intro             图片说明
     pic
     is_top             置顶
     add_time           加入时间
  */
-DROP TABLE IF EXISTS `site_album_pic`;
-CREATE TABLE `site_album_pic` (
+DROP TABLE IF EXISTS `site_pic`;
+CREATE TABLE `site_pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `sid`                 int(10) ,
   `intro`               varchar(200) ,
@@ -881,6 +940,32 @@ CREATE TABLE `site_album_pic` (
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+/*
+  -- 表的结构 `site_pic_discuss 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     bid                  帖子
+     quote_content          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
+
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `site_pic_discuss`;
+CREATE TABLE IF NOT EXISTS `site_pic_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `pic_id`                    int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
   site_video         视频
@@ -901,10 +986,34 @@ CREATE TABLE `site_video` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+/*
+  -- 表的结构 `site_pic_discuss 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     bid                  帖子
+     quote_content          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
 
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `site_video_discuss`;
+CREATE TABLE IF NOT EXISTS `site_video_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `video_id`                    int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*
 *  日志 blog
    创建者      uid
+   来源        comefrom
    所属小镇     sid
    分类   0 食谱  1 食材 2 其他
    名称  name
@@ -922,8 +1031,8 @@ CREATE TABLE `blog` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `sid`                 int(10) ,
-  `cid`                tinyint  not null default  '0',
-  `title`              varchar(64) not null,
+  `come_from`          varchar(250) not null ,
+  `title`              varchar(128) not null,
   `pic`                 varchar(250) not null ,
   `content`             text ,
   `tags`             varchar(200) ,
@@ -932,12 +1041,6 @@ CREATE TABLE `blog` (
   `view_num`          int unsigned  not null default  '1',
   `love_num`          int unsigned  not null default  '1',
   `reply_num`          int unsigned  not null default  '1',
-  `extra_attr1`             varchar(200) ,
-  `extra_attr2`             varchar(200) ,
-  `extra_attr3`             varchar(200) ,
-  `extra_attr4`             varchar(200) ,
-  `extra_attr5`             varchar(200) ,
-  `extra_attr6`             varchar(200) ,
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -945,11 +1048,10 @@ CREATE TABLE `blog` (
 
 -- --------------------------------------------------------
 /*
-  -- 表的结构 `post_reply 帖子回复`
+  -- 表的结构 `blog_discuss 帖子回复`
      id                  表的ID
      uid                  用户的id
-     pid                  帖子
-     reply_type          0 随意吐槽 1 提问求解  2 上传成果
+     bid                  帖子
      quote_content          引用的内容
      content             回复的内容
      check_state        审核状态
@@ -958,15 +1060,14 @@ CREATE TABLE `blog` (
 --
 */
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `post_reply`;
-CREATE TABLE IF NOT EXISTS `post_reply`(
+DROP TABLE IF EXISTS `blog_discuss`;
+CREATE TABLE IF NOT EXISTS `blog_discuss`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
-  `pid`                    int(10) NOT NULL ,
-  `cid`             tinyint NOT NULL DEFAULT '0',
+  `bid`                    int(10) NOT NULL ,
   `quote_content`             text,
   `content`                  text ,
-  `status`          tinyint NOT NULL DEFAULT '0',
+  `status`            tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

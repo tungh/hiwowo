@@ -1,12 +1,6 @@
 package models.user
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-2-19
- * Time: 下午2:12
- * To change this template use File | Settings | File Templates.
- */
+
 object CreditSetting {
     /* 连续签到 获得额外积分 */
   val checkIn7Days:Int = 15

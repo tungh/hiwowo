@@ -24,12 +24,13 @@ case class User(
                  email: Option[String],
                  credit:Int,
                  pic: String,
-                 daren:Int,
+                 title:Option[String],
+                 intro: Option[String],
                  status:Int,
                  comeFrom:Int,
                  openId:Option[String],
                  tags:Option[String],
-                 intro: Option[String],
+                 province:Option[String],
                  modifyTime:Option[Timestamp]
                  )
 
@@ -37,25 +38,22 @@ case class User(
 object Users extends Table[User]("user") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
-  def passwd = column[String]("passwd")
+  def password = column[String]("password")
   def email = column[String]("email")
-  def credits = column[Int]("credits")
+  def credit = column[Int]("credit")
   def pic = column[String]("pic")
-  def daren= column[Int]("daren")
+  def title = column[String]("title")
+  def intro     = column[String]("intro")
   def status = column[Int]("status")
   def comeFrom = column[Int]("come_from")
   def openId = column[String]("open_id")
-  def shiDou = column[Int]("shi_dou")
-  def withdrawCredits = column[Int]("withdraw_credits")
-  def withdrawShiDou = column[Int]("withdraw_shi_dou")
   def tags     = column[String]("tags")
-  def alipay     = column[String]("alipay")
-  def intro     = column[String]("intro")
+  def province     = column[String]("province")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ intro.? ~ modifyTime.?  <>(User, User.unapply _)
-  def autoInc = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ intro.? ~ modifyTime.? <>(User, User.unapply _) returning id
-  def autoInc2 = name ~ passwd ~ email returning id
+  def * = id.? ~ name ~ password ~ email.? ~ credit ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.?  <>(User, User.unapply _)
+  def autoInc = id.? ~ name ~ password ~ email.? ~ credit ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.? <>(User, User.unapply _) returning id
+  def autoInc2 = name ~ password ~ email returning id
   def autoInc3 = name ~ comeFrom ~ openId ~ pic returning id
   /* count  */
   def count()(implicit session: Session):Int = {
@@ -66,8 +64,8 @@ object Users extends Table[User]("user") {
     Query(Users.filter(_.comeFrom === comeFrom).length).first()
   }
   /* 验证用户登陆email 和 密码是否正确 */
-  def authenticate(email: String, passwd: String)(implicit session: Session): Option[User] = {
-    (for(u<-Users if u.email === email && u.passwd===Codecs.sha1("smeite"+passwd))yield(u) ).firstOption
+  def authenticate(email: String, password: String)(implicit session: Session): Option[User] = {
+    (for(u<-Users if u.email === email && u.password===Codecs.sha1("hiwowo"+password))yield(u) ).firstOption
   }
   /* 根据用户id 查找 */
   def findById(uid:Long)(implicit session: Session):Option[User] = {

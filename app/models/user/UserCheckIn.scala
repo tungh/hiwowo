@@ -12,7 +12,7 @@ import scala.slick.driver.MySQLDriver.simple._
 case class UserCheckIn(
                         id: Option[Long],
                         uid: Long,
-                        credits: Int,
+                        credit: Int,
                         days: Int,
                         month: Int,
                         history: String,
@@ -21,11 +21,11 @@ case class UserCheckIn(
 object UserCheckIns extends Table[UserCheckIn]("user_check_in") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def credits = column[Int]("credits")
+  def credit = column[Int]("credit")
   def days = column[Int]("days")
   def month = column[Int]("month")
   def history = column[String]("history")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ credits ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _)
-  def autoInc =  id.? ~ uid ~ credits ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _) returning id
+  def * = id.? ~ uid ~ credit ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _)
+  def autoInc =  id.? ~ uid ~ credit ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _) returning id
 }
