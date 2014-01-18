@@ -18,9 +18,8 @@ import models.user.{User,Users}
 
 case class GoodsDiscuss(
                         id: Option[Long],
-                        goodsId:Long,
                         uid:Long,
-                        uname: String,
+                        goodsId:Long,
                         content: String,
                         isWorth:Boolean,
                         isBought: Boolean,
@@ -30,16 +29,15 @@ case class GoodsDiscuss(
 
 object GoodsDiscusses extends Table[GoodsDiscuss]("goods_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
-  def goodsId = column[Long]("goods_id")
   def uid = column[Long]("uid")
-  def uname = column[String]("uname")
+  def goodsId = column[Long]("goods_id")
   def content = column[String]("content")
   def isWorth =column[Boolean]("is_worth")
   def isBought =column[Boolean]("is_bought")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ goodsId ~ uid ~ uname ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _)
-  def autoInc = id.? ~ goodsId ~ uid ~ uname ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _) returning id
-  def autoInc2  = goodsId ~ uid ~ uname ~ content ~ checkState  returning id
+  def * = id.? ~ uid ~  goodsId  ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _)
+  def autoInc = id.? ~ uid ~ goodsId  ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _) returning id
+  def autoInc2  = uid ~ goodsId  ~ content ~ checkState  returning id
 }
 

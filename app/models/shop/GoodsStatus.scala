@@ -12,8 +12,8 @@ import scala.slick.driver.MySQLDriver.simple._
  */
 
 object  GoodsStatus extends Enumeration{
-  val offSALE=Value("下架");
-  val onSALE=Value("上架");
+  val offSALE=Value("下架")
+  val onSALE=Value("上架")
 
 
 }

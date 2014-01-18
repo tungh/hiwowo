@@ -22,21 +22,20 @@ import models.user.UserLoveThemes
 
 case class Shop(
                   id: Option[Long],
+                  uid:Long,
+                  cid:Long,
                   name: String,
                   intro:Option[String],
-                  hotIndex:Int,
-                  isRecommend:Boolean,
-                  uid:Long,
-                  uname:String,
-                  cid:Int,
-                  tags:Option[String],
+                  isVisible:Int,
                   pic:String,
+                  tags:Option[String],
                   loveNum:Int,
-                  replyNum:Int,
+                  discussNum:Int,
                   goodsNum:Int,
-                  seoTitle:Option[String],
-                  seoKeywords:Option[String],
-                  seoDesc:Option[String],
+                  province: Option[String],
+                  city: Option[String],
+                  town: Option[String],
+                  street: Option[String],
                   modifyTime:Option[Timestamp],
                   addTime:Option[Timestamp]
                   )
@@ -44,41 +43,29 @@ case class Shop(
 
 object Shops extends Table[Shop]("shop") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
+  def uid = column[Long]("uid")
+  def cid = column[Int]("cid")
   def name = column[String]("name")
   def intro = column[String]("intro")
-  def hotIndex=column[Int]("hot_index")
-  def isRecommend = column[Boolean]("is_recommend")
-  def uid = column[Long]("uid")
-  def uname = column[String]("uname")
-  def cid = column[Int]("cid")
-  def tags = column[String]("tags")
+  def isVisible = column[Boolean]("isVisible")
   def pic=   column[String]("pic")
+  def tags = column[String]("tags")
   def loveNum = column[Int]("love_num")
-  def replyNum = column[Int]("reply_num")
+  def discussNum = column[Int]("discuss_num")
   def goodsNum = column[Int]("goods_num")
-  def seoTitle = column[String]("seo_title")
-  def seoKeywords = column[String]("seo_keywords")
-  def seoDesc = column[String]("seo_desc")
+  def province = column[String]("province")
+  def city = column[String]("city")
+  def town = column[String]("town")
+  def street = column[String]("street")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ name ~ intro.? ~ hotIndex ~ isRecommend ~ uid ~ uname ~ cid  ~ tags.? ~ pic ~ loveNum ~ replyNum ~ goodsNum ~ seoTitle.? ~ seoKeywords.? ~ seoDesc.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
-  def autoInc = id.? ~ name ~ intro.? ~ hotIndex ~ isRecommend ~ uid ~ uname ~ cid  ~ tags.? ~ pic ~ loveNum ~ replyNum~ goodsNum ~ seoTitle.? ~ seoKeywords.? ~ seoDesc.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
+  def * = id.? ~ uid  ~ cid  ~ name ~ intro.?  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
+  def autoInc = id.? ~ uid ~ cid ~ name ~ intro.?  ~ isVisible ~ cid  ~ tags.? ~ pic ~ loveNum ~ discussNum~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
 
-  def autoInc2 = name ~ uid ~ uname ~ addTime  returning id
-  def autoInc3 = name ~ intro.? ~ uid ~ uname ~ cid ~ tags.? ~ addTime returning id
+  def autoInc2 = name ~ uid  ~ addTime  returning id
+  def autoInc3 = name ~ intro.? ~ uid ~ cid ~ tags.? ~ addTime returning id
 
-  def count()(implicit session: Session):Int = {
-    Query(Themes.length).first()
-  }
-  def find(id:Long)(implicit  session :Session)={
-   (for(c<-Themes.filter(_.id === id))yield(c)).firstOption
-  }
-  def find(name:String)(implicit  session :Session)={
-    (for(c<-Themes.filter(_.name === name))yield(c)).firstOption
-  }
-  def delete(id:Long)(implicit  session :Session)={
-    (for(c<-Themes.filter(_.id === id))yield(c)).delete
-  }
+
 
 }
 

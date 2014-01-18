@@ -14,7 +14,8 @@ import play.api.db.DB
  */
 
 case class ShopStyle (
-        themeId:Long, 
+        id: Option[Long],
+        shopId:Long,
         pageBgColor:String,
         pageBgImage:String,
         pageBgRepeat:String,
@@ -28,7 +29,8 @@ case class ShopStyle (
         bannerBgPosition:String
 )
 object  ShopStyles extends  Table[ShopStyle]("shop_style") {
-def themeId  =column[Long]("theme_id")
+ def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+def shopId  =column[Long]("shop_id")
 def pageBgColor = column[String]("page_bg_color")
 def pageBgImage = column[String]("page_bg_image")
 def pageBgRepeat = column[String]("page_bg_repeat")
@@ -40,7 +42,7 @@ def bannerBgColor = column[String]("banner_bg_color")
 def bannerBgImage = column[String]("banner_bg_image")
 def bannerBgRepeat = column[String]("banner_bg_repeat")
 def bannerBgPosition = column[String]("banner_bg_position")
-def * = themeId ~ pageBgColor ~ pageBgImage ~ pageBgRepeat ~ pageBgPosition ~ pageBgAttachment ~ bannerHeight ~ bannerColor ~ bannerBgColor ~ bannerBgImage ~ bannerBgRepeat ~ bannerBgPosition  <>(ShopStyle, ShopStyle.unapply _)
+def * =id.? ~ shopId ~ pageBgColor ~ pageBgImage ~ pageBgRepeat ~ pageBgPosition ~ pageBgAttachment ~ bannerHeight ~ bannerColor ~ bannerBgColor ~ bannerBgImage ~ bannerBgRepeat ~ bannerBgPosition  <>(ShopStyle, ShopStyle.unapply _)
 
 
 }

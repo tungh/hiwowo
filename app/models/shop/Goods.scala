@@ -21,50 +21,40 @@ import java.sql.{ Timestamp}
 
 case class Goods(
                   id: Option[Long],
+                  shopId:Long,
                   numIid:Long,
-                  hwRate:Float,
                   name: String,
                   intro: String,
+                  content:Option[String],
                   price:String,
                   pic: String,
                   itemPics: String,
-                  nick: String,
-                  promotionPrice:Option[String],
-                  content:Option[String],
+                  detailUrl: String,
                   loveNum: Int,
-                  volume: Int,
                   status: Int,
                   isMember: Boolean,
-                  location:String,
-                  foodSecurity: Option[String],
-                  uid:Long,
-                  collectTime:Option[Timestamp],
-                  clickUrl:String
+                  modifyTime:Option[Timestamp],
+                  addTime:Option[Timestamp],
                   )
 
 object Goodses extends Table[Goods]("goods") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
+  def shopId = column[Long]("shop_id")
   def numIid = column[Long]("num_iid")
-  def hwRate = column[Float]("hw_rate")
   def name = column[String]("name")
   def intro = column[String]("intro")
+  def content = column[String]("content")
   def price =column[String]("price")
   def pic = column[String]("pic")
   def itemPics = column[String]("item_pics")
-  def nick = column[String]("nick")
-  def promotionPrice = column[String]("promotion_price")
-  def content = column[String]("content")
+  def detailUrl = column[String]("detail_url")
   def loveNum = column[Int]("love_num")
-  def volume = column[Int]("volume")
   def status = column[Int]("status")
   def isMember = column[Boolean]("is_member")
-  def location     = column[String]("location")
-  def foodSecurity = column[String]("food_security")
-  def uid = column[Long]("uid")
-  def collectTime=column[Timestamp]("collect_time")
-  def clickUrl=column[String]("click_url")
-  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ content.? ~ loveNum ~ volume ~ status ~ isMember ~ location ~  foodSecurity.? ~ uid ~ collectTime.? ~ clickUrl <>(Goods, Goods.unapply _)
-  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ foodSecurity.? ~ location ~ hwRate  returning id
+  def modifyTime=column[Timestamp]("modify_time")
+  def addTime=column[Timestamp]("add_time")
+  def * = id.? ~ shopId ~ numIid  ~ name ~ intro ~ content ~ price ~ pic ~ itemPics ~ detailUrl ~ loveNum  ~ status ~ isMember ~ modifyTime.? ~ addTime.? <>(Goods, Goods.unapply _)
+  def autoInc =  shopId ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics   returning id
 
 
 }

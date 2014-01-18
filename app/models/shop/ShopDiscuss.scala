@@ -17,9 +17,8 @@ import java.sql.Timestamp
 
 case class ShopDiscuss(
                         id: Option[Long],
-                        themeId:Long,
                         uid:Long,
-                        uname:String,
+                        shopId:Long,
                         quoteContent:Option[String],
                         content:String,
                         checkState:Int,
@@ -27,22 +26,19 @@ case class ShopDiscuss(
                         )
 object ShopDiscusses  extends  Table[ShopDiscuss]("shop_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
-  def themeId  =column[Long]("theme_id")
   def uid = column[Long]("uid")
-  def uname =column[String]("uname")
+  def shopId  =column[Long]("shop_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
   
-  def * =id.? ~ themeId ~ uid ~ uname  ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _)
-  def autoInc =id.? ~ themeId ~ uid ~ uname  ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _) returning id
+  def * =id.?  ~ uid ~ shopId  ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _)
+  def autoInc =id.? ~ uid ~ shopId  ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _) returning id
 
-  def autoInc2 = themeId ~ uid  ~ uname ~ quoteContent.?  ~ content ~ checkState returning id
+  def autoInc2 =  uid  ~ shopId ~ quoteContent.?  ~ content ~ checkState returning id
 
-  def delete(id:Long)(implicit session:Session)={
-    (for(c <-ThemeDiscusses if c.id === id)yield c).delete
-  }
+
 
 
 }

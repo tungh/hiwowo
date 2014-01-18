@@ -431,23 +431,20 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
 DROP TABLE IF EXISTS `shop`;
 CREATE TABLE IF NOT EXISTS `shop`(
   `id`                      int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                int(10) not null ,
+  `cid`                tinyint default '0' ,
   `name`                    varchar(128) not null default '',
   `intro`                   varchar(255) ,
   `is_visible`              tinyint(1) not null default '0',
-  `uid`                int(10) not null default '0',
   `pic`                varchar(128) not null default '/images/shop/default.jpg',
-  `cid`                tinyint default '5' ,
   `tags`                   varchar(128),
   `love_num`              smallint(10) not null default '1' ,
-  `reply_num`              smallint(10) not null default '0' ,
+  `discuss_num`              smallint(10) not null default '0' ,
   `goods_num`              smallint(10) not null default '0' ,
   `province`             varchar(20),
   `city`                 varchar(20) ,
   `town`                 varchar(20),
   `street`               varchar(50) ,
-  `seo_title`               varchar(128) ,
-  `seo_keywords`            varchar(255) ,
-  `seo_desc`                varchar(255) ,
   `modify_time`             timestamp,
   `add_time`                timestamp ,
   PRIMARY KEY (`id`)
@@ -509,6 +506,7 @@ body{
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `shop_style`;
 CREATE TABLE IF NOT EXISTS `shop_style`(
+  `id`                          int(10) NOT NULL AUTO_INCREMENT,
   `shop_id`                      int(10) NOT NULL ,
   `page_bg_color`                      varchar (16) NOT NULL default'#F9F9EF',
   `page_bg_image`                      varchar (128) NOT NULL default '',
@@ -556,10 +554,9 @@ CREATE TABLE IF NOT EXISTS `goods`(
    `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `shop_id`               int (10) not null,
    `num_iid`               bigint (20) not null,
-   `track_iid`             varchar(32),
   `name`                    varchar(128) not null  ,
   `intro`                    varchar(255) not null ,
-  `desc`                     text ,
+  `content`                     text ,
   `price`                    varchar(16) not null ,
   `pic`                      varchar(128) not null ,
   `item_pics`                varchar(500),
@@ -567,7 +564,6 @@ CREATE TABLE IF NOT EXISTS `goods`(
   `love_num`                 smallint(10) not null  DEFAULT '1',
   `status`                   tinyint  not null default '1'   ,
   `is_member`                  tinyint(1) not null default '0',
-  `hot_index`                   smallint(10) not null default '0',
   `modify_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `add_time`                 timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
@@ -619,9 +615,6 @@ CREATE TABLE IF NOT EXISTS `goods_discuss`(
      name               标签名称
      intro              简介
      tag_group_id       标签组id
-     tag_group_name     标签组名称
-     hot_index          推荐指数
-     goods_num          产品的数量
      add_num          添加次数  用户添加标签时，同样的标签记录一次
      is_top             是否置顶
      is_highlight        是否强调
@@ -642,10 +635,6 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(32) not null ,
-  `cid`                   tinyint (4) ,
-  `group_id`                   int(10) ,
-  `group_name`                 varchar(32),
-   `hot_index`                 smallint(10) not null default '1',
    `add_num`                 smallint(10) not null default '1',
   `is_top`                 tinyint(1) not null default '0',
   `is_highlight`                 tinyint(1) not null default '0',
@@ -658,45 +647,6 @@ CREATE TABLE IF NOT EXISTS `tag`(
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
- -- --------------------------------------------------------
-
-/*  -- 表的结构 `tag_group `
-     id                 表的ID
-     name               标签名称
-     category_id         theme 分类 id
-     category_name         theme 分类名称
-     hot_index         推荐指数 与排序有关
-     intro
-     is_visible
-      seo_title          用户的名称
-     seo_keywords       seo 关键词
-     seo_desc           seo 描述
-     modify_time        修改
-     add_time           添加时间
-     11月3日
-     tag_group 需要跟theme_group进行关联,一个theme_group 对应多个tag_group
---*/
--- ------------------------------------------------------------
-  DROP TABLE IF EXISTS `tag_group`;
-CREATE TABLE IF NOT EXISTS `tag_group`(
-       `id`                     int(10) NOT NULL AUTO_INCREMENT,
-      `name`                    varchar(32) not null default '',
-      `pic`                     varchar(128) not null default '/assets/img/ui/tag.jpg',
-      `intro`                   varchar(128) not null default '',
-      `cid`                     smallint(10) NOT NULL,
-      `hot_index`               smallint(10) NOT NULL default '0',
-     `is_visible`               tinyint(1) not null default '1',
-  `sort_num`                 smallint(10) not null default '0',
-    `seo_title`                 varchar(128) not null default '' ,
-    `seo_keywords`              varchar(128) not null default '' ,
-    `seo_desc`                  varchar(255) not null default '' ,
-    `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-    `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- -- --------------------------------------------------------
 
 
 
