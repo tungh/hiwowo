@@ -1,9 +1,6 @@
 package models.advert
 
 import java.sql.Timestamp
-import play.api.Play.current
-import play.api.db.DB
-
 import scala.slick.driver.MySQLDriver.simple._
 /**
  * Created by zuosanshao.

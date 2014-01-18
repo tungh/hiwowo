@@ -1,14 +1,10 @@
 package models.shop
 
 
-import play.api.db._
-import play.api.Play.current
+
 import java.sql.{Timestamp }
 import scala.slick.driver.MySQLDriver.simple._
-import models.Page._
-import models.Page
-import collection.mutable.ListBuffer
-import models.user.UserLoveThemes
+
 
 
 /**
@@ -23,9 +19,9 @@ import models.user.UserLoveThemes
 case class Shop(
                   id: Option[Long],
                   uid:Long,
-                  cid:Long,
+                  cid:Int,
                   name: String,
-                  intro:Option[String],
+                  intro:String,
                   isVisible:Int,
                   pic:String,
                   tags:Option[String],
@@ -47,8 +43,8 @@ object Shops extends Table[Shop]("shop") {
   def cid = column[Int]("cid")
   def name = column[String]("name")
   def intro = column[String]("intro")
-  def isVisible = column[Boolean]("isVisible")
-  def pic=   column[String]("pic")
+  def isVisible = column[Int]("is_visible")
+  def pic =   column[String]("pic")
   def tags = column[String]("tags")
   def loveNum = column[Int]("love_num")
   def discussNum = column[Int]("discuss_num")
@@ -59,8 +55,8 @@ object Shops extends Table[Shop]("shop") {
   def street = column[String]("street")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid  ~ cid  ~ name ~ intro.?  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
-  def autoInc = id.? ~ uid ~ cid ~ name ~ intro.?  ~ isVisible ~ cid  ~ tags.? ~ pic ~ loveNum ~ discussNum~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
+  def * = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
+  def autoInc = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
 
   def autoInc2 = name ~ uid  ~ addTime  returning id
   def autoInc3 = name ~ intro.? ~ uid ~ cid ~ tags.? ~ addTime returning id

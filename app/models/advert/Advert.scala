@@ -1,17 +1,9 @@
 package models.advert
 
-import play.api.Play.current
-import play.api.db.DB
+
 import scala.slick.driver.MySQLDriver.simple._
-import java.sql.{Timestamp }
-import models.Page
-import models.Page._
-import models.goods.Goods
-import models.goods.Goodses
-import models.user.User
-import models.user.Users
-import  models.shop.Theme
-import  models.shop.Themes
+import java.sql.Timestamp
+
 
 /**
  * Created by zuosanshao.

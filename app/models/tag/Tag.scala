@@ -2,14 +2,10 @@ package models.tag
 
 
 
-import play.api.db._
-import play.api.Play.current
+
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
-import models.Page
-import models.Page._
-import models.goods.{GoodsAssesses, Goodses, Goods}
-import models.user.{Users,User}
+
 /**
  * Created by zuosanshao.
  * email:zuosanshao@qq.com

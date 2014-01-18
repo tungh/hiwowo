@@ -41,29 +41,7 @@ object UserRecords extends Table[UserRecord]("user_record") {
   def * = id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _)
   def autoInc =id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _) returning id
 
-  /* 根据id 查找 */
-  def findById(id:Long)(implicit session: Session):Option[UserTrend] = {
-    (for (c <-UserTrends if c.id === id)yield c).firstOption
-  }
-  /* count 所有的动态数 */
-  def count()(implicit session: Session):Int = {
-    Query(UserTrends.length).first()
-  }
-  /* count uid 的动态数 */
-  def count(uid:Long)(implicit session: Session):Int = {
-    Query(UserTrends.filter(_.uid === uid).length).first()
-  }
-  def list(start:Int,num:Int) (implicit session: Session):List[UserTrend] = {
-    Query(UserTrends).sortBy(_.addTime desc).drop(start).take(num).list()
-  }
-  def list(uid:Long,start:Int,num:Int) (implicit session: Session):List[UserTrend] = {
-  val query = Query(UserTrends).filter(_.uid === uid).sortBy(_.addTime desc).drop(start).take(num)
-    //println(query.selectStatement)
-    query.list
-  }
-  def list(uid:Long)(implicit  session:Session):List[UserTrend] ={
-    Query(UserTrends).filter(_.uid === uid).list
-  }
+
 
 }
 

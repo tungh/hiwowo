@@ -7,7 +7,7 @@
  * 用户是个大的结构  主要有以下几个表
  * user表                User常用的基本信息，包括常用的统计信息
  * user_profile 表        User不常用的信息、例如生日、性别、所在位置等等
- * user_stats             用户统计信息
+ * user_static             用户统计信息
  * user_tag 表            用户的标签
  * user_follow 表         用户关注的人
  * user_love_site 表     用户喜欢的小站
@@ -99,14 +99,14 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 -- --------------------------------------------------------
 /*
 
-  -- 表的结构 `user_stats`
+  -- 表的结构 `user_static`
      id                               表的ID
      uid                              用户ID
 --
 */
 
-DROP TABLE IF EXISTS `user_stats`;
-CREATE TABLE `user_stats` (
+DROP TABLE IF EXISTS `user_static`;
+CREATE TABLE `user_static` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) NOT NULL ,
   `fans_num`                  smallint(11) DEFAULT '0',
@@ -520,7 +520,7 @@ CREATE TABLE IF NOT EXISTS `shop_style`(
   `banner_bg_repeat`                      varchar (32) NOT NULL default 'no-repeat',
   `banner_bg_position`                      varchar (32) NOT NULL  default 'scroll',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`shop_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   -- --------------------------------------------------------

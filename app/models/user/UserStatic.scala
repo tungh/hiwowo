@@ -16,7 +16,7 @@ import play.api.Play.current
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
 
-case class UserStats(
+case class UserStatic(
                       id: Option[Long],
                       uid: Long,
                       fansNum: Int,
@@ -33,7 +33,7 @@ case class UserStats(
                       ownShopNum: Int,
                       ownTopicNum: Int
                       )
-object UserStats extends Table[UserStats]("user_stats") {
+object UserStatics extends Table[UserStatic]("user_static") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def fansNum = column[Int]("fans_num")
@@ -48,14 +48,12 @@ object UserStats extends Table[UserStats]("user_stats") {
   def ownPicNum = column[Int]("own_pic_num")
   def ownVideoNum = column[Int]("own_video_num")
   def ownShopNum = column[Int]("own_shop_num")
+  def ownTopicNum = column[Int]("own_topic_num")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ fansNum ~ followNum  ~ loveSiteNum ~ loveBlogNum ~ lovePicNum ~ loveVideoNum ~ loveShopNum ~ ownSiteNum ~ ownBlogNum ~ ownPicNum ~ ownVideoNum ~ ownShopNum <>(UserStats, UserStats.unapply _)
+  def * = id.? ~ uid ~ fansNum ~ followNum  ~ loveSiteNum ~ loveBlogNum ~ lovePicNum ~ loveVideoNum ~ loveShopNum ~ ownSiteNum ~ ownBlogNum ~ ownPicNum ~ ownVideoNum ~ ownShopNum ~ ownTopicNum  <>(UserStatic, UserStatic.unapply _)
   def autoInc = uid  returning id
 
-  /* 根据用户id 查找 */
-  def findByUid(uid:Long)(implicit session: Session):Option[UserStatic] = {
-    Query(UserStatics).filter(_.uid === uid).firstOption
-  }
+
 
 }
 

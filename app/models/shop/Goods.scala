@@ -34,7 +34,7 @@ case class Goods(
                   status: Int,
                   isMember: Boolean,
                   modifyTime:Option[Timestamp],
-                  addTime:Option[Timestamp],
+                  addTime:Option[Timestamp]
                   )
 
 object Goodses extends Table[Goods]("goods") {
@@ -53,7 +53,7 @@ object Goodses extends Table[Goods]("goods") {
   def isMember = column[Boolean]("is_member")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ shopId ~ numIid  ~ name ~ intro ~ content ~ price ~ pic ~ itemPics ~ detailUrl ~ loveNum  ~ status ~ isMember ~ modifyTime.? ~ addTime.? <>(Goods, Goods.unapply _)
+  def * = id.? ~ shopId ~ numIid  ~ name ~ intro ~ content.? ~ price ~ pic ~ itemPics ~ detailUrl ~ loveNum  ~ status ~ isMember ~ modifyTime.? ~ addTime.? <>(Goods, Goods.unapply _)
   def autoInc =  shopId ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics   returning id
 
 
