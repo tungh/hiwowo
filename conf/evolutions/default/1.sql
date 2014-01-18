@@ -920,6 +920,31 @@ CREATE TABLE `site` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `blog_discuss 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     bid                  帖子
+     quote_content          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
+
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `site_discuss`;
+CREATE TABLE IF NOT EXISTS `site_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `site_id`                    int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*
@@ -1026,8 +1051,8 @@ CREATE TABLE IF NOT EXISTS `site_video_discuss`(
    原文链接（参考）   refer
    创建时间   add_time
 */
-DROP TABLE IF EXISTS `blog`;
-CREATE TABLE `blog` (
+DROP TABLE IF EXISTS `site_blog`;
+CREATE TABLE `site_blog` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `sid`                 int(10) ,
@@ -1060,11 +1085,11 @@ CREATE TABLE `blog` (
 --
 */
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `blog_discuss`;
-CREATE TABLE IF NOT EXISTS `blog_discuss`(
+DROP TABLE IF EXISTS `site_blog_discuss`;
+CREATE TABLE IF NOT EXISTS `site_blog_discuss`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
-  `bid`                    int(10) NOT NULL ,
+  `blog_id`                    int(10) NOT NULL ,
   `quote_content`             text,
   `content`                  text ,
   `status`            tinyint NOT NULL DEFAULT '0',

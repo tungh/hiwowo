@@ -21,3 +21,18 @@ case class SiteVideoDiscuss (
                             )
 
 
+object SiteVideoDiscusses  extends  Table[SiteVideoDiscuss]("site_video_discuss") {
+  def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+  def uid = column[Long]("uid")
+  def videoId  =column[Long]("video_id")
+  def quoteContent = column[String]("quote_content")
+  def content = column[String]("content")
+  def checkState = column[Int]("check_state")
+  def addTime = column[Timestamp]("add_time")
+
+  def * =id.?  ~ uid ~ videoId  ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(SiteVideoDiscuss, SiteVideoDiscuss.unapply _)
+  def autoInc =id.?  ~ uid ~ videoId   ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(SiteVideoDiscuss, SiteVideoDiscuss.unapply _) returning id
+
+  def autoInc2 = uid ~  videoId  ~ quoteContent.?  ~ content ~ checkState returning id
+
+}
