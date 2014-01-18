@@ -20,19 +20,15 @@ import models.Page._
 case class User(
                  id: Option[Long],
                  name: String,
-                 passwd: String,
+                 password: String,
                  email: Option[String],
-                 credits: Int,
+                 credit:Int,
                  pic: String,
                  daren:Int,
                  status:Int,
                  comeFrom:Int,
                  openId:Option[String],
-                 shiDou:Int,
-                 withdrawCredits:Int,
-                 withdrawShiDou:Int,
                  tags:Option[String],
-                 alipay:Option[String],
                  intro: Option[String],
                  modifyTime:Option[Timestamp]
                  )

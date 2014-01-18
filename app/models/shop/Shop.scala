@@ -17,7 +17,7 @@ import models.user.UserLoveThemes
  * Date: 12-9-20
  * Time: 上午11:11
  * ***********************
- * description:主题
+ * description: 所在地区域
  */
 
 case class Shop(
