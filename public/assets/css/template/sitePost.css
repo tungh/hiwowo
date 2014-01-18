@@ -1,0 +1,489 @@
+/**
+ * Created by zuosanshao.
+ * User: smeite.com
+ * Email:zuosanshao@qq.com
+ * @description: 
+ * @depends: 
+ * Includes:
+ * Since: 13-6-25  上午10:38
+ * ModifyTime : 
+ * ModifyContent: 
+ * http://www.smeite.com/
+ *
+ */
+/* post  content*/
+/*#J_Page {
+    background: url(images/site_bg_lines.png) repeat;
+}*/
+.processing{height:20px;width:140px;background:url(images/processing.gif) no-repeat;overflow:hidden;display:block;position:relative;top:7px;margin-left:5px;float:left;_display:inline;}
+.processing_nd0{background-position:0px 0px;}
+.processing_nd1{background-position:0px -20px;}
+.processing_nd2{background-position:0px -40px;}
+.processing_nd3{background-position:0px -60px;}
+.processing_nd4{background-position:0px -80px;}
+.processing_nd5{background-position:0px -100px;}
+.processing_nd6{background-position:0px -120px;}
+.processing_nd7{background-position:0px -140px;}
+.processing_nd8{background-position:0px -160px;}
+.processing_nd9{background-position:0px -180px;}
+.processing_nd10{background-position:0px -200px;}
+.processing_nd11{background-position:0px -220px;}
+.processing_nd12{background-position:0px -240px;}
+.processing_nd13{background-position:0px -260px;}
+.processing_nd14{background-position:0px -280px;}
+.processing_nd15{background-position:0px -300px;}
+.processing_nd16{background-position:0px -320px;}
+.bl1{
+    border-left:1px solid #eee;
+}
+.bt1{
+    border-top:1px solid #eee;
+}
+.post{
+ margin-top: 20px;
+}
+.post .follow{
+    text-align: center;
+    margin: 15px auto;
+}
+.post .follow-btn{
+    width: 80px;
+    text-align: center;
+    float: none;
+}
+
+.post .post-left{
+    float: left;
+    width: 180px;
+    margin-right:20px ;
+}
+
+.post-left .poster{
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+}
+
+.post-left .poster a.pic{
+    display: block;
+    padding: 10px 0;
+}
+.post-left .poster a.pic img{
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
+    behavior: url(images/PIE.htc);
+}
+.post-left .poster span{
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+}
+
+.post-left .poster-others{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+.poster-others .posts{
+    margin-bottom: 25px;
+}
+.poster-others dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.poster-others .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+.poster-others .site dd {
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden;
+}
+.poster-others .site dd a {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+}
+.poster-others .site dd img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px 0 0;
+}
+ /*post left end*/
+
+.post .post-main{
+    position: relative;
+    float: left;
+    width: 540px;
+    background-color: #fff;
+    padding: 15px 19px;
+    border: 1px solid #eee;
+    margin-right: 20px;
+}
+
+.post-main .post-title-bar{
+    margin-bottom: 15px;
+    position: relative;
+}
+.post-title-bar .post-title{
+   position: relative;
+    padding-top: 5px;
+}
+.post-title-bar .post-title h3{
+    font-size: 18px;
+}
+.post-title-bar .post-relate li{
+    float: left;
+    color: #999;
+    height: 22px;
+    line-height: 22px;
+}
+.post-title-bar .post-relate li.blank{
+    margin: 0 10px;
+    color: #e1e1e1;
+}
+.post-title-bar .post-relate{
+    padding-top: 5px;
+}
+.post-title-bar .like-common{
+    top:0;
+    right:0;
+}
+.post .menu {
+
+}
+
+.post .menu li{
+    width: 160px;
+    float: left;
+    height: 48px;
+    border-right: 1px solid #EEE;
+    padding: 18px 0 18px 18px;
+    border-bottom: 1px solid #EEE;
+}
+.post .menu  li strong {
+    font-size: 12px;
+    color: #999;
+    line-height: 18px;
+    display: block;
+    height: 18px;
+
+}
+
+.post .menu li a.big {
+    display: block;
+    font-size: 24px;
+    color: #FF3232;
+    font-family: Microsoft Yahei;
+    line-height: 30px;
+    width: 100px;
+    cursor: default;
+}
+.post .menu li a.small {
+    color: #666;
+    line-height: 24px;
+    float: left;
+    padding-top: 6px;
+    _display: inline;
+    cursor: default;
+}
+.post .menu .br0{
+    border-right: 0;
+}
+.post-main .post-content{
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+.post .post-right{
+    float: left;
+    width: 180px;
+}
+
+.post-right .post-site{
+    width: 180px;
+    overflow: hidden;
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+.post-site h3{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-site .back-site{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-right .site-others{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+
+.site-others .posts{
+    margin-bottom: 25px;
+}
+.site-others dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.site-others .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+.site-others .members dd {
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden;
+}
+.site-others .members dd a {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+}
+.site-others .members dd img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px 0 0;
+}
+
+/* post replies*/
+.post-right .post-replies{
+    padding: 10px 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+
+.post-replies .replies{
+    margin-bottom: 25px;
+}
+.post-replies dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.post-replies .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+
+.post-replies .pic{
+    float: left;
+    width: 40px;
+}
+.post-replies  img {
+    width: 40px;
+    height: 40px;
+}
+.post-replies .info{
+    width: 100px;
+    float: right;
+}
+  /* post share */
+.post-main  .post-share {
+    border-top: 1px dashed #ccc;
+    padding: 10px 25px 0 25px;
+}
+.post-main .post-like-doing {
+    float: right;
+}
+.post-main .post-like-doing em {
+    line-height: 30px;
+    float: left;
+    margin-right: 10px;
+}
+.post-main a.btn-postlike {
+    float: left;
+    color: #d9b79f;
+    height: 23px;
+    line-height: 23px;
+    padding: 0 10px;
+    border: 1px solid #d9b69f;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    behavior: url(PIE.htc);
+}
+a:hover.btn-postlike {
+    background: #d9b79f;
+    color: #fff;
+    text-decoration: none
+}
+.post-main a.btn-postlike ins {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+    height: 12px;
+    padding: 0 0 0 17px;
+    overflow: hidden;
+    background: url(images/post-favor.png) no-repeat 0 0;
+}
+
+.post-main a:hover.btn-postlike ins {
+    background-position: -24px 0
+}
+
+.post-main a.btn-postliked {
+    background: #d9b79f;
+    color: #fff
+}
+
+.post-main a.btn-postliked ins,.post-main a:hover.btn-postliked ins {
+    background-position: -48px 0
+}
+/* comment */
+.comment{
+    margin-bottom: 30px;
+}
+.comment .top-arrow{
+    display: block;
+    height: 25px;
+    overflow: hidden;
+    background: 0;
+    border-bottom: 5px solid #231f20;
+}
+.comment .top-arrow em {
+    float: left;
+    margin: 0 0 0 270px;
+    display: inline;
+    height: 25px;
+    width: 18px;
+    overflow: hidden;
+    background: url(images/dotted-arrow.png) no-repeat 0 0;
+}
+.comment .comment-box {
+    border: 1px solid #efefef;
+    border-top: 0;
+    background: #fff;
+    padding-top: 20px;
+    text-align: left;
+}
+.comment .comment-title {
+    text-align: right;
+    color: #aaa;
+    padding: 0 20px;
+}
+.comment .comment-list {
+    background: 0;
+    margin: 0 20px 30px 20px;
+    padding-top: 15px;
+}
+.comment-list li {
+    padding-left: 60px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+}
+.comment-list li .share-avt {
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.comment-list li .arrow {
+    float: left;
+    position: absolute;
+    height: 14px;
+    overflow: hidden;
+    background: url(images/left-arrow.png) no-repeat 0 0;
+    width: 10px;
+    left: 51px;
+    top: 13px;
+}
+.comment-list .share-user {
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    padding: 15px 15px 5px 15px;
+    zoom: 1;
+}
+.comment-list .share-user h3 {
+    margin-bottom: 12px;
+    line-height: 16px;
+}
+.share-user h3 a {
+    font-size: 14px;
+    color: #000;
+}
+.share-user h3 span{
+    margin-left: 15px;
+    color: #999;
+    font-size:12px;
+    font-weight: normal;
+}
+.share-user .user-title {
+    color: #aaa;
+    font-size: 12px;
+    display: inline;
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+.comment-list .share-user p.content {
+    color: #444;
+    word-wrap: break-word;
+}
+.comment-list .share-user p.quote-content {
+    color: #444;
+    background-color: #efefef;
+    word-wrap: break-word;
+}
+.comment-list .share-user .pic {
+    background: 0;
+    padding: 10px 0;
+    width: 436px;
+    overflow: hidden;
+}
+.comment-list .share-user .pic img {
+    max-width: 436px;
+}
+.comment-list .item-doing {
+    text-align: right;
+    color: #d1d1d1;
+    padding: 5px 0;
+}
+.comment-list .item-doing .reply {
+    margin-right: 15px;
+}
+.comment-list .post textarea {
+    width: 410px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.comment-list .post-quote {
+    margin-top: 8px
+}
+
+.comment-list .post-quote blockquote {
+    padding: 8px 10px;
+    margin: 0 0 8px 0;
+    background-color: #fafafa;
+    position: relative;
+    line-height: 24px
+}
+
+.comment-list .post-quote blockquote .close {
+    position: absolute;
+    right: 15px;
+    top: 10px
+}

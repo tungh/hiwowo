@@ -57,7 +57,6 @@ object Shops extends Table[Shop]("shop") {
   def addTime=column[Timestamp]("add_time")
   def * = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
   def autoInc = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
-
   def autoInc2 = name ~ uid  ~ addTime  returning id
   def autoInc3 = name ~ intro.? ~ uid ~ cid ~ tags.? ~ addTime returning id
 
