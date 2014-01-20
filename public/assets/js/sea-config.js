@@ -16,7 +16,8 @@ seajs.config({
         'zeroclipboard': 'sea-modules/zeroclipboard',
         'easing':'sea-modules/jquery.easing',
         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
-       'hiwowo':'hiwowo/hiwowo'
+        'bootstrap':'hiwowo/bootstrap',
+         'hiwowo':'hiwowo/hiwowo'
     },
 
     // 预加载项
