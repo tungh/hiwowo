@@ -13,4 +13,8 @@ object Pages extends Controller {
   def index = Action {
     Ok(views.html.pages.index())
   }
+
+  def flatui = Action{
+    Ok(views.html.pages.flatui())
+  }
 }

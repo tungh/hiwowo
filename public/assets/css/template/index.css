@@ -13,5 +13,49 @@
     background-color: #eee;
     background-color: rgba(86,61,124,.15);
 }
+.wrap {
+    width: 1190px;
+    margin: 0 auto;
+    *zoom: 1
+}
+
+.wrap:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.row {
+    *zoom: 1
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.row-full {
+    width: 100%;
+    *zoom: 1
+}
+
+.row-full:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+@media (min-width:1010px) and (max-width:1024px) {
+    .wrap{
+        width: 990px;
+    }
+}
+
+@media (max-width:1009px) {
+    .wrap{
+       width: 740px;
+    }
+}
 
 

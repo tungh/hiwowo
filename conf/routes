@@ -7,6 +7,7 @@
 # Home page
 
 GET       /                             controllers.Pages.index
+GET       /flatui                             controllers.Pages.flatui
 
 
 
