@@ -1,0 +1,161 @@
+@views.html.template()(css="/assets/css/template/forum.css"){
+
+
+<div class="container forum">
+    <div class="row">
+        <div class="forum-main">
+            <div class="forum-dtitle clearfix">
+                <a class="fl back" href="/forum">&lt;返回话题列表</a>
+                <div class="fr">
+                    <div class="clearfix fenye">
+                        <form action="/forum/post/608113" method="get">
+                                                <span class="fl go ml5">
+                              跳转:<input type="text" class="ml10" name="p" id="J_FPage" value="1">/1
+                        </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="f-con mt15">
+                <div class="f-con-main">
+                    <div class="f-title clearfix">
+                        <h3 class="fl wbbw">标题</h3>
+                    </div>
+                    <ul class="con-list" id="J_ForumPost">
+                        <li class="first clearfix">
+                            <a href="/u/1221281" target="_blank" rel="usercard" data-id="1221281" class="fl">
+                                <img src="http://s1.img.guang.com/u/efaeaikafiqv6jc7eqvh4.jpg" alt="Yanxi" width="50" height="50">
+                            </a>
+                            <div class="fr info">
+                                <div class="user-info clearfix">
+                                    <span class="fl"><a href="/u/1221281" target="_blank">Yanxi</a>/ 01-01 11:20</span>
+                                    <span class="fr">楼主</span>
+                                </div>
+                                <div class="wbbw post clearfix" id="J_PostArtical" style=""><b>自己不能删除自己的贴子吗？</b><p></p><p></p></div>
+                                <div class="opt clearfix">
+                                    <a class="follower-btn fl" id="J_FollowerBtn" data-num="0">鲜花&nbsp;<span></span></a>
+                                    <a class="share-btn fl ml15" id="J_ShareBtn"><span class="share-icon">分享</span></a>
+                                    <a class="fr mt50" id="J_PostCmt">回复</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix" data-cmtid="57011">
+                            <a href="/u/1004138" target="_blank" rel="usercard" data-id="1004138" class="fl">
+                                <img src="http://s8.img.guang.com/u/ef7h4jbbemvf6jc7eqvh4.jpg" alt="马子天天发呆" width="50" height="50">
+                            </a>
+                            <div class="fr info">
+                                <div class="user-info clearfix">
+                                    <span class="fl"><a class="J_UserNick" href="/u/1004138" target="_blank">马子天天发呆</a>/ <em class="time">01-01 16:38</em></span>
+                                    <span class="fr">沙发</span>
+                                </div>
+                                <div class="wbbw post">
+                                    <p class="J_PostCon wbbw">是的</p>
+                                </div>
+                                <div class="opt clearfix">
+                                    <div class="fr">
+                                        <a class="J_PostCmtReply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix" data-cmtid="57119">
+                            <a href="/u/1221281" target="_blank" rel="usercard" data-id="1221281" class="fl">
+                                <img src="http://s1.img.guang.com/u/efaeaikafiqv6jc7eqvh4.jpg" alt="Yanxi" width="50" height="50">
+                            </a>
+                            <div class="fr info">
+                                <div class="user-info clearfix">
+                                    <span class="fl"><a class="J_UserNick" href="/u/1221281" target="_blank">Yanxi</a>/ <em class="time">01-03 22:18</em></span>
+                                    <span class="fr">板凳</span>
+                                </div>
+                                <div class="wbbw post">
+                                    <p class="J_PostCon wbbw">不好</p>
+                                </div>
+                                <div class="opt clearfix">
+                                    <div class="fr">
+                                        <a class="J_PostCmtReply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix" data-cmtid="57133">
+                            <a href="/u/1692565" target="_blank" rel="usercard" data-id="1692565" class="fl">
+                                <img src="http://s5.img.guang.com/u/efpd6qbflysv6jc7eqvh4.jpg" alt="我有点小坏" width="50" height="50">
+                            </a>
+                            <div class="fr info">
+                                <div class="user-info clearfix">
+                                    <span class="fl"><a class="J_UserNick" href="/u/1692565" target="_blank">我有点小坏</a>/ <em class="time">01-04 16:43</em></span>
+                                    <span class="fr">地板</span>
+                                </div>
+                                <div class="wbbw post">
+                                    <p class="J_PostCon wbbw">好像是的</p>
+                                </div>
+                                <div class="opt clearfix">
+                                    <div class="fr">
+                                        <a class="J_PostCmtReply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="pagin inlineblock fr mt10" id="J_Pagination">
+
+
+
+
+
+
+                <span class="current">1</span>
+                <a href="/forum/post/226159?p=2">2</a>
+                <a href="/forum/post/226159?p=3">3</a>
+                <a href="/forum/post/226159?p=4">4</a>
+
+                <span>...</span><a href="/forum/post/226159?p=21">21</a>
+
+                <a title="下一页" href="/forum/post/226159?p=2" class="next">下一页</a>
+            </div>
+        </div>
+        <div class="side">
+            <div class="taolun-owner">
+                <div class="clearfix t-header">
+                    <a href="/u/1221281" target="_blank" rel="usercard" data-id="1221281" class="fl">
+                        <img src="http://s1.img.guang.com/u/efaeaikafiqv6jc7eqvh4.jpg" alt="Yanxi" width="40" height="40">
+                    </a>
+                    <div class="fl ml10">
+                        <div class="u-info"><a class="u-name mr5" href="/u/1221281" target="_blank">Yanxi</a>楼主</div>
+                        <div class="gc"> 创建话题1<span class="mr5 ml5">|</span>参加讨论1 </div>
+                    </div>
+                </div>
+                <ul>
+                    <li class="clearfix">
+                        <a class="fl" href="/forum/post/608113" target="_blank" title="">
+                            标题
+                        </a>
+                        <a class="fr num">5</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="ad mt15">
+                <a href="/huabao?gad=tlbgg" target="_blank">
+                    <img src="http://s4.img.guang.com/site/2013/12/16/promotion_44_1_1782447316166.jpg" width="240" height="130" alt="逛画报" title="逛画报">
+                </a>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+    seajs.use("hiwowo/pages/index.js")
+</script>
+}
+
+

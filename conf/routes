@@ -6,8 +6,10 @@
 
 # Home page
 
-GET       /                             controllers.Pages.index
-GET       /flatui                             controllers.Pages.flatui
+GET       /                                    controllers.Pages.index
+GET       /forum                               controllers.Pages.forum
+GET       /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long)
+
 
 
 

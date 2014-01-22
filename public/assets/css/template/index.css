@@ -5,57 +5,43 @@
  * Time: 下午8:50
  * 维护：zuosanshao@qq.com
 */
-.show-grid {
-    margin-bottom: 15px;
+#content {
+    position: relative;
+    z-index: 3;
 }
-.show-grid [class^="col-"] {
-    text-align: center;
-    background-color: #eee;
-    background-color: rgba(86,61,124,.15);
+.index .row{
+    background: #f8f8f8;
 }
-.wrap {
-    width: 1190px;
-    margin: 0 auto;
-    *zoom: 1
+.index .main .desc {
+    font-size: 12px;
+    height: 90px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #999;
 }
+.index .main .coll {display: inline;float: left;padding-top: 20px;padding-bottom:100px;border-right: 1px dotted #999;}
+.index .main .coll .tri {right: -10px;border-color: #fff #fff #fff #f4f4f4;border-width: 10px 0px 10px 10px;}
+.index .main .tri {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border-style: solid;
+    font-size: 0;
+}
+.index .main .colr {display: inline;float: right;padding-top: 25px;}
 
-.wrap:after {
-    content: "";
-    display: table;
-    clear: both
-}
+.index .main .colr .tri {left: -10px;border-color: #fff #f4f4f4 #fff #fff;border-width: 10px 10px 10px 0px;}
+.index .main .pic-panel {position: relative;width:100%;height: 180px;margin-bottom: 40px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-ms-border-radius: 5px;-o-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: -2px 4px 6px -4px #999;-moz-box-shadow: -2px 4px 6px -4px #999;box-shadow: -2px 4px 6px -4px #999;background:#f4f4f4;}
+.index .main .pic-panel .face {position: relative;display: inline;float: left;width:320px;height: 160px;margin: 10px;overflow: hidden;}
+.index .main .pic-panel .face img {width:100%;height: 160px;}
+.index .main .pic-panel .pic-info {display: none; margin: 10px;}
+.index .main .pic-panel .title, .index .main .pic-panel .artist {display: block;float: left;/*width: 190px;*/overflow: hidden;}
+.index .main .pic-panel .title {font-size: 18px;color: #333;}
+.index .main .pic-panel .artist {line-height: 40px;}
 
-.row {
-    *zoom: 1
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both
-}
-
-.row-full {
-    width: 100%;
-    *zoom: 1
-}
-
-.row-full:after {
-    content: "";
-    display: table;
-    clear: both
-}
-
-@media (min-width:1010px) and (max-width:1024px) {
-    .wrap{
-        width: 990px;
-    }
-}
-
-@media (max-width:1009px) {
-    .wrap{
-       width: 740px;
-    }
-}
-
-
+.index .main .coll .pic-panel .favor {right: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.index .main .colr .pic-panel .favor {left: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.index .main .pic-panel .favor i {display: block;display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu3.bdstatic.com/static/i/lYM3Cq1b.png",sizingMethod="crop");margin-top: 5px;}
+.index .main .pic-panel .favor.on i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu3.bdstatic.com/static/i/XjrIkjei.png",sizingMethod="crop");}
