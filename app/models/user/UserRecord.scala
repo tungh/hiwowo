@@ -15,7 +15,7 @@ import play.api.Play.current
 * Since:13-1-9下午7:19
 * ModifyTime :
 * ModifyContent:
-* http://www.smeite.com/
+* http://www.hiwowo.com/
 *
 */
 

@@ -6,7 +6,7 @@ package models.advert
 * Since:12-12-16上午11:36
 * ModifyTime :
 * ModifyContent:
-* http://www.smeite.com/
+* http://www.hiwowo.com/
 *
 */
 object AdvertType extends Enumeration {

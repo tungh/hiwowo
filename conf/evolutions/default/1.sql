@@ -42,7 +42,7 @@ CREATE TABLE `user` (
   `name`                varchar(64) NOT NULL ,
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
-  `credit`              smallint(10) not null default '0',
+  `credits`              smallint(10) not null default '0',
   `pic`                 varchar(255) NOT NULL default '/images/user/default.jpg',
   `title`                varchar(64),
   `intro`                varchar(250),
@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `invite_id`           int(10) ,
   `gender`              tinyint(4) not null DEFAULT '2',
   `birth`                varchar(16) ,
+  `qq`                varchar(64) ,
   `weixin`                varchar(64) ,
   `receiver`            varchar(20) ,
   `province`            varchar(20),
@@ -165,8 +166,8 @@ CREATE TABLE `user_record` (
   `uid`                int(10) NOT NULL DEFAULT '0',
   `action_name`       varchar(32) not null default 'love',
   `action_id`         int(10) NOT NULL,
-  `action_url`         varchar(128) NOT NULL DEFAULT 'http://smeite.com',
-  `action_content`     varchar(128) NOT NULL DEFAULT 'smeite',
+  `action_url`         varchar(128) NOT NULL DEFAULT 'http://hiwowo.com',
+  `action_content`     varchar(128) NOT NULL DEFAULT 'hiwowo',
   `add_time`           timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -346,7 +347,6 @@ DROP TABLE IF EXISTS `topic`;
 CREATE TABLE IF NOT EXISTS `topic`(
    `id`                int(10) NOT NULL AUTO_INCREMENT,
   `uid`                int(10) NOT NULL ,
-  `uname`              varchar (32) NOT NULL ,
   `title`              varchar (128) NOT NULL ,
   `content`            text    NOT NULL ,
   `intro`             varchar(200)   NOT NULL ,
@@ -354,8 +354,7 @@ CREATE TABLE IF NOT EXISTS `topic`(
   `type_id`          tinyint NOT NULL DEFAULT '0',
   `is_best`            tinyint(1) NOT NULL DEFAULT '0',
   `is_top`            tinyint(1) NOT NULL DEFAULT '0',
-  `hot_index`           smallint(10)  default '0',
-  `reply_num`           smallint(10) default '0',
+  `discuss_num`           smallint(10) default '0',
   `view_num`           smallint(10)  default '1',
   `love_num`           smallint(10)  default '0',
   `check_state`          tinyint NOT NULL DEFAULT '0',
@@ -381,7 +380,6 @@ DROP TABLE IF EXISTS `topic_discuss`;
 CREATE TABLE IF NOT EXISTS `topic_discuss`(
     `id`                     int(10) NOT NULL AUTO_INCREMENT,
     `uid`                    int(10) NOT NULL ,
-   `uname`                   varchar (32) NOT NULL ,
   `topic_id`                 int(10) NOT NULL ,
   `quote_content`             text,
   `content`                 text ,
@@ -674,7 +672,7 @@ CREATE TABLE IF NOT EXISTS `tag`(
 CREATE TABLE IF NOT EXISTS `at_msg`(
        `id` int(10) NOT NULL AUTO_INCREMENT,
          `sender_id`                int(10) not null default '0',
-  `sender_name`                varchar(32) not null default 'smeite',
+  `sender_name`                varchar(32) not null default 'hiwowo',
   `content`                varchar(255) not null default '',
   `receiver_id`                int(10) not null default '0',
   `receiver_name`             varchar(32) not null default '',
@@ -697,7 +695,7 @@ CREATE TABLE IF NOT EXISTS `at_msg`(
    DROP TABLE IF EXISTS `system_msg`;
 CREATE TABLE IF NOT EXISTS `system_msg`(
        `id`                 int(10) NOT NULL AUTO_INCREMENT,
-       `title`                varchar(32) not null default 'smeite',
+       `title`                varchar(32) not null default 'hiwowo',
        `content`                varchar(255) not null default '',
        `status`               tinyint not null default '1',
        `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
@@ -758,7 +756,7 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
     create table manager(
       `id`                 smallint (10) not null  auto_increment ,
       `email`             varchar(64) not null,
-      `passwd`             varchar(64) not null,
+      `password`             varchar(64) not null,
       `name`          varchar(32) not null default '',
       `department`         varchar(16) not null default '',
       `phone`              varchar(30) not null default '',
@@ -1075,7 +1073,7 @@ DROP TABLE IF EXISTS `at_msg`;
 CREATE TABLE IF NOT EXISTS `at_msg`(
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sender_id`                int(10) not null default '0',
-  `sender_name`                varchar(32) not null default 'smeite',
+  `sender_name`                varchar(32) not null default 'hiwowo',
   `content`                varchar(255) not null default '',
   `receiver_id`                int(10) not null default '0',
   `receiver_name`             varchar(32) not null default '',
@@ -1100,7 +1098,7 @@ CREATE TABLE IF NOT EXISTS `at_msg`(
 DROP TABLE IF EXISTS `system_msg`;
 CREATE TABLE IF NOT EXISTS `system_msg`(
   `id`                 int(10) NOT NULL AUTO_INCREMENT,
-  `title`                varchar(32) not null default 'smeite',
+  `title`                varchar(32) not null default 'hiwowo',
   `content`                varchar(255) not null default '',
   `status`               tinyint not null default '1',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',

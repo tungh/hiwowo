@@ -6,7 +6,7 @@ package utils.global
 * Since:13-2-18下午7:19
 * ModifyTime :
 * ModifyContent:
-* http://www.smeite.com/
+* http://www.hiwowo.com/
 *
 */
 import play.api._

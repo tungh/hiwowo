@@ -14,7 +14,7 @@ import scala.slick.driver.MySQLDriver.simple._
 case class AdministratorRole (
                          id:Option[Long]=None,
                          email: String,
-                         passwd: String,
+                         password: String,
                          name:String,
                          department:String,
                          phone:String,

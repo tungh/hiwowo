@@ -10,7 +10,7 @@ package models.user
  */
 
 object ComeFrom extends Enumeration {
-  val SMEITE = Value("hiwowo")
+  val HIWOWO = Value("hiwowo")
   val QZONE = Value("腾讯QQ")
   val SINA =Value("新浪微博")
   val TAOBAO =Value("淘宝")

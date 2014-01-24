@@ -22,7 +22,7 @@ case class User(
                  name: String,
                  password: String,
                  email: Option[String],
-                 credit:Int,
+                 credits:Int,
                  pic: String,
                  title:Option[String],
                  intro: Option[String],
@@ -40,7 +40,7 @@ object Users extends Table[User]("user") {
   def name = column[String]("name")
   def password = column[String]("password")
   def email = column[String]("email")
-  def credit = column[Int]("credit")
+  def credits = column[Int]("credits")
   def pic = column[String]("pic")
   def title = column[String]("title")
   def intro     = column[String]("intro")
@@ -51,8 +51,8 @@ object Users extends Table[User]("user") {
   def province     = column[String]("province")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ password ~ email.? ~ credit ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.?  <>(User, User.unapply _)
-  def autoInc = id.? ~ name ~ password ~ email.? ~ credit ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.? <>(User, User.unapply _) returning id
+  def * = id.? ~ name ~ password ~ email.? ~ credits ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.?  <>(User, User.unapply _)
+  def autoInc = id.? ~ name ~ password ~ email.? ~ credits ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.? <>(User, User.unapply _) returning id
   def autoInc2 = name ~ password ~ email returning id
   def autoInc3 = name ~ comeFrom ~ openId ~ pic returning id
   /* count  */

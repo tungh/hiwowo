@@ -18,7 +18,7 @@ import java.sql.{Timestamp }
 case class Administrator (
                      id:Option[Long]=None,
                      email: String,
-                     passwd: String,
+                     password: String,
                      name:String,
                      department:String,
                      phone:String,
@@ -35,7 +35,7 @@ case class Administrator (
 object Administrators extends Table[Administrator]("administrator") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def email = column[String]("email")
-  def passwd = column[String]("passwd")
+  def password = column[String]("password")
   def name = column[String]("name")
   def department = column[String]("department")
   def phone = column[String]("phone")
@@ -48,7 +48,7 @@ object Administrators extends Table[Administrator]("administrator") {
   def roleName=column[String]("role_name")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ email ~ passwd ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Administrator, Administrator.unapply _)
+  def * = id.? ~ email ~ password ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Administrator, Administrator.unapply _)
 
 
 }

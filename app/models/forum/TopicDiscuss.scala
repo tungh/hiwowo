@@ -21,7 +21,6 @@ import models.Page._
 case class TopicDiscuss (
                         id: Option[Long],
                         uid: Long,
-                        uname: String,
                         topicId: Long,
                         quoteContent: Option[String],
                         content: String,
@@ -31,16 +30,15 @@ case class TopicDiscuss (
 object TopicDiscusses extends Table[TopicDiscuss]("topic_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def uname = column[String]("uname")
   def topicId = column[Long]("topic_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicDiscuss, TopicDiscuss.unapply _)
-  def autoInc = id.? ~ uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicDiscuss, TopicDiscuss.unapply _) returning id
+  def * = id.? ~ uid  ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicDiscuss, TopicDiscuss.unapply _)
+  def autoInc = id.? ~ uid  ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicDiscuss, TopicDiscuss.unapply _) returning id
 
-  def autoInc2 = uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState returning id
+  def autoInc2 = uid  ~ topicId ~ quoteContent.? ~ content ~ checkState returning id
 
 
 }

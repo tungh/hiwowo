@@ -53,7 +53,9 @@ object UserStatics extends Table[UserStatic]("user_static") {
   def * = id.? ~ uid ~ fansNum ~ followNum  ~ loveSiteNum ~ loveBlogNum ~ lovePicNum ~ loveVideoNum ~ loveShopNum ~ ownSiteNum ~ ownBlogNum ~ ownPicNum ~ ownVideoNum ~ ownShopNum ~ ownTopicNum  <>(UserStatic, UserStatic.unapply _)
   def autoInc = uid  returning id
 
-
+  def findByUid(uid:Long)(implicit session: Session):Option[UserStatic] = {
+    Query(UserStatics).filter(_.uid === uid).firstOption
+  }
 
 }
 
