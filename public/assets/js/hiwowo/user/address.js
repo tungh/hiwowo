@@ -12,7 +12,7 @@
  */
 
 define(function(require, exports){
-	var $  = require("$");
+	var $ = jQuery = require("jquery");
 	var Setup = require("hiwowo/common/area");
     require("hiwowo/common/validator")($);
 	$("#J_Address").validator({fun:function(vali,inputs){

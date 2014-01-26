@@ -1,6 +1,7 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
+import controllers.users.Users
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,8 +11,8 @@ import play.api.mvc.{Action, Controller}
  */
 object Pages extends Controller {
 
-  def index = Action {
-    Ok(views.html.pages.index())
+  def index = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pages.index(user))
   }
 
   def forum = Action{

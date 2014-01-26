@@ -38,7 +38,7 @@ object Users extends Controller {
   /*user 首页*/
   def home(id:Long) =UserAction { user => implicit request =>
 
-    Ok("todo")
+    Ok(views.html.users.home(user) )
   }
 
 

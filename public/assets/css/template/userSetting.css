@@ -6,7 +6,8 @@
  */
 .setting {
     margin-top: 20px;
-    min-height: 500px;
+    margin-bottom: 20px;
+
     padding: 50px;
     background: #fff;
     -moz-border-radius: 4px;
@@ -47,7 +48,7 @@
 .main-content {
     float: left;
     width: 779px;
-    min-height: 500px;
+    min-height: 400px;
     border-left: 1px dotted #d1d1d1
 }
 .main-content a{

@@ -408,7 +408,7 @@ define(function(require, exports) {
 
             if(!$("#J_loginDialog")[0]){
                 var html = "";
-                html += '<div id="J_loginDialog" class="g-dialog">';
+             /*   html += '<div id="J_loginDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
                 html += '<div class="hd"><h3>登录</h3></div>';
                 html += '<div class="bd clearfix"><div class="bd-l">';
@@ -442,15 +442,58 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
+                html += '</div>';*/
+                html +='<div class="modal fade" id="J_loginDialog"> ';
+                html +=    '<div class="modal-dialog"> ';
+                html +=   '<div class="modal-content"> ';
+                    html +=       '<div class="modal-header">  ';
+                        html +=         '  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+                        html +=         '  <h4 class="modal-title">登录</h4>   ';
+                        html +=       ' </div>   ';
+                    html +=       ' <div class="modal-body">   ';
+                html += '<div class="bd clearfix"><div class="bd-l">';
+                html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
+                html += '<div class="error-row"><p class="error"></p></div>';
+                html += '<div class="form-row"><label>Email：</label>';
+                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
                 html += '</div>';
-                    alert("before dialog")
-                $("#J_loginDialog").modal({
-                    backdrop:'static'
-                })
+                html += '<div class="form-row"><label>密码：</label>';
+                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
+                html += '</div>';
+                html += '<div class="form-row"><label>&nbsp;</label>';
+                html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
+                html += '<span>两周内自动登录</span>';
+                html += '</div>';
+                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
+                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
+                html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
+                html += '</form></div>';
+                html += '<div class="bd-r">';
+                html += '<p>你也可以使用这些帐号登录</p>';
+                html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
+                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
+                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
+                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
+                html += '</ul>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="clear"></div>';
+
+                html += '</div>';
+                        html +=   '  </div>                   ';
+                    html +=    ' <div class="modal-footer">     ';
+                        html +=   '  <div class="noaccount">还没有帐号？<a href="/user/regist">免费注册一个</a></div>';
+
+                        html +=  '   </div>   ';
+                    html +=  ' </div> ';
+                html += ' </div>  ';
+                html +=  ' </div> ';
+                $("body").append(html)
+                $("#J_loginDialog").modal('show')
             }else{
-               alert("hello")
+                $("#J_loginDialog").modal('show')
             }
-                alert("after")
+
             $("#J_loginDialog .close").bind("click",function(){
 
                 $("#J_loginDialogForm")[0].reset();
@@ -613,7 +656,7 @@ define(function(require, exports) {
         /* 用户登录弹出框 */
         if($("a[rel=loginD]")[0]){
             $("a[rel=loginD]").click(function(event){
-                alert("hello")
+
                 event.preventDefault();
                 $.hiwowo.loginDialog.login();
             });
@@ -836,83 +879,8 @@ define(function(require, exports) {
                 }
             });
         }
-//同步授权登录后关注弹出层
-        window.followhiwowo = function(code,msg,site,flag,refresh){
-            if(code==444){
-                alert(msg);
-                return false;
-            }
-            if((site!="sina" && site!="qzone" ) || flag=="true" ){
-                if(refresh){
-                    window.location.reload();
-                }
-                return false;
-            }
-            var bdClass = "",
-                frameHtml = "";
-            if(site=="sina"){
-                bdClass = "sinaBd";
-                frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
-            }else if(site=="qzone"){
-                bdClass = "qzoneBd";
-                frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
-            }
 
-            if(!$("#followDialog")[0]){
-                var html = '<div id="J_followDialog" class="g-dialog">';
-                html +=	'<div class="dialog-content">';
-                html +=	'<div class="hd"><h3></h3></div>';
-                html +=	'<div class="bd clearfix '+bdClass+'">';
-                html +=	'<div class="btnFrame">';
-                html +=	frameHtml;
-                html +=	'</div>';
-                html +=	'</div>';
-                html +=	'<i></i>';
-                html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
-                html +=	'<a class="close" href="javascript:;"></a>';
-                html +=	'</div>';
-                html +=	'</div>';
-                $("body").append(html);
-                if($("#loginDialog:visible")[0]){
-                    $("#loginDialog").empty().remove();
-                    $("#exposeMask").empty().remove();
-                }
-                followOverlay = new Overlay({
-                    classPrefix: "g-dialog",
-                    template:html,
-                    width: 600,
-                    zIndex: 9999,
-                    align: {
-                        selfXY: [ "50%", "50%" ],
-                        baseXY: [ "50%", "50%" ]
-                    }
-                });
-                followOverlay.show();
-                Mask.show() ;
-            }else{
-                followOverlay = new Overlay({
-                    classPrefix: "g-dialog",
-                    template:"#J_followDialog",
-                    width: 600,
-                    zIndex: 9999,
-                    align: {
-                        selfXY: [ "50%", "50%" ],
-                        baseXY: [ "50%", "50%" ]
-                    }
-                });
-                followOverlay.show();
-                Mask.show() ;
-            }
-            $(document).on("click","#J_followDialog",function(){
-                if($("input[name=noMore]")[0].checked){
-                    Cookie.set("noMoreTip","n");
-                }
-                if(refresh){
-                    window.location.reload();
-                }
-            })
 
-        }
 
         /*异步授权登陆后*/
         window.refresh=function(){

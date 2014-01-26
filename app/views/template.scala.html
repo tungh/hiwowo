@@ -41,14 +41,14 @@
             <section class="user-info">
                 <div class="menu nav-item">
                     <a class="user" href="">
-                        <img class="avatar" alt="zuosanshao" src="http://himg.bdimg.com/sys/portraitn/item/3e1b7a756f73616e7368616f2804.jpg?cdnversion=0552">
-                        <span class="name">zuosanshao</span>
+                        <img class="avatar" alt="zuosanshao" src="@user.get.pic">
+                        <span class="name">@user.get.name</span>
                         <span class="triangle"></span>
                     </a>
                     <ul class="dropdown" style="width: 132px;">
-                        <li><a href="">个人中心</a></li>
-                        <li><a href="">账号设置</a></li>
-                        <li><a class="logout" href="#">退出</a></li>
+                        <li><a href="@controllers.users.routes.Users.home(user.get.id.get)">我的主页</a></li>
+                        <li><a href="@controllers.users.routes.UsersAccount.base">账号设置</a></li>
+                        <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
                 <a class="favorite nav-item" title="" href=""><i></i></a>

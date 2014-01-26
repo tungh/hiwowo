@@ -11,12 +11,11 @@
  *
  */
 define(function(require, exports) {
-	var $  = require("$");
+	var $ = jQuery = require("jquery");
     require("hiwowo/common/validator")($);
 	var DateSelector = require("hiwowo/common/dateSelect");
 	require("imgAreaSelect");
-    var Overlay = require("overlay")
-    var Mask = require("mask")
+
     var Detector = require("detector")
 $.hiwowo.photoarea = null;
 $.hiwowo.rotate = null;
@@ -165,32 +164,11 @@ $(function(){
 				html += '<a class="close" href="javascript:;"></a>';
 				html += '</div>';
 				html += '</div>';
-			//	$("body").append(html);
-                uploadOverlay = new Overlay({
-                    template:html,
-                    width:450,
-                    zIndex: 9999,
-                    align: {
-                        selfXY: [ "50%", "50%" ],
-                        baseXY: [ "50%", "50%" ]
-                    }
-                });
-                uploadOverlay.show();
-                Mask.set({ backgroundColor:'#000', opacity:0.3 }).show();
+				$("body").append(html);
 
-
+                   $("#photoDialog").modal('show')
             }else{
-                uploadOverlay = new Overlay({
-                    template:'#photoDialog',
-                    width:450,
-                    zIndex: 9999,
-                    align: {
-                        selfXY: [ "50%", "50%" ],
-                        baseXY: [ "50%", "50%" ]
-                    }
-                });
-                uploadOverlay.show();
-                Mask.show()
+                $("#photoDialog").modal('show')
             }
         $("#J_FilePath").change(function(){
             $("#faceUpload").submit();
@@ -206,8 +184,7 @@ $(function(){
                 $("#faceUpload2 input[type=submit]")[0].disabled = "";
                 $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
                 if(data.code=="100"){
-                    uploadOverlay.hide()
-                    Mask.hide()
+                    $("#photoDialog").modal('hide')
 
                     $("#J_uploadImgShow").attr("src",data.src)
                     $(".site-logo").show()

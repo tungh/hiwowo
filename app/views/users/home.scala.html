@@ -1,0 +1,25 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user
+)(css="/assets/css/template/user.css") {
+
+<div class="container user" style="height: 1000px">
+    <div class="row">
+        <div class="main">
+                main
+        </div>
+        <div class="side">
+            side
+        </div>
+
+    </div>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use(["smeite/user/profile","smeite/baobei/favor"]);
+</script>
+}
