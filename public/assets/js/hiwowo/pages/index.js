@@ -7,13 +7,11 @@
  */
 define(function (require) {
     var $ = jQuery = require("jquery");
-    require("bootstrap")
-    var Cookie = require("cookie")
+
+
     $(function(){
-       // $('#example').popover("toggle")
 
-       // $('#myModal').modal('toggle')
 
-        $('#btn-loading').button('loading')
+
     })
 })

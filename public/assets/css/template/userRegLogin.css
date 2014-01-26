@@ -6,7 +6,7 @@
  */
 .setting {
 
-    padding: 50px;
+    padding:50px;
     margin: 20px auto;
     background: #fff;
     -moz-border-radius: 5px;
@@ -17,8 +17,8 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
 }
 
-.content h2 {
-    width: 700px;
+.setting h2 {
+
     line-height: 22px;
     margin: 0 auto 30px;
     padding: 0 0 10px 0;
@@ -26,7 +26,7 @@
     border-bottom: 1px dotted #d1d1d1
 }
 
-.content h2 span {
+.setting h2 span {
     color: #666;
     font-size: 12px;
     font-weight: normal
@@ -34,11 +34,6 @@
 
 
 
-.content .regBox {
-    width: 700px;
-
-    margin: 0 auto
-}
 
 .regBox .reg,.regBox .out-login {
     overflow: hidden;

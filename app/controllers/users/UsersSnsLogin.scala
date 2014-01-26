@@ -1,6 +1,6 @@
 package controllers.users
 
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{AnyContent, Action, Controller}
 import play.api.data._
 import play.api.data.Forms._
 import models.user.User
@@ -45,14 +45,13 @@ object UsersSnsLogin extends Controller {
 
   }
   /* i  inviteId */
-  def  registered(snsType:String,code:String,backType:String,i:Long)=Action{   implicit request =>
+  def  registed(snsType:String,code:String,backType:String,i:Long): Action[AnyContent] =Action{   implicit request =>
      if(snsType=="taobao"){
        /*第一步 获取token,淘宝的第三方登录比较成熟，可以一步到位，token和用户信息一起返回*/
         val post = new HttpPost("https://oauth.taobao.com/token?grant_type=authorization_code&client_id=21136607&client_secret=b43392b7a08581a8916d2f9fa67003db&code="+code+"&redirect_uri=http://hiwowo.com/user/taobao/getToken")
          val client =new DefaultHttpClient();
          val resp= client.execute(post)
          val entity=resp.getEntity;
-       //println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity))
 
          val r=EntityUtils.toString(entity,"UTF-8")
        //println("ssdfdf         " +r);

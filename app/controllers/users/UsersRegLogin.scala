@@ -56,8 +56,8 @@ object UsersRegLogin extends Controller {
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.users.regLogin.login(formWithErrors)),
       user =>{
-        val u=UserDao.authenticate(user._1,user._2).get;
-        Cache.set(u.id.get.toString,u);
+        val u=UserDao.authenticate(user._1,user._2).get
+        Cache.set(u.id.get.toString,u)
         /*记录登陆信息*/
         UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)
         Redirect(controllers.users.routes.Users.home(u.id.get)).withSession("user" -> u.id.get.toString) }
@@ -75,7 +75,7 @@ object UsersRegLogin extends Controller {
     loginForm.bindFromRequest.fold(
       formWithErrors => Ok(Json.obj("code" -> 101, "message" -> "密码或者email错误……")),
       user =>{
-        val u=UserDao.authenticate(user._1,user._2).get;
+        val u=UserDao.authenticate(user._1,user._2).get
         Cache.set(u.id.get.toString,u);
         /*记录登陆信息*/
         UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)

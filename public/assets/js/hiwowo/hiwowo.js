@@ -17,6 +17,7 @@
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
     var Cookie = require("cookie");
+    require("bootstrap")
     $.hiwowo = $.hiwowo || {
         version: "v1.0.0"
     };
@@ -393,6 +394,99 @@ define(function(require, exports) {
         }
     });
 
+    /* 对话框：用户登陆 和 判断是否为新用户 */
+    $.hiwowo.loginDialog = {
+        /*判断是否登陆*/
+        isLogin: function(){
+            if(HIWOWO.userId == ""){
+                $.hiwowo.loginDialog.login();
+                return false;
+            }
+            return true;
+        },
+        login: function(){
+
+            if(!$("#J_loginDialog")[0]){
+                var html = "";
+                html += '<div id="J_loginDialog" class="g-dialog">';
+                html += '<div class="dialog-content">';
+                html += '<div class="hd"><h3>登录</h3></div>';
+                html += '<div class="bd clearfix"><div class="bd-l">';
+                html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
+                html += '<div class="error-row"><p class="error"></p></div>';
+                html += '<div class="form-row"><label>Email：</label>';
+                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
+                html += '</div>';
+                html += '<div class="form-row"><label>密码：</label>';
+                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
+                html += '</div>';
+                html += '<div class="form-row"><label>&nbsp;</label>';
+                html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
+                html += '<span>两周内自动登录</span>';
+                html += '</div>';
+                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
+                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
+                html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
+                html += '</form></div>';
+                html += '<div class="bd-r">';
+                html += '<p>你也可以使用这些帐号登录</p>';
+                html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
+                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
+                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
+                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
+                html += '</ul>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="clear"></div>';
+                html += '<div class="noaccount">还没有帐号？<a href="/user/regist">免费注册一个</a></div>';
+                html += '</div>';
+                html += '<a class="close" href="javascript:;"></a>';
+                html += '</div>';
+                html += '</div>';
+                    alert("before dialog")
+                $("#J_loginDialog").modal({
+                    backdrop:'static'
+                })
+            }else{
+               alert("hello")
+            }
+                alert("after")
+            $("#J_loginDialog .close").bind("click",function(){
+
+                $("#J_loginDialogForm")[0].reset();
+                $("#J_loginDialog").find(".error-row").hide();
+            });
+
+            $("#J_loginDialogForm").submit(function(){
+                var  $this = $(this);
+                $.ajax({
+                    type: "POST",
+                    url:$this.attr("action"),
+                    data:$this.serializeArray(),
+                    dataType:"json",
+                    success:function(data){
+                        if(data.code==100){
+                            //    loginDialog.hide()
+                            window.location.reload();
+                        }else if(data.code==101){
+                            $("#J_loginDialog").find(".error-row").fadeIn();
+                            $("#J_loginDialog").find(".error").html(data.message);
+                            $("#J_loginDialog input[name=password]").val("");
+                        }
+                    }
+                });
+                return false;
+            });
+
+            $(".snslogin a").unbind("click").click(function(){
+                var snsurl = $(this).attr("href");
+                $.hiwowo.util.openWin(snsurl);
+                return false;
+            });
+
+        }
+
+    }
 
     /*
      * 字数统计限制
@@ -513,21 +607,17 @@ define(function(require, exports) {
 
 
         /* 下拉框 */
-        $(".gohome").dropDown({
-            classNm: ".set-dropdown"
+        $(".user").dropDown({
+            classNm: ".dropdown"
         });
-        /*分享好东西*/
-        $(".btn-sg").dropDown({
-            classNm: ".shareit-dropdown"
-        });
-        $(".btn-checkIn").dropDown({
-            classNm: ".checkIn-dropdown"
-        });
-        /*消息*/
-        $(".xiaoxi").dropDown({
-            classNm: ".xiaoxi-dropdown"
-        });
-
+        /* 用户登录弹出框 */
+        if($("a[rel=loginD]")[0]){
+            $("a[rel=loginD]").click(function(event){
+                alert("hello")
+                event.preventDefault();
+                $.hiwowo.loginDialog.login();
+            });
+        }
 
         /* 搜索框效果 header 搜索框*/
         $(".header-search-button").bind("click",function(){

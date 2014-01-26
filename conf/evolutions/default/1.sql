@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `login_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `login_num`           smallint(10) NOT NULL default '1',
   `login_ip`            varchar(32) DEFAULT '0',
-  `register_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `regist_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

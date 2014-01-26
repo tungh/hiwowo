@@ -22,7 +22,7 @@ seajs.config({
 
     // 预加载项
     preload: [
-        this.JSON ? '' : 'json','hiwowo','bootstrap'
+        this.JSON ? '' : 'json','hiwowo'
     ],
 
     // 调试模式
