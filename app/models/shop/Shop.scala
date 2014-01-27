@@ -37,7 +37,7 @@ case class Shop(
                   )
 
 
-object Shops extends Table[Shop]("shop") {
+class Shops(tag:Tag) extends Table[Shop](tag,"shop") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def cid = column[Int]("cid")
@@ -55,12 +55,7 @@ object Shops extends Table[Shop]("shop") {
   def street = column[String]("street")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _)
-  def autoInc = id.? ~ uid  ~ cid  ~ name ~ intro  ~ isVisible  ~ pic ~ tags.? ~ loveNum ~ discussNum ~ goodsNum ~ province.? ~ city.? ~ town.? ~ street.?  ~ modifyTime.? ~ addTime.? <>(Shop, Shop.unapply _) returning id
-  def autoInc2 = name ~ uid  ~ addTime  returning id
-  def autoInc3 = name ~ intro.? ~ uid ~ cid ~ tags.? ~ addTime returning id
-
-
+  def * =(id.?,uid,cid,name,intro,isVisible,pic,tags.?,loveNum,discussNum,goodsNum,province.?,city.?,town.?,street.?,modifyTime.?,addTime.?)<>(Shop.tupled, Shop.unapply)
 
 }
 

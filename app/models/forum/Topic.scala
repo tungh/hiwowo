@@ -37,7 +37,7 @@ case class Topic(
                  addTime:Option[Timestamp]
                  )
 
-object Topics extends Table[Topic]("topic") {
+class Topics(tag:Tag) extends Table[Topic](tag,"topic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def title = column[String]("title")
@@ -52,10 +52,8 @@ object Topics extends Table[Topic]("topic") {
   def loveNum = column[Int]("love_num")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid  ~ title ~ content ~ intro ~ pics.? ~ typeId ~ isBest ~ isTop  ~ discussNum ~ viewNum ~ loveNum ~ checkState ~ addTime.? <>(Topic, Topic.unapply _)
-  def autoInc = id.? ~ uid ~ title ~ content ~ intro ~ pics.?  ~ typeId ~ isBest ~ isTop ~ discussNum ~ viewNum ~ loveNum ~ checkState ~ addTime.? <>(Topic, Topic.unapply _) returning id
-
-  def autoInc2 = uid ~ title ~ content  ~ typeId ~ checkState returning id
+  def * = (id.?,uid ,title,content,intro,pics.?,typeId,isBest,isTop ,discussNum,viewNum,loveNum,checkState,addTime.?) <>(Topic.tupled, Topic.unapply)
+  
 
 
 }

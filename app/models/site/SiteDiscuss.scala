@@ -19,7 +19,7 @@ case class SiteDiscuss (
                           addTime:Option[Timestamp]
                           )
 
-object SiteDiscusses  extends  Table[SiteDiscuss]("site_discuss") {
+class SiteDiscusses(tag:Tag) extends  Table[SiteDiscuss](tag,"site_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def siteId  =column[Long]("site_id")
@@ -28,9 +28,7 @@ object SiteDiscusses  extends  Table[SiteDiscuss]("site_discuss") {
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
 
-  def * = id.? ~ uid ~ siteId   ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(SiteDiscuss, SiteDiscuss.unapply _)
-  def autoInc = id.? ~ uid ~ siteId  ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(SiteDiscuss, SiteDiscuss.unapply _) returning id
+  def * =(id.?,uid,siteId,quoteContent.?,content,checkState,addTime.?) <> (SiteDiscuss.tupled, SiteDiscuss.unapply )
 
-  def autoInc2 = uid ~ siteId ~ quoteContent.?  ~ content ~ checkState returning id
 
 }

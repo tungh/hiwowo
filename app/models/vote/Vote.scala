@@ -27,7 +27,7 @@ case class Vote(
                         value5: Option[Int],
                         addTime: Option[Timestamp]
                         )
-object Votes extends Table[Vote]("vote") {
+class Votes(tag:Tag) extends Table[Vote](tag,"vote") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def voteType = column[Int]("vote_type")
   def validState = column[Int]("valid_state")
@@ -45,6 +45,6 @@ object Votes extends Table[Vote]("vote") {
   def value4 = column[Int]("value4")
   def value5 = column[Int]("value5")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ voteType ~ validState ~ thirdId.? ~ intro.? ~ pic.? ~ select1.? ~ select2.? ~ select3.? ~ select4.? ~ select5.? ~ value1.? ~ value2.? ~ value3.? ~ value4.? ~ value5.? ~ addTime.? <> (Vote, Vote.unapply _)
-  def autoInc =  id.? ~ voteType ~ validState ~ thirdId.? ~ intro.? ~ pic.? ~ select1.? ~ select2.? ~ select3.? ~ select4.? ~ select5.? ~ value1.? ~ value2.? ~ value3.? ~ value4.? ~ value5.? ~ addTime.? <> (Vote, Vote.unapply _) returning id
+  def * = (id.?, voteType, validState, thirdId.?, intro.?, pic.?, select1.?, select2.?, select3.?, select4.?, select5.?, value1.?, value2.?, value3.?, value4.?, value5.?, addTime.?)<> (Vote.tupled, Vote.unapply)
+  
 }

@@ -14,7 +14,7 @@ import models.Page
  */
 object DiscussMsgDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
-
+/*
   def addMsg( replierId:Long,replierName:String,replyType:Int,thirdId:Long,content:String,ownerId:Long):Long = database.withSession {  implicit session:Session =>
     DiscussMsgs.autoInc2.insert(replierId,replierName,replyType,thirdId,content,ownerId)
 }
@@ -37,5 +37,5 @@ object DiscussMsgDao {
     //println(" q sql "+q.selectStatement)
     val msgs:List[DiscussMsg]=  q.list()
     Page[DiscussMsg](msgs,currentPage,totalPages)
-  }
+  }*/
 }

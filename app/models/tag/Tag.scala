@@ -15,7 +15,7 @@ import scala.slick.driver.MySQLDriver.simple._
  * description:标签
  */
 
-case class Tag(
+case class HiTag(
                 id: Option[Long],
                 name: String,
                 addNum:Int,
@@ -30,11 +30,10 @@ case class Tag(
                 addTime:Option[Timestamp]
                 )
 
-
-object Tags extends Table[Tag]("tag") {
+class HiTags(tag:Tag) extends Table[HiTag](tag,"hi-tag") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
-  def  addNum = column[Int]("add_num")
+  def addNum = column[Int]("add_num")
   def isTop = column[Boolean]("is_top")
   def isHighlight = column[Boolean]("is_highlight")
   def sortNum  = column[Int]("sort_num")
@@ -45,12 +44,7 @@ object Tags extends Table[Tag]("tag") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _)
-  def autoInc = id.? ~ name ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _) returning id
-
-
-
+  def * =(id.?,name,addNum,isTop,isHighlight,sortNum,checkState,seoTitle.?,seoKeywords.?,seoDesc.?,modifyTime.?,addTime.?) <> (HiTag.tupled, HiTag.unapply)
 
 
 }

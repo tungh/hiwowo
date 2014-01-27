@@ -17,7 +17,7 @@ case class SitePic (
                         addTime:Option[Timestamp]
                         )
 
-object SitePics extends Table[SitePic]("site_pic") {
+class SitePics(tag:Tag) extends Table[SitePic](tag,"site_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def sid = column[Long]("sid")
   def intro = column[String]("intro")
@@ -25,10 +25,7 @@ object SitePics extends Table[SitePic]("site_pic") {
   def pic = column[String]("pic")
   def isTop = column[Int]("is_top")
   def addTime = column[Timestamp]("add_time")
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ sid  ~ intro.? ~ tags.? ~ pic ~ isTop ~ addTime.?  <>(SitePic, SitePic.unapply _)
-  def autoInc  = id.? ~ sid ~ intro.? ~ tags.? ~ pic ~ isTop ~ addTime.?  <>(SitePic, SitePic.unapply _) returning id
-  def autoInc2 = sid  ~ intro.? ~ tags.? ~ pic ~ isTop returning id
-  def autoInc3 = sid ~ pic returning id
+  def * =(id.?,sid,intro.?,tags.?,pic,isTop,addTime.?) <> (SitePic.tupled, SitePic.unapply)
+
 
 }

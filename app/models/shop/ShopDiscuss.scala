@@ -24,7 +24,7 @@ case class ShopDiscuss(
                         checkState:Int,
                         addTime:Option[Timestamp]
                         )
-object ShopDiscusses  extends  Table[ShopDiscuss]("shop_discuss") {
+class ShopDiscusses(tag:Tag)  extends  Table[ShopDiscuss](tag,"shop_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def shopId  =column[Long]("shop_id")
@@ -33,13 +33,7 @@ object ShopDiscusses  extends  Table[ShopDiscuss]("shop_discuss") {
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
   
-  def * =id.?  ~ uid ~ shopId  ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _)
-  def autoInc =id.? ~ uid ~ shopId  ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(ShopDiscuss, ShopDiscuss.unapply _) returning id
-
-  def autoInc2 =  uid  ~ shopId ~ quoteContent.?  ~ content ~ checkState returning id
-
-
-
+  def * =(id.? , uid, shopId , quoteContent.?, content, checkState, addTime.? ) <>(ShopDiscuss.tupled, ShopDiscuss.unapply )
 
 }
 

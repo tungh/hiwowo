@@ -20,7 +20,7 @@ case class SiteBlogDiscuss (
                           )
 
 
-object SiteBlogDiscusses  extends  Table[SiteBlogDiscuss]("site_blog_discuss") {
+class SiteBlogDiscusses(tag:Tag) extends Table[SiteBlogDiscuss](tag,"site_blog_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def blogId  =column[Long]("blog_id")
@@ -29,9 +29,7 @@ object SiteBlogDiscusses  extends  Table[SiteBlogDiscuss]("site_blog_discuss") {
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
 
-  def * =id.? ~ uid  ~ blogId  ~ quoteContent.? ~ content ~ checkState ~ addTime.?   <>(SiteBlogDiscuss, SiteBlogDiscuss.unapply _)
-  def autoInc =id.? ~ uid  ~ blogId   ~ quoteContent.?  ~ content ~ checkState ~ addTime.?   <>(SiteBlogDiscuss, SiteBlogDiscuss.unapply _) returning id
+  def * = (id.?,uid,blogId,quoteContent.?,content,checkState,addTime.?) <> (SiteBlogDiscuss.tupled,SiteBlogDiscuss.unapply)
 
-  def autoInc2 = uid ~ blogId  ~ quoteContent.?  ~ content ~ checkState returning id
 
 }

@@ -21,15 +21,13 @@ case class UserLoveVideo (
                           videoId:Long,
                           addTime:Option[Timestamp]
                           )
-object UserLoveVideos extends Table[UserLoveBlog]("user_love_video") {
+class UserLoveVideos(tag:Tag) extends Table[UserLoveBlog](tag,"user_love_video") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def videoId = column[Long]("videoId")
   def addTime = column[Timestamp]("add_time")
 
-  def * = id.? ~ uid  ~ videoId  ~ addTime.?  <>(UserLoveBlog, UserLoveBlog.unapply _)
-
-  def autoInc = uid  ~ videoId   returning id
+  def * = (id.?,uid,videoId,addTime.?) <> (UserLoveBlog.tupled, UserLoveBlog.unapply)
 
 
 }

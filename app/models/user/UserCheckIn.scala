@@ -16,9 +16,9 @@ case class UserCheckIn(
                         days: Int,
                         month: Int,
                         history: String,
-                        addTime: Timestamp
+                        addTime: Option[Timestamp]
                         )
-object UserCheckIns extends Table[UserCheckIn]("user_check_in") {
+class UserCheckIns(tag:Tag) extends Table[UserCheckIn](tag,"user_check_in") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def credit = column[Int]("credit")
@@ -26,6 +26,6 @@ object UserCheckIns extends Table[UserCheckIn]("user_check_in") {
   def month = column[Int]("month")
   def history = column[String]("history")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ credit ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _)
-  def autoInc =  id.? ~ uid ~ credit ~ days ~ month ~ history ~ addTime <> (UserCheckIn, UserCheckIn.unapply _) returning id
+  def * =(id.?,uid,credit,days,month,history,addTime.?) <> (UserCheckIn.tupled, UserCheckIn.unapply)
+
 }

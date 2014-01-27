@@ -33,7 +33,7 @@ case class UserStatic(
                       ownShopNum: Int,
                       ownTopicNum: Int
                       )
-object UserStatics extends Table[UserStatic]("user_static") {
+class UserStatics(tag:Tag) extends Table[UserStatic](tag,"user_static") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def fansNum = column[Int]("fans_num")
@@ -50,13 +50,8 @@ object UserStatics extends Table[UserStatic]("user_static") {
   def ownShopNum = column[Int]("own_shop_num")
   def ownTopicNum = column[Int]("own_topic_num")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ fansNum ~ followNum  ~ loveSiteNum ~ loveBlogNum ~ lovePicNum ~ loveVideoNum ~ loveShopNum ~ ownSiteNum ~ ownBlogNum ~ ownPicNum ~ ownVideoNum ~ ownShopNum ~ ownTopicNum  <>(UserStatic, UserStatic.unapply _)
-  def autoInc = uid  returning id
-
-  def findByUid(uid:Long)(implicit session: Session):Option[UserStatic] = {
-    Query(UserStatics).filter(_.uid === uid).firstOption
-  }
-
+  def * =(id.?, uid, fansNum, followNum , loveSiteNum, loveBlogNum, lovePicNum, loveVideoNum, loveShopNum, ownSiteNum, ownBlogNum, ownPicNum, ownVideoNum, ownShopNum, ownTopicNum)  <>(UserStatic.tupled, UserStatic.unapply)
+  
 }
 
 

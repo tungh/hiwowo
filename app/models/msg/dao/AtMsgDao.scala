@@ -15,7 +15,7 @@ import java.sql.Timestamp
 object AtMsgDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
-  def addMsg( senderId:Long,senderName:String,content:String,receiverId:Long,receiverName:String):Long = database.withSession {  implicit session:Session =>
+ /* def addMsg( senderId:Long,senderName:String,content:String,receiverId:Long,receiverName:String):Long = database.withSession {  implicit session:Session =>
       AtMsgs.autoInc2.insert(senderId,senderName,content,receiverId,receiverName)
   }
 
@@ -57,5 +57,5 @@ object AtMsgDao {
     val q=  for(c<-AtMsgs.filter(_.receiverId === receiverId ).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     val msgs:List[AtMsg]=  q.list()
     Page[AtMsg](msgs,currentPage,totalPages)
-  }
+  }*/
   }

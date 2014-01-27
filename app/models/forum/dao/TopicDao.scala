@@ -22,7 +22,7 @@ object TopicDao {
 
   lazy val database = Database.forDataSource(DB.getDataSource())
 
-  /* 增加一个话题 */
+ /* /* 增加一个话题 */
   def addTopic(topic:Topic):Long =database.withSession {  implicit session:Session =>
       Topics.autoInc.insert(topic)
 
@@ -216,5 +216,5 @@ object TopicDao {
        val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
        val discusses:List[TopicDiscuss]= query.drop(startRow).take(pageSize).list()
        Page[TopicDiscuss](discusses,currentPage,totalPages)
-  }
+  }*/
 }

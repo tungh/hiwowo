@@ -14,7 +14,7 @@ case class SiteVideo (
                         addTime:Option[Timestamp]
                         )
 
-object SiteVideos extends Table[SiteVideo]("site_video") {
+class SiteVideos(tag:Tag) extends Table[SiteVideo](tag,"site_video") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def sid = column[Long]("sid")
   def url = column[String]("url")
@@ -23,10 +23,8 @@ object SiteVideos extends Table[SiteVideo]("site_video") {
   def isTop = column[Int]("is_top")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ sid ~ url ~ intro.? ~ tags.? ~ isTop ~ addTime.?  <>(SiteVideo, SiteVideo.unapply _)
-  def autoInc  = id.? ~ sid ~ url ~ intro.? ~ tags.?  ~ isTop ~ addTime.?  <>(SiteVideo, SiteVideo.unapply _) returning id
-  def autoInc2 = sid ~ url ~ intro.? ~ isTop returning id
-  def autoInc3 = sid ~ url returning id
+  def * = (id.? , sid , url , intro.? , tags.? , isTop , addTime.?)  <>(SiteVideo.tupled, SiteVideo.unapply)
+
 
 
 

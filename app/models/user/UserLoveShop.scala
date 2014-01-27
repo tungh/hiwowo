@@ -20,16 +20,13 @@ case class UserLoveShop (
                            addTime:Option[Timestamp]
                            )
 
-object UserLoveShops extends Table[UserLoveShop]("user_love_shop") {
+class UserLoveShops(tag:Tag) extends Table[UserLoveShop](tag,"user_love_shop") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def shopId = column[Long]("shop_id")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ shopId ~ addTime.?  <>(UserLoveShop, UserLoveShop.unapply _)
-
-  def autoInc = uid  ~ shopId   returning id
-
+  def * = (id.?,uid,shopId,addTime.?)  <> (UserLoveShop.tupled, UserLoveShop.unapply )
 
 
 }

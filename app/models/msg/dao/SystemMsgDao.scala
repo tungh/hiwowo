@@ -15,7 +15,7 @@ import java.sql.Timestamp
  */
 object SystemMsgDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
-
+/*
    def addMsg(title:String,content:String):Long = database.withSession {  implicit session:Session =>
          SystemMsgs.autoId2.insert(title,content)
    }
@@ -104,5 +104,5 @@ object SystemMsgDao {
     }yield c.id ~ c.receiverId ~ c.status ~ sm.title ~ sm.content ~c.addTime
     val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.sortBy(_._1 desc).drop(startRow).take(pageSize).list()
     Page[(Long,Long,Int,String,String,Timestamp)](msgs,currentPage,totalPages)
-  }
+  }*/
 }

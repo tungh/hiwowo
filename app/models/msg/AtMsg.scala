@@ -25,7 +25,7 @@ case class AtMsg (
             addTime:Option[Timestamp]
             )
 
-object AtMsgs extends Table[AtMsg]("at_msg") {
+class AtMsgs(tag:Tag) extends Table[AtMsg](tag,"at_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def senderId =column[Long]("sender_id")
   def senderName =column[String]("sender_name")
@@ -34,9 +34,7 @@ object AtMsgs extends Table[AtMsg]("at_msg") {
   def receiverName =column[String]("receiver_name")
   def status = column[Int]("status")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ senderId ~ senderName ~ content ~ receiverId ~ receiverName  ~ status  ~ addTime.? <>(AtMsg, AtMsg.unapply _)
-  def autoInc =id.? ~ senderId ~ senderName  ~ content ~ receiverId ~ receiverName  ~ status  ~ addTime.? <>(AtMsg, AtMsg.unapply _) returning id
-  def autoInc2 = senderId ~ senderName  ~ content ~ receiverId ~ receiverName  returning id
+  def * = (id.?,senderId,senderName,content,receiverId,receiverName,status,addTime.?) <> (AtMsg.tupled, AtMsg.unapply)
 }
 
 

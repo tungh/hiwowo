@@ -24,25 +24,15 @@ case class UserLoveTopic (
                            topicId:Long,
                            addTime:Option[Timestamp]
                            )
-object UserLoveTopics extends Table[UserLoveTopic]("user_love_topic") {
+class UserLoveTopics(tag:Tag) extends Table[UserLoveTopic](tag,"user_love_topic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def topicId = column[Long]("topic_id")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ topicId  ~ addTime.?  <>(UserLoveTopic, UserLoveTopic.unapply _)
+  def * = (id.?,uid,topicId,addTime.?)  <> (UserLoveTopic.tupled, UserLoveTopic.unapply)
 
-  def autoInc = uid  ~ topicId   returning id
 
-  def insert(uid:Long,topicId:Long)(implicit session: Session)={
-    UserLoveTopics.autoInc.insert(uid,topicId)
-  }
-  def find(uid:Long,topicId:Long)(implicit session: Session)={
-    (for(c<-UserLoveTopics if c.uid===uid  if c.topicId ===topicId  )yield c).firstOption
-  }
-  def delete(uid:Long,topicId:Long)(implicit session: Session)={
-    (for(c<-UserLoveTopics if c.uid===uid  if c.topicId === topicId  )yield c).delete
-  }
 }
 
 

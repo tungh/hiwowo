@@ -1,12 +1,11 @@
 package models.user.dao
 
-import scala.slick.session.Database
-import Database.threadLocalSession
+import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 import scala.slick.jdbc.{GetResult, StaticQuery => Q}
 import Q.interpolation
 import play.api.db._
 import play.api.Play.current
-
+import scala.slick.driver.MySQLDriver.simple._
 /**
 * Created by zuosanshao.
 * Email:zuosanshao@qq.com
@@ -19,7 +18,7 @@ import play.api.Play.current
 object UserSQLDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
-  /* 添加 一个创建 theme num */
+ /* /* 添加 一个创建 theme num */
   def updatePostThemeNum(uid:Long,num:Int)=database.withSession {
     sqlu"update user_static set post_theme_num =post_theme_num+$num where id =$uid".first
   }
@@ -72,6 +71,6 @@ object UserSQLDao {
   }
   def updateWithdrawShiDou(uid:Long,num:Int)=database.withSession{
     sqlu"update user set withdraw_shi_dou = withdraw_shi_dou+$num where id =$uid".first
-  }
+  }*/
 
 }

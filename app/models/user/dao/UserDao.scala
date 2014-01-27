@@ -11,6 +11,7 @@ import models.Page
 import models.user._
 import models.Page
 import models.user.User
+import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 
 /*
 *
@@ -21,9 +22,10 @@ object UserDao {
 
   /*从connection pool 中 获取jdbc的connection*/
   implicit val database = Database.forDataSource(DB.getDataSource())
+  val users = TableQuery[Users]
   /* 验证 */
-  def authenticate(email: String, password: String): Option[User] = database.withSession{  implicit session:Session =>
-    val user = Users.authenticate(email,password)
+  def authenticate(email: String, password: String): Option[User] = database.withDynSession {
+    val user =  (for(u<- users if u.email === email && u.password === Codecs.sha1("hiwowo"+password))yield u ).firstOption
     if(!user.isEmpty){
         Cache.set("user_"+user.get.id.get,user.get)
     }
@@ -31,10 +33,10 @@ object UserDao {
 
   }
   /*find By id*/
-  def findById(uid:Long):User = database.withSession{  implicit session:Session =>
+  def findById(uid:Long):User = database.withDynSession {
     Cache.getOrElse[User]("user_"+uid) {
       //println("get it from db")
-      val user = Users.findById(uid)
+      val user = ( for( u <- users if u.id === uid ) yield u ).firstOption
       if(!user.isEmpty){
         Cache.set("user_"+uid,user.get)
       }
@@ -42,15 +44,15 @@ object UserDao {
     }
   }
   /*find by email */
-  def findByEmail(email: String):Option[User] = database.withSession{ implicit session:Session =>
-    val user =Users.findByEmail(email)
+  def findByEmail(email: String):Option[User] = database.withDynSession {
+    val user =( for(u <- users if u.email === email) yield u ).firstOption
     if(!user.isEmpty){
       Cache.set("user_"+user.get.id.get,user.get)
     }
     user
   }
 
-  def findUserWithStatic(uid:Long):(User,UserStatic) = database.withSession{  implicit session:Session =>
+/*  def findUserWithStatic(uid:Long):(User,UserStatic) = database.withDynSession {
       (for{
         c <-Users
         s<-UserStatics
@@ -58,9 +60,10 @@ object UserDao {
         if c.id ===uid
       }yield(c,s)).first
 
-  }
+  }*/
 
-  /* count user */
+
+ /* /* count user */
   def countUser = database.withSession{  implicit session:Session =>
        Query(Users.length).first
   }
@@ -172,6 +175,6 @@ object UserDao {
     Page[User](groups,currentPage,totalPages)
    }
 
-
+*/
 
 }

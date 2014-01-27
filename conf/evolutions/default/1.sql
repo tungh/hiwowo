@@ -608,7 +608,7 @@ CREATE TABLE IF NOT EXISTS `goods_discuss`(
  **************************************************************/
  -- --------------------------------------------------------
 /*
-  -- 表的结构 `tag `
+  -- 表的结构 `hi tag `
      id                 表的ID
      name               标签名称
      intro              简介
@@ -629,8 +629,8 @@ CREATE TABLE IF NOT EXISTS `goods_discuss`(
 */
 -- ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `tag`;
-CREATE TABLE IF NOT EXISTS `tag`(
+DROP TABLE IF EXISTS `hi-tag`;
+CREATE TABLE IF NOT EXISTS `hi-tag`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(32) not null ,
    `add_num`                 smallint(10) not null default '1',

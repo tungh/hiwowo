@@ -14,7 +14,7 @@ import models.Page
 object FavorMsgDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
-  def addMsg(loverId:Long,loverName:String,favorType:Int,thirdId:Long,content:String,lovedId:Long):Long = database.withSession {  implicit session:Session =>
+ /* def addMsg(loverId:Long,loverName:String,favorType:Int,thirdId:Long,content:String,lovedId:Long):Long = database.withSession {  implicit session:Session =>
     FavorMsgs.autoInc.insert(loverId,loverName,favorType,thirdId,content,lovedId)
 }
   def findMsgByLovedId(lovedId:Long,currentPage:Int,pageSize:Int):Page[FavorMsg] = database.withSession {  implicit session:Session =>
@@ -36,5 +36,5 @@ object FavorMsgDao {
     val msgs:List[FavorMsg]=  q.list()
     Page[FavorMsg](msgs,currentPage,totalPages)
   }
-
+*/
 }

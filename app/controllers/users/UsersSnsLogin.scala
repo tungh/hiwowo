@@ -58,11 +58,12 @@ object UsersSnsLogin extends Controller {
          val json=Json.parse(r)
          val nick=(json \ "taobao_user_nick").as[String];
          val openId = (json \ "taobao_user_id").as[String];
+       var uid =0;
          /*
          * 第二步 查找用户是否存在，存在则缓存，不存在则保存 再缓存
          *
          * */
-         val user=UserDao.checkSnsUser(3,openId);
+        /* val user=UserDao.checkSnsUser(3,openId);
          var uid:Long = 0;
         if (user.isEmpty){
              UserDao.addSnsUser(java.net.URLDecoder.decode(nick,"UTF-8"),3,openId,"/images/user/default.jpg",i);
@@ -72,7 +73,7 @@ object UsersSnsLogin extends Controller {
         }else {
           Cache.set(user.get.id.get.toString,user);
           uid = user.get.id.get
-        }
+        }*/
        /*
        * 第三步 返回result   异步直接刷新，同步显示followSmeite
        * */
@@ -116,10 +117,10 @@ object UsersSnsLogin extends Controller {
        val json2 =Json.parse(info)
        val nickName= (json2 \ "nickname").as[String]
        val pic = (json2 \ "figureurl_1").as[String]
-
+       val uid =0
 
        /*查找用户信息*/
-       val user =UserDao.checkSnsUser(1,openId);
+      /* val user =UserDao.checkSnsUser(1,openId);
        var uid:Long = 0;
        if (user.isEmpty){
          UserDao.addSnsUser(nickName,1,openId,pic,i)
@@ -129,7 +130,7 @@ object UsersSnsLogin extends Controller {
        }else {
          Cache.set(user.get.id.get.toString,user);
          uid = user.get.id.get
-       }
+       }*/
         /* 处理result */
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
@@ -157,9 +158,10 @@ object UsersSnsLogin extends Controller {
        val json2 =Json.parse(r2)
        val nickName = (json2 \ "name").as[String]
        val pic = (json2 \ "profile_image_url").as[String]
+       val uid =0;
         /* 查找用户信息 */
         /*查找用户信息*/
-        val user =UserDao.checkSnsUser(2,openId);
+     /*   val user =UserDao.checkSnsUser(2,openId);
        var uid:Long = 0;
        if (user.isEmpty){
          UserDao.addSnsUser(nickName,2,openId,pic,i)
@@ -169,7 +171,7 @@ object UsersSnsLogin extends Controller {
        }else {
          Cache.set(user.get.id.get.toString,user);
          uid = user.get.id.get
-       }
+       }*/
        /* 处理result */
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("sina")).withSession("user" -> uid.toString)

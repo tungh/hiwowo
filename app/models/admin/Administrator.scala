@@ -5,7 +5,7 @@ import play.api.libs.Codecs
 import play.api.Play.current
 import play.api.db.DB
 import scala.slick.driver.MySQLDriver.simple._
-import java.sql.{Timestamp }
+import java.sql.Timestamp
 /**
  * Created by zuosanshao.
  * email:zuosanshao@qq.com
@@ -16,7 +16,7 @@ import java.sql.{Timestamp }
  */
 
 case class Administrator (
-                     id:Option[Long]=None,
+                     id:Option[Long],
                      email: String,
                      password: String,
                      name:String,
@@ -32,7 +32,7 @@ case class Administrator (
                      )
 
 
-object Administrators extends Table[Administrator]("administrator") {
+class Administrators(tag: Tag) extends Table[Administrator](tag,"administrator") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def email = column[String]("email")
   def password = column[String]("password")
@@ -46,11 +46,9 @@ object Administrators extends Table[Administrator]("administrator") {
   def addTime = column[Timestamp]("add_time")
   def roleId=column[Int]("role_id")
   def roleName=column[String]("role_name")
-
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ email ~ password ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Administrator, Administrator.unapply _)
-
-
+  def * =(id.?,email, password, name, department,phone,loginTime, loginNum ,loginIP.?,lastLoginTime,addTime,roleId,roleName)  <> ( Administrator.tupled, Administrator.unapply)
 }
+  //
+  // val Administrators = TableQuery[Administrators]
 
 

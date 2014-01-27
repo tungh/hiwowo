@@ -11,7 +11,7 @@ import java.util.Date
 object VoteDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
-  /* 添加 vote */
+/*  /* 添加 vote */
   def addVote(vote:Vote) =database.withSession {  implicit session:Session =>
     Votes.autoInc.insert(vote)
   }
@@ -52,5 +52,5 @@ object VoteDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val list:List[Vote]=  query.drop(startRow).take(pageSize).list()
     Page[Vote](list,currentPage,totalPages);
-  }
+  }*/
 }

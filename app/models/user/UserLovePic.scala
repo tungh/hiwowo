@@ -16,15 +16,12 @@ case class UserLovePic (
                           picId:Long,
                           addTime:Option[Timestamp]
                           )
-object UserLovePics extends Table[UserLoveBlog]("user_love_blog") {
+class UserLovePics(tag:Tag) extends Table[UserLovePic](tag,"user_love_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def picId = column[Long]("blogId")
+  def picId = column[Long]("picId")
   def addTime = column[Timestamp]("add_time")
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ picId  ~ addTime.?  <>(UserLoveBlog, UserLoveBlog.unapply _)
 
-  def autoInc = uid  ~ picId  returning id
-
+  def * =(id.?,uid,picId,addTime.?) <> (UserLovePic.tupled, UserLovePic.unapply)
 
 }

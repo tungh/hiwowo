@@ -27,7 +27,7 @@ case class GoodsDiscuss(
                         addTime:Option[Timestamp]
                         )
 
-object GoodsDiscusses extends Table[GoodsDiscuss]("goods_discuss") {
+class GoodsDiscusses(tag:Tag) extends Table[GoodsDiscuss](tag,"goods_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def goodsId = column[Long]("goods_id")
@@ -36,8 +36,7 @@ object GoodsDiscusses extends Table[GoodsDiscuss]("goods_discuss") {
   def isBought =column[Boolean]("is_bought")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid ~  goodsId  ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _)
-  def autoInc = id.? ~ uid ~ goodsId  ~ content ~ isWorth ~ isBought ~ checkState ~ addTime.? <>(GoodsDiscuss, GoodsDiscuss.unapply _) returning id
-  def autoInc2  = uid ~ goodsId  ~ content ~ checkState  returning id
+  def * = (id.?, uid,  goodsId , content, isWorth, isBought, checkState, addTime.?) <>(GoodsDiscuss.tupled, GoodsDiscuss.unapply)
+
 }
 

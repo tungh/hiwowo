@@ -17,8 +17,9 @@ object UsersMsg extends Controller {
     user => implicit request =>
       if (user.isEmpty) Redirect(controllers.users.routes.UsersRegLogin.login)
       else {
-        val page = SystemMsgDao.findReceiverMsgs(user.get.id.get,p,10)
-        Ok(views.html.users.msg.system(user,page))
+   //     val page = SystemMsgDao.findReceiverMsgs(user.get.id.get,p,10)
+     //   Ok(views.html.users.msg.system(user,page))
+        Ok("todo")
       }
 
   }

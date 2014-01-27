@@ -28,7 +28,7 @@ case class ShopStyle (
         bannerBgRepeat:String,
         bannerBgPosition:String
 )
-object  ShopStyles extends  Table[ShopStyle]("shop_style") {
+class  ShopStyles(tag:Tag) extends  Table[ShopStyle](tag,"shop_style") {
  def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
 def shopId  =column[Long]("shop_id")
 def pageBgColor = column[String]("page_bg_color")
@@ -42,7 +42,7 @@ def bannerBgColor = column[String]("banner_bg_color")
 def bannerBgImage = column[String]("banner_bg_image")
 def bannerBgRepeat = column[String]("banner_bg_repeat")
 def bannerBgPosition = column[String]("banner_bg_position")
-def * =id.? ~ shopId ~ pageBgColor ~ pageBgImage ~ pageBgRepeat ~ pageBgPosition ~ pageBgAttachment ~ bannerHeight ~ bannerColor ~ bannerBgColor ~ bannerBgImage ~ bannerBgRepeat ~ bannerBgPosition  <>(ShopStyle, ShopStyle.unapply _)
+def * = (id.?,shopId,pageBgColor,pageBgImage,pageBgRepeat,pageBgPosition,pageBgAttachment,bannerHeight,bannerColor,bannerBgColor,bannerBgImage,bannerBgRepeat,bannerBgPosition)  <>(ShopStyle.tupled, ShopStyle.unapply )
 
 
 }

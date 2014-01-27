@@ -37,7 +37,7 @@ case class Goods(
                   addTime:Option[Timestamp]
                   )
 
-object Goodses extends Table[Goods]("goods") {
+class Goodses(tag:Tag) extends Table[Goods](tag,"goods") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def shopId = column[Long]("shop_id")
   def numIid = column[Long]("num_iid")
@@ -53,8 +53,6 @@ object Goodses extends Table[Goods]("goods") {
   def isMember = column[Boolean]("is_member")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ shopId ~ numIid  ~ name ~ intro ~ content.? ~ price ~ pic ~ itemPics ~ detailUrl ~ loveNum  ~ status ~ isMember ~ modifyTime.? ~ addTime.? <>(Goods, Goods.unapply _)
-  def autoInc =  shopId ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics   returning id
-
+  def * =(id.?,shopId,numIid,name,intro,content.?,price,pic,itemPics,detailUrl,loveNum,status,isMember,modifyTime.?,addTime.?) <> (Goods.tupled, Goods.unapply)
 
 }

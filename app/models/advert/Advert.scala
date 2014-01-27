@@ -15,7 +15,7 @@ import java.sql.Timestamp
  */
 
 case class Advert(
-                   id:Option[Long]=None,
+                   id:Option[Long],
                    positionCode:String,
                    name: String,
                    thirdId:Option[Long],
@@ -32,7 +32,7 @@ case class Advert(
                    endTime:Option[Timestamp],
                    addTime:Option[Timestamp]
                    )
-object Adverts extends Table[Advert]("advert") {
+class Adverts(tag: Tag) extends Table[Advert](tag,"advert") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def positionCode = column[String]("position_code")
   def name = column[String]("name")
@@ -50,6 +50,6 @@ object Adverts extends Table[Advert]("advert") {
   def endTime = column[Timestamp]("end_time")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ positionCode ~ name ~ thirdId.?   ~ title.? ~ content.? ~ pic.? ~ spic.? ~ width ~ height ~ link.? ~ note.?  ~ clickNum ~ startTime.? ~ endTime.? ~ addTime.? <>(Advert, Advert.unapply _)
+  def * = ( id.?,positionCode,name,thirdId.?,title.?,content.?,pic.?,spic.?,width,height,link.?,note.?,clickNum,startTime.?,endTime.?,addTime.? ) <> (Advert.tupled, Advert.unapply)
 }
 

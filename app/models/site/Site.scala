@@ -28,7 +28,7 @@ case class Site(
                 )
 
 
-object Sites extends Table[Site]("site") {
+class Sites(tag:Tag) extends Table[Site](tag,"site") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def title = column[String]("title")
@@ -40,9 +40,7 @@ object Sites extends Table[Site]("site") {
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
 
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid  ~ title ~ pic ~ intro ~ tags ~ status  ~ notice.? ~ modifyTime.? ~addTime.? <>(Site, Site.unapply _)
-  def autoInc =  uid  ~ title  ~ pic ~ intro ~ tags~ addTime   returning id
+  def * =(id.?,uid,title,pic,intro,tags,status,notice.?,modifyTime.?,addTime.?)<>(Site.tupled, Site.unapply)
 
 
 

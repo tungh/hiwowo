@@ -15,7 +15,7 @@ case class FavorMsg(
                       lovedId:Long,
                      addTime:Option[Timestamp]
                      )
-object FavorMsgs extends Table[FavorMsg]("favor_msg") {
+class FavorMsgs(tag:Tag) extends Table[FavorMsg](tag,"favor_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def loverId =column[Long]("lover_id")
   def loverName =column[String]("lover_name")
@@ -24,6 +24,6 @@ object FavorMsgs extends Table[FavorMsg]("favor_msg") {
   def content = column[String]("content")
   def lovedId = column[Long]("loved_id")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ loverId ~ loverName ~ favorType ~ thirdId  ~ content ~ lovedId   ~ addTime.? <>(FavorMsg, FavorMsg.unapply _)
-  def autoInc = loverId ~ loverName ~ favorType ~ thirdId ~ content ~ lovedId   returning id
+  def * = (id.?,loverId,loverName,favorType,thirdId,content,lovedId,addTime.?) <> (FavorMsg.tupled, FavorMsg.unapply)
+
 }

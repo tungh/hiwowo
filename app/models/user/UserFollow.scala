@@ -24,24 +24,14 @@ case class UserFollow(
                        fansId: Long,
                        addTime: Option[Timestamp]
                        )
-object UserFollows extends Table[UserFollow]("user_follow") {
+class UserFollows(tag:Tag) extends Table[UserFollow](tag,"user_follow") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def fansId = column[Long]("fans_id")
   def addTime = column[Timestamp]("add_time")
 
-  def * = id.? ~ uid  ~ fansId  ~ addTime.?  <> (UserFollow, UserFollow.unapply _)
-  def autoInc = uid ~ fansId returning id
+  def * =(id.?,uid,fansId,addTime.?)<> (UserFollow.tupled, UserFollow.unapply )
 
-  def insert(followId:Long,fansId:Long)(implicit session: Session)={
-    UserFollows.autoInc.insert(followId,fansId)
-  }
-  def find(uid:Long,fansId:Long)(implicit session: Session)={
-    (for(c<-UserFollows if c.uid===uid  if c.fansId ===fansId  )yield c).firstOption
-  }
-  def delete(uid:Long,fansId:Long)(implicit session: Session)={
-    (for(c<-UserFollows if c.uid===uid  if c.fansId ===fansId  )yield c).delete
-  }
 }
 
 

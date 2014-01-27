@@ -20,15 +20,14 @@ case class AdvertPosition(
                            addTime:Option[Timestamp]
                            )
 
-object AdvertPositions extends Table[AdvertPosition]("advert_position") {
+class AdvertPositions(tag:Tag) extends Table[AdvertPosition](tag,"advert_position") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def position = column[String]("position")
   def name = column[String]("name")
   def code = column[String]("code")
   def advertType = column[Int]("advert_type")
   def addTime = column[Timestamp]("add_time")
-  // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ position ~ name ~ code ~ advertType ~ addTime.? <>(AdvertPosition, AdvertPosition.unapply _)
+  def * = (id.? , position , name , code , advertType , addTime.?) <>(AdvertPosition.tupled, AdvertPosition.unapply )
 }
 
 

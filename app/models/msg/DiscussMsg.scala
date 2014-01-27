@@ -16,7 +16,7 @@ case class DiscussMsg(
                      addTime:Option[Timestamp]
                      )
 
-object DiscussMsgs extends Table[DiscussMsg]("discuss_msg") {
+class DiscussMsgs(tag:Tag) extends Table[DiscussMsg](tag,"discuss_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def replierId =column[Long]("replier_id")
   def replierName =column[String]("replier_name")
@@ -25,7 +25,6 @@ object DiscussMsgs extends Table[DiscussMsg]("discuss_msg") {
   def content = column[String]("content")
   def ownerId = column[Long]("owner_id")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(DiscussMsg, DiscussMsg.unapply _)
-  def autoInc =id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(DiscussMsg, DiscussMsg.unapply _) returning id
-  def autoInc2 =replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   returning id
+  def * = (id.?,replierId,replierName,replyType,thirdId,content,ownerId,addTime.? )<>(DiscussMsg.tupled, DiscussMsg.unapply )
+  
 }

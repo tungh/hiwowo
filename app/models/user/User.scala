@@ -35,7 +35,7 @@ case class User(
                  )
 
 
-object Users extends Table[User]("user") {
+class Users(tag:Tag) extends Table[User](tag,"user") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def password = column[String]("password")
@@ -51,35 +51,8 @@ object Users extends Table[User]("user") {
   def province     = column[String]("province")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ password ~ email.? ~ credits ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.?  <>(User, User.unapply _)
-  def autoInc = id.? ~ name ~ password ~ email.? ~ credits ~ pic  ~ title.?  ~ intro.?  ~ status ~ comeFrom ~ openId.?  ~ tags.? ~ province.?  ~ modifyTime.? <>(User, User.unapply _) returning id
-  def autoInc2 = name ~ password ~ email returning id
-  def autoInc3 = name ~ comeFrom ~ openId ~ pic returning id
-  /* count  */
-  def count()(implicit session: Session):Int = {
-    Query(Users.length).first()
-  }
-  /* count  */
-  def count(comeFrom:Int)(implicit session: Session):Int = {
-    Query(Users.filter(_.comeFrom === comeFrom).length).first()
-  }
-  /* 验证用户登陆email 和 密码是否正确 */
-  def authenticate(email: String, password: String)(implicit session: Session): Option[User] = {
-    (for(u<-Users if u.email === email && u.password===Codecs.sha1("hiwowo"+password))yield(u) ).firstOption
-  }
-  /* 根据用户id 查找 */
-  def findById(uid:Long)(implicit session: Session):Option[User] = {
-    Query(Users).filter(_.id === uid).firstOption
-  }
-  /* 根据用户email 查找 */
-  def findByEmail(email:String)(implicit session: Session):Option[User] = {
-    Query(Users).filter(_.email === email).firstOption
-  }
-  /*验证第三方登陆用户*/
-  def findSnsUser(comeFrom:Int,openId:String)(implicit session: Session): Option[User] = {
-    (for(u<-Users if u.comeFrom === comeFrom && u.openId=== openId )yield(u) ).firstOption
-  }
-
+  def * = (id.?, name, password, email.?, credits, pic , title.? , intro.? , status, comeFrom, openId.? , tags.?, province.? , modifyTime.?)  <>(User.tupled, User.unapply)
+ 
 
 
 }

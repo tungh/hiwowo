@@ -23,7 +23,7 @@ case  class  SiteBlog(
                   addTime:Option[Timestamp]
                   )
 
-object SiteBlogs extends Table[SiteBlog]("site_blog") {
+class SiteBlogs(tag:Tag) extends Table[SiteBlog](tag,"site_blog") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def sid = column[Long]("sid")
@@ -40,8 +40,6 @@ object SiteBlogs extends Table[SiteBlog]("site_blog") {
   def addTime = column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ sid ~ comeFrom.? ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum   ~addTime.? <>(SiteBlog, SiteBlog.unapply _)
-  def autoInc = id.? ~ uid ~ sid ~ comeFrom.?  ~ title ~ pic.? ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ loveNum ~ replyNum   ~addTime.? <>(SiteBlog, SiteBlog.unapply _) returning id
-  def autoInc2 = uid ~ sid ~ comeFrom.? ~ title ~ pic.? ~ content ~ tags.? ~ status   returning id
+  def * =(id.?,uid,sid,comeFrom.?,title,pic.?,content,tags.?,status,isTop,viewNum,loveNum,replyNum, addTime.?) <>(SiteBlog.tupled, SiteBlog.unapply)
 
 }

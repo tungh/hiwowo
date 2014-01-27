@@ -30,7 +30,7 @@ actionContent:String,
 addTime: Option[Timestamp]
 )
 
-object UserRecords extends Table[UserRecord]("user_record") {
+class UserRecords(tag:Tag) extends Table[UserRecord](tag,"user_record") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def actionName = column[String]("action_name")
@@ -38,10 +38,7 @@ object UserRecords extends Table[UserRecord]("user_record") {
   def actionUrl = column[String]("action_url")
   def actionContent = column[String]("action_content")
   def addTime = column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _)
-  def autoInc =id.? ~ uid ~ actionName ~ actionId ~ actionUrl ~ actionContent ~ addTime.? <> (UserRecord, UserRecord.unapply _) returning id
-
-
+  def * = (id.?,uid,actionName,actionId,actionUrl,actionContent,addTime.?) <> (UserRecord.tupled, UserRecord.unapply )
 
 }
 
