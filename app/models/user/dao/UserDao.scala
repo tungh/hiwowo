@@ -23,8 +23,13 @@ object UserDao {
   /*从connection pool 中 获取jdbc的connection*/
   implicit val database = Database.forDataSource(DB.getDataSource())
   val users = TableQuery[Users]
+  val userStatics = TableQuery[UserStatics]
+  val userProfiles = TableQuery[UserProfiles]
   /* 验证 */
   def authenticate(email: String, password: String): Option[User] = database.withDynSession {
+    println("******************************** authenticate **************************")
+    val q =  for(u<- users if u.email === email && u.password === Codecs.sha1("hiwowo"+password))yield u
+    println("  authenticate   "+q.selectStatement)
     val user =  (for(u<- users if u.email === email && u.password === Codecs.sha1("hiwowo"+password))yield u ).firstOption
     if(!user.isEmpty){
         Cache.set("user_"+user.get.id.get,user.get)
@@ -36,6 +41,8 @@ object UserDao {
   def findById(uid:Long):User = database.withDynSession {
     Cache.getOrElse[User]("user_"+uid) {
       //println("get it from db")
+      val q = for( u <- users if u.id === uid ) yield u
+      println(q.selectStatement)
       val user = ( for( u <- users if u.id === uid ) yield u ).firstOption
       if(!user.isEmpty){
         Cache.set("user_"+uid,user.get)
@@ -52,116 +59,115 @@ object UserDao {
     user
   }
 
-/*  def findUserWithStatic(uid:Long):(User,UserStatic) = database.withDynSession {
-      (for{
-        c <-Users
-        s<-UserStatics
-        if c.id ===s.uid
-        if c.id ===uid
-      }yield(c,s)).first
-
-  }*/
-
-
- /* /* count user */
-  def countUser = database.withSession{  implicit session:Session =>
-       Query(Users.length).first
+ def findUserWithStatic(uid:Long):(User,UserStatic) = database.withDynSession {
+    val query =  for{
+        c <-users
+        s<-userStatics
+        if c.id === s.uid
+        if c.id === uid
+      }yield(c,s)
+    println(query.selectStatement)
+   query.first
   }
-  def countUser(time:Timestamp) = database.withSession{  implicit session:Session =>
-    Query(Users.filter(_.modifyTime > time).length).first
+
+
+ /* count user */
+  def countUser =  database.withDynSession {
+       Query(users.length).first
   }
-  def countUser(days:Int):Int = database.withSession{  implicit session:Session =>
+  def countUser(time:Timestamp) =  database.withDynSession {
+    Query(users.filter(_.modifyTime > time).length).first
+  }
+  def countUser(days:Int):Int =  database.withDynSession {
     val now = new Timestamp(System.currentTimeMillis())
     val before = new Timestamp(now.getTime-1000*60*60*24*days)
 
-    Query(Users.filter(_.modifyTime between(before,now)).length).first
+    Query(users.filter(_.modifyTime between(before,now)).length).first
 
   }
 
   /* 检查第三方用户是否存在 */
   /*查找sns 帐号的用户*/
-  def checkSnsUser(comeFrom:Int,openId:String):Option[User]=database.withSession{ implicit  session:Session =>
-    val user = Users.findSnsUser(comeFrom,openId)
+  def checkSnsUser(comeFrom:Int,openId:String):Option[User] = database.withDynSession {
+    val user = (for( u<-users if u.comeFrom === comeFrom && u.openId=== openId )yield u ).firstOption
     if(!user.isEmpty){
       Cache.set("user_"+user.get.id.get,user)
     }
     user
   }
  /* 第三方用户初次登陆 */
-  def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String,inviteId:Long) =database.withSession{ implicit  session:Session =>
-    val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
-    UserStatics.autoInc.insert(id)
-    UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
+  def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String,inviteId:Long) = database.withDynSession {
+      val id = users.map(u =>(u.name,u.comeFrom,u.openId,u.pic)).insert(name,comeFrom,openId,pic)
+    userStatics.map( u => u.uid ).insert(id)
+    userProfiles.map( u =>(u.uid,u.inviteId,u.loginTime,u.registTime,u.loginIP)).insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
   /*用户通过网站注册 * */
-  def addHiwowoUser(name:String, password:String, email:String,inviteId:Long,ip:String)=database.withSession{ implicit  session:Session =>
-    val id = Users.autoInc2.insert(name,Codecs.sha1("hiwowo"+password),email)
-    UserStatics.autoInc.insert(id)
-    UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
+  def addHiwowoUser(name:String, password:String, email:String,inviteId:Long,ip:String) = database.withDynSession {
+    val id = users.map(u =>(u.name,u.password,u.email)).insert(name,Codecs.sha1("hiwowo"+password),email)
+    userStatics.map(u=>u.uid).insert(id)
+    userProfiles.map( u =>(u.uid,u.inviteId,u.loginTime,u.registTime,u.loginIP)).insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
     id
   }
   /*修改密码*/
-  def modifyPassword(uid:Long, password:String) =database.withSession{ implicit  session:Session =>
+  def modifyPassword(uid:Long, password:String) = database.withDynSession {
     Cache.remove("user_"+uid)
-    (for(c<-Users if c.id === uid)yield c.password).update(Codecs.sha1("hiwowo"+password))
+    (for(c<-users if c.id === uid)yield c.password).update(Codecs.sha1("hiwowo"+password))
   }
   /*保存地址*/
-  def modifyAddr(uid:Long, receiver:String,province:String, city:String, street:String, postCode:String, phone:String)= database.withSession{  implicit session:Session =>
+  def modifyAddr(uid:Long, receiver:String,province:String, city:String, street:String, postCode:String, phone:String) = database.withDynSession {
 
-    (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone).update((receiver,province,city,street,postCode,phone))
+    (for(c<-userProfiles if c.uid === uid) yield (c.receiver,c.province,c.city,c.street,c.postCode,c.phone)).update((receiver,province,city,street,postCode,phone))
   }
 
   /*修改user pic*/
-  def modifyPic(uid:Long,pic:String)= database.withSession{  implicit session:Session =>
+  def modifyPic(uid:Long,pic:String) =  database.withDynSession {
     Cache.remove("user_"+uid)
-    (for(c<-Users if c.id===uid)yield c.pic).update(pic)
+    (for(c<-users if c.id===uid)yield c.pic).update(pic)
   }
   /*修改 user email*/
-  def modifyEmail(uid:Long,email:String)= database.withSession{  implicit session:Session =>
+  def modifyEmail(uid:Long,email:String) = database.withDynSession {
     Cache.remove("user_"+uid)
-    (for(c<-Users if c.id===uid)yield c.email ).update(email)
+    (for(c<-users if c.id===uid)yield c.email ).update(email)
   }
   /*保存基本信息*/
-  def modifyBase(uid:Long,name:String,email:String,intro:String,gender:Int, birth:String,blog:String,qq:String)  = database.withSession{  implicit session:Session =>
+  def modifyBase(uid:Long,name:String,email:String,intro:String,gender:Int, birth:String,blog:String,qq:String) = database.withDynSession {
     Cache.remove("user_"+uid)
-    (for(c <-Users if c.id === uid)yield c.name ~ c.email ~ c.intro ).update((name,email,intro))
-    (for(c<-UserProfiles if c.uid === uid)yield c.birth ~ c.gender ~ c.blog ~ c.qq).update((birth,gender,blog,qq))
+    (for(c <-users if c.id === uid)yield (c.name,c.email,c.intro)).update((name,email,intro))
+    (for(c<-userProfiles if c.uid === uid)yield (c.birth,c.gender,c.blog,c.qq)).update((birth,gender,blog,qq))
   }
   /* 修改用户状态 */
   def modifyStatus(uid:Long,status:Int)= database.withSession {  implicit session:Session =>
     Cache.remove("user_"+uid)
-    (for(u<-Users if u.id === uid) yield u.status ).update(status)
+    (for(u<-users if u.id === uid) yield u.status ).update(status)
   }
 
   /*  list  user */
-  def findAll(currentPage: Int, pageSize: Int ): Page[User] = database.withSession {  implicit session:Session =>
-    val totalRows=Users.count()
+  def findAll(currentPage: Int, pageSize: Int ): Page[User] = database.withDynSession {
+      val totalRows = Query(users.length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val q=  for(c<-Users.sortBy(_.id desc).drop(startRow).take(pageSize)) yield c
-
-    //println(" q sql "+q.selectStatement)
-    val users:List[User]=  q.list()
-    Page[User](users,currentPage,totalPages)
+    val q=  for(c<-users ) yield c
+    // println("q select statement " +q.selectStatement)
+    Page[User](q.drop(startRow).take(pageSize).list(),currentPage,totalPages)
   }
 
 
   /* find by id with profile */
-  def findWithProfile(uid:Long) = database.withSession{  implicit session:Session =>
+  def findWithProfile(uid:Long) = database.withDynSession {
     (for{
-      u<-Users
-      p<-UserProfiles
+      u<-users
+      p<-userProfiles
       if u.id === p.uid
       if u.id === uid }yield(u,p)).first
   }
   /* find profile*/
-  def findProfile(uid:Long):UserProfile=database.withSession{  implicit session:Session =>
-    {for( c <-UserProfiles  if c.uid === uid )yield c }.first
+  def findProfile(uid:Long):UserProfile = database.withDynSession {
+    {for( c <- userProfiles  if c.uid === uid )yield c }.first
   }
 
    /*用户筛选*/
-  def filterUsers(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Int,pageSize:Int)= database.withSession {  implicit session:Session =>
-    var query =for(u<-Users)yield u
+  def filterUsers(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Int,pageSize:Int) = database.withDynSession {
+    var query =for(u<-users)yield u
     if(!name.isEmpty) query = query.filter(_.name like "%"+name.get+"%")
      if(!status.isEmpty) query =query.filter(_.status === status.get)
      if(!comeFrom.isEmpty) query =query.filter(_.comeFrom === comeFrom.get)
@@ -175,6 +181,6 @@ object UserDao {
     Page[User](groups,currentPage,totalPages)
    }
 
-*/
+
 
 }
