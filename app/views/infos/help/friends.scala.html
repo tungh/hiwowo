@@ -1,0 +1,65 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title = "友情链接_食美特，爱美食爱生活"
+)(css="/assets/css/template/infos.css") {
+
+<div class="container common clearfix">
+    <div class="aside">
+
+        <div class="inner">
+            <ul class="aside-nav">
+                <li><a href="/help">帮助中心</a></li>
+                <li ><a href="/aboutUs">关于嗨喔喔</a></li>
+                <li ><a href="/shiDou">喔喔叫攻略</a></li>
+                <li ><a href="/contactUs">联系我们</a></li>
+                <li ><a href="/cooperation">商务合作</a></li>
+                <li class="current"><a href="/friends">友情链接</a></li>
+            </ul>
+            <div class="aside-contact">
+                <p><a href="/contactUs"><img src="/assets/images/hiwowo-weixin.png" width="160"></a></p>
+                <p>^_^关爱我吧</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="main friends">
+        <div class="inner">
+            <div class="help-con">
+
+                <div class="help-bd">
+                    <!-- 内容 start -->
+
+                    <h3>合作伙伴</h3>
+
+
+                    <h3>友情链接</h3>
+
+
+                        <div class="friendApply">
+                            <h3>友情链接申请</h3>
+                            <p>
+                                1：凡申请友情链接请先在贵网站上做好我们的链接并通知我们即可。<br>
+                                2：目前食美特仅接受文字链接，将会以文字的方式放在“友情链接”页面。<br>
+                                链接文字：食美特<br>
+                                链接地址：http://smeite.com<br>
+                                联系方式：service@@smeite.com
+                            </p>
+                        </div>
+
+
+                    <p class="team"><a href="/forum/view/2" target="_blank" >食美特团队</a></p>
+                    <!-- 内容 end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+        }{
+<script type="text/javascript">
+    seajs.use('hiwowo/info');
+</script>
+}

@@ -1,0 +1,62 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title =  "关于我们_食美特，爱美食爱生活"
+)(css="/assets/css/template/infos.css") {
+
+<div class="container common clearfix">
+
+    <div class="aside">
+
+        <div class="inner">
+            <ul class="aside-nav">
+                <li ><a href="/help">帮助中心</a></li>
+                <li class="current"><a href="/aboutUs">关于嗨喔喔</a></li>
+                <li ><a href="/credits">喔喔叫攻略</a></li>
+                <li ><a href="/contactUs">联系我们</a></li>
+                <li ><a href="/cooperation">商务合作</a></li>
+                <li ><a href="/friends">友情链接</a></li>
+            </ul>
+            <div class="aside-contact">
+            <p><a href="/contactUs"><img src="/assets/images/hiwowo-weixin.png" width="160"></a></p>
+            <p>^_^关爱我吧</p>
+        </div>
+        </div>
+
+    </div>
+     <div class="main aboutUs">
+             <div class="inner">
+                 <div class="help-con">
+                     <div class="help-hd">
+                         <h3>关于食美特</h3>
+                     </div>
+                     <div class="help-bd">
+                         <!-- 内容 start -->
+                         <div>
+                         <p>食美特，爱美食爱生活 </p>
+
+                         <p>Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品。
+                             我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。
+
+                         </p>
+                         <p> 我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议和更健康的购物方式！</p>
+
+                         <p>理念：创造更美好的日常生活</p>
+                         </div>
+
+                         <p class="team"><a href="/forum/view/2" target="_blank" >食美特团队</a></p>
+
+                         <!-- 内容 end -->
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('hiwowo/info');
+</script>
+}

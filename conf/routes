@@ -8,8 +8,16 @@ GET   /test                                controllers.Test.index
 # Home page
 
 GET       /                                    controllers.Pages.index
-GET       /forum                               controllers.Pages.forum
-GET       /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long)
+GET       /sites                               controllers.Pages.sites
+GET       /store                               controllers.Pages.store
+GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new")
+
+#forum
+GET    /forum/search                     controllers.Forums.search
+GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long)
+GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
+POST   /forum/topic/save                       controllers.Forums.save
+
 
 
 
@@ -46,6 +54,23 @@ GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
 
 
+
+#info 信息页面 新年 公告，帮助中心
+GET   /agreement                                       controllers.Infos.agreement
+GET   /aboutUs                                         controllers.Infos.aboutUs
+GET   /contactUs                                       controllers.Infos.contactUs
+GET   /friends                                         controllers.Infos.friends
+GET   /help                                            controllers.Infos.help
+GET   /cooperation                                     controllers.Infos.cooperation
+GET   /sitemap                                         controllers.Infos.siteMap
+GET   /credits                                         controllers.Infos.credits
+GET   /jiucuo                                          controllers.Infos.jiucuo
+
+GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
+GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth
+GET   /686d2b12a3c8fa6430c6f32b51d504ca.txt            controllers.Infos.qzone
+GET   /bdsitemap.txt                                   controllers.Infos.baiduSiteMap
+GET   /root.txt                                        controllers.Infos.alimama
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

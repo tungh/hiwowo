@@ -11,9 +11,7 @@ package models.forum
 
 object TopicType extends Enumeration{
   val Normal = Value("普通")
-  val Ask  =  Value("问答")
   val Knowledge = Value("知识")
-  val Experience  = Value("经验")
-  val Story=Value("故事")
+  val Ask  =  Value("问答")
   val Activity =Value("活动")
 }

@@ -1,33 +1,34 @@
-@views.html.template()(css="/assets/css/template/forum.css"){
+@(user:Option[models.user.User],typeId:Int,sortBy:String)
+@views.html.template(user)(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">
     <div class="row">
         <div class="forum-main">
             <div class="forum-stitle">
-                <form class="search-forum clearfix" action="/forum">
+                <form class="search-forum clearfix" action="@controllers.routes.Forums.search" method="get">
                     <input name="text" type="text" class="s-text fl" value="" id="J_STxte">
                     <input type="submit" class="forum-sbtn fr" value="搜索">
                 </form>
                 <div class="clearfix mt10">
                     <div class="fl mt5">
-                        <a href="/forum?sort=&amp;text=" class="on">全部</a>
+                        <a href='@controllers.routes.Pages.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
                         <span class="sp">-</span>
-                        <a href="/forum?type=best&amp;sort=&amp;text=">精华</a>
+                        <a href='@controllers.routes.Pages.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
                         <span class="sp">-</span>
-                        <a href="/forum?type=knowledge&amp;sort=&amp;text=">知识</a>
+                        <a href='@controllers.routes.Pages.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
                         <span class="sp">-</span>
-                        <a href="/forum?type=question&amp;sort=&amp;text=">问答</a>
+                        <a href='@controllers.routes.Pages.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
                         <span class="sp">|</span>
                         <span class="ml5">排序：</span>
-                        <a href="/forum?type=&amp;text=" class="on">最后回复</a>
+                        <a href='@controllers.routes.Pages.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
                         <span class="sp">-</span>
-                        <a href="/forum?sort=new&amp;type=&amp;text=">最新发表</a>
+                        <a href='@controllers.routes.Pages.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
                         <span class="sp">-</span>
-                        <a href="/forum?sort=most&amp;type=&amp;text=">最多回复</a>
+                        <a href='@controllers.routes.Pages.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
                     </div>
                     <div class="fr">
-                        <a title="关闭搜索" href="/forum" class="forum-cbtn" id="J_CSearch">关闭搜索</a>
+                        <a title="关闭搜索" href="@controllers.routes.Forums.search" class="forum-cbtn" id="J_CSearch">关闭搜索</a>
                     </div>
                 </div>
 
@@ -36,20 +37,20 @@
             <!-- filter -->
             <div class="forum-ltitle clearfix">
                 <div class="fl">
-                    <a href="/forum?sort=&amp;text=" class="on">全部</a>
+                    <a href='@controllers.routes.Pages.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
                     <span class="sp">-</span>
-                    <a href="/forum?type=best&amp;sort=&amp;text=">精华</a>
+                    <a href='@controllers.routes.Pages.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
                     <span class="sp">-</span>
-                    <a href="/forum?type=knowledge&amp;sort=&amp;text=">知识</a>
+                    <a href='@controllers.routes.Pages.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
                     <span class="sp">-</span>
-                    <a href="/forum?type=question&amp;sort=&amp;text=">问答</a>
+                    <a href='@controllers.routes.Pages.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
                     <span class="sp">|</span>
                     <span class="ml5">排序：</span>
-                    <a href="/forum?type=&amp;text=" class="on">最后回复</a>
+                    <a href='@controllers.routes.Pages.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
                     <span class="sp">-</span>
-                    <a href="/forum?sort=new&amp;type=&amp;text=">最新发表</a>
+                    <a href='@controllers.routes.Pages.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
                     <span class="sp">-</span>
-                    <a href="/forum?sort=most&amp;type=&amp;text=">最多回复</a>
+                    <a href='@controllers.routes.Pages.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
                 </div>
                 <div class="fr">
                     <a title="搜索" class="search" id="J_SearchFBtn" href="javascript:;">
@@ -57,7 +58,7 @@
                     </a>
                 </div>
                 <div class="fr mr10">
-                    <a title="创建话题" href="/forum/create" class="createTopic">创建话题</a>
+                    <a title="创建话题" href="@controllers.routes.Forums.edit(0)" class="createTopic">创建话题</a>
                 </div>
             </div>
             <!-- list -->
