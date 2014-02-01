@@ -1,7 +1,5 @@
 package models.forum
 
-
-
 import play.api.db._
 import play.api.Play.current
 import java.sql.Timestamp

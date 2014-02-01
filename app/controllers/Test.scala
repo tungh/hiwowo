@@ -17,6 +17,8 @@ object Test extends Controller {
     for(user <- users.items){
       println(user.name)
     }
+  val (user,userStatic) = UserDao.findUserWithStatic(2)
+  println(user.name + " : " + userStatic.uid)
     Ok("Ok")
   }
 }

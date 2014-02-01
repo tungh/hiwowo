@@ -1,14 +1,7 @@
 package models.forum
 
-
-
-import play.api.db._
-import play.api.Play.current
 import  java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
-import models.Page
-import models.Page._
-import models.user.{Users, UserLoveTopics}
 
 
 /**
@@ -52,9 +45,7 @@ class Topics(tag:Tag) extends Table[Topic](tag,"topic") {
   def loveNum = column[Int]("love_num")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = (id.?,uid ,title,content,intro,pics.?,typeId,isBest,isTop ,discussNum,viewNum,loveNum,checkState,addTime.?) <>(Topic.tupled, Topic.unapply)
-  
-
+  def * = (id.?,uid ,title,content,intro,pics.?,typeId,isBest,isTop,discussNum,viewNum,loveNum,checkState,addTime.?) <>(Topic.tupled, Topic.unapply)
 
 }
 

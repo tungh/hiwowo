@@ -3,9 +3,6 @@ package controllers.users
 import play.api.mvc._
 import play.api.libs.json.Json
 import models.user._
-import models.forum.Topic
-import models.forum.dao.TopicDao
-import models.goods.Goods
 import models.user.User
 import models.user.dao.{UserSQLDao, UserDao}
 import models.Page

@@ -9,12 +9,8 @@ package models.user
  * description:用户
  */
 import  java.sql.Timestamp
-import play.api.Play.current
-import play.api.libs.Codecs
-import play.api.db.DB
+
 import scala.slick.driver.MySQLDriver.simple._
-import models.Page
-import models.Page._
 
 
 case class User(
