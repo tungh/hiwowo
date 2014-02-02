@@ -143,15 +143,40 @@ object TopicDao {
     Page[Topic](q.list(), currentPage, totalPages)
 
   }
-
+     /* forum 页面筛选 */
   def filterTopics(typeId:Int,sortBy:String,currentPage:Int =1,pageSize:Int =10) =  database.withDynSession {
-    var query = for (c <- topics) yield c
+    var query = for {
+      c <- topics
+      u <- users
+      if c.uid === u.id
+    } yield (c,u)
 
-    if(typeId != -1) query = query.filter(_.typeId === typeId)
-    if(sortBy == "new") query = query.sortBy(_.addTime desc)
-    if(sortBy == "discuss") query = query.sortBy(_.discussNum desc)
-    if(sortBy == "love") query = query.sortBy(_.loveNum desc)
-    query.sortBy(_.isBest desc)
+    if(typeId != -1) query = query.filter(_._1.typeId === typeId)
+    if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
+    if(sortBy == "discuss") query = query.sortBy(_._1.discussNum desc)
+    if(sortBy == "love") query = query.sortBy(_._1.loveNum desc)
+    query.sortBy(_._1.isBest desc)
+    //println("sql " +query.selectStatement)
+    val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
+    }
+    val ts: List[(Topic,User)] = query.drop(startRow).take(pageSize).list()
+    Page[(Topic,User)](ts, currentPage, totalPages)
+
+  }
+   /* 管理后台 筛选 */
+  def filterTopics(title: Option[String], checkState: Option[Int], typeId: Option[Int], isBest: Option[Boolean], isTop: Option[Boolean], currentPage: Int, pageSize: Int) = database.withDynSession {
+    var query = for (c <- topics) yield c
+    if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
+    if(!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
+    if(!typeId.isEmpty) query = query.filter(_.typeId === typeId.get)
+    if(!isTop.isEmpty) query = query.filter(_.isTop === isTop.get)
+    if(!isBest.isEmpty) query = query.filter(_.isBest === isBest.get)
+    query = query.sortBy(_.id desc)
     //println("sql " +query.selectStatement)
     val totalRows = query.list().length
     val totalPages = (totalRows + pageSize - 1) / pageSize
@@ -162,9 +187,7 @@ object TopicDao {
     }
     val ts: List[Topic] = query.drop(startRow).take(pageSize).list()
     Page[Topic](ts, currentPage, totalPages)
-
   }
-
 
 
   /* topic discuss */
@@ -195,42 +218,20 @@ object TopicDao {
     (for (c <- topicDiscusses if c.id === id) yield c.checkState).update(checkState)
   }
 
-  /*根据topic分类 分页显示*/
-  def findDiscusses(topicId: Long, currentPage: Int, pageSize: Int): Page[TopicDiscuss] = database.withDynSession {
-    val totalRows = Query(topicDiscusses.filter(_.topicId === topicId).length).first
-    val totalPages = (totalRows + pageSize - 1) / pageSize
-    //println("totalPages " +totalPages)
-    /*获取分页起始行*/
-    val startRow = if (currentPage < 1 || currentPage > totalPages) {
-      0
-    } else {
-      (currentPage - 1) * pageSize
-    }
-    val q = for (c <- topicDiscusses.drop(startRow).take(pageSize) if c.topicId === topicId) yield c
-    //println(" q sql "+q.selectStatement)
-    val discusses: List[TopicDiscuss] = q.list()
-    Page[TopicDiscuss](discusses, currentPage, totalPages)
-  }
+  /*根据topic 分页显示*/
+  def findDiscusses(topicId: Long, currentPage: Int, pageSize: Int): Page[(TopicDiscuss,User)] = database.withDynSession {
 
-  /* 获取比较全的 user 和 discuss */
-  def findTopicDiscusses(topicId: Long, currentPage: Int, pageSize: Int): Page[(String, String, Long, Long, Option[String], String, Int, Timestamp)] = database.withDynSession {
-    val totalRows = Query(topicDiscusses.filter(_.topicId === topicId).length).first
-    val totalPages = (totalRows + pageSize - 1) / pageSize
-    //println("totalPages " +totalPages)
-    /*获取分页起始行*/
-    val startRow = if (currentPage < 1 || currentPage > totalPages) {
-      0
-    } else {
-      (currentPage - 1) * pageSize
-    }
-    val q = for {
+    val query = for {
       c <- topicDiscusses
       u <- users
       if c.uid === u.id
       if c.topicId === topicId
-    } yield (u.name, u.pic, u.id, c.id, c.quoteContent.?, c.content, c.checkState, c.addTime)
-    val discusses: List[(String, String, Long, Long, Option[String], String, Int, Timestamp)] = q.sortBy(_._8 desc).drop(startRow).take(pageSize).list()
-    Page[(String, String, Long, Long, Option[String], String, Int, Timestamp)](discusses, currentPage, totalPages)
+    } yield (c,u)
+    val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0} else {(currentPage - 1) * pageSize }
+    val discusses: List[(TopicDiscuss,User)] = query.drop(startRow).take(pageSize).list()
+    Page[(TopicDiscuss,User)](discusses, currentPage, totalPages)
 
   }
 
@@ -249,26 +250,6 @@ object TopicDao {
     val discusses: List[TopicDiscuss] = q.list()
     Page[TopicDiscuss](discusses, currentPage, totalPages)
 
-  }
-
-  def filterTopics(title: Option[String], checkState: Option[Int], typeId: Option[Int], isBest: Option[Boolean], isTop: Option[Boolean], currentPage: Int, pageSize: Int) = database.withDynSession {
-    var query = for (c <- topics) yield c
-      if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
-      if(!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
-      if(!typeId.isEmpty) query = query.filter(_.typeId === typeId.get)
-      if(!isTop.isEmpty) query = query.filter(_.isTop === isTop.get)
-      if(!isBest.isEmpty) query = query.filter(_.isBest === isBest.get)
-     query = query.sortBy(_.id desc)
-    //println("sql " +query.selectStatement)
-    val totalRows = query.list().length
-    val totalPages = (totalRows + pageSize - 1) / pageSize
-    val startRow = if (currentPage < 1 || currentPage > totalPages) {
-      0
-    } else {
-      (currentPage - 1) * pageSize
-    }
-    val ts: List[Topic] = query.drop(startRow).take(pageSize).list()
-    Page[Topic](ts, currentPage, totalPages)
   }
 
 

@@ -1,5 +1,5 @@
-@(user:Option[models.user.User],typeId:Int,sortBy:String)
-@views.html.template(user)(css="/assets/css/template/forum.css"){
+@(user:Option[models.user.User],typeId:Int,sortBy:String,page:models.Page[(models.forum.Topic,models.user.User)])
+@views.html.template(user,title="讨论吧")(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">
@@ -63,71 +63,61 @@
             </div>
             <!-- list -->
             <div class="forum-list">
+                @for((t,u)<-page.items ){
                 <div class="unit clearfix">
                     <div class="fl type">
                         <div class="reply-count">
-                            <div class="fs18 pt5 gc6">62</div>
+                            <div class="fs18 pt5 gc6">@t.discussNum</div>
                             <div class="fs12 gc">回帖</div>
                         </div>
-                        <a class="type-btn totop">置顶</a>
+                        <a class="type-btn totop">@if(t.isTop){ 置顶 }</a>
                     </div>
                     <div class="fr info">
                         <div class="clearfix mt5">
-                            <h2 class="fl"><a href="/forum/post/608976" target="_blank"
-                                              title="#今日精选主题有偿征集#下周主题方向——自由发挥~~~"> #今日精选主题有偿征集#下周主题方向——自由发挥~~~</a></h2>
-
-                            <div class="fl page">
-                                <a href="/forum/post/608976?p=2" target="_blank">2</a>
-                                <a href="/forum/post/608976?p=3" target="_blank">3</a>
-                                <a href="/forum/post/608976?p=4" target="_blank">4</a>
-
-
-                            </div>
-                            <div class="fr talk-people">
-                                <a rel="usercard" data-id="1598520" class="u-reply g-daren" href="u/1598520"
-                                   target="_blank">
-                                    <span class="inlineblock ofh">苏里</span>
-                                    <i class="i-daren">达人</i>
-                                </a>
-                                <span class="gc ml5">01-22 18:41</span>
-                            </div>
+                            <h2 class="fl"><a href="@controllers.routes.Forums.view(t.id.get)" target="_blank"
+                                              title="@t.title">@t.title</a></h2>
                         </div>
                         <div class="gc mt10">
-                            <a class="gc g-daren" rel="usercard" data-id="1004031" href="/u/1004031" target="_blank">
-                                <span class="inlineblock ofh">逛逛</span>
-                            </a>&nbsp;&nbsp;发表于01-08 17:37 / 1589 个浏览
+                            <a class="gc g-daren" rel="usercard" data-id="@u.id.get" href="@controllers.users.routes.Users.home(u.id.get)" target="_blank">
+                                <span class="inlineblock ofh">@u.name </span>
+                                <i class="i-daren">@u.title</i>
+                            </a>&nbsp;&nbsp;发表于 @utils.Utils.timestampFormat(t.addTime.get) / @t.viewNum 个浏览
                         </div>
-                        <p class="des">各位， 因为马上要过年了，没来由地就很想庆祝的心情你们懂嘛！ 于是决定，年前的主题就让大家自由发挥好了~ 但是，还是有要求的呐， 请要按下面的分类要求来投稿哦
-                            …</p>
+                        <p class="des">@t.intro</p>
 
-                        <div class="sourceHtml dn">[p]各位， [/p] [p] [s] [s] 因为马上要过年了，没来由地就很想庆祝的心情你们懂嘛！ [/p] [p] [s] [s]
-                            于是决定，年前的主题就让大家自由发挥好了~ [/p] [p] [s] [s] 但是，还是有要求的呐， [/p] [p] [s] [s] 请要按下面的分类要求来投稿哦 [/p] [p]
-                            [br] [/p] [p] [s] [s]周一：生活日常 [/p] [p] [s] [s]周二：时尚潮流 [/p] [p] [s] [s]周三：热点、爱好 [/p] [p] [s]
-                            [s]周四：时尚潮流 [/p] [p] [s] [s]周五：时尚潮流 [s] [/p] [p] [br] [/p] [p]欢迎大家踊跃投稿！！！ [/p] [p] [/p] [p]
-                            [/p] [p] [fontdd0000]# 投稿在本帖回复主题即可，请注明是投哪一天的主题。 [/font] [/p] [p] [br] [/p] [p] [font4dd0000]
-                            [b]查看【我要上首页之#今日精选主题有偿征集#】详细规则请点击： [/b] [/font]<a href="http://guang.com/forum/post/601234"
-                                                                             target="_blank">http://guang.com/forum/post/601234</a>
-                            [/p] [p] [/p] [p] [/p] [p]鲜花 [s] [/p] [p] [/p] [p] [s] [s] [s] [/p] [p] [br] [/p] [p] [br]
-                            [/p]
-                        </div>
-                        <div class="image-jsonStr dn">{}</div>
-                        <div class="video-jsonStr dn">{}</div>
-                        <div class="topic-preview">
-                            <a class="pic-list clearfix gc" href="/forum/post/608976" target="_blank"></a>
-                        </div>
                     </div>
                 </div>
+                }
             </div>
+
+            <div class="pagin inlineblock fr mt10" id="J_Pagination">
+                @if(page.nums.length>1){
+                @page.prev.map { page =>
+                <a class="prev" href="@controllers.routes.Pages.forum(page)">上一页</a>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <span class="current" >@num</span>
+                }else {
+                <a href="@controllers.routes.Pages.forum(num)">@num</a>
+                }
+                }
+                @page.next.map { page =>
+                <a class="next" href="@controllers.routes.Pages.forum(page)">下一页</a>
+                }
+                }
+            </div>
+
         </div>
         <div class="side">
             <div class="ad">
-                <a href="/huabao?gad=tlbgg" target="_blank">
+                <a href="" target="_blank">
                     <img src="http://s4.img.guang.com/site/2013/12/16/promotion_44_1_1782447316166.jpg" width="240"
                          height="130" alt="逛画报" title="逛画报">
                 </a>
             </div>
 
-            <div class="box">
+            <div class="box mb15">
                 <div class="hd">
                     <h3>公告栏</h3>
                 </div>

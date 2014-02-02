@@ -2,6 +2,7 @@ package controllers
 
 import play.api.mvc.{Action, Controller}
 import controllers.users.Users
+import models.forum.dao.TopicDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,9 +25,9 @@ object Pages extends Controller {
     Ok(views.html.pages.store(user))
   }
 
-  def forum(typeId:Int,sortBy:String) = Users.UserAction{ user => implicit request =>
-
-    Ok(views.html.pages.forum(user,typeId,sortBy))
+  def forum(typeId:Int,sortBy:String,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
+      val page = TopicDao.filterTopics(typeId,sortBy,p,size)
+    Ok(views.html.pages.forum(user,typeId,sortBy,page))
   }
 
 

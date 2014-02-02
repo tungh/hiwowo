@@ -10,11 +10,11 @@ GET   /test                                controllers.Test.index
 GET       /                                    controllers.Pages.index
 GET       /sites                               controllers.Pages.sites
 GET       /store                               controllers.Pages.store
-GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new")
+GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
 
 #forum
 GET    /forum/search                     controllers.Forums.search
-GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long)
+GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long,p:Int ?=1,size:Int ?=10)
 GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
 POST   /forum/topic/save                       controllers.Forums.save
 

@@ -117,7 +117,6 @@
 /* box notice*/
 .forum .side .box {
     background-color: #fff;
-    margin-top: 15px;
     margin-bottom: 10px;
     padding: 10px;
     text-align: center;
@@ -132,3 +131,69 @@
 .forum .side .box .bd{
     line-height: 22px
 }
+
+/*  /* 创建帖子页面*/
+.forum-create, .forum-lover {
+    background-color: #fff;
+    padding: 15px;
+}
+
+.forum-create ul, .forum-lover ul {
+    padding: 0 30px;
+    overflow: hidden
+}
+
+.forum-create h3, .forum-lover h3 {
+    font-size: 14px;
+    border-bottom: 1px dotted #ddd;
+    line-height: 50px
+}
+
+.forum-create .oper input {
+    margin-right: 20px
+}
+
+.forum-create li {
+    /*  clear: both;*/
+    margin-top: 15px
+}
+
+.forum-create li label {
+    float: left;
+    line-height: 32px;
+    width: 78px;
+    text-align: right
+}
+
+.forum-create li label.no-float {
+    float: none;
+    margin-right: 10px
+}
+
+.forum-create li label.no-float input {
+    margin-right: 4px
+}
+
+.forum-create li .b-input, .forum-create li .b-textarea {
+    width: 580px
+}
+
+.forum-create li .b-textarea {
+    height: 295px;
+    line-height: 23px
+}
+
+.forum-create li.oper {
+    padding-left: 78px;
+    width: 616px
+}
+
+.forum-create li .bbl-btn {
+    width: 90px
+}
+
+.forum-create .guang-editor-wrap {
+    width: 616px;
+    float: left
+}
+
