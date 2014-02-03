@@ -24,6 +24,9 @@ POST   /forum/topic/save                       controllers.Forums.save
 
 # user
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
+GET    /user/$id<[0-9]+>/love                     controllers.users.Users.love(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1)
+
 # user 账号设定
 GET   /user/account/base           controllers.users.UsersAccount.base
 POST  /user/account/saveBase         controllers.users.UsersAccount.saveBase
@@ -53,7 +56,11 @@ GET     /user/msg/comment          controllers.users.UsersMsg.comment
 GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
 
+#常用的upload
 
+POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
+POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
+POST  /getVideo                           controllers.Upload.getVideo
 
 #info 信息页面 新年 公告，帮助中心
 GET   /agreement                                       controllers.Infos.agreement
@@ -75,4 +82,6 @@ GET   /root.txt                                        controllers.Infos.alimama
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
+GET     /uploadImage/*file               controllers.Assets.at(path="/public/uploadImage", file)
+GET     /uploadVideo/*file               controllers.Assets.at(path="/public/uploadVideo", file)
 GET     /admin/assets/*file         controllers.Assets.at(path="/public/admin/assets", file)

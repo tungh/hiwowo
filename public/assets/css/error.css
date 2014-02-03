@@ -113,7 +113,7 @@ p {
 }
 .container {
     margin: auto;
-    width: 980px;
+    width: 990px;
     *zoom: 1;
 }
 .container:before,
@@ -143,7 +143,7 @@ p {
     line-height: 30px;
 }
 .title .logo{
-    background: #efefef url("/assets/img/ui/hiwowo.png") no-repeat 0 0;
+    background: #efefef url("/assets/images/hiwowo.png") no-repeat 0 0;
     height:30px;
     width: 75px;
     text-indent: -999px;

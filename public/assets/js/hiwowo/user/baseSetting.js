@@ -10,12 +10,12 @@
  * http://www.hiwowo.com/
  *
  */
-define(function(require, exports) {
+define(function(require) {
 	var $ = jQuery = require("jquery");
     require("hiwowo/common/validator")($);
+    require("imgAreaSelect");
+    require("bootstrap")
 	var DateSelector = require("hiwowo/common/dateSelect");
-	require("imgAreaSelect");
-
     var Detector = require("detector")
 $.hiwowo.photoarea = null;
 $.hiwowo.rotate = null;
@@ -128,51 +128,64 @@ $(function(){
 	var ds = new DateSelector("J_Year", "J_Month", "J_Day", {Year: year, Month: month, Day: day, MinYear: new Date().getFullYear() -100, MaxYear: new Date().getFullYear() });
 	
 	$("#J_ModifyPhoto, #thePhoto").click(function(){
-			if(!$("#photoDialog")[0]){
+			if(!$("#J_photoDialog")[0]){
 				var html = "";
-				html += '<div id="photoDialog" class="g-dialog photo-dialog">';
-				html += '<div class="dialog-content">';
-				html += '<div class="hd"><h3>修改头像</h3></div>';
-				html += '<div class="bd clearfix">';
-				html += '<form id="faceUpload" name="faceUpload" enctype="multipart/form-data" method="post" target="photo-frame" action="/uploadPic/select">';
+                html +='<div class="modal fade" id="J_photoDialog">';
+                html +='<div class="modal-dialog">';
+                html +='<div class="modal-content">';
+                html +='<div class="modal-header"> ';
+                html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+                html +='<h4 class="modal-title">登录</h4>';
+                html +='</div>';
+                html +='<div class="modal-body">';
+               /* body content */
+                html += '<div class="bd clearfix">';
+                html += '<form id="faceUpload" name="faceUpload" enctype="multipart/form-data" method="post" target="photo-frame" action="/uploadPic/select">';
                 html += '<div class="photo-row clearfix">';
-				html += '<input type="button" value="上传新头像" class="bbl-btn upload-cover" />'; 
-				html += '<input type="file" class="upload-btn" name="filedata" id="J_FilePath" />';
-                html += '</div>';                
+                html += '<input type="button" value="上传新头像" class="bbl-btn upload-cover" />';
+                html += '<input type="file" class="upload-btn" name="filedata" id="J_FilePath" />';
+                html += '</div>';
                 html += '<div class="photo-row pt10 pb15">';
-				html += '<span class="gc6">支持JPG、GIF、PNG格式，且文件小于2M</span>';
-                html += '</div>';     
+                html += '<span class="gc6">支持JPG、GIF、PNG格式，且文件小于2M</span>';
+                html += '</div>';
                 html += '<div class="photo-row">';
-				html += '<div class="photo-box">';
-				html += '<span><img src="/assets/img/ui/blank.gif" id="photo" alt="" /> </span>';
-				html += '</div>';
-				html += '</div>';
-				html += '</form>';
-				html += '<form class="mt20" id="faceUpload2" name="faceUpload2" enctype="multipart/form-data" method="post" action="/user/account/doUploadPic">';
-				html += '<input type="hidden" value="" name="thumb-path" id="thumb-path" />';
+                html += '<div class="photo-box">';
+                html += '<span><img src="/assets/images/blank.gif" id="photo" alt=""  /> </span>';
+                html += '</div>';
+                html += '</div>';
+                html += '</form>';
+                html += '<form class="mt20" id="faceUpload2" name="faceUpload2" enctype="multipart/form-data" method="post" action="/user/account/doUploadPic">';
+                html += '<input type="hidden" value="" name="thumb-path" id="thumb-path" />';
                 html += '<input type="hidden" value="" name="area-x1" id="area-x1" />';
                 html += '<input type="hidden" value="" name="area-y1" id="area-y1" />';
                 html += '<input type="hidden" value="" name="area-x2" id="area-x2" />';
                 html += '<input type="hidden" value="" name="area-y2" id="area-y2" />';
-				html += '<div class="photo-row face-submit dn">';
-				html += '<input type="submit" class="bbl-btn submit" value="保存头像"/>';
-				html += '<span id="J_Waiting" class="ml10 gc6 dn"><img src="/assets/img/ui/loading16.gif">请耐心等待…</span>';
-                html += '</div>';                
-            	html += '</form>';
-            	html += '<iframe style="width:0px;height:0px;padding:0px;" src="" frameborder="0" name="photo-frame"></iframe>';
-				html += '</div>';
-				html += '<a class="close" href="javascript:;"></a>';
-				html += '</div>';
-				html += '</div>';
+                html += '<div class="photo-row face-submit dn">';
+                html += '<input type="submit" class="bbl-btn submit" value="保存头像"/>';
+                html += '<span id="J_Waiting" class="ml10 gc6 hidden"><img src="/assets/images/loading16.gif">请耐心等待…</span>';
+                html += '</div>';
+                html += '</form>';
+                html += '<iframe style="width:0px;height:0px;padding:0px;" src="" frameborder="0" name="photo-frame"></iframe>';
+                html += '</div>';
+
+                /* body content */
+                html += '</div>';
+                html += '<div class="modal-footer">';
+                html += '</div>';
+                html += '</div> ';
+                html += '</div>';
+                html += '</div> ';
+
 				$("body").append(html);
 
-                   $("#photoDialog").modal('show')
+                   $("#J_photoDialog").modal('show')
+
             }else{
-                $("#photoDialog").modal('show')
+                $("#J_photoDialog").modal('show')
             }
         $("#J_FilePath").change(function(){
             $("#faceUpload").submit();
-            $('#photo').attr("src","/assets/img/ui/loading1.gif");
+            $('#photo').attr("src","/assets/images/loading.gif");
         });
         $("#faceUpload2").submit(function(){
             $this = $(this);
@@ -184,13 +197,13 @@ $(function(){
                 $("#faceUpload2 input[type=submit]")[0].disabled = "";
                 $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
                 if(data.code=="100"){
-                    $("#photoDialog").modal('hide')
+                    $("#J_photoDialog").modal('hide')
 
-                    $("#J_uploadImgShow").attr("src",data.src)
-                    $(".site-logo").show()
+                    $("#thePhoto").attr("src",data.src)
+                  //  $(".site-logo").show()
                     $("#faceUpload")[0].reset();
                     $("#faceUpload2")[0].reset();
-                    $("#J_uploadImg").val(data.src)
+                   // $("#J_uploadImg").val(data.src)
                     $("#faceUpload2 .face-submit").hide();
                     $.hiwowo.photoarea.cancelSelection();
 
@@ -206,8 +219,7 @@ $(function(){
             if($.hiwowo.photoarea!=null){
                 $.hiwowo.photoarea.cancelSelection();
             }
-            uploadOverlay.hide()
-            Mask.hide()
+            $("#J_photoDialog").modal('hide')
         });
 
 	});

@@ -82,12 +82,10 @@ p { line-height: 1.6; color: #666}
 .fs30{ font-size:30px;}
 .tac{ text-align:center;}
 .tar{ text-align:right;}
-.inlineblock {
-    display: inline-block;
-    zoom: 1;
-    overflow: hidden;
-    vertical-align: middle;
-}
+.inlineblock {display: inline-block; zoom: 1;overflow: hidden;vertical-align: middle;}
+.close {float: right;font-size: 21px;font-weight: bold;line-height: 1;color: #000000;text-shadow: 0 1px 0 #ffffff;opacity: 0.2;filter: alpha(opacity=20);}
+.close:hover,.close:focus {color: #000000;text-decoration: none; cursor: pointer; opacity: 0.5; filter: alpha(opacity=50);}
+button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-webkit-appearance: none;}
 /*
 * grid 模块
 *  分为左右两栏 响应式布局，从 990px 740px 420px
@@ -236,14 +234,15 @@ p { line-height: 1.6; color: #666}
 .navbar .user-info .menu .triangle {display: inline;float: left;width: 0;height: 0;margin: 19px 0 0 5px;overflow: hidden;border-style: solid dashed none dashed;border-width: 4px 4px 0 4px;border-color: white transparent transparent transparent;}
 .navbar .user-info .menu.on .triangle {border-style: none dashed solid dashed;border-width: 0 4px 4px 4px;border-color: transparent transparent white transparent;}
 .navbar .user-info .menu.on .dropdown {display: block;}
-.navbar .user-info .dropdown {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 5px #eee;-moz-box-shadow: 0 0 5px #eee;box-shadow: 0 0 5px #eee;display: none;position: absolute;z-index: 999;background: white;text-align: center;top: 40px;right: 0;border: 1px solid #e5e5e5;border-bottom: none;}
+.navbar .user-info .dropdown {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 5px #eee;-moz-box-shadow: 0 0 5px #eee;box-shadow: 0 0 5px #eee;display: none;position: absolute;z-index: 999;background: white;text-align: center;right: 0;border: 1px solid #e5e5e5;border-bottom: none;}
 .navbar .user-info .dropdown li {border-bottom: 1px solid #e6e6e6;}
 .navbar .user-info .dropdown li a {*zoom: 1;display: block;color: #282828;}
 .navbar .user-info .dropdown li a:hover {background-color: #f3f3f3;text-decoration: none;}
 .navbar-fixed-top,.navbar-fixed-bottom { position: fixed;right: 0;left: 0; z-index: 1030;}
 .navbar-fixed-top { top: 0; border-width: 0 0 1px;}
 .navbar-fixed-bottom { bottom: 0; margin-bottom: 0; border-width: 1px 0 0;}
-
+.navbar .user-info .topbar-dropdown{ top: 40px;}
+.navbar .user-info .bottombar-dropdown{bottom:40px}
 
 /* footer 组件 */
 #footer {height: 72px;line-height: 72px;background: white;border-top: 1px solid #e6e6e6;margin-bottom: 56px;}
@@ -804,33 +803,7 @@ input[type="button"].btn-block {
 #J_loginDialog .bd .act-row { margin-bottom:0; }
 #J_loginDialog .noaccount a:hover{ color: #ff7f00; text-decoration: underline;}
 /*bootstrap modal */
-.close {
-    float: right;
-    font-size: 21px;
-    font-weight: bold;
-    line-height: 1;
-    color: #000000;
-    text-shadow: 0 1px 0 #ffffff;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
-}
 
-.close:hover,
-.close:focus {
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-
-button.close {
-    padding: 0;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
-}
 
 .modal-open {
     overflow: hidden;
@@ -945,3 +918,37 @@ button.close {
     }
 }
 
+.guide{ display:none;position:fixed;bottom:-90px;width:100%;z-index:100;height:90px;background:rgba(47,42,30,0.8);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#cc2f2a1e',endColorstr='#cc2f2a1e');}
+.guide .guide_boby{width:960px; margin:0 auto; height:90px; position:relative }
+.guide .guide_boby p{display:block; padding-top:8px; margin:0; text-align:left; font-size:16px; font-weight:700; color:#fff; line-height:1.8;margin-left:164px; }
+.guide-share .guide_boby p{margin-left:220px;}
+.guide .guide_boby p strong{font-weight:bold;font-size:18px;color:#ffa62a;margin: 0 5px;}
+.guide .guide_boby p span {position: absolute;right:215px;top:10px; color:#fff;font-size:12px;font-weight:400}
+.guide .guide_boby p span a{color:#fff;font-size:14px;font-weight:bolder}
+.guide .guide_boby p span a:hover{text-decoration:underline}
+.guide .guide_boby p a:hover{text-decoration:none;}
+.guide .guide_add,.guide .other-login,.guide .guide_add .favorites,.guide .guide_add .weibo,.guide .guide_add .weibo a,.guide .guide_add a,.guide .del a,.guide .guide_boby p i{background-image:url(images/guide-img.png);_background-image:url(images/guide-img-png8.png);background-repeat:no-repeat;}
+.guide .guide_boby p i{display:block;position:absolute;width:36px;height:22px; background-position:-460px -70px;left:125px;top:20px;}
+.guide .guide_add,.guide .other-login,.guide .guide_add .favorites,.guide .guide_add .weibo,.guide .guide_add .weibo a,.guide .guide_add a{ height:38px; display:block;text-indent:-1000em;background-position:-1000px 0;}
+.guide .guide_add{ width:750px; padding-top:7px;float:left }
+.guide-share .guide_add{width:600px;}
+.guide .guide_add .favorites{float:right; width:123px;background-position:0 0;}
+.guide-share .guide_add .favorites{float:left;}
+.guide .guide_add .weibo{float:right;  width:385px;background-position:-133px 0; margin-right:10px;}
+.guide .guide_add .weibo a{ display:block; float:left; width:115px;text-indent:-1000em;background-position:-1000px 0;cursor:pointer;}
+.guide .del{ width:53px; height:53px; position:absolute ; right:0px; top:18px;z-index:999;}
+.guide .del a{ display:block; height:53px; background-position:0 -50px;text-indent:-1000em;}
+.guide .del a:hover{ display:block; height:53px; background-position:-54px -50px;}
+.guide .referer-login{width:162px;float:left;}
+.guide-guang .guide_add .referer-login{background-position:-182px -170px;}
+.guide-alipay .guide_add .referer-login{background-position:0px -124px;}
+.guide-taobao .guide_add .referer-login{background-position:-182px -124px;}
+.guide-qq .guide_add .referer-login{background-position:-363px -124px;}
+.guide-weibo .guide_add .referer-login{background-position:0px -170px;}
+.guide .other-login {float:left;width:396px;background-position:0px -234px;margin-left:34px;height:38px;_height:37px;display:inline}
+.guide .other-login li{width:120px;height:24px;float:left;margin-top:7px;margin-left:50px;display:inline}
+.guide .other-login li a{width:120px;height:24px;}
+.guide .other-login .shortcut-login-qq {background-position:0px -284px;}
+.guide .other-login .shortcut-login-weibo {background-position:-127px -284px;}
+.guide .other-login .shortcut-login-taobao {background-position:-254px -284px;}
+.guide .other-login .shortcut-login-alipay {background-position:-381px -284px;}

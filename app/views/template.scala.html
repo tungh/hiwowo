@@ -40,19 +40,19 @@
             }else{
             <section class="user-info">
                 <div class="menu nav-item">
-                    <a class="user" href="">
-                        <img class="avatar" alt="zuosanshao" src="@user.get.pic">
+                    <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user">
+                        <img class="avatar" alt="@user.get.name" src="@user.get.pic">
                         <span class="name">@user.get.name</span>
                         <span class="triangle"></span>
                     </a>
-                    <ul class="dropdown" style="width: 132px;">
+                    <ul class="dropdown topbar-dropdown" style="width: 132px;">
                         <li><a href="@controllers.users.routes.Users.home(user.get.id.get)">我的主页</a></li>
                         <li><a href="@controllers.users.routes.UsersAccount.base">账号设置</a></li>
                         <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
-                <a class="favorite nav-item" title="" href=""><i></i></a>
-                <a class="follow nav-item" title="" href=""><i></i></a>
+                <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.love(user.get.id.get)"><i></i></a>
+                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
             </section>
            }
         </div>
@@ -88,10 +88,28 @@
                     <li><a href="/">讨论吧</a></li>
                 </ul>
             </nav>
+            @if(user.isEmpty){
             <section class="user-info">
-
-                <a class="login need-login" href="#">登录</a><span class="spacing">|</span><a class="signup" target="_blank" href="#">注册</a>
+                <a class="login need-login" href="#" rel="loginD">登录</a><span class="spacing">|</span><a class="signup" target="_blank" href="/user/regist">注册</a>
             </section>
+            }else{
+            <section class="user-info">
+                <div class="menu nav-item">
+                    <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_bottombar_user">
+                        <img class="avatar" alt="@user.get.name" src="@user.get.pic">
+                        <span class="name">@user.get.name</span>
+                        <span class="triangle"></span>
+                    </a>
+                    <ul class="dropdown bottombar-dropdown" style="width: 132px;">
+                        <li><a href="@controllers.users.routes.Users.home(user.get.id.get)">我的主页</a></li>
+                        <li><a href="@controllers.users.routes.UsersAccount.base">账号设置</a></li>
+                        <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
+                    </ul>
+                </div>
+                <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.love(user.get.id.get)"><i></i></a>
+                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
+            </section>
+            }
         </div>
     </div>
 

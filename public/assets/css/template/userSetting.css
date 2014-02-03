@@ -151,7 +151,7 @@
 
 .photo-row {
     margin: 0 auto;
-    width: 520px;
+    width: 320px;
     position: relative
 }
 
@@ -197,13 +197,6 @@
     cursor: pointer
 }
 
-.photo-dialog {
-    width: 450px
-}
-
-.photo-dialog form {
-    margin-left: 40px
-}
 
 /* 我的收货地址*/
 

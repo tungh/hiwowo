@@ -39,11 +39,22 @@ object Users extends Controller {
   }
 
 
-  /*user   讨论吧 广场 */
-  def forum(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
+  /* 我讨论的 */
+  def discuss(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     Ok("todo")
    
+  }
+
+  /* 我喜欢的 */
+  def love(id:Long,p:Int) = UserAction{ user => implicit request =>
+
+    Ok("todo")
+  }
+
+  /* 我关注的 */
+  def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
+    Ok("todo")
   }
 
 

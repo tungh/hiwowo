@@ -408,9 +408,14 @@ define(function(require, exports) {
 
             if(!$("#J_loginDialog")[0]){
                 var html = "";
-             /*   html += '<div id="J_loginDialog" class="g-dialog">';
-                html += '<div class="dialog-content">';
-                html += '<div class="hd"><h3>登录</h3></div>';
+                html +='<div class="modal fade" id="J_loginDialog">';
+                html +='<div class="modal-dialog">';
+                html +='<div class="modal-content">';
+                html +='<div class="modal-header"> ';
+                html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+                html +='<h4 class="modal-title">登录</h4>';
+                html +='</div>';
+                html +='<div class="modal-body">';
                 html += '<div class="bd clearfix"><div class="bd-l">';
                 html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
                 html += '<div class="error-row"><p class="error"></p></div>';
@@ -438,56 +443,14 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="clear"></div>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="modal-footer">';
                 html += '<div class="noaccount">还没有帐号？<a href="/user/regist">免费注册一个</a></div>';
                 html += '</div>';
-                html += '<a class="close" href="javascript:;"></a>';
+                html += '</div> ';
                 html += '</div>';
-                html += '</div>';*/
-                html +='<div class="modal fade" id="J_loginDialog"> ';
-                html +=    '<div class="modal-dialog"> ';
-                html +=   '<div class="modal-content"> ';
-                    html +=       '<div class="modal-header">  ';
-                        html +=         '  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-                        html +=         '  <h4 class="modal-title">登录</h4>   ';
-                        html +=       ' </div>   ';
-                    html +=       ' <div class="modal-body">   ';
-                html += '<div class="bd clearfix"><div class="bd-l">';
-                html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
-                html += '<div class="error-row"><p class="error"></p></div>';
-                html += '<div class="form-row"><label>Email：</label>';
-                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
-                html += '</div>';
-                html += '<div class="form-row"><label>密码：</label>';
-                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
-                html += '</div>';
-                html += '<div class="form-row"><label>&nbsp;</label>';
-                html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
-                html += '<span>两周内自动登录</span>';
-                html += '</div>';
-                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
-                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
-                html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
-                html += '</form></div>';
-                html += '<div class="bd-r">';
-                html += '<p>你也可以使用这些帐号登录</p>';
-                html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
-                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
-                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
-                html += '</ul>';
-                html += '</div>';
-                html += '</div>';
-                html += '<div class="clear"></div>';
-
-                html += '</div>';
-                        html +=   '  </div>                   ';
-                    html +=    ' <div class="modal-footer">     ';
-                        html +=   '  <div class="noaccount">还没有帐号？<a href="/user/regist">免费注册一个</a></div>';
-
-                        html +=  '   </div>   ';
-                    html +=  ' </div> ';
-                html += ' </div>  ';
-                html +=  ' </div> ';
+                html += '</div> ';
                 $("body").append(html)
                 $("#J_loginDialog").modal('show')
             }else{
@@ -498,6 +461,7 @@ define(function(require, exports) {
 
                 $("#J_loginDialogForm")[0].reset();
                 $("#J_loginDialog").find(".error-row").hide();
+                $("#J_loginDialog").modal('hide')
             });
 
             $("#J_loginDialogForm").submit(function(){
@@ -509,7 +473,7 @@ define(function(require, exports) {
                     dataType:"json",
                     success:function(data){
                         if(data.code==100){
-                            //    loginDialog.hide()
+                            $("#J_loginDialog").modal('show')
                             window.location.reload();
                         }else if(data.code==101){
                             $("#J_loginDialog").find(".error-row").fadeIn();
@@ -650,8 +614,11 @@ define(function(require, exports) {
 
 
         /* 下拉框 */
-        $(".user").dropDown({
-            classNm: ".dropdown"
+        $("#J_topbar_user").dropDown({
+            classNm: ".topbar-dropdown"
+        });
+        $("#J_bottombar_user").dropDown({
+            classNm: ".bottombar-dropdown"
         });
         /* 用户登录弹出框 */
         if($("a[rel=loginD]")[0]){
@@ -834,8 +801,8 @@ define(function(require, exports) {
                             +'<div class="guide_add" style="margin-right:174px;">'
                             +'<div class="favorites" id="J_Favorites"><a href="javascript:void(0);">加入收藏夹</a></div>'
                             +'<div class="weibo">'
-                            +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。hiwowo：http://hiwowo.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://hiwowo.com/assets/img/ui/hiwowo.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
-                            +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。hiwowo：http://hiwowo.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://hiwowo.com/assets/img/ui/hiwowo.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
+                            +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。hiwowo：http://hiwowo.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://hiwowo.com/assets/images/hiwowo.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
+                            +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。hiwowo：http://hiwowo.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://hiwowo.com/assets/images/hiwowo.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
                             +'<a style="margin-left:6px; width:118px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。hiwowo：http://hiwowo.com\');var link=encodeURIComponent(window.location.href);window.open(\'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=\'+link);})())" alt="分享到QQ空间"></a>'
                             +'</div>'
                             +'</div>'

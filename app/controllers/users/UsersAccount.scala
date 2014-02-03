@@ -32,9 +32,10 @@ case  class BaseFormData(
                           day:Option[String],
                           blog:Option[String],
                           qq:Option[String],
+                          weixin:Option[String],
                           intro:Option[String]
                           )
-case class InvitePrize(num:Int,handleStatus:Int,handleResult:String)
+
 object UsersAccount  extends Controller {
 
   val passwordForm = Form(
@@ -65,6 +66,7 @@ object UsersAccount  extends Controller {
       "day"->optional(text),
       "blog"->optional(text),
       "qq"->optional(text),
+      "weixin"->optional(text),
       "intro" ->optional(text)
     )(BaseFormData.apply)(BaseFormData.unapply)
   )
@@ -76,9 +78,9 @@ object UsersAccount  extends Controller {
   def base = Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
-      Ok("todo")
-  //    val profile =UserDao.findProfile(user.get.id.get)
-//      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,user.get.intro))))
+
+   val profile =UserDao.findProfile(user.get.id.get)
+      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,profile.weixin,user.get.intro))))
     }
 
   }
@@ -91,7 +93,7 @@ object UsersAccount  extends Controller {
         data =>{
           /*uid:Long,name:String,intro:String,email:String,gender:Int, birth:String, province:String, city:String, blog:String, qq:String*/
           val birth:String=data.year.getOrElse("")+"|"+data.month.getOrElse("")+"|"+data.day.getOrElse("")
-       //   UserDao.modifyBase(user.get.id.get,data.nickName,data.email.getOrElse(""),data.intro.getOrElse(""),data.sex,birth,data.blog.getOrElse(""),data.qq.getOrElse(""))
+          UserDao.modifyBase(user.get.id.get,data.nickName,data.email.getOrElse(""),data.intro.getOrElse(""),data.sex,birth,data.blog.getOrElse(""),data.qq.getOrElse(""),data.weixin.getOrElse(""))
           Ok(views.html.users.account.base(user,baseForm.fill(data),"基本资料保存成功"))
         }
       )
@@ -115,7 +117,7 @@ object UsersAccount  extends Controller {
           val oldUser =UserDao.authenticate(user.get.email.get,fields._1)
           if(oldUser.isEmpty) Ok(views.html.users.account.password(user,passwordForm,"当前密码不正确"))
           else {
-        //    UserDao.modifyPassword(user.get.id.get,fields._2)
+          UserDao.modifyPassword(user.get.id.get,fields._2)
             Ok(views.html.users.account.password(user,passwordForm,"密码修改成功"))
           }
         }
@@ -130,9 +132,9 @@ object UsersAccount  extends Controller {
   def address = Users.UserAction {   user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
-    //  val profile =UserDao.findProfile(user.get.id.get)
-     // Ok(views.html.users.account.address(user,addrForm.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
-      Ok("todo")
+    val profile =UserDao.findProfile(user.get.id.get)
+    Ok(views.html.users.account.address(user,addrForm.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
+
     }
   }
   /* user account 用户账户 收货地址  保存*/
@@ -141,12 +143,11 @@ object UsersAccount  extends Controller {
     else  {
       addrForm.bindFromRequest.fold(
         formWithErrors => {
-      //    val profile =UserDao.findProfile(user.get.id.get)
-        //  BadRequest(views.html.users.account.address(user,formWithErrors.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
-          Ok("todo")
+        val profile =UserDao.findProfile(user.get.id.get)
+         BadRequest(views.html.users.account.address(user,formWithErrors.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
         } ,
         fields =>{
-      //    UserDao.modifyAddr(user.get.id.get, fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""),fields._4.getOrElse(""),fields._5.getOrElse(""),fields._6.getOrElse(""))
+         UserDao.modifyAddr(user.get.id.get, fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""),fields._4.getOrElse(""),fields._5.getOrElse(""),fields._6.getOrElse(""))
           Ok(views.html.users.account.address(user,addrForm.fill(fields._1,fields._2,fields._3,fields._4,fields._5,fields._6),"收货地址保存成功"))
 
         }

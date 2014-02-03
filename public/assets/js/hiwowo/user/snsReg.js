@@ -12,7 +12,7 @@
 
 
 define(function(require, exports){
-    var $  = require("$");
+    var $ = jQuery = require("jquery");
     require("hiwowo/common/validator")($);
     jQuery(function() {
         $("#setForm").validator();
