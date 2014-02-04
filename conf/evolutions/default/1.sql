@@ -863,6 +863,9 @@ CREATE TABLE `site` (
   `tags`             varchar(250) ,
   `status`            tinyint  not null default  '0',
   `notice`             varchar(250) ,
+  `blog_num`           smallint(10) not null  DEFAULT '0',
+  `pic_num`                 smallint(10) not null  DEFAULT '0',
+  `video_num`                 smallint(10) not null  DEFAULT '0',
   `modify_time`         timestamp default '2013-07-18 12:00:00',
   `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)

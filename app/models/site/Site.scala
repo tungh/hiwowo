@@ -23,6 +23,9 @@ case class Site(
                 tags:String,
                 status:Int,
                 notice:Option[String],
+                blogNum:Int,
+                picNum:Int,
+                videoNum:Int,
                 modifyTime:Option[Timestamp],
                 addTime:Option[Timestamp]
                 )
@@ -33,14 +36,17 @@ class Sites(tag:Tag) extends Table[Site](tag,"site") {
   def uid = column[Long]("uid")
   def title = column[String]("title")
   def pic = column[String]("pic")
-  def intro     =column[String]("intro")
-  def tags    =column[String]("tags")
+  def intro     = column[String]("intro")
+  def tags    = column[String]("tags")
   def status = column[Int]("status")
-  def notice     =column[String]("notice")
+  def notice  = column[String]("notice")
+  def blogNum  = column[Int]("blog_num")
+  def picNum  = column[Int]("pic_num")
+  def videoNum  = column[Int]("video_num")
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
 
-  def * =(id.?,uid,title,pic,intro,tags,status,notice.?,modifyTime.?,addTime.?)<>(Site.tupled, Site.unapply)
+  def * =(id.?,uid,title,pic,intro,tags,status,notice.?,blogNum,picNum,videoNum,modifyTime.?,addTime.?)<>(Site.tupled, Site.unapply)
 
 
 

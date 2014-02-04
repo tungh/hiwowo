@@ -89,8 +89,6 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize) if c.checkState === 1) yield c
-    //println(" q sql "+q.selectStatement)
-    // val topics:List[Topic]=  q.list()
     Page[Topic](q.list(), currentPage, totalPages)
   }
 
@@ -105,8 +103,6 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize) if c.uid === uid) yield c
-    //println(" q sql "+q.selectStatement)
-    // val topics:List[Topic]=  q.list()
     Page[Topic](q.list(), currentPage, totalPages)
   }
 
@@ -122,12 +118,10 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize)) yield c
-    //println(" q sql "+q.selectStatement)
-    //  val topics:List[Topic]=  q.list()
     Page[Topic](q.list(), currentPage, totalPages)
   }
 
-  /*search for 前端的square的 forum eatLocal*/
+  /* search */
   def search( title:String,currentPage: Int = 1, pageSize: Int = 10) = database.withDynSession {
     val totalRows = Query(topics.filter(_.title like ("%" + title + "%")).length).first()
     val totalPages = (totalRows + pageSize - 1) / pageSize
@@ -137,9 +131,7 @@ object TopicDao {
     } else {
       (currentPage - 1) * pageSize
     }
-    val q = for (c <- topics.sortBy(c => (c.isBest, c.addTime, c.discussNum.desc)).drop(startRow).take(pageSize) if c.title.like("%" + title + "%") if c.checkState === 1) yield (c)
-    //println(" q sql "+q.selectStatement)
-    //  val topics:List[Topic]=  q.list()
+    val q = for (c <- topics.sortBy(c => (c.isBest, c.addTime, c.discussNum.desc)).drop(startRow).take(pageSize) if c.title.like("%" + title + "%") if c.checkState === 1) yield c
     Page[Topic](q.list(), currentPage, totalPages)
 
   }
@@ -156,7 +148,6 @@ object TopicDao {
     if(sortBy == "discuss") query = query.sortBy(_._1.discussNum desc)
     if(sortBy == "love") query = query.sortBy(_._1.loveNum desc)
     query.sortBy(_._1.isBest desc)
-    //println("sql " +query.selectStatement)
     val totalRows = query.list().length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -238,7 +229,6 @@ object TopicDao {
   def findAllDiscusses(currentPage: Int, pageSize: Int): Page[TopicDiscuss] = database.withDynSession {
     val totalRows = Query(topicDiscusses.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
-    //println("totalPages " +totalPages)
     /*获取分页起始行*/
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
