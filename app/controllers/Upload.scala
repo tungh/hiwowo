@@ -44,7 +44,7 @@ object Upload extends Controller {
           //  Thumbnails.of(new File("/opt/static/images/temp/" + filename)).size(300, 300).toFile(new File("/opt/static/images/temp/" + filename))
           //  val picSrc = "/images/temp/" + filename
               picture.ref.moveTo(new File("public/uploadImage/temp/" + filename), true)
-              Thumbnails.of(new File("public/uploadImage/temp/" + filename)).size(300, 300).toFile(new File("/opt/static/images/temp/" + filename))
+              Thumbnails.of(new File("public/uploadImage/temp/" + filename)).size(300, 300).toFile(new File("public/uploadImage/temp/" + filename))
               val picSrc = "/uploadImage/temp/" + filename
             Ok(views.html.common.uploadImageSelectSuccess(true, picSrc))
           } else {

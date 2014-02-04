@@ -1150,5 +1150,139 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+/*  pet  */
+/* ***************************************************** */
+
+/*
+ 小站 site
+
+pet              小站表 site （分为几类：生活  品牌站 其他）
+pet_pic           小站图片
+pet_pic_discuss           小站图片
+pet_video            小站视频
+pet_video_discuss            小站视频
+
+
+*/
+
+/*
+*  pet  小镇
+   创建者      uid
+   名称  name
+   站牌  logo
+   简介  intro
+   标签  tags
+   状态  status 0 未审核  1 通过审核 2 优质
+   通告 notice
+   修改时间   modify_time
+   创建时间   add_time
+*/
+DROP TABLE IF EXISTS `pet`;
+CREATE TABLE `pet` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `title`              varchar(64) not null,
+  `pic`                 varchar(250) not null ,
+  `intro`             varchar(250) ,
+  `tags`             varchar(250) ,
+  `status`            tinyint  not null default  '0',
+  `notice`             varchar(250) ,
+  `modify_time`         timestamp default '2013-07-18 12:00:00',
+  `add_time`           timestamp default '2013-07-18 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+
+/*
+  pet_pic        pet-图片
+    pet id               小站
+    intro             图片说明
+    pic
+    is_top             置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `pet_pic`;
+CREATE TABLE `pet_pic` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `pet_id`                 int(10) ,
+  `intro`               varchar(200) ,
+  `pic`               varchar(250) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+/*
+  -- 表的结构 `pet_pic_discuss 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     bid                  帖子
+     quote_content          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
+
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `pet_pic_discuss`;
+CREATE TABLE IF NOT EXISTS `pet_pic_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `pic_id`                    int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+  pet_video         视频
+    sid                   小镇
+    intro                 图片说明
+    url                 视频网址
+    is_top             置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `pet_video`;
+CREATE TABLE `pet_video` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `pet_id`                 int(10) ,
+  `intro`               varchar(200) ,
+  `url`               varchar(250) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*
+  -- 表的结构 pet_video_discuss 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     bid                  帖子
+     quote_content          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
+
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `pet_video_discuss`;
+CREATE TABLE IF NOT EXISTS `pet_video_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `video_id`                    int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 

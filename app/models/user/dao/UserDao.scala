@@ -107,6 +107,7 @@ object UserDao {
     val id = usersAutoInc.insert(name, comeFrom, openId, pic)
     userStatics.map(u => u.uid).insert(id)
     userProfiles.map(u => (u.uid, u.inviteId, u.loginTime, u.registTime, u.loginIP)).insert(id, inviteId, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), "sns")
+    id
   }
 
   /*用户通过网站注册 * */
