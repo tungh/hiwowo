@@ -48,7 +48,6 @@ class Administrators(tag: Tag) extends Table[Administrator](tag,"administrator")
   def roleName=column[String]("role_name")
   def * =(id.?,email, password, name, department,phone,loginTime, loginNum ,loginIP.?,lastLoginTime,addTime,roleId,roleName)  <> ( Administrator.tupled, Administrator.unapply)
 }
-  //
-  // val Administrators = TableQuery[Administrators]
+
 
 

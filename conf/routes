@@ -78,6 +78,23 @@ GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAu
 GET   /686d2b12a3c8fa6430c6f32b51d504ca.txt            controllers.Infos.qzone
 GET   /bdsitemap.txt                                   controllers.Infos.baiduSiteMap
 GET   /root.txt                                        controllers.Infos.alimama
+#管理后台 管理员管理
+GET   /admin/login                controllers.admin.Administrators.login
+POST  /admin/emailLogin          controllers.admin.Administrators.emailLogin
+GET   /admin/logout              controllers.admin.Administrators.logout
+GET   /admin/myAccount            controllers.admin.Administrators.myAccount
+GET   /admin/modify               controllers.admin.Administrators.modify
+GET   /admin/index                controllers.admin.Administrators.index
+#管理后台 站内信管理
+GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
+POST  /admin/msgs/saveSystemMsg       controllers.admin.Msgs.saveSystemMsg
+GET   /admin/msgs/filterSystemMsgs     controllers.admin.Msgs.filterSystemMsgs
+POST   /admin/msgs/batchSystemMsgs       controllers.admin.Msgs.batchSystemMsgs
+GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
+GET   /admin/msgs/systemMsgReceivers   controllers.admin.Msgs.systemMsgReceivers(p:Int ?=1)
+GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
+GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
+GET   /admin/msgs/discussMsgs              controllers.admin.Msgs.discussMsgs(p:Int ?=1)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

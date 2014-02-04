@@ -752,8 +752,8 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
  **************************************************************/
     /*
   数据表：user  用户（使用的人）*/
-    DROP TABLE IF EXISTS `manager`;
-    create table manager(
+    DROP TABLE IF EXISTS `administrator`;
+    create table administrator(
       `id`                 smallint (10) not null  auto_increment ,
       `email`             varchar(64) not null,
       `password`             varchar(64) not null,
@@ -771,8 +771,8 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
     /*
      * 数据表  userRole   用户角色
     */
-    DROP TABLE IF EXISTS `manager_role`;
-    create table manager_role(
+    DROP TABLE IF EXISTS `administrator_role`;
+    create table administrator_role(
       id             int  unsigned primary  key  auto_increment ,
       name           varchar(32) not null,
       note           varchar(128) not null default '',

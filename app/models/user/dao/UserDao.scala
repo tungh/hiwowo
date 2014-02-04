@@ -26,9 +26,6 @@ object UserDao {
 
   /* 验证 */
   def authenticate(email: String, password: String): Option[User] = database.withDynSession {
-   // println("******************************** authenticate **************************")
-    val q = for (u <- users if u.email === email && u.password === Codecs.sha1("hiwowo" + password)) yield u
- //   println("  authenticate   " + q.selectStatement)
     val user = (for (u <- users if u.email === email && u.password === Codecs.sha1("hiwowo" + password)) yield u).firstOption
     if (!user.isEmpty) {
       Cache.set("user_" + user.get.id.get, user.get)
@@ -40,9 +37,6 @@ object UserDao {
   /*find By id*/
   def findById(uid: Long): User = database.withDynSession {
     Cache.getOrElse[User]("user_" + uid) {
-      //println("get it from db")
-      val q = for (u <- users if u.id === uid) yield u
- //     println(q.selectStatement)
       val user = (for (u <- users if u.id === uid) yield u).firstOption
       if (!user.isEmpty) {
         Cache.set("user_" + uid, user.get)
