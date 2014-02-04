@@ -20,8 +20,8 @@ object TopicSQLDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
 
-  def updateDiscussNum(topicId:Long)=database.withDynSession{
-   sqlu"update topic set discuss_num =discuss_num+1 where id =$topicId".first
+  def updateDiscussNum(topicId:Long,num:Int)=database.withDynSession{
+   sqlu"update topic set discuss_num =discuss_num+$num where id =$topicId".first
 
   }
 }

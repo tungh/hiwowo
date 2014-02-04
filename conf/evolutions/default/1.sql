@@ -763,6 +763,7 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
       `login_time`         timestamp default '2012-5-12 14:18:00',
       `login_num`           smallint(10) NOT NULL default '1',
       `login_ip`            varchar(32) DEFAULT '0',
+      `last_login_time`         timestamp default '2012-5-12 14:18:00',
       `add_time`            timestamp default '2012-5-12 14:18:00',
       `role_id`        smallint  not null default '1',
       `role_name`      varchar(32) not null default '',
@@ -1138,8 +1139,8 @@ CREATE TABLE IF NOT EXISTS `favor_msg`(
 /*
 reply type 0 帖子回复 1 宝贝回复 2 主题回复
 */
-DROP TABLE IF EXISTS `reply_msg`;
-CREATE TABLE IF NOT EXISTS `reply_msg`(
+DROP TABLE IF EXISTS `discuss_msg`;
+CREATE TABLE IF NOT EXISTS `discuss_msg`(
   `id`                          int(10)          NOT NULL AUTO_INCREMENT,
   `replier_id`                    int(10) not null ,
   `replier_name`                varchar(32) not null ,
@@ -1287,5 +1288,33 @@ CREATE TABLE IF NOT EXISTS `pet_video_discuss`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+/*
+  -- 表的结构 cms 内容管理系统
+     id                  表的ID
+     aid                  发布者（跟administrator 一致）
+     title                 标题
+     content             回复的内容
+     seo
+     check_state        审核状态
+     add_time           添加时间
+
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `cms`;
+CREATE TABLE IF NOT EXISTS `cms`(
+  `id`                         int(10) NOT NULL AUTO_INCREMENT,
+  `aid`                        int(10) NOT NULL ,
+  `title`                      varchar(128)  ,
+  `content`                    text ,
+  `view_num`                   int(10) NOT NULL ,
+  `seo_title`                  varchar(128)  ,
+  `seo_keywords`               varchar(128)  ,
+  `seo_desc`                   varchar(255)  ,
+  `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `status`            tinyint NOT NULL DEFAULT '1',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

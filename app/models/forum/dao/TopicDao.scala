@@ -184,7 +184,7 @@ object TopicDao {
   /* topic discuss */
 
   def addDiscuss(uid: Long, topicId: Long, quoteContent: Option[String], content: String, checkState: Int) = database.withDynSession {
-    TopicSQLDao.updateDiscussNum(topicId)
+    TopicSQLDao.updateDiscussNum(topicId,1)
     val discussesAutoInc = topicDiscusses.map(t => (t.uid, t.topicId, t.quoteContent, t.content, t.checkState)) returning topics.map(_.id) into {
       case (_, id) => id
     }
