@@ -184,12 +184,13 @@ object UserDao {
   }
 
   /*用户筛选*/
-  def filterUsers(name: Option[String], status: Option[Int], daren: Option[Int], comeFrom: Option[Int], creditsOrder: String, shiDouOrder: String, idOrder: String, currentPage: Int, pageSize: Int) = database.withDynSession {
+  def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], creditsOrder: String, addTimeOrder: String, currentPage: Int, pageSize: Int) = database.withDynSession {
     var query = for (u <- users) yield u
     if (!name.isEmpty) query = query.filter(_.name like "%" + name.get + "%")
     if (!status.isEmpty) query = query.filter(_.status === status.get)
+    if (!title.isEmpty) query = query.filter(_.title like "%" + title.get + "%")
     if (!comeFrom.isEmpty) query = query.filter(_.comeFrom === comeFrom.get)
-    if (idOrder == "desc") query = query.sortBy(_.id desc) else query = query.sortBy(_.id asc)
+    if (addTimeOrder == "desc") query = query.sortBy(_.id desc) else query = query.sortBy(_.id asc)
     if (creditsOrder == "desc") query = query.sortBy(_.credits desc) else query = query.sortBy(_.credits asc)
     //println("sql " +query.selectStatement)
     val totalRows = query.list().length

@@ -49,9 +49,9 @@ object Forums extends Controller {
   )
 
 
-  def list(p:Int) = Administrators.AdminAction{administrator => implicit request =>
+  def topics(p:Int) = Administrators.AdminAction{administrator => implicit request =>
       val page=TopicDao.findAll(p,50)
-      Ok(views.html.admin.forums.list(administrator,page))
+      Ok(views.html.admin.forums.topics(administrator,page))
   }
   
   def delete(id:Long) = Administrators.AdminAction{administrator => implicit request =>

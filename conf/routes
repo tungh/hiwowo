@@ -87,7 +87,7 @@ GET   /admin/modify               controllers.admin.Administrators.modify
 GET   /admin/index                controllers.admin.Administrators.index
 
 #管理后台  讨论管理
-GET   /admin/forums/list           controllers.admin.Forums.list(p:Int ?=1)
+GET   /admin/forums/topics           controllers.admin.Forums.topics(p:Int ?=1)
 GET   /admin/forums/delete         controllers.admin.Forums.delete(id:Long)
 GET   /admin/forums/check          controllers.admin.Forums.check(id:Long,state:Int ?=1)
 GET   /admin/forums/discusses         controllers.admin.Forums.discusses(p:Int ?=1)
@@ -97,6 +97,14 @@ GET  /admin/forums/filterTopics       controllers.admin.Forums.filterTopics
 POST /admin/forums/batchTopics       controllers.admin.Forums.batchTopics
 GET  /admin/forums/filterDiscusses       controllers.admin.Forums.filterDiscusses
 POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
+
+#管理后台 用户管理
+GET  /admin/users/users            controllers.admin.Users.users(p:Int ?=1)
+GET  /admin/users/black           controllers.admin.Users.black(uid:Long)
+GET  /admin/users/edit            controllers.admin.Users.edit(uid:Long)
+GET  /admin/users/view            controllers.admin.Users.view(uid:Long)
+GET  /admin/users/filterUsers       controllers.admin.Users.filterUsers
+POST /admin/users/batchUsers       controllers.admin.Users.batchUsers
 
 #管理后台 站内信管理
 GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
