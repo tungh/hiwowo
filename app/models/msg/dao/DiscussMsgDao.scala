@@ -17,11 +17,11 @@ object DiscussMsgDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
   val discussMsgs = TableQuery[DiscussMsgs]
 
-  def addMsg( replierId:Long,replierName:String,replyType:Int,thirdId:Long,content:String,ownerId:Long):Long  = database.withDynSession {
-    val discussMsgsAutoInc = discussMsgs.map( u => (u.replierId, u.replierName,u.replyType, u.thirdId, u.content, u.ownerId)) returning discussMsgs.map(_.id) into {
+  def addMsg(discusserId:Long,discusserName:String,discussType:Int,thirdId:Long,content:String,ownerId:Long):Long  = database.withDynSession {
+    val discussMsgsAutoInc = discussMsgs.map( u => (u.discusserId, u.discusserName,u.discussType, u.thirdId, u.content, u.ownerId)) returning discussMsgs.map(_.id) into {
       case (_, id) => id
     }
-    discussMsgsAutoInc.insert(replierId, replierName,replyType,thirdId,content,ownerId)
+    discussMsgsAutoInc.insert(discusserId, discusserName,discussType,thirdId,content,ownerId)
 }
   def findMsgByLovedId(ownerId:Long,currentPage:Int,pageSize:Int):Page[DiscussMsg]  = database.withDynSession {
     val totalRows=Query(discussMsgs.filter(_.ownerId === ownerId ).length).first()

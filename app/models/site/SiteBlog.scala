@@ -19,7 +19,7 @@ case  class  SiteBlog(
                   isTop:Int,
                   viewNum:Int,
                   loveNum:Int,
-                  replyNum:Int,
+                  discussNum:Int,
                   addTime:Option[Timestamp]
                   )
 
@@ -36,10 +36,10 @@ class SiteBlogs(tag:Tag) extends Table[SiteBlog](tag,"site_blog") {
   def isTop = column[Int]("is_top")
   def viewNum = column[Int]("view_num")
   def loveNum = column[Int]("love_num")
-  def replyNum = column[Int]("reply_num")
+  def discussNum = column[Int]("discuss_num")
   def addTime = column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * =(id.?,uid,sid,comeFrom.?,title,pic.?,content,tags.?,status,isTop,viewNum,loveNum,replyNum, addTime.?) <>(SiteBlog.tupled, SiteBlog.unapply)
+  def * =(id.?,uid,sid,comeFrom.?,title,pic.?,content,tags.?,status,isTop,viewNum,loveNum,discussNum,addTime.?) <>(SiteBlog.tupled, SiteBlog.unapply)
 
 }

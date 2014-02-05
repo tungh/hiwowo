@@ -728,22 +728,7 @@ CREATE TABLE IF NOT EXISTS `favor_msg`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-   /*
-   reply type 0 帖子回复 1 宝贝回复 2 主题回复
-   */
- DROP TABLE IF EXISTS `reply_msg`;
-CREATE TABLE IF NOT EXISTS `reply_msg`(
-       `id`                          int(10)          NOT NULL AUTO_INCREMENT,
-        `replier_id`                    int(10) not null ,
-       `replier_name`                varchar(32) not null ,
-        `reply_action`                varchar(32) not null ,
-       `reply_type`               tinyint not null default '0',
-       `third_id`               int(10) not null ,
-        `content`                varchar(200) not null,
-       `owner_id`               int(10) not null,
-        `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
    /************************************************************
  * 管理员
@@ -1017,7 +1002,7 @@ CREATE TABLE `site_blog` (
   `is_top`            tinyint  not null default  '0',
   `view_num`          int unsigned  not null default  '1',
   `love_num`          int unsigned  not null default  '1',
-  `reply_num`          int unsigned  not null default  '1',
+  `discuss_num`          int unsigned  not null default  '1',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -1137,15 +1122,15 @@ CREATE TABLE IF NOT EXISTS `favor_msg`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
-reply type 0 帖子回复 1 宝贝回复 2 主题回复
+discuss type 0 帖子回复 1 宝贝回复 2 主题回复
 */
 DROP TABLE IF EXISTS `discuss_msg`;
 CREATE TABLE IF NOT EXISTS `discuss_msg`(
   `id`                          int(10)          NOT NULL AUTO_INCREMENT,
-  `replier_id`                    int(10) not null ,
-  `replier_name`                varchar(32) not null ,
-  `reply_action`                varchar(32) not null ,
-  `reply_type`               tinyint not null default '0',
+  `discusser_id`                    int(10) not null ,
+  `discusser_name`                varchar(32) not null ,
+  `discuss_action`                varchar(32) not null ,
+  `discuss_type`               tinyint not null default '0',
   `third_id`               int(10) not null ,
   `content`                varchar(200) not null,
   `owner_id`               int(10) not null,

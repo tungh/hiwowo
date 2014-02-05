@@ -100,11 +100,11 @@
                 <tr id="@item.id.get">
                     <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
                     <td>@item.id</td>
-                    <td><a href="@controllers.users.routes.Users.home(item.replierId)"> @item.replierName </a> </td>
+                    <td><a href="@controllers.users.routes.Users.home(item.discusserId)"> @item.discusserName </a> </td>
                     <td>
-                       @if(item.replyType == 1){ <a href=""> @item.content </a>  }
-                        @if(item.replyType == 2){ <a href=""> @item.content </a>   }
-                        @if(item.replyType == 3) {<a href=""> @item.content </a>    }
+                       @if(item.discussType == 1){ <a href=""> @item.content </a>  }
+                        @if(item.discussType == 2){ <a href=""> @item.content </a>   }
+                        @if(item.discussType == 3) {<a href=""> @item.content </a>    }
                     </td>
                     <td><a href="@controllers.users.routes.Users.home(item.ownerId)"> @item.ownerId </a> </td>
 

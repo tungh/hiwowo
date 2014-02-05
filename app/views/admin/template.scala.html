@@ -68,13 +68,7 @@
                     <li><a href="#">评论管理</a></li>
                 </ul>
             </li>
-                <li class='submenu @if(nav=="channel"){active open}'>
-                    <a href="#"><i class="icon icon-th-list"></i> <span>频道管理</span></a>
-                    <ul>
-                        <li><a href='#'>首页频道管理</a></li>
 
-                    </ul>
-                </li>
 
                 <li class='submenu @if(nav=="site"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>小站管理</span></a>
@@ -84,7 +78,19 @@
                         <li><a href=''>帖子评价管理</a></li>
                     </ul>
                 </li>
+                <li class='submenu @if(nav=="site"){active open}'>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>宠物管理</span></a>
+                    <ul>
+                        <li><a href=''>宠物管理</a></li>
 
+                    </ul>
+                </li>
+                <li class='submenu @if(nav=="site"){active open}'>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>小店管理</span></a>
+                    <ul>
+                        <li><a href=''>小店管理</a></li>
+                    </ul>
+                </li>
                 <li class='submenu @if(nav=="msg"){active open}'>
                 <a href="#"><i class="icon icon-th-list"></i> <span>站内信管理</span></a>
                 <ul>
@@ -96,19 +102,28 @@
                 </ul>
                 </li>
 
-                <!--  站内信 -->
-                <li class='submenu @if(nav=="vote"){active open}'>
-                <a href="#"><i class="icon icon-th-list"></i> <span>调查投票管理</span></a>
-                <ul>
-                    <li><a href=''>调查投票管理</a></li>
 
-                </ul>
+                <!-- 频道页管理 -->
+                <li class='submenu @if(nav=="channel"){active open}'>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>频道管理</span></a>
+                    <ul>
+                        <li><a href='#'>首页频道管理</a></li>
+
+                    </ul>
                 </li>
                 <!--  cms 系统管理 -->
                 <li class='submenu @if(nav=="cms"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>CMS系统管理</span></a>
                     <ul>
                         <li><a href=''>友情链接</a></li>
+
+                    </ul>
+                </li>
+                <!-- 投票管理 -->
+                <li class='submenu @if(nav=="vote"){active open}'>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>调查投票管理</span></a>
+                    <ul>
+                        <li><a href=''>调查投票管理</a></li>
 
                     </ul>
                 </li>

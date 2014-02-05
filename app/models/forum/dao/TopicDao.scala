@@ -37,7 +37,7 @@ object TopicDao {
     topicsAutoInc.insert(uid, title, content, intro, pics, typeId, checkState)
   }
 
-  /*删除topic的同时，需要把topic 下的reply 给删除*/
+  /*删除topic的同时，需要把topic 下的 discuss 给删除*/
   def deleteTopic(id: Long) = database.withDynSession {
     (for (c <- topics if c.id === id) yield c).delete
     (for (c <- topicDiscusses if c.topicId === id) yield c).delete
