@@ -1,6 +1,7 @@
 package controllers.admin
 
 import play.api.mvc.Controller
+import models.site.dao.SiteDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +11,9 @@ import play.api.mvc.Controller
  */
 object Sites extends Controller {
 
-  def sites(p:Int) = Administrators.AdminAction{administrator => implicit request =>
-
-    Ok("todo")
+  def sites(p:Int,size:Int) = Administrators.AdminAction{administrator => implicit request =>
+    val page = SiteDao.findAllSites(p,size)
+    Ok(views.html.admin.sites.sites(administrator,page))
   }
   def filterSites =  Administrators.AdminAction{administrator => implicit request =>
    Ok("todo")
@@ -21,7 +22,7 @@ object Sites extends Controller {
    Ok("todo")
   }
 
-  def siteDiscusses =  Administrators.AdminAction{administrator => implicit request =>
+  def siteDiscusses(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterSiteDiscusses =  Administrators.AdminAction{administrator => implicit request =>
@@ -31,7 +32,7 @@ object Sites extends Controller {
     Ok("todo")
   }
 
-  def blogs =  Administrators.AdminAction{administrator => implicit request =>
+  def blogs(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterBlogs =  Administrators.AdminAction{administrator => implicit request =>
@@ -41,7 +42,7 @@ object Sites extends Controller {
     Ok("todo")
   }
 
-  def blogDiscusses =  Administrators.AdminAction{administrator => implicit request =>
+  def blogDiscusses(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterBlogDiscusses =  Administrators.AdminAction{administrator => implicit request =>
@@ -51,7 +52,7 @@ object Sites extends Controller {
     Ok("todo")
   }
 
-  def pics =  Administrators.AdminAction{administrator => implicit request =>
+  def pics(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
    Ok("todo")
   }
   def filterPics =  Administrators.AdminAction{administrator => implicit request =>
@@ -61,7 +62,7 @@ object Sites extends Controller {
    Ok("todo")
   }
 
-  def picDiscusses =  Administrators.AdminAction{administrator => implicit request =>
+  def picDiscusses(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterPicDiscusses =  Administrators.AdminAction{administrator => implicit request =>
@@ -71,7 +72,7 @@ object Sites extends Controller {
     Ok("todo")
   }
 
-  def videos =  Administrators.AdminAction{administrator => implicit request =>
+  def videos(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterVideos =  Administrators.AdminAction{administrator => implicit request =>
@@ -81,7 +82,7 @@ object Sites extends Controller {
     Ok("todo")
   }
 
-  def videoDiscusses =  Administrators.AdminAction{administrator => implicit request =>
+  def videoDiscusses(p:Int,size:Int) =  Administrators.AdminAction{administrator => implicit request =>
     Ok("todo")
   }
   def filterVideoDiscusses =  Administrators.AdminAction{administrator => implicit request =>

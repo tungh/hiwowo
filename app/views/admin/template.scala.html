@@ -73,8 +73,14 @@
                 <li class='submenu @if(nav=="site"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>小站管理</span></a>
                     <ul>
-                        <li><a href=''>小站管理</a></li>
-                        <li><a href=''>帖子管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.sites(1,20)'>小站管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.siteDiscusses(1,20)'>小站评价管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.blogs(1,20)'>小站博客管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.blogDiscusses(1,20)'>小站博客评价管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.pics(1,20)'>小站图片管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.picDiscusses(1,20)'>小站图片评价管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.videos(1,20)'>小站视频管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.videoDiscusses(1,20)'>小站视频管理</a></li>
                         <li><a href=''>帖子评价管理</a></li>
                     </ul>
                 </li>

@@ -65,13 +65,11 @@ object SiteDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val list =  (for(c<-sites.drop(startRow).take(pageSize)  )yield c).list()
-
     Page[Site](list,currentPage,totalPages)
   }
 
   /* 筛选 sites */
   def filterSites(uid:Option[Long],title:Option[String],status:Option[Int],startDate:Option[Timestamp],endDate:Option[Timestamp],currentPage:Int,pageSize:Int):Page[Site]  = database.withDynSession {
-
     var query =for(c<-sites)yield c
     if(!uid.isEmpty) query = query.filter(_.uid === uid)
     if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
