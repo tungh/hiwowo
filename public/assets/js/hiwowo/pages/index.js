@@ -11,7 +11,11 @@ define(function (require) {
 
     $(function(){
 
-
+          $(".colm dl").hover(function(){
+              $(this).addClass("hover")
+          },function(){
+              $(this).removeClass("hover")
+          })
 
     })
 })

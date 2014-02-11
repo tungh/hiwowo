@@ -6,158 +6,139 @@
  * 维护：zuosanshao@qq.com
 */
 #content {
+    background: #f0f0f0;
     position: relative;
     z-index: 3;
 }
-.index .row{
-    background: #f8f8f8;
+.index .mod-header {overflow: hidden;padding: 35px 180px}
+.index .mod-header h1 {font-size: 100px;color: #c33;display: inline;float: left;margin-bottom: 0;}
+.index .mod-header p {font-size: 60px;line-height: 53px;overflow: hidden;height: 128px;display: inline;float: left;}
+.index .mod-header em {font-size: 18px;font-weight: normal;color: white;background: black;margin-left: 7px;padding: 2px;}
+
+
+.index .row .coll, .index .row .colm,.index .row .colr{
+    width: 330px;
+    float: left;
 }
-.index .main .desc {
-    font-size: 12px;
-    height: 90px;
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #999;
+.index .title{
+    height: 92px;
+    padding: 30px 0 15px 0;
+    text-align: center;
 }
-.index .main .coll {display: inline;float: left;padding-top: 20px;padding-bottom:100px;border-right: 1px dotted #999;}
-.index .main .coll .tri {right: -10px;border-color: #fff #fff #fff #f4f4f4;border-width: 10px 0px 10px 10px;}
-.index .main .tri {
-    position: absolute;
-    top: 50%;
-    width: 0;
-    height: 0;
-    margin-top: -10px;
-    border-style: solid;
-    font-size: 0;
+.index .title h1{
+    font-size: 32px;
+    height: 38px;
+    margin-bottom: 10px;
 }
-.index .main .colr {display: inline;float: right;padding-top: 25px;}
-
-.index .main .colr .tri {left: -10px;border-color: #fff #f4f4f4 #fff #fff;border-width: 10px 10px 10px 0px;}
-.index .main .pic-panel {position: relative;width:100%;height: 180px;margin-bottom: 40px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-ms-border-radius: 5px;-o-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: -2px 4px 6px -4px #999;-moz-box-shadow: -2px 4px 6px -4px #999;box-shadow: -2px 4px 6px -4px #999;background:#f4f4f4;}
-.index .main .pic-panel .face {position: relative;display: inline;float: left;width:320px;height: 160px;margin: 10px;overflow: hidden;}
-.index .main .pic-panel .face img {width:100%;height: 160px;}
-.index .main .pic-panel .pic-info {display: none; margin: 10px;}
-.index .main .pic-panel .title, .index .main .pic-panel .artist {display: block;float: left;/*width: 190px;*/overflow: hidden;}
-.index .main .pic-panel .title {font-size: 18px;color: #333;}
-.index .main .pic-panel .artist {line-height: 40px;}
-
-.index .main .coll .pic-panel .favor {right: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
-.index .main .colr .pic-panel .favor {left: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
-.index .main .pic-panel .favor i {display: block;display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");margin-top: 5px;}
-.index .main .pic-panel .favor.on i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");}
-
-
-/*
-
-*/
-.avgrund-popin {
-    position: absolute;
-    background: #fff;
-    padding: 10px;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    top: 50%;
-    left: 50%;
-    z-index: 1000;
-    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .5);
-
-    -webkit-transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-    -o-transform: scale(0.8);
-    transform: scale(0.8);
-}
-
-.avgrund-overlay {
-    background: #000;
-    width: 100%;
-    position: relative;
-    top: -1500px;
-    left: 0;
-    z-index: 101;
-    visibility: hidden;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-body.avgrund-ready,
-.avgrund-ready .avgrund-popin,
-.avgrund-ready .avgrund-overlay {
-    -webkit-transform-origin: 50% 50%;
-    -moz-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
-    -o-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-
-    -webkit-transition: 0.3s all ease-out;
-    -moz-transition: 0.3s all ease-out;
-    -ms-transition: 0.3s all ease-out;
-    -o-transition: 0.3s all ease-out;
-    transition: 0.3s all ease-out;
-}
-
-body.avgrund-active {
-    -webkit-transform: scale(0.9);
-    -moz-transform: scale(0.9);
-    -ms-transform: scale(0.9);
-    -o-transform: scale(0.9);
-    transform: scale(0.9);
-    overflow: hidden;
-}
-
-.avgrund-active .avgrund-popin {
-    visibility: visible;
-    opacity: 1;
-    filter: alpha(opacity=100);
-
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.avgrund-active .avgrund-overlay {
-    visibility: visible;
-    opacity: .5;
-    filter: alpha(opacity=50);
-    height: 20000px;
-}
-
-.avgrund-popin.stack {
-    -webkit-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    -ms-transform: scale(1.5);
-    -o-transform: scale(1.5);
-    transform: scale(1.5);
-}
-
-.avgrund-active .avgrund-popin.stack {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.avgrund-active .avgrund-blur {
-    -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-    -ms-filter: blur(1px);
-    -o-filter: blur(1px);
-    filter: blur(1px);
-}
-
-/* Optional close button styles */
-.avgrund-close {
+.index .title span{
     display: block;
-    color: #555;
-    font-size: 13px;
-    text-decoration: none;
-    text-transform: uppercase;
+    font-size: 14px;
+    color: #000;
+    font-family: Microsoft YaHei;
+    line-height: 24px;
+}
+.index .title span em{
+    color: #57c5c1;
+    padding: 0px 10px;
+}
+.index .colm .title, .index .colr .title{
+    height: 92px;
+    background: url(images/index-col-bg.png) 0 10px no-repeat;
+}
+
+.index .coll .wrap{
+    min-height: 910px;
+}
+.index .coll .wrap .box{
+    padding: 28px 20px;
+    margin-right: 22px;
+    background: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+.index .coll .wrap dl{
+    height: 245px;
+    min-height: 245px;
+    border-bottom: 1px #ccc dashed;
+    padding-bottom: 33px;
+    margin-bottom: 25px;
+}
+.index .colm .wrap{
+    min-height: 910px;
+    border-left: 1px #57c5c1 solid;
+
+}
+
+.index .colm dl{
+    margin: 0 22px;
+    height: 250px;
+    min-height: 250px;
+    padding-top: 16px;
+    padding-bottom: 38px;
+    font-size: 16px;
+    font-family: Microsoft YaHei;
+    line-height: 20px;
+    border-bottom: 1px #ccc dashed;
+}
+.index .colm dl .pic {
+    margin: 0 auto;
+    height: 162px;
+    position: relative;
+    width: 166px;
+}
+.index .colm dl .pic a{
+    display: block;
+    width: 166px;
+    height: 162px;
+    position: relative;
+}
+.index .colm dl .pic a:hover {color: #c00;}
+
+.index .colm  dl  .shadow{
     position: absolute;
-    top: 6px;
-    right: 10px;
+    left: 0px;
+    top: 0px;
+    background: url(http://mat1.gtimg.com/fashion/2014fw/ny/raidus_bg.png) no-repeat;
+    overflow: hidden;
+    width: 166px;
+    height: 162px;
+}
+.index .colm  dl.hover .shadow { background-position:  0px -162px;}
+.index .colm .author {
+    text-align: center;
+    font-size: 14px;
+    margin: 15px 0px 10px 0px;
+    line-height: 24px;
+}
+.index .colm .author a{
+    color: #333333;
+}
+.index .colm .intro{
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777777;
+}
+
+/* index colm right */
+.index .colr .wrap{
+    min-height: 910px;
+    border-left: 1px #57c5c1 solid;
+}
+
+
+.index .colr .wrap .box{
+    padding: 28px 20px;
+    margin-left: 22px;
+    margin-right: 0px;
+    background: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+.index .colr dl{
+    height: 245px;
+    min-height: 245px;
+    border-bottom: 1px #ccc dashed;
+    padding-bottom: 33px;
+    margin-bottom: 25px;
 }
