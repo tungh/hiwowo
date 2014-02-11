@@ -33,6 +33,7 @@
                     <li><a href="/forum">讨论吧</a></li>
                 </ul>
             </nav>
+
             @if(user.isEmpty){
             <section class="user-info">
                 <a class="login need-login" href="#" rel="loginD">登录</a><span class="spacing">|</span><a class="signup" target="_blank" href="/user/regist">注册</a>
@@ -55,6 +56,12 @@
                 <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
             </section>
            }
+            <section class="topSearch">
+                <div class="searchBox">
+                    <input type="text" class="searchText" value="乐翻天">
+                    <a class="searchBtn" href="javascript:void(0);"></a>
+                </div>
+            </section>
         </div>
     </div>
 
