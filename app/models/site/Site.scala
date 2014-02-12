@@ -12,11 +12,13 @@ import scala.slick.driver.MySQLDriver.simple._
  * ***********************
  * description: 小镇
  * status 0 未审核  1 通过审核 2 优质
+ * typeID 0 album 1 pet
  */
 
 case class Site(
                 id: Option[Long],
                 uid:Long,
+                typeId:Int,
                 title:String,
                 pic:String,
                 intro: String,
@@ -34,6 +36,7 @@ case class Site(
 class Sites(tag:Tag) extends Table[Site](tag,"site") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
+  def typeId = column[Int]("type_id")
   def title = column[String]("title")
   def pic = column[String]("pic")
   def intro     = column[String]("intro")
@@ -46,7 +49,7 @@ class Sites(tag:Tag) extends Table[Site](tag,"site") {
   def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
 
-  def * =(id.?,uid,title,pic,intro,tags,status,notice.?,blogNum,picNum,videoNum,modifyTime.?,addTime.?)<>(Site.tupled, Site.unapply)
+  def * =(id.?,uid,typeId,title,pic,intro,tags,status,notice.?,blogNum,picNum,videoNum,modifyTime.?,addTime.?)<>(Site.tupled, Site.unapply)
 
 
 

@@ -193,7 +193,7 @@ CREATE TABLE `user_check_in` (
 
 -- --------------------------------------------------------
 /*
-  -- 表的结构 `user_love_site`
+  -- 表的结构 `user_love`
      id 表的ID
      uid 用户的id
      love_id  第三方的ID
@@ -737,7 +737,8 @@ PRIMARY KEY (`id`)
 DROP TABLE IF EXISTS `site`;
 CREATE TABLE `site` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
+  `uid`                 int(10) not null,
+  `type_id`             tinyint not null,
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
   `intro`             varchar(250) ,
