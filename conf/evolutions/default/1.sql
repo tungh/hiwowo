@@ -10,12 +10,9 @@
  * user_static             用户统计信息
  * user_tag 表            用户的标签
  * user_follow 表         用户关注的人
- * user_love_site 表     用户喜欢的小站
- * user_love_blog 表     用户喜欢的博客
- * user_love_pic 表      用户喜欢的图片
- * user_love_video 表    用户喜欢的视频
- * user_love_shop 表     用户喜欢的店铺
- * user_invite_prize 表    用户
+ * user_love 表           用户喜欢的（收藏的）
+
+
  * user_record     表    用户动态，类似于用户的操作记录，记录用户的动作
 
  **************************************************************/
@@ -199,122 +196,20 @@ CREATE TABLE `user_check_in` (
   -- 表的结构 `user_love_site`
      id 表的ID
      uid 用户的id
-     site_id 小镇的Id
+     love_id  第三方的ID
      add_time  添加时间
 --
 */
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `user_love_site`;
-CREATE TABLE `user_love_site` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `uid` int(10) NOT NULL DEFAULT '0',
-  `site_id` int(20) NOT NULL DEFAULT '0',
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- --------------------------------------------------------
-/*
-  -- 表的结构 `user_love_baobei`
-     id 表的ID
-     uid 用户的id
-     blog_id 商品的Id
-     add_time  添加时间
---
-*/
-
--- --------------------------------------------------------
- DROP TABLE IF EXISTS `user_love_blog`;
-CREATE TABLE `user_love_blog` (
+DROP TABLE IF EXISTS `user_love`;
+CREATE TABLE `user_love` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` int(10) NOT NULL ,
-  `blog_id` int(10) NOT NULL ,
+  `love_id` int(20) NOT NULL ,
+  `type_id` tinyint NOT NULL ,
   `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `user_love_pic`
-     id 表的ID
-     uid 用户的id
-     pic_id 图片的Id
-     add_time  添加时间
---
-*/
-
--- --------------------------------------------------------
-
- DROP TABLE IF EXISTS `user_love_pic`;
-CREATE TABLE `user_love_pic` (
-  `id`   int(10) NOT NULL AUTO_INCREMENT,
-  `uid`   int(10) not null,
-  `pic_id` int(10) NOT NULL,
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `user_love_video`
-     id 表的ID
-     uid 用户的id
-     video_id 的Id
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `user_love_video`;
-CREATE TABLE `user_love_video` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `uid` int(10) NOT NULL DEFAULT '0',
-  `video_id` int(20) NOT NULL DEFAULT '0',
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- --------------------------------------------------------
-/*
-  -- 表的结构 `user_love_topic`
-     id 表的ID
-     uid 用户的id
-     topic_id 话题的Id
-     topic_name 话题的名称
-     add_time  添加时间
---
-*/
-
--- --------------------------------------------------------
- DROP TABLE IF EXISTS `user_love_topic`;
-CREATE TABLE `user_love_topic` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `uid` int(10) NOT NULL ,
-  `topic_id` int(10) NOT NULL ,
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `user_love_shop`
-     id 表的ID
-     uid 用户的id
-     shop_id 商品的Id
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
- DROP TABLE IF EXISTS `user_love_shop`;
- CREATE TABLE `user_love_shop` (
-   `id` int(10) NOT NULL AUTO_INCREMENT,
-   `uid` int(10) NOT NULL DEFAULT '0',
-   `shop_id` int(20) NOT NULL DEFAULT '0',
-   `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-   PRIMARY KEY (`id`)
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 
 /************************************************************
  * forum  论坛：主要有话题、话题回复     板块》话题》回复，讨论话题与goods的评论、theme的讨论分开设计，这就是一个独立的模块
