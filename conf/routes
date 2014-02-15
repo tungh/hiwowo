@@ -9,7 +9,7 @@ GET   /test                                controllers.Test.index
 
 GET       /                                    controllers.Pages.index
 GET       /sites                               controllers.Pages.sites
-GET       /store                               controllers.Pages.store
+GET       /my                                  controllers.Pages.my
 GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
 
 #forum

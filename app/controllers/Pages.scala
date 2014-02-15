@@ -20,9 +20,9 @@ object Pages extends Controller {
     Ok(views.html.pages.sites(user))
   }
 
-  def store = Users.UserAction{ user => implicit request =>
+  def my = Users.UserAction{ user => implicit request =>
 
-    Ok(views.html.pages.store(user))
+    Ok(views.html.pages.my(user))
   }
 
   def forum(typeId:Int,sortBy:String,p:Int,size:Int) = Users.UserAction{ user => implicit request =>

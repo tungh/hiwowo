@@ -1,5 +1,5 @@
 /*新版讨论吧*/
-.forum { margin: 60px auto; }
+.forum { margin: 20px auto; }
 .forum  .forum-no-data{text-align:center;line-height:100px;background-color:#fff;font-size:16px;font-weight:bold;}
 .forum .forum-main{}
 .forum .forum-main .forum-ltitle,.forum .forum-main .forum-dtitle{background:#fff;height:26px;line-height:26px;padding:7px 15px;}

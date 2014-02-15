@@ -1,5 +1,5 @@
 @(user:Option[models.user.User],typeId:Int,sortBy:String,page:models.Page[(models.forum.Topic,models.user.User)])
-@views.html.template(user,title="讨论吧")(css="/assets/css/template/forum.css"){
+@views.html.template(user,nav="forum",subNav="new",title="讨论吧")(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">

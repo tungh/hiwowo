@@ -230,6 +230,9 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 .navbar .topSearch .searchText{float: left; height: 24px;width: 124px;font-size: 12px;line-height: 24px;border: 0;color: #556069;}
 .navbar .topSearch .searchBtn{float: right;width: 24px;height: 28px; background: url(images/icon_search.png) 0 2px no-repeat;}
 .navbar .user-info {display: inline;float: right;height: 40px;line-height: 40px;}
+.navbar .user-info a{
+    color: #fff;
+}
 .navbar .user-info .login, .navbar .user-info .spacing, .navbar .user-info .signup, .navbar .user-info .avatar, .navbar .user-info .user {display: inline;float: left;}
 .navbar .user-info .spacing {margin: 0 10px;color: #3e3e3e;}
 .navbar .user-info .avatar {margin: 5px 10px 0 10px;}
@@ -327,18 +330,18 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     text-align: center
 }
 
-.subbar .container li.esp {
+.subbar .container li.on {
     color: #333;
     font-weight: bold;
     height: 33px;
     line-height: 35px
 }
 
-.subbar .container li.imgbg {
+.subbar .container li.new {
     background: url(images/Newweichat.gif) right 4px no-repeat
 }
 
-.subbar .container li.esp a {
+.subbar .container li.on a {
     color: #333;
     font-weight: bold;
     display: block;
@@ -385,7 +388,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     background: url(images/icon_view_switcher.png) no-repeat 0 -135px
 }
 
-.switch a.esp {
+.switch a.on {
     background: url(images/icon_view_switcher.png) no-repeat 0 -190px
 }
 

@@ -1,10 +1,9 @@
-@(user:Option[models.user.User]=None,title: String = "",keywords:String = "",description:String = "")(css:String)(content: Html)(js:Html)
+@(user:Option[models.user.User]=None,nav:String=" ",subNav:String =" ",title: String = " ",keywords:String = " ",description:String = "")(css:String)(content: Html)(js:Html)
 <!doctype html>
 <html>
 <head>
     <title>@title</title>
-    <meta property="wb:webmaster" content="59dcb1f27fb8d6af" />
-	<meta property="qc:admins" content="10213762651456375" />
+
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
@@ -27,10 +26,10 @@
 
             <nav class="nav">
                 <ul class="clearfix">
-                    <li ><a href="/" class="current">嗨喔喔</a></li>
-                    <li><a href="/sites">喔喔站</a></li>
-                    <li><a href="/store">喔喔店</a></li>
-                    <li><a href="/forum">讨论吧</a></li>
+                    <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
+                    <li><a href="/sites" class=' @("current".when(nav == "sites")) ' >部落</a></li>
+                    <li><a href="/my" class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
+                    <li><a href="/forum" class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
                 </ul>
             </nav>
 
@@ -65,28 +64,72 @@
             </section>
         </div>
     </div>
-
-    <div id="J_subbar" class="subbar">
+     @nav match{
+    case "index" => {   <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class="esp"><a href="" title="订阅的专辑">我的订阅</a></li>
-                <li><a href="" title="猜你喜欢">猜你喜欢</a></li>
-                <li class="imgbg"><a href="" title="微信精选">微信精选</a></li>
-                <li><a href="" title="发现更多">发现更多</a></li>
+                <li class=' @("on".when(subNav == "index")) '><a href="" title="首页">首页</a></li>
+                <li class=' @("on".when(subNav == "guess")) '><a href=""  title="猜你喜欢">猜你喜欢</a></li>
+                <li class=' @("on".when(subNav == "weixin")) new '><a href="" title="微信精选">微信精选</a></li>
+                <li class=' @("on".when(subNav == "findMore")) '><a href="" title="发现更多">发现更多</a></li>
             </ul>
-            <div class="switch">
-                <a href="" class="clipboard" title="剪报专辑视图"></a>
-                <a href="" class="board" title="快速浏览" style=""></a>
-                <a href="javascript:void(0)" class="cliplist" title="剪报列表视图"></a>
-                <a href="javascript:void(0)" class="clipfloat" title="剪报卡片视图"
-                    style="background-color: rgb(0, 159, 221); background-position-y: -33px;"></a>
-            </div>
+
             <div class="subSearch" id="J_subSearch">
                 <input type="text" class="" placeholder="萌">
                 <a  href="javascript:void(0);"></a>
             </div>
         </div>
-    </div>
+    </div> }
+    case "sites" => {  <div id="J_subbar" class="subbar">
+        <div class="container">
+            <ul>
+
+                <li class=' @("e".when(subNav == "sites")) '><a href="" title="小站推荐">部落推荐</a></li>
+                <li class=' @("e".when(subNav == "pet")) '><a href="" title="宠物广场">宠物乐园</a></li>
+
+            </ul>
+
+            <div class="subSearch" id="J_subSearch">
+                <input type="text" class="" placeholder="萌">
+                <a  href="javascript:void(0);"></a>
+            </div>
+        </div>
+    </div> }
+    case "my" => {  <div id="J_subbar" class="subbar">
+        <div class="container">
+            <ul>
+                <li class=' @("on".when(subNav == "myLove")) '><a href="" title="我的关注">我的关注</a></li>
+                <li class=' @("on".when(subNav == "mySite")) '><a href="" title="我的部落">我的部落</a></li>
+                <li class=' @("on".when(subNav == "myDiscuss")) '><a href="" title="我的评论">我的评论</a></li>
+                <li class=' @("on".when(subNav == "myRecord")) '><a href="" title="阅读历史">阅读历史</a></li>
+
+            </ul>
+
+            <div class="subSearch" id="J_subSearch">
+                <input type="text" class="" placeholder="萌">
+                <a  href="javascript:void(0);"></a>
+            </div>
+        </div>
+    </div> }
+    case "forum" => {<div id="J_subbar" class="subbar">
+        <div class="container">
+            <ul>
+                <li class=' @("on".when(subNav == "new")) '><a href="" title="最新发表">最新发表</a></li>
+                <li class=' @("on".when(subNav == "discuss")) '><a href=""  title="最多回复">最多回复</a></li>
+                <li class=' @("on".when(subNav == "love")) '><a href="" title="最受欢迎">最受欢迎</a></li>
+                <li class=' @("on".when(subNav == "love")) '><a href="" title="最受欢迎">吧规^_^</a></li>
+            </ul>
+
+            <div class="subSearch" id="J_subSearch">
+                <input type="text" class="" placeholder="萌">
+                <a  href="javascript:void(0);"></a>
+            </div>
+        </div>
+    </div> }
+    case   _ => { @********************* none *********************@ }
+
+    }
+
 
   <div id="content">
       @content
