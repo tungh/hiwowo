@@ -1,9 +1,39 @@
 @(user:Option[models.user.User])
-@views.html.template(
-user
-)(css="/assets/css/template/user.css") {
+@views.html.template(user,subNav="userHome")(css="/assets/css/template/my.css"){
 
-<div class="container user-home" style="height: 1000px">
+<div class="container my">
+
+    <div class="my-header">
+        <div class="userLeft">
+            <ul>
+                <li >粉丝<a href="">0</a></li>
+                <li >|</li>
+                <li >关注<a href="">6</a></li>
+                <li >|</li>
+                <li >部落<a href="">4</a>
+                </li>
+                <li >|</li>
+                <li >那些事<a href="">0</a>
+                </li>
+            </ul>
+        </div>
+        <div class="userRight">
+            <div class="usericon">
+                <ul>
+                    <li ><img class="js_click" style="cursor:pointer;"src="http://tp2.sinaimg.cn/1526846353/180/1294222011/1" alt="正牌七公"></li>
+                    <li ><a title="正牌七公" href="/ownboard/247002fca85048188ee39fdf00232bfc.clip">正牌七公</a></li>
+                    <li class="sns" ><a href="javascript:void(0);" class="follow js_follow" style="">关注</a>
+                        <a href="javascript:void(0);" class="unfollow js_unfollow" style="display:none;">已关注</a>
+                        <a href="javascript:void(0);" class="mail js_mail" style="">私信</a>
+                        <a href="http://weibo.com/u/1526846353" class="weibo" title="正牌七公" target="_blank"> <img src="http://vfancn.blob.core.chinacloudapi.cn/image/weibo.gif">正牌七公</a>
+
+                        <div class="clear"></div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="main">
                 main

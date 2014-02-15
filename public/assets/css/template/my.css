@@ -1,0 +1,179 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-31  
+ * Time: 下午8:50
+ * 维护：zuosanshao@qq.com
+*/
+#content {
+    position: relative;
+    z-index: 3;
+}
+.my .row{
+    background: #f8f8f8;
+}
+.my .my-header{
+    margin-bottom: 20px;
+    background-color: #fff;
+    height: 80px;
+    overflow: hidden;
+}
+
+
+.my .my-header ul {
+    background: 0;
+    height: 80px;
+    padding-right: 0
+}
+
+.my .my-header .userLeft {
+    width: 45%;
+    float: left
+}
+
+.my .my-header .userLeft li {
+    float: right;
+    padding: 0 6px;
+    color: #333;
+    width: auto;
+    height: 80px;
+    line-height: 80px;
+    font-weight: normal
+}
+
+.my .my-header .userLeft li a {
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    float: right;
+    padding: 0 4px
+}
+
+.my .my-header .userRight {
+    width: 55%;
+    float: right
+}
+
+.my .my-header .usericon {
+    height: 80px;
+    line-height: 80px
+}
+
+.my .my-header .usericon li {
+    float: left;
+    margin-right: 10px;
+    color: #666;
+    width: auto;
+    padding: 0;
+    height: 80px
+}
+
+.my .my-header .usericon li a {
+    padding: 0;
+    display: block;
+    line-height: 80px;
+    color: #000;
+    font-weight: bold;
+    font-family: "宋体"
+}
+
+.my .my-header .usericon li img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    margin-top: 15px
+}
+
+
+.my .my-header .usericon li a.createboard {
+    background: url(images/icon_creat_board.png) no-repeat 0;
+    padding-left: 20px;
+    color: #666;
+    font-weight: normal;
+    font-family: "宋体";
+    margin-left: 20px
+}
+
+.my .my-header .usericon li.sns a {
+    float: left;
+    margin-right: 10px;
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 27px;
+    text-align: center;
+    font-family: "宋体"
+}
+
+.my .my-header .usericon li.sns a.follow {
+    width: 75px;
+    background: #3c9200;
+    color: #fff;
+    border-radius: 2px
+}
+
+.my .my-header .usericon li.sns a.unfollow {
+    width: 75px;
+    background: #ccc;
+    color: #333;
+    border-radius: 2px
+}
+
+.my .my-header .usericon li.sns a.mail {
+    color: #666;
+    background: url(images/icon_mail.png) no-repeat 0;
+    padding-left: 20px
+}
+
+.my .my-header .usericon li.sns a.weibo {
+    overflow: hidden;
+    color: #666;
+    text-align: left;
+    word-break: break-all;
+    width: 100px
+}
+
+.my .my-header .usericon li.sns a.weibo img {
+    border-radius: 0;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+
+.my .main .desc {
+    font-size: 12px;
+    height: 90px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #999;
+}
+.my .main .coll {display: inline;float: left;padding-top: 20px;padding-bottom:100px;border-right: 1px dotted #999;}
+.my .main .coll .tri {right: -10px;border-color: #fff #fff #fff #f4f4f4;border-width: 10px 0px 10px 10px;}
+.my .main .tri {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border-style: solid;
+    font-size: 0;
+}
+.my .main .colr {display: inline;float: right;padding-top: 25px;}
+
+.my .main .colr .tri {left: -10px;border-color: #fff #f4f4f4 #fff #fff;border-width: 10px 10px 10px 0px;}
+.my .main .pic-panel {position: relative;width:100%;height: 180px;margin-bottom: 40px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-ms-border-radius: 5px;-o-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: -2px 4px 6px -4px #999;-moz-box-shadow: -2px 4px 6px -4px #999;box-shadow: -2px 4px 6px -4px #999;background:#f4f4f4;}
+.my .main .pic-panel .face {position: relative;display: inline;float: left;width:320px;height: 160px;margin: 10px;overflow: hidden;}
+.my .main .pic-panel .face img {width:100%;height: 160px;}
+.my .main .pic-panel .pic-info {display: none; margin: 10px;}
+.my .main .pic-panel .title, .my .main .pic-panel .artist {display: block;float: left;/*width: 190px;*/overflow: hidden;}
+.my .main .pic-panel .title {font-size: 18px;color: #333;}
+.my .main .pic-panel .artist {line-height: 40px;}
+
+.my .main .coll .pic-panel .favor {right: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.my .main .colr .pic-panel .favor {left: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.my .main .pic-panel .favor i {display: block;display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");margin-top: 5px;}
+.my .main .pic-panel .favor.on i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");}
+
+
