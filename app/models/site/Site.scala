@@ -12,7 +12,7 @@ import scala.slick.driver.MySQLDriver.simple._
  * ***********************
  * description: 小镇
  * status 0 未审核  1 通过审核 2 优质
- * typeID 0 album 1 pet
+ * typeID 0 album 专辑 1 pet 宠物
  */
 
 case class Site(

@@ -248,6 +248,28 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 .navbar-fixed-bottom { bottom: 0; margin-bottom: 0; border-width: 1px 0 0;}
 .navbar .user-info .topbar-dropdown{ top: 40px;}
 .navbar .user-info .bottombar-dropdown{bottom:40px}
+.navbar .msg {
+    float:left;
+    display: block;
+    width: 55px;
+    height: 45px;
+    color: #fff;
+    background: url(images/icon_messageTop.png) no-repeat 15px;
+}
+.navbar .msg span {
+    display: none;
+    width: 12px;
+    height: 24px;
+    background: url(images/message_num_bg.png) no-repeat;
+    line-height: 22px;
+    margin-top: 5px;
+    margin-left: 30px;
+    overflow: hidden;
+    font-weight: bold;
+    font-family: Arial,Helvetica,sans-serif;
+    text-align: center;
+    padding: 0 6px 0 5px;
+}
 
 /* footer 组件 */
 #footer {height: 72px;line-height: 72px;background: white;border-top: 1px solid #e6e6e6;margin-top: 30px}
@@ -923,37 +945,3 @@ input[type="button"].btn-block {
     }
 }
 
-.guide{ display:none;position:fixed;bottom:-90px;width:100%;z-index:100;height:90px;background:rgba(47,42,30,0.8);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#cc2f2a1e',endColorstr='#cc2f2a1e');}
-.guide .guide_boby{width:960px; margin:0 auto; height:90px; position:relative }
-.guide .guide_boby p{display:block; padding-top:8px; margin:0; text-align:left; font-size:16px; font-weight:700; color:#fff; line-height:1.8;margin-left:164px; }
-.guide-share .guide_boby p{margin-left:220px;}
-.guide .guide_boby p strong{font-weight:bold;font-size:18px;color:#ffa62a;margin: 0 5px;}
-.guide .guide_boby p span {position: absolute;right:215px;top:10px; color:#fff;font-size:12px;font-weight:400}
-.guide .guide_boby p span a{color:#fff;font-size:14px;font-weight:bolder}
-.guide .guide_boby p span a:hover{text-decoration:underline}
-.guide .guide_boby p a:hover{text-decoration:none;}
-.guide .guide_add,.guide .other-login,.guide .guide_add .favorites,.guide .guide_add .weibo,.guide .guide_add .weibo a,.guide .guide_add a,.guide .del a,.guide .guide_boby p i{background-image:url(images/guide-img.png);_background-image:url(images/guide-img-png8.png);background-repeat:no-repeat;}
-.guide .guide_boby p i{display:block;position:absolute;width:36px;height:22px; background-position:-460px -70px;left:125px;top:20px;}
-.guide .guide_add,.guide .other-login,.guide .guide_add .favorites,.guide .guide_add .weibo,.guide .guide_add .weibo a,.guide .guide_add a{ height:38px; display:block;text-indent:-1000em;background-position:-1000px 0;}
-.guide .guide_add{ width:750px; padding-top:7px;float:left }
-.guide-share .guide_add{width:600px;}
-.guide .guide_add .favorites{float:right; width:123px;background-position:0 0;}
-.guide-share .guide_add .favorites{float:left;}
-.guide .guide_add .weibo{float:right;  width:385px;background-position:-133px 0; margin-right:10px;}
-.guide .guide_add .weibo a{ display:block; float:left; width:115px;text-indent:-1000em;background-position:-1000px 0;cursor:pointer;}
-.guide .del{ width:53px; height:53px; position:absolute ; right:0px; top:18px;z-index:999;}
-.guide .del a{ display:block; height:53px; background-position:0 -50px;text-indent:-1000em;}
-.guide .del a:hover{ display:block; height:53px; background-position:-54px -50px;}
-.guide .referer-login{width:162px;float:left;}
-.guide-guang .guide_add .referer-login{background-position:-182px -170px;}
-.guide-alipay .guide_add .referer-login{background-position:0px -124px;}
-.guide-taobao .guide_add .referer-login{background-position:-182px -124px;}
-.guide-qq .guide_add .referer-login{background-position:-363px -124px;}
-.guide-weibo .guide_add .referer-login{background-position:0px -170px;}
-.guide .other-login {float:left;width:396px;background-position:0px -234px;margin-left:34px;height:38px;_height:37px;display:inline}
-.guide .other-login li{width:120px;height:24px;float:left;margin-top:7px;margin-left:50px;display:inline}
-.guide .other-login li a{width:120px;height:24px;}
-.guide .other-login .shortcut-login-qq {background-position:0px -284px;}
-.guide .other-login .shortcut-login-weibo {background-position:-127px -284px;}
-.guide .other-login .shortcut-login-taobao {background-position:-254px -284px;}
-.guide .other-login .shortcut-login-alipay {background-position:-381px -284px;}
