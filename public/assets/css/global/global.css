@@ -290,7 +290,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     z-index: 4
 }
 
-.rightposition {
+.subbar-fixed {
     z-index: 6;
     position: fixed;
     top: 0;
@@ -354,6 +354,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     padding-left: 4px
 }
 .switch {
+
     height: 20px;
     width: 180px;
     float: right;
@@ -402,6 +403,35 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 
 .switch a.board:hover {
     background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -169px
+}
+.subSearch {
+    border: 1px solid rgb(204, 204, 204);
+    float: right;
+    width: 170px;
+    height: 24px;
+    padding-left: 13px;
+    zoom: 1;
+    margin:4px 10px 0 0;
+    display: none;
+    background: #FFF;
+    border-radius: 13px
+}
+
+.subSearch input {
+    float: left;
+    height: 24px;
+    width: 124px;
+    font-size: 12px;
+    line-height: 24px;
+    border: 0;
+    color: #556069
+}
+
+.subSearch a {
+    float: right;
+    width: 24px;
+    height: 28px;
+    background: url(images/icon_search.png) 0 2px no-repeat
 }
 
 /* footer 组件 */

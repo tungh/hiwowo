@@ -684,7 +684,7 @@ define(function(require, exports) {
 
         /* 返回顶部 */
         $("#returnTop").returnTop();
-
+         /* 用户喜欢操作 */
         $('.like-common .like').hover(function(){
             $(this).parent().children('.like-num').find('.J_scrollUp').animate({ top:"-24" }, 600)
         },function(){
@@ -697,8 +697,17 @@ define(function(require, exports) {
         },function(){
             $(this).closest(".like-state").find(".J_scrollUp").animate({top:'0'},600)
         })
-
-
+         /*subnav fixed 操作 */
+        $(window).scroll(function () {
+            var d = $(document).scrollTop();
+            if (d > 40) {
+                $("#J_subbar").addClass("subbar-fixed");
+                $("#J_subbar").find("#J_subSearch").show()
+            } else {
+                $("#J_subbar").removeClass("subbar-fixed");
+                $("#J_subbar").find("#J_subSearch").hide()
+            }
+        });
 
 
 
