@@ -22,14 +22,14 @@
 </head>
 <body id="J_Page">
 
-    <div  id="topbar" class="navbar navbar-fixed-top">
+    <div  id="topbar" class="navbar">
         <div class="container">
-            <a class="logo" href="/">百度音乐人</a>
+
             <nav class="nav">
-                <ul>
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/sites">小站</a></li>
-                    <li><a href="/store">小店</a></li>
+                <ul class="clearfix">
+                    <li ><a href="/" class="current">嗨喔喔</a></li>
+                    <li><a href="/sites">喔喔站</a></li>
+                    <li><a href="/store">喔喔店</a></li>
                     <li><a href="/forum">讨论吧</a></li>
                 </ul>
             </nav>
@@ -66,7 +66,24 @@
         </div>
     </div>
 
+    <div id="subbar" class="subbar">
+        <div class="container">
+            <ul>
+                <li class="esp"><a href="" title="订阅的专辑">我的订阅</a></li>
+                <li><a href="" title="猜你喜欢">猜你喜欢</a></li>
+                <li class="imgbg"><a href="" title="微信精选">微信精选</a></li>
+                <li><a href="" title="发现更多">发现更多</a></li>
+            </ul>
+            <div class="switch">
+                <a href="" class="clipboard" title="剪报专辑视图"></a>
+                <a href="" class="board" title="快速浏览" style=""></a>
+                <a href="javascript:void(0)" class="cliplist" title="剪报列表视图"></a>
+                <a href="javascript:void(0)" class="clipfloat" title="剪报卡片视图"
+                    style="background-color: rgb(0, 159, 221); background-position-y: -33px;"></a>
+            </div>
 
+        </div>
+    </div>
 
   <div id="content">
       @content

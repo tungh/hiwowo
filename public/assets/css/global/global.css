@@ -204,19 +204,27 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
  */
 .navbar-holder{position: relative; z-index: 3;}
 .navbar section{display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;}
-.navbar .nav{display: inline;display: inline;float: left;font-size: 14px;margin-left: 110px;}
 .navbar {background: #282828;}
-.navbar, .navbar a, .navbar a:active, .navbar a:hover {color: white;}
 .navbar .logo {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 156px;height: 40px;background: url("//mu4.bdstatic.com/static/i/eL38PCbx.png") no-repeat;overflow: hidden;float: left;text-indent: -999em;}
-.navbar .nav {height: 40px;line-height: 40px;position: relative;margin-left: 40px;font-weight: bold;}
+.navbar .nav {float:left;height: 40px;line-height: 40px;position: relative;margin-left: 10px;}
 .navbar .nav li {display: inline;float: left;}
-.navbar .nav a {display: inline;float: left;color: white;padding: 0 15px;}
-.navbar .nav a:visited {color: white;}
-.navbar .nav a:focus {color: white;}
-.navbar .nav a:hover {color: white;}
-.navbar .nav a:active {color: white;}
-.navbar .nav a:hover {background: #1c1c1c;text-decoration: none;}
-.navbar .nav a.active, .navbar .nav a.active:hover {background: #a32950;}
+.navbar .nav a {
+    padding: 0 15px;
+    float: left;
+    display: inline;
+    color: #999;
+    text-shadow: #2f353a 0 -1px 0;
+    font-size: 14px;
+}
+
+.navbar .nav a:hover {color: white;text-decoration:none}
+.navbar .nav .current {
+    height:40px;
+    text-shadow: none;
+    background: url(images/icon_triangle.png) no-repeat center bottom;
+    color: #fff;
+}
+
 .navbar .topSearch{display: inline;float: right;height: 40px;line-height: 40px}
 .navbar .topSearch .searchBox{float: right; width: 170px;height: 24px;padding-left: 13px;zoom: 1;margin: 8px 20px 0 0;display: inline;background: #FFF; -webkit-border-radius: 13px; -moz-border-radius: 13px;  -ms-border-radius: 13px;-o-border-radius: 13px;border-radius:13px; behavior: url(PIE.htc);}
 .navbar .topSearch .searchText{float: left; height: 24px;width: 124px;font-size: 12px;line-height: 24px;border: 0;color: #556069;}
@@ -269,6 +277,131 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     font-family: Arial,Helvetica,sans-serif;
     text-align: center;
     padding: 0 6px 0 5px;
+}
+
+/*sub bar*/
+.subbar {
+    height: 34px;
+    line-height: 34px;
+    background: #f5f5f5;
+    width: 100%;
+    border-bottom: #b4b4b4 solid 1px;
+    position: relative;
+    z-index: 4
+}
+
+.rightposition {
+    z-index: 6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    border-bottom: 0
+}
+
+.subbar .container {
+    color: #556069;
+    height: 35px;
+    position: relative
+}
+
+.subbar .container ul {
+    float: left;
+    height: 35px
+}
+
+.subbar .container a {
+    color: #333;
+    font-size: 12px;
+
+}
+
+.subbar .container li {
+    float: left;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    margin-right: 10px;
+    text-align: center
+}
+
+.subbar .container li.esp {
+    color: #333;
+    font-weight: bold;
+    height: 33px;
+    line-height: 35px
+}
+
+.subbar .container li.imgbg {
+    background: url(images/Newweichat.gif) right 4px no-repeat
+}
+
+.subbar .container li.esp a {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    width: 60px;
+    margin-top: 0;
+    height: 33px;
+    line-height: 33px;
+    border-bottom: #444 solid 2px
+}
+
+.subbar .container li a span {
+    font-size: 12px;
+    padding-left: 4px
+}
+.switch {
+    height: 20px;
+    width: 180px;
+    float: right;
+    position: relative
+}
+
+.switch a {
+    float: right;
+    margin-left: 10px;
+    display: inline;
+    width: 32px;
+    height: 34px
+}
+
+.switch a.clipfloat {
+    background: url(images/icon_view_switcher.png) no-repeat 0 0
+}
+
+.switch a.cliplist {
+    background: url(images/icon_view_switcher.png) no-repeat 0 -68px
+}
+
+.switch a.clipboard {
+    background: url(images/icon_view_switcher.png) no-repeat 0 -204px
+}
+
+.switch a.board {
+    background: url(images/icon_view_switcher.png) no-repeat 0 -135px
+}
+
+.switch a.esp {
+    background: url(images/icon_view_switcher.png) no-repeat 0 -190px
+}
+
+.switch a.clipfloat:hover {
+    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -33px
+}
+
+.switch a.cliplist:hover {
+    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -102px
+}
+
+.switch a.clipboard:hover {
+    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -238px
+}
+
+.switch a.board:hover {
+    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -169px
 }
 
 /* footer 组件 */
