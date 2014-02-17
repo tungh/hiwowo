@@ -1,0 +1,85 @@
+@(user:Option[models.user.User])
+@views.html.template(user)(css="/assets/css/template/site.css"){
+<div class="subbar">
+    <div class="container">
+        <ul>
+            <li class="sitePic">
+                <a><img src="/images/user/default.jpg" width="80" height="80"> </a>
+            </li>
+            <li class=' '><a href="" title="首页">那些事</a></li>
+            <li class=''><a href=""  title="猜你喜欢">图片</a></li>
+            <li class=''><a href="" title="微信精选">视频</a></li>
+        </ul>
+        <div class="notice">
+            <i></i>
+            <p class="ofh">hi 喔喔叫，亲，听到美丽的水声了吗</p>
+        </div>
+
+
+    </div>
+
+</div>
+        <div class="site-header">
+            <div class="container">
+            <div class="siteIntro">
+
+                <div class="sr_user">
+                    <ul>
+                        <li class="firtli" style="border-left:none"><a
+                                href="/ownboard/cd8f8585a1d646239c5158ad5d163d60.clip"><img
+                                src="http://eachcloudcn.blob.core.chinacloudapi.cn/userimg/cd8f8585a1d646239c5158ad5d163d60.png"></a><a
+                                href="/ownboard/cd8f8585a1d646239c5158ad5d163d60.clip">主编<u>成都壳子</u></a></li>
+                        <li class="fourli js_IsPrivate"><font>64</font>剪报</li>
+                        <li class="thirdli js_IsPrivate"><a href="/boardfollower/ee2bf9c1408c4a4394b316356de2be4f.clip"
+                                                            class="person"><font>2270</font>人订阅</a><a
+                                href="javascript:void(0);" class="js_follow" cf_cc="board_follow" style="">马上订阅</a><a
+                                href="javascript:void(0);" class="wgt2_careActive js_unfollow"
+                                style="display:none;">已订阅</a></li>
+                        <li class="secondli js_IsPrivate">
+                            <div class="cannum">
+                                <div class="num"><a
+                                        href="/boardeditor/ee2bf9c1408c4a4394b316356de2be4f.clip"><font>2</font>人参与</a>
+                                </div>
+                            </div>
+                            <div class="more"><a href="javascript:void(0)" class="js_canyubtn canyubtn"></a></div>
+                            <div class="more js_iscanyu" style=""><a href="javascript:void(0)" class="canyu js_replay"
+                                                                     style="">申请参与</a><a href="javascript:void(0)"
+                                                                                         class="canyu js_noreplay"
+                                                                                         style="display:none;background:#759e9d">核准中...</a><a
+                                    href="javascript:void(0)" class="canyu js_canyu" style="display:none">参与</a><a
+                                    href="javascript:void(0)" class="canyu js_uncanyu wgt2_careActive"
+                                    style="display:none;background:#787878">已经参与</a></div>
+                            <div class="more"></div>
+                        </li>
+                        <li class="sixli js_tuijian js_IsPrivate"><a href="javascript:void(0)">推荐</a></li>
+                        <li class="sixli  js_IsPrivate "><a href="javascript:void(0)" class="js_ContributeBtn">投稿给它</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="source">来自<a href="/16/findclip.clip">人文</a></div>
+
+            </div>
+            </div>
+        </div>
+<div class="container my">
+
+
+    <div class="row">
+        <div class="main">
+                main
+        </div>
+        <div class="side">
+            side
+        </div>
+
+    </div>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use(["hiwowo/user/userHome"]);
+</script>
+}

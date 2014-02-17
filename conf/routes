@@ -18,7 +18,14 @@ GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long,p:In
 GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
 POST   /forum/topic/save                       controllers.Forums.save
 
-
+#site
+GET  /site/$id<[0-9]+>                      controllers.Sites.site(id:Long)
+GET  /site/$id<[0-9]+>/blog                 controllers.Sites.blog(id:Long)
+GET  /site/$id<[0-9]+>/pic                  controllers.Sites.pic(id:Long)
+GET  /site/$id<[0-9]+>/video                  controllers.Sites.video(id:Long)
+GET  /blog/$id<[0-9]+>                         controllers.Sites.blogView(id:Long)
+GET  /pic/$id<[0-9]+>                         controllers.Sites.picView(id:Long)
+GET  /video/$id<[0-9]+>                         controllers.Sites.videoView(id:Long)
 
 
 
@@ -26,6 +33,11 @@ POST   /forum/topic/save                       controllers.Forums.save
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/love                     controllers.users.Users.love(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/discuss                   controllers.users.Users.discuss(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/record                   controllers.users.Users.record(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/site                   controllers.users.Users.site(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/blog                   controllers.users.Users.blog(id:Long,p:Int ?=1)
+
 
 # user 账号设定
 GET   /user/account/base           controllers.users.UsersAccount.base

@@ -1,4 +1,4 @@
-@(user:Option[models.user.User]=None,nav:String=" ",subNav:String =" ",title: String = " ",keywords:String = " ",description:String = "")(css:String)(content: Html)(js:Html)
+@(user:Option[models.user.User]=None,author:Option[models.user.User]=None,nav:String=" ",subNav:String =" ",title: String = " ",keywords:String = " ",description:String = "")(css:String)(content: Html)(js:Html)
 <!doctype html>
 <html>
 <head>
@@ -98,10 +98,10 @@
     case "my" => {  <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "myLove")) '><a href="" title="我的关注">我的关注</a></li>
-                <li class=' @("on".when(subNav == "mySite")) '><a href="" title="我的部落">我的部落</a></li>
-                <li class=' @("on".when(subNav == "myDiscuss")) '><a href="" title="我的评论">我的评注</a></li>
-                <li class=' @("on".when(subNav == "myRecord")) '><a href="" title="阅读历史">阅读历史</a></li>
+                <li class=' @("on".when(subNav == "my")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.love(user.get.id.get)}' title="我的关注">我的关注</a></li>
+                <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.site(user.get.id.get)}' title="我的部落">我的部落</a></li>
+                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.discuss(user.get.id.get)}' title="我的评论">我的评注</a></li>
+                <li class=' @("on".when(subNav == "record")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.record(user.get.id.get)}' title="阅读历史">阅读历史</a></li>
 
             </ul>
 
@@ -129,10 +129,10 @@
     case "userHome" => { <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "site")) '><a href="" title="首页">TA的部落</a></li>
-                <li class=' @("on".when(subNav == "blog")) '><a href=""  title="猜你喜欢">TA的那些事</a></li>
-                <li class=' @("on".when(subNav == "discuss")) '><a href="" title="微信精选">TA的评注</a></li>
-                <li class=' @("on".when(subNav == "trend")) '><a href="" title="发现更多">TA的动态</a></li>
+                <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.site(author.get.id.get)}' title="首页">TA的部落</a></li>
+                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.blog(author.get.id.get)}'  title="猜你喜欢">TA的那些事</a></li>
+                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.discuss(author.get.id.get)}' title="微信精选">TA的评注</a></li>
+                <li class=' @("on".when(subNav == "record")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.record(author.get.id.get)}' title="发现更多">TA的动态</a></li>
             </ul>
 
             <div class="subSearch" id="J_subSearch">
@@ -194,7 +194,7 @@
         photo = photo;
     }
     HIWOWO = {
-        userId:"@user.get.id",
+        userId:"@user.get.id.get",
         userPhoto:photo,
         nick:"@user.get.name",
         status:"@user.get.status",

@@ -1,0 +1,151 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-31  
+ * Time: 下午8:50
+ * 维护：zuosanshao@qq.com
+*/
+#content {
+    position: relative;
+    z-index: 3;
+}
+/*sub bar*/
+.subbar .container{
+    position: relative;
+}
+.subbar .container .sitePic {
+    position: relative;
+    float: left;
+    height: 80px;
+    width: 80px;
+    padding: 0;
+}
+.subbar .container .sitePic img{
+    position:absolute;
+    top:0;
+    left: 0;
+}
+.subbar .container li.siteName {
+    font-size: 18px;
+    color: #333;
+}
+.subbar .container .notice{
+    float: left;
+    margin-left: 30px;
+}
+.subbar .container .notice i{
+    float: left;
+    display: block;
+    width: 45px;
+    height:35px;
+    background: url(images/icon_notice.png) no-repeat 15px;
+}
+.subbar .container .notice p{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+.site-header{
+    margin-bottom: 20px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.siteIntro {
+    margin-left: 90px;
+    float: left;
+    position: relative;
+    height: 45px;
+    background: #fff;
+    overflow: hidden
+}
+
+.sr_user {
+    height: 25px;
+    line-height: 25px;
+    padding: 10px 20px
+}
+
+.sr_user li {
+    float: left;
+    list-style-type: none;
+    padding: 0;
+    margin: 0
+}
+
+.sr_user li.firtli {
+    height: 25px;
+    color: #556069;
+    min-width: 100px;
+    overflow: hidden
+}
+
+.sr_user li.firtli a {
+    color: #556069;
+    float: left;
+    padding-right: 10px
+}
+
+.sr_user li.firtli a u {
+    font-weight: bold;
+    padding-left: 5px;
+    font-family: "宋体"
+}
+
+.sr_user li.firtli img {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px
+}
+
+.sr_user li.secondli {
+    height: 25px;
+    text-align: center;
+    color: #556069
+}
+
+.sr_user li.secondli img {
+    float: left;
+    width: 33px;
+    width: 33px;
+    margin-right: 10px
+}
+
+
+
+.my .main .desc {
+    font-size: 12px;
+    height: 90px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #999;
+}
+.my .main .coll {display: inline;float: left;padding-top: 20px;padding-bottom:100px;border-right: 1px dotted #999;}
+.my .main .coll .tri {right: -10px;border-color: #fff #fff #fff #f4f4f4;border-width: 10px 0px 10px 10px;}
+.my .main .tri {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    margin-top: -10px;
+    border-style: solid;
+    font-size: 0;
+}
+.my .main .colr {display: inline;float: right;padding-top: 25px;}
+
+.my .main .colr .tri {left: -10px;border-color: #fff #f4f4f4 #fff #fff;border-width: 10px 10px 10px 0px;}
+.my .main .pic-panel {position: relative;width:100%;height: 180px;margin-bottom: 40px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-ms-border-radius: 5px;-o-border-radius: 5px;border-radius: 5px;-webkit-box-shadow: -2px 4px 6px -4px #999;-moz-box-shadow: -2px 4px 6px -4px #999;box-shadow: -2px 4px 6px -4px #999;background:#f4f4f4;}
+.my .main .pic-panel .face {position: relative;display: inline;float: left;width:320px;height: 160px;margin: 10px;overflow: hidden;}
+.my .main .pic-panel .face img {width:100%;height: 160px;}
+.my .main .pic-panel .pic-info {display: none; margin: 10px;}
+.my .main .pic-panel .title, .my .main .pic-panel .artist {display: block;float: left;/*width: 190px;*/overflow: hidden;}
+.my .main .pic-panel .title {font-size: 18px;color: #333;}
+.my .main .pic-panel .artist {line-height: 40px;}
+
+.my .main .coll .pic-panel .favor {right: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.my .main .colr .pic-panel .favor {left: 10px;width: 24px;height: 24px;position: absolute;bottom: 10px;}
+.my .main .pic-panel .favor i {display: block;display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");margin-top: 5px;}
+.my .main .pic-panel .favor.on i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 18px;height: 15px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/love.png",sizingMethod="crop");}
+
+

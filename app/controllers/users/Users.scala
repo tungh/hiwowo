@@ -38,7 +38,18 @@ object Users extends Controller {
     Ok(views.html.users.home(user) )
   }
 
+  /* 我的部落 */
+  def site(id:Long,p:Int) = UserAction{ user => implicit request =>
 
+    Ok("todo")
+
+  }
+  /* 我的那些事 */
+  def blog(id:Long,p:Int) = UserAction{ user => implicit request =>
+
+    Ok("todo")
+
+  }
   /* 我讨论的 */
   def discuss(id:Long,p:Int) = UserAction{ user => implicit request =>
 
@@ -57,6 +68,10 @@ object Users extends Controller {
     Ok("todo")
   }
 
+  /* 我的动态 */
+  def record(id:Long,p:Int)  = UserAction{ user => implicit request =>
+    Ok("todo")
+  }
 
 
 
