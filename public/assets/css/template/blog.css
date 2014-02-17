@@ -1,0 +1,446 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-31  
+ * Time: 下午8:50
+ * 维护：zuosanshao@qq.com
+*/
+#content {
+    position: relative;
+    z-index: 3;
+}
+.container .main{
+    float: left;
+    width: 680px;
+    background: #FFF;
+    border-right: #b4b4b4 solid 1px;
+    overflow: auto;
+}
+.container .side {
+    background: #FFF;
+    float: right;
+    width: 308px;
+    height: auto;
+}
+.main .sitebar {
+    height: 60px;
+    margin-bottom: 40px;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.main .sitebar li {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 15px;
+    color: #999
+}
+
+.main .sitebar li strong {
+    padding: 0 4px
+}
+
+.main .sitebar li.esp {
+    padding-left: 0
+}
+
+.main .sitebar li a {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333
+}
+
+.main .sitebar li.btn {
+    float: right;
+    margin-right: 30px
+}
+
+.main .sitebar li.btn a {
+    display: block;
+    background: #009bba;
+    height: 26px;
+    line-height: 26px;
+    width: 72px;
+    text-align: center;
+    margin-top: 16px;
+    color: #fff;
+    font-weight: normal
+}
+
+.main .sitebar li.btn a.js_follow {
+    background: #009bba
+}
+
+.main .sitebar li.btn a.js_unfollow {
+    background: #ccc
+}
+.main  h1{
+    color: #333;
+    font-size: 32px;
+    line-height: 48px;
+    padding: 0 50px 20px 50px;
+    font-weight: normal;
+    text-shadow: 0 0 3px rgba(0,0,0,0.4);
+    text-align: center;
+    max-height: 280px;
+    overflow: hidden;
+    font-family: "微软雅黑";
+}
+.main .info {
+    border-top: #dbdbd9 solid 1px;
+    border-bottom: #dbdbd9 solid 1px;
+    height: 50px;
+    line-height: 50px;
+    margin: 20px 50px
+}
+
+.main .info li {
+    float: left;
+    font-size: 12px;
+    color: #bbb;
+    font-family: "宋体";
+    height: 50px;
+    line-height: 50px
+}
+
+.main .info li a {
+    font-size: 12px;
+    color: #bbb;
+    font-family: "宋体"
+}
+
+.main .info li.infoleft {
+    width: 260px;
+    padding-right: 12px
+}
+
+.main .info li.infoleft a {
+    float: right;
+    padding: 0 3px;
+    max-width: 90px
+}
+
+.main .info li.inforight {
+    overflow: hidden;
+    width: 260px;
+    padding-left: 12px
+}
+
+.main .info li.inforight a {
+    padding: 0 4px;
+    max-width: 80px;
+    height: 50px;
+    overflow: hidden;
+    float: left;
+    display: block
+}
+
+.main .info li.userImg {
+    height: 36px;
+    width: 36px;
+    padding: 6px 0 0 0
+}
+
+.main .info li.userImg a {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    display: block;
+    border: #FFF solid 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4)
+}
+
+.main .info li.userImg a img {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px
+}
+
+.main .info li a span {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.main .desc {
+    padding: 15px 50px 80px 50px;
+    font-size: 16px;
+    color: #444;
+    line-height: 26px;
+    font-family: "微软雅黑"
+}
+
+.main .desc h2, .main .desc h1, .main .desc h3, .main .desc h4 {
+    color: #666;
+    padding: 0;
+    text-align: left;
+    text-shadow: none;
+    font-family: "微软雅黑"
+}
+
+.main .desc h1 {
+    font-size: 20px;
+    padding: 0
+}
+
+.main .desc h2 {
+    font-size: 18px
+}
+
+.main .desc u, .main .desc ol, .main .desc li, .main .desc article, .main .desc span, .main .desc font, .main .desc td {
+    font-size: 16px;
+    color: #66635e;
+    line-height: 26px;
+    font-family: "微软雅黑"
+}
+
+.main .desc iframe {
+    width: 600px;
+    height: 600px;
+    max-height: 1200px;
+    overflow: auto
+}
+
+.main .desc strong, .main .desc b {
+    font-size: 16px;
+    color: #66635e;
+    line-height: 26px;
+    font-family: "微软雅黑";
+    font-weight: bold
+}
+
+.main .desc table {
+    background: #eee;
+    border-top: #ccc solid 1px;
+    border-left: #ccc solid 1px
+}
+
+.main .desc table td {
+    padding-left: 4px;
+    line-height: 24px;
+    border-bottom: #ccc solid 1px;
+    border-right: #ccc solid 1px
+}
+
+.main .desc embed, .main .desc object {
+    width: 600px;
+    font-family: "微软雅黑"
+}
+
+.main .desc a {
+    color: #009bba;
+    font-family: "微软雅黑"
+}
+
+.main .desc a:hover {
+    text-decoration: underline;
+    font-family: "微软雅黑"
+}
+
+.main .desc p {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #444;
+    line-height: 26px;
+    text-align: left;
+    font-family: "微软雅黑"
+}
+
+.main .desc p span {
+    font-family: "微软雅黑"
+}
+
+.main .desc img {
+    max-width: 580px
+}
+
+/* side  */
+
+.side .UserApp {
+    padding: 10px;
+    overflow: auto
+}
+
+.side .UserApp li {
+    float: left
+}
+
+.side .UserApp li.espImg {
+    width: 100px
+}
+
+.side .UserApp li.espImg img {
+    height: 100px;
+    width: 100px;
+    border-radius: 0
+}
+
+.side .UserApp li.espTxt {
+    width: 180px;
+    padding-left: 8px
+}
+
+.side .UserApp li.espTxt img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 8px
+}
+
+.side .UserApp li.espTxt p {
+    line-height: 20px;
+    color: #999;
+    font-family: "宋体";
+    padding-top: 10px
+}
+
+.side .UserApp li.espTxt p.esp {
+    background: #fff;
+    border-radius: 2px;
+    height: 24px;
+    padding: 3px 6px;
+    line-height: 24px;
+    width: 150px;
+    margin-top: 9px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3)
+}
+
+.side .UserApp li.espTxt p.esp span {
+    padding-left: 17px;
+    font-family: "宋体"
+}
+
+.side .UserApp li.espTxt p a {
+    color: #666;
+    font-family: "宋体";
+    font-size: 12px
+}
+
+.side .UserApp li.espTxt a.appname {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "宋体";
+    height: 24px;
+    width: 147px;
+    overflow: hidden;
+    color: #666;
+    cursor: default
+}
+
+.side .UserApp li.espTxt p a.upload {
+    text-decoration: underline
+}
+
+.side .UserApp li.espTxt p span {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #009bba
+}
+
+.side .recommendRead {
+    overflow: auto;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.side .recommendRead h2 {
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    background: url(images/dash_line_1x3.png) repeat-x top
+}
+
+.side .recommendRead h2 span {
+    float: left;
+    color: #444;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "宋体";
+    padding-left: 8px
+}
+
+.side .recommendRead h2 a {
+    float: right;
+    font-family: "宋体";
+    color: #666;
+    font-size: 12px;
+    font-weight: normal;
+    font-size: 12px;
+    padding-right: 16px;
+    background: url(images/icon_refresh.png) no-repeat left;
+    padding-left: 20px
+}
+
+.side .rRead {
+    width: 298px
+}
+
+.side .rRead ul {
+    width: 280px;
+    margin: 0 auto
+}
+
+.side .rRead li {
+    line-height: 18px;
+    font-size: 12px;
+    font-family: "宋体";
+    color: #666;
+    overflow: hidden;
+    padding: 10px 8px;
+    height: 36px;
+    padding: 0 10px;
+    background: #fff;
+    margin-top: 10px
+}
+
+.side .rRead li:hover {
+    background: #eee
+}
+
+.side .rRead li a {
+    color: #888;
+    font-family: "宋体";
+    display: block;
+    height: 36px;
+    overflow: hidden;
+    background: url(images/dot_gray.png) no-repeat left 5px;
+    padding-left: 15px;
+    font-weight: bold
+}
+.side .ReadUser {
+    padding: 10px 10px 25px 10px;
+    overflow: auto;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.side .ReadUser h2 {
+    font-size: 14px;
+    font-weight: normal;
+    font-family: "宋体";
+    color: #444;
+    font-weight: bold;
+    padding-left: 8px
+}
+
+.side .ReadUserList li {
+    float: left;
+    height: 33px;
+    width: 33px;
+    padding: 5px 5px 0 7px;
+    margin-top: 10px
+}
+
+.side .ReadUserList li a {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    display: block;
+    border: #FFF solid 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4)
+}
+
+.side .ReadUserList li a img {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px
+}
+
