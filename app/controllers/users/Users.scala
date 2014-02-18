@@ -34,43 +34,49 @@ object Users extends Controller {
 
   /*user 首页*/
   def home(id:Long) =UserAction { user => implicit request =>
-
-    Ok(views.html.users.home(user) )
+   val author = UserDao.findById(id)
+    Ok(views.html.users.home(user,author) )
   }
 
   /* 我的部落 */
   def site(id:Long,p:Int) = UserAction{ user => implicit request =>
 
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.site(user,author) )
 
   }
   /* 我的那些事 */
   def blog(id:Long,p:Int) = UserAction{ user => implicit request =>
 
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.blog(user,author) )
 
   }
   /* 我讨论的 */
   def discuss(id:Long,p:Int) = UserAction{ user => implicit request =>
 
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.discuss(user,author) )
    
   }
 
   /* 我喜欢的 */
   def love(id:Long,p:Int) = UserAction{ user => implicit request =>
 
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.love(user,author) )
   }
 
   /* 我关注的 */
   def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.follow(user,author) )
   }
 
   /* 我的动态 */
   def record(id:Long,p:Int)  = UserAction{ user => implicit request =>
-    Ok("todo")
+    val author = UserDao.findById(id)
+    Ok(views.html.users.record(user,author) )
   }
 
 

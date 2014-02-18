@@ -28,7 +28,7 @@
                 <ul class="clearfix">
                     <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
                     <li><a href="/sites" class=' @("current".when(nav == "sites")) ' >部落</a></li>
-                    <li><a href="/my" class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
+                    <li><a href="@if(!user.isEmpty){@controllers.users.routes.Users.home(user.get.id.get)}" rel='@if(user.isEmpty){loginD}' class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
                     <li><a href="/forum" class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
                 </ul>
             </nav>
@@ -84,8 +84,8 @@
         <div class="container">
             <ul>
 
-                <li class=' @("e".when(subNav == "sites")) '><a href="" title="小站推荐">部落推荐</a></li>
-                <li class=' @("e".when(subNav == "pet")) '><a href="" title="宠物广场">宠物乐园</a></li>
+                <li class=' @("on".when(subNav == "sites")) '><a href="" title="小站推荐">部落推荐</a></li>
+                <li class=' @("on".when(subNav == "pet")) '><a href="" title="宠物广场">宠物乐园</a></li>
 
             </ul>
 
@@ -98,10 +98,11 @@
     case "my" => {  <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "my")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.love(user.get.id.get)}' title="我的关注">我的关注</a></li>
+                <li class=' @("on".when(subNav == "love")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.love(user.get.id.get)}' title="我的关注">我的关注</a></li>
                 <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.site(user.get.id.get)}' title="我的部落">我的部落</a></li>
+                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.blog(user.get.id.get)}' title="我的那些事">我的那些事</a></li>
                 <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.discuss(user.get.id.get)}' title="我的评论">我的评注</a></li>
-                <li class=' @("on".when(subNav == "record")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.record(user.get.id.get)}' title="阅读历史">阅读历史</a></li>
+
 
             </ul>
 
@@ -111,6 +112,22 @@
             </div>
         </div>
     </div> }
+    case "userHome" => { <div id="J_subbar" class="subbar">
+        <div class="container">
+            <ul>
+                <li class=' @("on".when(subNav == "love")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.love(author.get.id.get)}' title="我的关注">我的关注</a></li>
+                <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.site(author.get.id.get)}' title="首页">TA的部落</a></li>
+                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.blog(author.get.id.get)}'  title="猜你喜欢">TA的那些事</a></li>
+                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.discuss(author.get.id.get)}' title="微信精选">TA的评注</a></li>
+
+            </ul>
+
+            <div class="subSearch" id="J_subSearch">
+                <input type="text" class="" placeholder="萌">
+                <a  href="javascript:void(0);"></a>
+            </div>
+        </div>
+    </div>}
     case "forum" => {<div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
@@ -126,21 +143,7 @@
             </div>
         </div>
     </div> }
-    case "userHome" => { <div id="J_subbar" class="subbar">
-        <div class="container">
-            <ul>
-                <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.site(author.get.id.get)}' title="首页">TA的部落</a></li>
-                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.blog(author.get.id.get)}'  title="猜你喜欢">TA的那些事</a></li>
-                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.discuss(author.get.id.get)}' title="微信精选">TA的评注</a></li>
-                <li class=' @("on".when(subNav == "record")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.record(author.get.id.get)}' title="发现更多">TA的动态</a></li>
-            </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌">
-                <a  href="javascript:void(0);"></a>
-            </div>
-        </div>
-    </div>}
     case   _ => { @********************* none *********************@ }
 
     }
