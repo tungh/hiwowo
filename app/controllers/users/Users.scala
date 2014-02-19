@@ -39,32 +39,32 @@ object Users extends Controller {
   }
 
   /* 我的部落 */
-  def site(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def sites(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.site(user,author) )
+    Ok(views.html.users.sites(user,author) )
 
   }
   /* 我的那些事 */
-  def blog(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def blogs(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.blog(user,author) )
+    Ok(views.html.users.blogs(user,author) )
 
   }
   /* 我讨论的 */
-  def discuss(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def discusses(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.discuss(user,author) )
+    Ok(views.html.users.discusses(user,author) )
    
   }
 
   /* 我喜欢的 */
-  def love(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def loves(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.love(user,author) )
+    Ok(views.html.users.loves(user,author) )
   }
 
   /* 我关注的 */
@@ -74,9 +74,9 @@ object Users extends Controller {
   }
 
   /* 我的动态 */
-  def record(id:Long,p:Int)  = UserAction{ user => implicit request =>
+  def records(id:Long,p:Int)  = UserAction{ user => implicit request =>
     val author = UserDao.findById(id)
-    Ok(views.html.users.record(user,author) )
+    Ok(views.html.users.records(user,author) )
   }
 
 

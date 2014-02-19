@@ -12,12 +12,29 @@ import models.forum.dao.TopicDao
  */
 object Pages extends Controller {
 
+  /* 首页 */
   def index = Users.UserAction{ user => implicit request =>
     Ok(views.html.pages.index(user))
   }
-
+   /* 猜你喜欢 */
+   def guess = Users.UserAction{ user => implicit request =>
+     Ok(views.html.pages.guess(user))
+   }
+   /* 微信精选 */
+   def weixin = Users.UserAction{ user => implicit request =>
+     Ok(views.html.pages.weixin(user))
+   }
+  /* 发现更多 */
+  def find = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pages.find(user))
+  }
+  /* 部落*/
   def sites = Users.UserAction{ user => implicit request =>
     Ok(views.html.pages.sites(user))
+  }
+  /* 宠物乐园 */
+  def pets = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pages.pets(user))
   }
 
 

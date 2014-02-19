@@ -1,96 +1,30 @@
-/*
- * 样式文件
- * User: Administrator
- * Date: 12-7-31
- * Time: 下午8:50
- * 维护：zuosanshao@qq.com
-   部落 站点
-*/
-#content {
-    position: relative;
-    z-index: 3;
-}
-/*sub bar*/
-.subbar .container{
-    position: relative;
-}
-.subbar .container .sitePic {
-    position: relative;
-    float: left;
-    height: 80px;
-    width: 80px;
-    padding: 0;
-}
-.subbar .container .sitePic img{
-    position:absolute;
-    top:0;
-    left: 0;
-}
-.subbar .container li.siteName {
-    font-size: 18px;
-    color: #333;
-}
-
-.site-header{
+.mod-header{
     margin-bottom: 20px;
     background-color: #fff;
+    height: 60px;
     overflow: hidden;
+    border-bottom: #ccc solid 2px;
 }
-
-.site-header .siteIntro {
-    margin-left: 90px;
+.mod-header ul {
+    margin: 0 auto;
+    width: 400px;
+    height: 58px;
+}
+.mod-header li {
+    width: 100px;
+    text-align: center;
     float: left;
-    position: relative;
-    height: 45px;
-    background: #fff;
-    overflow: hidden
+    line-height: 58px;
 }
-
-.site-header .sr_user {
-    height: 25px;
-    line-height: 25px;
-    padding: 10px 20px
-}
-
-.site-header .sr_user li {
-    float: left;
-    list-style-type: none;
-    padding-left: 10px;
-    margin: 0
-}
-
-.site-header .sr_user .user_pic img{
-    width: 25px;
-    height: 25px;
-    -webkit-border-radius:25px;
-    -moz-border-radius: 25px;
-    -ms-border-radius: 25px;
-    -o-border-radius: 25px;
-    border-radius: 25px;
-    behavior: url(PIE.htc);
-}
-.site-header .sr_user li font {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    padding-right: 4px
-}
-.site-header .notice{
-    float: left;
-    margin-left: 30px;
-}
-.site-header .notice i{
-    float: left;
+.mod-header li a {
+    color: #666;
+    font-family: "宋体";
+    font-size: 14px;
     display: block;
-    width: 45px;
-    height:35px;
-    background: url(images/icon_notice.png) no-repeat 15px;
 }
-.site-header .notice p{
-    float: left;
-    height: 35px;
-    line-height: 35px;
+.mod-header li.on a {
+    color: #009bab
 }
-
 .site-list .box{
     width: 720px;
     border-bottom: #f0f0f0 solid 8px;

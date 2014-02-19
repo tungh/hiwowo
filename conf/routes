@@ -8,7 +8,11 @@ GET   /test                                controllers.Test.index
 # Home page
 
 GET       /                                    controllers.Pages.index
+GET       /guess                               controllers.Pages.guess
+GET       /weixin                              controllers.Pages.weixin
+GET       /find                                controllers.Pages.find
 GET       /sites                               controllers.Pages.sites
+GET       /pets                               controllers.Pages.pets
 GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
 
 #forum
@@ -30,12 +34,12 @@ GET  /video/$id<[0-9]+>                         controllers.Sites.videoView(id:L
 
 # user
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
-GET    /user/$id<[0-9]+>/love                     controllers.users.Users.love(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/loves                     controllers.users.Users.loves(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/discuss                   controllers.users.Users.discuss(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/record                   controllers.users.Users.record(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/site                   controllers.users.Users.site(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/blog                   controllers.users.Users.blog(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/discusses                   controllers.users.Users.discusses(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/records                   controllers.users.Users.records(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/sites                   controllers.users.Users.sites(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/blogs                   controllers.users.Users.blogs(id:Long,p:Int ?=1)
 
 
 # user 账号设定
