@@ -18,7 +18,7 @@ object Pages extends Controller {
   }
    /* 图说 */
    def diagrams = Users.UserAction{ user => implicit request =>
-     Ok(views.html.pages.guess(user))
+     Ok(views.html.pages.diagrams(user))
    }
    /* 微信精选 */
    def weixin = Users.UserAction{ user => implicit request =>

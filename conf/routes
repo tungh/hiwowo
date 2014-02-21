@@ -19,14 +19,7 @@ GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long,p:In
 GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
 POST   /forum/topic/save                       controllers.Forums.save
 
-#site
-GET  /site/$id<[0-9]+>                      controllers.Sites.site(id:Long)
-GET  /site/$id<[0-9]+>/blog                 controllers.Sites.blog(id:Long)
-GET  /site/$id<[0-9]+>/pic                  controllers.Sites.pic(id:Long)
-GET  /site/$id<[0-9]+>/video                  controllers.Sites.video(id:Long)
-GET  /blog/$id<[0-9]+>                         controllers.Sites.blogView(id:Long)
-GET  /pic/$id<[0-9]+>                         controllers.Sites.picView(id:Long)
-GET  /video/$id<[0-9]+>                         controllers.Sites.videoView(id:Long)
+
 
 
 
@@ -38,7 +31,7 @@ GET    /user/$id<[0-9]+>/discusses                   controllers.users.Users.dis
 GET    /user/$id<[0-9]+>/records                   controllers.users.Users.records(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/videos                   controllers.users.Users.videos(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/diagrams                   controllers.users.Users.diagrams(id:Long,p:Int ?=1)
-
+GET    /user/$id<[0-9]+>/collects                   controllers.users.Users.collects(id:Long,p:Int ?=1)
 
 # user 账号设定
 GET   /user/account/base           controllers.users.UsersAccount.base
@@ -111,34 +104,7 @@ POST /admin/forums/batchTopics       controllers.admin.Forums.batchTopics
 GET  /admin/forums/filterDiscusses       controllers.admin.Forums.filterDiscusses
 POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
 
-#管理后台  小站管理
-GET  /admin/sites/sites                controllers.admin.Sites.sites(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterSites          controllers.admin.Sites.filterSites
-POST /admin/sites/batchSites           controllers.admin.Sites.batchSites
-GET  /admin/sites/siteDiscusses                controllers.admin.Sites.siteDiscusses(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterSiteDiscusses          controllers.admin.Sites.filterSiteDiscusses
-POST /admin/sites/batchSiteDiscusses           controllers.admin.Sites.batchSiteDiscusses
 
-GET  /admin/sites/blogs                controllers.admin.Sites.blogs(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterBlogs          controllers.admin.Sites.filterBlogs
-POST /admin/sites/batchBlogs           controllers.admin.Sites.batchBlogs
-GET  /admin/sites/blogDiscusses                controllers.admin.Sites.blogDiscusses(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterBlogDiscusses          controllers.admin.Sites.filterBlogDiscusses
-POST /admin/sites/batchBlogDiscusses           controllers.admin.Sites.batchBlogDiscusses
-
-GET  /admin/sites/pics                controllers.admin.Sites.pics(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterPics          controllers.admin.Sites.filterPics
-POST /admin/sites/batchPics           controllers.admin.Sites.batchPics
-GET  /admin/sites/picDiscusses                controllers.admin.Sites.picDiscusses(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterPicDiscusses          controllers.admin.Sites.filterPicDiscusses
-POST /admin/sites/batchPicDiscusses           controllers.admin.Sites.batchPicDiscusses
-
-GET  /admin/sites/videos                controllers.admin.Sites.videos(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterVideos          controllers.admin.Sites.filterVideos
-POST /admin/sites/batchVideos           controllers.admin.Sites.batchVideos
-GET  /admin/sites/videoDiscusses                controllers.admin.Sites.videoDiscusses(p:Int ?=1,size:Int ?=20)
-GET  /admin/sites/filterVideoDiscusses          controllers.admin.Sites.filterVideoDiscusses
-POST /admin/sites/batchVideoDiscusses           controllers.admin.Sites.batchVideoDiscusses
 
 
 

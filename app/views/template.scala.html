@@ -68,9 +68,9 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "index")) '><a href="@controllers.routes.Pages.index" title="首页">首页</a></li>
-                <li class=' @("on".when(subNav == "guess")) '><a href="@controllers.routes.Pages.diagrams"  title="图说">图说</a></li>
+                <li class=' @("on".when(subNav == "diagrams")) '><a href="@controllers.routes.Pages.diagrams"  title="图说">图说</a></li>
                 <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin" title="微信精选">微信精选</a></li>
-                <li class=' @("on".when(subNav == "find")) '><a href="@controllers.routes.Pages.pets" title="宠物乐园">宠物乐园</a></li>
+                <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets" title="宠物乐园">宠物乐园</a></li>
             </ul>
 
             <div class="subSearch" id="J_subSearch">
@@ -84,9 +84,9 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "love")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.loves(user.get.id.get)}' title="我的关注">我的关注</a></li>
-                <li class=' @("on".when(subNav == "site")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的图说">我的图说</a></li>
-                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.videos(user.get.id.get)}' title="我的视频">我的视频</a></li>
-                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
+                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的图说">我的图说</a></li>
+                <li class=' @("on".when(subNav == "video")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.videos(user.get.id.get)}' title="我的视频">我的视频</a></li>
+                <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
 
 
             </ul>
@@ -101,9 +101,9 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "love")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.loves(author.get.id.get)}' title="TA的关注">TA的关注</a></li>
-                <li class=' @("on".when(subNav == "site")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.diagrams(author.get.id.get)}' title="TA的图说">TA的图说</a></li>
-                <li class=' @("on".when(subNav == "blog")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.videos(author.get.id.get)}'  title="TA的视频">TA的视频</a></li>
-                <li class=' @("on".when(subNav == "discuss")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.collects(author.get.id.get)}' title="我的收藏">TA的收藏</a></li>
+                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.diagrams(author.get.id.get)}' title="TA的图说">TA的图说</a></li>
+                <li class=' @("on".when(subNav == "video")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.videos(author.get.id.get)}'  title="TA的视频">TA的视频</a></li>
+                <li class=' @("on".when(subNav == "collect")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.collects(author.get.id.get)}' title="我的收藏">TA的收藏</a></li>
 
             </ul>
 
