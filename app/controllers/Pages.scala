@@ -24,6 +24,11 @@ object Pages extends Controller {
    def weixin = Users.UserAction{ user => implicit request =>
      Ok(views.html.pages.weixin(user))
    }
+  /* 发现更多 */
+  def find = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pages.find(user))
+  }
+
   /* 宠物乐园 */
   def pets = Users.UserAction{ user => implicit request =>
     Ok(views.html.pages.pets(user))

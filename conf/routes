@@ -11,6 +11,7 @@ GET       /                                    controllers.Pages.index
 GET       /diagrams                            controllers.Pages.diagrams
 GET       /weixin                              controllers.Pages.weixin
 GET       /pets                               controllers.Pages.pets
+GET       /find                               controllers.Pages.find
 GET       /forum                               controllers.Pages.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
 
 #forum
