@@ -38,18 +38,25 @@ object Users extends Controller {
     Ok(views.html.users.home(user,author) )
   }
 
-  /* 我的部落 */
-  def sites(id:Long,p:Int) = UserAction{ user => implicit request =>
+  /* 我的图说 */
+  def diagrams(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.sites(user,author) )
+    Ok(views.html.users.diagrams(user,author) )
 
   }
   /* 我的那些事 */
-  def blogs(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def videos(id:Long,p:Int) = UserAction{ user => implicit request =>
 
     val author = UserDao.findById(id)
-    Ok(views.html.users.blogs(user,author) )
+    Ok(views.html.users.videos(user,author) )
+
+  }
+  /* 我收藏的 */
+  def collects(id:Long,p:Int) = UserAction{ user => implicit request =>
+
+    val author = UserDao.findById(id)
+    Ok(views.html.users.collects(user,author) )
 
   }
   /* 我讨论的 */
