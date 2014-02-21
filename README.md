@@ -1,4 +1,4 @@
 hiwowo
 ======
 
-hiwowo.com
+hiwowo.com  funny diagram
