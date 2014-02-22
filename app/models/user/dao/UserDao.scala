@@ -143,8 +143,8 @@ object UserDao {
   /*保存基本信息*/
   def modifyBase(uid: Long, name: String, email: String, intro: String, gender: Int, birth: String, blog: String, qq: String, weixin: String) = database.withDynSession {
     Cache.remove("user_" + uid)
-    (for (c <- users if c.id === uid) yield (c.name, c.email, c.intro)).update((name, email, intro))
-    (for (c <- userProfiles if c.uid === uid) yield (c.birth, c.gender, c.blog, c.qq,c.weixin)).update((birth, gender, blog, qq,weixin))
+    (for (c <- users if c.id === uid) yield (c.name, c.email, c.intro,c.weixin)).update((name, email, intro, weixin))
+    (for (c <- userProfiles if c.uid === uid) yield (c.birth, c.gender, c.blog, c.qq)).update((birth, gender, blog,qq))
   }
 
   /* 修改用户状态 */
