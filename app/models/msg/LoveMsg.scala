@@ -5,7 +5,7 @@ import scala.slick.driver.MySQLDriver.simple._
  /*
  * favorType 0 baobei 1 theme 2 post
  * */
-case class FavorMsg(
+case class LoveMsg(
                      id: Option[Long],
                      loverId:Long,
                      loverName: String,
@@ -15,7 +15,7 @@ case class FavorMsg(
                       lovedId:Long,
                      addTime:Option[Timestamp]
                      )
-class FavorMsgs(tag:Tag) extends Table[FavorMsg](tag,"favor_msg") {
+class LoveMsgs(tag:Tag) extends Table[LoveMsg](tag,"love_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def loverId =column[Long]("lover_id")
   def loverName =column[String]("lover_name")
@@ -24,6 +24,6 @@ class FavorMsgs(tag:Tag) extends Table[FavorMsg](tag,"favor_msg") {
   def content = column[String]("content")
   def lovedId = column[Long]("loved_id")
   def addTime = column[Timestamp]("add_time")
-  def * = (id.?,loverId,loverName,favorType,thirdId,content,lovedId,addTime.?) <> (FavorMsg.tupled, FavorMsg.unapply)
+  def * = (id.?,loverId,loverName,favorType,thirdId,content,lovedId,addTime.?) <> (LoveMsg.tupled, LoveMsg.unapply)
 
 }

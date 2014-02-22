@@ -163,26 +163,6 @@ CREATE TABLE `user_record` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-/*
-* 用户签到表设计
-* check_in_days 连续签到时间
-* credits 获得的积分
-* check_in_month 201305
-* check_in_history day:state:credit  01:1:3,02:0:0,03:1:2 诸如此类
-*/
-
-
-DROP TABLE IF EXISTS `user_check_in`;
-CREATE TABLE `user_check_in` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
-  `credit`             smallint (10) ,
-  `days`      smallint (10) ,
-  `month`     int(10) unsigned ,
-  `history`   varchar(200),
-  `add_time`      timestamp,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -542,13 +522,13 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
 
 
 
-DROP TABLE IF EXISTS `favor_msg`;
-CREATE TABLE IF NOT EXISTS `favor_msg`(
+DROP TABLE IF EXISTS `love_msg`;
+CREATE TABLE IF NOT EXISTS `love_msg`(
   `id`                          int(10)          NOT NULL AUTO_INCREMENT,
   `lover_id`                    int(10) not null ,
   `lover_name`                varchar(32) not null ,
   `love_action`                varchar(32) not null ,
-  `favor_type`               tinyint not null default '0',
+  `love_type`               tinyint not null default '0',
   `third_id`               int(10) not null ,
   `content`                varchar(200) not null,
   `loved_id`               int(10) not null,
