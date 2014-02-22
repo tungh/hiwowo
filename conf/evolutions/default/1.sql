@@ -34,6 +34,8 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `open_id`               varchar(64),
+  `come_from`              tinyint    not null default '0',
   `name`                varchar(64) NOT NULL ,
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
@@ -42,11 +44,11 @@ CREATE TABLE `user` (
   `title`                varchar(64),
   `intro`                varchar(250),
   `status`                tinyint    not null default '0',
-  `come_from`              tinyint    not null default '0',
-  `open_id`               varchar(64),
   `province`            varchar(20),
+  `weixin`              varchar(20),
+  `qrcode`              varchar(20),
   `tags`                    varchar(250) ,
-  `modify_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -65,7 +67,6 @@ CREATE TABLE `user` (
      street       所在具体的街道
      post_code    邮编
      phone        联系手机
-     blog        个人博客、微博、qq空间
   */
 DROP TABLE IF EXISTS `user_profile`;
 CREATE TABLE IF NOT EXISTS `user_profile` (
@@ -75,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `gender`              tinyint(4) not null DEFAULT '2',
   `birth`                varchar(16) ,
   `qq`                varchar(64) ,
-  `weixin`                varchar(64) ,
   `receiver`            varchar(20) ,
   `province`            varchar(20),
   `city`               varchar(20) ,
@@ -109,11 +109,9 @@ CREATE TABLE `user_static` (
   `follow_num`                smallint(11) DEFAULT '0',
   `love_diagram_num`            smallint(11) DEFAULT '0',
   `love_pic_num`            smallint(11) DEFAULT '0',
-  `love_video_num`            smallint(11) DEFAULT '0',
   `love_topic_num`           smallint(11) DEFAULT '0',
   `own_diagram_num`            smallint(11) DEFAULT '0',
   `own_pic_num`            smallint(11) DEFAULT '0',
-  `own_video_num`            smallint(11) DEFAULT '0',
   `own_topic_num`           smallint(11) DEFAULT '0',
   `collect_diagram_num`            smallint(11) DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -206,6 +204,15 @@ CREATE TABLE `user_love` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `user_collect`;
+CREATE TABLE `user_collect` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL ,
+  `collect_id` int(20) NOT NULL ,
+  `type_id` tinyint NOT NULL ,
+  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* ***************************************************** */
 DROP TABLE IF EXISTS `album`;
@@ -231,7 +238,9 @@ CREATE TABLE `diagram` (
   `intro`             varchar(250) ,
   `tags`             varchar(250) ,
   `status`            tinyint  not null default  '0',
-  `pic_num`                 smallint(10) not null  DEFAULT '0',
+  `view_num`                 smallint(10) not null  DEFAULT '0',
+  `love_num`                 smallint(10) not null  DEFAULT '0',
+  `discuss_num`                 smallint(10) not null  DEFAULT '0',
   `modify_time`         timestamp default '2013-07-18 12:00:00',
   `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)
@@ -254,7 +263,8 @@ DROP TABLE IF EXISTS `diagram_discuss`;
 CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
-  `did`                    int(10) NOT NULL ,
+  `diagram_id`            int(10) NOT NULL ,
+  `discuss_id`            int(10) NOT NULL ,
   `type_id`            tinyint NOT NULL DEFAULT '0',
   `quote_content`             text,
   `content`                  text ,
@@ -279,7 +289,6 @@ CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   -- 表的结构 `topic 讨论话题`
      id 表的ID
      uid           用户的id
-     uname         用户的名称
      title         讨论的话题名称
      content       讨论的话题内容
      intro         简介
@@ -287,7 +296,6 @@ CREATE TABLE IF NOT EXISTS `diagram_discuss`(
      topic_type    话题的类型 0 普通 2、问答 3 知识 4、经验、5、文化故事
      is_best      是否精华
      is_top       是否置顶
-     hot_index     排序指数
      check_state   审核状态
      add_time     添加时间
 --
@@ -368,9 +376,6 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
      tags              标签组      2012.11.04 新增，用于简化处理shop_tag,
      love_num        喜欢的人
      pic               主题封面
-     seo_title       用户的名称
-     seo_keywords     seo 关键词
-     seo_desc          seo 描述
      modify_time      修改
      add_time  添加时间
 --
@@ -385,10 +390,6 @@ CREATE TABLE IF NOT EXISTS `shop`(
   `intro`                   varchar(255) ,
   `is_visible`              tinyint(1) not null default '0',
   `pic`                varchar(128) not null default '/images/shop/default.jpg',
-  `tags`                   varchar(128),
-  `love_num`              smallint(10) not null default '1' ,
-  `discuss_num`              smallint(10) not null default '0' ,
-  `goods_num`              smallint(10) not null default '0' ,
   `province`             varchar(20),
   `city`                 varchar(20) ,
   `town`                 varchar(20),
@@ -419,55 +420,6 @@ CREATE TABLE IF NOT EXISTS `shop_discuss`(
   `content`                     text,
   `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`                      timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `theme_style `
-    <style>
-body{
-	background-color:#F9F9EF;
-	 backgroup-image:url();
-	background-repeat:no-repeat;
-	background-position:center top;
-	background-attachment:fixed;
-}
-.banner {
-	height:70px;
-	background-color:#fafafa;
-	 background-image:url();
-	 	background-repeat:repeat;
-	background-position:center top;
-	max-height:600px;
-	min-heihgt:80px;
-	overflow:hidden;
-}
-.banner .banner-title .subtitle {
-	color : #666;
-}
-</style>
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `shop_style`;
-CREATE TABLE IF NOT EXISTS `shop_style`(
-  `id`                          int(10) NOT NULL AUTO_INCREMENT,
-  `shop_id`                      int(10) NOT NULL ,
-  `page_bg_color`                      varchar (16) NOT NULL default'#F9F9EF',
-  `page_bg_image`                      varchar (128) NOT NULL default '',
-  `page_bg_repeat`                      varchar (32) NOT NULL default 'no-repeat',
-  `page_bg_position`                      varchar (32) NOT NULL default 'center top',
-  `page_bg_attachment`                      varchar (16) NOT NULL  default 'scroll',
-  `banner_height`                      varchar (16) NOT NULL  default '70',
-  `banner_color`                      varchar (16) NOT NULL  default '#f666',
-  `banner_bg_color`                      varchar (16) NOT NULL default '#fafafa',
-  `banner_bg_image`                      varchar (128) NOT NULL  default '',
-  `banner_bg_repeat`                      varchar (32) NOT NULL default 'no-repeat',
-  `banner_bg_position`                      varchar (32) NOT NULL  default 'scroll',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -508,10 +460,9 @@ DROP TABLE IF EXISTS `hi-tag`;
 CREATE TABLE IF NOT EXISTS `hi-tag`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(32) not null ,
-   `add_num`                 smallint(10) not null default '1',
-  `is_top`                 tinyint(1) not null default '0',
+  `add_num`                 smallint(10) not null default '1',
+  `is_core`                 tinyint(1) not null default '0',
   `is_highlight`                 tinyint(1) not null default '0',
-  `sort_num`                 smallint(10) not null default '0',
   `check_state`                 tinyint(4) not null default '0',
   `seo_title`                  varchar(128)  ,
   `seo_keywords`               varchar(128)  ,
@@ -520,90 +471,6 @@ CREATE TABLE IF NOT EXISTS `hi-tag`(
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-
-
-
-   /************************************************************
- * 管理员
- * admin  表             管理员
- * admin_role            管理员角色
- **************************************************************/
-    /*
-  数据表：user  用户（使用的人）*/
-    DROP TABLE IF EXISTS `administrator`;
-    create table administrator(
-      `id`                 smallint (10) not null  auto_increment ,
-      `email`             varchar(64) not null,
-      `password`             varchar(64) not null,
-      `name`          varchar(32) not null default '',
-      `department`         varchar(16) not null default '',
-      `phone`              varchar(30) not null default '',
-      `login_time`         timestamp default '2012-5-12 14:18:00',
-      `login_num`           smallint(10) NOT NULL default '1',
-      `login_ip`            varchar(32) DEFAULT '0',
-      `last_login_time`         timestamp default '2012-5-12 14:18:00',
-      `add_time`            timestamp default '2012-5-12 14:18:00',
-      `role_id`        smallint  not null default '1',
-      `role_name`      varchar(32) not null default '',
-        PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    /*
-     * 数据表  userRole   用户角色
-    */
-    DROP TABLE IF EXISTS `administrator_role`;
-    create table administrator_role(
-      id             int  unsigned primary  key  auto_increment ,
-      name           varchar(32) not null,
-      note           varchar(128) not null default '',
-      modify_time     timestamp  ,
-      add_time       timestamp default '2012-5-12 14:18:00'
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-
-
-/*广告组*/
-DROP TABLE IF EXISTS `advert_position`;
-create table advert_position(
-  id              smallint (10) not null  auto_increment ,
-  position        varchar(16)   not null,
-  name            varchar (64)  not null,
-  code            varchar(32)   not null,
-  advert_type       tinyint default 0,
-  add_time          timestamp default '2012-5-12 14:18:00',
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*广告
-* name  位置名称
-* title 广告名称
-*/
-DROP TABLE IF EXISTS `advert`;
-create table advert(
-  id              smallint (10) not null  auto_increment ,
-  position_code   varchar(32)  not null,
-  third_id          int,
-  name            varchar (64)  not null,
-  title           varchar(128),
-  content         text ,
-  pic             varchar(128),
-  spic           varchar(128),
-  width           smallint(10) default '0',
-  height          smallint(10) default '0',
-  link            varchar(128),
-note              varchar(200) default 'note',
-click_num       smallint(10) default '1',
-add_time          timestamp default '2012-5-12 14:18:00',
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 
 
 
@@ -735,6 +602,77 @@ CREATE TABLE IF NOT EXISTS `cms`(
   `status`            tinyint NOT NULL DEFAULT '1',
   `add_time`               timestamp ,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*广告组*/
+DROP TABLE IF EXISTS `advert_position`;
+create table advert_position(
+  id              smallint (10) not null  auto_increment ,
+  position        varchar(16)   not null,
+  name            varchar (64)  not null,
+  code            varchar(32)   not null,
+  advert_type       tinyint default 0,
+  add_time          timestamp default '2012-5-12 14:18:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*广告
+* name  位置名称
+* title 广告名称
+*/
+DROP TABLE IF EXISTS `advert`;
+create table advert(
+  id              smallint (10) not null  auto_increment ,
+  position_code   varchar(32)  not null,
+  third_id          int,
+  name            varchar (64)  not null,
+  title           varchar(128),
+  content         text ,
+  pic             varchar(128),
+  spic           varchar(128),
+  width           smallint(10) default '0',
+  height          smallint(10) default '0',
+  link            varchar(128),
+  note              varchar(200) default 'note',
+  click_num       smallint(10) default '1',
+  add_time          timestamp default '2012-5-12 14:18:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/************************************************************
+* 管理员
+* admin  表             管理员
+* admin_role            管理员角色
+**************************************************************/
+/*
+数据表：user  用户（使用的人）*/
+DROP TABLE IF EXISTS `administrator`;
+create table administrator(
+  `id`                 smallint (10) not null  auto_increment ,
+  `email`             varchar(64) not null,
+  `password`             varchar(64) not null,
+  `name`          varchar(32) not null default '',
+  `department`         varchar(16) not null default '',
+  `phone`              varchar(30) not null default '',
+  `login_time`         timestamp default '2012-5-12 14:18:00',
+  `login_num`           smallint(10) NOT NULL default '1',
+  `login_ip`            varchar(32) DEFAULT '0',
+  `last_login_time`         timestamp default '2012-5-12 14:18:00',
+  `add_time`            timestamp default '2012-5-12 14:18:00',
+  `role_id`        smallint  not null default '1',
+  `role_name`      varchar(32) not null default '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*
+ * 数据表  userRole   用户角色
+*/
+DROP TABLE IF EXISTS `administrator_role`;
+create table administrator_role(
+  id             int  unsigned primary  key  auto_increment ,
+  name           varchar(32) not null,
+  note           varchar(128) not null default '',
+  modify_time     timestamp  ,
+  add_time       timestamp default '2012-5-12 14:18:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
