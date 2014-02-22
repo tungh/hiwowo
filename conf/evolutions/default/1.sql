@@ -1,4 +1,4 @@
-﻿# --- First database schema
+﻿﻿# --- First database schema
 # --- First database schema
 
 # --- !Ups
@@ -231,9 +231,11 @@ CREATE TABLE `diagram` (
 DROP TABLE IF EXISTS `diagram_pic`;
 CREATE TABLE `diagram_pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
   `diagram_id`                 int(10) ,
-  `intro`               varchar(200) ,
   `pic`               varchar(250) ,
+  `intro`               varchar(200) ,
+  `sort_num`              tinyint  not null default  '0',
   `is_top`            tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
@@ -522,13 +524,13 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
 
 
 
-DROP TABLE IF EXISTS `love_msg`;
-CREATE TABLE IF NOT EXISTS `love_msg`(
+DROP TABLE IF EXISTS `favor_msg`;
+CREATE TABLE IF NOT EXISTS `favor_msg`(
   `id`                          int(10)          NOT NULL AUTO_INCREMENT,
   `lover_id`                    int(10) not null ,
   `lover_name`                varchar(32) not null ,
   `love_action`                varchar(32) not null ,
-  `love_type`               tinyint not null default '0',
+  `favor_type`               tinyint not null default '0',
   `third_id`               int(10) not null ,
   `content`                varchar(200) not null,
   `loved_id`               int(10) not null,
