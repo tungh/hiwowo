@@ -26,7 +26,7 @@ class DiagramDiscusses(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discu
   def uid = column[Long]("uid")
   def diagramId = column[Long]("uid")
   def thirdId = column[Long]("third_id")
-  def typeId = column[Long]("type_id")
+  def typeId = column[Int]("type_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
   def checkState = column[Int]("check_state")
