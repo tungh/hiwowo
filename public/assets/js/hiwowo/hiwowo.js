@@ -620,7 +620,11 @@ define(function(require, exports) {
         $("#J_bottombar_user").dropDown({
             classNm: ".bottombar-dropdown"
         });
-
+        $(".feed").hover(function(){
+            $(this).find(".link-to-post-holder").show()
+        },function(){
+            $(this).find(".link-to-post-holder").hide()
+        })
         /* 用户登录弹出框 */
         if($("a[rel=loginD]")[0]){
             $("a[rel=loginD]").click(function(event){

@@ -22,10 +22,12 @@ define(function (require) {
         $("#J_diagram_sort").dropDown({
             classNm: ".diagram-dropdown"
         })
-        $(".feed").hover(function(){
-            $(this).find(".link-to-post-holder").show()
+
+        /* pets page */
+        $("#J_num").hover(function(){
+            $(this).hide()
         },function(){
-            $(this).find(".link-to-post-holder").hide()
+            $(this).show()
         })
 
     })
