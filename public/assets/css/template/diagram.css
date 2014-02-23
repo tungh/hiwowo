@@ -1,0 +1,446 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-31  
+ * Time: 下午8:50
+ * 维护：zuosanshao@qq.com
+*/
+#content {
+    position: relative;
+    z-index: 3;
+}
+.diagram .main{
+    float: left;
+    width: 680px;
+    background: #FFF;
+    border-right: #b4b4b4 solid 1px;
+    overflow: auto;
+}
+.diagram .side {
+    background: #FFF;
+    float: right;
+    width: 308px;
+    height: auto;
+}
+.main .sitebar {
+    height: 60px;
+    margin-bottom: 40px;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.diagram  .sitebar li {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 15px;
+    color: #999
+}
+
+.main .sitebar li strong {
+    padding: 0 4px
+}
+
+.main .sitebar li.esp {
+    padding-left: 0
+}
+
+.diagram .main .sitebar li a {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333
+}
+
+.diagram .main .sitebar li.btn {
+    float: right;
+    margin-right: 30px
+}
+
+.diagram .main .sitebar li.btn a {
+    display: block;
+    background: #009bba;
+    height: 26px;
+    line-height: 26px;
+    width: 72px;
+    text-align: center;
+    margin-top: 16px;
+    color: #fff;
+    font-weight: normal
+}
+
+.diagram .main .sitebar li.btn a.js_follow {
+    background: #009bba
+}
+
+.diagram .main .sitebar li.btn a.js_unfollow {
+    background: #ccc
+}
+.diagram .main  h1{
+    color: #333;
+    font-size: 32px;
+    line-height: 48px;
+    padding: 0 50px 20px 50px;
+    font-weight: normal;
+    text-shadow: 0 0 3px rgba(0,0,0,0.4);
+    text-align: center;
+    max-height: 280px;
+    overflow: hidden;
+   ;
+}
+.diagram .main .info {
+    border-top: #dbdbd9 solid 1px;
+    border-bottom: #dbdbd9 solid 1px;
+    height: 50px;
+    line-height: 50px;
+    margin: 20px 50px
+}
+
+.diagram .main .info li {
+    float: left;
+    font-size: 12px;
+    color: #bbb;
+    font-family: "宋体";
+    height: 50px;
+    line-height: 50px
+}
+
+.diagram .main .info li a {
+    font-size: 12px;
+    color: #bbb;
+    font-family: "宋体"
+}
+
+.diagram .main .info li.infoleft {
+    width: 260px;
+    padding-right: 12px
+}
+
+.diagram .main .info li.infoleft a {
+    float: right;
+    padding: 0 3px;
+    max-width: 90px
+}
+
+.diagram .main .info li.inforight {
+    overflow: hidden;
+    width: 260px;
+    padding-left: 12px
+}
+
+.diagram .main .info li.inforight a {
+    padding: 0 4px;
+    max-width: 80px;
+    height: 50px;
+    overflow: hidden;
+    float: left;
+    display: block
+}
+
+.diagram .main .info li.userImg {
+    height: 36px;
+    width: 36px;
+    padding: 6px 0 0 0
+}
+
+.diagram .main .info li.userImg a {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    display: block;
+    border: #FFF solid 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4)
+}
+
+.diagram .main .info li.userImg a img {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px
+}
+
+.diagram .main .info li a span {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.diagram .main .desc {
+    padding: 15px 50px 80px 50px;
+    font-size: 16px;
+    color: #444;
+    line-height: 26px;
+   
+}
+
+.diagram .main .desc h2, .diagram .main .desc h1, .diagram .main .desc h3, .diagram .main .desc h4 {
+    color: #666;
+    padding: 0;
+    text-align: left;
+    text-shadow: none;
+   
+}
+
+.diagram .main .desc h1 {
+    font-size: 20px;
+    padding: 0
+}
+
+.diagram .main .desc h2 {
+    font-size: 18px
+}
+
+.diagram .main .desc u, .diagram .main .desc ol, .diagram .main .desc li, .diagram .main .desc article, .diagram .main .desc span, .diagram .main .desc font, .diagram .main .desc td {
+    font-size: 16px;
+    color: #66635e;
+    line-height: 26px;
+   
+}
+
+.diagram .main .desc iframe {
+    width: 600px;
+    height: 600px;
+    max-height: 1200px;
+    overflow: auto
+}
+
+.diagram .main .desc strong, .diagram .main .desc b {
+    font-size: 16px;
+    color: #66635e;
+    line-height: 26px;
+   ;
+    font-weight: bold
+}
+
+.diagram .main .desc table {
+    background: #eee;
+    border-top: #ccc solid 1px;
+    border-left: #ccc solid 1px
+}
+
+.diagram .main .desc table td {
+    padding-left: 4px;
+    line-height: 24px;
+    border-bottom: #ccc solid 1px;
+    border-right: #ccc solid 1px
+}
+
+.diagram .main .desc embed, .diagram .main .desc object {
+    width: 600px;
+   
+}
+
+.diagram .main .desc a {
+    color: #009bba;
+   
+}
+
+.diagram .main .desc a:hover {
+    text-decoration: underline;
+   
+}
+
+.diagram .main .desc p {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #444;
+    line-height: 26px;
+    text-align: left;
+   
+}
+
+.diagram .main .desc p span {
+   
+}
+
+.diagram .main .desc img {
+    max-width: 580px
+}
+
+/* side  */
+
+.diagram .side .UserApp {
+    padding: 10px;
+    overflow: auto
+}
+
+.diagram .side .UserApp li {
+    float: left
+}
+
+.diagram .side .UserApp li.espImg {
+    width: 100px
+}
+
+.diagram .side .UserApp li.espImg img {
+    height: 100px;
+    width: 100px;
+    border-radius: 0
+}
+
+.diagram .side .UserApp li.espTxt {
+    width: 180px;
+    padding-left: 8px
+}
+
+.diagram .side .UserApp li.espTxt img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 8px
+}
+
+.diagram .side .UserApp li.espTxt p {
+    line-height: 20px;
+    color: #999;
+    font-family: "宋体";
+    padding-top: 10px
+}
+
+.diagram .side .UserApp li.espTxt p.esp {
+    background: #fff;
+    border-radius: 2px;
+    height: 24px;
+    padding: 3px 6px;
+    line-height: 24px;
+    width: 150px;
+    margin-top: 9px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3)
+}
+
+.diagram .side .UserApp li.espTxt p.esp span {
+    padding-left: 17px;
+    font-family: "宋体"
+}
+
+.diagram .side .UserApp li.espTxt p a {
+    color: #666;
+    font-family: "宋体";
+    font-size: 12px
+}
+
+.diagram .side .UserApp li.espTxt a.appname {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "宋体";
+    height: 24px;
+    width: 147px;
+    overflow: hidden;
+    color: #666;
+    cursor: default
+}
+
+.diagram .side .UserApp li.espTxt p a.upload {
+    text-decoration: underline
+}
+
+.diagram .side .UserApp li.espTxt p span {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #009bba
+}
+
+.diagram .side .recommendRead {
+    overflow: auto;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.diagram .side .recommendRead h2 {
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    background: url(images/dash_line_1x3.png) repeat-x top
+}
+
+.diagram .side .recommendRead h2 span {
+    float: left;
+    color: #444;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "宋体";
+    padding-left: 8px
+}
+
+.diagram .side .recommendRead h2 a {
+    float: right;
+    font-family: "宋体";
+    color: #666;
+    font-size: 12px;
+    font-weight: normal;
+    font-size: 12px;
+    padding-right: 16px;
+    background: url(images/icon_refresh.png) no-repeat left;
+    padding-left: 20px
+}
+
+.diagram .side .rRead {
+    width: 298px
+}
+
+.diagram .side .rRead ul {
+    width: 280px;
+    margin: 0 auto
+}
+
+.diagram .side .rRead li {
+    line-height: 18px;
+    font-size: 12px;
+    font-family: "宋体";
+    color: #666;
+    overflow: hidden;
+    padding: 10px 8px;
+    height: 36px;
+    padding: 0 10px;
+    background: #fff;
+    margin-top: 10px
+}
+
+.diagram .side .rRead li:hover {
+    background: #eee
+}
+
+.diagram .side .rRead li a {
+    color: #888;
+    font-family: "宋体";
+    display: block;
+    height: 36px;
+    overflow: hidden;
+    background: url(images/dot_gray.png) no-repeat left 5px;
+    padding-left: 15px;
+    font-weight: bold
+}
+.diagram .side .ReadUser {
+    padding: 10px 10px 25px 10px;
+    overflow: auto;
+    background: url(images/dash_line_1x3.png) repeat-x bottom
+}
+
+.diagram .side .ReadUser h2 {
+    font-size: 14px;
+    font-weight: normal;
+    font-family: "宋体";
+    color: #444;
+    font-weight: bold;
+    padding-left: 8px
+}
+
+.diagram .side .ReadUserList li {
+    float: left;
+    height: 33px;
+    width: 33px;
+    padding: 5px 5px 0 7px;
+    margin-top: 10px
+}
+
+.diagram .side .ReadUserList li a {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    display: block;
+    border: #FFF solid 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4)
+}
+
+.diagram .side .ReadUserList li a img {
+    height: 30px;
+    width: 30px;
+    border-radius: 30px
+}
+

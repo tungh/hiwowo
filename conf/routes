@@ -20,7 +20,8 @@ GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long,p:In
 GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
 POST   /forum/topic/save                       controllers.Forums.save
 
-
+#diagram
+GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
 
 
 
