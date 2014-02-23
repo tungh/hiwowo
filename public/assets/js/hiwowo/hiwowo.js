@@ -620,6 +620,7 @@ define(function(require, exports) {
         $("#J_bottombar_user").dropDown({
             classNm: ".bottombar-dropdown"
         });
+
         /* 用户登录弹出框 */
         if($("a[rel=loginD]")[0]){
             $("a[rel=loginD]").click(function(event){
