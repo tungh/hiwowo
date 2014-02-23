@@ -238,17 +238,7 @@
 
 .diagrams .mod-body {
     position: relative;
-    margin: 50px 0;
-}
-
-.diagrams .mod-body  .tri {
-    position: absolute;
-    top: 50%;
-    width: 0;
-    height: 0;
-    margin-top: -10px;
-    border-style: solid;
-    font-size: 0;
+    margin: 10px 0;
 }
 
 .diagrams .mod-body  .left-part {
@@ -258,324 +248,66 @@
     border-right: 1px dotted #999;
 }
 
-.diagrams .mod-body  .left-part .tri {
-    right: -10px;
-    border-color: #f4f4f4 #f4f4f4 #f4f4f4 white;
-    border-width: 10px 0px 10px 10px;
-}
-
 .diagrams .mod-body  .right-part {
     display: inline;
     float: right;
     padding: 20px 0 20px 40px;
 }
 
-.diagrams .mod-body  .right-part .tri {
-    left: -10px;
-    border-color: #f4f4f4 white #f4f4f4 #f4f4f4;
-    border-width: 10px 10px 10px 0px;
+
+
+/* weixin feed*/
+.weixin .mod-header {overflow: hidden;padding: 15px 180px}
+.weixin .mod-header h1 {font-size: 100px;color: #c33;display: inline;float: left;margin-bottom: 0;}
+.weixin .mod-header p {font-size: 60px;line-height: 53px;overflow: hidden;height: 128px;display: inline;float: left;}
+.weixin .mod-header em {font-size: 18px;font-weight: normal;color: white;background: black;margin-left: 7px;padding: 2px;}
+.weixin .mod-body {
+    position: relative;
+    margin: 10px 0;
 }
 
-/* diagrams feed*/
-.rich-content {
-    line-height: 20px;
-    color: #444;
-    font-size: 14px;
+.weixin .mod-body  .left-part {
+    display: inline;
+    float: left;
+    width: 495px;
 }
-.rich-content p {
-    margin: 0 0 0.5em;
-}
-.rich-content ol,
-.rich-content ul {
-    padding: 0 0 0 40px;
-    margin: 10px 0;
-    list-style: disc outside !important;
-}
-.rich-content ol {
-    list-style: decimal outside !important;
-}
-.rich-content blockquote {
-    border-left: 4px solid gainsboro;
-    margin: 10px 0 10px 10px;
-    padding-left: 15px;
-}
-.rich-content .text-img-holder {
-    display: block;
-}
-.rich-content pre {
-    white-space: normal;
-    margin: 0;
-    font-family: monospace;
-}
-.rich-content pre.feed-code-syntax-highlight {
-    font-size: 12px;
-    font-family: monospace;
-    white-space: pre;
-}
-.feed:after,
-.feed-hd:after,
-.feed-bd:after {
-    content: "\20";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-.feed,
-.feed-hd,
-.feed-bd {
-    zoom: 1;
-}
-.feed-list {
-    clear: both;
-}
-.feed {
-    margin: 10px 0;
-    color: #444;
-    padding: 5px 0;
-    position: relative;
-}
-.feed.first-feed {
-    margin-top: 0;
-    padding-top: 0;
-}
-.feed a,
-.feed a:visited,
-.feed a:link,
-.feed a:active {
-    color: #b4b4b4;
-}
-.feed a:hover {
-    color: #8f8f8f;
-}
-.feed-container-top {
-    height: 5px;
-    background: url('images/feed-bg-sprites.png') 0 0 no-repeat;
-    _background: url('images/feed-bg-sprites-ie.png') 0 0 no-repeat;
-}
-.feed-container-bottom {
-    height: 10px;
-    font-size: 0;
-    line-height: 0;
-    background: url('images/feed-bg-sprites.png') -600px bottom no-repeat;
-    _background: url('images/feed-bg-sprites-ie.png') -600px bottom no-repeat;
-}
-.feed-content-holder {
-    margin: -1px -2px -4px;
-    width:450px;
+
+.weixin .mod-body  .right-part {
+    display: inline;
     float: right;
-    position: relative;
-    zoom: 1;
+    width: 495px;
 }
-.feed .pop-triangle {
-    height: 20px;
-    width: 13px;
-    position: absolute;
-    right: -13px;
-    top: 35px;
-    background: url(images/feed-icons.png) no-repeat 0 -170px;
+.weixin .title{
+    height: 92px;
+    padding: 30px 0 15px 0;
+    text-align: center;
 }
-.feed .pop-content {
-    background: url('images/feed-bg-sprites.png') -1200px 0 repeat-y;
-    _background: url('images/feed-bg-sprites-ie.png') -1200px 0 repeat-y;
-}
-.feed .link-to-post-holder {
-    position: absolute;
-    right: -2px;
-    top: -3px;
-    z-index: 1;
-    background: url(images/htmlbg.png) repeat;
-    width: 25px;
-    height: 26px;
-}
-.feed .link-to-post-inner {
-    position: relative;
-    width: 25px;
-    height: 26px;
-    background: url(images/content-holder.png) repeat-x 0 -9999px;
-}
-.feed a.link-to-post {
-    display: block;
-    text-indent: -9999px;
-    outline: none;
-    background: url("images/feed-icons.png") no-repeat 0 -90px;
-    _background: url("images/feed-icons-ie.png") no-repeat 0 -90px;
-    width: 30px;
-    height: 35px;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.feed a.link-to-post:hover {
-    background-position: -160px -90px;
-    -webkit-animation: animLinkToPost 100ms step-start;
-    -moz-animation: animLinkToPost 100ms step-start;
-    -ms-animation: animLinkToPost 100ms step-start;
-}
-
-.feed .feed-hd {
-    padding: 15px 20px 0;
-    overflow: hidden;
-}
-.feed .feed-hd.no-content {
-    height: 0;
-}
-.feed .feed-bd {
-    padding: 0 20px 6px;
-    *padding-bottom: 0px;
-}
-.feed-hd .feed-basic {
-    float: left;
-    height: 16px;
-    line-height: 1;
-    width: 370px;
-    overflow: hidden;
-}
-.feed-hd .feed-basic .repost-from {
-    font-size: 12px;
-    font-weight: normal;
-    padding-left: 5px;
-    color: #B4B4B4;
-}
-.feed-hd .repost-from .repost-from-name {
-    padding-left: 5px;
-}
-.feed-hb .repost-from .repost-from-name:hover {
-    text-decoration: none;
-}
-.feed-bd.no-hd-content .feed-ct {
-    margin-top: 5px;
-}
-.feed-bd.no-hd-content .feed-title {
-    margin-top: 0;
-}
-.feed-bd .feed-title {
-    color: #444;
-    font-size: 22px;
-    font-weight: normal;
-    _font-weight: bold;
-    line-height: 1.3em;
-    margin: 10px 0 0;
-    word-wrap: break-word;
-    clear: both;
-    overflow: hidden;
-    _overflow: visiable;
-}
-.feed-bd .feed-ct {
-    clear: both;
-    clear: both;
-    word-wrap: break-word;
-    margin: 0 0 10px;
-    width: 500px;
-    overflow: hidden;
-}
-.feed-bd .feed-ct a {
-    color: #444;
-    text-decoration: underline;
-}
-.feed-bd .feed-img-thumb {
-    margin-top: 10px;
-}
-.feed-photo-layout-row {
-    margin-top: 10px;
-}
-.feed-photo-layout-row.first {
-    margin-top: 0;
-}
-.feed-photo-layout-cell {
-    float: left;
-    margin-left: 10px;
-    overflow: hidden;
-}
-.feed-photo-layout-cell.first {
-    margin-left: 0;
-}
-.feed-bd .photos-desc {
-    margin-top: 10px;
-}
-.feed-bd .feed-tag {
-    float: left;
-    color: #A8B1BA;
-    width: 200px;
-    height: 22px;
-    line-height: 14px;
-    overflow: hidden;
-    display: block;
-}
-.feed-bd .feed-tag a {
-    float: left;
-    margin-right: 6px;
-    height: 19px;
-    line-height: 19px;
+.weixin .title h1{
+    font-size: 32px;
+    height: 38px;
     margin-bottom: 10px;
 }
-.feed-bd .feed-tag a.last {
-    margin-right: 0;
+.weixin .title span{
+    display: block;
+    font-size: 14px;
+    color: #000;
+    font-family: Microsoft YaHei;
+    line-height: 24px;
 }
-.feed-bd .feed-act {
-    float: right;
-    height: 22px;
+.weixin .title span em{
+    color: #57c5c1;
+    padding: 0px 10px;
 }
-.feed-bd .feed-fav,
-.feed-bd .feed-rt,
-.feed-bd .feed-cmt,
-.feed-bd .feed-del,
-.feed-bd .feed-edit,
-.feed-bd .feed-nt,
-.feed-bd .feed-block,
-.feed-bd .feed-top,
-.feed-bd .feed-untop,
-.feed-bd .feed-report,
-.feed-bd .editor-promote-cancel,
-.feed-bd .editor-warning,
-.feed-bd .editor-black,
-.feed-bd .editor-black-top10,
-.feed-bd .editor-unblack-top10 {
-    margin-left: 10px;
-    float: right;
-    height: 16px;
-    line-height: 16px;
-    color: #B4B4B4;
-    cursor: pointer;
+.weixin .right-part .title{
+    height: 92px;
+    background: url(images/index-col-bg.png) 0 10px no-repeat;
 }
-.feed-bd .feed-fav:hover,
-.feed-bd .feed-rt:hover,
-.feed-bd .feed-cmt:hover,
-.feed-bd .feed-del:hover,
-.feed-bd .feed-edit:hover,
-.feed-bd .feed-nt:hover,
-.feed-bd .feed-block:hover,
-.feed-bd .feed-top:hover,
-.feed-bd .feed-untop:hover,
-.feed-bd .feed-report:hover,
-.feed-bd .editor-promote-cancel:hover,
-.feed-bd .editor-warning:hover,
-.feed-bd .editor-black:hover,
-.feed-bd .editor-black-top10:hover,
-.feed-bd .editor-unblack-top10:hover {
-    color: #8F8F8F;
+.weixin .left-part .feed-list {
+    min-height: 910px;
+    padding: 20px 40px 20px 0;
 }
-.feed-bd .feed-act a,
-.feed-contribute-preview-form {
-    margin-left: 10px;
-    float: right;
-    height: 18px;
-    line-height: 18px;
-}
-.feed-bd .feed-fav {
-    background: url("images/feed-icons.png") no-repeat scroll -59px -27px;
-    _background: url("images/feed-icons-ie.png") no-repeat scroll -59px -27px;
-    text-indent: -9999em;
-    width: 16px;
-    height: 16px;
-}
-.feed-bd a.feed-fav:hover {
-    background-position: -59px 2px;
-}
-.feed-bd a.feed-fav.faved {
-    background-position: -89px -58px;
-}
-.right-part .feed .pop-triangle {
-    background: url(images/feed-icons.png) no-repeat 0 -150px;
-    left:-11px;
+.weixin .right-part .feed-list{
+    min-height: 910px;
+    border-left: 1px #57c5c1 solid;
+    padding: 20px 0px 20px 40px;
 }
