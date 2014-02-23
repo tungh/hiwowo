@@ -45,13 +45,7 @@ object Users extends Controller {
     Ok(views.html.users.diagrams(user,author) )
 
   }
-  /* 我的那些事 */
-  def videos(id:Long,p:Int) = UserAction{ user => implicit request =>
 
-    val author = UserDao.findById(id)
-    Ok(views.html.users.videos(user,author) )
-
-  }
   /* 我收藏的 */
   def collects(id:Long,p:Int) = UserAction{ user => implicit request =>
 
@@ -78,6 +72,10 @@ object Users extends Controller {
   def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
     val author = UserDao.findById(id)
     Ok(views.html.users.follow(user,author) )
+  }
+  def fans(id:Long,p:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findById(id)
+    Ok(views.html.users.fans(user,author) )
   }
 
   /* 我的动态 */

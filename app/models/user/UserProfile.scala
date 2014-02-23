@@ -23,7 +23,6 @@ case class UserProfile (
                          gender: Int,
                          birth: Option[String],
                          qq: Option[String],
-                         weixin: Option[String],
                          receiver: Option[String],
                          province: Option[String],
                          city: Option[String],
@@ -44,7 +43,6 @@ class UserProfiles(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
   def gender = column[Int]("gender")
   def birth = column[String]("birth")
   def qq = column[String]("qq")
-  def weixin = column[String]("weixin")
   def receiver = column[String]("receiver")
   def province = column[String]("province")
   def city = column[String]("city")
@@ -58,7 +56,7 @@ class UserProfiles(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
   def loginIP = column[String]("login_ip")
   def registTime = column[Timestamp]("regist_time")
 
-  def * = (id.?, uid, inviteId.? , gender , birth.?, qq.?, weixin.? , receiver.?, province.?, city.?, town.?, street.?, postCode.?, phone.?, blog.?, loginTime.?, loginNum, loginIP.?, registTime.?) <>(UserProfile.tupled, UserProfile.unapply)
+  def * = (id.?, uid, inviteId.? , gender , birth.?, qq.?, receiver.?, province.?, city.?, town.?, street.?, postCode.?, phone.?, blog.?, loginTime.?, loginNum, loginIP.?, registTime.?) <>(UserProfile.tupled, UserProfile.unapply)
 
 }
 

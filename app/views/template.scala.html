@@ -46,7 +46,7 @@
                         <span class="triangle"></span>
                     </a>
                     <ul class="dropdown topbar-dropdown" style="width: 132px;">
-                        <li><a href="@controllers.users.routes.UsersAccount.base">个人中心</a></li>
+                        <li><a href="@controllers.users.routes.UsersAccount.base">账号设置</a></li>
                         <li><a href="#">发布图说</a></li>
                         <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
@@ -83,9 +83,9 @@
     case "my" => {  <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
+                <li class=' @("on".when(nav == "my")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.home(user.get.id.get)}' title="我的首页">我的首页</a></li>
                 <li class=' @("on".when(subNav == "love")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.loves(user.get.id.get)}' title="我的关注">我的关注</a></li>
                 <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的图说">我的图说</a></li>
-                <li class=' @("on".when(subNav == "video")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.videos(user.get.id.get)}' title="我的视频">我的视频</a></li>
                 <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
             </ul>
 
@@ -98,9 +98,9 @@
     case "userHome" => { <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
+                <li class=' @("on".when(nav == "userHome")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.home(author.get.id.get)}' title="TA的关注">TA的首页</a></li>
                 <li class=' @("on".when(subNav == "love")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.loves(author.get.id.get)}' title="TA的关注">TA的关注</a></li>
                 <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.diagrams(author.get.id.get)}' title="TA的图说">TA的图说</a></li>
-                <li class=' @("on".when(subNav == "video")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.videos(author.get.id.get)}'  title="TA的视频">TA的视频</a></li>
                 <li class=' @("on".when(subNav == "collect")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.collects(author.get.id.get)}' title="我的收藏">TA的收藏</a></li>
 
             </ul>

@@ -80,7 +80,7 @@ object UsersAccount  extends Controller {
     else {
 
    val profile =UserDao.findProfile(user.get.id.get)
-      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,profile.weixin,user.get.intro))))
+      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,user.get.weixin,user.get.intro))))
     }
 
   }

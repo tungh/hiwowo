@@ -28,9 +28,9 @@ POST   /forum/topic/save                       controllers.Forums.save
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/loves                     controllers.users.Users.loves(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/fans                   controllers.users.Users.fans(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/discusses                   controllers.users.Users.discusses(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/records                   controllers.users.Users.records(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/videos                   controllers.users.Users.videos(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/diagrams                   controllers.users.Users.diagrams(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/collects                   controllers.users.Users.collects(id:Long,p:Int ?=1)
 

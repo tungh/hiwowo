@@ -1,48 +1,68 @@
 @(form: Form[(String,String)])
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <title>嗨喔喔 管理后台</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/admin/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/admin/assets/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="/admin/assets/css/unicorn.login.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ehaier 魔方管理后台</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="/admin/assets/css/admin.css" rel="stylesheet">
+
 </head>
+
 <body>
-    <div id="logo">
-    <img src="/admin/assets/img/logo.png" alt="" />
-    </div>
-    <div id="loginbox">
-        <form id="loginform" class="form-vertical" method="post" action="@controllers.admin.routes.Administrators.emailLogin">
-            <p>Enter email and password to continue.</p>
-            @form.globalError.map { error =>
-                <div class="error-row" style="display:block">
-                    <p class="error"> @error.message</p>
-                </div>
-            }
-            <div class="control-group">
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-user"></i></span><input type="text" name="email" placeholder="email" />
-                    </div>
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-lock"></i></span><input type="password" name="password" placeholder="password" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <span class="pull-left"><a href="#" class="flip-link" id="to-recover">忘记密码?请联系管理员</a></span>
-                <span class="pull-right"><input type="submit" class="btn btn-inverse" value="Login" /></span>
-            </div>
-        </form>
 
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">hiwowo.com登陆</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="post" action="@controllers.admin.routes.Administrators.emailLogin">
+                        <p>Enter email and password to continue.</p>
+                        @form.globalError.map { error =>
+                        <div class="error-row" style="display:block">
+                            <p class="error"> @error.message</p>
+                        </div>
+                        }
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                            </div>
 
+                            <!-- Change this to a button or input when using this as a form -->
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-inverse" value="Login" />
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Core Scripts - Include with every page -->
+<script src="/admin/assets/js/jquery-1.10.2.js"></script>
+<script src="/admin/assets/js/bootstrap.min.js"></script>
+<script src="/admin/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- SB Admin Scripts - Include with every page -->
+<script src="/admin/assets/js/admin.js"></script>
 
 </body>
+
 </html>

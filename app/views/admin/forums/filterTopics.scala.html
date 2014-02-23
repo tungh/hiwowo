@@ -1,17 +1,13 @@
 @(administrator:models.admin.Administrator,page:models.Page[models.forum.Topic],form: Form[controllers.admin.TopicFilterFormData])
 @import models.forum.TopicType
 @import models.CheckState
-@views.html.admin.template(administrator,"topic") {
+@views.html.admin.template(administrator,"forum") {
 
-    <div id="content-header">
-        <h1>广场管理</h1>
-
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">讨论吧 》话题</h1>
     </div>
-    <div id="breadcrumb">
-        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-        <a href="#" class="current">话题管理</a>
-
-    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row-fluid">
