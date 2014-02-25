@@ -340,11 +340,6 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
  * shop ，主要有
   * shop 表                    小店
  * shop_discuss 表            小店讨论
- * shop_style   表          小店样式
- * goods 表                   宝贝
- * goods_discuss 表           宝贝讨论
-
-
  -- --------------------------------------------------------
 /*
   -- 表的结构 `shop `
@@ -424,11 +419,7 @@ CREATE TABLE IF NOT EXISTS `shop_discuss`(
      add_num          添加次数  用户添加标签时，同样的标签记录一次
      is_top             是否置顶
      is_highlight        是否强调
-     sort_num            排序
      check_state         审核状态
-     seo_title          seo
-     seo_keywords       seo 关键词
-     seo_desc           seo 描述
      modify_time        修改
      add_time           添加时间
 
@@ -438,22 +429,26 @@ CREATE TABLE IF NOT EXISTS `shop_discuss`(
 -- ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `hi-tag`;
-CREATE TABLE IF NOT EXISTS `hi-tag`(
+DROP TABLE IF EXISTS `term`;
+CREATE TABLE IF NOT EXISTS `term`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
-  `name`                       varchar(32) not null ,
-  `add_num`                 smallint(10) not null default '1',
-  `is_core`                 tinyint(1) not null default '0',
-  `is_highlight`                 tinyint(1) not null default '0',
-  `check_state`                 tinyint(4) not null default '0',
-  `seo_title`                  varchar(128)  ,
-  `seo_keywords`               varchar(128)  ,
-  `seo_desc`                   varchar(255)  ,
-  `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `name`                       varchar(64) not null ,
+  `alias`                     varchar(32),
+  `status`                 tinyint not null default '0',
+  `count`                  int not null default '0',
+  `add_num`                int not null default '0',
+
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+DROP TABLE IF EXISTS `term_relation`;
+CREATE TABLE IF NOT EXISTS `term_relation`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `third_id`                   int(10) not null ,
+  `type_id`                     tinyint  not null default '0',
+  `sort_num`                int not null default '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /************************************************************

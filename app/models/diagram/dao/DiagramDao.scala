@@ -19,8 +19,8 @@ import models.diagram._
  */
 object DiagramDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
-  val diagrams = TableQuery[Diagrams]
   val albums = TableQuery[Albums]
+  val diagrams = TableQuery[Diagrams]
   val diagramDiscusses = TableQuery[DiagramDiscusses]
   val diagramPics = TableQuery[DiagramPics]
 
