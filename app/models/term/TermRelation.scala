@@ -10,16 +10,18 @@ import scala.slick.driver.MySQLDriver.simple._
  */
 case class TermRelation (
                 id: Option[Long],
+                termId: Long,
                 thirdId: Long,
                 typeId:Int,
                 sortNum:Int
                 )
 class TermRelations(tag:Tag) extends Table[TermRelation](tag,"term_relation") {
 def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
+def termId = column[Long]("term_id")
 def thirdId = column[Long]("third_id")
 def typeId = column[Int]("type_id")
 def sortNum = column[Int]("sort_num")
-def * =(id.?,thirdId,typeId,sortNum) <> (TermRelation.tupled, TermRelation.unapply)
+def * =(id.?,termId,thirdId,typeId,sortNum) <> (TermRelation.tupled, TermRelation.unapply)
 
 
 }

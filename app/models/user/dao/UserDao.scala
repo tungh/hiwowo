@@ -148,8 +148,7 @@ object UserDao {
   }
 
   /* 修改用户状态 */
-  def modifyStatus(uid: Long, status: Int) = database.withSession {
-    implicit session: Session =>
+  def modifyStatus(uid: Long, status: Int) = database.withDynSession {
       Cache.remove("user_" + uid)
       (for (u <- users if u.id === uid) yield u.status).update(status)
   }

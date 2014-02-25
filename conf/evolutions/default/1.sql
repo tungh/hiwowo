@@ -428,22 +428,22 @@ CREATE TABLE IF NOT EXISTS `shop_discuss`(
 */
 -- ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `hi-tag`;
 DROP TABLE IF EXISTS `term`;
 CREATE TABLE IF NOT EXISTS `term`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(64) not null ,
-  `alias`                     varchar(32),
+  `alias`                     varchar(32) default '',
+  `intro`                     varchar(200) default '',
   `status`                 tinyint not null default '0',
   `count`                  int not null default '0',
   `add_num`                int not null default '0',
-
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `term_relation`;
 CREATE TABLE IF NOT EXISTS `term_relation`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `term_id`                   int(10) not null ,
   `third_id`                   int(10) not null ,
   `type_id`                     tinyint  not null default '0',
   `sort_num`                int not null default '0',
