@@ -215,6 +215,7 @@ CREATE TABLE `diagram` (
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
   `intro`             varchar(250) ,
+  `content`             text ,
   `tags`             varchar(250) ,
   `status`            tinyint  not null default  '0',
   `view_num`                 smallint(10) not null  DEFAULT '0',
@@ -405,27 +406,11 @@ CREATE TABLE IF NOT EXISTS `shop_discuss`(
 
 
  /************************************************************
- * tag ，
- * tag  表                    标签
- * tag_group 表               标签组
+ * term ，
+ * term  表                    标签
+ * term_relation 表               标签 关系表组
  **************************************************************/
- -- --------------------------------------------------------
-/*
-  -- 表的结构 `hi tag `
-     id                 表的ID
-     name               标签名称
-     intro              简介
-     tag_group_id       标签组id
-     add_num          添加次数  用户添加标签时，同样的标签记录一次
-     is_top             是否置顶
-     is_highlight        是否强调
-     check_state         审核状态
-     modify_time        修改
-     add_time           添加时间
 
-
---
-*/
 -- ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `term`;

@@ -18,6 +18,8 @@ seajs.config({
         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
         'detector':'sea-modules/detector',
         'bootstrap':'flatui/bootstrap',
+        'umeditor':'umeditor/umeditor.min.js',
+        'umeditor-lang':'umeditor/lang/zh-cn/zh-cn.js',
          'hiwowo':'hiwowo/hiwowo'
     },
 

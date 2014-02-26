@@ -24,4 +24,18 @@ object DiagramDao {
   val diagramDiscusses = TableQuery[DiagramDiscusses]
   val diagramPics = TableQuery[DiagramPics]
 
+  /*  add album */
+  def addAlbum(uid:Long,title:String) = database.withDynSession{
+    val albumsAutoInc = albums.map( c =>(c.uid,c.title))  returning albums.map(_.id) into {
+      case (_, id) => id
+    }
+    albumsAutoInc.insert(uid,title)
+  }
+  def addAlbum( uid:Long,title: String, pic: String, intro:String,status:Int,diagramNum:Int) = database.withDynSession{
+    val albumsAutoInc = albums.map( c => (c.uid,c.title,c.pic,c.intro,c.status,c.diagramNum)) returning albums.map(_.id) into {
+      case (_, id) => id
+    }
+    albumsAutoInc.insert(uid,title,pic,intro,status,diagramNum)
+  }
+
 }

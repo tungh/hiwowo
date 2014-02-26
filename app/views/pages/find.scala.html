@@ -13,7 +13,7 @@
 
        <section class="mod-body">
 
-
+                  <div class="well" id="newsEditor"> </div>
        </section>
 
     </div>
@@ -21,8 +21,15 @@
 </div>
 
 }{
+<script type="text/javascript" src="/assets/js/umeditor/umeditor.config.js"></script>
+        <link rel="stylesheet" href="/assets/js/umeditor/themes/default/css/umeditor.min.css">
 <script type="text/javascript">
-    seajs.use("hiwowo/pages/index.js")
+    seajs.use(['umeditor','umeditor-lang'],function(umeditor){
+
+
+            var editor = UM.getEditor('newsEditor');
+
+    })
 </script>
 }
 
