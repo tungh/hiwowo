@@ -1,4 +1,7 @@
-(function () {
+define(function(require){
+    require("umeditor")
+    var $ =jQuery =  require("jquery")
+//(function () {
 
     var widgetName = 'map';
 
@@ -242,5 +245,6 @@
         }
     });
 
-})();
+//})();
+})
 

@@ -1,4 +1,7 @@
-(function(){
+define(function(require){
+    require("umeditor")
+    var $ =jQuery =  require("jquery")
+//(function(){
     var utils = UM.utils;
     function hrefStartWith(href, arr) {
         href = href.replace(/^\s+|\s+$/g, '');
@@ -68,5 +71,6 @@
         },
         width: 400
     })
-})();
+//})();
+})
 

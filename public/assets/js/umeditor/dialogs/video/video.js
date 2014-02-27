@@ -1,5 +1,7 @@
-
-(function(){
+define(function(require){
+    require("umeditor")
+    var $ =jQuery =  require("jquery")
+//(function(){
     var domUtils = UM.dom.domUtils;
     var widgetName = 'insertvideo';
 
@@ -271,4 +273,5 @@
         }
     });
 
-})();
+//})();
+})

@@ -4,8 +4,9 @@
  * build: Tue Sep 17 2013 15:57:57 GMT+0800 (CST)
  */
 
-(function(){
-
+//(function(){
+define(function(require, exports,module) {
+    var $ = jQuery = require("jquery");
 UMEDITOR_CONFIG = window.UMEDITOR_CONFIG || {};
 
 window.UM = {
@@ -9734,4 +9735,5 @@ UM.registerUI('forecolor backcolor', function( name ) {
 
 });
 
-})()
+//})()
+})

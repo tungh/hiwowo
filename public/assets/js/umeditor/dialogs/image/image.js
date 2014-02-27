@@ -1,4 +1,7 @@
-(function () {
+define(function(require){
+    require("umeditor")
+    var $ =jQuery =  require("jquery")
+//(function () {
 
     var utils = UM.utils,
         browser = UM.browser,
@@ -423,5 +426,6 @@
     }, function (editor, $w, url, state) {
         Base.callback(editor, $w, url, state)
     })
-})();
+//})();
+})
 

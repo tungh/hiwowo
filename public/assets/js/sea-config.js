@@ -18,8 +18,14 @@ seajs.config({
         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
         'detector':'sea-modules/detector',
         'bootstrap':'flatui/bootstrap',
-        'umeditor':'umeditor/umeditor.min.js',
+       'umeditor':'umeditor/umeditor.min.js',
+       // 'umeditor':'umeditor/umeditor.js',
         'umeditor-lang':'umeditor/lang/zh-cn/zh-cn.js',
+        'umeditor-emotion':'umeditor/dialogs/emotion/emotion.js',
+        'umeditor-image':'umeditor/dialogs/image/image.js',
+        'umeditor-link':'umeditor/dialogs/link/link.js',
+        'umeditor-map':'umeditor/dialogs/map/map.js',
+        'umeditor-video':'umeditor/dialogs/video/video.js',
          'hiwowo':'hiwowo/hiwowo'
     },
 
