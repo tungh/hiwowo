@@ -13,6 +13,7 @@
 
        <section class="mod-body">
 
+
                   <div class="well" id="newsEditor"> </div>
        </section>
 
@@ -20,11 +21,20 @@
 
 </div>
 
+
+<div class="container">
+    <input type="file" name="file_upload" id="file_upload" />
+    <ul id="filelist"></ul>
+    <br />
+
+
+</div>
+
 }{
 <script type="text/javascript" src="/assets/js/umeditor/umeditor.config.js"></script>
         <link rel="stylesheet" href="/assets/js/umeditor/themes/default/css/umeditor.min.css">
 <script type="text/javascript">
-    seajs.use(['umeditor','umeditor-lang','umeditor-emotion','umeditor-image','umeditor-link','umeditor-map','umeditor-video'],function(umeditor,emotion,image,link,map,video){
+    seajs.use(['umeditor','umeditor-lang','umeditor-emotion','umeditor-image','umeditor-link','umeditor-map','umeditor-video',"hiwowo/pages/page.js"],function(umeditor,emotion,image,link,map,video){
 
 
             var editor = UM.getEditor('newsEditor');

@@ -12,11 +12,12 @@ seajs.config({
         'json': 'sea-modules/json',
          'jquery': 'sea-modules/jquery',
         'cookie': 'sea-modules/cookie',
-        'upload': 'sea-modules/upload',
         'zeroclipboard': 'sea-modules/zeroclipboard',
         'easing':'sea-modules/jquery.easing',
         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
         'detector':'sea-modules/detector',
+        'swfobject':'sea-modules/swfobject',
+        'swfupload':'swfupload/swfupload',
         'bootstrap':'flatui/bootstrap',
        'umeditor':'umeditor/umeditor.min.js',
        // 'umeditor':'umeditor/umeditor.js',
@@ -26,6 +27,7 @@ seajs.config({
         'umeditor-link':'umeditor/dialogs/link/link.js',
         'umeditor-map':'umeditor/dialogs/map/map.js',
         'umeditor-video':'umeditor/dialogs/video/video.js',
+        'uploadify':'uploadify/jquery.uploadify.js',
          'hiwowo':'hiwowo/hiwowo'
     },
 

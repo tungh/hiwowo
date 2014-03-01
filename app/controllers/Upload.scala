@@ -22,6 +22,9 @@ import models.user.dao.UserDao
  */
 
 object Upload extends Controller {
+
+
+
   val picForm = Form(
     tuple(
       "thumb-path" -> nonEmptyText,
@@ -31,7 +34,24 @@ object Upload extends Controller {
       "area-y2" -> number
     )
   )
+  /* 通过 upload.js 上传的图片 */
+  def uploadImage=Action(parse.multipartFormData) { request =>
+    request.body.file("fileData").map { picture =>
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
+        val src ="/uploadImage/"+filename
+        println(src)
+        Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
+      }else{
+        Ok(Json.obj("code"->"104","message"->"fail"))
+      }
+
+    }.getOrElse {
+      Ok("File uploaded error")
+    }
+  }
 
   /*上传 用户头像图片  */
   def uploadImageSelectPic = Action(parse.multipartFormData) {
