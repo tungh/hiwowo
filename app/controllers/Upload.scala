@@ -52,6 +52,22 @@ object Upload extends Controller {
       Ok("File uploaded error")
     }
   }
+  def uploadUmeditorPic(editorid:String) =Action(parse.multipartFormData)  {   request =>
+    request.body.file("upfile").map { picture =>
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
+        val picSrc ="/uploadImage/temp/"+filename
+       // Ok(Json.obj("url"->picSrc,"state"->"SUCCESS","title"->"嗨喔喔"))
+         Ok(views.html.common.umeditorUploadPic(picSrc,"SUCCESS",editorid))
+      }else{
+        Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+      }
+
+    }.getOrElse {
+      Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+    }
+  }
 
   /*上传 用户头像图片  */
   def uploadImageSelectPic = Action(parse.multipartFormData) {

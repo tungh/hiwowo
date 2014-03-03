@@ -34,7 +34,7 @@ define(function (require) {
 
         $('#file_upload').uploadify({
             'fileObjName' : 'fileData',
-            'swf'      : '/assets/js/uploadify/uploadify.swf',
+            'swf'      : '/assets/js/sea-modules/uploadify.swf',
             'uploader' : '/uploadImage',
             'onUploadSuccess' : function(file, data, response) {
                 alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);

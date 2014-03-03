@@ -66,6 +66,7 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 
 #常用的upload
 POST    /uploadImage                      controllers.Upload.uploadImage
+POST    /umeditor/uploadPic               controllers.Upload.uploadUmeditorPic(editorid:String)
 POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST  /getVideo                           controllers.Upload.getVideo
