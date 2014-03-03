@@ -17,7 +17,8 @@ seajs.config({
         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
         'detector':'sea-modules/detector',
         'swfobject':'sea-modules/swfobject',
-        'swfupload':'swfupload/swfupload',
+        'swfupload':'sea-modules/swfupload',
+        'uploadify':'sea-modules/jquery.uploadify.js',
         'bootstrap':'flatui/bootstrap',
        'umeditor':'umeditor/umeditor.min.js',
        // 'umeditor':'umeditor/umeditor.js',
@@ -27,7 +28,6 @@ seajs.config({
         'umeditor-link':'umeditor/dialogs/link/link.js',
         'umeditor-map':'umeditor/dialogs/map/map.js',
         'umeditor-video':'umeditor/dialogs/video/video.js',
-        'uploadify':'uploadify/jquery.uploadify.js',
          'hiwowo':'hiwowo/hiwowo'
     },
 
