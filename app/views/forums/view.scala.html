@@ -1,5 +1,7 @@
 @(user:Option[models.user.User],topic:(models.forum.Topic,models.user.User),page:models.Page[(models.forum.TopicDiscuss,models.user.User)])
-@views.html.template()(css="/assets/css/template/forum.css"){
+@views.html.template(user,
+nav="forum",
+title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">
@@ -20,7 +22,7 @@
             <div class="f-con mt15">
                 <div class="f-con-main">
                     <div class="f-title clearfix">
-                        <h3 class="fl wbbw">标题</h3>
+                        <h3 class="fl">标题</h3>
                     </div>
                     <ul class="con-list" id="J_ForumPost">
                         <li class="first clearfix">
@@ -32,8 +34,8 @@
                                     <span class="fl"><a href="@controllers.users.routes.Users.home(topic._2.id.get)" target="_blank">@topic._2.name</a>/ @utils.Utils.timestampFormat(topic._1.addTime.get) </span>
                                     <span class="fr">楼主</span>
                                 </div>
-                                <div class="wbbw post clearfix" id="J_PostArtical" style="">
-                                    @topic._1.content
+                                <div class="post clearfix" id="J_PostArtical">
+                                    @Html(topic._1.content)
                                 </div>
                                 <div class="opt clearfix">
                                     <a class="follower-btn fl" id="J_FollowerBtn" data-num="0">鲜花&nbsp;<span></span></a>
@@ -52,8 +54,8 @@
                                     <span class="fl"><a class="J_UserNick" href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a>/ <em class="time">@utils.Utils.timestampFormat(cmt.addTime.get)</em></span>
 
                                 </div>
-                                <div class="wbbw post">
-                                    <p class="J_PostCon wbbw">@cmt.content</p>
+                                <div class="post">
+                                    <p class="J_PostCon">@Html(cmt.content)</p>
                                 </div>
                                 <div class="opt clearfix">
                                     <div class="fr">

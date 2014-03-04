@@ -1,3 +1,4 @@
+
 /*新版讨论吧*/
 .forum { margin: 20px auto; }
 .forum  .forum-no-data{text-align:center;line-height:100px;background-color:#fff;font-size:16px;font-weight:bold;}
@@ -138,12 +139,12 @@
     padding: 15px;
 }
 
-.forum-create ul, .forum-lover ul {
+.forum-create ul.form-group, .forum-lover ul.form-group {
     padding: 0 30px;
     overflow: hidden
 }
 
-.forum-create h3, .forum-lover h3 {
+.forum-create h3.forum-title, .forum-lover h3.forum-title {
     font-size: 14px;
     border-bottom: 1px dotted #ddd;
     line-height: 50px
@@ -153,47 +154,45 @@
     margin-right: 20px
 }
 
-.forum-create li {
+.forum-create li.input-box {
     /*  clear: both;*/
     margin-top: 15px
 }
 
-.forum-create li label {
+.forum-create li.input-box label {
     float: left;
     line-height: 32px;
     width: 78px;
     text-align: right
 }
 
-.forum-create li label.no-float {
+.forum-create li.input-box label.no-float {
     float: none;
     margin-right: 10px
 }
 
-.forum-create li label.no-float input {
+.forum-create li.input-box label.no-float input {
     margin-right: 4px
 }
 
-.forum-create li .b-input, .forum-create li .b-textarea {
+.forum-create li.input-box .b-input, .forum-create li .b-textarea {
     width: 580px
 }
 
-.forum-create li .b-textarea {
+.forum-create li.input-box .b-textarea {
     height: 295px;
     line-height: 23px
 }
 
 .forum-create li.oper {
+    padding-top: 30px;
     padding-left: 78px;
-    width: 616px
+    width:500px
 }
 
-.forum-create li .bbl-btn {
+.forum-create li.input-box .bbl-btn {
     width: 90px
 }
 
-.forum-create .guang-editor-wrap {
-    width: 616px;
-    float: left
-}
+
 
