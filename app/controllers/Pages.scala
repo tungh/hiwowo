@@ -37,10 +37,7 @@ object Pages extends Controller {
 
 
 
-  def forum(typeId:Int,sortBy:String,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
-      val page = TopicDao.filterTopics(typeId,sortBy,p,size)
-    Ok(views.html.pages.forum(user,typeId,sortBy,page))
-  }
+
 
 
 }

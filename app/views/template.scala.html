@@ -116,10 +116,10 @@
     case "forum" => {<div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "new")) '><a href="" title="普通">吐槽</a></li>
-                <li class=' @("on".when(subNav == "discuss")) '><a href=""  title="知识">知识</a></li>
-                <li class=' @("on".when(subNav == "love")) '><a href="" title="问答">问答</a></li>
-                <li class=' @("on".when(subNav == "love")) '><a href="" title="活动">活动</a></li>
+                <li class=' @("on".when(subNav == "0")) '><a href='@controllers.routes.Forums.forum(0,"new",1,10)' title="普通">吐槽</a></li>
+                <li class=' @("on".when(subNav == "1")) '><a href='@controllers.routes.Forums.forum(1,"new",1,10)'  title="知识">知识</a></li>
+                <li class=' @("on".when(subNav == "2")) '><a href='@controllers.routes.Forums.forum(2,"new",1,10)' title="问答">问答</a></li>
+                <li class=' @("on".when(subNav == "3")) '><a href='@controllers.routes.Forums.forum(3,"new",1,10)' title="活动">活动</a></li>
             </ul>
 
             <div class="subSearch" id="J_subSearch">

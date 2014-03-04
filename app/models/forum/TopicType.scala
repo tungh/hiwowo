@@ -10,7 +10,7 @@ package models.forum
  */
 
 object TopicType extends Enumeration{
-  val Normal = Value("普通")
+  val Shits = Value("吐槽")
   val Knowledge = Value("知识")
   val Ask  =  Value("问答")
   val Activity =Value("活动")

@@ -1,5 +1,10 @@
 @(user:Option[models.user.User],typeId:Int,sortBy:String,page:models.Page[(models.forum.Topic,models.user.User)])
-@views.html.template(user,nav="forum",subNav="new",title="讨论吧")(css="/assets/css/template/forum.css"){
+@views.html.template(
+user,
+nav="forum",
+subNav=typeId.toString,
+title="讨论吧"
+)(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">
@@ -12,20 +17,22 @@
                 </form>
                 <div class="clearfix mt10">
                     <div class="fl mt5">
-                        <a href='@controllers.routes.Pages.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
+                        <a href='@controllers.routes.Forums.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
                         <span class="sp">-</span>
-                        <a href='@controllers.routes.Pages.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
+                        <a href='@controllers.routes.Forums.forum(0,sortBy)' class='@("on".when(typeId == 0 ))'>吐槽</a>
                         <span class="sp">-</span>
-                        <a href='@controllers.routes.Pages.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
+                        <a href='@controllers.routes.Forums.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
                         <span class="sp">-</span>
-                        <a href='@controllers.routes.Pages.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
+                        <a href='@controllers.routes.Forums.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
+                        <span class="sp">-</span>
+                        <a href='@controllers.routes.Forums.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
                         <span class="sp">|</span>
                         <span class="ml5">排序：</span>
-                        <a href='@controllers.routes.Pages.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
+                        <a href='@controllers.routes.Forums.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
                         <span class="sp">-</span>
-                        <a href='@controllers.routes.Pages.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
+                        <a href='@controllers.routes.Forums.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
                         <span class="sp">-</span>
-                        <a href='@controllers.routes.Pages.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
+                        <a href='@controllers.routes.Forums.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
                     </div>
                     <div class="fr">
                         <a title="关闭搜索" href="@controllers.routes.Forums.search" class="forum-cbtn" id="J_CSearch">关闭搜索</a>
@@ -37,20 +44,20 @@
             <!-- filter -->
             <div class="forum-ltitle clearfix">
                 <div class="fl">
-                    <a href='@controllers.routes.Pages.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
+                    <a href='@controllers.routes.Forums.forum(-1,sortBy)' class='@("on".when(typeId == -1 ))'>全部</a>
                     <span class="sp">-</span>
-                    <a href='@controllers.routes.Pages.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
+                    <a href='@controllers.routes.Forums.forum(1,sortBy)' class='@("on".when(typeId == 1 ))'>知识</a>
                     <span class="sp">-</span>
-                    <a href='@controllers.routes.Pages.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
+                    <a href='@controllers.routes.Forums.forum(2,sortBy)' class='@("on".when(typeId == 2 ))'>问答</a>
                     <span class="sp">-</span>
-                    <a href='@controllers.routes.Pages.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
+                    <a href='@controllers.routes.Forums.forum(3,sortBy)' class='@("on".when(typeId == 3 ))'>活动</a>
                     <span class="sp">|</span>
                     <span class="ml5">排序：</span>
-                    <a href='@controllers.routes.Pages.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
+                    <a href='@controllers.routes.Forums.forum(typeId,"new")' class='@("on".when(sortBy == "new" ))'>最新发布</a>
                     <span class="sp">-</span>
-                    <a href='@controllers.routes.Pages.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
+                    <a href='@controllers.routes.Forums.forum(typeId,"discuss")' class='@("on".when(sortBy == "discuss" ))'>最多回复</a>
                     <span class="sp">-</span>
-                    <a href='@controllers.routes.Pages.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
+                    <a href='@controllers.routes.Forums.forum(typeId,"love")' class='@("on".when(sortBy == "love" ))'>最受欢迎</a>
                 </div>
                 <div class="fr">
                     <a title="搜索" class="search" id="J_SearchFBtn" href="javascript:;">
@@ -83,8 +90,18 @@
                                 <i class="i-daren">@u.title</i>
                             </a>&nbsp;&nbsp;发表于 @utils.Utils.timestampFormat(t.addTime.get) / @t.viewNum 个浏览
                         </div>
-                        <p class="des">@t.intro</p>
+                        <p class="des">@Html(t.intro)</p>
 
+                        <div class="topic-preview">
+                            <a class="pic-list clearfix gc" href="@controllers.routes.Forums.view(t.id.get)" target="_blank">
+                                @for(src <- t.pics.get.split(",")){
+                                @if(src.trim !=""){
+                                <div class="d-out"><img src="@src"></div>
+                                }
+                                }
+
+                            </a>
+                        </div>
                     </div>
                 </div>
                 }
@@ -93,17 +110,17 @@
             <div class="pagin inlineblock fr mt10" id="J_Pagination">
                 @if(page.nums.length>1){
                 @page.prev.map { page =>
-                <a class="prev" href="@controllers.routes.Pages.forum(page)">上一页</a>
+                <a class="prev" href="@controllers.routes.Forums.forum(page)">上一页</a>
                 }
                 @for(num <-page.nums){
                 @if(num==page.currentPage){
                 <span class="current" >@num</span>
                 }else {
-                <a href="@controllers.routes.Pages.forum(num)">@num</a>
+                <a href="@controllers.routes.Forums.forum(num)">@num</a>
                 }
                 }
                 @page.next.map { page =>
-                <a class="next" href="@controllers.routes.Pages.forum(page)">下一页</a>
+                <a class="next" href="@controllers.routes.Forums.forum(page)">下一页</a>
                 }
                 }
             </div>
@@ -137,7 +154,7 @@
 
 }{
 <script type="text/javascript">
-    seajs.use("hiwowo/pages/index.js")
+    seajs.use("hiwowo/forum/forum.js")
 </script>
 }
 

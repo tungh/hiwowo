@@ -60,16 +60,11 @@ object Forums extends Controller {
         var intro =Jsoup.clean(fields._4,Whitelist.none())
         if(intro.length()>100) intro =intro.substring(0,100)+"..."
         val  doc =Jsoup.parseBodyFragment(fields._4)
-        val goodsImages =doc.body().getElementsByClass("img-goods")
-        val uploadImages= doc.body().getElementsByClass("img-upload")
+        val uploadImages =doc.body().getElementsByTag("img")
         var pics =""
         val it=uploadImages.iterator()
         while(it.hasNext){
           pics +=it.next().attr("src")+","
-        }
-        val it2= goodsImages.iterator()
-        while(it2.hasNext){
-          pics +=it2.next().attr("src")+","
         }
         if (fields._1.isEmpty){
           val id= TopicDao.addTopic(user.get.id.get,fields._2,fields._4,intro,pics,fields._3,0)
@@ -93,6 +88,10 @@ object Forums extends Controller {
 
   }
 
+  def forum(typeId:Int,sortBy:String,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
+    val page = TopicDao.filterTopics(typeId,sortBy,p,size)
+    Ok(views.html.forums.forum(user,typeId,sortBy,page))
+  }
 
   def search = Users.UserAction{ user => implicit request =>
          Ok(" forum search ")
