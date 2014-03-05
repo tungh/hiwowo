@@ -19,6 +19,10 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 object TopicSQLDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
+  def updateViewNum(topicId:Long,num:Int)=database.withDynSession{
+    sqlu"update topic set view_num = view_num+$num where id =$topicId".first
+
+  }
 
   def updateDiscussNum(topicId:Long,num:Int)=database.withDynSession{
    sqlu"update topic set discuss_num =discuss_num+$num where id =$topicId".first

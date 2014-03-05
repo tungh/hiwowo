@@ -10,7 +10,7 @@ title = "发布话题_讨论吧"
           <div class="forum-main">
                  <div class="forum-create box-shadow">
                   <h3 class="forum-title">创建话题</h3>
-                  <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_ForumPostEditForm">
+                  <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_ForumTopicEditForm">
                       <input type="hidden" name="groupId" value="0">
                       <input type="hidden" name="id" value='@form("id").value' id="J_topicId">
                       @form.globalError.map { error =>
@@ -28,7 +28,7 @@ title = "发布话题_讨论吧"
                           </li>
                           <li class="input-box clearfix">
                               <label>话题内容：</label>
-                              <textarea id="J_postContent" name="content" class="b-textarea" placeholder="请输入话题内容">
+                              <textarea id="J_topicContent" name="content" class="b-textarea" placeholder="请输入话题内容">
                                   @form("content").value
                               </textarea>
                           </li>
@@ -66,7 +66,7 @@ title = "发布话题_讨论吧"
         if(HIWOWO.userId == ""){
             $.hiwowo.loginDialog.isLogin();
         }
-        var editor = UM.getEditor('J_postContent');
+        var editor = UM.getEditor('J_topicContent');
 
     })
 </script>

@@ -55,6 +55,13 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
 
                                 </div>
                                 <div class="post">
+                                    @if(cmt.quoteContent.isEmpty && cmt.quoteContent.get.trim()!=""){
+                                    <div class="post-reply">
+                                        <p class="post-quoteContent mt5">
+                                           @Html(cmt.quoteContent.getOrElse(""))
+                                        </p>
+                                    </div>
+                                    }
                                     <p class="J_PostCon">@Html(cmt.content)</p>
                                 </div>
                                 <div class="opt clearfix">
@@ -88,6 +95,26 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
                 }
                 }
             </div>
+            <div class="clearfix"></div>
+            <div class="post-box clearfix">
+                <form id="J_topicDiscussForm" method="post" action="@controllers.routes.Forums.addDiscuss">
+                    <input type="hidden" name="topicId" value="@topic._1.id.get" id="J_topicId">
+                    <div>左三少_1924，<span id="J_LoginerExperience"></span><a href="javascript:;"
+                                                                           class="J_UserAddExperience ml5"> 添加签名 </a>
+                    </div>
+                    <div id="J_discussQuote" class="post-reply"></div>
+
+
+                    <div class="clearfix">
+                        <textarea  id="J_discussContent" name="content" placeholder="说两句~~"></textarea>
+
+
+                    </div>
+                    <div class="clearfix mt20">
+                        <input type="button" class="bbl-btn pl30 pr30" id="J_discussPublishBtn" value="发表">
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="side">
             <div class="taolun-owner">
@@ -104,7 +131,7 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
             </div>
             <div class="ad mt15">
                 <a href="" target="_blank">
-                    <img src="http://s4.img.guang.com/site/2013/12/16/promotion_44_1_1782447316166.jpg" width="240" height="130" alt="逛画报" title="逛画报">
+                    <img src="/images/2.jpg" width="240" height="130" alt="逛画报" title="逛画报">
                 </a>
             </div>
 
@@ -118,8 +145,16 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
 </div>
 
 }{
+<script type="text/javascript" src="/assets/js/umeditor/discuss.umeditor.config.js"></script>
 <script type="text/javascript">
-    seajs.use("hiwowo/forum/forum.js")
+    seajs.use(['jquery','hiwowo/forum/forum'],function($,forum){
+
+        if(HIWOWO.userId == ""){
+            $.hiwowo.loginDialog.isLogin();
+        }
+
+
+    })
 </script>
 }
 

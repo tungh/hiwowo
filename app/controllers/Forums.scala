@@ -2,12 +2,17 @@ package controllers
 
 import play.api.mvc.{Action, Controller}
 import controllers.users.Users
-import models.forum.dao.TopicDao
+import models.forum.dao.{TopicSQLDao, TopicDao}
 import play.api.data.Form
 import play.api.data.Forms._
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import models.forum.Topic
+import play.api.cache.Cache
+import play.api.Play.current
+import models.user.User
+import models.user.dao.UserDao
+import play.api.libs.json.Json
 
 /**
  * Created with IntelliJ IDEA.
@@ -79,12 +84,37 @@ object Forums extends Controller {
     )
 
   }
-
+ /* topic view */
   def view(id: Long,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
+    /* 记录每个页面的点击次数，先放在cache里，当大于9时，记录到数据库中 */
+    val viewNum =  Cache.getOrElse[Int]("topic_"+id) { 1 }
+     Cache.set("topic_"+id,viewNum+1)
+  if(viewNum >9) {
+    TopicSQLDao.updateViewNum(id,viewNum)
+    Cache.remove("topic_"+id)
+  }
       val topic=TopicDao.findById(id)
      val pageDiscusses = TopicDao.findDiscusses(id,p,size)
 
       Ok(views.html.forums.view(user,topic,pageDiscusses))
+
+  }
+  /* add discuss */
+  def addDiscuss =Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+    else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
+    else {
+      val topicId = (request.body \ "topicId").asOpt[Long]
+      val  content =(request.body \ "content").asOpt[String]
+      val  quoteContent=(request.body \ "quoteContent").asOpt[String]
+      if(content.isEmpty || topicId.isEmpty ){
+        Ok(Json.obj("code" -> "101", "message" ->"亲，是不是没有输入内容？请重新提交试试"))
+      }else{
+        TopicDao.addDiscuss(user.get.id.get,topicId.get,quoteContent,content.get,1)
+        Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+      }
+    }
 
   }
 
