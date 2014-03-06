@@ -10,7 +10,7 @@ title = "发布话题_讨论吧"
           <div class="forum-main">
                  <div class="forum-create box-shadow">
                   <h3 class="forum-title">创建话题</h3>
-                  <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_ForumTopicEditForm">
+                  <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_forumTopicEditForm">
                       <input type="hidden" name="groupId" value="0">
                       <input type="hidden" name="id" value='@form("id").value' id="J_topicId">
                       @form.globalError.map { error =>
@@ -19,7 +19,7 @@ title = "发布话题_讨论吧"
                       </div>
                       }
                       <ul class="form-group">
-                          <li class="input-box"><label>话题标题：</label><input id="J_postTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
+                          <li class="input-box"><label>话题标题：</label><input id="J_topicTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
                           <li class="input-box"><label>话题类型：</label>
                               <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") =="0") {"checked"}) value="0"/>吐槽</label>
                               <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "1") {"checked"}) value="1"/>知识</label>
@@ -33,7 +33,7 @@ title = "发布话题_讨论吧"
                               </textarea>
                           </li>
                           <li class="oper clearfix">
-                              <input id="J_postEditBtn" type="submit" class="bbl-btn" value="发表"/>
+                              <input id="J_topicEditBtn" type="submit" class="bbl-btn" value="发表"/>
                               <input type="button" class="bgr-btn" onclick="window.history.back(-1)"  value="取消并返回" />
 
                           </li>

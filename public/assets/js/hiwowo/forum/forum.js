@@ -72,20 +72,21 @@ define(function(require, exports) {
                             if(data.code=="100"){
                                 $this.enableBtn("bbl-btn");
 
-                                var html ='<li>';
-                                html +='<a class="img" href="/user/'+SMEITER.userId+'" target="_blank"><img src="'+SMEITER.userPhoto+'" width="80" height="80"></a>';
-                                html +='<span class="info"><a class="J_UserNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick +'</a>/ <span class="time">刚刚</span> </span>';
-                                html +=' <div class="post">';
-                                if($.trim(comment.quoteContent)!=''){
-                                    html +='<div class="post-reply">'+comment.quoteContent+'</div>';
+                                var html ='<li class="clearfix">';
+                                html +='<a class="fl" href="/user/'+HIWOWO.userId+'" target="_blank"><img src="'+HIWOWO.userPhoto+'" width="50" height="50"></a>';
+                                html +='<div class="info fr"><span class="fl"><a class="J_UserNick" href="/user/'+HIWOWO.userId+'" target="_blank">'+HIWOWO.nick +'</a>/ <em class="time">刚刚</em> </span>';
+                                html +=' <div class="topic">';
+                                if($.trim(discuss.quoteContent)!=''){
+                                    html +='<div class="topic-reply">'+discuss.quoteContent+'</div>';
                                 }
 
-                                html +=' <div class="J_PostCon wordbreak">'+comment.content+'</div>';
+                                html +=' <div class="J_discussCon wordbreak">'+discuss.content+'</div>';
                                 html +='</div>';
-                                html +='<p class="oper"><a class="J_postReply">回复</a></p>';
+                                html +='<div class="oper"><div class="fr"><a class="J_discussReply">回复</a></div></div>';
+                                html +='</div> ';
                                 html +='</li>';
 
-                                $("#J_forumPost").append(html);
+                                $("#J_forumTopic").append(html);
 
                             }
                         }
@@ -98,7 +99,7 @@ define(function(require, exports) {
 
         //帖子创建与编辑
         editSubmit : function($this){
-            var title = $.trim($("#J_postTitle").val());
+            var title = $.trim($("#J_topicTitle").val());
 
                 if(topicEditor.getContent()==""){
                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
@@ -124,7 +125,7 @@ define(function(require, exports) {
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
             }else{
-                $("#J_ForumTopicEditForm").submit();
+                $("#J_forumTopicEditForm").submit();
 
             }
         },
@@ -132,36 +133,32 @@ define(function(require, exports) {
         //通用讨论组初始化
         init : function(){
             //评论与回复
-            var $postCmtSegment = $("#J_postQuote");
-            var $postCommentForm = $("#J_postCommentForm");
+            var $discussQuote = $("#J_discussQuote");
+            var $topicDiscussForm = $("#J_topicDiscussForm");
 
-            //评论格式化
-            if($(".J_PostCon")[0]){
-                $(".J_PostCon").each(function(){
-                    $(this).html($.hiwowo.util.trim($(this).html()).replace(/\n/g,"<br/>"));
-                });
-            }
+
 
             //回复
-            $(document).on("click",".J_postReply",function(){
+            $(document).on("click",".J_discussReply",function(){
 
                 var $li = $(this).closest("li");
-                var userNick = $li.find(".J_UserNick:first").html();
-                var replyCon = $li.find(".J_PostCon").html();
-                var time = $li.find(".time").html();
+                var userInfo = $li.find(".user-info").html();
+                var replyCon = $li.find(".J_discussCon").html();
+
                 var segmentHtml = "";
                 segmentHtml += '<blockquote>';
-                segmentHtml += '<span class="info g-daren">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
+                segmentHtml += userInfo ;
                 segmentHtml += '<p>' + $.trim(replyCon) + '</p>';
                 segmentHtml += '</blockquote>';
                 //console.log(segmentHtml);
-                $postCmtSegment.html(segmentHtml);
 
-                $("html, body").scrollTop($postCommentForm.offset().top -50);
+                $discussQuote.html(segmentHtml);
+
+                $("html, body").scrollTop($topicDiscussForm.offset().top -50);
 
                 //删除回应
-                $postCmtSegment.find(".close:first").unbind("click").click(function(){
-                    $postCmtSegment.html("");
+                $discussQuote.find(".close:first").unbind("click").click(function(){
+                    $discussQuote.html("");
                 });
             });
 
@@ -170,26 +167,26 @@ define(function(require, exports) {
                 $.hiwowo.forum.discussSubmit($(this));
             });
 
-            $postCommentForm.find("textarea").focus(function(){
+            $topicDiscussForm.find("textarea").focus(function(){
                 $.hiwowo.loginDialog.isLogin();
             });
 
             //回车键提交评论
-            $postCommentForm.find("textarea").on("keyup",function(e){
+            $topicDiscussForm.find("textarea").on("keyup",function(e){
                 var $this = $(this);
                 $.hiwowo.util.submitByEnter(e, function(){
-                    $.hiwowo.forum.discussSubmit($("#J_postCommentSubmit"));
+                    $.hiwowo.forum.discussSubmit($("#J_discussPublishBtn"));
                 });
             });
             //话题创建与编辑
-            if($("#J_postEditBtn")[0]){
-                $("#J_postTitle").focus(function(){
+            if($("#J_topicEditBtn")[0]){
+                $("#J_topicTitle").focus(function(){
                     $.hiwowo.loginDialog.isLogin();
                 });
-                $("#J_commentContent").focus(function(){
+                $("#J_topicContent").focus(function(){
                     $.hiwowo.loginDialog.isLogin();
                 });
-                $("#J_postEditBtn").click(function(event){
+                $("#J_topicEditBtn").click(function(event){
                     event.preventDefault();
                     if($.hiwowo.loginDialog.isLogin()){
                         $.hiwowo.forum.editSubmit($(this));

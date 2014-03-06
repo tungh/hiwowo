@@ -58,19 +58,19 @@
 .forum .forum-main .f-con .con-list li{margin-top:20px;}
 .forum .forum-main .f-con .con-list li.clearfix{clear:both;}
 .forum .forum-main .f-con .con-list li.del{float:right;padding-bottom:10px;color:#999;}
-.forum .forum-main .f-con .con-list li .post-reply{background-color:#f2f2f2;padding:10px;position:relative;margin-bottom:8px;}
+.forum .forum-main .f-con .con-list li .topic-reply{background-color:#f2f2f2;padding:10px;position:relative;margin-bottom:8px;}
 .forum .forum-main .f-con .con-list li .info{width:610px;}
 .forum .forum-main .f-con .con-list li .info p{line-height:2}
 .forum .forum-main .f-con .con-list li .info .user-info{height:30px;line-height: 30px;background:#f2f2f2;color:#999;width:590px;padding:0 10px;}
-.forum .forum-main .f-con .con-list li .info .post{margin-top:20px;}
+.forum .forum-main .f-con .con-list li .info .topic{margin-top:20px;}
 .forum .forum-main .f-con .con-list li .info .opt{margin-top:50px;}
 .forum .forum-main .f-con .con-list li .info .follower-btn{display:block;width:75px;height:30px;line-height:30px;text-align:center;color:#fff;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;background:#fc6699;}
 .forum .forum-main .f-con .con-list li .info .opt .share-btn{width:75px;height:30px;display:block;background:#f2f2f2;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;position: relative;color:#666;}
 .forum .forum-main .f-con .con-list li .info .opt .share-icon{background: url("images/topic-share-icon.png") no-repeat;height:22px;line-height:22px;padding-left:24px;display:block;position:absolute;top:4px;left:12px;}
-.forum .forum-main .post-reply { margin:8px 0;}
-.forum .forum-main .post-reply  blockquote {background-color: #f2f2f2;line-height: 24px; padding: 8px 10px;position: relative;}
-.forum .forum-main .post-reply  blockquote .close {position: absolute; right: 15px;top: 10px;color:#666;}
-.forum .forum-main .post-box{padding:15px;background:#fff;margin-top:30px;}
+.forum .forum-main .topic-reply { margin:8px 0;}
+.forum .forum-main .topic-reply  blockquote {background-color: #f2f2f2;line-height: 24px; padding: 8px 10px;position: relative;}
+.forum .forum-main .topic-reply  blockquote .close {position: absolute; right: 15px;top: 10px;color:#666;}
+.forum .forum-main .topic-box{padding:15px;background:#fff;margin-top:30px;}
 .forum .forum-main .guang-editor-wrap { width:670px;}
 .topic-preview{margin-top:5px;}
 .topic-preview a.pic-list{display: block;float:left;overflow:hidden;zoom:1;}
@@ -111,9 +111,9 @@
 .guang-editor .baobeiWrap{left: -37px;}
 .guang-editor .imgWrap{left:-40px;}
 .guang-editor .videoWrap{left:-40px;}
-#J_PostArtical p{line-height:2}
-#J_PostArtical img{max-width:560px;max-height:560px;}
-.J_PostCon img{max-width:560px;max-height:560px;}
+#J_topicArtical p{line-height:2}
+#J_topicArtical img{max-width:560px;max-height:560px;}
+.J_topicCon img{max-width:560px;max-height:560px;}
 
 /* box notice*/
 .forum .side .box {
