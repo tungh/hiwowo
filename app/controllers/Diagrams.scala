@@ -17,4 +17,8 @@ object  Diagrams extends Controller {
     Ok(views.html.diagrams.diagram(user))
   }
 
+  /* editor */
+  def edit(id:Long) = Users.UserAction{ user => implicit request =>
+    Ok(views.html.diagrams.edit(user))
+  }
 }

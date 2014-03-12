@@ -1,0 +1,13 @@
+@(user:Option[models.user.User])
+@views.html.template(user)(css="/assets/css/template/diagram.css"){
+
+        <div class="container diagram">
+            <textarea id="J_diagramIntro" > </textarea>
+        </div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use("hiwowo/diagram/diagram.js")
+</script>
+}

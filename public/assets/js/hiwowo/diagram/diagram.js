@@ -5,3 +5,15 @@
  * Time: 下午11:42
  *
  */
+ define(function(require){
+     var $ = jQuery = require("jquery")
+      require("jqueryte")
+     $(function(){
+         $("textarea").jqte({
+             format: false,
+             fsize:false,
+             color:false
+         })
+     })
+
+ })

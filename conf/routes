@@ -24,6 +24,7 @@ GET    /forum                               controllers.Forums.forum(typeId:Int 
 
 #diagram
 GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
+GET   /diagram/edit                               controllers.Diagrams.edit(id:Long ?=0L)
 
 
 
