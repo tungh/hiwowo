@@ -226,17 +226,21 @@ CREATE TABLE `diagram` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-
-
 DROP TABLE IF EXISTS `diagram_pic`;
 CREATE TABLE `diagram_pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
   `diagram_id`                 int(10) ,
-  `pic`               varchar(250) ,
+  `pic_id`               int(10) ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `pic`;
+CREATE TABLE `pic` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `src`               varchar(250) ,
   `intro`               varchar(200) ,
   `sort_num`              tinyint  not null default  '0',
-  `is_top`            tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

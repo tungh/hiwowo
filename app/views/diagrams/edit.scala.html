@@ -2,7 +2,58 @@
 @views.html.template(user)(css="/assets/css/template/diagram.css"){
 
         <div class="container diagram">
-            <textarea id="J_diagramIntro" > </textarea>
+
+            <div class="row">
+                <div class="main">
+                    <div class="diagram-create box-shadow">
+                        <h3 class="diagram-title">创建话题</h3>
+                        <form action="/diagram/topic/save" method="post" class="post-edit-form" id="J_diagramTopicEditForm">
+                            <input type="hidden" name="groupId" value="0">
+                            <input type="hidden" name="id" value="" id="J_topicId">
+
+                            <ul class="form-group">
+                                <li class="input-box"><input id="J_topicTitle" name="title" class="b-input" type="text" value="" placeholder="请输入话题标题"></li>
+
+                                <li class="input-box clearfix">
+
+                                    <input id="J_intro" name="intro" class="b-textarea" placeholder="亲，简单的介绍下呗">
+
+                                </li>
+
+                                <li class="input-box clearfix mt15">
+                                     <input type="file" id="J_uploadify">
+                                </li>
+
+                                <li class="input-box"><input id="J_tags" name="title" class="b-input" type="text" value="" placeholder="请输入话题标题"></li>
+                                <li class="input-box clearfix">
+
+                                    <input id="J_ps" name="ps" class="b-textarea" placeholder="亲，简单的介绍下呗">
+
+                                </li>
+                                <li class="oper clearfix">
+                                    <input type="button" class="bgr-btn" onclick="window.history.back(-1)" value="保存到草稿">
+                                    <input id="J_topicEditBtn" type="submit" class="bbl-btn" value="发表">
+
+
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+                <div class="side">
+                    <div class="box">
+                        <div class="hd">
+                            <h3>公告栏</h3>
+                        </div>
+                        <p class="bd" id="J_NoticeCon">
+                            和谐社会，你我共建～
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 }{

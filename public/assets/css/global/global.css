@@ -132,7 +132,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     float: left;
     background: #fff;
 }
-.container .forum-main,.container .site-main{
+.container .forum-main,.container .diagram-main{
     width: 720px;
     float: left;
 }

@@ -8,8 +8,21 @@
  define(function(require){
      var $ = jQuery = require("jquery")
       require("jqueryte")
+     require("uploadify")
      $(function(){
-         $("textarea").jqte({
+
+         $('#J_uploadify').uploadify({
+             'fileObjName' : 'fileData',
+             'swf'      : '/assets/js/sea-modules/uploadify.swf',
+             'uploader' : '/uploadImage',
+             'onUploadSuccess' : function(file, data, response) {
+
+             }
+             // Put your options here
+         });
+
+
+         $(".b-textarea").jqte({
              format: false,
              fsize:false,
              color:false

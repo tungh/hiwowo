@@ -11,26 +11,16 @@ import java.sql.Timestamp
  */
 case class DiagramPic (
                         id: Option[Long],
-                        uid:Long,
                         diagramId:Long,
-                        pic:String,
-                        intro: Option[String],
-                        isTop:Int,
-                        sortNum:Int,
-                        addTime:Option[Timestamp]
+                        picId:Long
                         )
 
 class DiagramPics(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
-  def uid = column[Long]("uid")
   def diagramId = column[Long]("diagram_id")
-  def pic = column[String]("pic")
-  def intro  = column[String]("intro")
-  def isTop = column[Int]("is_top")
-  def sortNum = column[Int]("sort_num")
-  def addTime = column[Timestamp]("add_time")
+  def picId = column[Long]("pic_id")
 
-  def * =(id.?,uid,diagramId,pic,intro.?,isTop,sortNum,addTime.?) <> (DiagramPic.tupled, DiagramPic.unapply)
+  def * =(id.?,diagramId,picId) <> (DiagramPic.tupled, DiagramPic.unapply)
 
 
 }

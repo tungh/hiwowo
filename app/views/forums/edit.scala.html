@@ -27,7 +27,7 @@ title = "发布话题_讨论吧"
                               <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "3") {"checked"}) value="3"/>活动</label>
                           </li>
                           <li class="input-box clearfix">
-                              <label>话题内容：</label>
+
                               <textarea id="J_topicContent" name="content" class="b-textarea" placeholder="请输入话题内容">
                                   @form("content").value
                               </textarea>
