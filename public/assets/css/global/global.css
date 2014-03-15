@@ -1412,9 +1412,9 @@ input[type="button"].btn-block {
     );
     background-position: center top;
     background-repeat: no-repeat;
-    -webkit-border-radius: 30px;
+   /* -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
-    border-radius: 30px;
+    border-radius: 30px;*/
     border: 2px solid #808080;
     color: #FFF;
     font: bold 12px Arial, Helvetica, sans-serif;

@@ -252,6 +252,18 @@
 .diagram .main .desc img {
     max-width: 580px
 }
+.diagram .photo_box{margin-bottom:16px}
+.diagram figure{display:block;overflow:hidden;width:100%}
+.diagram figure a{display:inline-block;*display:inline;*zoom:1;width:100%;text-align:center}
+.diagram figure figcaption{display:block}
+.diagram figure figcaption.desc{margin-bottom:0}
+.diagram .pic_intro{margin-bottom:16px;color:#4c4c4c;font-size:14px;line-height:22px;vertical-align:baseline}
+.diagram .pic_intro *{vertical-align:baseline}
+.diagram .pic_intro ul,.diagram .pic_in ol{padding-left:2em}
+.diagram .pic_intro blockquote{border-left:3px solid #aaa;padding-left:10px}
+.diagram .pic_intro a{color:#cc0f0f;text-decoration:underline}
+.diagram .pic_intro a:hover,.diagram .pic_intro a:focus{color:#000;text-decoration:underline}
+.diagram .pic_intro strong{font-weight:600}
 
 /* side  */
 
@@ -479,7 +491,11 @@
     border-bottom: 1px dotted #ddd;
     line-height: 50px
 }
-
+.diagram-create li label {
+    color: #333;
+    line-height: 32px;
+    text-align: right
+}
 .diagram-create .oper input {
     margin-right: 20px
 }
@@ -495,8 +511,9 @@
 }
 
 .diagram-create li.input-box .b-textarea {
-    height: 295px;
-    line-height: 23px
+    height: 50px;
+    width: 570px;
+    line-height: 23px;
 }
 
 .diagram-create li.oper {

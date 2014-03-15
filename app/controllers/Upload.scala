@@ -34,13 +34,13 @@ object Upload extends Controller {
       "area-y2" -> number
     )
   )
-  /* 通过 upload.js 上传的图片 */
+
   def uploadImage=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
-        val src ="/uploadImage/"+filename
+        val src ="/uploadImage/temp/"+filename
         println(src)
         Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
@@ -52,6 +52,7 @@ object Upload extends Controller {
       Ok("File uploaded error")
     }
   }
+
   def uploadUmeditorPic(editorid:String) =Action(parse.multipartFormData)  {   request =>
     request.body.file("upfile").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))

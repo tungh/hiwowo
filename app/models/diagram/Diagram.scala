@@ -8,6 +8,7 @@ import java.sql.Timestamp
  * Date: 14-2-21
  * Time: 下午3:27
  * 图说
+ * ps 后记 postscript
  */
 case class Diagram (
                    id: Option[Long],
@@ -16,6 +17,7 @@ case class Diagram (
                    pic: String,
                    intro: Option[String],
                    content: Option[String],
+                   ps:Option[String],
                    tags:Option[String],
                    status:Int,
                    viewNum:Int,
@@ -32,6 +34,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def pic = column[String]("pic")
   def intro  = column[String]("intro")
   def content  = column[String]("content")
+  def ps  = column[String]("ps")
   def tags  = column[String]("tags")
   def status = column[Int]("status")
   def viewNum = column[Int]("view_num")
@@ -40,7 +43,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,title,pic,intro.?,content.?,tags.?,status,viewNum,loveNum,discussNum,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,title,pic,intro.?,content.?,ps.?,tags.?,status,viewNum,loveNum,discussNum,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }

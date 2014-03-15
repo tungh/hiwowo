@@ -190,7 +190,7 @@ var SWFUpload = require("swfupload")
 							'id'    : settings.id + '-queue',
 							'class' : 'uploadify-queue'
 						});
-						$wrapper.after($queue);
+						$wrapper.before($queue);
 						swfuploadify.settings.queueID      = settings.id + '-queue';
 						swfuploadify.settings.defaultQueue = true;
 					}
