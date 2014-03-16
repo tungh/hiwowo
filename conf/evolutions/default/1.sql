@@ -239,8 +239,9 @@ DROP TABLE IF EXISTS `pic`;
 CREATE TABLE `pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
-  `src`               varchar(250) ,
+  `url`               varchar(250) ,
   `intro`               varchar(200) ,
+  `status`              tinyint  not null default  '0',
   `sort_num`              tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)

@@ -7,19 +7,18 @@
                 <div class="main">
                     <div class="diagram-create box-shadow">
                         <h3 class="diagram-title">创建话题</h3>
-                        <form action="/diagram/topic/save" method="post" class="post-edit-form" id="J_diagramEditForm">
-                            <input type="hidden" name="groupId" value="0">
-                            <input type="hidden" name="id" value="" id="J_topicId">
+
+                            <input type="hidden" name="diagramId" value="" id="J_diagramId">
 
                             <ul class="form-group">
                                 <li class="input-box">
                                     <label>亲，你就给我起个牛逼哄哄的名字呗</label>
-                                    <input id="J_topicTitle" name="title" class="b-input" type="text" value="" placeholder="亲，你就给我起个牛逼哄哄的名字呗">
+                                    <input id="J_diagramTitle" name="title" class="b-input" type="text" value="" placeholder="亲，你就给我起个牛逼哄哄的名字呗">
                                 </li>
 
                                 <li class="input-box clearfix">
                                      <label>哎呀，亲，给我介绍下呗</label>
-                                    <input id="J_intro" name="intro" class="b-textarea" placeholder="亲，简单的介绍下呗">
+                                    <input id="J_diagramIntro" name="intro" class="b-textarea" placeholder="亲，简单的介绍下呗">
 
                                 </li>
 
@@ -27,21 +26,21 @@
 
                                 <li class="input-box clearfix mt15">
 
-                                     <input type="file" id="J_uploadify">
+                                     <div  id="J_uploadify"> </div>
                                 </li>
 
 
                                 <li class="input-box clearfix">
                                    <label id="J_psLabel">亲，狠戳我，给我写个后记，怎么样啊</label>
-                                    <input id="J_ps"  name="ps" class="b-textarea hidden">
+                                    <input id="J_diagramPs"  name="ps" class="b-textarea hidden">
                                 </li>
                                 <li class="input-box">
                                      <label id="J_tagsLabel">那个啥，狠戳我,给我贴几个标签如何^_^</label>
-                                    <input id="J_tags" name="tags" class="b-input hidden" type="text" value="" placeholder="亲，给我添几个标签如何">
+                                    <input id="J_DiagramTags" name="tags" class="b-input hidden" type="text" value="" placeholder="亲，给我添几个标签如何">
                                 </li>
                                 <li class="oper clearfix">
-                                    <input type="button" class="bgr-btn" onclick="window.history.back(-1)" value="保存到草稿">
-                                    <input id="J_topicEditBtn" type="submit" class="bbl-btn" value="发表">
+                                    <input type="button" class="bgr-btn" id="J_diagramDraftBtn"  value="保存到草稿">
+                                    <input id="J_diagramPublishBtn" type="submit" class="bbl-btn" value="发表">
 
 
                                 </li>
@@ -50,7 +49,7 @@
                     </div>
                 </div>
                 <div class="side">
-                    <div class="box">
+                    <div class="box  affix">
                         <div class="hd">
                             <h3>公告栏</h3>
                         </div>

@@ -25,6 +25,8 @@ GET    /forum                               controllers.Forums.forum(typeId:Int 
 #diagram
 GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
 GET   /diagram/edit                               controllers.Diagrams.edit(id:Long ?=0L)
+POST  /diagram/savePic                     controllers.Diagrams.savePic
+POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 
 
 
@@ -68,7 +70,7 @@ GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
 
 #常用的upload
-POST    /uploadImage                      controllers.Upload.uploadImage
+POST    /uploadDiagramPic                      controllers.Upload.uploadDiagramPic
 POST    /umeditor/uploadPic               controllers.Upload.uploadUmeditorPic(editorid:String)
 POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic

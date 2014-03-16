@@ -35,13 +35,14 @@ object Upload extends Controller {
     )
   )
 
-  def uploadImage=Action(parse.multipartFormData) { request =>
+  def uploadDiagramPic=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
         val src ="/uploadImage/temp/"+filename
-        println(src)
+       // println(src)
+
         Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
       }else{

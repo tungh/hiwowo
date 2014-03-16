@@ -1,0 +1,9 @@
+﻿1 新用户注册 需要弄一个注册引导页。告诉用户 网站的定位、他可以做什么、怎么做
+
+2014/3/16
+1、diagram edit 需要引入ID 后的编辑
+2、图片保存后，需要 生存pic-box,为diagram content 使用，并且，需要生存pic id,为 diagram pic 类使用
+3、在diagram edit 删除图片时，需要删除diagram-pic ，并且 pic 的status 变为0
+4、可以调整 图片位置，可以模仿xiangqu.com中的效果
+
+diagram 是核心，需要花很多精力做哦

@@ -19,6 +19,7 @@ seajs.config({
         'swfobject':'sea-modules/swfobject',
         'swfupload':'sea-modules/swfupload',
         'uploadify':'sea-modules/jquery.uploadify.js',
+        'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
        'umeditor':'umeditor/umeditor.min.js',
         'umeditor-lang':'umeditor/lang/zh-cn/zh-cn.js',

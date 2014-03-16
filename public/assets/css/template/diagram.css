@@ -153,7 +153,8 @@
 .diagram .main .info li.userImg a img {
     height: 30px;
     width: 30px;
-    border-radius: 30px
+    border-radius: 30px;
+    margin-bottom: 20px;
 }
 
 .diagram .main .info li a span {
@@ -252,13 +253,13 @@
 .diagram .main .desc img {
     max-width: 580px
 }
-.diagram .photo_box{margin-bottom:16px}
+.diagram .pic_box{margin-bottom:16px}
 .diagram figure{display:block;overflow:hidden;width:100%}
 .diagram figure a{display:inline-block;*display:inline;*zoom:1;width:100%;text-align:center}
 .diagram figure figcaption{display:block}
 .diagram figure figcaption.desc{margin-bottom:0}
 .diagram .pic_intro{margin-bottom:16px;color:#4c4c4c;font-size:14px;line-height:22px;vertical-align:baseline}
-.diagram .pic_intro *{vertical-align:baseline}
+.diagram .pic_intro *{vertical-align:baseline;margin-top: 10px}
 .diagram .pic_intro ul,.diagram .pic_in ol{padding-left:2em}
 .diagram .pic_intro blockquote{border-left:3px solid #aaa;padding-left:10px}
 .diagram .pic_intro a{color:#cc0f0f;text-decoration:underline}
@@ -268,7 +269,7 @@
 /* side  */
 
 .diagram .side .UserApp {
-    padding: 10px;
+    padding-bottom: 10px;
     overflow: auto
 }
 
@@ -350,7 +351,7 @@
 }
 
 .diagram .side .recommendRead {
-    overflow: auto;
+
     background: url(images/dash_line_1x3.png) repeat-x bottom
 }
 
@@ -394,12 +395,10 @@
 .diagram .side .rRead li {
     line-height: 18px;
     font-size: 12px;
-    font-family: "宋体";
+    text-align: left;
     color: #666;
     overflow: hidden;
-    padding: 10px 8px;
     height: 36px;
-    padding: 0 10px;
     background: #fff;
     margin-top: 10px
 }
@@ -463,6 +462,7 @@
     margin-bottom: 10px;
     padding: 10px;
     text-align: center;
+    width: 288px;
 }
 
 .diagram .side .box .hd {
@@ -525,7 +525,9 @@
 .diagram-create li.input-box .bbl-btn {
     width: 90px
 }
-
+.diagram-create li.pic_intro{
+    display: none;
+}
 
 /*!
  *

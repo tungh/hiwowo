@@ -2,12 +2,15 @@ package models.diagram
 import scala.slick.driver.MySQLDriver.simple._
 
 import java.sql.Timestamp
-
+ /*
+ * status 0 表示未使用  1 表示使用
+ * */
 case class Pic (
                         id: Option[Long],
                         uid:Long,
-                        src:String,
+                        url:String,
                         intro: Option[String],
+                        status:Int,
                         sortNum:Int,
                         addTime:Option[Timestamp]
                         )
@@ -15,11 +18,12 @@ case class Pic (
 class Pics(tag:Tag) extends Table[Pic](tag,"pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def src = column[String]("pic")
+  def url = column[String]("url")
   def intro  = column[String]("intro")
+  def status = column[Int]("status")
   def sortNum = column[Int]("sort_num")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,src,intro.?,sortNum,addTime.?) <> (Pic.tupled, Pic.unapply)
+  def * =(id.?,uid,url,intro.?,status,sortNum,addTime.?) <> (Pic.tupled, Pic.unapply)
 
 
 }
