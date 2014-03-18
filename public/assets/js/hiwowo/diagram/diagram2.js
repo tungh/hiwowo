@@ -11,7 +11,7 @@
      require("uploadify")
      $(function(){
 
-         $("#J_diagramIntro").jqte({
+         $("#J_intro").jqte({
              format: false,
              fsize:false,
              color:false
@@ -37,13 +37,13 @@
              'uploadLimit' : 15,
              'width'    : 580,
              'height':60,
-             'itemTemplate' : '<div class="photo_box" id="${fileID}"><figure> </figure><div  class="uploadify-queue-item">\
+             'itemTemplate' : '<div class="post_photo"> <div class="photo_box" id="${fileID}"><figure> </figure><div  class="uploadify-queue-item">\
 					<div class="cancel">\
 						<a href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')">X</a>\
 					</div>\
 					<span class="fileName">${fileName} (${fileSize})</span><span class="data"></span>\
 				</div> <div class="pic_intro"><textarea  class="b-textarea"></textarea> </div>\
-                 </div>',
+                 </div><div class="site-doing-all clearfix"><span class="site-doing"><a class="img_save_href" href="javascript:;"><ins class="ico-site-save"></ins>保存</a><a id="img_del_href" href="javascript:;"><ins class="ico-site-del"></ins>删除</a></span></div> </div>',
              'removeCompleted' : false,
              'onUploadSuccess' : function(file, data, response) {
 

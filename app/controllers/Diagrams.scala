@@ -25,6 +25,9 @@ object  Diagrams extends Controller {
   def edit(id:Long) = Users.UserAction{ user => implicit request =>
     Ok(views.html.diagrams.edit(user))
   }
+  def edit2(id:Long) =  Users.UserAction{ user => implicit request =>
+    Ok(views.html.diagrams.edit2(user))
+  }
   /* pic save */
   def savePic =Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))

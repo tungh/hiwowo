@@ -1,0 +1,69 @@
+@(user:Option[models.user.User])
+@views.html.template(user)(css="/assets/css/template/diagram.edit.css"){
+
+        <div class="container diagram">
+
+            <div class="row">
+                <div class="main">
+                    <div class="diagram-edit">
+                        <div class="diagram-title">
+                            <dl>
+                                <dt>标题：</dt>
+                                <dd><input id="J_title" onkeyup="checkTopicTitleNode($(this), 100)" name="title" class="input-normal" value="嗨喔喔"></dd>
+                                <dd class="msg" style="display:none"><div class="msg-error">：（ 超出2个字了</div>32/30</dd>
+                            </dl>
+                        </div>
+
+                        <div class="diagram-intro">
+                            <dl>
+                                <dt>亲，你就说点什么呗 </dt>
+                                <dd><input id="J_intro" name="intro" value="亲，你就不说点什么吗"> </dd>
+                                <dd class="msg" style="display: none"><div class="msg-error"></div> </dd>
+                            </dl>
+                        </div>
+                        <div class="post-photo post-item-edit topic_node">
+                            <div class="move-bar"><a class="move-up" href="javascript:;" style="">上移</a><a class="move-down" href="javascript:;" style="display: none;">下移</a></div>
+                            <div class="edit-box clearfix">
+                                <div class="upload-img">
+                                    <div class="img"><img src="http://img1.xiangqu.com/xiangqu/image/53D/53D52251BEBE0633BB1094A31D0D554C_350x262.jpg"></div>
+                                </div>
+
+                                <div class="photo-des"><textarea id="image_desc" name="image_desc" cols="" rows="" class="textarea-normal" label="图片描述(可不填)" style="color: rgb(188, 188, 188);"></textarea></div>
+
+                            </div>
+                            <div class="site-doing-all clearfix"><span class="site-doing"><a class="img_save_href" href="javascript:;"><ins class="ico-site-save"></ins>保存</a><a id="img_del_href" href="javascript:;"><ins class="ico-site-del"></ins>删除</a></span></div>
+                        </div>
+
+                      <!-- 操作 -->
+                        <div class="diagram-btnbar clearfix">
+
+
+                <span class="fr">
+                    <a id="id-btn-draft" class="btn-diagram" onclick="saveDraft(true)" href="javascript:;">保存草稿</a>
+                    <a id="id-btn-diagram" class="btn-diagram" onclick="postTopic()" href="javascript:;">发布</a>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="side">
+                    <div class="box  affix">
+                        <div class="hd">
+                            <h3>公告栏</h3>
+                        </div>
+                        <p class="bd" id="J_NoticeCon">
+                            和谐社会，你我共建～
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use("hiwowo/diagram/diagram2.js")
+</script>
+}
