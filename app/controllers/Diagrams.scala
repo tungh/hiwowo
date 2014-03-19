@@ -42,10 +42,10 @@ object  Diagrams extends Controller {
       } else {
       if(picId.isEmpty || picId.getOrElse(0) ==0 ){
        val id = DiagramDao.addPic(user.get.id.get,picUrl.getOrElse(""),picIntro,0,1)
-        Ok(Json.obj("code" -> "100", "message" ->"success","picId"->id))
+        Ok(Json.obj("code" -> "100", "message" ->"success","picUrl" ->picUrl,"picId"->id))
       }else{
         DiagramDao.modifyPic(picId.get,picUrl.get,picIntro,0,1)
-        Ok(Json.obj("code" -> "100", "message" ->"success","picId"->picId.get))
+        Ok(Json.obj("code" -> "100", "message" ->"success","picUrl" ->picUrl,"picId"->picId.get))
       }
 
       }
