@@ -7,6 +7,7 @@ package models.user
  * Time: 上午11:08
  * ***********************
  * description:用户
+ * 用户状态:例如正常状态、拉黑状态、活跃用户等    0、邮箱未验证 1、正常用户 2 普通用户  3 vip用户  4 拉黑用户
  */
 import  java.sql.Timestamp
 

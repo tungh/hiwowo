@@ -1,0 +1,17 @@
+@(user:Option[models.user.User])
+@views.html.template(user,nav="userHome")(css="/assets/css/template/vip.css"){
+
+<div class="container my">
+
+
+    <h1 style="font-size: 48px"> VIP 认证 todo </h1>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use(["hiwowo/user/userHome"]);
+</script>
+}

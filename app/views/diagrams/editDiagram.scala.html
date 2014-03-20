@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],diagram:models.diagram.Diagram,pics:List[models.diagram.Pic])
 @views.html.template(user)(css="/assets/css/template/diagram.edit.css"){
 
         <div class="container diagram">
@@ -9,18 +9,36 @@
                         <div class="diagram-title">
                             <dl>
                                 <dt>标题：</dt>
-                                <dd><input id="J_title" onkeyup="checkTopicTitleNode($(this), 100)" name="title" class="input-normal" value="嗨喔喔"></dd>
-                                <dd class="msg" style="display:none"><div class="msg-error">：（ 超出2个字了</div>32/30</dd>
+                                <dd><input id="J_title" onkeyup="checkTopicTitleNode($(this), 100)" name="title" class="input-normal" value="@diagram.title"></dd>
+                                <dd class="msg" style="display:none"><div class="msg-error"></div></dd>
                             </dl>
                         </div>
 
                         <div class="diagram-intro">
                             <dl>
                                 <dt>亲，你就说点什么呗 </dt>
-                                <dd><input id="J_intro" name="intro" value="亲，你就不说点什么吗"> </dd>
+                                <dd><input id="J_intro" name="intro" value="@diagram.intro"> </dd>
                                 <dd class="msg" style="display: none"><div class="msg-error"></div> </dd>
                             </dl>
                         </div>
+
+                        @for(pic <- pics){
+                        <div  class="post-photo post-item-edit topic_node"  type="image" picid="@pic.id">
+                            <div class="move-bar"><a class="move-up" href="javascript:;" style="display: none;">上移</a><a class="move-down" href="javascript:;" style="display: none;">下移</a></div>
+                            <div class="edit-box clearfix">
+                                <div class="upload-img">
+                                    <div class="img"><img src="@pic.url"></div>
+                                </div>
+                                <div class="photo-des">@pic.intro</div>
+                            </div>
+                            <div class="pic-doing-all clearfix">
+                                <span class="pic-doing">
+                                   <a class="sitedel-href" href="javascript:;"><ins class="ico-pic-del"></ins>删除</a>
+                                </span>
+                            </div>
+                        </div>
+
+                        }
 
                         <div class="diagram-uploadify">
                             <div  id="J_uploadify"> </div>
@@ -44,13 +62,9 @@
 
                             </div>
 
-                            <div class="site-doing-all clearfix">
-        <span class="site-doing">
-
-            <li class="site-upload-li" style="float:left">
-                <a href="javascript:;"><ins class="ico-site-upload"></ins>重新上传</a>
-            </li>
-            <a class="sitedel-href" href="javascript:;"><ins class="ico-site-del"></ins>删除</a>
+                            <div class="pic-doing-all clearfix">
+        <span class="pic-doing">
+            <a class="sitedel-href" href="javascript:;"><ins class="ico-pic-del"></ins>删除</a>
         </span>
                             </div>
                         </div>

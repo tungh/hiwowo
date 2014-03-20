@@ -21,13 +21,25 @@ object  Diagrams extends Controller {
     Ok(views.html.diagrams.diagram(user))
   }
 
-  /* editor */
+  /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只用不为零的图说，可以进入编辑状态 */
   def edit(id:Long) = Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.edit(user))
+    if(user.isEmpty){
+        Redirect(controllers.users.routes.UsersRegLogin.login)
+    } else{
+      if(user.get.status == 3){
+          if(id == 0) Ok(views.html.diagrams.createDiagram(user))
+          else{
+            val diagram = DiagramDao.findDiagramById(id)
+            val pics = DiagramDao.findPicsByDiagramId(id)
+            Ok(views.html.diagrams.editDiagram(user,diagram.get,pics))
+          }
+      } else{
+        Redirect(controllers.users.routes.UsersAccount.vip)
+      }
+    }
+
   }
-  def edit2(id:Long) =  Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.edit2(user))
-  }
+
   /* pic save */
   def savePic =Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
@@ -66,16 +78,19 @@ object  Diagrams extends Controller {
       val  diagramContent = (request.body \ "diagramContent").asOpt[String]
       val  diagramPs = (request.body \ "diagramPs").asOpt[String]
       val  diagramTags = (request.body \ "diagramTags").asOpt[String]
+      val diagramStatus =  (request.body \ "diagramStatus").asOpt[Int]
       val  picIds = (request.body \ "picIds").asOpt[String]
-      println(picIds + " : " +diagramContent)
+      val ids=picIds.get.split(",").map(x=>x.toLong)
       if(diagramTitle.isEmpty){
         Ok(Json.obj("code"->"104","message"->"diagram title is empty"))
       } else {
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-          val id = DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,0)
-          Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->id))
+          val dId = DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
+          for (id<-ids) DiagramDao.addDiagramPic(dId,id)
+          Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId))
         }else{
-          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,0)
+          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
+          for (id<-ids) DiagramDao.addDiagramPic(diagramId.get,id)
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->diagramId.get))
         }
 

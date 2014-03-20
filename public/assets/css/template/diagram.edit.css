@@ -44,35 +44,11 @@
 }
 
  /* 创建帖子页面*/
-.ico-site-edit, .ico-site-pagecover, .ico-site-goods, .ico-site-del, .ico-site-save, .ico-site-link, .ico-site-upload,.ico-site-comment, .ico-site-dig, .ico-site-digcanel, .ico-site-setting, .ico-addimage, .ico-addword, .ico-addgoods, .ico-addphoto-m, .ico-addphotoalbum-m, .ico-addvideo-m, .ico-addpost-m, .ico-addphoto-s, .ico-addphoto-s2, .ico-addphotoalbum-s,.ico-addvideo-s{ height: 22px; line-height: 22px; padding: 0 0 0 22px; overflow: hidden; display: inline-block;*display:inline;vertical-align: middle;zoom:1; background: url(images/widget_site.png) no-repeat -2222px -136px; margin-right: 5px;}
-.ico-site-edit{ background-position: 3px -592px;}
-.ico-site-pagecover{ background-position: -38px -592px;}
-.ico-site-goods{ background-position: -86px -592px;}
-.ico-site-del{ background-position: -128px -592px;}
-.ico-site-save{ background-position: -167px -592px;}
-.ico-site-link{ background-position: -208px -592px;}
-.ico-site-upload{ background-position: -248px -592px;}
-.ico-site-comment{background-position: 0px -630px; height: 16px; line-height: 16px; padding-left: 20px; margin-right: 0;}
-.ico-site-dig{background-position: -39px -628px;}
-.ico-site-setting{background: url(images/ico_site.png) no-repeat 0 -463px;}
-
-
-.ico-addimage{ height: 26px; line-height: 26px; padding-left: 34px;background-position: 0 -496px;}
-.ico-addword{ height: 26px; line-height: 26px; padding-left: 34px;background-position: -53px -496px;}
-.ico-addgoods{ height: 26px; line-height: 26px; padding-left: 34px;background-position: -104px -496px;}
-
-.ico-addphoto-m{ height: 58px; line-height: 58px; padding-left:64px;background-position: -210px -1162px;}
-.ico-addphotoalbum-m{ height: 58px; line-height: 58px; padding-left:64px;background-position: 7px -998px;}
-.ico-addvideo-m{ height: 58px; line-height: 58px; padding-left: 64px;background-position: -105px -995px;}
-.ico-addpost-m{ height: 58px; line-height: 58px; padding-left: 64px;background-position: -205px -998px;}
-
-.ico-addphoto-s{height: 26px; line-height: 26px; padding-left: 30px;background-position: -110px -1062px;}
-.ico-addphotoalbum-s{height: 26px; line-height: 26px; padding-left: 30px;background-position: -158px -1062px;}
-.ico-addvideo-s{height: 26px; line-height: 26px; padding-left: 30px;background-position: -205px -1062px;}
-.ico-addphoto-s2{height: 26px; line-height: 26px; padding-left: 30px;background-position: -62px -1062px;}
-
-.site-doing{ float:right;}
-.site-doing a{ float:left; margin: 0 0 0 15px;}
+.ico-pic-del, .ico-pic-save { height: 22px; line-height: 22px; padding: 0 0 0 22px; overflow: hidden; display: inline-block;*display:inline;vertical-align: middle;zoom:1; background-image: url(images/widget_site.png);background-repeat:no-repeat; margin-right: 5px;}
+.ico-pic-del{ background-position: -128px 0px;}
+.ico-pic-save{ background-position: -167px 0px;}
+.pic-doing{ float:right;}
+.pic-doing a{ float:left; margin: 0 0 0 15px;}
 .diagram-edit {
     background-color: #fff;
     padding: 15px;
@@ -107,16 +83,13 @@
 .diagram-edit .move-bar a.move-down{background-position: -48px -96px;}
 .diagram-edit .move-bar a.move-up{background-position: -8px -96px;}
 .diagram-edit .post-item-edit .edit-box{ border: 1px solid #bbb; padding: 3px; margin: -4px;}
-.diagram-edit .site-doing{ float: left; margin: 0 0 0 0; display: inline; padding: 0 0;}
-.diagram-edit .post-photo .site-doing{ margin-left: 100px; margin-top: 10px;}
+.diagram-edit .pic-doing{ float: left; margin: 0 0 0 0; display: inline; padding: 0 0;}
+.diagram-edit .post-photo .pic-doing{ margin-left: 100px; margin-top: 10px;}
 .diagram-edit .post-photo .photo-des{ clear: both;margin: 0 20px; padding: 20px 0;}
 .diagram-edit .post-photo .photo-des textarea{ height: 60px; width:600px;}
-.site-doing-all{display: none; position:absolute; right:0; bottom: 0px;}
-
-
-
-.diagram-edit .post-item-edit .site-doing-all{ display: block; padding: 10px 0;}
-.diagram-edit .post-item-edit .site-doing-all .site-doing{ float: right;}
+.pic-doing-all{display: none; position:absolute; right:0; bottom: 0px;}
+.diagram-edit .post-item-edit .pic-doing-all{ display: block; padding: 10px 0;}
+.diagram-edit .post-item-edit .pic-doing-all .pic-doing{ float: right;}
 .diagram-edit .post-item-edit .move-bar{ display: block;}
 /*!
  *

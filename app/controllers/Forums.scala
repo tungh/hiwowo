@@ -45,15 +45,15 @@ object Forums extends Controller {
   )
   /*编辑或者新增一个topic*/
   def edit(id: Long) = Users.UserAction { user => implicit request =>
-    //  if (user.isEmpty) {
-    //    Redirect(controllers.users.routes.UsersRegLogin.login)
-   //   } else {
+     if (user.isEmpty) {
+       Redirect(controllers.users.routes.UsersRegLogin.login)
+     } else {
         if (id == 0) Ok(views.html.forums.edit(user, topicForm))
         else {
           val (t,u) = TopicDao.findById(id)
           Ok(views.html.forums.edit(user, topicForm.fill((t.id, t.title, t.typeId, t.content))))
         }
-    //  }
+      }
 
   }
 

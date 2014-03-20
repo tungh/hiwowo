@@ -60,13 +60,15 @@ object UsersRegLogin extends Controller {
         Cache.set(u.id.get.toString,u)
         /*记录登陆信息*/
      //   UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)
-        Redirect(controllers.users.routes.Users.home(u.id.get)).withSession("user" -> u.id.get.toString) }
+      //  Redirect(request.headers.get("REFERER").getOrElse("/user/"+u.id.get)).withSession("user" -> u.id.get.toString)
+          Redirect(controllers.users.routes.Users.home(u.id.get)).withSession("user" -> u.id.get.toString)
+      }
     )
 
   }
   /* 用户退出  清除缓存*/
   def logout=Action{ implicit  request =>
- //   Cache.remove(session.get("user"))
+   // Cache.remove(session.get("user"))
     Redirect(controllers.routes.Pages.index).withNewSession
   }
 

@@ -80,13 +80,23 @@ object DiagramDao {
     ( for(c<-pics if c.id === id) yield c).firstOption
   }
 
+  def findPicsByDiagramId(id:Long):List[Pic] = database.withDynSession{
+    ( for{
+      p  <- pics
+      dp <- diagramPics
+      if p.id === dp.picId
+      if dp.diagramId === id
+    }yield p ).list()
+
+  }
+
 
   /*
   *
   * diagram 处理
   *
   * */
- def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int) = database.withDynSession{
+ def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
     val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
