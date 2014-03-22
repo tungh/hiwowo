@@ -212,6 +212,7 @@ DROP TABLE IF EXISTS `diagram`;
 CREATE TABLE `diagram` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) not null,
+  `type_id`            tinyint NOT NULL DEFAULT '0',
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
   `intro`             text,

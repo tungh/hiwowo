@@ -1,0 +1,45 @@
+@(user:Option[models.user.User])
+@views.html.template(user,nav="index",subNav="weixin")(css="/assets/css/template/pageTempt.css"){
+
+
+<div class="container weixin">
+
+    <div class="row">
+        <section class="mod-header">
+            <h1>嗨喔喔</h1>
+
+            <p><em>用无节操的爱找回快乐</em><br>萌物治愈系</p>
+        </section>
+
+       <section class="mod-body">
+
+
+                  <div class="well" id="newsEditor"> </div>
+       </section>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+    <input type="file" name="file_upload" id="file_upload" />
+    <ul id="filelist"></ul>
+    <br />
+
+
+</div>
+
+}{
+<script type="text/javascript" src="/assets/js/umeditor/umeditor.config.js"></script>
+<script type="text/javascript">
+    seajs.use(['umeditor','umeditor-lang','umeditor-emotion','umeditor-image','umeditor-link','umeditor-map','umeditor-video',"hiwowo/pages/pageTempt.js"],function(umeditor,emotion,image,link,map,video){
+
+
+            var editor = UM.getEditor('newsEditor');
+
+    })
+</script>
+}
+
+

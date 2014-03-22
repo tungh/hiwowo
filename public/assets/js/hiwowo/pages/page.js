@@ -7,42 +7,12 @@
  */
 define(function (require) {
     var $ = jQuery = require("jquery");
-     require("uploadify")
+    var pin = require("pin")
 
     $(function(){
-         /* index page */
-          $(".index .colm dl").hover(function(){
-              $(this).addClass("hover")
-          },function(){
-              $(this).removeClass("hover")
-          })
-
-
-        /* diagram page */
-        $("#J_diagram_sort").dropDown({
-            classNm: ".diagram-dropdown"
+        $(".pin").pin({
+            containerSelector: ".diagram"
         })
-
-        /* pets page */
-        $("#J_num").hover(function(){
-            $(this).hide()
-        },function(){
-            $(this).show()
-        })
-
-       /* uploadify */
-
-        $('#file_upload').uploadify({
-            'fileObjName' : 'fileData',
-            'swf'      : '/assets/js/sea-modules/uploadify.swf',
-            'uploader' : '/uploadImage',
-            'onUploadSuccess' : function(file, data, response) {
-                alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-            }
-            // Put your options here
-        });
-
-        /* uploadify */
 
 
     })

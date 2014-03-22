@@ -9,29 +9,30 @@ import models.forum.dao.TopicDao
  * User: zuosanshao
  * Date: 14-1-18
  * Time: 下午3:17
+ * page 常用的模板
  */
-object Pages extends Controller {
-
-
+object PagesTempt extends Controller {
 
   /* 首页 */
-  def index  = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.index(user))
+  def index = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pagesTempt.index(user))
   }
-
-
+   /* 图说 */
+   def diagrams = Users.UserAction{ user => implicit request =>
+     Ok(views.html.pagesTempt.diagrams(user))
+   }
    /* 微信精选 */
    def weixin = Users.UserAction{ user => implicit request =>
-     Ok(views.html.pages.weixin(user))
+     Ok(views.html.pagesTempt.weixin(user))
    }
-  /* 发现 图说 */
+  /* 发现更多 */
   def find = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.find(user))
+    Ok(views.html.pagesTempt.find(user))
   }
 
   /* 宠物乐园 */
   def pets = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.pets(user))
+    Ok(views.html.pagesTempt.pets(user))
   }
 
 

@@ -8,11 +8,16 @@ GET   /test                                controllers.Test.index
 # Home page
 
 GET       /                                    controllers.Pages.index
-GET       /index2                              controllers.Pages.index2
-GET       /diagrams                            controllers.Pages.diagrams
 GET       /weixin                              controllers.Pages.weixin
 GET       /pets                               controllers.Pages.pets
 GET       /find                               controllers.Pages.find
+
+#common template
+GET       /tempt/index                                    controllers.PagesTempt.index
+GET       /tempt/diagrams                            controllers.PagesTempt.diagrams
+GET       /tempt/weixin                              controllers.PagesTempt.weixin
+GET       /tempt/pets                               controllers.PagesTempt.pets
+GET       /tempt/find                               controllers.PagesTempt.find
 
 #forum
 GET    /forum/search                     controllers.Forums.search
