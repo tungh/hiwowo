@@ -1,8 +1,16 @@
 @import "umeditor/default/css/umeditor.min.css";
 /*新版讨论吧*/
+
 .forum { margin: 20px auto; }
+.forum .forum-main{
+    width: 720px;
+    float: left;
+}
+.forum .forum-side{
+    width: 250px;
+    float: right;
+}
 .forum  .forum-no-data{text-align:center;line-height:100px;background-color:#fff;font-size:16px;font-weight:bold;}
-.forum .forum-main{}
 .forum .forum-main .forum-ltitle,.forum .forum-main .forum-dtitle{background:#fff;height:26px;line-height:26px;padding:7px 15px;}
 .forum .forum-main .forum-ltitle .fl a,.forum .forum-main .forum-stitle .fl a{color:#999;}
 .forum .forum-main .forum-ltitle .fl a.on,.forum .forum-main .forum-stitle .fl a.on{color:#333;}
@@ -30,17 +38,17 @@
 .forum .forum-main .forum-list .unit .info .talk-people a{color:#666;}
 .forum .forum-main .forum-list .unit .info .des{margin-top:10px;line-height:24px;}
 
-.forum .side .ad{padding:10px;background:#fff;}
-.forum .side .taolun-list,.forum .side .taolun-star,.forum .side .taolun-owner{background:#fff;padding:20px 15px;}
-.forum .side .t-header{padding-bottom:10px;border-bottom: 1px dotted #D1D1D1;}
-.forum .side .t-header h3{font-size:14px;}
-.forum .side .taolun-list ul,.forum .side .taolun-owner ul{margin-top:8px;}
-.forum .side .taolun-owner .u-info{line-height:24px;}
-.forum .side .taolun-list li,.forum .side .taolun-owner li{height:30px;line-height:30px;}
-.forum .side .taolun-list a,.forum .side .taolun-owner li a{color:#666;}
-.forum .side .taolun-list .num,.forum .side .taolun-owner li .num{display:block;width:26px;height:18px;line-height:18px;text-align:center;color:#fff;background:#bac5cc;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;margin-top:5px;}
-.forum .side .taolun-star li{padding-top:20px;float:left;width:200px;}
-.forum .side .u-name{font-size:14px;font-weight:bold;color:#333;}
+.forum .forum-side .ad{padding:10px;background:#fff;}
+.forum .forum-side .taolun-list,.forum .forum-side .taolun-star,.forum .forum-side .taolun-owner{background:#fff;padding:20px 15px;}
+.forum .forum-side .t-header{padding-bottom:10px;border-bottom: 1px dotted #D1D1D1;}
+.forum .forum-side .t-header h3{font-size:14px;}
+.forum .forum-side .taolun-list ul,.forum .forum-side .taolun-owner ul{margin-top:8px;}
+.forum .forum-side .taolun-owner .u-info{line-height:24px;}
+.forum .forum-side .taolun-list li,.forum .forum-side .taolun-owner li{height:30px;line-height:30px;}
+.forum .forum-side .taolun-list a,.forum .forum-side .taolun-owner li a{color:#666;}
+.forum .forum-side .taolun-list .num,.forum .forum-side .taolun-owner li .num{display:block;width:26px;height:18px;line-height:18px;text-align:center;color:#fff;background:#bac5cc;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;margin-top:5px;}
+.forum .forum-side .taolun-star li{padding-top:20px;float:left;width:200px;}
+.forum .forum-side .u-name{font-size:14px;font-weight:bold;color:#333;}
 .forum .forum-main .forum-dtitle .back{color:#333;}
 .forum .forum-main .forum-dtitle .fenye{color:#666;margin-top:3px;}
 .forum .forum-main .forum-dtitle .fenye a{display:block;width:40px;height:22px;line-height: 22px;text-align:center;background:#f2f2f2;color:#666;}
@@ -116,20 +124,20 @@
 .J_topicCon img{max-width:560px;max-height:560px;}
 
 /* box notice*/
-.forum .side .box {
+.forum .forum-side .box {
     background-color: #fff;
     margin-bottom: 10px;
     padding: 10px;
     text-align: center;
 }
 
-.forum .side .box .hd {
+.forum .forum-side .box .hd {
     line-height: 1.2;
     padding: 0 0 6px 0;
     margin: 0 0 5px;
     border-bottom: 1px dotted #d1d1d1
 }
-.forum .side .box .bd{
+.forum .forum-side .box .bd{
     line-height: 22px
 }
 

@@ -132,10 +132,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     float: left;
     background: #fff;
 }
-.container .forum-main,.container .diagram-main{
-    width: 720px;
-    float: left;
-}
+
 .container .main .coll,.container .main .colr{
     width: 47%;
     position: relative;
@@ -152,8 +149,9 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 }
 
 .container .side{
-     width: 250px;
+     width: 290px;
     float:right;
+    background: #fff;
 }
 @media only screen and (max-width: 989px) {
     .container {
@@ -435,6 +433,77 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     height: 28px;
     background: url(images/icon_search.png) 0 2px no-repeat
 }
+ /*  喜欢  */
+.like-common { position: absolute;right: 10px;top: 10px;display: inline-block; *display: inline; zoom: 1;vertical-align: middle;width: 80px; height: 34px; z-index: 3020; overflow: hidden}
+.like-common a.like { float: left;width: 34px; height: 34px; background: url(images/ico-like-common.png) no-repeat -23px 0px}
+.like-common .ico-likes { margin-right: 10px}
+.like-common a.like i { float: left;  height: 34px; width: 34px; background: url(images/ico_ilike.png) no-repeat 3px -31px; _background: url(images/ico-like-common.png) no-repeat 4px 0px; text-indent: -9999em}
+.like-common a:hover.like i { background: url(images/ico_ilike.png) no-repeat 2px -103px;  _background: url(images/ico-like-common.png) no-repeat 4px -40px}
+.like-common .like-num { height: 24px; overflow: hidden; margin-top: 8px; text-align: left;padding-left: 5px; position: relative}
+.like-common dl { position: relative}
+.like-common dl dd { height: 24px; float: none}
+.like-common a.liked { float: left; width: 34px; height: 34px;  background: url(images/ico-like-common.png) no-repeat -23px -0px}
+.like-common a.liked i { float: left; height: 34px; width: 34px; background: url(images/ico_ilike.png) no-repeat 6px -15px;  _background: url(images/ico_ilike.png) no-repeat -73px 0px;  text-indent: -9999em}
+.like-common-s { background: url(images/ico-like-common.png) no-repeat -24px -66px; width: 64px;}
+.like-common-s a.like {   background: 0}
+.like-common-s .like-num { padding: 0 3px 0 0;text-align: center}
+.like-common-s a.liked{   background: 0}
+.ico-likes{  line-height: 12px;   padding: 0 0 0 20px; overflow: hidden;display: inline-block; *display: inline;vertical-align: middle; zoom: 1; background: url(images/like.png) no-repeat; _background: url(images/ico_ilike.png) no-repeat -3px 0px; height: 15px; margin: 0}
+.ico-liked { background: url(images/liked.png) no-repeat; _background: url(images/ico_ilike.png) no-repeat -80px -0px;height: 15px; margin: 0}
+a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background: url(images/ico_ilike.png) no-repeat -3px -40px}
+/* 分享 */
+.share a { float:left;width:16px;height:16px;margin-left:5px;background-image:url(images/icons-share.png);background-repeat:no-repeat; }
+.share-link a { width: 16px;height: 16px; padding-left: 5px;display: block; background-image:url(images/icons-share.png);background-repeat:no-repeat; }
+.s-sina { background-position:0 -417px; }
+.s-renren { background-position:0 -80px; }
+.s-tencent { background-position:0 -280px; }
+.s-qzone { background-position:0 -371px; }
+.s-163 { background-position:0 -463px; }
+.s-douban { background-position:0 -120px; }
+.s-qq { background-position:0 0; }
+.s-tao { background-position:0 -163px; }
+.s-alipay { background-position:0 -241px; }
+.l-sina, .l-qq, .l-tao { display:block;width:120px;height:24px;text-indent:-1999px; }
+.l-sina { background:url(images/l-sina.png); }
+.l-qq { background:url(images/l-qq.png); }
+.l-tao { background:url(images/l-tao.png); }
+
+.share32 a { background: url(images/share_32.png) no-repeat; width: 37px;height: 37px;display: block;float: left;padding-left: 5px;text-indent: -100em;cursor: pointer;}
+.sh-qzone { background-position: 0 -75px !important;}
+.sh-sina {background-position: 0 -115px !important;}
+.sh-bdhome { background-position: 0 -155px !important;}
+.sh-renren { background-position: 0 -195px !important;}
+.sh-tencent { background-position: 0 -235px !important;}
+.sh-kaixin001 {background-position: 0 -275px !important;}
+.sh-tqf { background-position: 0 -315px !important;}
+.sh-hi { background-position: 0 -355px !important;}
+.sh-douban {  background-position: 0 -395px !important;}
+.sh-tsohu { background-position: 0 -435px !important;}
+.sh-msn { background-position: 0 -475px !important;}
+.sh-qq { background-position: 0 -515px !important;}
+.sh-taobao { background-position: 0 -555px !important;}
+.sh-tieba {  background-position: 0 -595px !important;}
+
+
+/* 分享开关 */
+.share-switch {background-image:url(images/share-icon-gray.png);background-repeat:no-repeat;}
+.ss-sina-btnclick-on{background-position:0 -417px;}
+.ss-tencent-btnclick-on{background-position:0 -280px;}
+.ss-renren-btnclick-on{background-position:0 -80px;}
+.ss-qzone-btnclick-on{background-position:0 -371px;}
+.ss-163-btnclick-on{background-position:0 -463px;}
+.ss-douban-btnclick-on{background-position:0 -120px;}
+.ss-sina-btnclick-off{background-position:-45px -417px;}
+.ss-tencent-btnclick-off{background-position:-45px -280px;}
+.ss-renren-btnclick-off{background-position:-45px -80px;}
+.ss-qzone-btnclick-off{background-position:-45px -371px;}
+.ss-163-btnclick-off{background-position:-45px -463px;}
+.ss-douban-btnclick-off{background-position:-45px -120px;}
+.sns-sync { float:right;padding-top:12px; }
+.sns-sync span { float:left; }
+.sns-sync ul { float:left;height:16px; }
+.sns-sync ul li { float:left;width:16px;height:16px;cursor:pointer;margin-right:5px; }
+
 
 /* footer 组件 */
 #footer {height: 72px;line-height: 72px;background: white;border-top: 1px solid #e6e6e6;margin-top: 30px}

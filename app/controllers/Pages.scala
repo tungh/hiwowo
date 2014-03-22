@@ -16,6 +16,12 @@ object Pages extends Controller {
   def index = Users.UserAction{ user => implicit request =>
     Ok(views.html.pages.index(user))
   }
+
+  /* 首页2 */
+  def index2  = Users.UserAction{ user => implicit request =>
+    Ok(views.html.pages.index2(user))
+  }
+
    /* 图说 */
    def diagrams = Users.UserAction{ user => implicit request =>
      Ok(views.html.pages.diagrams(user))

@@ -8,6 +8,7 @@ GET   /test                                controllers.Test.index
 # Home page
 
 GET       /                                    controllers.Pages.index
+GET       /index2                              controllers.Pages.index2
 GET       /diagrams                            controllers.Pages.diagrams
 GET       /weixin                              controllers.Pages.weixin
 GET       /pets                               controllers.Pages.pets
