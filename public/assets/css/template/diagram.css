@@ -10,9 +10,6 @@
     z-index: 3;
 }
 .diagram .main{
-    float: left;
-    width: 680px;
-    background: #FFF;
     border-right: #b4b4b4 solid 1px;
     overflow: auto;
 }

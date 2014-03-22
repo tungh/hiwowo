@@ -128,7 +128,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     clear: both;
 }
 .container .main{
-    width: 740px;
+    width: 680px;
     float: left;
     background: #fff;
 }
@@ -157,13 +157,13 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 }
 @media only screen and (max-width: 989px) {
     .container {
-        width: 740px;
+        width: 680px;
     }
     .container .main{
-        width: 740px;
+        width: 680px;
     }
     .container .forum-main {
-        width: 740px;
+        width: 680px;
     }
    .container .side{
        display: none !important;
