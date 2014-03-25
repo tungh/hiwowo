@@ -223,7 +223,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 }
 
 .navbar .topSearch{display: inline;float: right;height: 40px;line-height: 40px}
-.navbar .topSearch .searchBox{float: left; width: 170px;height: 24px;padding-left: 13px;zoom: 1;margin: 8px  0 0 200px;display: inline;background: #FFF; -webkit-border-radius: 13px; -moz-border-radius: 13px;  -ms-border-radius: 13px;-o-border-radius: 13px;border-radius:13px; behavior: url(PIE.htc);}
+.navbar .topSearch .searchBox{float: left; width: 170px;height: 24px;padding-left: 13px;zoom: 1;margin: 8px  50px 0 10px;display: inline;background: #FFF; -webkit-border-radius: 13px; -moz-border-radius: 13px;  -ms-border-radius: 13px;-o-border-radius: 13px;border-radius:13px; behavior: url(PIE.htc);}
 .navbar .topSearch .searchText{float: left; height: 24px;width: 124px;font-size: 12px;line-height: 24px;border: 0;color: #556069;}
 .navbar .topSearch .searchBtn{float: right;width: 24px;height: 28px; background: url(images/icon_search.png) 0 2px no-repeat;}
 .navbar .user-info {display: inline;float: right;height: 40px;line-height: 40px;}

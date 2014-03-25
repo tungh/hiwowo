@@ -1,7 +1,8 @@
 ﻿# --- First database schema
 
 # --- !Ups
-
+#DROP DATABASE IF EXISTS `hiwowo`;
+#create database  hiwowo;
 /************************************************************
  * 用户是个大的结构  主要有以下几个表
  * user表                User常用的基本信息，包括常用的统计信息
