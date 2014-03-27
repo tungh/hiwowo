@@ -71,7 +71,7 @@ object  Diagrams extends Controller {
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
     else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止发表图说"))
     else {
-      val diagramId = (request.body \ "picId").asOpt[Long]
+      val diagramId = (request.body \ "diagramId").asOpt[Long]
       val diagramTitle = (request.body \ "diagramTitle").asOpt[String]
       val  diagramPic = (request.body \ "diagramPic").asOpt[String]
       val  diagramIntro = (request.body \ "diagramIntro").asOpt[String]
@@ -80,17 +80,18 @@ object  Diagrams extends Controller {
       val  diagramTags = (request.body \ "diagramTags").asOpt[String]
       val diagramStatus =  (request.body \ "diagramStatus").asOpt[Int]
       val  picIds = (request.body \ "picIds").asOpt[String]
-      val ids=picIds.get.split(",").map(x=>x.toLong)
+      val ids=picIds.get.split("-").map(x=>x.toLong)
       if(diagramTitle.isEmpty){
         Ok(Json.obj("code"->"104","message"->"diagram title is empty"))
       } else {
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
           val dId = DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
-          for (id<-ids) DiagramDao.addDiagramPic(dId,id)
+          for (id<-ids){ if(DiagramDao.findDiagramPic(dId,id).isEmpty){DiagramDao.addDiagramPic(dId,id)}  }
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId))
         }else{
           DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
-          for (id<-ids) DiagramDao.addDiagramPic(diagramId.get,id)
+        /* 查找此diagram pic是否保存 */
+          for (id<-ids){ if(DiagramDao.findDiagramPic(diagramId.get,id).isEmpty){ println("sdsdfdddddd"); DiagramDao.addDiagramPic(diagramId.get,id)}  }
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->diagramId.get))
         }
 

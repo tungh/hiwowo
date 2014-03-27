@@ -265,7 +265,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     background: url(images/icon_messageTop.png) no-repeat 15px;
 }
 .navbar .msg span {
-    display: none;
+    display:block;
     width: 12px;
     height: 24px;
     background: url(images/message_num_bg.png) no-repeat;

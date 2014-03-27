@@ -9,7 +9,7 @@
                         <div class="diagram-title">
                             <dl>
                                 <dt>标题：</dt>
-                                <dd><input id="J_title" onkeyup="checkTopicTitleNode($(this), 100)" name="title" class="input-normal" value="@diagram.title"></dd>
+                                <dd><input id="J_title"   name="title" class="b-input" value="@diagram.title"></dd>
                                 <dd class="msg" style="display:none"><div class="msg-error"></div></dd>
                             </dl>
                         </div>
@@ -17,22 +17,26 @@
                         <div class="diagram-intro">
                             <dl>
                                 <dt>亲，你就说点什么呗 </dt>
-                                <dd><input id="J_intro" name="intro" value="@diagram.intro"> </dd>
-                                <dd class="msg" style="display: none"><div class="msg-error"></div> </dd>
+                                <dd><textarea id="J_intro" name="intro" class="b-textarea">@diagram.intro</textarea> </dd>
+
+
                             </dl>
                         </div>
 
                         @for(pic <- pics){
-                        <div  class="post-photo post-item-edit topic_node"  type="image" picid="@pic.id">
+                        <div  class="post-photo post-item-edit"  type="image" picid="@pic.id">
                             <div class="move-bar"><a class="move-up" href="javascript:;" style="display: none;">上移</a><a class="move-down" href="javascript:;" style="display: none;">下移</a></div>
                             <div class="edit-box clearfix">
                                 <div class="upload-img">
                                     <div class="img"><img src="@pic.url"></div>
                                 </div>
-                                <div class="photo-des">@pic.intro</div>
+                                <div class="photo-des">
+                                <textarea>@pic.intro</textarea>
+                                </div>
                             </div>
                             <div class="pic-doing-all clearfix">
                                 <span class="pic-doing">
+                                    <a class="img_save_href" href="javascript:;"><ins class="ico-pic-save"></ins>保存</a>
                                    <a class="sitedel-href" href="javascript:;"><ins class="ico-pic-del"></ins>删除</a>
                                 </span>
                             </div>
@@ -43,10 +47,22 @@
                         <div class="diagram-uploadify">
                             <div  id="J_uploadify"> </div>
                         </div>
-
+                        <div class="diagram-ps">
+                            <dl>
+                                <dt id="J_psLabel">亲，狠戳我，给我写个后记，怎么样啊</dt>
+                                <dd> <textarea id="J_ps"  name="ps" class="b-textarea hidden">@diagram.ps</textarea></dd>
+                            </dl>
+                        </div>
+                        <div class="diagram-tags">
+                            <dl>
+                                <dt id="J_tagsLabel">那个啥，都到这了，给我贴几个标签如何^_^</dt>
+                                <dd>  <input id="J_tags" name="tags" class="b-input hidden" type="text" value="@diagram.tags" placeholder="亲，给我添几个标签如何"></dd>
+                            </dl>
+                        </div>
 
                       <!-- 操作 -->
                         <div class="diagram-btnbar clearfix">
+                            <input type="hidden" name="id" id="J_id" value="@diagram.id">
                            <span class="fr">
                             <a id="id-btn-draft" class="btn-diagram"  href="javascript:;">保存草稿</a>
                             <a id="id-btn-diagram" class="btn-diagram" href="javascript:;">发布</a>

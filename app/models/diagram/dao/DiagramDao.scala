@@ -100,6 +100,7 @@ object DiagramDao {
     val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
+    println("content : " +content)
     diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
   }
   def deleteDiagram(id:Long) = database.withDynSession{
@@ -119,6 +120,9 @@ object DiagramDao {
 
  def addDiagramPic(diagramId:Long,picId:Long) = database.withDynSession{
    ( for( c<- diagramPics)yield (c.diagramId,c.picId) ).insert(diagramId,picId)
+ }
+ def findDiagramPic(diagramId:Long,picId:Long):Option[DiagramPic] = database.withDynSession{
+   ( for( c<- diagramPics if c.diagramId === diagramId if c.picId === picId ) yield c).firstOption
  }
   def deleteDiagramPic(diagramId:Long,picId:Long) = database.withDynSession{
     ( for(c<- diagramPics if c.diagramId === diagramId if c.picId === picId)yield c).delete

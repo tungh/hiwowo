@@ -58,8 +58,9 @@
     border: 1px solid #eee;
     margin-bottom: 15px;
 }
-.diagram-edit  dt{ font-size: 14px; padding-bottom: 10px;}
-.diagram-edit  input{ font-size: 18px; width: 498px; padding: 10px 10px; margin: 0;}
+.diagram-edit  dt{ font-size: 14px; padding-top: 15px;color:#999}
+.diagram-edit  .b-input{ font-size: 14px; width: 580px;margin: 0;}
+.diagram-edit .b-textarea{width: 580px;height: 50px;}
 .diagram-edit  dd.msg{ padding: 10px 0; text-align:right; height: 24px; }
 .diagram-edit  .msg-error{ vertical-align: inherit; margin-right: 15px;}
 .diagram-edit .diagram-btnbar{ margin-bottom: 50px; padding: 10px 25px;}

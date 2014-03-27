@@ -12,7 +12,7 @@
                         <div class="diagram-title">
                             <dl>
                                 <dt>标题：</dt>
-                                <dd><input id="J_title" onkeyup="checkTopicTitleNode($(this), 100)" name="title" class="input-normal" value="嗨喔喔"></dd>
+                                <dd><input id="J_title"  name="title" class="b-input" value="" placeholder="给我起个牛逼哄哄的标题"></dd>
                                 <dd class="msg" style="display:none"><div class="msg-error">：（ 超出2个字了</div>32/30</dd>
                             </dl>
                         </div>
@@ -20,8 +20,7 @@
                         <div class="diagram-intro">
                             <dl>
                                 <dt>亲，你就说点什么呗 </dt>
-                                <dd><input id="J_intro" name="intro" value="亲，你就不说点什么吗"> </dd>
-                                <dd class="msg" style="display: none"><div class="msg-error"></div> </dd>
+                                <dd><textarea id="J_intro" name="intro" class="b-textarea"></textarea> </dd>
                             </dl>
                         </div>
 
@@ -29,7 +28,18 @@
                             <div  id="J_uploadify"> </div>
                         </div>
 
-
+                        <div class="diagram-ps">
+                            <dl>
+                                <dt id="J_psLabel">亲，狠戳我，给我写个后记，怎么样啊</dt>
+                                <dd> <textarea id="J_ps"  name="ps" class="b-textarea hidden"></textarea></dd>
+                            </dl>
+                        </div>
+                        <div class="diagram-tags">
+                            <dl>
+                                <dt id="J_tagsLabel">那个啥，都到这了，给我贴几个标签如何^_^</dt>
+                                <dd>  <input id="J_tags" name="tags" class="b-input hidden" type="text" value="" placeholder="亲，给我添几个标签如何"></dd>
+                            </dl>
+                        </div>
                       <!-- 操作 -->
                         <div class="diagram-btnbar clearfix">
                            <span class="fr">

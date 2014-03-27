@@ -38,7 +38,7 @@
             </section>
             }else{
             <section class="user-info">
-                <a href="" class="msg" target="_blank"><span id="J_msgNum"></span></a>
+                <a href="" class="msg" target="_blank"><span id="J_msgNum" style="display: none">9</span></a>
                 <div class="menu nav-item">
                     <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user">
                         <img class="avatar" alt="@user.get.name" src="@user.get.pic">
@@ -51,8 +51,8 @@
                         <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
-                <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.loves(user.get.id.get)"><i></i></a>
-                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
+              <!--  <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.loves(user.get.id.get)"><i></i></a>
+                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>-->
             </section>
            }
             <section class="topSearch">

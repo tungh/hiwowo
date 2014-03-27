@@ -216,7 +216,7 @@ CREATE TABLE `diagram` (
   `type_id`            tinyint NOT NULL DEFAULT '0',
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
-  `intro`             text,
+  `intro`              text,
   `content`             text ,
   `ps`                  text ,
   `tags`             varchar(250) ,

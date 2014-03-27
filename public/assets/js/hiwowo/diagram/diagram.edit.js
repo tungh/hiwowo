@@ -114,7 +114,7 @@
          var idstrings = "";
          var id = 0;
          $(".topic_node").each(function() {
-             var cid = $(this).data("picid");
+             var cid = $(this).attr("picid");
              if(id > 0) {
                  idstrings += "-";
              }
@@ -155,8 +155,6 @@
          clone.attr("id", "image_" + image_id)
          afterNode.after(clone)
          clone.show();
-         clone.attr("type", "image");
-         clone.data("picid", image_id);
          clone.attr("picid",image_id)
          clone.addClass("topic_node");
          checkAndSetMoveBar(clone);
@@ -184,7 +182,7 @@
          var notdefined;
          attatchedFunc = notdefined;
 
-         var diagramId =$("#J_diagramId").val()
+         var diagramId =$("#J_id").val()
          var diagramTitle =$("#J_title").val()
          var diagramPic = $(".topic_node").first().find("img").attr("src");
          var diagramIntro =$("#J_intro").val()
@@ -192,25 +190,26 @@
          var diagramPs =$("#J_ps").val()
          var diagramTags =$("#J_tags").val()
          var picIds = getPicIDs()
-         alert(picIds + " : " +diagramContent +" : " +diagramTitle)
+
          $.ajax({
              url: "/diagram/saveDraft",
              type: "post",
              contentType:"application/json; charset=utf-8",
              dataType: "json",
              data: JSON.stringify({
-                 diagramId:diagramId,
+                 diagramId:parseInt(diagramId),
                  diagramTitle: diagramTitle,
                  diagramPic:diagramPic,
                  diagramIntro:diagramIntro,
                  diagramContent:diagramContent,
                  diagramPs:diagramPs,
                  diagramTags:diagramTags,
-                 diagramStatus:draft,
+                 diagramStatus:parseInt(draft),
                  picIds:picIds
              }),
              success: function(data) {
                  if(data.code=="100"){
+                     $("#J_id").val(data.diagramId)
                      alert("success")
                  }
              }
@@ -229,20 +228,23 @@
      }
      $(function(){
 
-         $("#J_intro").jqte({
+       /*  $("#J_intro").jqte({
              format: false,
              fsize:false,
              color:false
-         })
-         $("#J_psLabel").click(function(){
+         })*/
+       /*  $("#J_psLabel").click(function(){
              $("#J_diagramPs").jqte({
                  format: false,
                  fsize:false,
                  color:false
              })
+         })*/
+         $("#J_psLabel").click(function(){
+             $("#J_ps").toggleClass("hidden")
          })
          $("#J_tagsLabel").click(function(){
-             $("#J_diagramTags").toggleClass("hidden")
+             $("#J_tags").toggleClass("hidden")
          })
          /* 上传图片*/
          $('#J_uploadify').uploadify({
@@ -271,31 +273,7 @@
              // Put your options here
          });
 
-         $("a").bind("click", function(e) {
-             var href = $(this).attr("href");
-             if($(this).attr("target")) {
-                 return;
-             }
 
-             if(!hasChanged()) {
-                 return;
-             }
-
-             if(!href) {
-                 return;
-             }
-
-             if(href == "#") {
-                 return;
-             }
-
-             if(href.indexOf("javascript") == -1) {
-                 confirmOperate(function() {
-                     window.location.href=href;
-                 }, "编辑贴子中，确定要跳转到其它页面？");
-                 e.preventDefault();
-             }
-         });
          // 上移的事件
          $(document).on("click",".move-up",function () {
                  var parentNode = $(this).closest(".topic_node");
@@ -335,7 +313,7 @@
          $(document).on("click",".img_save_href",function(){
              var parentDiv = $(this).closest(".post-photo");
              var pic ={
-                picId:$(parentDiv).data("picid"),
+                picId:parseInt($(parentDiv).attr("picid")),
                 picUrl:$(parentDiv).find(".img img").attr("src"),
                 picIntro:$(parentDiv).find("textarea").val()
              }
@@ -361,7 +339,7 @@
          $(document).on("click",".sitedel-href",function () {
              var parentNode = $(this).closest(".topic_node");
              var cid = $(parentNode).attr("cid");
-             var type = $(parentNode).attr("type");
+
              //todo
          });
          // 图片上传节点删除
@@ -369,6 +347,9 @@
              var parentNode = $(this).closest(".post-photo");
              // todo
          });
+         $("#J_title").keyup(function(){
+             checkTopicTitleNode($(this), 100)
+         })
      })
 
  })
