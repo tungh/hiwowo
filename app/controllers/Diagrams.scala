@@ -18,7 +18,10 @@ object  Diagrams extends Controller {
 
   /* 图说 */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.diagram(user))
+
+    val diagram = DiagramDao.findDiagramById(id)
+
+    Ok(views.html.diagrams.diagram(user,diagram))
   }
 
   /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只用不为零的图说，可以进入编辑状态 */
@@ -99,9 +102,6 @@ object  Diagrams extends Controller {
     }
   }
 
-  def publishSave = Users.UserAction{ user => implicit request =>
 
-    Ok("OK")
-  }
 
 }

@@ -164,9 +164,10 @@
     font-size: 16px;
     color: #444;
     line-height: 26px;
-   
 }
-
+.diagram .main .desc textarea{
+    border: none;
+}
 .diagram .main .desc h2, .diagram .main .desc h1, .diagram .main .desc h3, .diagram .main .desc h4 {
     color: #666;
     padding: 0;
