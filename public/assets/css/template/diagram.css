@@ -335,43 +335,7 @@
     padding-left: 15px;
     font-weight: bold
 }
-.diagram .side .ReadUser {
-    padding: 10px 10px 25px 10px;
-    overflow: auto;
-    background: url(images/dash_line_1x3.png) repeat-x bottom
-}
 
-.diagram .side .ReadUser h2 {
-    font-size: 14px;
-    font-weight: normal;
-    font-family: "宋体";
-    color: #444;
-    font-weight: bold;
-    padding-left: 8px
-}
-
-.diagram .side .ReadUserList li {
-    float: left;
-    height: 33px;
-    width: 33px;
-    padding: 5px 5px 0 7px;
-    margin-top: 10px
-}
-
-.diagram .side .ReadUserList li a {
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    display: block;
-    border: #FFF solid 3px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4)
-}
-
-.diagram .side .ReadUserList li a img {
-    height: 30px;
-    width: 30px;
-    border-radius: 30px
-}
 
 /*  diagram edit */
 /* box notice*/
