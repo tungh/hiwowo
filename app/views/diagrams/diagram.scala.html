@@ -2,51 +2,35 @@
 @views.html.template(user)(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
- <div class="row">
+
+
  @if(diagram.isEmpty){
- <div class="no-content"> 哎呀，这篇图说被狗狗吃掉了 </div>
+    <div class="row">
+           <div class="no-content"> 哎呀，这篇图说被狗狗吃掉了 </div>
+    </div>
  }else {
+        <div class="row">
 <div class="main">
 <div class="sitebar">
     <ul>
-        <li class="esp"><a href="" title="人物杂志"><img  src="/images/1.jpg" width="60" height="60"></a></li>
-        <li>此图说来自 <a href="" title="人物杂志">《人物杂志》</a></li>
-        <li>图说<strong>64</strong></li>
-        <li> 订阅数 <strong>2277</strong></li>
-        <li class="btn"><a href="javascript:void(0)"  class="follow js_follow">马上订阅</a>
-            <a href="javascript:void(0)" class="follow js_unfollow" style="display:none">已经订阅</a>
+        <li class="esp"><a href="" title=""><img  src="/images/1.jpg" width="60" height="60"></a></li>
+        <li> <a href="" title="嗨喔喔">嗨喔喔</a></li>
+        <li>阅读<strong>64</strong></li>
+
+        <li class="btn"><a href="javascript:void(0)"  class="follow js_follow">+喜欢</a>
+            <a href="javascript:void(0)" class="follow js_unfollow" style="display:none">已经喜欢</a>
         </li>
     </ul>
 </div>
 <h1 class="title"> @diagram.get.title</h1>
 
-<div class="info">
-    <ul>
-        <li class="infoleft">
-            <a href="javascript:void(0)" class="js_tuijian unline">推荐</a>
-            <a  href="javascript:void(0)"  class="js_bjlinkclip">|</a>
-            <a title="编辑剪报" href="javascript:void(0);"target="_blank" class="js_bjlinkclip unline">编辑</a>
-            <a  href="javascript:void(0)" style="display: none;" class="js_dellinkclip">|</a>
-            <a title="删除" href="javascript:void(0);" class="js_dellinkclip unline">删除</a>
-            <a href="javascript:void(0)">|</a>
-            <a href="javascript:void(0)" class="js_pvCount">阅读&nbsp;<span>344</span></a>
-        </li>
-        <li class="userImg">
-            <a href=""><img src="/images/user/default.jpg" class="js_uimage"></a>
-        </li>
-        <li class="inforight js_ReclipPaths">
-            <a href=""  class="user" title="成都壳子"><span>成都壳子</span></a>
-            <a  href="javascript:void(0)" style="cursor:pointer">5个月前 摘自</a>
-            <a href="" target="_blank"><span>qq.com</span></a>
-        </li>
-    </ul>
-</div>
+
 <div class="desc">
    @Html(diagram.get.content.getOrElse(""))
 </div>
 </div>
 <div class="side">
-    <div class="box affix">
+    <div class="box">
     <div class="UserApp">
         <ul class="js_UserApp">
         <li class="espImg">
@@ -88,8 +72,26 @@
     </div>
     </div>
     </div>
+            <!-- left float -->
+            <div class="share-pin">
+                <div class="share-nav">
+                     <ul>
+                         <li class="collect">
+                             <div class="favNum" style="display: block;">6</div>
+                         </li>
+                         <li class="esp"></li>
+                     </ul>
+                </div>
+                <div class="share-content">
+                      <div class="ml15">
+                          <div class="love">ddd</div>
+                          <div class="share">dfdfd</div>
+                      </div>
+                </div>
+            </div>
+        </div>
  }
- </div>
+
 
 </div>
 
