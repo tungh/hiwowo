@@ -24,7 +24,7 @@ object DiagramDao {
   val diagramDiscusses = TableQuery[DiagramDiscusses]
   val diagramPics = TableQuery[DiagramPics]
   val pics = TableQuery[Pics]
-
+  val users = TableQuery[Users]
 
   /*
    *
@@ -100,7 +100,6 @@ object DiagramDao {
     val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
-    println("content : " +content)
     diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
   }
   def deleteDiagram(id:Long) = database.withDynSession{
@@ -114,6 +113,15 @@ object DiagramDao {
   }
   def findDiagramById(id:Long):Option[Diagram] = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield c).firstOption
+  }
+  def findDiagram(id:Long):Option[(Diagram,User)] = database.withDynSession{
+    (
+      for{
+        c<-diagrams
+        u<-users
+         if c.uid === u.id
+        if c.id === id } yield (c,u)
+      ).firstOption
   }
 
   /*

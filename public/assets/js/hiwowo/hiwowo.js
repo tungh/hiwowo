@@ -617,9 +617,9 @@ define(function(require, exports) {
         $("#J_topbar_user").dropDown({
             classNm: ".topbar-dropdown"
         });
-        $("#J_bottombar_user").dropDown({
-            classNm: ".bottombar-dropdown"
-        });
+        $("#J_diagram_sort").dropDown({
+            classNm:".find-diagram-dropdown"
+        })
         $(".feed").hover(function(){
             $(this).find(".link-to-post-holder").show()
         },function(){

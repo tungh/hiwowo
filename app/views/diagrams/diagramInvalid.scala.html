@@ -1,0 +1,21 @@
+@(user:Option[models.user.User])
+@views.html.template(user,nav="index",subNav="find")(css="/assets/css/template/diagram.css"){
+
+<div class="container diagram">
+
+
+
+    <div class="row">
+        <div class="no-content"> 哎呀，这篇图说被狗狗吃掉了 </div>
+    </div>
+
+
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use("hiwowo/diagram/diagram.js")
+</script>
+}
