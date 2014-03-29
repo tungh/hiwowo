@@ -109,6 +109,9 @@ object DiagramDao {
   def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status) ).update(uid,title,intro,content,ps,tags,status)
   }
+  def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
+    (for(c<-diagrams if c.id === id) yield  c.status).update(status)
+  }
   def findDiagramById(id:Long):Option[Diagram] = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield c).firstOption
   }

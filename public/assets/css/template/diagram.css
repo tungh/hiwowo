@@ -9,6 +9,14 @@
     position: relative;
     z-index: 3;
 }
+.diagram .no-content{
+    position: relative;
+    margin-bottom: 20px;
+    background-color: #fff;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+}
 .diagram .row{
     position: relative;
     background-color: #fff;
@@ -34,7 +42,7 @@
     height: 60px;
     line-height: 60px;
     padding-left: 15px;
-    color: #999
+    color: #bbb
 }
 
 .main .sitebar li strong {
@@ -47,8 +55,7 @@
 
 .diagram .main .sitebar li a {
     font-size: 12px;
-    font-weight: bold;
-    color: #333
+    color: #bbb
 }
 
 .diagram .main .sitebar li.btn {

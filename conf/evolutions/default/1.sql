@@ -220,11 +220,12 @@ CREATE TABLE `diagram` (
   `content`             text ,
   `ps`                  text ,
   `tags`             varchar(250) ,
-  `come_from`             varchar(250) ,
   `status`            tinyint  not null default  '0',
   `view_num`                 smallint(10) not null  DEFAULT '0',
   `love_num`                 smallint(10) not null  DEFAULT '0',
   `discuss_num`                 smallint(10) not null  DEFAULT '0',
+  `come_from_site`             varchar(64) ,
+  `come_from_url`             varchar(250) ,
   `modify_time`         timestamp default '2013-07-18 12:00:00',
   `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)

@@ -102,6 +102,24 @@ object  Diagrams extends Controller {
     }
   }
 
+   def  delete =Action(parse.json){  implicit request =>
+     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+     else{
+       val diagramId = (request.body \ "diagramId").asOpt[Long]
+       if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
+         Ok(Json.obj("code" -> "104", "message" ->"图说不存在"))
+       }else{
+         val diagram =DiagramDao.findDiagramById(diagramId.get)
+          if(user.get.id.get == diagram.get.uid){
+            DiagramDao.modifyDiagramStatus(diagramId.get,0)
+            Ok(Json.obj("code" -> "104", "message" ->"图说已删除"))
+          }else{
+            Ok(Json.obj("code" -> "444", "message" ->"你没有权限删除哦"))
+          }
+       }
 
+     }
+   }
 
 }

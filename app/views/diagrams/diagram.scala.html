@@ -1,5 +1,5 @@
 @(user:Option[models.user.User],diagram:Option[models.diagram.Diagram])
-@views.html.template(user)(css="/assets/css/template/diagram.css"){
+@views.html.template(user,nav="index",subNav="find")(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
 
@@ -14,9 +14,9 @@
 <div class="sitebar">
     <ul>
         <li class="esp"><a href="" title=""><img  src="/images/1.jpg" width="60" height="60"></a></li>
-        <li> <a href="" title="嗨喔喔">嗨喔喔</a></li>
-        <li>阅读<strong>64</strong></li>
-
+        <li> <a href="" title="嗨喔喔" style="color: #333">嗨喔喔</a></li>
+        <li>阅读<strong>64</strong> &nbsp;|&nbsp;<a href="@controllers.routes.Diagrams.edit(diagram.get.id.get)">编辑</a>&nbsp;|&nbsp;<a href="">删除</a></li>
+        <li></li>
         <li class="btn"><a href="javascript:void(0)"  class="follow js_follow">+喜欢</a>
             <a href="javascript:void(0)" class="follow js_unfollow" style="display:none">已经喜欢</a>
         </li>
