@@ -210,9 +210,11 @@
              success: function(data) {
                  if(data.code=="100"){
                      $("#J_id").val(data.diagramId)
-                     alert("success")
+
                      if(!draft){
                          window.location.href="/diagram/"+data.diagramId
+                     } else{
+                         alert("success")
                      }
                  }
              }

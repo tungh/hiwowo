@@ -7,9 +7,13 @@
 <div class="main">
 <div class="sitebar">
     <ul>
-        <li class="esp"><a href="" title=""><img  src="/images/1.jpg" width="60" height="60"></a></li>
-        <li> <a href="" title="嗨喔喔" style="color: #333">嗨喔喔</a></li>
-        <li>阅读<strong>64</strong> &nbsp;|&nbsp;<a href="@controllers.routes.Diagrams.edit(diagram.getDiagram.id.get)">编辑</a>&nbsp;|&nbsp;<a href="">删除</a></li>
+        <li class="esp"><a href="@controllers.users.routes.Users.home(diagram.getUser.id.get)" title="@diagram.getUser.name" target="_blank" ><img  src="@diagram.getUser.pic" width="60" height="60"></a></li>
+        <li> <a href="@controllers.users.routes.Users.home(diagram.getUser.id.get)" title="@diagram.getUser.name" style="color: #333">@diagram.getUser.name</a></li>
+        <li>浏览<strong>@diagram.getDiagram.viewNum</strong>
+            @if(!user.isEmpty && diagram.getDiagram.uid == user.get.id.get){
+           <a href="@controllers.routes.Diagrams.edit(diagram.getDiagram.id.get)">编辑</a>
+            }
+        </li>
         <li></li>
         <li class="btn"><a href="javascript:void(0)"  class="follow js_follow">+喜欢</a>
             <a href="javascript:void(0)" class="follow js_unfollow" style="display:none">已经喜欢</a>

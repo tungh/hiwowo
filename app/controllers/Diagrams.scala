@@ -5,8 +5,9 @@ import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.user.User
-import models.diagram.dao.DiagramDao
+import models.diagram.dao.{DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
+import play.api.cache.Cache
 
 
 /**
@@ -23,6 +24,14 @@ object  Diagrams extends Controller {
 
   /* 图说 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
+  /* 记录每个页面的点击次数，先放在cache里，当大于9时，记录到数据库中 */
+    val viewNum =  Cache.getOrElse[Int]("diagram_"+id) { 1 }
+    Cache.set("diagram_"+id,viewNum+1)
+    if(viewNum >9) {
+      DiagramSQLDao.updateViewNum(id,viewNum)
+      Cache.remove("topic_"+id)
+    }
+
     val diagramWithUser = DiagramDao.findDiagram(id)
     val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),None)
      if(diagramWithUser.isEmpty ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
