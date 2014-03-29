@@ -20,7 +20,9 @@
 
 
 <div class="desc">
+    <div class="intro">@diagram.getDiagram.intro.getOrElse("")</div>
    @Html(diagram.getDiagram.content.getOrElse(""))
+    <div class="ps">@diagram.getDiagram.ps.getOrElse("")</div>
 </div>
 </div>
 <div class="side">

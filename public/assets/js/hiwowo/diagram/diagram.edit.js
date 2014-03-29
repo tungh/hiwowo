@@ -211,14 +211,17 @@
                  if(data.code=="100"){
                      $("#J_id").val(data.diagramId)
                      alert("success")
+                     if(!draft){
+                         window.location.href="/diagram/"+data.diagramId
+                     }
                  }
              }
          });
 
      }
      function postTopic() {
-         if(!checkTopicTitleNode($("#title"), 100)) {
-             $("#title").focus();
+         if(!checkTopicTitleNode($("#J_title"), 100)) {
+             $("#J_title").focus();
              return false;
          }
 

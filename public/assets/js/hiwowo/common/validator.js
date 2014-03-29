@@ -124,19 +124,11 @@ define(function(require, exports) {
 	});
 
 	vali.fn("input[name=phone]", "请填写11位手机号码，方便我们及时提醒您集分宝到账成功", "info");
-   // vali.fn("input[name=weixin]", "请填写微信号，方便我们及时提醒您集分宝到账成功", "info");
-	vali.fn("input[name=alipay]", "请输入正确的支付宝账号", "error", function(el, v) {
-		return $.hiwowo.util.isEmail(v)||/^(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/.test(v);
-	});
-	vali.fn("input[name=alipay]", "支付宝账号不能为空，否则收不到集分宝哦", "require", function(el, v) {
-		return v.length == 0 ? false : true;
-	});
-	vali.fn("input[name=shiDou]", "食豆数量不能为空", "require", function(el, v) {
-		return v.length == 0 ? false : true;
-	});
-	vali.fn("input[name=shiDou]", "食豆的数量需要是1000的整数倍,例如1000,2000,3000等", "error", function(el, v) {
-		return /^([0-9])(000)$/.test(v)
-	});
+    vali.fn("input[name=weixin]", "请填写微信号，方便彼此联系哦", "info");
+
+
+
+
 	
 	
 	
