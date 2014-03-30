@@ -8,7 +8,7 @@ import models.user.User
 import models.diagram.dao.{DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
 import play.api.cache.Cache
-
+import play.api.Play.current
 
 /**
  * Created with IntelliJ IDEA.
