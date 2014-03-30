@@ -26,7 +26,6 @@ import org.apache.http.util.EntityUtils
 */
 
 object UsersSnsLogin extends Controller {
-  private def taobaoAppkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
 
   /*
   * 第三方登录 目前只开发qq weibo taobao
@@ -35,7 +34,7 @@ object UsersSnsLogin extends Controller {
     if(snsType=="qzone"){
       Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101050057&state=qq&redirect_uri=http://hiwowo.com/user/qzone/registed/"+backType+"/"+id)
     }else if (snsType=="sina"){
-      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1464940004&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed/"+backType+"/"+id)
+      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1905427044&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed/"+backType+"/"+id)
     }
     else{
       Ok("亲，我们只支持qq帐号登录和新浪微博登陆哦…… ")
@@ -96,18 +95,18 @@ object UsersSnsLogin extends Controller {
      }
      /* 新浪微博登陆 */
      else if(snsType=="sina"){
-       val get = new HttpPost("https://api.weibo.com/oauth2/access_token?client_id=1464940004&client_secret=52cb22ab45f9764a3b329578c70b89df&grant_type=authorization_code&redirect_uri=http://hiwowo.com/user/sina/registed&state=sina&code="+code)
-       val client =new DefaultHttpClient();
+       val get = new HttpPost("https://api.weibo.com/oauth2/access_token?client_id=1905427044&client_secret=723d3b32fda467dcfe0414844d5848bb&grant_type=authorization_code&redirect_uri=http://hiwowo.com/user/sina/registed&state=sina&code="+code)
+       val client =new DefaultHttpClient()
        val resp= client.execute(get)
-       val entity=resp.getEntity;
+       val entity=resp.getEntity
        val r=EntityUtils.toString(entity)
-       val json =Json.parse(r);
-       val assessToken=(json \ "access_token").as[String];
-       val openId =(json \ "uid").as[String];
+       val json =Json.parse(r)
+       val assessToken=(json \ "access_token").as[String]
+       val openId =(json \ "uid").as[String]
        val getInfo = new HttpGet("https://api.weibo.com/2/users/show.json?access_token="+assessToken+"&uid="+openId)
-       val client2 =new DefaultHttpClient();
+       val client2 =new DefaultHttpClient()
        val resp2= client2.execute(getInfo)
-       val entity2=resp2.getEntity;
+       val entity2=resp2.getEntity
        //println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity2))
        val r2=EntityUtils.toString(entity2)
        //println(r2)
