@@ -26,6 +26,7 @@ case class Diagram (
                    viewNum:Int,
                    loveNum:Int,
                    discussNum:Int,
+                   collectNum:Int,
                    comeFromSite:Option[String],
                    comeFromUrl:Option[String],
                    modifyTime:Option[Timestamp],
@@ -46,12 +47,13 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def viewNum = column[Int]("view_num")
   def loveNum = column[Int]("love_num")
   def discussNum = column[Int]("discuss_num")
+  def collectNum = column[Int]("collect_num")
   def comeFromSite = column[String]("come_from_site")
   def comeFromUrl = column[String]("come_from_url")
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,ps.?,tags.?,status,viewNum,loveNum,discussNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,ps.?,tags.?,status,viewNum,loveNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }
