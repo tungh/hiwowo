@@ -94,7 +94,7 @@ object UserDao {
   }
 
   /* 第三方用户初次登陆 */
-  def addSnsUser(name: String, comeFrom: Int, openId: String, pic: String, inviteId: Long) = database.withDynSession {
+  def addSnsUser(name: String, comeFrom: Int, openId: String, pic: String, inviteId: Long):Long = database.withDynSession {
     val usersAutoInc = users.map(u => (u.name, u.comeFrom, u.openId, u.pic)) returning users.map(_.id) into {
       case (_, id) => id
     }
