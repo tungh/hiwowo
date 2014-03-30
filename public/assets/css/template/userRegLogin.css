@@ -46,6 +46,7 @@
     border-right: 1px dotted #666;
 }
 .regBox .reg{
+    margin-left: 15px;
     width: 380px;
 }
 .regBox legend {
@@ -64,18 +65,15 @@
 }
 
 .regBox .out-login a {
-
-    display: block;
     margin-bottom: 20px;
     margin-right: 30px;
-    margin-left: 60px
+    margin-left: 30px
 }
 .regBox .out-login .sns-login{
 }
 
 .out-login .hiwowo-login{
-
-    width: 250px;
+    width: 280px;
     border-top: 1px dotted #666;
 }
 .l-sina, .l-qq, .l-tao {
@@ -85,18 +83,6 @@
     overflow: hidden
 }
 
-
-.l-sina {
-    background: url(images/l-sina.png)
-}
-
-.l-qq {
-    background: url(images/l-qq.png)
-}
-
-.l-tao {
-    background: url(images/l-tao.png)
-}
 
    /*重置密码*/
 .forgotlink {

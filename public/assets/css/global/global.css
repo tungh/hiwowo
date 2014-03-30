@@ -468,6 +468,7 @@ a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background:
 .l-qq { background:url(images/l-qq.png); }
 .l-tao { background:url(images/l-tao.png); }
 
+
 .share32 a { background: url(images/share_32.png) no-repeat; width: 37px;height: 37px;display: block;float: left;padding-left: 5px;text-indent: -100em;cursor: pointer;}
 .sh-qzone { background-position: 0 -75px !important;}
 .sh-sina {background-position: 0 -115px !important;}
@@ -517,6 +518,57 @@ a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background:
 .l-sina { background:url(images/l-sina.png); }
 .l-qq { background:url(images/l-qq.png); }
 .l-tao { background:url(images/l-tao.png); }
+.site-openid li {
+    float: left;
+    display: inline
+}
+
+.site-openid li.renren {
+    margin-right: 0
+}
+
+.site-openid li a {
+    float: left;
+    text-align: center;
+    color: #a7a9ac
+}
+
+.site-openid li a:hover {
+    color: #000;
+    text-decoration: none
+}
+
+.site-openid li a i {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+    overflow: hidden;
+    background: url(images/sns_ico.png) no-repeat -9999em -9999em
+}
+
+.site-openid li.weibo a i {
+    background-position: -9px 0
+}
+
+.site-openid li.qq a i {
+    background-position: -123px 0
+}
+
+.site-openid li.douban a i {
+    background-position: -9px -104px
+}
+
+.site-openid li.renren a i {
+    background-position: -123px -104px
+}
+
+.site-openid li a p {
+    padding: 10px 0 0 0
+}
+
 /* 回到顶部 */
 #J_weixin{position:absolute;top:55px;left:0;height:58px;width:42px;background:url(images/addweixinfriend.png) no-repeat 3px 0;display:block;_background-image:url(images/addweixinfriend-png8.png) no-repeat 3px 0;cursor:default  }
 #J_weixin:hover{background:url(images/addweixinfriend.png) no-repeat -94px -6px;_background-image:url(images/addweixinfriend-png8.png) no-repeat -94px -6px;}
@@ -1055,7 +1107,7 @@ input[type="button"].btn-block {
 .g-dialog .close:hover { color:#55aadd;text-decoration:none;background-position:0 -16px; }
 .g-dialog .bd { padding:20px; }
 .g-dialog .success-text{ margin-bottom: 15px; text-align: center;}
-#J_loginDialog .bd { padding:20px 0; }
+#J_loginDialog .bd { padding:20px 0 0; }
 #J_loginDialog .bd .bd-l { float:left;width:330px;padding:10px 0 0 0;border-right:1px dotted #cdcdcd; }
 #J_loginDialog .bd .bd-r { float:right;width:251px;padding:10px 0 0 0; }
 #J_loginDialog .bd .noaccount {text-align: center; margin: 10px 30px 0 30px; line-height: 18px; padding: 10px 0 0 10px; color: #666; border-top: 1px dotted #cdcdcd;}
