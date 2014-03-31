@@ -91,7 +91,7 @@ object UsersSnsLogin extends Controller {
          Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
        }else{
       //  Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
-         Redirect(controllers.routes.Pages.index())
+         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
        }
      }
      /* 新浪微博登陆 */
@@ -129,7 +129,7 @@ object UsersSnsLogin extends Controller {
          Ok(views.html.users.snsLogin.asynLogin("sina")).withSession("user" -> uid.toString)
        }else{
        //  Ok(views.html.users.snsLogin.synLogin("sina")).withSession("user" -> uid.toString)
-       Redirect(controllers.routes.Pages.index())
+         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
        }
 
      } else{

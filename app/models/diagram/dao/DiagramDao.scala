@@ -123,7 +123,22 @@ object DiagramDao {
         if c.id === id } yield (c,u)
       ).firstOption
   }
-
+    def findDiagrams(status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
+      val totalRows = Query(users.filter(_.status ===status).length).first
+      val totalPages = (totalRows + pageSize - 1) / pageSize
+      val startRow = if (currentPage < 1 || currentPage > totalPages) {
+        0
+      } else {
+        (currentPage - 1) * pageSize
+      }
+      val list = ( for{
+        c<-diagrams
+        u<-users
+        if c.status === status
+        if c.uid === u.id
+      } yield (c,u) ).sortBy(_._1.addTime desc).drop(startRow).take(pageSize).list()
+      Page[(Diagram,User)](list,currentPage,totalPages)
+    }
   /*
    *
    *    diagram pic dao

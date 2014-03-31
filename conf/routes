@@ -6,8 +6,8 @@
 GET   /test                                controllers.Test.index
 
 # Home page
-
-GET       /                                    controllers.Pages.index
+GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
+GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin                              controllers.Pages.weixin
 GET       /pets                               controllers.Pages.pets
 GET       /find                               controllers.Pages.find

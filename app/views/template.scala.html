@@ -27,7 +27,7 @@
 
             <nav class="nav">
                 <ul class="clearfix">
-                    <li ><a href="@controllers.routes.Pages.index" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
+                    <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
                     <li><a href="@if(!user.isEmpty){@controllers.users.routes.Users.home(user.get.id.get)}" rel='@if(user.isEmpty){loginD}' class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
                     <li><a href='/forum' class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
                 </ul>
@@ -68,7 +68,7 @@
     case "index" => {   <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "index")) '><a href="@controllers.routes.Pages.index" title="首页">首页</a></li>
+                <li class=' @("on".when(subNav == "index")) '><a href="/" title="首页">首页</a></li>
                 <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin" title="微信精选">微信精选</a></li>
                 <li class=' @("on".when(subNav == "find")) '><a href="@controllers.routes.Pages.find"  title="图说">图说</a></li>
                 <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets" title="宠物乐园">宠物乐园</a></li>

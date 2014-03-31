@@ -3,6 +3,7 @@ package controllers
 import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import models.forum.dao.TopicDao
+import models.diagram.dao.DiagramDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,8 +16,10 @@ object Pages extends Controller {
 
 
   /* 首页 */
-  def index  = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.index(user))
+  def index(currentPage:Int,pageSize:Int)  = Users.UserAction{ user => implicit request =>
+    /* 在首页显示精华的帖子 */
+    val pages = DiagramDao.findDiagrams(3,currentPage,pageSize)
+    Ok(views.html.pages.index(user,pages))
   }
 
 

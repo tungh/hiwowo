@@ -69,7 +69,7 @@ object UsersRegLogin extends Controller {
   /* 用户退出  清除缓存*/
   def logout=Action{ implicit  request =>
    // Cache.remove(session.get("user"))
-    Redirect(controllers.routes.Pages.index).withNewSession
+    Redirect("/").withNewSession
   }
 
   /*用户overlay dialog email 登陆*/

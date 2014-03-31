@@ -219,7 +219,7 @@ CREATE TABLE `diagram` (
   `intro`              text,
   `content`             text ,
   `ps`                  text ,
-  `tags`             varchar(250) ,
+  `tags`              varchar(250) ,
   `status`            tinyint  not null default  '0',
   `view_num`                 int(10) unsigned not null  DEFAULT '1',
   `love_num`                  int(10) unsigned not null  DEFAULT '0',
@@ -231,6 +231,7 @@ CREATE TABLE `diagram` (
   `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `diagram_pic`;
 CREATE TABLE `diagram_pic` (
@@ -266,7 +267,14 @@ CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+DROP TABLE IF EXISTS 'weixin_diagram';
+CREATE TABLE  IF NOT EXISTS 'weixin_diagram'(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `diagram_id`            int(10) NOT NULL ,
+  `period`                int(10) NOT NULL ,
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /************************************************************

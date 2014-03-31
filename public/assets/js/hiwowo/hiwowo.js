@@ -436,7 +436,7 @@ define(function(require, exports) {
                 html += '<div class="bd-r">';
                 html += '<p class="mb15">你也可以使用这些帐号登录</p>';
                 html += '<div class="site-openid clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li class="qq"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
+                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
                 html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina&backType=asyn&i=0"><i></i><p>新浪微博</p></a></li>';
                 html += '</ul>';
                 html += '</div>';
