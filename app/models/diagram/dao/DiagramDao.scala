@@ -124,7 +124,7 @@ object DiagramDao {
       ).firstOption
   }
     def findDiagrams(status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
-      val totalRows = Query(users.filter(_.status ===status).length).first
+      val totalRows = Query(diagrams.filter(_.status ===status).length).first
       val totalPages = (totalRows + pageSize - 1) / pageSize
       val startRow = if (currentPage < 1 || currentPage > totalPages) {
         0
