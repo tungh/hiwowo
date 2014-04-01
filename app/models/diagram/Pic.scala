@@ -11,7 +11,6 @@ case class Pic (
                         url:String,
                         intro: Option[String],
                         status:Int,
-                        sortNum:Int,
                         addTime:Option[Timestamp]
                         )
 
@@ -21,9 +20,8 @@ class Pics(tag:Tag) extends Table[Pic](tag,"pic") {
   def url = column[String]("url")
   def intro  = column[String]("intro")
   def status = column[Int]("status")
-  def sortNum = column[Int]("sort_num")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,url,intro.?,status,sortNum,addTime.?) <> (Pic.tupled, Pic.unapply)
+  def * =(id.?,uid,url,intro.?,status,addTime.?) <> (Pic.tupled, Pic.unapply)
 
 
 }

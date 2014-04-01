@@ -1,7 +1,9 @@
-package models.diagram
+package models.pet
+
 import scala.slick.driver.MySQLDriver.simple._
 
 import java.sql.Timestamp
+
 /**
  * Created with IntelliJ IDEA.
  * User: 01345096
@@ -9,26 +11,26 @@ import java.sql.Timestamp
  * Time: 下午3:27
  * 讨论
  */
-case class DiagramDiscuss  (
+case class PetDiscuss  (
                              id: Option[Long],
                              uid:Long,
-                             diagramId:Long,
+                             petId:Long,
                              quoteContent:Option[String],
                              content:String,
                              checkState:Int,
                              addTime:Option[Timestamp]
                              )
 
-class DiagramDiscusses(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discuss") {
+class PetDiscusses(tag:Tag) extends Table[PetDiscuss](tag,"pet_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def diagramId = column[Long]("diagram_id")
+  def petId = column[Long]("pet_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,diagramId,quoteContent.?, content, checkState, addTime.? ) <> (DiagramDiscuss.tupled,DiagramDiscuss.unapply)
+  def * =(id.?,uid,petId,quoteContent.?, content, checkState, addTime.? ) <> (PetDiscuss.tupled,PetDiscuss.unapply)
 
 
 }

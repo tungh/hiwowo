@@ -53,7 +53,8 @@
                     </ul>
                 </div>
               <!--  <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.loves(user.get.id.get)"><i></i></a>
-                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>-->
+                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
+                -->
             </section>
            }
             <section class="topSearch">
@@ -69,9 +70,9 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "index")) '><a href="/" title="首页">首页</a></li>
-                <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin" title="微信精选">微信精选</a></li>
+                <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin(1,10)" title="微信精选">微信精选</a></li>
                 <li class=' @("on".when(subNav == "find")) '><a href="@controllers.routes.Pages.find"  title="图说">图说</a></li>
-                <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets" title="宠物乐园">宠物乐园</a></li>
+                <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets(0)" title="怪兽乐园">怪兽乐园</a></li>
             </ul>
 
             <div class="subSearch" id="J_subSearch">

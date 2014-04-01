@@ -238,6 +238,7 @@ CREATE TABLE `diagram_pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `diagram_id`                 int(10) ,
   `pic_id`               int(10) ,
+  `sort_num`             tinyint ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -248,18 +249,18 @@ CREATE TABLE `pic` (
   `url`               varchar(250) ,
   `intro`               varchar(200) ,
   `status`              tinyint  not null default  '0',
-  `sort_num`              tinyint  not null default  '0',
+  `type_id`              tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 
 DROP TABLE IF EXISTS `diagram_discuss`;
 CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
   `diagram_id`            int(10) NOT NULL ,
-  `discuss_id`            int(10) NOT NULL ,
-  `type_id`            tinyint NOT NULL DEFAULT '0',
   `quote_content`             text,
   `content`                  text ,
   `status`            tinyint NOT NULL DEFAULT '0',
@@ -276,6 +277,43 @@ CREATE TABLE  IF NOT EXISTS `weixin_diagram`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/**********************************************
+ pet 怪兽
+ pet_discuss
+
+ **********************************************/
+DROP TABLE IF EXISTS `pet`;
+CREATE TABLE `pet` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `url`               varchar(250) ,
+  `intro`               varchar(200) ,
+  `status`              tinyint  not null default  '0',
+  `type_id`              tinyint  not null default  '0',
+  `tags`              varchar(250) ,
+  `view_num`                 int(10) unsigned not null  DEFAULT '1',
+  `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `discuss_num`                 int(10) unsigned not null  DEFAULT '0',
+  `collect_num`                 int(10) unsigned not null  DEFAULT '0',
+  `come_from_site`             varchar(64) ,
+  `come_from_url`             varchar(250) ,
+  `modify_time`         timestamp default '2013-07-18 12:00:00',
+  `add_time`           timestamp default '2013-07-18 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `pet_discuss`;
+CREATE TABLE IF NOT EXISTS `pet_discuss`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `pet_id`            int(10) NOT NULL ,
+  `quote_content`             text,
+  `content`                  text ,
+  `status`            tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /************************************************************
  * forum  论坛：主要有话题、话题回复     板块》话题》回复，讨论话题与goods的评论、theme的讨论分开设计，这就是一个独立的模块

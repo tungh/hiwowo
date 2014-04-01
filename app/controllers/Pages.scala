@@ -4,6 +4,7 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import models.forum.dao.TopicDao
 import models.diagram.dao.DiagramDao
+import models.weixin.dao.WeiXinDiagramDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,8 +25,9 @@ object Pages extends Controller {
 
 
    /* 微信精选 */
-   def weixin = Users.UserAction{ user => implicit request =>
-     Ok(views.html.pages.weixin(user))
+   def weixin(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+     val pages = WeiXinDiagramDao.findDiagrams(currentPage,pageSize)
+     Ok(views.html.pages.weixin(user,pages))
    }
   /* 发现 图说 */
   def find = Users.UserAction{ user => implicit request =>
@@ -33,7 +35,7 @@ object Pages extends Controller {
   }
 
   /* 宠物乐园 */
-  def pets = Users.UserAction{ user => implicit request =>
+  def pets(typeId:Int) = Users.UserAction{ user => implicit request =>
     Ok(views.html.pages.pets(user))
   }
 

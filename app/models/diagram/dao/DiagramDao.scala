@@ -59,18 +59,18 @@ object DiagramDao {
   *
   *   图片处理
   */
-  def addPic(uid:Long,url:String,intro:Option[String],status:Int,sortNum:Int) = database.withDynSession{
-    val picAutoInc = pics.map( c => (c.uid,c.url,c.intro.?,c.status,c.sortNum)) returning pics.map(_.id) into {
+  def addPic(uid:Long,url:String,intro:Option[String],status:Int) = database.withDynSession{
+    val picAutoInc = pics.map( c => (c.uid,c.url,c.intro.?,c.status)) returning pics.map(_.id) into {
       case (_, id) => id
     }
-    picAutoInc.insert(uid,url,intro,status,sortNum)
+    picAutoInc.insert(uid,url,intro,status)
   }
 
   def deletePic(id:Long) = database.withDynSession{
     ( for(c<-pics if c.id === id) yield c ).delete
   }
-  def modifyPic(id:Long,url:String,intro:Option[String],status:Int,sortNum:Int) = database.withDynSession{
-    ( for(c<-pics if c.id === id) yield(c.url,c.intro.?,c.status,c.sortNum)).update(url,intro,status,sortNum)
+  def modifyPic(id:Long,url:String,intro:Option[String],status:Int) = database.withDynSession{
+    ( for(c<-pics if c.id === id) yield(c.url,c.intro.?,c.status)).update(url,intro,status)
   }
   def modifyPicStatus(id:Long,status:Int) = database.withDynSession{
     ( for(c<-pics if c.id === id) yield c.status ).update(status)
@@ -80,15 +80,7 @@ object DiagramDao {
     ( for(c<-pics if c.id === id) yield c).firstOption
   }
 
-  def findPicsByDiagramId(id:Long):List[Pic] = database.withDynSession{
-    ( for{
-      p  <- pics
-      dp <- diagramPics
-      if p.id === dp.picId
-      if dp.diagramId === id
-    }yield p ).list()
 
-  }
 
 
   /*
@@ -153,17 +145,25 @@ object DiagramDao {
   def deleteDiagramPic(diagramId:Long,picId:Long) = database.withDynSession{
     ( for(c<- diagramPics if c.diagramId === diagramId if c.picId === picId)yield c).delete
   }
+  def findDiagramPics(id:Long):List[Pic] = database.withDynSession{
+    ( for{
+      p  <- pics
+      dp <- diagramPics
+      if p.id === dp.picId
+      if dp.diagramId === id
+    }yield p ).list()
 
+  }
   /*
   *
   * diagram discuss
   * */
 
-def addDiagramDiscuss(uid:Long,diagramId:Long,thirdId:Long,typeId:Int,quoteContent:Option[String],content:String,checkState:Int) = database.withDynSession{
-  val diagramDiscussAutoInc = diagramDiscusses.map( c => (c.uid,c.diagramId,c.thirdId,c.typeId,c.quoteContent.?,c.content,c.checkState)) returning diagramDiscusses.map(_.id) into {
+def addDiagramDiscuss(uid:Long,diagramId:Long,quoteContent:Option[String],content:String,checkState:Int) = database.withDynSession{
+  val diagramDiscussAutoInc = diagramDiscusses.map( c => (c.uid,c.diagramId,c.quoteContent.?,c.content,c.checkState)) returning diagramDiscusses.map(_.id) into {
     case (_, id) => id
   }
-  diagramDiscussAutoInc.insert(uid,diagramId,thirdId,typeId,quoteContent,content,checkState)
+  diagramDiscussAutoInc.insert(uid,diagramId,quoteContent,content,checkState)
 }
 
 }

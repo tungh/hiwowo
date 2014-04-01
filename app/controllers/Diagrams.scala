@@ -5,7 +5,7 @@ import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.user.User
-import models.diagram.dao.{DiagramSQLDao, DiagramDao}
+import models.diagram.dao.{ DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
 import play.api.cache.Cache
 import play.api.Play.current
@@ -50,7 +50,7 @@ object  Diagrams extends Controller {
           if(id == 0) Ok(views.html.diagrams.createDiagram(user))
           else{
             val diagram = DiagramDao.findDiagramById(id)
-            val pics = DiagramDao.findPicsByDiagramId(id)
+            val pics = DiagramDao.findDiagramPics(id)
             Ok(views.html.diagrams.editDiagram(user,diagram.get,pics))
           }
       } else{
@@ -73,10 +73,10 @@ object  Diagrams extends Controller {
         Ok(Json.obj("code"->"104","message"->"pic url is empty"))
       } else {
       if(picId.isEmpty || picId.getOrElse(0) ==0 ){
-       val id = DiagramDao.addPic(user.get.id.get,picUrl.getOrElse(""),picIntro,0,1)
+       val id = DiagramDao.addPic(user.get.id.get,picUrl.getOrElse(""),picIntro,0)
         Ok(Json.obj("code" -> "100", "message" ->"success","picUrl" ->picUrl,"picId"->id))
       }else{
-        DiagramDao.modifyPic(picId.get,picUrl.get,picIntro,0,1)
+        DiagramDao.modifyPic(picId.get,picUrl.get,picIntro,0)
         Ok(Json.obj("code" -> "100", "message" ->"success","picUrl" ->picUrl,"picId"->picId.get))
       }
 
