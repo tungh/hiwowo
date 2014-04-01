@@ -12,6 +12,7 @@ import java.sql.Timestamp
 case class Pet (
                  id: Option[Long],
                  uid:Long,
+                 title:String,
                  url:String,
                  intro: Option[String],
                  status:Int,
@@ -30,6 +31,7 @@ case class Pet (
 class Pets(tag:Tag) extends Table[Pet](tag,"pet") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
+  def title = column[String]("title")
   def url = column[String]("url")
   def intro  = column[String]("intro")
   def status = column[Int]("status")
@@ -43,7 +45,7 @@ class Pets(tag:Tag) extends Table[Pet](tag,"pet") {
   def comeFromUrl = column[String]("come_from_url")
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,url,intro.?,status,typeId,tags.?,viewNum,loveNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Pet.tupled, Pet.unapply)
+  def * =(id.?,uid,title,url,intro.?,status,typeId,tags.?,viewNum,loveNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Pet.tupled, Pet.unapply)
 
 
 }

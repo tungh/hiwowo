@@ -286,6 +286,7 @@ DROP TABLE IF EXISTS `pet`;
 CREATE TABLE `pet` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
+  `title`               varchar(64) ,
   `url`               varchar(250) ,
   `intro`               varchar(200) ,
   `status`              tinyint  not null default  '0',

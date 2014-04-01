@@ -35,6 +35,9 @@ POST  /diagram/savePic                     controllers.Diagrams.savePic
 POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 POST  /diagram/delete                     controllers.Diagrams.delete
 
+#pet
+GET    /pet/$id<[0-9]+>                      controllers.Pets.pet(id:Long)
+GET    /pet/edit                             controllers.Pets.edit(id:Long ?=0L)
 
 
 # user

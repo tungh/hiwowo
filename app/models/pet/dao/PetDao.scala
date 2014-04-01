@@ -29,25 +29,34 @@ object PetDao {
   *
   *   图片处理
   */
-  def addPic(uid:Long,url:String,intro:Option[String],status:Int,typeId:Int) = database.withDynSession{
-    val picAutoInc = pets.map( c => (c.uid,c.url,c.intro.?,c.status,c.typeId)) returning pets.map(_.id) into {
+  def addPet(uid:Long,url:String,intro:Option[String],status:Int,typeId:Int) = database.withDynSession{
+    val petAutoInc = pets.map( c => (c.uid,c.url,c.intro.?,c.status,c.typeId)) returning pets.map(_.id) into {
       case (_, id) => id
     }
-    picAutoInc.insert(uid,url,intro,status,typeId)
+    petAutoInc.insert(uid,url,intro,status,typeId)
   }
 
-  def deletePic(id:Long) = database.withDynSession{
+  def deletePet(id:Long) = database.withDynSession{
     ( for(c<-pets if c.id === id) yield c ).delete
   }
-  def modifyPic(id:Long,url:String,intro:Option[String],status:Int,typeId:Int) = database.withDynSession{
+  def modifyPet(id:Long,url:String,intro:Option[String],status:Int,typeId:Int) = database.withDynSession{
     ( for(c<-pets if c.id === id) yield(c.url,c.intro.?,c.status,c.typeId)).update(url,intro,status,typeId)
   }
-  def modifyPicStatus(id:Long,status:Int) = database.withDynSession{
+  def modifyPetStatus(id:Long,status:Int) = database.withDynSession{
     ( for(c<-pets if c.id === id) yield c.status ).update(status)
   }
 
-  def findPicById(id:Long):Option[Pet]= database.withDynSession{
+  def findPetById(id:Long):Option[Pet]= database.withDynSession{
     ( for(c<-pets if c.id === id) yield c).firstOption
+  }
+
+  def findPet(id:Long):Option[(Pet,User)] = database.withDynSession{
+    (for{
+      c<-pets
+      u<-users
+      if c.id === id
+      if c.uid === u.id
+    }yield(c,u) ).firstOption
   }
 
 
