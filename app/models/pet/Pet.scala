@@ -8,6 +8,7 @@ import java.sql.Timestamp
  * User: zuosanshao
  * Date: 14-4-1
  * Time: 下午11:11
+ * type id 0 图片 1 gif   2 视频
  */
 case class Pet (
                  id: Option[Long],
@@ -20,6 +21,7 @@ case class Pet (
                  tags:Option[String],
                  viewNum:Int,
                  loveNum:Int,
+                 hateNum:Int,
                  discussNum:Int,
                  collectNum:Int,
                  comeFromSite:Option[String],
@@ -39,13 +41,14 @@ class Pets(tag:Tag) extends Table[Pet](tag,"pet") {
   def tags  = column[String]("tags")
   def viewNum = column[Int]("view_num")
   def loveNum = column[Int]("love_num")
+  def hateNum = column[Int]("hate_num")
   def discussNum = column[Int]("discuss_num")
   def collectNum = column[Int]("collect_num")
   def comeFromSite = column[String]("come_from_site")
   def comeFromUrl = column[String]("come_from_url")
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,title,url,intro.?,status,typeId,tags.?,viewNum,loveNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Pet.tupled, Pet.unapply)
+  def * =(id.?,uid,title,url,intro.?,status,typeId,tags.?,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Pet.tupled, Pet.unapply)
 
 
 }

@@ -1,0 +1,79 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-31  
+ * Time: 下午8:50
+ * 维护：zuosanshao@qq.com
+*/
+#content {
+    position: relative;
+    z-index: 3;
+}
+.pet .main{
+    float: left;
+    width: 680px;
+    background: #FFF;
+    border-right: #b4b4b4 solid 1px;
+    overflow: auto;
+}
+.pet .side {
+    background: #FFF;
+    float: right;
+    width: 308px;
+    height: auto;
+}
+
+/* side  */
+/* box notice*/
+.pet .side .box {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 288px;
+}
+
+.pet .side .box .hd {
+    line-height: 1.2;
+    padding: 0 0 6px 0;
+    margin: 0 0 5px;
+    border-bottom: 1px dotted #d1d1d1
+}
+.pet .side .box .bd{
+    line-height: 22px
+}
+
+/* 创建帖子页面*/
+
+.pet-edit {
+    background-color: #fff;
+    padding: 15px;
+    height: auto;
+    min-height: 400px;
+    overflow: visible;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.pet-edit  dt{ font-size: 14px; padding-top: 15px;color:#999}
+.pet-edit  .b-input{ font-size: 14px; width: 580px;margin: 0;}
+.pet-edit .b-textarea{width: 580px;height: 50px;}
+.pet-edit  dd.msg{ padding: 10px 0; text-align:right; height: 24px; }
+.pet-edit  .msg-error{ vertical-align: inherit; margin-right: 15px;}
+.pet-edit .pet-btnbar{ margin-bottom: 50px; padding: 10px 25px;}
+.pet-edit .pet-btnbar a:hover{ text-decoration: none;}
+.pet-edit .pet-btnbar .share{ color: #aaa; float: left;}
+.pet-edit .btn-draft,.pet-btnbar .btn-diagram{ float: left; background: #a7a9ac; height: 30px; line-height: 30px; padding: 0 15px; text-align:center; font-size: 14px; color: #fff;}
+.pet-edit .btn-diagram{ background: #000; margin-left: 30px; display:inline;}
+.pet-edit a:hover.btn-diagram{ background: #555;}
+.pet-edit .upload-img{overflow: hidden;}
+.pet-edit .upload-img .img{ position:relative; background: #fff; text-align: center; margin: 0 auto;}
+.pet-edit .upload-img .img img{margin: 0 auto; }
+
+.pet-edit .post-photo{
+    margin-top:20px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+
+

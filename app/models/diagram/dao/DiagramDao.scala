@@ -94,6 +94,14 @@ object DiagramDao {
     }
     diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
   }
+
+  def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
+    val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
+      case (_, id) => id
+    }
+    diagramAutoInc.insert(uid,title,pic,intro,content,tags,status)
+  }
+
   def deleteDiagram(id:Long) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield c ).delete
   }

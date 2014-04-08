@@ -1,68 +1,48 @@
 @(user:Option[models.user.User])
-@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/pet.css"){
+@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/petEdit.css"){
 
 <div class="container pet">
 
     <div class="row">
         <div class="main">
-            <div class="diagram-edit">
-                <div class="diagram-id">
+            <div class="pet-edit">
+                <div class="pet-id">
                     <input type="hidden" id="J_id" value="">
                 </div>
-                <div class="diagram-title">
+                <div class="pet-title">
                     <dl>
                         <dt>标题：</dt>
-                        <dd><input id="J_title"  name="title" class="b-input" value="" placeholder="给我起个牛逼哄哄的标题"></dd>
+                        <dd><input id="J_title"  name="title" class="b-input" value="" placeholder="艹，给我起个牛逼的名字"></dd>
                         <dd class="msg" style="display:none"><div class="msg-error">：（ 超出2个字了</div>32/30</dd>
                     </dl>
                 </div>
 
-                <div class="diagram-intro">
-                    <dl>
-                        <dt>亲，你就说点什么呗 </dt>
-                        <dd><textarea id="J_intro" name="intro" class="b-textarea"></textarea> </dd>
-                    </dl>
-                </div>
 
-                <div class="diagram-uploadify">
+                <div class="pet-uploadify">
                     <div  id="J_uploadify"> </div>
                 </div>
 
-                <div class="diagram-ps">
+                <div class="pet-ps">
                     <dl>
-                        <dt id="J_psLabel">亲，狠戳我，给我写个后记，怎么样啊</dt>
-                        <dd> <textarea id="J_ps"  name="ps" class="b-textarea hidden"></textarea></dd>
+                        <dt id="J_psLabel">我靠( ‵o′)凸，就不能来个题外话</dt>
+                        <dd> <textarea id="J_ps"  name="ps" class="b-textarea"></textarea></dd>
                     </dl>
                 </div>
-                <div class="diagram-tags">
+                <div class="pet-tags">
                     <dl>
                         <dt id="J_tagsLabel">那个啥，都到这了，给我贴几个标签如何^_^</dt>
-                        <dd>  <input id="J_tags" name="tags" class="b-input hidden" type="text" value="" placeholder="亲，给我添几个标签如何"></dd>
+                        <dd>  <input id="J_tags" name="tags" class="b-input" type="text" value="" placeholder="亲，给我添几个标签如何"></dd>
                     </dl>
                 </div>
                 <!-- 操作 -->
-                <div class="diagram-btnbar clearfix">
-                           <span class="fr">
-                            <a id="id-btn-draft" class="btn-diagram"  href="javascript:;">保存草稿</a>
-                            <a id="id-btn-diagram" class="btn-diagram" href="javascript:;">发布</a>
-                          </span>
-                </div>
-                <div id="topic_image_example" class="post-photo post-item-edit" style="display: none">
-                    <div class="move-bar"><a class="move-up" href="javascript:;">上移</a><a class="move-down" href="javascript:;">下移</a></div>
-                    <div class="edit-box clearfix">
-                        <div class="upload-img">
-                            <div class="img"><a href="" target="_blank"><img src=""></a></div>
-                        </div>
-                        <div class="photo-des"></div>
+                <div class="pet-btnbar clearfix">
 
-                    </div>
 
-                    <div class="pic-doing-all clearfix">
-        <span class="pic-doing">
-            <a class="sitedel-href" href="javascript:;"><ins class="ico-pic-del"></ins>删除</a>
-        </span>
-                    </div>
+                        <input id="J_petEditBtn" type="submit" class="bbl-btn mr20" value="发表">
+                        <input type="button" class="bgr-btn" onclick="window.history.back(-1)" value="取消并返回">
+
                 </div>
+
 
             </div>
         </div>

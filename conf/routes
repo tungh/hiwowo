@@ -34,10 +34,15 @@ GET   /diagram/edit                               controllers.Diagrams.edit(id:L
 POST  /diagram/savePic                     controllers.Diagrams.savePic
 POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 POST  /diagram/delete                     controllers.Diagrams.delete
+GET   /diagram/edit2                      controllers.Diagrams.edit2(id:Long ?=0L)
+POST  /diagram/save                       controllers.Diagrams.save
 
 #pet
 GET    /pet/$id<[0-9]+>                      controllers.Pets.pet(id:Long)
 GET    /pet/edit                             controllers.Pets.edit(id:Long ?=0L)
+POST   /pet/save                            controllers.Pets.save
+POST   /pet/delete                          controllers.Pets.delete
+
 
 
 # user

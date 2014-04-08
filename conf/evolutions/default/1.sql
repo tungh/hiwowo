@@ -213,7 +213,6 @@ DROP TABLE IF EXISTS `diagram`;
 CREATE TABLE `diagram` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) not null,
-  `type_id`            tinyint NOT NULL DEFAULT '0',
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
   `intro`              text,
@@ -223,6 +222,7 @@ CREATE TABLE `diagram` (
   `status`            tinyint  not null default  '0',
   `view_num`                 int(10) unsigned not null  DEFAULT '1',
   `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
   `discuss_num`                 int(10) unsigned not null  DEFAULT '0',
   `collect_num`                 int(10) unsigned not null  DEFAULT '0',
   `come_from_site`             varchar(64) ,
@@ -294,6 +294,7 @@ CREATE TABLE `pet` (
   `tags`              varchar(250) ,
   `view_num`                 int(10) unsigned not null  DEFAULT '1',
   `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
   `discuss_num`                 int(10) unsigned not null  DEFAULT '0',
   `collect_num`                 int(10) unsigned not null  DEFAULT '0',
   `come_from_site`             varchar(64) ,

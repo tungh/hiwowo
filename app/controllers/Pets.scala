@@ -37,5 +37,12 @@ object Pets extends Controller {
     Ok(views.html.pets.editPet(user))
   }
 
+  def save = Users.UserAction{ user => implicit request =>
+
+    Ok("todo")
+  }
+  def delete = Users.UserAction{ user => implicit request =>
+    Ok("todo")
+  }
 
 }

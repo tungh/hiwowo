@@ -9,6 +9,14 @@ import models.diagram.dao.{ DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
 import play.api.cache.Cache
 import play.api.Play.current
+import play.api.data.Form
+import play.api.data.Forms._
+import models.diagram.Diagram
+import scala.Some
+import models.user.User
+import controllers.DiagramComponent
+import org.jsoup.Jsoup
+import org.jsoup.safety.Whitelist
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +28,19 @@ case class DiagramComponent(
                    getDiagram:Diagram,
                    getUser:User
                        )
+
+
 object  Diagrams extends Controller {
+
+  val diagramForm = Form(
+    tuple(
+      "id"->optional(longNumber),
+      "title" ->nonEmptyText ,
+      "content"->text,
+      "tags"->optional(text),
+      "status"->number
+    )
+  )
 
   /* 图说 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
@@ -139,4 +159,50 @@ object  Diagrams extends Controller {
      }
    }
 
+  /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只用不为零的图说，可以进入编辑状态 */
+  def edit2(id:Long) = Users.UserAction{ user => implicit request =>
+    if(user.isEmpty){
+      Redirect(controllers.users.routes.UsersRegLogin.login)
+    } else{
+      if(user.get.status == 3){
+        if(id == 0) Ok(views.html.diagrams.edit(user,diagramForm))
+        else{
+          val diagram = DiagramDao.findDiagramById(id)
+          Ok(views.html.diagrams.edit(user,diagramForm.fill((diagram.get.id,diagram.get.title,diagram.get.content.getOrElse(""),diagram.get.tags,diagram.get.status))))
+        }
+      } else{
+        Redirect(controllers.users.routes.UsersAccount.vip)
+      }
+    }
+
+  }
+
+  /*保存 帖子*/
+  def save = Users.UserAction{ user => implicit request =>
+    diagramForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.diagrams.edit(user,formWithErrors)),
+      fields =>{
+        var intro =Jsoup.clean(fields._3,Whitelist.none())
+        if(intro.length()>100) intro =intro.substring(0,100)+"..."
+        val  doc =Jsoup.parseBodyFragment(fields._3)
+        val uploadImages =doc.body().getElementsByTag("img")
+        var pics =""
+        val pic:String = if(!uploadImages.isEmpty){ uploadImages.first()+""}else{ "" }
+        val it=uploadImages.iterator()
+        while(it.hasNext){
+          pics +=it.next().attr("src")+","
+        }
+        if (fields._1.isEmpty){
+          val id= DiagramDao.addDiagram(user.get.id.get,fields._2,pic,Some(intro),Some(fields._3),fields._4,fields._5)
+          Redirect(controllers.routes.Diagrams.diagram(id))
+        }else{
+        //  TopicDao.modifyTopic(Topic(fields._1,user.get.id.get,fields._2,fields._4,intro,Some(pics.trim),fields._3,false,false,0,0,0,0,None))
+          Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
+        }
+
+
+      }
+    )
+
+  }
 }
