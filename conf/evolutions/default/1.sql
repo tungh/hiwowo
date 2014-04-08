@@ -278,7 +278,7 @@ CREATE TABLE  IF NOT EXISTS `weixin_diagram`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /**********************************************
- pet 怪兽
+ pet 神兽
  pet_discuss
 
  **********************************************/
