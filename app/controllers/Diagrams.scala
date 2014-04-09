@@ -38,7 +38,8 @@ object  Diagrams extends Controller {
       "pic"->nonEmptyText,
       "intro" ->optional(text) ,
       "tags"->optional(text),
-      "status"->number
+      "status"->number,
+      "typeId"->number
     )
   )
 
@@ -168,7 +169,7 @@ object  Diagrams extends Controller {
         if(id == 0) Ok(views.html.diagrams.editPet(user,petForm))
         else{
           val diagram = DiagramDao.findDiagramById(id)
-          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.tags,diagram.get.status))))
+          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.tags,diagram.get.status,diagram.get.typeId))))
         }
       } else{
         Redirect(controllers.users.routes.UsersAccount.vip)
@@ -184,10 +185,10 @@ object  Diagrams extends Controller {
       fields =>{
 
         if (fields._1.isEmpty){
-          val id= DiagramDao.addDiagram(user.get.id.get,fields._2,fields._3,fields._4,fields._5,fields._6)
+          val id= DiagramDao.addDiagram(user.get.id.get,fields._7,fields._2,fields._3,fields._4,fields._5,fields._6)
           Redirect(controllers.routes.Diagrams.diagram(id))
         }else{
-          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._2,fields._3,fields._4,fields._5,fields._6)
+          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._7,fields._2,fields._3,fields._4,fields._5,fields._6)
           Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
         }
 

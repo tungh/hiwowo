@@ -95,11 +95,11 @@ object DiagramDao {
     diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
   }
 
-  def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
-    val diagramAutoInc = diagrams.map(c => (c.uid,c.title,c.pic,c.intro.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
+  def addDiagram(uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
+    val diagramAutoInc = diagrams.map(c => (c.uid,c.typeId,c.title,c.pic,c.intro.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
-    diagramAutoInc.insert(uid,title,pic,intro,tags,status)
+    diagramAutoInc.insert(uid,typeId,title,pic,intro,tags,status)
   }
 
   def deleteDiagram(id:Long) = database.withDynSession{
@@ -108,8 +108,8 @@ object DiagramDao {
   def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status) ).update(uid,title,pic,intro,content,ps,tags,status)
   }
-  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int) = database.withDynSession{
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.tags.?,c.status) ).update(uid,title,pic,intro,tags,status)
+  def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int) = database.withDynSession{
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.tags.?,c.status) ).update(uid,typeId,title,pic,intro,tags,status)
   }
   def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield  c.status).update(status)

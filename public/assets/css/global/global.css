@@ -149,8 +149,9 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 }
 
 .container .side{
-     width: 290px;
-    float:right;
+    padding: 10px;
+    width: 270px;
+    float: right;
     background: #fff;
 }
 @media only screen and (max-width: 989px) {

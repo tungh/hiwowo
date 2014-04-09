@@ -30,12 +30,20 @@
                 </ul>
             </div>
             <h1 class="title"> @diagramComponent.diagram.title</h1>
-
+            @if(diagramComponent.diagram.typeId ==0){
             <div class="desc">
                 <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
                 @Html(diagramComponent.diagram.content.getOrElse(""))
                 <div class="ps">@diagramComponent.diagram.ps.getOrElse("")</div>
             </div>
+            }else{
+              <div class="desc">
+                  <div class="pic">
+                    <img src="@diagramComponent.diagram.pic" alt="@diagramComponent.diagram.title">
+                  </div>
+                  <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
+              </div>
+            }
             <div class="discusses">
                 <div class="no-discuss"></div>
                 <div class="discuss-textarea"></div>

@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Option[String],Option[String],Int)])
+@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Option[String],Option[String],Int,Int)])
 @views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/petEdit.css"){
 
 <div class="container pet">
@@ -6,44 +6,61 @@
     <div class="row">
         <div class="main">
             <div class="pet-edit">
-                <div class="pet-id">
-                    <input type="hidden" id="J_id" value="">
-                </div>
+                <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_forumTopicEditForm">
+                    <input type="hidden" id="J_id" name="id" value='@form("id").value'>
+                    <input type="hidden" id="J_status" name="status" value='1' >
+                    @form.globalError.map { error =>
+                    <div class="error-row" style="display:block">
+                        <p class="error"> @error.message</p>
+                    </div>
+                    }
                 <div class="pet-title">
                     <dl>
                         <dt>标题：</dt>
-                        <dd><input id="J_title"  name="title" class="b-input" value="" placeholder="艹，给我起个牛逼的名字"></dd>
-                        <dd class="msg" style="display:none"><div class="msg-error">：（ 超出2个字了</div>32/30</dd>
+                        <dd><input id="J_title"  name="title" class="b-input" value='@form("title").value' placeholder="艹，给我起个牛逼的名字"></dd>
+
                     </dl>
                 </div>
-
+               <div class="pet-type">
+                   <dl>
+                       <dt>类型：</dt>
+                       <dd>
+                           <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") =="1") {"checked"}) value="1"/>gif神兽</label>
+                           <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "2") {"checked"}) value="2"/>神兽自白</label>
+                       </dd>
+                   </dl>
+               </div>
 
                 <div class="pet-uploadify">
+                    <div class="pic" id="J_picShow">
+                        @if(form("pic").value !=""){ <img src='@form("pic").value'> }
+                    </div>
                     <div  id="J_uploadify"> </div>
+                    <input type="hidden" id="J_pic" name="pic" value='@form("pic").value'>
                 </div>
 
                 <div class="pet-intro">
                     <dl>
                         <dt id="J_psLabel">我靠( ‵o′)凸，就不能来个题外话</dt>
-                        <dd> <textarea id="J_intro"  name="intro" class="b-textarea"></textarea></dd>
+                        <dd> <textarea id="J_intro"  name="intro" class="b-textarea">@form("intro").value </textarea></dd>
                     </dl>
                 </div>
                 <div class="pet-tags">
                     <dl>
                         <dt id="J_tagsLabel">那个啥，都到这了，给我贴几个标签如何^_^</dt>
-                        <dd>  <input id="J_tags" name="tags" class="b-input" type="text" value="" placeholder="亲，给我添几个标签如何"></dd>
+                        <dd>  <input id="J_tags" name="tags" class="b-input" type="text" value='@form("tags").value' placeholder="亲，给我添几个标签如何"></dd>
                     </dl>
                 </div>
                 <!-- 操作 -->
                 <div class="pet-btnbar clearfix">
 
 
-                    <input id="J_petEditBtn" type="submit" class="bbl-btn mr20" value="发表">
+                    <input id="J_petEditBtn" type="submit" class="bbl-btn mr20" value="发布">
                     <input type="button" class="bgr-btn" onclick="window.history.back(-1)" value="取消并返回">
 
                 </div>
 
-
+               </form>
             </div>
         </div>
         <div class="side">
