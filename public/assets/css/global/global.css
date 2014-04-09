@@ -321,8 +321,9 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     float: left;
     font-size: 12px;
     height: 35px;
+    width: 60px;
     line-height: 35px;
-    padding: 0 20px;
+    padding: 0 10px;
     margin-right: 10px;
     text-align: center
 }
@@ -342,7 +343,6 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     color: #333;
     font-weight: bold;
     display: block;
-    width: 60px;
     margin-top: 0;
     height: 33px;
     line-height: 33px;

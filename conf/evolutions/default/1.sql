@@ -219,6 +219,7 @@ CREATE TABLE `diagram` (
   `content`             text ,
   `ps`                  text ,
   `tags`              varchar(250) ,
+  `type_id`            tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',
   `view_num`                 int(10) unsigned not null  DEFAULT '1',
   `love_num`                  int(10) unsigned not null  DEFAULT '0',

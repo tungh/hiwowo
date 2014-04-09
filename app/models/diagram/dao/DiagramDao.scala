@@ -95,18 +95,21 @@ object DiagramDao {
     diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
   }
 
-  def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
-    val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
+  def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
+    val diagramAutoInc = diagrams.map(c => (c.uid,c.title,c.pic,c.intro.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
-    diagramAutoInc.insert(uid,title,pic,intro,content,tags,status)
+    diagramAutoInc.insert(uid,title,pic,intro,tags,status)
   }
 
   def deleteDiagram(id:Long) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield c ).delete
   }
   def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int) = database.withDynSession{
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status) ).update(uid,title,intro,content,ps,tags,status)
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status) ).update(uid,title,pic,intro,content,ps,tags,status)
+  }
+  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int) = database.withDynSession{
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.tags.?,c.status) ).update(uid,title,pic,intro,tags,status)
   }
   def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield  c.status).update(status)
@@ -124,21 +127,45 @@ object DiagramDao {
       ).firstOption
   }
     def findDiagrams(status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
-      val totalRows = Query(diagrams.filter(_.status ===status).length).first
-      val totalPages = (totalRows + pageSize - 1) / pageSize
-      val startRow = if (currentPage < 1 || currentPage > totalPages) {
-        0
-      } else {
-        (currentPage - 1) * pageSize
-      }
-      val list = ( for{
-        c<-diagrams
-        u<-users
-        if c.status === status
-        if c.uid === u.id
-      } yield (c,u) ).sortBy(_._1.addTime desc).drop(startRow).take(pageSize).list()
-      Page[(Diagram,User)](list,currentPage,totalPages)
+    val totalRows = Query(diagrams.filter(_.status ===status).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
     }
+    val list = ( for{
+      c<-diagrams
+      u<-users
+      if c.status === status
+      if c.uid === u.id
+    } yield (c,u) ).sortBy(_._1.addTime desc).drop(startRow).take(pageSize).list()
+    Page[(Diagram,User)](list,currentPage,totalPages)
+  }
+
+
+
+  def findDiagrams(sortBy:String,typeId:Int,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
+    val totalRows = Query(diagrams.filter(_.status === status).filter(_.typeId === typeId).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
+    }
+    var query = for{
+      c<-diagrams
+      u<-users
+      if c.typeId === typeId
+      if c.status === status
+      if c.uid === u.id
+    }yield(c,u)
+    if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
+    if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
+    val list = query.drop(startRow).take(pageSize).list()
+    Page[(Diagram,User)](list,currentPage,totalPages)
+  }
+
   /*
    *
    *    diagram pic dao

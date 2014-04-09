@@ -4,7 +4,6 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
-import models.user.User
 import models.diagram.dao.{ DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
 import play.api.cache.Cache
@@ -14,7 +13,7 @@ import play.api.data.Forms._
 import models.diagram.Diagram
 import scala.Some
 import models.user.User
-import controllers.DiagramComponent
+
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 
@@ -25,18 +24,19 @@ import org.jsoup.safety.Whitelist
  * Time: 下午11:37
  */
 case class DiagramComponent(
-                   getDiagram:Diagram,
-                   getUser:User
+                   diagram:Diagram,
+                   user:User
                        )
 
 
 object  Diagrams extends Controller {
 
-  val diagramForm = Form(
+  val petForm = Form(
     tuple(
       "id"->optional(longNumber),
       "title" ->nonEmptyText ,
-      "content"->text,
+      "pic"->nonEmptyText,
+      "intro" ->optional(text) ,
       "tags"->optional(text),
       "status"->number
     )
@@ -45,12 +45,12 @@ object  Diagrams extends Controller {
   /* 图说 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
   /* 记录每个页面的点击次数，先放在cache里，当大于9时，记录到数据库中 */
-    val viewNum =  Cache.getOrElse[Int]("diagram_"+id) { 1 }
+  /*  val viewNum =  Cache.getOrElse[Int]("diagram_"+id) { 1 }
     Cache.set("diagram_"+id,viewNum+1)
     if(viewNum >9) {
       DiagramSQLDao.updateViewNum(id,viewNum)
       Cache.remove("topic_"+id)
-    }
+    }*/
 
     val diagramWithUser = DiagramDao.findDiagram(id)
     val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),None)
@@ -62,7 +62,7 @@ object  Diagrams extends Controller {
   }
 
   /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只用不为零的图说，可以进入编辑状态 */
-  def edit(id:Long) = Users.UserAction{ user => implicit request =>
+  def editDiagram(id:Long) = Users.UserAction{ user => implicit request =>
     if(user.isEmpty){
         Redirect(controllers.users.routes.UsersRegLogin.login)
     } else{
@@ -159,16 +159,16 @@ object  Diagrams extends Controller {
      }
    }
 
-  /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只用不为零的图说，可以进入编辑状态 */
-  def edit2(id:Long) = Users.UserAction{ user => implicit request =>
+  /* editor 1先判断用户是否登陆 2 判断用户的status 是否等于 3 ，只用等于3的用户，才能发表图说。3、判断id 是否为0，只有不为零的图说，可以进入编辑状态 */
+  def editPet(id:Long) = Users.UserAction{ user => implicit request =>
     if(user.isEmpty){
       Redirect(controllers.users.routes.UsersRegLogin.login)
     } else{
       if(user.get.status == 3){
-        if(id == 0) Ok(views.html.diagrams.edit(user,diagramForm))
+        if(id == 0) Ok(views.html.diagrams.editPet(user,petForm))
         else{
           val diagram = DiagramDao.findDiagramById(id)
-          Ok(views.html.diagrams.edit(user,diagramForm.fill((diagram.get.id,diagram.get.title,diagram.get.content.getOrElse(""),diagram.get.tags,diagram.get.status))))
+          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.tags,diagram.get.status))))
         }
       } else{
         Redirect(controllers.users.routes.UsersAccount.vip)
@@ -179,24 +179,15 @@ object  Diagrams extends Controller {
 
   /*保存 帖子*/
   def save = Users.UserAction{ user => implicit request =>
-    diagramForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.diagrams.edit(user,formWithErrors)),
+    petForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.diagrams.editPet(user,formWithErrors)),
       fields =>{
-        var intro =Jsoup.clean(fields._3,Whitelist.none())
-        if(intro.length()>100) intro =intro.substring(0,100)+"..."
-        val  doc =Jsoup.parseBodyFragment(fields._3)
-        val uploadImages =doc.body().getElementsByTag("img")
-        var pics =""
-        val pic:String = if(!uploadImages.isEmpty){ uploadImages.first()+""}else{ "" }
-        val it=uploadImages.iterator()
-        while(it.hasNext){
-          pics +=it.next().attr("src")+","
-        }
+
         if (fields._1.isEmpty){
-          val id= DiagramDao.addDiagram(user.get.id.get,fields._2,pic,Some(intro),Some(fields._3),fields._4,fields._5)
+          val id= DiagramDao.addDiagram(user.get.id.get,fields._2,fields._3,fields._4,fields._5,fields._6)
           Redirect(controllers.routes.Diagrams.diagram(id))
         }else{
-        //  TopicDao.modifyTopic(Topic(fields._1,user.get.id.get,fields._2,fields._4,intro,Some(pics.trim),fields._3,false,false,0,0,0,0,None))
+          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._2,fields._3,fields._4,fields._5,fields._6)
           Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
         }
 

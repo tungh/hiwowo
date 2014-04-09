@@ -1,5 +1,5 @@
-@(user:Option[models.user.User],diagram:(controllers.DiagramComponent))
-@views.html.template(user,nav="index",subNav="find")(css="/assets/css/template/diagram.css"){
+@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
+@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
 
@@ -7,15 +7,20 @@
         <div class="main">
             <div class="sitebar">
                 <ul>
-                    <li class="esp"><a href="@controllers.users.routes.Users.home(diagram.getUser.id.get)"
-                                       title="@diagram.getUser.name" target="_blank"><img src="@diagram.getUser.pic"
+                    <li class="esp"><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
+                                       title="@diagramComponent.user.name" target="_blank"><img src="@diagramComponent.user.pic"
                                                                                           width="60" height="60"></a>
                     </li>
-                    <li><a href="@controllers.users.routes.Users.home(diagram.getUser.id.get)"
-                           title="@diagram.getUser.name" style="color: #333">@diagram.getUser.name</a></li>
-                    <li>浏览<strong>@diagram.getDiagram.viewNum</strong>
-                        @if(!user.isEmpty && diagram.getDiagram.uid == user.get.id.get){
-                        <a href="@controllers.routes.Diagrams.edit(diagram.getDiagram.id.get)">编辑</a>
+                    <li><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
+                           title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>
+                    <li>浏览<strong>@diagramComponent.diagram.viewNum</strong>
+                        @if(!user.isEmpty && diagramComponent.diagram.uid == user.get.id.get){
+                        @if(diagramComponent.diagram.typeId == 0){
+                        <a href="@controllers.routes.Diagrams.editDiagram(diagramComponent.diagram.id.get)">编辑</a>
+                        }else{
+                        <a href="@controllers.routes.Diagrams.editPet(diagramComponent.diagram.id.get)">编辑</a>
+                        }
+
                         }
                     </li>
                     <li></li>
@@ -24,12 +29,12 @@
                     </li>
                 </ul>
             </div>
-            <h1 class="title"> @diagram.getDiagram.title</h1>
+            <h1 class="title"> @diagramComponent.diagram.title</h1>
 
             <div class="desc">
-                <div class="intro">@diagram.getDiagram.intro.getOrElse("")</div>
-                @Html(diagram.getDiagram.content.getOrElse(""))
-                <div class="ps">@diagram.getDiagram.ps.getOrElse("")</div>
+                <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
+                @Html(diagramComponent.diagram.content.getOrElse(""))
+                <div class="ps">@diagramComponent.diagram.ps.getOrElse("")</div>
             </div>
             <div class="discusses">
                 <div class="no-discuss"></div>

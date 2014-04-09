@@ -9,8 +9,8 @@ GET   /test                                controllers.Test.index
 GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
-GET       /pets                              controllers.Pages.pets(typeId:Int ?=0)
-GET       /find                             controllers.Pages.find
+GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
+GET       /diagrams/:sortBy                             controllers.Pages.diagrams(sortBy:String,p:Int ?=1,size:Int ?=10)
 
 #common template
 GET       /tempt/index                                    controllers.PagesTempt.index
@@ -30,11 +30,11 @@ GET    /forum                               controllers.Forums.forum(typeId:Int 
 
 #diagram
 GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
-GET   /diagram/edit                               controllers.Diagrams.edit(id:Long ?=0L)
+GET   /diagram/editDiagram                               controllers.Diagrams.editDiagram(id:Long ?=0L)
 POST  /diagram/savePic                     controllers.Diagrams.savePic
 POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 POST  /diagram/delete                     controllers.Diagrams.delete
-GET   /diagram/edit2                      controllers.Diagrams.edit2(id:Long ?=0L)
+GET   /diagram/editPet                      controllers.Diagrams.editPet(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
 
 #pet
@@ -103,11 +103,10 @@ GET   /sitemap                                         controllers.Infos.siteMap
 GET   /credits                                         controllers.Infos.credits
 GET   /jiucuo                                          controllers.Infos.jiucuo
 
-GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
-GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth
-GET   /686d2b12a3c8fa6430c6f32b51d504ca.txt            controllers.Infos.qzone
-GET   /bdsitemap.txt                                   controllers.Infos.baiduSiteMap
-GET   /root.txt                                        controllers.Infos.alimama
+
+
+
+
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Administrators.login
 POST  /admin/emailLogin          controllers.admin.Administrators.emailLogin

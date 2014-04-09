@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],petComponent:controllers.PetComponent)
+@(user:Option[models.user.User],diagramComponent:controllers.DiagramComponent)
 @views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/pet.css"){
 
 <div class="container pet">
@@ -7,15 +7,15 @@
         <div class="main">
             <div class="sitebar">
                 <ul>
-                    <li class="esp"><a href="@controllers.users.routes.Users.home(petComponent.getUser.id.get)"
-                                       title="@petComponent.getUser.name" target="_blank"><img src="@petComponent.getUser.pic"
+                    <li class="esp"><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
+                                       title="@diagramComponent.user.name" target="_blank"><img src="@diagramComponent.user.pic"
                                                                                           width="60" height="60"></a>
                     </li>
-                    <li><a href="@controllers.users.routes.Users.home(petComponent.getUser.id.get)"
-                           title="@petComponent.getUser.name" style="color: #333">@petComponent.getUser.name</a></li>
-                    <li>浏览<strong>@petComponent.getPet.viewNum</strong>
-                        @if(!user.isEmpty && petComponent.getPet.uid == user.get.id.get){
-                        <a href="@controllers.routes.Pets.edit(petComponent.getPet.id.get)">编辑</a>
+                    <li><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
+                           title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>
+                    <li>浏览<strong>@diagramComponent.diagram.viewNum</strong>
+                        @if(!user.isEmpty && diagramComponent.diagram.uid == user.get.id.get){
+                        <a href="@controllers.routes.Pets.edit(diagramComponent.diagram.id.get)">编辑</a>
                         }
                     </li>
                     <li></li>
@@ -24,12 +24,10 @@
                     </li>
                 </ul>
             </div>
-            <h1 class="title"> @petComponent.getPet.title</h1>
+            <h1 class="title"> @diagramComponent.diagram.title</h1>
 
             <div class="desc">
-                <div class="intro">@petComponent.getPet.intro.getOrElse("")</div>
-
-
+                <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
             </div>
             <div class="discusses">
                 <div class="no-discuss"></div>

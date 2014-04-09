@@ -19,7 +19,7 @@ object Pages extends Controller {
   /* 首页 */
   def index(currentPage:Int,pageSize:Int)  = Users.UserAction{ user => implicit request =>
     /* 在首页显示精华的帖子 */
-    val pages = DiagramDao.findDiagrams(3,currentPage,pageSize)
+    val pages = DiagramDao.findDiagrams(2,currentPage,pageSize)
     Ok(views.html.pages.index(user,pages))
   }
 
@@ -30,13 +30,15 @@ object Pages extends Controller {
      Ok(views.html.pages.weixin(user,pages))
    }
   /* 发现 图说 */
-  def find = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.find(user))
+  def diagrams(sortBy:String,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+    val pages = DiagramDao.findDiagrams(sortBy,0,2,currentPage,pageSize)
+    Ok(views.html.pages.diagrams(user,pages,sortBy))
   }
 
   /* 宠物乐园 */
-  def pets(typeId:Int) = Users.UserAction{ user => implicit request =>
-    Ok(views.html.pages.pets(user))
+  def pets(typeId:Int,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+    val pages = DiagramDao.findDiagrams("new",typeId,2,currentPage,pageSize)
+    Ok(views.html.pages.pets(user,pages,typeId))
   }
 
 
