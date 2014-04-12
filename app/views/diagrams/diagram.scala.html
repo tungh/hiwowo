@@ -7,9 +7,10 @@
         <div class="main">
             <div class="sitebar">
                 <ul>
-                    <li class="esp"><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
-                                       title="@diagramComponent.user.name" target="_blank"><img src="@diagramComponent.user.pic"
-                                                                                          width="60" height="60"></a>
+                    <li>
+                        <a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)" title="@diagramComponent.user.name" target="_blank">
+                        <img class="img-circle" src="@diagramComponent.user.pic" width="60" height="60">
+                        </a>
                     </li>
                     <li><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
                            title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>

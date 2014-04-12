@@ -112,7 +112,7 @@ object DiagramDao {
     ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.tags.?,c.status) ).update(uid,typeId,title,pic,intro,tags,status)
   }
   def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
-    (for(c<-diagrams if c.id === id) yield  c.status).update(status)
+    (for(c<-diagrams if c.id === id) yield c.status ).update(status)
   }
   def findDiagramById(id:Long):Option[Diagram] = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield c).firstOption
@@ -126,7 +126,7 @@ object DiagramDao {
         if c.id === id } yield (c,u)
       ).firstOption
   }
-    def findDiagrams(status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
+    def findDiagrams(sortBy:String,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
     val totalRows = Query(diagrams.filter(_.status ===status).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -134,12 +134,15 @@ object DiagramDao {
     } else {
       (currentPage - 1) * pageSize
     }
-    val list = ( for{
-      c<-diagrams
-      u<-users
-      if c.status === status
-      if c.uid === u.id
-    } yield (c,u) ).sortBy(_._1.addTime desc).drop(startRow).take(pageSize).list()
+      var query = for{
+        c<-diagrams
+        u<-users
+        if c.status === status
+        if c.uid === u.id
+      }yield(c,u)
+      if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
+      if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
+      val list = query.drop(startRow).take(pageSize).list()
     Page[(Diagram,User)](list,currentPage,totalPages)
   }
 
@@ -164,6 +167,35 @@ object DiagramDao {
     if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
     val list = query.drop(startRow).take(pageSize).list()
     Page[(Diagram,User)](list,currentPage,totalPages)
+  }
+  def findAllDiagrams(currentPage:Int,pageSize:Int):Page[Diagram] = database.withDynSession{
+    val totalRows = Query(diagrams.length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
+    }
+     val list =  ( for(c <- diagrams ) yield c).drop(startRow).take(pageSize).list()
+    Page[Diagram](list,currentPage,totalPages)
+  }
+
+  /* 管理后台 筛选 */
+  def filterDiagrams(title: Option[String], status: Option[Int], typeId: Option[Int], currentPage: Int, pageSize: Int):Page[Diagram] = database.withDynSession {
+    var query = for (c <- diagrams) yield c
+    if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
+    if(!status.isEmpty) query = query.filter(_.status === status.get)
+    if(!typeId.isEmpty) query = query.filter(_.typeId === typeId.get)
+    query = query.sortBy(_.id desc)
+    val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
+    }
+    val ts: List[Diagram] = query.drop(startRow).take(pageSize).list()
+    Page[Diagram](ts, currentPage, totalPages)
   }
 
   /*

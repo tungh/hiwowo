@@ -19,7 +19,7 @@ object Pages extends Controller {
   /* 首页 */
   def index(currentPage:Int,pageSize:Int)  = Users.UserAction{ user => implicit request =>
     /* 在首页显示精华的帖子 */
-    val pages = DiagramDao.findDiagrams(2,currentPage,pageSize)
+    val pages = DiagramDao.findDiagrams("new",2,currentPage,pageSize)
     Ok(views.html.pages.index(user,pages))
   }
 

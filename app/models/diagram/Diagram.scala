@@ -9,8 +9,8 @@ import java.sql.Timestamp
  * Time: 下午3:27
  * 图说
  * ps 后记 postscript
- * typeId 0:图说 ， 1 gif神兽 ， 2 神自白 ，3 视频      大于0 表示神兽
- * status 0 草稿 1 发布 2 已审核
+ * typeId 0:普通 ， 1 gif神兽 ， 2 神自白 ，3 视频      大于0 表示神兽
+ * status 0 草稿 1 发布 2 审核成功 3 审核失败
  */
 case class Diagram (
                    id: Option[Long],

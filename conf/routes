@@ -127,7 +127,13 @@ POST /admin/forums/batchTopics       controllers.admin.Forums.batchTopics
 GET  /admin/forums/filterDiscusses       controllers.admin.Forums.filterDiscusses
 POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
 
-
+#管理后台  图说管理
+GET   /admin/diagrams/list           controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/diagrams/view         controllers.admin.Diagrams.view(id:Long)
+GET   /admin/diagrams/delete         controllers.admin.Diagrams.delete(id:Long)
+GET   /admin/diagrams/check          controllers.admin.Diagrams.check(id:Long,status:Int ?=1)
+GET  /admin/diagrams/filter            controllers.admin.Diagrams.filter
+POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
 
 
 
