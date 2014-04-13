@@ -12,12 +12,7 @@ GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size
 GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
 GET       /diagrams/:sortBy                             controllers.Pages.diagrams(sortBy:String,p:Int ?=1,size:Int ?=10)
 
-#common template
-GET       /tempt/index                                    controllers.PagesTempt.index
-GET       /tempt/diagrams                            controllers.PagesTempt.diagrams
-GET       /tempt/weixin                              controllers.PagesTempt.weixin
-GET       /tempt/pets                               controllers.PagesTempt.pets
-GET       /tempt/find                               controllers.PagesTempt.find
+
 
 #forum
 GET    /forum/search                     controllers.Forums.search
@@ -37,11 +32,7 @@ POST  /diagram/delete                     controllers.Diagrams.delete
 GET   /diagram/editPet                      controllers.Diagrams.editPet(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
 
-#pet
-GET    /pet/$id<[0-9]+>                      controllers.Pets.pet(id:Long)
-GET    /pet/edit                             controllers.Pets.edit(id:Long ?=0L)
-POST   /pet/save                            controllers.Pets.save
-POST   /pet/delete                          controllers.Pets.delete
+
 
 
 

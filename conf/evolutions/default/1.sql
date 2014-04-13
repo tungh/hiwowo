@@ -281,45 +281,7 @@ CREATE TABLE  IF NOT EXISTS `weixin_diagram`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/**********************************************
- pet 神兽
- pet_discuss
 
- **********************************************/
-DROP TABLE IF EXISTS `pet`;
-CREATE TABLE `pet` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
-  `title`               varchar(64) ,
-  `url`               varchar(250) ,
-  `intro`               varchar(200) ,
-  `status`              tinyint  not null default  '0',
-  `type_id`              tinyint  not null default  '0',
-  `tags`              varchar(250) ,
-  `view_num`                 int(10) unsigned not null  DEFAULT '1',
-  `love_num`                  int(10) unsigned not null  DEFAULT '0',
-  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
-  `discuss_num`                 int(10) unsigned not null  DEFAULT '0',
-  `collect_num`                 int(10) unsigned not null  DEFAULT '0',
-  `come_from_site`             varchar(64) ,
-  `come_from_url`             varchar(250) ,
-  `modify_time`         timestamp default '2013-07-18 12:00:00',
-  `add_time`           timestamp default '2013-07-18 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `pet_discuss`;
-CREATE TABLE IF NOT EXISTS `pet_discuss`(
-  `id`                     int(10) NOT NULL AUTO_INCREMENT,
-  `uid`                    int(10) NOT NULL ,
-  `pet_id`            int(10) NOT NULL ,
-  `quote_content`             text,
-  `content`                  text ,
-  `status`            tinyint NOT NULL DEFAULT '0',
-  `add_time`               timestamp ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /************************************************************
  * forum  论坛：主要有话题、话题回复     板块》话题》回复，讨论话题与goods的评论、theme的讨论分开设计，这就是一个独立的模块
@@ -390,82 +352,6 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-
-
-
-
-
-
-/************************************************************
- * shop ，主要有
-  * shop 表                    小店
- * shop_discuss 表            小店讨论
- -- --------------------------------------------------------
-/*
-  -- 表的结构 `shop `
-     id                 表的ID
-     name              专题组名称
-     intro             介绍
-     is_visible       是否显示
-     uid         作者id
-     cid          分类  线上店铺 线下店铺
-     tags              标签组      2012.11.04 新增，用于简化处理shop_tag,
-     love_num        喜欢的人
-     pic               主题封面
-     modify_time      修改
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `shop`;
-CREATE TABLE IF NOT EXISTS `shop`(
-  `id`                      int(10) NOT NULL AUTO_INCREMENT,
-  `uid`                int(10) not null ,
-  `cid`                tinyint default '0' ,
-  `name`                    varchar(128) not null default '',
-  `intro`                   varchar(255) ,
-  `is_visible`              tinyint(1) not null default '0',
-  `pic`                varchar(128) not null default '/images/shop/default.jpg',
-  `province`             varchar(20),
-  `city`                 varchar(20) ,
-  `town`                 varchar(20),
-  `street`               varchar(50) ,
-  `modify_time`             timestamp,
-  `add_time`                timestamp ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `shop_discuss `
-     id                 表的ID
-     content            评论内容
-     shop_id              专题ID
-     uid                    评论人ID
-     is_delete              是否删除
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `shop_discuss`;
-CREATE TABLE IF NOT EXISTS `shop_discuss`(
-  `id`                          int(10) NOT NULL AUTO_INCREMENT,
-  `shop_id`                      int(10) NOT NULL ,
-  `uid`                           int(10) NOT NULL ,
-  `quote_content`             text,
-  `content`                     text,
-  `check_state`          tinyint NOT NULL DEFAULT '0',
-  `add_time`                      timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
 
 
  /************************************************************
