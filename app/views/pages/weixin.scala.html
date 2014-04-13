@@ -20,15 +20,15 @@
                         <div class="intro">
                             @Html(diagram.intro.getOrElse(""))
                         </div>
-                        <div class="pic">
+                        <a class="pic" href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank">
                             @Html(diagram.content.getOrElse(""))
-                        </div>
+                        </a>
                         </dt> }else{
                         <dt class="diagram-content fl">
 
-                        <div class="pic">
+                            <a class="pic" href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank">
                             <img src="@diagram.pic">
-                        </div>
+                        </a>
                         <div class="intro">
                             @Html(diagram.intro.getOrElse(""))
                         </div>
@@ -36,12 +36,12 @@
                         }
                         <dd class="diagram-info fr">
                             <div class="pin">
-                                <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)"> @diagram.title </a> </h3>
+                                <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.title </a> </h3>
                                 <div class="user-info mb10">
                                     <span class="user-img">
-                                        <a href="@controllers.users.routes.Users.home(user.id.get)"><img src="@user.pic"width="36" height="36"></a>
+                                        <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic"width="36" height="36"></a>
                                     </span>
-                                    <span class="user-name"><a href="@controllers.users.routes.Users.home(user.id.get)"> @user.name </a> </span>
+                                    <span class="user-name"><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"> @user.name </a> </span>
                                 </div>
                                 <div class="meta">
                                     <div class="like-common like-common-s" >
@@ -64,7 +64,7 @@
                                         <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
                                     </div>
                                     <div class="discuss">
-                                        <a href=""> @diagram.discussNum 评论  </a>
+                                        <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.discussNum 评论  </a>
                                     </div>
                                 </div>
                             </div>

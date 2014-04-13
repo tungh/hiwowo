@@ -26,6 +26,7 @@
     margin-bottom: 10px;
 }
 .main .diagrams .diagram .diagram-content .pic{
+    display: block;
     position: relative;
     width: 460px;
 }
