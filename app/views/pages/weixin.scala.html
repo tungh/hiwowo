@@ -15,16 +15,25 @@
                 <div class="diagrams">
                     @for((diagram,user)<-page.items ){
                     <dl class="diagram clearfix">
+                        @if(diagram.typeId ==0){
                         <dt class="diagram-content fl">
                         <div class="intro">
-                            @diagram.intro.getOrElse("")
+                            @Html(diagram.intro.getOrElse(""))
                         </div>
                         <div class="pic">
-                            @diagram.content.getOrElse("")
+                            @Html(diagram.content.getOrElse(""))
                         </div>
+                        </dt> }else{
+                        <dt class="diagram-content fl">
 
-
+                        <div class="pic">
+                            <img src="@diagram.pic">
+                        </div>
+                        <div class="intro">
+                            @Html(diagram.intro.getOrElse(""))
+                        </div>
                         </dt>
+                        }
                         <dd class="diagram-info fr">
                             <div class="pin">
                                 <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)"> @diagram.title </a> </h3>

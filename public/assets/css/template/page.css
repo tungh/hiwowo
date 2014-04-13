@@ -29,6 +29,9 @@
     position: relative;
     width: 460px;
 }
+.main .diagrams .diagram .diagram-content .pic img{
+    max-width: 460px;
+}
 .main .diagrams .diagram .diagram-content .intro{
     padding: 10px;
     text-align: center;

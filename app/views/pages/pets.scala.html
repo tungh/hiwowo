@@ -20,13 +20,12 @@
                     @for((diagram,user)<-page.items ){
                     <dl class="diagram clearfix">
                         <dt class="diagram-content fl">
-                        <div class="intro">
-                            @diagram.intro.getOrElse("")
-                        </div>
                         <div class="pic">
-                            @diagram.content.getOrElse("")
+                           <img src="@diagram.pic">
                         </div>
-
+                        <div class="intro">
+                            @Html(diagram.intro.getOrElse(""))
+                        </div>
 
                         </dt>
                         <dd class="diagram-info fr">
