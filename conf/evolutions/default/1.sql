@@ -264,7 +264,10 @@ CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   `diagram_id`            int(10) NOT NULL ,
   `quote_content`             text,
   `content`                  text ,
-  `status`            tinyint NOT NULL DEFAULT '0',
+  `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
+  `report_num`                 int(10) unsigned not null  DEFAULT '0',
+  `check_state`            tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

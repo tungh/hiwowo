@@ -15,6 +15,9 @@ case class DiagramDiscuss  (
                              diagramId:Long,
                              quoteContent:Option[String],
                              content:String,
+                             loveNum:Int,
+                             hateNum:Int,
+                             reportNum:Int,
                              checkState:Int,
                              addTime:Option[Timestamp]
                              )
@@ -25,10 +28,13 @@ class DiagramDiscusses(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discu
   def diagramId = column[Long]("diagram_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
+  def loveNum = column[Int]("love_num")
+  def hateNum = column[Int]("hate_num")
+  def reportNum = column[Int]("report_num")
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,diagramId,quoteContent.?, content, checkState, addTime.? ) <> (DiagramDiscuss.tupled,DiagramDiscuss.unapply)
+  def * =(id.?,uid,diagramId,quoteContent.?, content, loveNum, hateNum, reportNum,checkState, addTime.? ) <> (DiagramDiscuss.tupled,DiagramDiscuss.unapply)
 
 
 }
