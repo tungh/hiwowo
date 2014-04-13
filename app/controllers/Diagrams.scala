@@ -191,10 +191,32 @@ object  Diagrams extends Controller {
           DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._7,fields._2,fields._3,fields._4,fields._5,fields._6)
           Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
         }
-
-
       }
     )
 
+  }
+
+  /* save diagram discuss*/
+  def saveDiscuss = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+    else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
+    else {
+      val diagramId = (request.body \ "diagramId").asOpt[Long]
+      val quoteContent = (request.body \ "quoteContent").asOpt[String]
+      val content = (request.body \ "content").asOpt[String]
+        if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
+          Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
+        }else{
+          DiagramDao.addDiagramDiscuss(user.get.id.get,diagramId.get,quoteContent,content.getOrElse(""),0)
+          Ok(Json.obj("code" -> "100", "message" ->"success"))
+        }
+    }
+  }
+
+  /* get diagram discusses */
+  def getDiscusses(diagramId:Long,sortBy:String,p:Int)  = Users.UserAction{ user => implicit request =>
+      val page = DiagramDao.findDiagramDiscusses(diagramId,sortBy,p,3)
+    Ok(views.html.diagrams.discusses(diagramId,page,sortBy))
   }
 }

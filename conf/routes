@@ -31,7 +31,8 @@ POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 POST  /diagram/delete                     controllers.Diagrams.delete
 GET   /diagram/editPet                      controllers.Diagrams.editPet(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
-
+POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
+GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
 
 
 

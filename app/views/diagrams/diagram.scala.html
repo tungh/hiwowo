@@ -48,55 +48,22 @@
 
 
                 <div class="discuss-textarea clearfix">
+                    @if(user.isEmpty){
                     <div class="login">
                         <p><a class="bbl-btn" rel="loginD">登陆</a>后可发表评论</p>
                     </div>
-                    <form>
+                    }
+                    <form action="@controllers.routes.Diagrams.saveDiscuss" id="J_discussForm" method="post">
+                        <input type="hidden" name="diagramId" value="@diagramComponent.diagram.id.get" id="J_diagramId">
                         <h3>发表评价</h3>
-                        <div class="textarea">
-                            <textarea name="discussContent" placeholder="请保持评论内容和谐"></textarea>
-                            <input type="submit"class="bbl-btn" value="提交">
+                        <div class="textarea clearfix">
+                            <textarea name="discussContent" id="J_discussContent" placeholder="请保持评论内容和谐"></textarea>
+                            <input type="submit"class="bbl-btn" id="J_discussSubmit" value="提交">
                         </div>
                     </form>
                 </div>
-            <div class="discusses">
-                <div class="pagination clearfix">
-                    <span class="refresh" data-order="new">最新</span>
-                    <span class="refresh" data-order="hot">最热</span>
-                    <div class="pagin inlineblock fl mt10" id="J_Pagination">
-                        <a class="prev">上一页</a>
-                        <span class="current">1</span>
-                        <a>2</a>
-                        <a>3</a>
-                        <a class="next">下一页</a>
-                     </div>
-                </div>
-                <div class="clear"></div>
-                <div class="items clearfix">
-                    <div class="item clearfix">
-                        <div class="item-left">
-                            <a><img src="/images/user/default.jpg"></a>
-                        </div>
-                        <div class="item-right">
-                            <div class="c-head">
-                                <a href="">hiwowo</a>
-                                <span class="fl">1L</span>
-                            </div>
-                            <div class="c-body">  哥特萝莉侦探事件簿？好像是这样叫的••••••   </div>
-                            <div class="c-meta">
-                                <span class="main-access fr"> <a class="gray-text">2014-04-13 15:11:54</a> <a
-                                        class="source-from iphone hidden"
-                                        href="http://pages.b0.upaiyun.com/app/phone-app.html"></a> <a
-                                        href="javascript:showReport(12529786)"
-                                        class="report">举报</a> <a href="javascript:void(0);"
-                                                                                      class="c-up ">(0)</a> <a
-                                        href="javascript:void(0);" class="c-down ">(0)</a> <a
-                                        href="javascript:void(0);" class="reply ">回复</a> </span>
-                            </div>
-                            <div class="c-form"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="discusses" id="J_discusses">
+
              </div>
         </div>
         <!-- side -->

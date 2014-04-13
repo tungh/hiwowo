@@ -233,4 +233,22 @@ def addDiagramDiscuss(uid:Long,diagramId:Long,quoteContent:Option[String],conten
   diagramDiscussAutoInc.insert(uid,diagramId,quoteContent,content,checkState)
 }
 
+def findDiagramDiscusses(diagramId:Long,sortBy:String,currentPage:Int,pageSize:Int):Page[(DiagramDiscuss,User)] = database.withDynSession{
+  val totalRows = Query(diagramDiscusses.filter(_.diagramId === diagramId).filter(_.checkState === 1).length).first
+  val totalPages = (totalRows + pageSize - 1) / pageSize
+  val startRow = if (currentPage < 1 || currentPage > totalPages) { 0} else {(currentPage - 1) * pageSize }
+  var query = for {
+    c <- diagramDiscusses
+    u <- users
+  if c.diagramId === diagramId
+  if c.checkState === 1
+    if c.uid === u.id
+  }yield(c,u)
+
+  if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
+  if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
+  val list = query.drop(startRow).take(pageSize).list()
+  Page[(DiagramDiscuss,User)](list, currentPage,totalPages)
+}
+
 }

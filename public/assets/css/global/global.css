@@ -569,6 +569,16 @@ a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background:
 .site-openid li a p {
     padding: 10px 0 0 0
 }
+/* 提示框 */
+.tipbox { display:none;position:absolute;z-index:999999;padding:10px 15px;width:200px;color:#fff;text-align:left;font-size:12px;background:#000;border:1px solid #fff;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000; }
+.tipmodal{width:160px;color:#666;-moz-box-shadow:0 2px 2px #ddd;-webkit-box-shadow:0 2px 2px #ddd;box-shadow:0 2px 2px #ddd;border-radius:4px;--moz-border-radius:4px;--webkit-border-radius: 4px;}
+.tipmodal-ok{background:#f5fec7 url(images/correct.png) no-repeat 10px 10px;border-color:#cad49c;color:#666;padding-left:35px;}
+.tipmodal-general{background-color:#fff;border-color:#d6d6d6;}
+.tipmodal-general-short{width:auto;background-color:#fff;border-color:#d6d6d6;}
+.tipmodal-error{background-color:#ffe1e2;border-color:#ddb0b2;}
+.tipmodal-error2{background:#fff url(images/alert.png) no-repeat 10px 10px;border-color:#d6d6d6;padding-left:35px;color:#666;}
+.tipmodal-error3{width:auto;background:#fff url(images/alert.png) no-repeat 10px 10px;border-color:#d6d6d6;padding-left:35px;color:#666;}
+
 
 /* 回到顶部 */
 #J_weixin{position:absolute;top:55px;left:0;height:58px;width:42px;background:url(images/addweixinfriend.png) no-repeat 3px 0;display:block;_background-image:url(images/addweixinfriend-png8.png) no-repeat 3px 0;cursor:default  }
