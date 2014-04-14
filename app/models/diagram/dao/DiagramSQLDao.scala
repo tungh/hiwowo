@@ -30,4 +30,7 @@ object DiagramSQLDao {
   def updateLoveNum(diagramId:Long,num:Int)=database.withDynSession{
     sqlu"update diagram set love_num =love_num+$num where id =$diagramId".first
   }
+  def updateHateNum(diagramId:Long,num:Int)=database.withDynSession{
+    sqlu"update diagram set hate_num =hate_num+$num where id =$diagramId".first
+  }
 }

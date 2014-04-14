@@ -7,18 +7,72 @@
  */
 define(function(require){
     var $ = jQuery = require("jquery")
+    var Cookie = require("cookie");
     $.hiwowo.diagramFavor={
         /* like */
         like:function(id){
+            /* 不存在，则保存 */
+
+              var params={
+                  diagramId:id
+              }
+              $.ajax({
+                  url:"/diagram/up",
+                  type : "POST",
+                  contentType:"application/json; charset=utf-8",
+                  dataType: "json",
+                  data:JSON.stringify(params),
+
+                  success: function(data){
+                      if(data.code=="100"){
+                      if(data.message =="loved") { alert("loved")}
+                      if(data.message =="success"){alert("success")}
+                      }
+                  }
+              });
+
 
         },
         /* hate */
-        hate:function(){
+        hate:function(id){
+            if(Cookie.get('diagram-down-'+id) == undefined){
+                var params={
+                    diagramId:id
+                }
+                $.ajax({
+                    url:"/diagram/down",
+                    type : "POST",
+                    contentType:"application/json; charset=utf-8",
+                    dataType: "json",
+                    data:JSON.stringify(params),
 
+                    success: function(data){
+                        if(data.code=="100"){
+                            Cookie.set('diagram-down-'+id, id, {
+                                expires:1/(24*60)
+                            });
+                            alert("loved")
+                        }
+                    }
+                });
+
+            }else{
+                alert("已经鄙视了")
+            }
         },
         /* collect */
         collect:function(){
 
         }
     }
+    $(function(){
+        $(document).on("click","a[rel=upDiagram]",function(){
+            var id =$(this).data("id")
+            $.hiwowo.diagramFavor.like(id)
+        })
+        $(document).on("click","a[rel=downDiagram]",function(){
+            var id =$(this).data("id")
+            $.hiwowo.diagramFavor.like(id)
+        })
+    })
 })

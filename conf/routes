@@ -33,6 +33,8 @@ GET   /diagram/editPet                      controllers.Diagrams.editPet(id:Long
 POST  /diagram/save                       controllers.Diagrams.save
 POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
 GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
+POST  /diagram/up                         controllers.Diagrams.upDiagram
+POST  /diagram/down                       controllers.Diagrams.downDiagram
 
 
 
