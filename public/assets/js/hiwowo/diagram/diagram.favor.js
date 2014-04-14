@@ -35,7 +35,7 @@ define(function(require){
         },
         /* hate */
         hate:function(id){
-            if(Cookie.get('diagram-down-'+id) == undefined){
+
                 var params={
                     diagramId:id
                 }
@@ -48,17 +48,13 @@ define(function(require){
 
                     success: function(data){
                         if(data.code=="100"){
-                            Cookie.set('diagram-down-'+id, id, {
-                                expires:1/(24*60)
-                            });
-                            alert("loved")
+                            if(data.message =="loved") { alert("loved")}
+                            if(data.message =="success"){alert("success")}
                         }
                     }
                 });
 
-            }else{
-                alert("已经鄙视了")
-            }
+
         },
         /* collect */
         collect:function(){

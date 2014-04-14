@@ -220,7 +220,7 @@ object  Diagrams extends Controller {
     Ok(views.html.diagrams.discusses(diagramId,page,sortBy))
   }
 
-  /* add like num */
+  /* add like num 在一个session 里 只能 点击一次 */
   def upDiagram = Action(parse.json){  implicit request =>
 
       val diagramId = (request.body \ "diagramId").asOpt[Long]
@@ -241,15 +241,19 @@ object  Diagrams extends Controller {
   /* add hate num */
   def downDiagram = Action(parse.json){  implicit request =>
 
-      val diagramId = (request.body \ "diagramId").asOpt[Long]
-      if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-        Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
-      }else{
+    val diagramId = (request.body \ "diagramId").asOpt[Long]
+    if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
+      Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
+    }else{
+      if(!session.get("pet_"+diagramId.get).isEmpty){
+        Ok(Json.obj("code" -> "100", "message" ->"loved"))
+      } else {
         DiagramSQLDao.updateHateNum(diagramId.get,1)
-       //如果用户登录，则记录这个用户喜欢的diagram
-
-        Ok(Json.obj("code" -> "100", "message" ->"success"))
+        val key ="pet_"+diagramId.get.toString
+        val value=diagramId.get.toString
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
       }
+    }
   }
 
 }
