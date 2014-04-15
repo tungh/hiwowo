@@ -188,10 +188,70 @@
              });
          }
          }
+     var sideDiagramDiscuss={
+         submit:function($this){
+             $this.attr('disabled',true);
+             var discuss = {
+                 "diagramId":parseInt($("#J_sideDiagramId").val()),
+                 "quoteContent": "",
+                 "content": $("#J_sideDiscussContent").val()
+             };
+
+             if($.hiwowo.loginDialog.isLogin()){
+                 if($.trim(discuss.content) == ""){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"亲，评论内容不能为空哦");
+                     $this.attr('disabled',false);
+                 }else if($.hiwowo.util.getStrLength(discuss.content) >= 140){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"内容不能大于140字哦");
+                     $this.attr('disabled',false);
+                 }else{
+
+                     $.ajax({
+                         url: $("#J_sideDiscussForm").attr("action"),
+                         type : "POST",
+                         contentType:"application/json; charset=utf-8",
+                         dataType: "json",
+                         data: JSON.stringify(discuss),
+                         beforeSend: function(){
+                             $this.disableBtn("bbl-btn");
+                         },
+                         success: function(data){
+                             if(data.code=="100"){
+                               //  $this.enableBtn("bbl-btn");
+                                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-ok";
+                                 $.hiwowo.tip.show($this,"评论成功");
+
+                             }
+                         }
+                     });
+                     return false
+                 }
+             }
+         },
+         init:function(){
+             var $sideDiscussForm = $("#J_sideDiscussForm");
+             $sideDiscussForm.find("textarea").focus(function(){
+                 $.hiwowo.loginDialog.isLogin()
+             });
+             $("#J_sideDiscussSubmit").click(function(event){
+                 event.preventDefault();
+                 sideDiagramDiscuss.submit($(this));
+             });
+             //回车键提交评论
+             $sideDiscussForm.find("textarea").on("keyup",function(e){
+                 var $this = $(this);
+                 $.hiwowo.util.submitByEnter(e, function(){
+                     sideDiagramDiscuss.submit($("#J_sideDiscussSubmit"));
+                 });
+             });
+         }
+     }
 
     $(function(){
         diagramDiscuss.init()
-
+        sideDiagramDiscuss.init()
 
         /* ajax 加载 discuss*/
         $.ajax({

@@ -72,7 +72,7 @@
                 <div class="UserApp">
                     <ul class="js_UserApp">
                         <li class="espImg">
-                            <img src="/images/qr_hiwowo.jpg">
+                            <img src="/assets/images/qr_hiwowo.jpg">
                         </li>
                         <li class="espTxt">
                             <a href="javascript:void(0)" class="appname">嗨喔喔微信公共帐号</a>
@@ -101,15 +101,43 @@
             <div class="share-nav">
                 <ul>
                     <li class="collect">
-                        <div class="favNum" style="display: block;">6</div>
+                        <div class="collectNum" style="display: block;">@diagramComponent.diagram.collectNum</div>
                     </li>
                     <li class="esp"></li>
                 </ul>
             </div>
             <div class="share-content">
                 <div class="ml15">
-                    <div class="love">这里是喜欢区域</div>
-                    <div class="share">这里是分享区域</div>
+                    <div class="like-common like-common-s" >
+                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
+                        <div class="like-num">
+                            <dl class="J_scrollUp">
+                                <dd class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</dd>
+                                <dd>+1</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
+
+
+                        <a class="s-sina fl" href="javascript:void(0)" data-type="s-sina" title="分享到新浪微博"></a>
+                        <a class="s-qzone fl" href="javascript:void(0)" data-type="s-qzone" title="分享到QQ空间"></a>
+                        <a class="s-tencent fl" href="javascript:void(0)" data-type="s-tencent" title="分享到腾讯微博"></a>
+                        <a class="s-renren fl" href="javascript:void(0)" data-type="s-renren" title="分享到人人网"></a>
+                        <a class="s-qq fl" href="javascript:void(0)" data-type="s-qq" title="分享到qq"></a>
+                        <a class="s-douban fl" href="javascript:void(0)" data-type="s-douban" title="分享到豆瓣"></a>
+                    </div>
+                    <div class="discuss">
+                       <span>@diagramComponent.diagram.discussNum 评论,我要评论</span>
+                        <form action="@controllers.routes.Diagrams.saveDiscuss" id="J_sideDiscussForm" method="post">
+                            <input type="hidden" name="diagramId" value="@diagramComponent.diagram.id.get" id="J_sideDiagramId">
+                            <div class="textarea clearfix">
+                                <textarea name="discussContent" id="J_sideDiscussContent" placeholder="请保持评论内容和谐"></textarea>
+                                <input type="submit"class="bbl-btn" id="J_sideDiscussSubmit" value="提交">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

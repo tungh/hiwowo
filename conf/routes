@@ -35,6 +35,8 @@ POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
 GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
 POST  /diagram/up                         controllers.Diagrams.upDiagram
 POST  /diagram/down                       controllers.Diagrams.downDiagram
+POST  /discuss/up                         controllers.Diagrams.upDiscuss
+POST  /discuss/down                       controllers.Diagrams.upDiscuss
 
 
 

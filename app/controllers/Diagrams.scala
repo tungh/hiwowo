@@ -4,7 +4,7 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
-import models.diagram.dao.{ DiagramSQLDao, DiagramDao}
+import models.diagram.dao.{DiagramDiscussSQLDao, DiagramSQLDao, DiagramDao}
 import models.diagram.Diagram
 import play.api.cache.Cache
 import play.api.Play.current
@@ -228,7 +228,7 @@ object  Diagrams extends Controller {
         Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
       }else{
        if(!session.get("pet_"+diagramId.get).isEmpty){
-          Ok(Json.obj("code" -> "100", "message" ->"loved"))
+          Ok(Json.obj("code" -> "104", "message" ->"loved"))
         } else {
         DiagramSQLDao.updateLoveNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
@@ -246,7 +246,7 @@ object  Diagrams extends Controller {
       Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
     }else{
       if(!session.get("pet_"+diagramId.get).isEmpty){
-        Ok(Json.obj("code" -> "100", "message" ->"loved"))
+        Ok(Json.obj("code" -> "104", "message" ->"hated"))
       } else {
         DiagramSQLDao.updateHateNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
@@ -255,5 +255,39 @@ object  Diagrams extends Controller {
       }
     }
   }
+  /* add like num 在一个session 里 只能 点击一次 */
+  def upDiscuss = Action(parse.json){  implicit request =>
 
+    val discussId = (request.body \ "discussId").asOpt[Long]
+    if(discussId.isEmpty || discussId.getOrElse(0) ==0 ){
+      Ok(Json.obj("code" -> "104", "message" ->"discuss id is not correct"))
+    }else{
+      if(!session.get("discuss_"+discussId.get).isEmpty){
+        Ok(Json.obj("code" -> "104", "message" ->"support"))
+      } else {
+        DiagramDiscussSQLDao.updateLoveNum(discussId.get,1)
+        val key ="discuss_"+discussId.get.toString
+        val value=discussId.get.toString
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+      }
+    }
+  }
+
+  /* add hate num */
+  def downDiscuss = Action(parse.json){  implicit request =>
+
+    val discussId = (request.body \ "discussId").asOpt[Long]
+    if(discussId.isEmpty || discussId.getOrElse(0) ==0 ){
+      Ok(Json.obj("code" -> "104", "message" ->"discuss id is not correct"))
+    }else{
+      if(!session.get("discuss_"+discussId.get).isEmpty){
+        Ok(Json.obj("code" -> "104", "message" ->"support"))
+      } else {
+        DiagramDiscussSQLDao.updateHateNum(discussId.get,1)
+        val key ="discuss_"+discussId.get.toString
+        val value=discussId.get.toString
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+      }
+    }
+  }
 }
