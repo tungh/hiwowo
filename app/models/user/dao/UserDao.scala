@@ -23,6 +23,10 @@ object UserDao {
   val users = TableQuery[Users]
   val userStatics = TableQuery[UserStatics]
   val userProfiles = TableQuery[UserProfiles]
+  val userCollects = TableQuery[UserCollects]
+  val userLoves = TableQuery[UserLoves]
+  val userFollows = TableQuery[UserLoves]
+  val userRecords = TableQuery[UserRecords]
 
   /* 验证 */
   def authenticate(email: String, password: String): Option[User] = database.withDynSession {
@@ -203,5 +207,22 @@ object UserDao {
     Page[User](groups, currentPage, totalPages)
   }
 
+
+
+  /* user collect */
+  def addUserCollect(uid:Long,typeId:Int,collectId:Long) = database.withDynSession {
+    val userCollectAutoInc = userCollects.map(c => (c.uid, c.typeId, c.collectId)) returning userCollects.map(_.id) into {
+      case (_, id) => id
+    }
+    userCollectAutoInc.insert(uid,typeId,collectId)
+  }
+
+  def findUserCollect(id:Long):Option[UserCollect] = database.withDynSession{
+    ( for( c<-userCollects if c.id === id) yield c ).firstOption
+  }
+
+  def deleteUserCollect(id:Long) = database.withDynSession{
+    (for( c<- userCollects if c.id === id)yield c ).delete
+  }
 
 }

@@ -27,6 +27,11 @@ object DiagramSQLDao {
   def updateDiscussNum(diagramId:Long,num:Int)=database.withDynSession{
    sqlu"update diagram set discuss_num =discuss_num+$num where id =$diagramId".first
   }
+
+  def updateCollectNum(diagramId:Long,num:Int)=database.withDynSession{
+    sqlu"update diagram set collect_num =collect_num+$num where id =$diagramId".first
+  }
+
   def updateLoveNum(diagramId:Long,num:Int)=database.withDynSession{
     sqlu"update diagram set love_num =love_num+$num where id =$diagramId".first
   }

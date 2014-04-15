@@ -7,7 +7,6 @@
  */
 define(function(require){
     var $ = jQuery = require("jquery")
-    var Cookie = require("cookie");
     $.hiwowo.diagramFavor={
         /* like */
         like:function(id,o){
@@ -70,10 +69,6 @@ define(function(require){
                 });
 
 
-        },
-        /* collect */
-        collect:function(){
-
         }
     }
     $.hiwowo.discussFavor={
@@ -135,10 +130,6 @@ define(function(require){
                 }
             });
 
-
-        },
-        /* 举报 */
-        report:function(){
 
         }
     }

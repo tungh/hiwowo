@@ -100,7 +100,7 @@
         <div class="share-pin">
             <div class="share-nav">
                 <ul>
-                    <li class="collect">
+                    <li class="collect" rel="collectDiagram" data-val="@diagramComponent.diagram.collectNum" data-id="@diagramComponent.diagram.id.get">
                         <div class="collectNum" style="display: block;">@diagramComponent.diagram.collectNum</div>
                     </li>
                     <li class="esp"></li>
@@ -109,7 +109,7 @@
             <div class="share-content">
                 <div class="ml15">
                     <div class="like-common like-common-s" >
-                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
+                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
                         <div class="like-num">
                             <dl class="J_scrollUp">
                                 <dd class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</dd>
@@ -148,6 +148,6 @@
 }{
 <script type="text/javascript">
 
-    seajs.use("hiwowo/diagram/diagram.js")
+    seajs.use(["hiwowo/diagram/diagram.js","hiwowo/diagram/diagram.favor.js","hiwowo/user/user.collect.js"])
 </script>
 }

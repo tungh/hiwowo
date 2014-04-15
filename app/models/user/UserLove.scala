@@ -19,8 +19,8 @@ case class UserLove (
 class UserLoves(tag:Tag) extends Table[UserLove](tag,"user_love") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
-  def loveId = column[Long]("loveId")
-  def typeId = column[Long]("typeId")
+  def loveId = column[Long]("love_id")
+  def typeId = column[Long]("type_id")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
   def * = (id.?, uid, loveId,typeId,addTime.?)  <>(UserLove.tupled, UserLove.unapply)

@@ -107,13 +107,9 @@ CREATE TABLE `user_static` (
   `uid`                 int(10) NOT NULL ,
   `fans_num`                  smallint(11) DEFAULT '0',
   `follow_num`                smallint(11) DEFAULT '0',
-  `love_diagram_num`            smallint(11) DEFAULT '0',
-  `love_pic_num`            smallint(11) DEFAULT '0',
-  `love_topic_num`           smallint(11) DEFAULT '0',
-  `own_diagram_num`            smallint(11) DEFAULT '0',
-  `own_pic_num`            smallint(11) DEFAULT '0',
-  `own_topic_num`           smallint(11) DEFAULT '0',
-  `collect_diagram_num`            smallint(11) DEFAULT '0',
+  `collect_num`            smallint(11) DEFAULT '0',
+  `post_diagram_num`            smallint(11) DEFAULT '0',
+  `post_topic_num`           smallint(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

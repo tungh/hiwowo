@@ -6,6 +6,7 @@ import models.user._
 import models.user.User
 import models.user.dao.{UserSQLDao, UserDao}
 import models.Page
+import models.diagram.dao.DiagramSQLDao
 
 
 /**
@@ -85,7 +86,30 @@ object Users extends Controller {
   }
 
 
+  /* 添加收藏 */
+   def saveCollect = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+    else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
+    else {
+      val collectId = (request.body \ "collectId").asOpt[Long]
+      val typeId = (request.body \ "typeId").asOpt[Int]
+      if(collectId.isEmpty || collectId.getOrElse(0) ==0 ){
+        Ok(Json.obj("code" -> "104", "message" ->"collect id is not correct"))
+      }else{
+        val userCollect = UserDao.findUserCollect(collectId.get)
+        if(!userCollect.isEmpty){
+          Ok(Json.obj("code" -> "102", "message" ->"exists"))
+        }else{
+          UserDao.addUserCollect(user.get.id.get,typeId.getOrElse(0),collectId.get) // 在user collect 中记录
+          UserSQLDao.updateCollectNum(user.get.id.get,1)                             // update user_static 中的 collect num
+        if(typeId.getOrElse(0)==0) { DiagramSQLDao.updateCollectNum(collectId.get,1) }           // 如果type id ==0,则update diagram 中的collect num
+          Ok(Json.obj("code" -> "100", "message" ->"success"))
+        }
 
 
+      }
+    }
+  }
 
 }

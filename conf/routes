@@ -61,6 +61,10 @@ POST  /user/account/saveAddr          controllers.users.UsersAccount.saveAddress
 GET   /user/account/myAward           controllers.users.UsersAccount.myAward
 GET   /user/account/vip               controllers.users.UsersAccount.vip
 
+# user 操作
+POST /user/collect                 controllers.users.Users.saveCollect
+
+
 #user 用户登录注册
 GET   /user/login                    controllers.users.UsersRegLogin.login
 GET   /user/logout                   controllers.users.UsersRegLogin.logout
