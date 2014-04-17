@@ -88,28 +88,28 @@ object DiagramDao {
   * diagram 处理
   *
   * */
- def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
-    val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
+ def addDiagram(uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],labels:Option[String],status:Int):Long = database.withDynSession{
+    val diagramAutoInc = diagrams.map( c => (c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.labels.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
-    diagramAutoInc.insert(uid,title,pic,intro,content,ps,tags,status)
+    diagramAutoInc.insert(uid,title,pic,intro,content,ps,labels,status)
   }
 
-  def addDiagram(uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int):Long = database.withDynSession{
-    val diagramAutoInc = diagrams.map(c => (c.uid,c.typeId,c.title,c.pic,c.intro.?,c.tags.?,c.status)) returning diagrams.map(_.id) into {
+  def addDiagram(uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],labels:Option[String],status:Int):Long = database.withDynSession{
+    val diagramAutoInc = diagrams.map(c => (c.uid,c.typeId,c.title,c.pic,c.intro.?,c.labels.?,c.status)) returning diagrams.map(_.id) into {
       case (_, id) => id
     }
-    diagramAutoInc.insert(uid,typeId,title,pic,intro,tags,status)
+    diagramAutoInc.insert(uid,typeId,title,pic,intro,labels,status)
   }
 
   def deleteDiagram(id:Long) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield c ).delete
   }
-  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],tags:Option[String],status:Int) = database.withDynSession{
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.tags.?,c.status) ).update(uid,title,pic,intro,content,ps,tags,status)
+  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],ps:Option[String],labels:Option[String],status:Int) = database.withDynSession{
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.ps.?,c.labels.?,c.status) ).update(uid,title,pic,intro,content,ps,labels,status)
   }
-  def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],tags:Option[String],status:Int) = database.withDynSession{
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.tags.?,c.status) ).update(uid,typeId,title,pic,intro,tags,status)
+  def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],labels:Option[String],status:Int) = database.withDynSession{
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.labels.?,c.status) ).update(uid,typeId,title,pic,intro,labels,status)
   }
   def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield c.status ).update(status)

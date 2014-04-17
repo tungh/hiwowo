@@ -29,7 +29,7 @@ case class User(
                  province:Option[String],
                  weixin:Option[String],
                  qrcode:Option[String],
-                 tags:Option[String],
+                 labels:Option[String],
                  modifyTime:Option[Timestamp]
                  )
 
@@ -49,10 +49,10 @@ class Users(tag:Tag) extends Table[User](tag,"user") {
   def province     = column[String]("province")
   def weixin     = column[String]("weixin")
   def qrcode     = column[String]("qrcode")
-  def tags     = column[String]("tags")
+  def labels     = column[String]("labels")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, tags.?, modifyTime.?)  <>(User.tupled, User.unapply)
+  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, labels.?, modifyTime.?)  <>(User.tupled, User.unapply)
  
 
 

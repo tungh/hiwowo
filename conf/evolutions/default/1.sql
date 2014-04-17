@@ -47,7 +47,7 @@ CREATE TABLE `user` (
   `province`            varchar(20),
   `weixin`              varchar(20),
   `qrcode`              varchar(20),
-  `tags`                    varchar(250) ,
+  `labels`                    varchar(250) ,
   `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -214,7 +214,7 @@ CREATE TABLE `diagram` (
   `intro`              text,
   `content`             text ,
   `ps`                  text ,
-  `tags`              varchar(250) ,
+  `labels`              varchar(250) ,
   `type_id`            tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',
   `view_num`                 int(10) unsigned not null  DEFAULT '1',
@@ -351,32 +351,31 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
 
 
  /************************************************************
- * term ，
- * term  表                    标签
- * term_relation 表               标签 关系表组
+ * label ，
+ * label  表                    标签
+ * label_relation 表               标签 关系表组
  **************************************************************/
 
 -- ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `term`;
-CREATE TABLE IF NOT EXISTS `term`(
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE IF NOT EXISTS `label`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(64) not null ,
-  `alias`                     varchar(32) default '',
-  `intro`                     varchar(200) default '',
-  `status`                 tinyint not null default '0',
-  `count`                  int not null default '0',
+  `level`                     tinyint not null default '1',
+  `intro`                     varchar(200),
+  `is_hot`                 tinyint not null default '0',
+  `check_state`                 tinyint not null default '0',
   `add_num`                int not null default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `term_relation`;
-CREATE TABLE IF NOT EXISTS `term_relation`(
+DROP TABLE IF EXISTS `label_relation`;
+CREATE TABLE IF NOT EXISTS `label_relation`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
-  `term_id`                   int(10) not null ,
-  `third_id`                   int(10) not null ,
-  `type_id`                     tinyint  not null default '0',
-  `sort_num`                int not null default '0',
+  `label_id`                   int(10) not null ,
+  `diagram_id`                   int(10) not null ,
+  `check_state`                 tinyint not null default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

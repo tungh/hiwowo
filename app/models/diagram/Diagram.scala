@@ -21,7 +21,7 @@ case class Diagram (
                    intro: Option[String],
                    content: Option[String],
                    ps:Option[String],
-                   tags:Option[String],
+                   labels:Option[String],
                    status:Int,
                    viewNum:Int,
                    loveNum:Int,
@@ -43,7 +43,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def intro  = column[String]("intro")
   def content  = column[String]("content")
   def ps  = column[String]("ps")
-  def tags  = column[String]("tags")
+  def labels  = column[String]("labels")
   def status = column[Int]("status")
   def viewNum = column[Int]("view_num")
   def loveNum = column[Int]("love_num")
@@ -55,7 +55,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,ps.?,tags.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,ps.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }

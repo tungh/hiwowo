@@ -37,7 +37,7 @@ object  Diagrams extends Controller {
       "title" ->nonEmptyText ,
       "pic"->nonEmptyText,
       "intro" ->optional(text) ,
-      "tags"->optional(text),
+      "labels"->optional(text),
       "status"->number,
       "typeId"->number
     )
@@ -169,7 +169,7 @@ object  Diagrams extends Controller {
         if(id == 0) Ok(views.html.diagrams.editPet(user,petForm))
         else{
           val diagram = DiagramDao.findDiagramById(id)
-          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.tags,diagram.get.status,diagram.get.typeId))))
+          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.labels,diagram.get.status,diagram.get.typeId))))
         }
       } else{
         Redirect(controllers.users.routes.UsersAccount.vip)
