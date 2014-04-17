@@ -54,7 +54,7 @@ object  Diagrams extends Controller {
     }*/
 
     val diagramWithUser = DiagramDao.findDiagram(id)
-    val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),None)
+    val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),0,None)
      if(diagramWithUser.isEmpty ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
        Ok(views.html.diagrams.diagramInvalid(user))
      } else {

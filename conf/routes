@@ -108,12 +108,9 @@ GET   /jiucuo                                          controllers.Infos.jiucuo
 
 
 #管理后台 管理员管理
-GET   /admin/login                controllers.admin.Administrators.login
-POST  /admin/emailLogin          controllers.admin.Administrators.emailLogin
-GET   /admin/logout              controllers.admin.Administrators.logout
-GET   /admin/myAccount            controllers.admin.Administrators.myAccount
-GET   /admin/modify               controllers.admin.Administrators.modify
-GET   /admin/index                controllers.admin.Administrators.index
+
+GET   /admin/logout              controllers.admin.Admin.logout
+GET   /admin/index                controllers.admin.Admin.index
 
 #管理后台  讨论管理
 GET   /admin/forums/topics           controllers.admin.Forums.topics(p:Int ?=1)

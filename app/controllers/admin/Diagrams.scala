@@ -4,7 +4,7 @@ import play.api.mvc.Controller
 import models.diagram.dao.DiagramDao
 import play.api.data.Form
 import play.api.data.Forms._
-import controllers.admin.TopicFilterFormData
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,29 +25,29 @@ object Diagrams extends Controller {
     )(DiagramFilterFormData.apply)(DiagramFilterFormData.unapply)
   )
 
-  def list(p:Int,pageSize:Int) = Administrators.AdminAction{administrator => implicit request =>
+  def list(p:Int,pageSize:Int) = Admin.AdminAction{user => implicit request =>
          val pages = DiagramDao.findAllDiagrams(p,pageSize)
-     Ok(views.html.admin.diagrams.list(administrator,pages))
+     Ok(views.html.admin.diagrams.list(user,pages))
   }
-  def view(id:Long)= Administrators.AdminAction{administrator => implicit request =>
+  def view(id:Long)= Admin.AdminAction{user => implicit request =>
     Ok("todo")
   }
-  def delete(id:Long)= Administrators.AdminAction{administrator => implicit request =>
+  def delete(id:Long)= Admin.AdminAction{user => implicit request =>
    Ok("todo")
   }
-  def check(id:Long,status:Int) = Administrators.AdminAction{administrator => implicit request =>
+  def check(id:Long,status:Int) = Admin.AdminAction{user => implicit request =>
     Ok("todo")
   }
-  def filter =   Administrators.AdminAction{administrator => implicit request =>
+  def filter =   Admin.AdminAction{user => implicit request =>
     diagramFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       filterCondition => {
         val page=DiagramDao.filterDiagrams(filterCondition.title,filterCondition.status,filterCondition.typeId,filterCondition.currentPage.getOrElse(1),20)
-        Ok(views.html.admin.diagrams.filter(administrator,page,diagramFilterForm.fill(filterCondition)))
+        Ok(views.html.admin.diagrams.filter(user,page,diagramFilterForm.fill(filterCondition)))
       }
     )
   }
-  def batch =   Administrators.AdminAction{administrator => implicit request =>
+  def batch =   Admin.AdminAction{user => implicit request =>
     BatchFormData.batchForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       batch => {

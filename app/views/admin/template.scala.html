@@ -1,4 +1,4 @@
-@(administrator:models.admin.Administrator,nav:String = "home")(content: Html)
+@(user:models.user.User,nav:String = "home")(content: Html)
 <!DOCTYPE html>
 <html>
 
@@ -119,12 +119,12 @@
         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu dropdown-user">
-        <li><a href="#"><i class="fa fa-user fa-fw"></i> @administrator.name</a>
+        <li><a href="#"><i class="fa fa-user fa-fw"></i> @user.name</a>
         </li>
         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 账号设置</a>
         </li>
         <li class="divider"></li>
-        <li><a href="@controllers.admin.routes.Administrators.logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
     <!-- /.dropdown-user -->
@@ -144,7 +144,7 @@
             <li class='@if(nav=="home"){active}'>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>控制中心<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="@controllers.admin.routes.Administrators.index">后台首页</a></li>
+                    <li><a href="@controllers.admin.routes.Admin.index">后台首页</a></li>
 
                     <li><a>缓存管理</a></li>
                 </ul>

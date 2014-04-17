@@ -1,8 +1,8 @@
-@(administrator:models.admin.Administrator,page:models.Page[models.forum.TopicDiscuss])
+@(user:models.user.User,page:models.Page[models.forum.TopicDiscuss])
 @import models.forum.TopicType
 @import models.forum.Topic
 @import models.CheckState
-@views.html.admin.template(administrator,"forum") {
+@views.html.admin.template(user,"forum") {
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">讨论吧 》讨论</h1>

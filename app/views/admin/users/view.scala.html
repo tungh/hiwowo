@@ -1,5 +1,5 @@
-@(administrator:models.admin.Administrator,user:(models.user.User,models.user.UserProfile))
-@views.html.admin.template(administrator,"user") {
+@(u:models.user.User,user:(models.user.User,models.user.UserProfile))
+@views.html.admin.template(u,"user") {
     <div id="content-header">
         <h1>用户管理</h1>
     </div>

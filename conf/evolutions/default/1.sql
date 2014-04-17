@@ -48,7 +48,7 @@ CREATE TABLE `user` (
   `weixin`              varchar(20),
   `qrcode`              varchar(20),
   `labels`                    varchar(250) ,
-  `isAdmin`                tinyint    not null default '0',
+  `is_admin`                tinyint    not null default '0',
   `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
