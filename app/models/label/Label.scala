@@ -24,7 +24,8 @@ case class Label(
                 intro:Option[String],
                 isHot:Int,
                 checkState:Int,
-                addNum:Int
+                addNum:Int,
+                addTime:Option[Timestamp]
                 )
 
 class Labels(tag:Tag) extends Table[Label](tag,"label") {
@@ -35,9 +36,8 @@ class Labels(tag:Tag) extends Table[Label](tag,"label") {
   def isHot = column[Int]("is_hot")
   def checkState = column[Int]("check_state")
   def addNum = column[Int]("add_num")
-
-
-  def * =(id.?,name,level,intro.?,isHot,checkState,addNum) <> (Label.tupled, Label.unapply)
+  def addTime = column[Timestamp]("add_time")
+  def * =(id.?,name,level,intro.?,isHot,checkState,addNum,addTime.?) <> (Label.tupled, Label.unapply)
 
 
 }

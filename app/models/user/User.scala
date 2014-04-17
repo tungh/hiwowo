@@ -30,6 +30,7 @@ case class User(
                  weixin:Option[String],
                  qrcode:Option[String],
                  labels:Option[String],
+                 isAdmin:Int,
                  modifyTime:Option[Timestamp]
                  )
 
@@ -50,9 +51,10 @@ class Users(tag:Tag) extends Table[User](tag,"user") {
   def weixin     = column[String]("weixin")
   def qrcode     = column[String]("qrcode")
   def labels     = column[String]("labels")
+  def isAdmin    = column[String]("is_admin")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, labels.?, modifyTime.?)  <>(User.tupled, User.unapply)
+  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, labels.?, isAdmin, modifyTime.?)  <>(User.tupled, User.unapply)
  
 
 

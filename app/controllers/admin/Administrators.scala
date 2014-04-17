@@ -7,7 +7,9 @@ import play.api.data.Forms._
 import play.api.data.Form
 import java.sql.Timestamp
 import models.admin.Administrator
+import models.user.User
 import models.admin.dao.{AdministratorSQLDao, AdministratorDao}
+import models.user.dao.UserDao
 
 
 /**
@@ -31,16 +33,14 @@ object Administrators extends Controller {
     })
   )
   /*每个页面 每次访问，都需要知道用户状态，比如是否登录*/
-  def AdminAction(f: Administrator => Request[AnyContent] => Result) = {
+  def AdminAction(f: User => Request[AnyContent] => Result) = {
     Action {
       request =>
-        val administrator: Option[Administrator] = request.session.get("administrator").map(m => Cache.getOrElse[Administrator](m) {
-          AdministratorDao.findById(m.split("-").last.toLong)
-        })
-        if (administrator.isEmpty)
+        val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+        if (user.isEmpty || user.get.isAdmin == 0)
           Redirect(controllers.admin.routes.Administrators.login())
         else
-          f(administrator.get)(request)
+          f(user.get)(request)
     }
   }
 
@@ -64,8 +64,8 @@ object Administrators extends Controller {
 
   /* 用户退出  清除缓存*/
   def logout = Action {  implicit request =>
-      if (!session.get("administrator").isEmpty) {
-        Cache.remove(session.get("administrator").get)
+      if (!session.get("user").isEmpty) {
+        Cache.remove(session.get("user").get)
       }
       Redirect(controllers.admin.routes.Administrators.login()).withNewSession
   }

@@ -48,6 +48,7 @@ CREATE TABLE `user` (
   `weixin`              varchar(20),
   `qrcode`              varchar(20),
   `labels`                    varchar(250) ,
+  `isAdmin`                tinyint    not null default '0',
   `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -352,11 +353,32 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
 
  /************************************************************
  * label ，
+ * group    label 群
+ * group_label group 与 label 多对多关系
  * label  表                    标签
- * label_relation 表               标签 关系表组
+ * label_diagram 表               标签 关系表组
  **************************************************************/
 
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS `group`;
+CREATE TABLE IF NOT EXISTS `group`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `name`                       varchar(64) not null ,
+  `intro`                     varchar(200),
+  `is_hot`                 tinyint not null default '0',
+  `status`                 tinyint not null default '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `group_label`;
+CREATE TABLE IF NOT EXISTS `group_label`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `group_id`                   int(10) not null ,
+  `label_id`                   int(10) not null ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `label`;
 CREATE TABLE IF NOT EXISTS `label`(
@@ -367,11 +389,12 @@ CREATE TABLE IF NOT EXISTS `label`(
   `is_hot`                 tinyint not null default '0',
   `check_state`                 tinyint not null default '0',
   `add_num`                int not null default '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `label_relation`;
-CREATE TABLE IF NOT EXISTS `label_relation`(
+DROP TABLE IF EXISTS `label_diagram`;
+CREATE TABLE IF NOT EXISTS `label_diagram`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `label_id`                   int(10) not null ,
   `diagram_id`                   int(10) not null ,

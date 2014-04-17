@@ -17,8 +17,10 @@ import models.label._
  */
 object LabelDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
+  val groups = TableQuery[Groups]
+  val groupLabels = TableQuery[GroupLabels]
   val labels = TableQuery[Labels]
-  val labelRelations = TableQuery[LabelRelations]
+  val labelDiagrams = TableQuery[LabelDiagrams]
 
   /* label dao */
   def addLabel(name:String,level:Int,intro:String,checkState:Int) = database.withDynSession {
@@ -41,7 +43,7 @@ object LabelDao {
   }
   def deleteLabel(id:Long) = database.withDynSession {
     (for( t<- labels if t.id === id ) yield t ).delete
-    ( for(c <- labelRelations if c.id === id)yield c ).delete
+    ( for(c <- labelDiagrams if c.id === id)yield c ).delete
   }
 
   def findLabelById(id:Long) = database.withDynSession{
@@ -51,12 +53,12 @@ object LabelDao {
     ( for(t <- labels if t.name === name ) yield t ).first
   }
 
-  /* label relation ship */
-  def addLabelRelation(labelId:Long,diagramId:Long) = database.withDynSession{
-    (for( t<- labelRelations ) yield (t.labelId,t.diagramId)).insert(labelId,diagramId)
+  /* label diagram ship */
+  def addLabelDiagram(labelId:Long,diagramId:Long) = database.withDynSession{
+    (for( t<- labelDiagrams ) yield (t.labelId,t.diagramId)).insert(labelId,diagramId)
   }
-  def deleteLabelRelation(labelId:Long,diagramId:Long) = database.withDynSession{
-    ( for( t<- labelRelations if t.labelId === labelId if t.diagramId === diagramId) yield t ).delete
+  def deleteLabelDiagram(labelId:Long,diagramId:Long) = database.withDynSession{
+    ( for( t<- labelDiagrams if t.labelId === labelId if t.diagramId === diagramId) yield t ).delete
   }
 
 
