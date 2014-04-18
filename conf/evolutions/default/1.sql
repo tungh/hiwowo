@@ -191,6 +191,16 @@ CREATE TABLE `user_collect` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+DROP TABLE IF EXISTS `user_subscribe`;
+CREATE TABLE `user_subscribe` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL ,
+  `label_id` int(20) NOT NULL ,
+  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /* ***************************************************** */
 DROP TABLE IF EXISTS `album`;
 CREATE TABLE `album` (
@@ -385,10 +395,12 @@ CREATE TABLE IF NOT EXISTS `label`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(64) not null ,
   `level`                     tinyint not null default '1',
-  `intro`                     varchar(200),
+  `intro`                     text,
   `is_hot`                 tinyint not null default '0',
+  `spell`                       varchar(32) ,
   `check_state`                 tinyint not null default '0',
   `add_num`                int not null default '0',
+  `subscribe_num`                int not null default '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
