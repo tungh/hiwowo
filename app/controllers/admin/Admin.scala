@@ -3,12 +3,7 @@ package controllers.admin
 import play.api.mvc._
 import play.api.cache.Cache
 import play.api.Play.current
-import play.api.data.Forms._
-import play.api.data.Form
-import java.sql.Timestamp
-import models.admin.Administrator
 import models.user.User
-import models.admin.dao.{AdministratorSQLDao, AdministratorDao}
 import models.user.dao.UserDao
 
 
