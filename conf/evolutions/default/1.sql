@@ -375,7 +375,6 @@ CREATE TABLE IF NOT EXISTS `group`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(64) not null ,
   `intro`                     varchar(200),
-  `is_hot`                 tinyint not null default '0',
   `status`                 tinyint not null default '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)

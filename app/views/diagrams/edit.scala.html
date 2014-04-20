@@ -1,0 +1,167 @@
+@(user:Option[models.user.User])
+@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/hiwowo.editor.css"){
+
+<div class="container pet">
+
+    <div class="row">
+        <div class="main">
+            <div id="pdeditor_container" >
+
+                <input type="hidden" value="0" name="data_boardid"  />
+
+
+                <style>
+                    .jh {
+                        position:absolute;
+                        margin: 10px 0px 0px 0px;
+                        width: 600px;
+                        height: 400px;
+                        background-color: blanchedalmond;
+                        -moz-border-radius: 7px;
+                        -webkit-border-radius: 7px;
+                        border: 2px solid #000;
+                        color: black;
+                        z-index:1000;
+                        overflow-y:auto;
+                    }
+                </style>
+
+
+                <div id='jh' class="jh" style="display: none;">
+
+                </div>
+                <div class="pdtitleborder">
+                    <label for="pdtitle">标题</label>
+                    <input type="text" name="data_posttitle" id="pdtitle" value='请输入文章标题'  maxlength='45' />
+                </div>
+                <div class="section">
+                    <div class="main_section">
+                        <span>发表到：</span>
+                        <a href="javascript:void(0);"  section="21"><em>淘宝天猫</em></a>                        <a href="javascript:void(0);"  section="20"><em>创业交流</em></a>                        <a href="javascript:void(0);"  section="32"><em>求助问答</em></a>                        <a href="javascript:void(0);"  section="30"><em>电商杂谈</em></a>                        <a href="javascript:void(0);"  section="14"><em>市场营销</em></a>                        <br class='clear' />
+                    </div>
+                    <div class="other_section">
+                        <a href="javascript:void(0);" id="other_btn" class="other_btn" section="0"><em></em></a>
+                        <div class='clear'></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="other_list">
+                        <div class="other_list_a">
+                            <a href="javascript:;" section="26"><em>求职招聘</em></a>
+                            <a href="javascript:;" section="46"><em>网店转让</em></a>
+                            <a href="javascript:;" section="48"><em>找淘宝客</em></a>
+                            <a href="javascript:;" section="44"><em>客服交流</em></a>
+                            <a href="javascript:;" section="42"><em>业界观察</em></a>
+                            <a href="javascript:;" section="47"><em>货源供销</em></a>
+                            <a href="javascript:;" section="45"><em>第三方服务商</em></a>
+                            <a href="javascript:;" section="43"><em>独立B2C</em></a>
+                            <a href="javascript:;" section="39"><em>京东POP</em></a>
+                            <a href="javascript:;" section="36"><em>仓储配送</em></a>
+                            <a href="javascript:;" section="18"><em>摄影设计</em></a>
+                            <a href="javascript:;" section="8"><em>建议反馈</em></a>
+                        </div>
+                        <div class='clear'></div>
+                    </div>
+                </div>
+                <div class="iframeborder">
+
+
+                    <div class="toolbar" style="width:668px;">
+                        <div class="toolbar_left">
+                            <a href="javascript:void(0);" title="字体大小" id="pdfontsize"></a>
+                            <a href="javascript:void(0);" title="字体颜色" id="pdfontcolor"></a>
+
+                            <a href="javascript:void(0);" title="加粗" id="pdbold"></a>
+                            <a href="javascript:void(0);" title="插入图片" id="swfuploadbtn"></a>
+                            <a href="javascript:void(0);" title="插入视频" id="insertvideo"></a>
+                            <div id="upload_bg">
+                                <div id="upload_color">
+                                    <div id="upload_percent">
+                                        <span id="upload_percent_num">0</span>%
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="count_num" id="count_num_tips"><b id="count_num">0</b> 字</span>
+
+                            <div class="fontSizeWrap" style="display:none;">
+                                <a btntype="btnFontSizeAction" size="1" style="font-size:12px;"href="javascript:;" title="小号"unselectable="on">小号</a>
+                                <a btntype="btnFontSizeAction" size="2" style="font-size:14px;" href="javascript:;"title="标准" unselectable="on">标准</a>
+                                <a btntype="btnFontSizeAction" size="3" style="font-size:16px;" href="javascript:;" title="大号" unselectable="on">大号</a>
+                                <a btntype="btnFontSizeAction" size="4" style="font-size:18px;" href="javascript:;"title="特大" unselectable="on">特大</a>
+                            </div>
+                            <div class="fontColorWrap" style="display: none;">
+                                <a btntype="btnFontColoAction" coloval="#333333"style="background-color:#333333;" href="javascript:;" title="灰色-80%"unselectable="on">#333333</a>
+                                <a btntype="btnFontColoAction" coloval="#666666" style="background-color:#666666;" href="javascript:;" title="灰色-60%" unselectable="on">#666666</a>
+                                <a btntype="btnFontColoAction" coloval="#999999" style="background-color:#999999;" href="javascript:;" title="灰色-40%" unselectable="on">#999999</a>
+                                <a btntype="btnFontColoAction" coloval="#cccccc" style="background-color:#cccccc;" href="javascript:;" title="灰色-20%" unselectable="on">#cccccc</a>
+                                <a btntype="btnFontColoAction" coloval="#bb0000" style="background-color:#bb0000;" href="javascript:;" title="深红" unselectable="on">#bb0000</a>
+                                <a btntype="btnFontColoAction" coloval="#dd0000" style="background-color:#dd0000;" href="javascript:;" title="红色" unselectable="on">#dd0000</a>
+                                <a btntype="btnFontColoAction" coloval="#ee4488" style="background-color:#ee4488;" href="javascript:;" title="粉红" unselectable="on">#ee4488</a>
+                                <a btntype="btnFontColoAction" coloval="#ff66dd" style="background-color:#ff66dd;" href="javascript:;" title="淡紫" unselectable="on">#ff66dd</a>
+                                <a btntype="btnFontColoAction" coloval="#333399" style="background-color:#333399;" href="javascript:;" title="深蓝" unselectable="on">#333399</a>
+                                <a btntype="btnFontColoAction" coloval="#0066cc" style="background-color:#0066cc;"  href="javascript:;" title="蓝色" unselectable="on">#0066cc</a>
+                                <a btntype="btnFontColoAction" coloval="#0099cc" style="background-color:#0099cc;"  href="javascript:;" title="天蓝" unselectable="on">#0099cc</a>
+                                <a btntype="btnFontColoAction" coloval="#66cccc" style="background-color:#66cccc;" href="javascript:;" title="淡蓝" unselectable="on">#66cccc</a>
+                                <a btntype="btnFontColoAction" coloval="#336600" style="background-color:#336600;"  href="javascript:;" title="深绿" unselectable="on">#336600</a>
+                                <a btntype="btnFontColoAction" coloval="#999900" style="background-color:#999900;"  href="javascript:;" title="深黄" unselectable="on">#999900</a>
+                                <a btntype="btnFontColoAction" coloval="#cccc33" style="background-color:#cccc33;"  href="javascript:;" title="淡黄" unselectable="on">#cccc33</a>
+                                <a btntype="btnFontColoAction" coloval="#77cc33" style="background-color:#77cc33;"  href="javascript:;" title="淡绿" unselectable="on">#77cc33</a>
+                                <a  btntype="btnFontColoAction" coloval="#663300" style="background-color:#663300;" href="javascript:;" title="咖啡" unselectable="on">#663300</a>
+                                <a btntype="btnFontColoAction" coloval="#cc6633" style="background-color:#cc6633;"  href="javascript:;" title="褐色" unselectable="on">#cc6633</a>
+                                <a btntype="btnFontColoAction" coloval="#ff9900" style="background-color:#ff9900;" href="javascript:;" title="橙黄" unselectable="on">#ff9900</a>
+                                <a btntype="btnFontColoAction" coloval="#ffcc33" style="background-color:#ffcc33;" href="javascript:;" title="黄色" unselectable="on">#ffcc33</a>
+                            </div>
+                        </div>
+                    </div>
+                    <iframe name="pdeditor" id="pdeditor" frameborder="none" style="min-height:300px; padding-bottom:20px;" ></iframe>
+
+                </div>
+                <div class="clear"></div>
+
+                <div id="videopanel" >
+                    <p><a href="javascript:void(0);" id="cancelvideo"></a>粘贴视频地址 (&lt;embed&gt;标签或.swf格式) </p>
+                    <a href="javascript:void(0);" id="addvideo">确定</a>
+                    <div class="video_add_border"><input type="text" id="videoaddr"  /></div>
+                </div>
+                <p class="func_buttons clearfix zoom" >
+                    <a href="javascript:;" class="fl func_button" id="save_draft">保存草稿</a>
+                    <span class="fl" id="save_status" style="margin-top:10px;"></span>
+                    <!--<a href="javascript:;" class="fl func_button" id="preview" >预览</a>-->
+                    <a href="javascript:;" class="fr func_button" id="pdsubmit" >发表</a>
+                    <input type="hidden" id="pd_userdata" />
+                </p>
+
+                <div style="text-align:center;display:none;">
+                    <form action="post.php?act=preview" method="post" id="preview_form" target="_blank">
+                        <input type="hidden" name="title" value="" />
+                        <input type="hidden" name="contents" value="" />
+                        <input type="hidden" name="boardid" value="" />
+                    </form>
+                    <input type="hidden" id="draft_hash" value="" />
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="side">
+            <div class="box  affix">
+                <div class="hd">
+                    <h3>公告栏</h3>
+                </div>
+                <p class="bd" id="J_NoticeCon">
+                    和谐社会，你我共建～
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use("hiwowo/editor/hiwowo.editor.js")
+</script>
+}

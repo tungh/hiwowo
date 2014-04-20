@@ -14,7 +14,6 @@ case class Group (
                    id: Option[Long],
                    name: String,
                    intro:Option[String],
-                   isHot:Int,
                    status:Int,
                    addTime:Option[Timestamp]
                    )
@@ -23,10 +22,9 @@ class Groups(tag:Tag) extends Table[Group](tag,"group") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def intro = column[String]("intro")
-  def isHot = column[Int]("is_hot")
   def status = column[Int]("status")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,name,intro.?,isHot,status,addTime.?) <> (Group.tupled, Group.unapply)
+  def * =(id.?,name,intro.?,status,addTime.?) <> (Group.tupled, Group.unapply)
 
 
 }

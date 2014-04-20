@@ -37,6 +37,7 @@ POST  /diagram/up                         controllers.Diagrams.upDiagram
 POST  /diagram/down                       controllers.Diagrams.downDiagram
 POST  /discuss/up                         controllers.Diagrams.upDiscuss
 POST  /discuss/down                       controllers.Diagrams.upDiscuss
+GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
 
 
 
