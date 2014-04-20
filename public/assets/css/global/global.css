@@ -1612,14 +1612,22 @@ input[type="button"].btn-block {
     width: 1px;
 }
 /* 弹出层箭头 */
+.sg-dialog { position:absolute;z-index:9997;width:396px;background:#fff;border:none;border:1px solid #ccc\9;box-shadow:0 0 3px rgba(34,25,25,0.2);-moz-box-shadow:0 0 3px rgba(34,25,25,0.2);-webkit-box-shadow:0 0 3px rgba(34,25,25,0.2); }
+.sg-dialog .content { position:relative;padding:12px 15px;min-height:0; }
+.sg-dialog .content .title { padding-bottom:6px;font-weight:bold;color:#333; }
+.sg-dialog .content .contact a:hover{color:#5ad;}
+.sg-dialog .sg-form .sg-input { float:left;_display:inline;width:290px;margin-right:10px; }
+.sg-dialog .sg-form .url-sub { margin-top:2px;cursor:pointer;*visibility:visible;width:56px\9; }
+.sg-dialog .sg-form .text-tip { display:none;padding:5px 0;line-height:1.1; }
+.sg-dialog .manual-upload { line-height:1.1;padding:5px 0 0 0;border-top:1px dotted #d1d1d1; }
 .tipbox-up { left:50%;margin-left:-8px;top:-10px;position:absolute; }
 .tipbox-up em, .tipbox-up span { height:19px;width:17px;font-family:Simsun;font-size:16px;line-height:21px;overflow:hidden;position:absolute; }
 .tipbox-up em { color:#ccc; }
 .tipbox-up span { top:1px;color:#fff; }
 .sg-dialog .content .tipbox-up { left:30px;margin-left:0; }
 /* 富文本编辑器 */
-.guang-editor-wrap{width:676px;float:left;}
-.guang-editor{border:1px solid #ddd;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor-wrap{width:668px;float:left;}
+.guang-editor{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .guang-editor .edit-btns .bbl-btn{padding-left:0px;padding-right:0px;}
 .guang-editor .edit-btns{background:#f3f3f3;position:relative;border-bottom:1px solid #ddd;height:40px;padding:0 5px;}
 .guang-editor .edit-btns .font-btns {padding-top:7px;float:left;margin:0 5px;}
@@ -1670,7 +1678,7 @@ input[type="button"].btn-block {
 .guang-editor .base-input{width:290px;float:left;}
 .guang-editor .videoWrap{top:36px;left:10px;border:1px solid #ddd;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .guang-editor .videoWrap #J_InsertVideo{width:60px;margin-top:2px;float:right;}
-.guang-editor .videoWrap .content .tipbox-up{left:340px;}
+.guang-editor .videoWrap .content .tipbox-up{left:220px;}
 .guang-editor .videoWrap .content .title{padding-bottom:10px;font-weight:normal;}
 .guang-editor .videoWrap .content .sg-source p{height:20px;line-height:20px;padding:8px 0 5px 0;}
 .guang-editor .videoWrap .sg-form .sg-input { margin-right:0px; }

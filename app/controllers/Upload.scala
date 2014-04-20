@@ -54,13 +54,13 @@ object Upload extends Controller {
     }
   }
 
-  def uploadEditorPic(editorid:String) =Action(parse.multipartFormData)  {   request =>
-    request.body.file("upfile").map { picture =>
+  def uploadEditorPic =Action(parse.multipartFormData)  {   request =>
+    request.body.file("fileData").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
         val picSrc ="/uploadImage/temp/"+filename
-       Ok(Json.obj("src"->picSrc,"state"->"SUCCESS","title"->"嗨喔喔"))
+       Ok(Json.obj("code"->"100","src"->picSrc,"message"->"success","title"->"嗨喔喔"))
 
       }else{
         Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
