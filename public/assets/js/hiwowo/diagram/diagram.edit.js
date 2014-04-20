@@ -7,7 +7,6 @@
  */
  define(function(require){
      var $ = jQuery = require("jquery")
-      require("jqueryte")
      require("uploadify")
      function isVisiable(node) {
          return $(node).is(":visible");

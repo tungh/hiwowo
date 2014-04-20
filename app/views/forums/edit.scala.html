@@ -59,14 +59,14 @@ title = "发布话题_讨论吧"
 
 
 }{
-<script type="text/javascript" src="/assets/js/umeditor/forum.umeditor.config.js"></script>
+
 <script type="text/javascript">
-    seajs.use(['jquery','umeditor','umeditor-lang','umeditor-emotion','umeditor-image','umeditor-link','umeditor-map','umeditor-video','hiwowo/forum/forum'],function($,umeditor,emotion,image,link,map,video){
+    seajs.use(['jquery','hiwowo/forum/forum'],function($){
 
         if(HIWOWO.userId == ""){
             $.hiwowo.loginDialog.isLogin();
         }
-        var editor = UM.getEditor('J_topicContent');
+
 
     })
 </script>

@@ -21,14 +21,6 @@ seajs.config({
         'uploadify':'sea-modules/jquery.uploadify.js',
         'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
-       'umeditor':'umeditor/umeditor.min.js',
-        'umeditor-lang':'umeditor/lang/zh-cn/zh-cn.js',
-        'umeditor-emotion':'umeditor/dialogs/emotion/emotion.js',
-        'umeditor-image':'umeditor/dialogs/image/image.js',
-        'umeditor-link':'umeditor/dialogs/link/link.js',
-        'umeditor-map':'umeditor/dialogs/map/map.js',
-        'umeditor-video':'umeditor/dialogs/video/video.js',
-        'jqueryte':'jqueryte/jquery-te-1.4.0.min.js',
          'hiwowo':'hiwowo/hiwowo'
     },
 

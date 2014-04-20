@@ -54,20 +54,20 @@ object Upload extends Controller {
     }
   }
 
-  def uploadUmeditorPic(editorid:String) =Action(parse.multipartFormData)  {   request =>
+  def uploadEditorPic(editorid:String) =Action(parse.multipartFormData)  {   request =>
     request.body.file("upfile").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
         val picSrc ="/uploadImage/temp/"+filename
-       // Ok(Json.obj("url"->picSrc,"state"->"SUCCESS","title"->"嗨喔喔"))
-         Ok(views.html.common.umeditorUploadPic(picSrc,"SUCCESS",editorid))
+       Ok(Json.obj("src"->picSrc,"state"->"SUCCESS","title"->"嗨喔喔"))
+
       }else{
-        Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+        Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
       }
 
     }.getOrElse {
-      Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+      Ok(Json.obj("code"->"500","message"->"亲，服务器欧巴桑了，请重试"))
     }
   }
 

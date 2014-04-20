@@ -38,6 +38,7 @@ POST  /diagram/down                       controllers.Diagrams.downDiagram
 POST  /discuss/up                         controllers.Diagrams.upDiscuss
 POST  /discuss/down                       controllers.Diagrams.upDiscuss
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
+GET   /diagram/edit2                       controllers.Diagrams.edit2(id:Long ?=0L)
 
 
 
@@ -88,7 +89,7 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 
 #常用的upload
 POST    /uploadDiagramPic                      controllers.Upload.uploadDiagramPic
-POST    /umeditor/uploadPic               controllers.Upload.uploadUmeditorPic(editorid:String)
+POST    /editor/uploadPic               controllers.Upload.uploadEditorPic(editorid:String)
 POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST  /getVideo                           controllers.Upload.getVideo

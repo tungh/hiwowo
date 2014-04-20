@@ -1611,3 +1611,87 @@ input[type="button"].btn-block {
     height: 3px;
     width: 1px;
 }
+/* 弹出层箭头 */
+.tipbox-up { left:50%;margin-left:-8px;top:-10px;position:absolute; }
+.tipbox-up em, .tipbox-up span { height:19px;width:17px;font-family:Simsun;font-size:16px;line-height:21px;overflow:hidden;position:absolute; }
+.tipbox-up em { color:#ccc; }
+.tipbox-up span { top:1px;color:#fff; }
+.sg-dialog .content .tipbox-up { left:30px;margin-left:0; }
+/* 富文本编辑器 */
+.guang-editor-wrap{width:676px;float:left;}
+.guang-editor{border:1px solid #ddd;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .edit-btns .bbl-btn{padding-left:0px;padding-right:0px;}
+.guang-editor .edit-btns{background:#f3f3f3;position:relative;border-bottom:1px solid #ddd;height:40px;padding:0 5px;}
+.guang-editor .edit-btns .font-btns {padding-top:7px;float:left;margin:0 5px;}
+.guang-editor .edit-btns .split{border-left:1px solid #ddd;float:left;height:20px;width:6px;margin-left:5px;margin-top:10px;}
+.guang-editor .edit-btns .media-btns {padding-top:7px;margin:0 1px;float:left;}
+.guang-editor .edit-btns .media-btns a{height:24px;color:#666;line-height:24px;padding-left:28px;padding-right:6px;margin:1px;float:left;background:transparent url(images/edit_toolbar.gif) no-repeat;}
+.guang-editor .edit-btns .media-btns a:hover{background-color:#fff;text-decoration:none;border:1px solid #ddd;margin:0px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .edit-btns .font-size{}
+.guang-editor .edit-btns .font-size a{color:#666;float:left;height:24px;line-height:24px;font-size:12px;white-space:nowrap;border:1px solid #ddd;padding:0 10px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+.guang-editor .edit-btns .font-size a:hover{background:#fff;text-decoration:none;}
+.guang-editor .edit-btns .font-bold{width:26px;margin-right:2px;}
+.guang-editor .edit-btns .font-bold a{float:left;height:24px;width:24px;margin:1px;text-indent:-2000px;overflow:hidden;background:transparent url(images/edit_toolbar.gif) 2px -94px no-repeat;}
+.guang-editor .edit-btns .font-bold a:hover{background-color:#fff;border:1px solid #ddd;margin:0px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .edit-btns .font-bold-active{background:url(images/ui/b_bg.gif) left 7px no-repeat;border:0;}
+.guang-editor .edit-btns .font-bold-active a:hover{background-color:transparent;border:0px;margin:1px;}
+.guang-editor .edit-btns .font-colo{width:26px;margin-left:2px;}
+.guang-editor .edit-btns .font-colo a{float:left;height:16px;width:16px;margin:1px;padding:4px 5px;}
+.guang-editor .edit-btns .font-colo a span{display:block;width:10px;height:10px;padding:2px;border:1px solid #ddd;}
+.guang-editor .edit-btns .font-colo a i{display:block;width:10px;height:10px;overflow:hidden;line-height:1px;background:#000;}
+.guang-editor .edit-btns .font-colo a:hover{background-color:#fff;border:1px solid #ddd;margin:0px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .edit-btns .face a{background-position:5px 3px;}
+.guang-editor .edit-btns .baobei a{background-position:5px -70px;}
+.guang-editor .edit-btns .img a{background-position:5px -20px;}
+.guang-editor .edit-btns .video a{background-position:5px -45px;}
+.guang-editor iframe{width:100%;overflow:hidden;}
+.guang-editor .iframeWrap{padding:8px;}
+.guang-editor .fontSizeWrap{position:absolute;padding:0 2px 2px 2px;top:34px;left:10px;border:1px solid #ddd;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .fontSizeWrap a{display:block;width:44px;margin-top:2px;padding-left:6px;height:24px;line-height:24px;text-align:left;color:#666;background:#f3f3f3;}
+.guang-editor .fontSizeWrap a:hover{text-decoration:none;background:#f8f8f8;}
+.guang-editor .fontColoWrap{position:absolute;padding:0 4px 4px 0px;top:34px;left:10px;border:1px solid #ddd;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .fontColoWrap a{float:left;width:16px;height:16px;margin-top:4px;margin-left:4px;line-height:16px;text-indent:-2000px;overflow:hidden;position:relative;}
+.guang-editor .faceWrap a:hover{text-decoration:none;}
+.guang-editor .fontColoWrap{position:absolute;padding:0 4px 4px 0px;top:34px;left:10px;border:1px solid #ddd;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .fontColoWrap a{float:left;width:16px;height:16px;margin-top:4px;margin-left:4px;line-height:16px;text-indent:-2000px;overflow:hidden;position:relative;}
+.guang-editor .fontColoWrap a:hover{text-decoration:none;}
+.guang-editor .faceWrap{position:absolute;padding:4px;top:34px;left:10px;border:1px solid #ddd;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .faceWrap a{border-bottom:1px solid #ddd;border-right:1px solid #ddd;float:left;width:30px;height:30px;line-height:30px;text-indent:-2000px;overflow:hidden;position:relative;}
+.guang-editor .faceWrap a:hover{text-decoration:none;}
+.guang-editor .faceWrapBorder{border-left:1px solid #ddd;border-top:1px solid #ddd;width:372px;}
+.guang-editor .imgWrap{position:absolute;padding:15px;width:366px;top:36px;left:10px;border:1px solid #ddd;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;box-shadow:0 0 3px rgba(34,25,25,0.2);-moz-box-shadow:0 0 3px rgba(34,25,25,0.2);-webkit-box-shadow:0 0 3px rgba(34,25,25,0.2)}
+.guang-editor .imgWrap .uploadImg{position:relative;height:28px;/*padding-bottom:12px;border-bottom:1px dotted #ddd;*/}
+.guang-editor .imgWrap .upload-cover{width:105px;}
+.guang-editor .imgWrap .upload-btn{ position:absolute;top:0px;left:0px;filter:alpha(opacity=0);opacity:0;z-index:698;display:block;width:105px;height:28px; cursor:pointer;}
+.guang-editor .imgWrap .netImg {display:none;}
+.guang-editor .imgWrap .netImg p{height:20px;line-height:20px;padding:8px 0;}
+.guang-editor .imgWrap .netImg .bbl-btn{width:60px;margin-top:2px;float:right;}
+.guang-editor .imgWrap .tipbox-up{left:145px;}
+.guang-editor .base-input{width:290px;float:left;}
+.guang-editor .videoWrap{top:36px;left:10px;border:1px solid #ddd;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor .videoWrap #J_InsertVideo{width:60px;margin-top:2px;float:right;}
+.guang-editor .videoWrap .content .tipbox-up{left:340px;}
+.guang-editor .videoWrap .content .title{padding-bottom:10px;font-weight:normal;}
+.guang-editor .videoWrap .content .sg-source p{height:20px;line-height:20px;padding:8px 0 5px 0;}
+.guang-editor .videoWrap .sg-form .sg-input { margin-right:0px; }
+.icon-youku{height:20px;color:#666;line-height:20px;padding-left:22px;padding-right:6px;float:left;background:transparent url(images/edit_toolbar.gif) 0px -123px no-repeat;}
+.icon-tudou{height:20px;color:#666;line-height:20px;padding-left:22px;padding-right:6px;float:left;background:transparent url(images/edit_toolbar.gif) 0px -148px no-repeat;}
+.icon-sinavideo{height:20px;color:#666;line-height:20px;padding-left:22px;padding-right:6px;float:left;background:transparent url(images/edit_toolbar.gif) 0px -173px no-repeat;}
+.guang-editor .baobeiWrap{top:36px;left:10px;border:1px solid #ddd;position:absolute;z-index:9997;width:396px;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;box-shadow:0 0 3px rgba(34,25,25,0.2);-moz-box-shadow:0 0 3px rgba(34,25,25,0.2);-webkit-box-shadow:0 0 3px rgba(34,25,25,0.2);}
+.guang-editor .baobeiWrap #J_InsertBaobei{width:60px;margin-top:2px;float:right;padding-left:0px;padding-right:0px;}
+.guang-editor .baobeiWrap .content { position:relative;padding:12px 15px;min-height:0; }
+.guang-editor .baobeiWrap .content .tipbox-up{left:216px;}
+.guang-editor .baobeiWrap .content .title{padding-bottom:10px;font-weight:normal;color:#333;}
+.guang-editor .baobeiWrap .content .sg-source p{height:20px;line-height:20px;padding:8px 0 5px 0;}
+.guang-editor .baobeiWrap .sg-form .sg-input { float:left;_display:inline;width:290px;margin-right:0px; }
+.guang-editor .baobeiWrap .sg-form .url-sub { margin-top:2px;cursor:pointer;*visibility:visible;width:56px\9; }
+.guang-editor .baobeiWrap .sg-form .text-tip { display:none;padding:5px 0;line-height:1.1; }
+.guang-editor .baobeiWrap .manual-upload { line-height:1.1;padding:5px 0 0 0;border-top:1px dotted #d1d1d1; }
+.guang-editor-mediaViewWrap {min-height:100px;background:#f3f3f3;padding:0px 10px 10px 10px;margin-top:10px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.guang-editor-mediaViewWrap .item{float:left;margin-right:10px;margin-top:10px;width:80px;}
+.guang-editor-mediaViewWrap .item .mediaImg{width:80px;height:80px;overflow:hidden;position:relative;}
+.guang-editor-mediaViewWrap .item .mediaImg .btn{display:none;height:24px;line-height:24px;color:#fff;text-align:center;position:absolute;bottom:0px;width:80px;left:0px;background:rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#cc000000',endColorstr='#cc000000');}
+.guang-editor-mediaViewWrap .item .mediaImg .btn a{color:#fff;}
+.guang-editor-mediaViewWrap .item .mediaImg .btn a:hover{color:#ccc;text-decoration:none;}
+.guang-editor-mediaViewWrap .item img{width:80px;height:80px;}
+.guang-editor-mediaViewWrap .item p{height:14px;line-height:14px;padding-top:6px;text-align:center;}

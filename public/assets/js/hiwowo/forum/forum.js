@@ -8,15 +8,7 @@
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-  var UM =  require("umeditor");
-    require("umeditor-lang")
-    require("umeditor-emotion")
-    require("umeditor-image")
-    require("umeditor-link")
-    require("umeditor-map")
-    require("umeditor-video")
-    var discussEditor = UM.getEditor('J_discussContent');
-    var topicEditor = UM.getEditor('J_topicContent');
+
     //讨论组组件
     $.hiwowo.forum = {
 
