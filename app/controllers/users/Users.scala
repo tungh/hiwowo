@@ -44,16 +44,19 @@ object Users extends Controller {
 
     val author = UserDao.findById(id)
     Ok(views.html.users.diagrams(user,author) )
-
   }
 
   /* 我收藏的 */
   def collects(id:Long,p:Int) = UserAction{ user => implicit request =>
-
     val author = UserDao.findById(id)
     Ok(views.html.users.collects(user,author) )
-
   }
+  /* 我订阅的 */
+  def subscribes(id:Long,p:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findById(id)
+    Ok(views.html.users.subscribes(user,author) )
+  }
+
   /* 我讨论的 */
   def discusses(id:Long,p:Int) = UserAction{ user => implicit request =>
 

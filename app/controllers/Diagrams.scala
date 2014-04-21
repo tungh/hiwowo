@@ -181,9 +181,7 @@ object  Diagrams extends Controller {
   def edit(id:Long) = Users.UserAction{ user => implicit request =>
       Ok(views.html.diagrams.edit(user))
   }
-  def edit2(id:Long) = Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.edit2(user))
-  }
+
 
   /*保存 帖子*/
   def save = Users.UserAction{ user => implicit request =>

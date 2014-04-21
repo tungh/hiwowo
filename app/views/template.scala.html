@@ -35,27 +35,24 @@
 
             @if(user.isEmpty){
             <section class="user-info">
-                <a class="login need-login" href="#" rel="loginD">登录</a><span class="spacing">|</span><a class="signup" target="_blank" href="/user/regist">注册</a>
+                <a class="login need-login" href="javascript:void(0)" rel="loginD">登录</a><span class="spacing">|</span><a class="signup"  href="/user/regist">注册</a>
             </section>
             }else{
             <section class="user-info">
                 <a href="" class="msg" target="_blank"><span id="J_msgNum" style="display: none">9</span></a>
                 <div class="menu nav-item">
-                    <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user">
+                    <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user" target="_blank">
                         <img class="avatar" alt="@user.get.name" src="@user.get.pic">
                         <span class="name">@user.get.name</span>
                         <span class="triangle"></span>
                     </a>
                     <ul class="dropdown topbar-dropdown" style="width: 132px;">
-                        <li><a href="@controllers.users.routes.UsersAccount.base">账号设置</a></li>
-                        <li><a href="@controllers.routes.Diagrams.editDiagram(0)">发布图说</a></li>
-                        <li><a href="@controllers.routes.Diagrams.editPet(0)">发布神兽</a></li>
+                        <li><a href="@controllers.users.routes.UsersAccount.base" target="_blank">账号设置</a></li>
+                        <li><a href="@controllers.routes.Diagrams.edit(0)">发布神兽</a></li>
                         <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
-              <!--  <a class="favorite nav-item" title="我喜欢的" href="@controllers.users.routes.Users.loves(user.get.id.get)"><i></i></a>
-                <a class="follow nav-item" title="我关注的" href="@controllers.users.routes.Users.follow(user.get.id.get)"><i></i></a>
-                -->
+
             </section>
            }
             <section class="topSearch">
@@ -72,7 +69,6 @@
             <ul>
                 <li class=' @("on".when(subNav == "index")) '><a href="/" title="首页">首页</a></li>
                 <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin(1,10)" title="微信精选">微信精选</a></li>
-                <li class=' @("on".when(subNav == "diagrams")) '><a href="/diagrams/new"  title="图说">图说</a></li>
                 <li class=' @("on".when(subNav == "pets")) '><a href="/pets/1" title="神兽乐园">神兽乐园</a></li>
             </ul>
 
@@ -87,9 +83,8 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "home")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.home(user.get.id.get)}' title="我的首页">我的首页</a></li>
-                <li class=' @("on".when(subNav == "love")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.loves(user.get.id.get)}' title="我的关注">我的关注</a></li>
-                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的图说">我的图说</a></li>
-                <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
+                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的神兽">我的神兽</a></li>
+                <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.subscribes(user.get.id.get)}' title="我的订阅">我的订阅</a></li>
             </ul>
 
             <div class="subSearch" id="J_subSearch">
@@ -102,9 +97,8 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "home")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.home(author.get.id.get)}' title="TA的关注">TA的首页</a></li>
-                <li class=' @("on".when(subNav == "love")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.loves(author.get.id.get)}' title="TA的关注">TA的关注</a></li>
-                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.diagrams(author.get.id.get)}' title="TA的图说">TA的图说</a></li>
-                <li class=' @("on".when(subNav == "collect")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.collects(author.get.id.get)}' title="我的收藏">TA的收藏</a></li>
+                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.diagrams(author.get.id.get)}' title="TA的神兽">TA的神兽</a></li>
+                <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!author.isEmpty){ @controllers.users.routes.Users.subscribes(author.get.id.get)}' title="我的订阅">TA的订阅</a></li>
 
             </ul>
 
