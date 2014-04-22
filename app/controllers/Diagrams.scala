@@ -31,13 +31,22 @@ case class DiagramComponent(
 
 object  Diagrams extends Controller {
 
+  val diagramForm =Form(
+    tuple(
+      "id"->optional(longNumber),
+      "title" ->nonEmptyText ,
+      "content"->nonEmptyText,
+      "typeId"->number,
+      "status"->number
+    )
+  )
+
   val petForm = Form(
     tuple(
       "id"->optional(longNumber),
       "title" ->nonEmptyText ,
       "pic"->nonEmptyText,
       "intro" ->optional(text) ,
-      "labels"->optional(text),
       "status"->number,
       "typeId"->number
     )
@@ -118,7 +127,6 @@ object  Diagrams extends Controller {
       val  diagramIntro = (request.body \ "diagramIntro").asOpt[String]
       val  diagramContent = (request.body \ "diagramContent").asOpt[String]
       val  diagramPs = (request.body \ "diagramPs").asOpt[String]
-      val  diagramTags = (request.body \ "diagramTags").asOpt[String]
       val diagramStatus =  (request.body \ "diagramStatus").asOpt[Int]
       val  picIds = (request.body \ "picIds").asOpt[String]
       val ids=picIds.get.split("-").map(x=>x.toLong)
@@ -126,11 +134,11 @@ object  Diagrams extends Controller {
         Ok(Json.obj("code"->"104","message"->"diagram title is empty"))
       } else {
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-          val dId = DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
+          val dId = DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramStatus.getOrElse(0))
           for (id<-ids){ if(DiagramDao.findDiagramPic(dId,id).isEmpty){DiagramDao.addDiagramPic(dId,id)}  }
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId))
         }else{
-          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramTags,diagramStatus.getOrElse(0))
+          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,diagramPic.get,diagramIntro,diagramContent,diagramPs,diagramStatus.getOrElse(0))
         /* 查找此diagram pic是否保存 */
           for (id<-ids){ if(DiagramDao.findDiagramPic(diagramId.get,id).isEmpty){ println("sdsdfdddddd"); DiagramDao.addDiagramPic(diagramId.get,id)}  }
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->diagramId.get))
@@ -169,7 +177,7 @@ object  Diagrams extends Controller {
         if(id == 0) Ok(views.html.diagrams.editPet(user,petForm))
         else{
           val diagram = DiagramDao.findDiagramById(id)
-          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.labels,diagram.get.status,diagram.get.typeId))))
+          Ok(views.html.diagrams.editPet(user,petForm.fill((diagram.get.id,diagram.get.title,diagram.get.pic,diagram.get.intro,diagram.get.status,diagram.get.typeId))))
         }
       } else{
         Redirect(controllers.users.routes.UsersAccount.vip)
@@ -179,21 +187,60 @@ object  Diagrams extends Controller {
   }
 
   def edit(id:Long) = Users.UserAction{ user => implicit request =>
-      Ok(views.html.diagrams.edit(user))
+    if(user.isEmpty){
+      Redirect(controllers.users.routes.UsersRegLogin.login)        // 用户未登录，提醒去登录
+    } else{
+      if(user.get.status == 3){
+        if(id == 0)   Ok(views.html.diagrams.edit(user,diagramForm))  // 只有是vip 用户才能edit
+        else{
+          val diagram = DiagramDao.findDiagramById(id)
+          if(diagram.isEmpty || diagram.get.uid != user.get.id.get){
+              Ok("图说不存在，或者你没有权限编辑")
+          }else{
+            Ok(views.html.diagrams.edit(user,diagramForm.fill(diagram.get.id,diagram.get.title,diagram.get.content.getOrElse(""),diagram.get.typeId,diagram.get.status)))
+          }
+
+        }
+      } else{
+        Redirect(controllers.users.routes.UsersAccount.vip)
+      }
+
+    }
   }
 
 
-  /*保存 帖子*/
-  def save = Users.UserAction{ user => implicit request =>
+  /*保存 图说*/
+  def savePet = Users.UserAction{ user => implicit request =>
     petForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.diagrams.editPet(user,formWithErrors)),
       fields =>{
 
         if (fields._1.isEmpty){
-          val id= DiagramDao.addDiagram(user.get.id.get,fields._7,fields._2,fields._3,fields._4,fields._5,fields._6)
+          val id= DiagramDao.addDiagram(user.get.id.get,fields._6,fields._2,fields._3,fields._4,fields._5)
           Redirect(controllers.routes.Diagrams.diagram(id))
         }else{
-          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._7,fields._2,fields._3,fields._4,fields._5,fields._6)
+          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._6,fields._2,fields._3,fields._4,fields._5)
+          Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
+        }
+      }
+    )
+
+  }
+
+  /* 保存图说 */
+  def save = Users.UserAction{ user => implicit request =>
+    diagramForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.diagrams.edit(user,formWithErrors)),
+      fields =>{
+        var intro =Jsoup.clean(fields._3,Whitelist.none())
+        if(intro.length()>100) intro =intro.substring(0,140)+"..."
+        val  doc =Jsoup.parseBodyFragment(fields._3)
+        val pic =doc.body().getElementsByTag("img").first().attr("src")
+        if (fields._1.isEmpty){
+          val id= DiagramDao.addDiagram(user.get.id.get,fields._4,fields._2,pic,Some(intro),fields._5)
+          Redirect(controllers.routes.Diagrams.diagram(id))
+        }else{
+          DiagramDao.modifyDiagram(fields._1.get,user.get.id.get,fields._4,fields._2,pic,Some(intro),fields._5)
           Redirect(controllers.routes.Diagrams.diagram(fields._1.get))
         }
       }

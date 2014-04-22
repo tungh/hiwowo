@@ -307,6 +307,33 @@
 .editor-select .other-list a.selected:hover em {
     padding-right: 13px;
 }
+ /* 简介区域 */
+.editor-intro {
+    width: 668px;
+    background: #fafafa;
+    border: 1px solid #D9D8D8;
+    border-bottom-width: 0;
+    border-top-width: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.editor-intro .textarea-intro{
+    width: 668px;
+    height: 60px;
+    line-height: 25px;
+    padding: 6px 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -webkit-transition: all 0.08s ease-in-out;
+    -moz-transition: all 0.08s ease-in-out;
+}
 
 /*--编辑区--*/
 .editor-area {
@@ -321,37 +348,7 @@
 }
 
 /*--进度条--*/
-#upload_bg {
-    width: 180px;
-    overflow: hidden;
-    height: 7px;
-    margin: 16px 0 0 30px;
-    display: none;
-    float: left;
-    position: relative;
-    background: url(images/editor/new_btns.png) no-repeat 0px 0px;
-}
 
-#upload_color {
-    position: absolute;
-    overflow: hidden;
-    height: 13px;
-    z-index: 2;
-    background: url(images/editor/new_btns.png) no-repeat 0 -9px;
-}
-
-#upload_percent {
-    position: absolute;
-    width: 180px;
-    overflow: hidden;
-    height: 7px;
-    z-index: 3;
-    color: #dfe0e0;
-    text-align: center;
-    line-height: 7px;
-    font-size: 10px;
-    -webkit-text-size-adjust: none;
-}
 
 /*下方的三个按钮*/
 .func_buttons {

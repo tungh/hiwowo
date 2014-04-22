@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Int,Int)])
 @views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/editor.css"){
 
 <div class="container pet">
@@ -6,8 +6,10 @@
     <div class="row">
         <div class="main">
             <div class="editor-box" >
-                <input type="hidden" value="0" name="id"  />
+                <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_editForm">
+                <input type="hidden" name="id"   value="0" />
                 <input type="hidden" name="content" id="J_content">
+                <input type="hidden" name="typeId" id="J_typeId">
                 <div class="editor-title">
                     <label for="J_title">标题</label>
                     <input type="text" name="title" class="input" id="J_title" value='哎呀，我要个牛逼哄哄的名字'  maxlength='45' />
@@ -15,16 +17,16 @@
                 <div class="editor-select">
                     <div class="main-select">
                         <span>类型：</span>
-                        <a href="javascript:void(0);"  data-typeid="21"><em>淘宝天猫</em></a>
-                        <a href="javascript:void(0);"  data-typeid="20"><em>创业交流</em></a>
-                        <a href="javascript:void(0);"  data-typeid="32"><em>求助问答</em></a>                        <a href="javascript:void(0);"  section="30"><em>电商杂谈</em></a>                        <a href="javascript:void(0);"  section="14"><em>市场营销</em></a>                        <br class='clear' />
+                        <a href="javascript:void(0);"  data-typeid="0" class="selected"><em>乖乖兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="1"><em>Gif怪兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="2"><em>神兽自白</em></a>
+                        <br class='clear' />
                     </div>
-
                     <div class="clear"></div>
-
                 </div>
+
                 <div class="editor-area">
-                    <textarea id="J_editorContent"  name="intro" class="b-textarea"> </textarea>
+                    <textarea id="J_editorContent"   class="b-textarea">偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^ </textarea>
                 </div>
                 <div class="clear"></div>
 
@@ -37,7 +39,7 @@
 
                 </p>
 
-
+             </form>
 
             </div>
 
@@ -61,7 +63,9 @@
 }{
 <script type="text/javascript">
             seajs.use(['jquery','hiwowo/diagram/diagramEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
-
+                if(HIWOWO.userId == ""){
+                    $.hiwowo.loginDialog.isLogin();
+                }
                 $.hiwowo.editor = $.hiwowo.Editor();
             })
 </script>

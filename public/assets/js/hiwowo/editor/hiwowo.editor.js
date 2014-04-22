@@ -328,7 +328,7 @@ define(function (require, exports) {
                         }
                     }
                 },
-                html:"<div class='font-btns font-colo'><a href='javascript:;' btntype='btnFontColo' title='前景色' unselectable='on'><span btntype='btnFontColo' unselectable='on'><i btntype='btnFontColo' unselectable='on'></i></span></a></div>"
+                html:"<div class='font-btns font-colo'><a href='javascript:;' btntype='btnFontColo' title='字体颜色' unselectable='on'><span btntype='btnFontColo' unselectable='on'><i btntype='btnFontColo' unselectable='on'></i></span></a></div>"
             },
             btnFontColoAction:{
                 exec:function (self, $srcElement) {
@@ -374,7 +374,7 @@ define(function (require, exports) {
                             // Button settings
                             button_image_url: "/assets/css/template/images/editor/swfupload_btn.gif",
                             button_placeholder_id: "J_swfUpload",
-                           button_width: 48,
+                           button_width:120,
                            button_height: 38,
                           //   Flash Settings
                             flash_url: "/assets/js/sea-modules/swfupload.swf",
@@ -649,9 +649,9 @@ define(function (require, exports) {
             self.iframeDocument.designMode = "on";
             self.iframeDocument.open();
             if (self.isIE678) {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;}.img-goods,.img-upload { display: block;max-width: 200px; max-height: 250px; _width: 200px;background:  url(/assets/css/global/images/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
             } else {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;}.img-goods,.img-upload { display: block;max-width: 200px; max-height: 250px; _width: 200px;background:  url(/assets/css/global/images/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
             }
             self.iframeDocument.close();
             var textareaVal = $("#" + self.config.textareaID).val();

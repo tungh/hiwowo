@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Option[String],Option[String],Int,Int)])
+@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Option[String],Int,Int)])
 @views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/petEdit.css"){
 
 <div class="container pet">
@@ -6,7 +6,7 @@
     <div class="row">
         <div class="main">
             <div class="pet-edit">
-                <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_forumTopicEditForm">
+                <form action="@controllers.routes.Diagrams.savePet" method="post" class="post-edit-form" id="J_forumTopicEditForm">
                     <input type="hidden" id="J_id" name="id" value='@form("id").value'>
                     <input type="hidden" id="J_status" name="status" value='1' >
                     @form.globalError.map { error =>
@@ -45,12 +45,7 @@
                         <dd> <textarea id="J_intro"  name="intro" class="b-textarea">@form("intro").value </textarea></dd>
                     </dl>
                 </div>
-                <div class="pet-tags">
-                    <dl>
-                        <dt id="J_tagsLabel">那个啥，都到这了，给我贴几个标签如何^_^</dt>
-                        <dd>  <input id="J_tags" name="tags" class="b-input" type="text" value='@form("tags").value' placeholder="亲，给我添几个标签如何"></dd>
-                    </dl>
-                </div>
+
                 <!-- 操作 -->
                 <div class="pet-btnbar clearfix">
 

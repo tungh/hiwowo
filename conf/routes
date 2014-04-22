@@ -30,7 +30,7 @@ POST  /diagram/savePic                     controllers.Diagrams.savePic
 POST  /diagram/saveDraft                  controllers.Diagrams.saveDraft
 POST  /diagram/delete                     controllers.Diagrams.delete
 GET   /diagram/editPet                      controllers.Diagrams.editPet(id:Long ?=0L)
-POST  /diagram/save                       controllers.Diagrams.save
+POST  /diagram/savePet                       controllers.Diagrams.savePet
 POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
 GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
 POST  /diagram/up                         controllers.Diagrams.upDiagram
@@ -38,10 +38,7 @@ POST  /diagram/down                       controllers.Diagrams.downDiagram
 POST  /discuss/up                         controllers.Diagrams.upDiscuss
 POST  /discuss/down                       controllers.Diagrams.upDiscuss
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
-
-
-
-
+POST  /diagram/save                       controllers.Diagrams.save
 
 # user
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)

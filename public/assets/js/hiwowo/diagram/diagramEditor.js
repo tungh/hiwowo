@@ -15,37 +15,31 @@ define(function(require){
         },
         editSubmit:function($this){
             var title="";
+            var content="";
+            var frameBody = $("#J_GuangEditorIframe").contents().find("body")
+                if($.trim(frameBody.html())!="偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^"){
+                    $("#J_content").val(frameBody.html());
+                    content=frameBody.html()
+                }
             if ($("#J_title").val() != '哎呀，我要个牛逼哄哄的名字') {
-              title = $.trim($("#J_title").val())
+                title = $.trim($("#J_title").val())
             }
 
-            if($.hiwowo.editor){
-                if($.trim($.hiwowo.editor.iframeDocument.body.innerHTML)==""){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"内容不能为空哦！");
-                    $this.attr('disabled',false);
-                    return;
-                }
-                if($.hiwowo.util.getStrLength($.hiwowo.editor.iframeDocument.body.innerHTML) >= 10000){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"内容不得超过10000字");
-                    $this.attr('disabled',false);
-                    return;
-                }
+            $("#J_typeId").val($('.main-select a:has(".selected")').data("typeid"))
 
-                $("#J_content").val($.hiwowo.editor.iframeDocument.body.innerHTML);
-            }
-            var content = $("#J_content").val();
-            if(title == "" || $.trim(content) == ""){
+            if(title == ""){
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.hiwowo.tip.show($this,"标题和内容不能为空哦！");
+                $.hiwowo.tip.show($this,"标题不能为空哦！");
+            }else if($.trim(content) == ""){
+                $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                $.hiwowo.tip.show($this,"内容不能为空哦！");
             }else if($.hiwowo.util.getStrLength(title) > 50 || $.hiwowo.util.getStrLength(content) >= 10000){
 
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
             }else{
-              //  $("#J_ForumPostEditForm").submit();
-                alert("hello")
+               $("#J_editForm").submit();
+
 
             }
         },
@@ -68,6 +62,32 @@ define(function(require){
                     $(this).val('哎呀，我要个牛逼哄哄的名字').css({'color': '#a0a0a0'});
                 }
             })
+            /* text area 内容输入 */
+            $('#J_editorContent').focus(function() {
+                if ($(this).val() == '偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^') {
+                    $(this).val('').css({'color': '#323232'});
+                }
+            })
+            $('#J_editorContent').blur(function() {
+                if ($(this).val() == '') {
+                    $(this).val('偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^').css({'color': '#a0a0a0'});
+                }
+            })
+            /* editor 内容输入 */
+        //    if($.hiwowo.editor){
+            var frameBody = $("#J_GuangEditorIframe").contents().find("body")
+            frameBody.focus(function(){
+                if($.trim(frameBody.html())=="偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^"){
+                    frameBody.html("");
+                }
+            })
+            frameBody.blur(function(){
+                if ($.trim(frameBody.html())== '') {
+                    frameBody.html("偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^")
+
+                }
+            })
+          //  }
             //点击主要板块
             $('.main-select a').click(function() {
                 $('.main-select a, .other-list a').removeClass('selected');
@@ -101,6 +121,9 @@ define(function(require){
         }
     }
 
-    $.hiwowo.diagramEditor.init()
+    $(function(){
+        $.hiwowo.diagramEditor.init()
+    })
+
 
 })

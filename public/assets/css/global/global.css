@@ -1703,3 +1703,34 @@ input[type="button"].btn-block {
 .guang-editor-mediaViewWrap .item .mediaImg .btn a:hover{color:#ccc;text-decoration:none;}
 .guang-editor-mediaViewWrap .item img{width:80px;height:80px;}
 .guang-editor-mediaViewWrap .item p{height:14px;line-height:14px;padding-top:6px;text-align:center;}
+.guang-editor #upload_bg {
+    width: 180px;
+    overflow: hidden;
+    height: 7px;
+    margin: 16px 0 0 30px;
+    display: none;
+    float: left;
+    position: relative;
+    background: url(images/editor/new_btns.png) no-repeat 0px 0px;
+}
+
+.guang-editor #upload_color {
+    position: absolute;
+    overflow: hidden;
+    height: 13px;
+    z-index: 2;
+    background: url(images/editor/new_btns.png) no-repeat 0 -9px;
+}
+
+.guang-editor #upload_percent {
+    position: absolute;
+    width: 180px;
+    overflow: hidden;
+    height: 7px;
+    z-index: 3;
+    color: #dfe0e0;
+    text-align: center;
+    line-height: 7px;
+    font-size: 10px;
+    -webkit-text-size-adjust: none;
+}
