@@ -7,27 +7,24 @@
         <div class="main">
             <div class="editor-box" >
                 <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_editForm">
-                <input type="hidden" name="id"   value='@form("id").value' />
-                <input type="hidden" name="content" id="J_content" value='@form("content").value'>
-                <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
-                    <input type="hidden" name="typeId" id="J_status" value='@form("status").value'>
+                <input type="hidden" name="id" id="J_id"  value="0" />
                 <div class="editor-title">
                     <label for="J_title">标题</label>
-                    <input type="text" name="title" class="input" id="J_title" value='@form("title").value'  maxlength='45' />
+                    <input type="text" name="title" class="input" id="J_title" value='哎呀，我要个牛逼哄哄的名字'  maxlength='45' />
                 </div>
                 <div class="editor-select">
                     <div class="main-select">
                         <span>类型：</span>
-                        <a href="javascript:void(0);"  data-typeid="0"    @if(form("typeId").value.getOrElse("0") =="0") { class="selected" } ><em>乖乖兽</em></a>
-                        <a href="javascript:void(0);"  data-typeid="1"   @if(form("typeId").value.getOrElse("0") =="1") { class="selected" }><em>Gif怪兽</em></a>
-                        <a href="javascript:void(0);"  data-typeid="2"  @if(form("typeId").value.getOrElse("0") =="2") { class="selected" }><em>神兽自白</em></a>
+                        <a href="javascript:void(0);"  data-typeid="0" class="selected"><em>乖乖兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="1"><em>Gif怪兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="2"><em>神兽自白</em></a>
                         <br class='clear' />
                     </div>
                     <div class="clear"></div>
                 </div>
 
                 <div class="editor-area">
-                    <textarea id="J_editorContent"   class="b-textarea"> @form("content").value </textarea>
+                    <textarea id="J_editorContent"   class="b-textarea">偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^ </textarea>
                 </div>
                 <div class="clear"></div>
 

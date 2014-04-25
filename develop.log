@@ -79,7 +79,15 @@ diagram 是核心，需要花很多精力做哦
 
    需要制作swfupload 上传按钮 todo        完成
    需要制作swfupload process  todo        完成
-   需要调整 diagram save  todo
+   需要调整 diagram save  todo            完成
+
+4月23日
+    1、 forum edit       forum discuss                       todo
+    2 、diagram 编辑结束后，形成 标签，然后用户进行选择       todo
+    3、diagram 管理后台，形成标签，编辑人员进行选择           todo
+    4、 diagram discuss
+    5、如果浏览器支持本地存储，使用本地存储。
+    6、重复提交 
 
 
 二、网络爬虫

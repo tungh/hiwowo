@@ -37,8 +37,10 @@ POST  /diagram/up                         controllers.Diagrams.upDiagram
 POST  /diagram/down                       controllers.Diagrams.downDiagram
 POST  /discuss/up                         controllers.Diagrams.upDiscuss
 POST  /discuss/down                       controllers.Diagrams.upDiscuss
+GET   /diagram/create                     controllers.Diagrams.create
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
+POST  /diagram/ajaxSave                   controllers.Diagrams.ajaxSave
 
 # user
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)

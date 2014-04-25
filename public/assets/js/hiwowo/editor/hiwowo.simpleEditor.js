@@ -1,13 +1,7 @@
 /*
- * Copyright 2011-2012, Guang.com
  * @contain: textarea编辑器
- * @depends: jquery.js markitup.js
- * 
- * Author: luyao
- * Since: 2012-07-13
- * ModifyTime : 2012-07-13 15:05
- * email: water2212683@gmail.com
- * 
+ * @depends: jquery.js
+ *
  */
  define(function(require, exports) {
  	var $  = require("$");
@@ -88,7 +82,7 @@
 		{key:"[钟]",val:"clock_thumb.gif"},
 		{key:"[话筒]",val:"m_thumb.gif"}
 	];
-	var textarea = $("#J_Content")[0];
+	var textarea = $("#J_discussContent")[0];
 	var faceBtn = $("#J_FaceBtn");
 	var faceBtnWrapDom = null;
 	var faceIsShow = false;
@@ -224,7 +218,7 @@
 			return val.replace(/\<[^\>]+\>/g,"");
 		}
 	};
-	$.smeite.simpleEditor = SimpleEditor;
+	$.hiwowo.simpleEditor = SimpleEditor;
 
 
 

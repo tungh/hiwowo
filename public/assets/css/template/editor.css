@@ -8,14 +8,13 @@
     float: left;
     width: 680px;
     background: #FFF;
-    border-right: #b4b4b4 solid 1px;
     overflow: auto;
 }
 
 #content .side {
     background: #FFF;
     float: right;
-    width: 308px;
+    width: 288px;
     height: auto;
     padding: 0;
 }
