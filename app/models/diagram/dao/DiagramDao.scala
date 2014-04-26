@@ -120,6 +120,9 @@ object DiagramDao {
   def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],status:Int) = database.withDynSession{
     ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.status) ).update(uid,typeId,title,pic,intro,status)
   }
+  def modifyDiagramLabels(id:Long,labels:String) = database.withDynSession{
+    (for(c<-diagrams if c.id ===id)yield c.labels ).update(labels)
+  }
   def modifyDiagramStatus(id:Long,status:Int) = database.withDynSession{
     (for(c<-diagrams if c.id === id) yield c.status ).update(status)
   }

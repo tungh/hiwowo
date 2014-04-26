@@ -1328,6 +1328,10 @@ input[type="button"].btn-block {
     line-height: 37px;
     color: #369;
 }
+#J_systemTagsDialog .bbl-btn{
+    float: right;
+    margin-right: 50px;
+}
 /* diagrams */
 .rich-content {
     line-height: 20px;

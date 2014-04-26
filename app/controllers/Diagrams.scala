@@ -114,7 +114,7 @@ object  Diagrams extends Controller {
 
   }
   def ajaxSave = Action(parse.json){  implicit request =>
-  /*  val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
     else if(user.get.status!=3)Ok(Json.obj("code" -> "444", "message" -> "亲，你还没有权限发布神兽"))
     else {
@@ -140,8 +140,8 @@ object  Diagrams extends Controller {
         }
 
       }
-    }*/
-    Ok(Json.obj("code" -> "100", "message" ->"diagram id is not correct"))
+    }
+    //Ok(Json.obj("code" -> "100", "message" ->"diagram id is not correct"))
   }
   def  delete =Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
@@ -154,7 +154,7 @@ object  Diagrams extends Controller {
         val diagram =DiagramDao.findDiagramById(diagramId.get)
         if(user.get.id.get == diagram.get.uid){
           DiagramDao.modifyDiagramStatus(diagramId.get,0)
-          Ok(Json.obj("code" -> "104", "message" ->"图说已删除"))
+          Ok(Json.obj("code" -> "100", "message" ->"图说已删除"))
         }else{
           Ok(Json.obj("code" -> "444", "message" ->"你没有权限删除哦"))
         }
@@ -162,7 +162,26 @@ object  Diagrams extends Controller {
 
     }
   }
+  def addLabels =Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+    else{
+      val diagramId = (request.body \ "id").asOpt[Long]
+      val labels = (request.body \ "labels").asOpt[String]
+      if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
+        Ok(Json.obj("code" -> "104", "message" ->"图说不存在"))
+      }else{
+        val diagram =DiagramDao.findDiagramById(diagramId.get)
+        if(user.get.id.get == diagram.get.uid){
+          DiagramDao.modifyDiagramLabels(diagramId.get,labels.getOrElse(""))
+          Ok(Json.obj("code" -> "100", "message" ->"添加成功"))
+        }else{
+          Ok(Json.obj("code" -> "444", "message" ->"你没有权限删除哦"))
+        }
+      }
 
+    }
+  }
   /* save diagram discuss*/
   def saveDiscuss = Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))

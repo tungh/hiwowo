@@ -35,10 +35,10 @@ define(function(require){
 
             diagram.id =parseInt($("#J_id").val())
           if(diagram.title == ""){
-              isCommited=false;
+               isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"标题不能为空哦！");
-            }/*else if($.trim(diagram.content) == ""){
+            }else if($.trim(diagram.content) == ""){
               isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"内容不能为空哦！");
@@ -50,7 +50,7 @@ define(function(require){
               isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
-            }*/else{
+            }else{
                 $.ajax({
                     url: "/diagram/ajaxSave",
                     type: "post",
@@ -58,12 +58,13 @@ define(function(require){
                     dataType: "json",
                     data:JSON.stringify(diagram),
                     beforeSend:function(){
+                        $this.addClass("func_button_disabled").val("正在提交，请耐心等待^_^")
                     },
                     success: function(data) {
                       isCommited=false;
                         if(data.code=="100") {
                             if(diagram.id ==0){
-                                $.hiwowo.diagramEditor.systemTags(data.id,data.tags)
+                                $.hiwowo.diagramEditor.systemTags(data.diagramId,data.tags)
                             }else{
                                 window.location="/diagram/"+data.diagramId
                             }
@@ -83,7 +84,7 @@ define(function(require){
 
             if(!$("#J_systemTagsDialog")[0]){
                 var html = "";
-                html +='<div class="modal fade" id="J_systemTagsDialog">';
+                html +='<div class="modal fade" data-backdrop="static" id="J_systemTagsDialog">';
                 html +='<div class="modal-dialog">';
                 html +='<div class="modal-content">';
                 html +='<div class="modal-header"> ';
@@ -96,25 +97,37 @@ define(function(require){
                html +='<div class="tags-container" id="J_tagsContainer" class="clearfix"><span class="my-tags" id="J_myTags"></span><input class="fl" type="text" id="tag-input" autocomplete="off" maxlength="6" size="10"></div> ';
                 html +='<div id="tag-searched" style="display: none;"></div>';
                html +='<p class="tips"><span class="c96">输入标签，按"回车键"完成一个标签</span><em id="tip-input-size"></em></p>';
-                html +='<dl class="sys-tags clearfix zoom" id="J_sysTags"> <dt class="fl">推荐标签：</dt><dd class="fl"><a href="javascript:;" rid="4429" oid="237049">女人</a><a href="javascript:;" rid="5892" oid="237049">发展</a><a href="javascript:;" rid="11404" oid="237049">电商发展</a></dd> </dl>';
+                html +='<dl class="sys-tags clearfix zoom" id="J_sysTags"> <dt class="fl">推荐标签：</dt><dd class="fl"></dd> </dl>';
                 html += '<div class="clear"></div>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="modal-footer">';
-                html += '<input type="button" class="bbl-btn" value="确认">';
+                html += '<input type="button" class="bbl-btn" id="J_submitLabels" value="确认">';
                 html += '</div>';
                 html += '</div> ';
                 html += '</div>';
                 html += '</div> ';
                 $("body").append(html)
-                $("#J_loginDialog").modal('show',{
+                $("#J_systemTagsDialog").modal('show',{
                     backdrop:'static'
                 })
             }else{
-                $("#J_systemTagsDialog").modal({
+                $("#J_systemTagsDialog").modal('show',{
                     backdrop:'static'
                 })
             }
+             /* 分配 tags to J_sysTags */
+             var list =""
+             if (tags!=null && tags !="" ) {
+                 $.each(tags, function(i, item) {
+                     list += '<a href="javascript:;" >' +item + '</a>';
+                 })
+
+                 $('#J_sysTags dd').html(list);
+             } else {
+                 $('#J_sysTags dd').html('<h2 style="color:#646464;">抱歉哦，系统未能推荐相关标签，请手动添加</h2>');
+             }
+
              /* 选择system tags 进入 my tags 中 */
              $(document).on("click","#J_sysTags a",function(){
                  $(this).appendTo("#J_myTags")
@@ -135,19 +148,16 @@ define(function(require){
                  }
                  e.stopPropagation();
              });
-
+              /* 处理输入的标签 */
              var oldKeyWord;
              $('#tag-input').keyup(function(e) {
-                 var relatTags = $("#tag-searched a"),
-                     currentTag = $("#current-tag"),
+                 var  currentTag = $("#current-tag"),
                      newKeyWord = $.trim($(this).val()).replace(/[^\u4E00-\u9FA50-9a-zA-Z]/g, '');
-                 if (!newKeyWord) {							//删除键
+                 if (!newKeyWord) {
                      $('#tag-searched').empty().hide();
                      oldKeyWord = '';
                      return;
                  }
-
-
                  if (newKeyWord != oldKeyWord) {
                      $('#tag-searched').show().empty().append('<a href="javascript:;">添加 <b>' + newKeyWord + '</b> 标签</a>');
                      $('#tag-searched a').first().attr("id", "current-tag");
@@ -155,38 +165,14 @@ define(function(require){
                  } else {							//判断按键
                      var keyCode = e.keyCode || event.keyCode;
                      switch (keyCode) {
-                         case 40:                //按了向下的键
-                             if (currentTag.index() == relatTags.last().index()) {
-                                 currentTag.removeAttr("id");
-                                 relatTags.first().attr("id", "current-tag");
-                             } else {
-                                 currentTag.removeAttr("id").next().attr("id", "current-tag");
-                             }
-                             ;
-                             break;
-                         case 38:                //按了向上的键
-                             if (currentTag.index() == relatTags.first().index()) {
-                                 currentTag.removeAttr("id");
-                                 relatTags.last().attr("id", "current-tag");
-                             } else {
-                                 currentTag.removeAttr("id").prev().attr("id", "current-tag");
-                             }
-                             ;
-                             break;
                          case 13:                //回车键
-                             var a = currentTag.find("span").text() || currentTag.find("b").text();
+                             var a =  currentTag.find("b").text();
                              if (!a) {
                                  $("#tag-searched").slideUp();
                                  break;
                              } else {
-                                 var kk = false;
-                                 if (currentTag.find("span").length > 0) {
-                                     var tagid = currentTag.find('span').attr('oid');
-                                     var autid = currentTag.attr('autid');
-                                     var b = '<a href="javascript:;" cla ="ser" tid=' + tagid + ' autid=' + autid + '>' + a + '</a>';
-                                 } else {
-                                     var b = '<a href="javascript:;" cla ="def" >' + a + '</a>';
-                                 }
+                                     var kk = false;
+                                     var b = '<a href="javascript:;"  >' + a + '</a>';
                                  //去重标签添加
                                  $('#J_myTags a').each(function() {
                                      if ($(this).text() == a) {
@@ -195,8 +181,7 @@ define(function(require){
                                          return false;
                                      }
                                  })
-                                 if (kk == true)
-                                     return false;
+                                 if (kk == true) return false;
                                  $('#J_myTags').append(b);
                                  $('#tag-input').val('');
                                  $('#tag-searched').empty().hide();
@@ -210,48 +195,6 @@ define(function(require){
                      }
                  }
              })
-             //标签鼠标感应
-             $(document).on("hover","#tag-searched a",function(){
-                 $("#current-tag").removeAttr('id');
-                 $(this).attr('id', 'current-tag');
-             })
-
-             //鼠标点击添加标签
-             $(document).on("click","#tag-searched a",function(){
-                 if ($('#J_myTags a').length < 5) {
-                     var kk = false;
-                     var a = $(this).find('b').length ? $(this).find('b').text() : $(this).text();
-                     if ($(this).find('span').length > 0) {
-                         var tagid = $(this).find('span').attr('oid');
-                         var autid = $(this).attr('autid');
-                         var b = '<a href="javascript:;" cla ="ser" tid=' + tagid + ' autid=' + autid + '>' + a + '</a>';
-                     } else {
-                         var b = '<a href="javascript:;" cla ="def" >' + a + '</a>';
-                     }
-                     //去重标签添加
-                     $('#J_myTags a').each(function() {
-                         if ($(this).text() == a) {
-                             alert('已添加过此标签');
-                             kk = true;
-                             return false;
-                         }
-                     })
-                     if (kk == true)
-                         return false;
-                     $('#J_myTags').append(b);
-                     $('#tag-input').val('');
-                     $('#tag-searched').empty().hide();
-                     oldKeyWord = '';
-                     if ($('#J_myTags a').length == 5) {
-                         $('#tag-input').val('').hide();
-                     }
-                 } else {
-                     if ($('#tip-input-size').text() == '') {
-                         $('#tip-input-size').text('(已有5个标签，不可再添加)');
-                     }
-                     return false;
-                 }
-             })
 
              //输入框失去焦点
              $("#tag-input").blur(function() {
@@ -261,9 +204,49 @@ define(function(require){
              function searchedHide() {
                  $("#tag-searched").slideUp('fast');
              }
+             /* 处理当close modal*/
+             $(document).on("click","#J_systemTagsDialog button.close",function(){
+                     if ($('#J_myTags a').length > 0) {
+                         var mytags ="";
+                         $('#J_myTags a').each(function() {
+                             mytags +=$(this).text()+ ",";
+                         })
+                         $.hiwowo.diagramEditor.addTags(id,mytags)
+                     }else{
+                         window.location="/diagram/"+id
+                     }
+             })
+             /* 处理 确认 */
+             $(document).on("click","#J_submitLabels",function(){
+                 if ($('#J_myTags a').length > 0) {
+                     var mytags ="";
+                     $('#J_myTags a').each(function() {
+                         mytags +=$(this).text()+ ",";
+                     })
+                     $.hiwowo.diagramEditor.addTags(id,mytags)
+                 }else{
+                     window.location="/diagram/"+id
+                 }
+             })
 
         },
-        addTags:function(){},
+        addTags:function(id,tags){
+            $.ajax({
+                url: "/diagram/addLabels",
+                type: "post",
+                contentType:"application/json; charset=utf-8",
+                dataType: "json",
+                data:JSON.stringify({id:id,labels:tags}),
+                success: function(data) {
+                    if(data.code=="100") {
+                        window.location="/diagram/"+id
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            });
+
+        },
         deleteTag:function(){},
         init:function(){
             /* 触发焦点 判断 是否登录 */

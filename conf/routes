@@ -29,6 +29,7 @@ GET   /diagram/create                     controllers.Diagrams.create
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
 POST  /diagram/ajaxSave                   controllers.Diagrams.ajaxSave
+POST  /diagram/addLabels                  controllers.Diagrams.addLabels
 POST  /diagram/delete                     controllers.Diagrams.delete
 POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
 GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
