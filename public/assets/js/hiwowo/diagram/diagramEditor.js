@@ -7,14 +7,16 @@
  */
 define(function(require){
     var $ = jQuery = require("jquery")
-
+    isCommited = false;
     $.hiwowo.diagramEditor={
+
         /* 保存草稿 */
         saveDraft:function($this){
 
         },
         editSubmit:function($this){
-
+            if(!isCommited){
+            isCommited = true;
             var diagram={
                 id:0,
                 typeId:0,
@@ -31,17 +33,21 @@ define(function(require){
             }
                diagram.typeId= parseInt($(".editor-select").find(".selected").data("typeid"))
 
-               diagram.id =$("#J_id").val()
-            if(diagram.title == ""){
+            diagram.id =parseInt($("#J_id").val())
+          if(diagram.title == ""){
+              isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"标题不能为空哦！");
             }else if($.trim(diagram.content) == ""){
+              isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"内容不能为空哦！");
             }else if(diagram.content.indexOf("img-upload")<0){
+              isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"至少需要上传一张图片哦");
             }else if($.hiwowo.util.getStrLength(diagram.title) > 50 || $.hiwowo.util.getStrLength(diagram.content) >= 10000){
+              isCommited=false;
                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                 $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
             }else{
@@ -52,9 +58,11 @@ define(function(require){
                     dataType: "json",
                     data:JSON.stringify(diagram),
                     beforeSend:function(){
-                        $this.disableBtn("bbl-btn");
+                   //    $this.disableBtn("func_button");
                     },
                     success: function(data) {
+                      isCommited=false;
+                    //    $this.enableBtn("func_button")
                         if(data.code=="100") {
                             $.hiwowo.diagramEditor.selectTags(data.id,data.tags)
                         } else {
@@ -62,8 +70,10 @@ define(function(require){
                         }
                     }
                 });
-
-
+           }
+            } else{
+                $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                $.hiwowo.tip.show($this,"正在提交，请耐心等待 ^_^");
             }
         },
         selectTags:function(id,tags){
@@ -194,7 +204,10 @@ define(function(require){
             $("#J_submit").click(function(event){
                 event.preventDefault();
                 if($.hiwowo.loginDialog.isLogin()){
-                    $.hiwowo.diagramEditor.editSubmit($(this));
+
+                        $.hiwowo.diagramEditor.editSubmit($(this));
+
+
                 }
             })
         }

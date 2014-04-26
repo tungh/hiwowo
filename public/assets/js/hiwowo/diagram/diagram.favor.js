@@ -46,7 +46,7 @@ define(function(require){
                     diagramId:id
                 }
                 $.ajax({
-                    url:"/diagram/down",
+                    url:"/diagram/disfavor",
                     type : "POST",
                     contentType:"application/json; charset=utf-8",
                     dataType: "json",
@@ -80,7 +80,7 @@ define(function(require){
                 discussId:id
             }
             $.ajax({
-                url:"/discuss/up",
+                url:"/discuss/favor",
                 type : "POST",
                 contentType:"application/json; charset=utf-8",
                 dataType: "json",

@@ -16,12 +16,7 @@
                            title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>
                     <li>浏览<strong>@diagramComponent.diagram.viewNum</strong>
                         @if(!user.isEmpty && diagramComponent.diagram.uid == user.get.id.get){
-                        @if(diagramComponent.diagram.typeId == 0){
-                        <a href="@controllers.routes.Diagrams.editDiagram(diagramComponent.diagram.id.get)">编辑</a>
-                        }else{
-                        <a href="@controllers.routes.Diagrams.editPet(diagramComponent.diagram.id.get)">编辑</a>
-                        }
-
+                        <a href="@controllers.routes.Diagrams.edit(diagramComponent.diagram.id.get)">编辑</a>
                         }
                     </li>
                     <li></li>
