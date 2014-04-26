@@ -114,7 +114,7 @@ object  Diagrams extends Controller {
 
   }
   def ajaxSave = Action(parse.json){  implicit request =>
-    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+  /*  val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
     else if(user.get.status!=3)Ok(Json.obj("code" -> "444", "message" -> "亲，你还没有权限发布神兽"))
     else {
@@ -140,8 +140,8 @@ object  Diagrams extends Controller {
         }
 
       }
-    }
- //   Ok(Json.obj("code" -> "100", "message" ->"diagram id is not correct"))
+    }*/
+    Ok(Json.obj("code" -> "100", "message" ->"diagram id is not correct"))
   }
   def  delete =Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))

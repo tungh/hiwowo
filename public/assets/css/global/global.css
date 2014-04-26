@@ -1242,8 +1242,92 @@ input[type="button"].btn-block {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 }
-
-
+/* diagram 编辑之后，选择 system tags */
+#J_systemTagsDialog .modal-title{
+    text-align: center;
+}
+#J_systemTagsDialog .bd {
+    color: #969696;
+}
+#J_systemTagsDialog .bd .tags-intro{
+    margin-left: 18px;
+    margin-top: 10px;
+}
+#J_systemTagsDialog .tags-container{
+    position: relative;
+    width: 515px;
+    height: 30px;
+    margin: 0px 0px 0px 16px;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    padding: 4px 3px 2px 3px;
+    overflow: hidden;
+}
+#J_systemTagsDialog .my-tags a {
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin: 0px 3px 0px 0px;
+    padding: 0 18px 0 10px;
+    border-radius: 4px;
+    border: 1px solid #cce2c9;
+    color: #5f7a5b;
+    background: #e9f5e7 url(http://static.epaidai.com/images/bbs/pdeditor_ico.gif?v=2012091202) no-repeat right -514px;
+    cursor: pointer;
+}
+#J_systemTagsDialog #tag-input {
+    height: 15px;
+    min-height: 15px;
+    line-height: 15px;
+    padding: 4px 2px;
+    border: 0;
+    margin-top: 3px;
+    outline: none;
+}
+#J_systemTagsDialog #tag-searched {
+    display: none;
+    position: absolute;
+    background: #fff;
+    width: 234px;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    margin-left: 16px;
+    border-top: 0px;
+}
+#J_systemTagsDialog .tips {
+    margin-left: 18px;
+    margin-top: 10px;
+}
+#J_systemTagsDialog  #tip-input-size {
+    color: #F30;
+    margin-left: 20px;
+}
+#J_systemTagsDialog  .sys-tags {
+    margin: 40px 0px 0px 112px;
+    height: 28px;
+}
+#J_systemTagsDialog .sys-tags a {
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 3px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #cce2c9;
+    color: #5f7a5b;
+    background: #e9f5e7;
+    cursor: pointer;
+}
+#J_systemTagsDialog #current-tag {
+    background: #dfeadd;
+}
+#J_systemTagsDialog #tag-searched a {
+    display: block;
+    height: 37px;
+    padding-left: 10px;
+    line-height: 37px;
+    color: #369;
+}
 /* diagrams */
 .rich-content {
     line-height: 20px;

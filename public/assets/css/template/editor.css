@@ -392,7 +392,8 @@
 
 .func_publish {
     background: url(images/editor/new_btns.png) no-repeat -102px -22px;
-    border: 0px;
+    border: 0;
+   color:#fff;
 }
 
 .func_publish:hover {
@@ -400,10 +401,7 @@
     border: 0px;
 }
 
-.func_publish:link, .func_publish_hover:link {
-    color: #FFF;
-    border: 0px;
-}
+
 
 .func_buttons .func_button_disabled, .func_buttons .func_button_disabled:link, .func_buttons .func_button_disabled:hover {
     background-color: #f0f0f0;
