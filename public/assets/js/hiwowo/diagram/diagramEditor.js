@@ -58,11 +58,12 @@ define(function(require){
                     dataType: "json",
                     data:JSON.stringify(diagram),
                     beforeSend:function(){
-                        $this.addClass("func_button_disabled").val("正在提交，请耐心等待^_^")
+                        $this.addClass("func_button_disabled").val("提交中……")
                     },
                     success: function(data) {
                       isCommited=false;
                         if(data.code=="100") {
+                            $this.removeClass("func_button_disabled").val("发表")
                             if(diagram.id ==0){
                                 $.hiwowo.diagramEditor.systemTags(data.diagramId,data.tags)
                             }else{

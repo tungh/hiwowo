@@ -18,6 +18,7 @@ import scala.collection.JavaConversions._
 import org.ansj.app.keyword.{Keyword, KeyWordComputer}
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
+import models.label.dao.LabelDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -168,11 +169,20 @@ object  Diagrams extends Controller {
     else{
       val diagramId = (request.body \ "id").asOpt[Long]
       val labels = (request.body \ "labels").asOpt[String]
-      if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-        Ok(Json.obj("code" -> "104", "message" ->"图说不存在"))
+      if(diagramId.isEmpty || labels.isEmpty  ){
+        Ok(Json.obj("code" -> "104", "message" ->"图说或者标签为空"))
       }else{
         val diagram =DiagramDao.findDiagramById(diagramId.get)
         if(user.get.id.get == diagram.get.uid){
+         val list = labels.getOrElse("").split(",")
+          for(item <- list){
+            val label = LabelDao.findLabelByName(item)      // 查找label 是否存在，不存在添加
+            if(label.isEmpty){ LabelDao.addLabel(item,0) }else{
+            val labelDiagram = LabelDao.findLabelDiagram(label.get.id.get,diagramId.get) // 查找是否存在 label diagram,不存在添加
+              if(labelDiagram.isEmpty){ LabelDao.addLabelDiagram(label.get.id.get,diagramId.get) }
+            }
+          }
+
           DiagramDao.modifyDiagramLabels(diagramId.get,labels.getOrElse(""))
           Ok(Json.obj("code" -> "100", "message" ->"添加成功"))
         }else{
@@ -279,7 +289,7 @@ object  Diagrams extends Controller {
 
   /* 根据词频，抽取文章中的标签 */
   def extractTags(title:String,content:String):List[String] = {
-    val kwc:KeyWordComputer = new KeyWordComputer(10)
+    val kwc:KeyWordComputer = new KeyWordComputer(5)
      kwc.computeArticleTfidf(title, content).toList.map( x =>x.getName )
   }
 }

@@ -46,6 +46,12 @@ object LabelDao {
     }
     labelsAutoInc.insert(name,level,intro,checkState)
   }
+  def addLabel(name:String,checkState:Int) = database.withDynSession {
+    val labelsAutoInc = labels.map( t => (t.name,t.checkState)) returning labels.map(_.id) into {
+      case (_, id) => id
+    }
+    labelsAutoInc.insert(name,checkState)
+  }
 
   def modifyLabelCheckState(id:Long,checkState:Int) = database.withDynSession {
     ( for( t <- labels if t.id === id )yield t.checkState ).update(checkState)
@@ -80,6 +86,12 @@ object LabelDao {
   def addLabelDiagram(labelId:Long,diagramId:Long) = database.withDynSession{
     (for( t<- labelDiagrams ) yield (t.labelId,t.diagramId)).insert(labelId,diagramId)
   }
+
+  def findLabelDiagram(labelId:Long,diagramId:Long):Option[LabelDiagram] = database.withDynSession{
+    (for(c<- labelDiagrams if c.labelId === labelId  if c.diagramId === diagramId) yield c ).firstOption
+  }
+
+
   def deleteLabelDiagram(labelId:Long,diagramId:Long) = database.withDynSession{
     ( for( t<- labelDiagrams if t.labelId === labelId if t.diagramId === diagramId) yield t ).delete
   }

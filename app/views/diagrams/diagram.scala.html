@@ -26,20 +26,11 @@
                 </ul>
             </div>
             <h1 class="title"> @diagramComponent.diagram.title</h1>
-            @if(diagramComponent.diagram.typeId ==0){
+
             <div class="desc">
-                <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
                 @Html(diagramComponent.diagram.content.getOrElse(""))
-                <div class="ps">@diagramComponent.diagram.ps.getOrElse("")</div>
             </div>
-            }else{
-              <div class="desc">
-                  <div class="pic">
-                    <img src="@diagramComponent.diagram.pic" alt="@diagramComponent.diagram.title">
-                  </div>
-                  <div class="intro">@diagramComponent.diagram.intro.getOrElse("")</div>
-              </div>
-            }
+
 
 
                 <div class="discuss-textarea clearfix">
@@ -54,9 +45,96 @@
                         <div class="textarea clearfix">
                             <textarea name="discussContent" id="J_discussContent" placeholder="请保持评论内容和谐"></textarea>
                             <input type="submit"class="bbl-btn" id="J_discussSubmit" value="提交">
+                            <div id="J_FaceBtn">
+                                <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
+                            </div>
                         </div>
                     </form>
                 </div>
+            <div class="discusses" id="J_discusses2">
+                <div class="pagination clearfix">
+
+                    <div class="pagin inlineblock fl mt10">
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="items clearfix" id="J_items">
+
+                    <div class="item clearfix">
+                        <div class="item-left">
+                            <a href="/user/1" target="_blank"><img src="/images/user/default.jpg"></a>
+                        </div>
+                        <div class="item-right">
+                            <div class="c-head">
+                                <a href="/user/1" target="_blank">hiwowo</a>
+                                <span class="fr">3 L</span>
+                            </div>
+                            <div class="c-body">  [神马][给力]  </div>
+                            <div class="c-meta">
+                                <span class="main-access fr"> <a class="gray-text">2014-04-27 11:06:39.0</a>
+                                <!--  <a href="javascript:void(0)"  class="report" data-id="3">举报</a>-->
+                                    <a href="javascript:void(0);" rel="upDiscuss" class="c-up" data-val="1" data-id="3">(1)</a>
+                                    <a href="javascript:void(0);" rel="downDiscuss" class="c-down" data-val="0" data-id="3">(0)</a>
+                                   <!-- <a  href="javascript:void(0);" class="reply ">回复</a>-->
+                                </span>
+                            </div>
+                            <div class="c-form"></div>
+                        </div>
+                    </div>
+
+                    <div class="item clearfix">
+                        <div class="item-left">
+                            <a href="/user/1" target="_blank"><img src="/images/user/default.jpg"></a>
+                        </div>
+                        <div class="item-right">
+                            <div class="c-head">
+                                <a href="/user/1" target="_blank">hiwowo</a>
+                                <span class="fr">2 L</span>
+                            </div>
+                            <div class="c-body">  地对地导弹  </div>
+                            <div class="c-meta">
+                                <span class="main-access fr"> <a class="gray-text">2014-04-27 11:03:39.0</a>
+                                <!--  <a href="javascript:void(0)"  class="report" data-id="2">举报</a>-->
+                                    <a href="javascript:void(0);" rel="upDiscuss" class="c-up" data-val="0" data-id="2">(0)</a>
+                                    <a href="javascript:void(0);" rel="downDiscuss" class="c-down" data-val="0" data-id="2">(0)</a>
+                                   <!-- <a  href="javascript:void(0);" class="reply ">回复</a>-->
+                                </span>
+                            </div>
+                            <div class="c-form"></div>
+                        </div>
+                    </div>
+
+                    <div class="item clearfix">
+                        <div class="item-left">
+                            <a href="/user/1" target="_blank"><img src="/images/user/default.jpg"></a>
+                        </div>
+                        <div class="item-right">
+                            <div class="c-head">
+                                <a href="/user/1" target="_blank">hiwowo</a>
+                                <span class="fr">1 L</span>
+                            </div>
+                            <div class="c-body">  生生死死  </div>
+                            <div class="c-meta">
+                                <span class="main-access fr"> <a class="gray-text">2014-04-27 11:03:37.0</a>
+                                <!--  <a href="javascript:void(0)"  class="report" data-id="1">举报</a>-->
+                                    <a href="javascript:void(0);" rel="upDiscuss" class="c-up" data-val="0" data-id="1">(0)</a>
+                                    <a href="javascript:void(0);" rel="downDiscuss" class="c-down" data-val="0" data-id="1">(0)</a>
+                                   <!-- <a  href="javascript:void(0);" class="reply ">回复</a>-->
+                                </span>
+                            </div>
+                            <div class="c-form"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clear"></div>
+                <div class="pagination clearfix">
+
+                    <div class="pagin inlineblock fl mt10">
+
+                    </div>
+                </div></div>
             <div class="discusses" id="J_discusses">
 
              </div>
@@ -130,6 +208,7 @@
                             <div class="textarea clearfix">
                                 <textarea name="discussContent" id="J_sideDiscussContent" placeholder="请保持评论内容和谐"></textarea>
                                 <input type="submit"class="bbl-btn" id="J_sideDiscussSubmit" value="提交">
+                                <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
                             </div>
                         </form>
                     </div>
@@ -143,6 +222,8 @@
 }{
 <script type="text/javascript">
 
-    seajs.use(["hiwowo/diagram/diagram.js","hiwowo/diagram/diagram.favor.js","hiwowo/user/user.collect.js"])
+    seajs.use(["jquery","hiwowo/diagram/diagram.js","hiwowo/diagram/diagram.favor.js","hiwowo/user/user.collect.js"],function($){
+
+    })
 </script>
 }

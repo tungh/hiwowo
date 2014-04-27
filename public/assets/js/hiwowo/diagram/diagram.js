@@ -7,6 +7,7 @@
  */
  define(function(require){
      var $ = jQuery = require("jquery")
+     require("hiwowo/editor/hiwowo.simpleEditor")
      var DiagramReply = {
          //评论与回复提交前校验
          submit : function($this){
@@ -261,6 +262,13 @@
             data:{diagramId:parseInt($("#J_diagramId").val())},
             success: function(data){
                 $("#J_discusses").html(data);
+                $(".item .c-body").each(function(){
+                    var $this = $(this);
+                    var html = $this.html();
+                    $this.data("content",html)
+                    html = $.hiwowo.simpleEditor.decodeFace(html);
+                    $this.html(html);
+                })
             }
         });
 
@@ -294,6 +302,8 @@
                       $("#J_discusses").html(data);
                   }})
           })
+
+
     })
 
  })

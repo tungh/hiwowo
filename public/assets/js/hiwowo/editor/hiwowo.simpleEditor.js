@@ -4,7 +4,7 @@
  *
  */
  define(function(require, exports) {
- 	var $  = require("$");
+ 	var $  = require("jquery");
  
 //(function($){
 	//表情配对表
@@ -142,7 +142,7 @@
 		var caretPosition = 0;
 		if (document.selection) {
 			selection = document.selection.createRange().text;
-			if ($.browser.msie) { // ie
+            if (/msie/.test(navigator.userAgent.toLowerCase())) { // ie
 				var range = document.selection.createRange(), rangeCopy = range.duplicate();
 				rangeCopy.moveToElementText(textarea);
 				caretPosition = -1;
@@ -182,41 +182,31 @@
 		}
 	})
 	var data = null;
-	var decodeFace = function(html){
-		//插入表情数组
-		var length = FACEJSON.length;
-		if(!data){
-			data = {};
-			for(var i = 0;i < length;i++){
-				data[FACEJSON[i].key] = '<img src="/assets/img/emotion/'+FACEJSON[i].val+'" unselectable="on" title="'+FACEJSON[i].key+'" alt="'+FACEJSON[i].key+'">';
-			}
-		}
-		html = html.replace(/\[[^\[\]]+\]/gi,function(tag){
-			if(data[tag]){
-				return data[tag];
-			}else{
-				return tag;
-			}
-		})
-		return html;
-	}
-	$("#J_forumPost .J_PostCon").each(function(){
-		var $this = $(this);
-		var html = $this.html();
-		$this.data("content",html)
-		html = decodeFace(html);
-		$this.html(html);
-	})
-	$("#J_forumPost .post-quoteContent").each(function(){
-		var $this = $(this);
-		var html = $this.html();
-		html = decodeFace(html);
-		$this.html(html);
-	})
+
+
 	var SimpleEditor = {
 		richText2text:function(val){
 			return val.replace(/\<[^\>]+\>/g,"");
-		}
+		},
+        decodeFace:function(html){
+        //插入表情数组
+        var length = FACEJSON.length;
+        if(!data){
+            data = {};
+            for(var i = 0;i < length;i++){
+                data[FACEJSON[i].key] = '<img src="/assets/images/emotion/'+FACEJSON[i].val+'" unselectable="on" title="'+FACEJSON[i].key+'" alt="'+FACEJSON[i].key+'">';
+            }
+        }
+        html = html.replace(/\[[^\[\]]+\]/gi,function(tag){
+            if(data[tag]){
+                return data[tag];
+            }else{
+                return tag;
+            }
+        })
+        return html;
+    }
+
 	};
 	$.hiwowo.simpleEditor = SimpleEditor;
 
