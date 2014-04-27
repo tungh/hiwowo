@@ -14,7 +14,7 @@ define(function(require){
         saveDraft:function($this){
 
         },
-        editSubmit:function($this){
+        createSubmit:function($this){
             if(!isCommited){
             isCommited = true;
             var diagram={
@@ -248,7 +248,48 @@ define(function(require){
             });
 
         },
-        deleteTag:function(){},
+         editSubmit:function($this){
+             if(!isCommited){
+                 isCommited = true;
+                 var diagram={
+                     id:$("#J_id").val(),
+                     typeId:$("#J_typeId").val(),
+                     title:'',
+                     content:'',
+                     status:$("#J_status").val()
+                 }
+                 var frameBody = $("#J_GuangEditorIframe").contents().find("body")
+                 if($.trim(frameBody.html())!="偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^"){
+                     $("#J_editorContent").val(frameBody.html())
+                     diagram.content=frameBody.html()
+                 }
+
+                  $("#J_typeId").val(parseInt($(".editor-select").find(".selected").data("typeid")))
+                 diagram.title=$("#J_title").val()
+                 if(diagram.title == ""){
+                     isCommited=false;
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"标题不能为空哦！");
+                 }else if($.trim(diagram.content) == ""){
+                     isCommited=false;
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"内容不能为空哦！");
+                 }else if(diagram.content.indexOf("img-upload")<0){
+                     isCommited=false;
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"至少需要上传一张图片哦");
+                 }else if($.hiwowo.util.getStrLength(diagram.title) > 50 || $.hiwowo.util.getStrLength(diagram.content) >= 10000){
+                     isCommited=false;
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
+                 }else{
+                     $("#J_editForm").submit();
+                 }
+             } else{
+                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                 $.hiwowo.tip.show($this,"正在提交，请耐心等待 ^_^");
+             }
+         },
         init:function(){
             /* 触发焦点 判断 是否登录 */
             $("#J_title").focus(function(){
@@ -318,13 +359,17 @@ define(function(require){
 
             })
             /* 提交 */
-            $("#J_submit").click(function(event){
+            $("#J_createSubmit").click(function(event){
                 event.preventDefault();
                 if($.hiwowo.loginDialog.isLogin()){
-
-                        $.hiwowo.diagramEditor.editSubmit($(this));
-
-
+                  $.hiwowo.diagramEditor.createSubmit($(this));
+                }
+            })
+            /* 提交 */
+            $("#J_editSubmit").click(function(event){
+                event.preventDefault();
+                if($.hiwowo.loginDialog.isLogin()){
+                    $.hiwowo.diagramEditor.editSubmit($(this));
                 }
             })
         }

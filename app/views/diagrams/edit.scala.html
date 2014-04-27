@@ -8,9 +8,8 @@
             <div class="editor-box" >
                 <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_editForm">
                 <input type="hidden" name="id"   value='@form("id").value' />
-                <input type="hidden" name="content" id="J_content" value='@form("content").value'>
                 <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
-                    <input type="hidden" name="typeId" id="J_status" value='@form("status").value'>
+                <input type="hidden" name="status" id="J_status" value='@form("status").value'>
                 <div class="editor-title">
                     <label for="J_title">标题</label>
                     <input type="text" name="title" class="input" id="J_title" value='@form("title").value'  maxlength='45' />
@@ -27,14 +26,14 @@
                 </div>
 
                 <div class="editor-area">
-                    <textarea id="J_editorContent"   class="b-textarea"> @form("content").value </textarea>
+                    <textarea id="J_editorContent" name="content"   class="b-textarea"> @form("content").value </textarea>
                 </div>
                 <div class="clear"></div>
 
 
                 <p class="func_buttons clearfix" >
                     <input type="button" class="fl func_button" id="J_saveDraft" value="保存草稿">
-                    <input type="button" class="fr func_button func_publish" id="J_submit" value="发表" >
+                    <input type="button" class="fr func_button func_publish" id="J_editSubmit" value="发表" >
 
                 </p>
 

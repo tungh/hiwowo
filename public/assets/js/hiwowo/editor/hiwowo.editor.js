@@ -611,7 +611,7 @@ define(function (require, exports) {
                 }
             }) ;
             html += "</div>"  ;
-            html += "<div class='iframeWrap'><iframe frameborder='0' id='J_GuangEditorIframe'></iframe></div>"  ;
+            html += "<div class='iframeWrap'><iframe frameborder='0' id='J_GuangEditorIframe' style='height:280px'></iframe></div>"  ;
             html += "</div></div>" ;
             $("#" + self.config.textareaID).after(html).hide();
             this.iframe = $("#J_GuangEditorIframe")[0];
