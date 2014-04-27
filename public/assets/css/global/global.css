@@ -154,48 +154,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     float: right;
     background: #fff;
 }
-@media only screen and (max-width: 989px) {
-    .container {
-        width: 680px;
-    }
-    .container .main{
-        width: 680px;
-    }
-    .container .forum-main {
-        width: 680px;
-    }
-   .container .side{
-       display: none !important;
-   }
 
-}
-
-
-
-/* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-    .container {
-        width:420px;
-    }
-    .container .main{
-        width: 420px;
-    }
-    .container .forum-main {
-        width: 420px;
-    }
-    .container .main .coll,.container .main .colr{
-        float: none;
-        width: 50%;
-       padding-right: 0;
-       padding-left:0;
-    }
-    .container .side{
-        display: none !important;
-    }
-    #footer{
-        display: none !important;
-    }
-}
 
 /*
  *  navbar 组件 用户页面的头部和底部
