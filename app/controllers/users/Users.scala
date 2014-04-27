@@ -18,6 +18,12 @@ import models.diagram.dao.DiagramSQLDao
  * description:用户页面显示，采用类似于权限控制的规则，对外显示的页面和用户能够看到的页面一致，只是在局部上 某些功能有额外的处理
  */
 
+case class UserComponent(
+                         user:User,
+                         profile:UserProfile,
+                         stat:UserStatic
+                          )
+
 object Users extends Controller {
 
 

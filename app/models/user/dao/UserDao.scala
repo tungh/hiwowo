@@ -58,17 +58,6 @@ object UserDao {
     user
   }
 
-  def findUserWithStatic(uid: Long): (User, UserStatic) = database.withDynSession {
-    val query = for {
-      c <- users
-      s <- userStatics
-      if c.id === s.uid
-      if c.id === uid
-    } yield (c, s)
- //   println(query.selectStatement)
-    query.first
-  }
-
 
   /* count user */
   def countUser = database.withDynSession {
@@ -185,7 +174,27 @@ object UserDao {
       for (c <- userProfiles if c.uid === uid) yield c
     }.first
   }
+  def findUserWithStatic(uid: Long): (User,UserStatic) = database.withDynSession {
+    val query = for {
+      c <- users
+      s <- userStatics
+      if c.id === s.uid
+      if c.id === uid
+    } yield (c,s)
+    //   println(query.selectStatement)
+    query.first
+  }
 
+  def findUser(uid:Long):(User,UserProfile,UserStatic) =  database.withDynSession {
+    ( for {
+        u <- users
+        p <- userProfiles
+        s <- userStatics
+      if u.id === p.uid
+      if u.id === s.uid
+      if u.id === uid
+    }yield(u,p,s) ).first
+  }
   /*用户筛选*/
   def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], creditsOrder: String, addTimeOrder: String, currentPage: Int, pageSize: Int) = database.withDynSession {
     var query = for (u <- users) yield u

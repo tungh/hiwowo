@@ -7,7 +7,7 @@ import java.sql.Timestamp
  * User: zuosanshao
  * Date: 14-2-12
  * Time: 下午8:16
- * typeId 0 site  1 blog 2 pic 3 video 4 shop 5 topic
+ * typeId 0 diagram  1 topic
  */
 case class UserLove (
                           id: Option[Long],
