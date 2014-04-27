@@ -290,8 +290,7 @@ define(function(require){
                  $.hiwowo.tip.show($this,"正在提交，请耐心等待 ^_^");
              }
          },
-        init:function(){
-            /* 触发焦点 判断 是否登录 */
+        init:function(){/* 触发焦点 判断 是否登录 */
             $("#J_title").focus(function(){
                 $.hiwowo.loginDialog.isLogin();
             });
@@ -321,7 +320,7 @@ define(function(require){
                 }
             })
             /* editor 内容输入 */
-        //    if($.hiwowo.editor){
+            //    if($.hiwowo.editor){
             var frameBody = $("#J_GuangEditorIframe").contents().find("body")
             frameBody.focus(function(){
                 if($.trim(frameBody.html())=="偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^"){
@@ -334,7 +333,7 @@ define(function(require){
 
                 }
             })
-          //  }
+            //  }
             //点击主要板块
             $('.main-select a').click(function() {
                 $('.main-select a, .other-list a').removeClass('selected');
@@ -354,6 +353,7 @@ define(function(require){
                 $('#J_otherList').slideUp('slow');
                 $(this).addClass('selected');
             })
+
             /* 保存草稿 */
             $("#J_saveDraft").click(function(){
 

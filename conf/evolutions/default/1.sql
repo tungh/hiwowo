@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `label`(
   `level`                     tinyint not null default '1',
   `intro`                     text,
   `is_hot`                 tinyint not null default '0',
-  `spell`                       varchar(32) ,
+  `spell`                       varchar(32) default '' ,
   `check_state`                 tinyint not null default '0',
   `add_num`                int not null default '0',
   `subscribe_num`                int not null default '0',

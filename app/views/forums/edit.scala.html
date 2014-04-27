@@ -3,15 +3,21 @@
 user,
 nav="forum",
 title = "发布话题_讨论吧"
-)(css="/assets/css/template/forum.css") {
+)(css="/assets/css/template/editor.css") {
 <div class="container">
 
     <div class="row">
         <div class="main">
             <div class="editor-box" >
                 <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_editForm">
-                    <input type="hidden" name="id" id="J_id"  value=' @form("id").value' />
-                    <input type="hidden" name="typeId" id="J_typeId" value=' @form("typeId").value'>
+                    <input type="hidden" name="id" id="J_id"  value='@form("id").value' />
+                    <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
+                    @if(form.hasErrors) {
+                    <div class="alert-message error">
+                        <p><strong>Oops</strong> Please fix all errors</p>
+                    </div>
+                    }
+
                     @form.globalError.map { error =>
                     <div class="error-row" style="display:block">
                         <p class="error"> @error.message</p>
@@ -40,9 +46,9 @@ title = "发布话题_讨论吧"
 
 
                     <p class="func_buttons clearfix" >
-                        <a href="javascript:void(0)" class="fl func_button" id="J_saveDraft" onclick="window.history.back(-1)">取消并返回</a>
+                        <input type="button" class="fl func_button"  onclick="window.history.back(-1)" value="取消并返回">
 
-                        <a href="javascript:void(0)" class="fr func_button func_publish" id="J_submit" >发表</a>
+                        <input type="button"  class="fr func_button func_publish" id="J_submit" value="发表" >
 
                     </p>
 
@@ -74,7 +80,7 @@ title = "发布话题_讨论吧"
 
 
 <script type="text/javascript">
-    seajs.use(['jquery','hiwowo/diagram/forumEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
+    seajs.use(['jquery','hiwowo/forum/forum.js','hiwowo/editor/hiwowo.editor'],function($,editor){
         if(HIWOWO.userId == ""){
             $.hiwowo.loginDialog.isLogin();
         }
