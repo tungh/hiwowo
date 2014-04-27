@@ -79,46 +79,12 @@
 .forum .forum-main .topic-reply  blockquote {background-color: #f2f2f2;line-height: 24px; padding: 8px 10px;position: relative;}
 .forum .forum-main .topic-reply  blockquote .close {position: absolute; right: 15px;top: 10px;color:#666;}
 .forum .forum-main .topic-box{padding:15px;background:#fff;margin-top:30px;}
-.forum .forum-main .guang-editor-wrap { width:670px;}
-.topic-preview{margin-top:5px;}
-.topic-preview a.pic-list{display: block;float:left;overflow:hidden;zoom:1;}
-.topic-preview img {max-width:200px;max-height:100px;_width:200px;_height:100px;cursor:pointer; }
-.topic-preview .d-goods{padding:5px;background:#f2f2f2;float:left;margin-right:10px;_display:inline;}
-.topic-preview .d-out{float:left;margin-right:10px;_display:inline;position: relative;}
-.topic-preview .video-play { display:inline-block;width:76px;height:27px;background:url(images/video-play.png) 0 0 no-repeat;position:absolute;top:15px;left:30px; }
-.topic-preview .video-play:hover { background-position:0 -33px; }
-.topic-image, .topic-video { padding:14px;background:url(images/bg-photo.gif);border:1px solid #F3F3F3; }
-.media-box img { cursor:url(images/small.cur),pointer; }
-.media-box .media-oper { line-height:18px;margin-bottom:5px; }
-.media-oper .retract, .media-oper .show-big { padding:0 0 0 12px;background:url(images/icon-forum.png) 0 -120px no-repeat; }
-.media-oper .show-big { background-position:0 -135px; }
-.topic-image img { max-width:520px;_width:520px; }
-.flower-box{padding:15px 10px;border:1px solid #cdcdcd;background:#fff;z-index:1000;position:absolute;display:none;border-radius: 3px 3px 3px 3px;}
-.flower-box ul{width:350px;}
-.flower-box ul li{float:left;width:30px;height:30px;overflow:hidden;margin:5px 5px 0 0;}
-.flower-box ul li a{display:block;width:30px;height:30px;line-height:30px;color:#666;}
-.flower-box ul li a.more{background:#f2f2f2;text-align:center;font-size:16px;font-weight:bold;}
-.forum-admin-oper{background:#e4e4e4;padding:10px 15px;}
-.forum-admin-oper a{color:#333;}
-.forum-admin-oper span{color:#999;margin:0 15px;}
-#J_SendFlowerDialog{width:300px;}
-#J_SendFlowerDialog .dialog-content{height:180px;}
-#J_ConfirmSend{display:block;width:80px;height:30px;line-height:30px;text-align:center;background:#55aadd;color:#fff;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-#J_CanCelSend{display:block;width:80px;height:30px;line-height:30px;text-align:center;background:#f4f4f4;color:#666;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-#J_ShareBox{background:#fff;border-radius:3px 3px 3px 3px;position:absolute;display:none;padding:15px 10px;border:1px solid #cdcdcd;}
-#J_ShareBox li{float:left;width:16px;height:16px;margin-right:5px;}
-#J_ShareBox li a{display:block;width:16px;height:16px;}
-#J_ShareBox .ico{background-image:url("images/icons-share.png");background-repeat:no-repeat;display:block;height:16px;line-height:16px;}
-#J_ShareBox .i-sina{background-position:0 -417px;}
-#J_ShareBox .i-renren{background-position:0 -80px;}
-#J_ShareBox .i-tencent{background-position:0 -280px;}
-#J_ShareBox .i-qzone{background-position:0 -371px;}
-#J_ShareBox .i-163{background-position:0 -463px;}
-#J_ShareBox .i-douban{background-position:0 -120px;}
-#J_ShareBox .i-qq{background-position:0 0;}
-.guang-editor .baobeiWrap{left: -37px;}
-.guang-editor .imgWrap{left:-40px;}
-.guang-editor .videoWrap{left:-40px;}
+#J_discussContent{
+    width: 580px;
+    height: 50px;
+}
+
+
 #J_topicArtical p{line-height:2}
 #J_topicArtical img{max-width:560px;max-height:560px;}
 .J_topicCon img{max-width:560px;max-height:560px;}

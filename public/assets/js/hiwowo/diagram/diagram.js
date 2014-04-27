@@ -7,7 +7,7 @@
  */
  define(function(require){
      var $ = jQuery = require("jquery")
-     require("hiwowo/editor/hiwowo.simpleEditor")
+     require("simpleEditor")
      var DiagramReply = {
          //评论与回复提交前校验
          submit : function($this){
@@ -171,6 +171,17 @@
                  }
              }
          },
+         formatDiscuss:function(data){
+             $("#J_discusses").html(data);
+             $(".item .c-body").each(function(){
+                 var $this = $(this);
+                 var html = $this.html();
+                 $this.data("content",html)
+                 html = $.hiwowo.simpleEditor.decodeFace(html);
+                 $this.html(html);
+             })
+
+         },
          init:function(){
              var $discussForm = $("#J_discussForm");
              $discussForm.find("textarea").focus(function(){
@@ -202,14 +213,7 @@
             dataType:"html",
             data:{diagramId:parseInt($("#J_diagramId").val())},
             success: function(data){
-                $("#J_discusses").html(data);
-                $(".item .c-body").each(function(){
-                    var $this = $(this);
-                    var html = $this.html();
-                    $this.data("content",html)
-                    html = $.hiwowo.simpleEditor.decodeFace(html);
-                    $this.html(html);
-                })
+                diagramDiscuss.formatDiscuss(data)
             }
         });
 
@@ -225,7 +229,7 @@
                 },
                 dataType:"html",
                 success:function (data) {
-                    $("#J_discusses").html(data);
+                    diagramDiscuss.formatDiscuss(data)
                 }})
         })
         /* 排序查看 */
@@ -240,7 +244,7 @@
                   },
                   dataType:"html",
                   success:function (data) {
-                      $("#J_discusses").html(data);
+                      diagramDiscuss.formatDiscuss(data)
                   }})
           })
 

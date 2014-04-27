@@ -21,6 +21,7 @@ seajs.config({
         'uploadify':'sea-modules/jquery.uploadify.js',
         'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
+        'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
          'hiwowo':'hiwowo/hiwowo'
     },
 
