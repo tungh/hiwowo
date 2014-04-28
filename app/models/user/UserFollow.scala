@@ -21,16 +21,16 @@ import models.Page._
 case class UserFollow(
                        id: Option[Long],
                        uid: Long,
-                       fansId: Long,
+                       followId: Long,
                        addTime: Option[Timestamp]
                        )
 class UserFollows(tag:Tag) extends Table[UserFollow](tag,"user_follow") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def fansId = column[Long]("fans_id")
+  def followId = column[Long]("follow_id")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,fansId,addTime.?)<> (UserFollow.tupled, UserFollow.unapply )
+  def * =(id.?,uid,followId,addTime.?)<> (UserFollow.tupled, UserFollow.unapply )
 
 }
 

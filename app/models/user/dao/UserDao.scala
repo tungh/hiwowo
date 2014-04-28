@@ -25,7 +25,8 @@ object UserDao {
   val userProfiles = TableQuery[UserProfiles]
   val userCollects = TableQuery[UserCollects]
   val userLoves = TableQuery[UserLoves]
-  val userFollows = TableQuery[UserLoves]
+  val userFollows = TableQuery[UserFollows]
+  val userSubscribes = TableQuery[UserSubscribes]
   val userRecords = TableQuery[UserRecords]
 
   /* 验证 */
@@ -226,12 +227,48 @@ object UserDao {
     userCollectAutoInc.insert(uid,typeId,collectId)
   }
 
-  def findUserCollect(id:Long):Option[UserCollect] = database.withDynSession{
-    ( for( c<-userCollects if c.id === id) yield c ).firstOption
+  def findUserCollect(uid:Long,typeId:Int,collectId:Long):Option[UserCollect] = database.withDynSession{
+    ( for( c<-userCollects if c.uid === uid  if c.typeId === typeId if c.collectId === collectId ) yield c ).firstOption
   }
 
   def deleteUserCollect(id:Long) = database.withDynSession{
     (for( c<- userCollects if c.id === id)yield c ).delete
+  }
+
+  def deleteUserCollect(uid:Long,typeId:Int,collectId:Long) = database.withDynSession{
+    (for( c<- userCollects if c.uid === uid if c.typeId === typeId if c.collectId === collectId )yield c ).delete
+  }
+
+  /* user subscribe 用户订阅 */
+  def addUserSubscribe(uid:Long,labelId:Long) = database.withDynSession{
+    val userSubscribeAutoInc = userSubscribes.map(c => (c.uid, c.labelId)) returning userCollects.map(_.id) into {
+      case (_, id) => id
+    }
+    userSubscribeAutoInc.insert(uid,labelId)
+  }
+
+  def findUserSubscribe(uid:Long,labelId:Long):Option[UserSubscribe] = database.withDynSession{
+    ( for(c <- userSubscribes if c.uid === uid if c.labelId === labelId )yield c ).firstOption
+  }
+
+  def deleteUserSubscribe(uid:Long,labelId:Long) = database.withDynSession{
+    ( for(c <- userSubscribes if c.uid === uid if c.labelId === labelId )yield c ).delete
+  }
+
+  /* user subscribe 用户关注 */
+  def addUserFollow(uid:Long,followId:Long) = database.withDynSession{
+    val userFollowAutoInc = userFollows.map(c => (c.uid, c.followId)) returning userFollows.map(_.id) into {
+      case (_, id) => id
+    }
+    userFollowAutoInc.insert(uid,followId)
+  }
+
+  def findUserFollow(uid:Long,followId:Long):Option[UserFollow] = database.withDynSession{
+    ( for(c <- userFollows if c.uid === uid if c.followId === followId )yield c ).firstOption
+  }
+
+  def deleteUserFollow(uid:Long,followId:Long) = database.withDynSession{
+    ( for(c <- userFollows if c.uid === uid if c.followId === followId )yield c ).delete
   }
 
 }

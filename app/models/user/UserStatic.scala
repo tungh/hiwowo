@@ -22,6 +22,7 @@ case class UserStatic(
                       fansNum: Int,
                       followNum: Int,
                       collectNum: Int,
+                      subscribeNum:Int,
                       postDiagramNum: Int,
                       postTopicNum: Int
                       )
@@ -31,11 +32,12 @@ class UserStatics(tag:Tag) extends Table[UserStatic](tag,"user_static") {
   def fansNum = column[Int]("fans_num")
   def followNum = column[Int]("follow_num")
   def collectNum = column[Int]("collect_num")
+  def subscribeNum = column[Int]("subscribe_num")
   def postDiagramNum = column[Int]("post_diagram_num")
   def postTopicNum = column[Int]("post_topic_num")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * =(id.?, uid, fansNum, followNum , collectNum, postDiagramNum, postTopicNum)  <>(UserStatic.tupled, UserStatic.unapply)
+  def * =(id.?, uid, fansNum, followNum , collectNum,subscribeNum, postDiagramNum, postTopicNum)  <>(UserStatic.tupled, UserStatic.unapply)
   
 }
 

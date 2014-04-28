@@ -32,6 +32,11 @@ object UserSQLDao {
   def updateCollectNum(uid:Long,num:Int)=database.withDynSession {
     sqlu"update user_static set collect_num =collect_num+$num where id =$uid".first
   }
+
+  def updateSubscribeNum(uid:Long,num:Int)=database.withDynSession {
+    sqlu"update user_static set subscribe_num = subscribe_num+$num where id =$uid".first
+  }
+
   def updatePostDiagramNum(uid:Long,num:Int)=database.withDynSession {
     sqlu"update user_static set post_diagram_num =post_diagram_num+$num where id =$uid".first
   }

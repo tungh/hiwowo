@@ -62,7 +62,12 @@ GET   /user/account/myAward           controllers.users.UsersAccount.myAward
 GET   /user/account/vip               controllers.users.UsersAccount.vip
 
 # user 操作
-POST /user/collect                 controllers.users.Users.saveCollect
+POST    /user/addCollect                 controllers.users.Users.addCollect
+POST    /user/removeCollect              controllers.users.Users.removeCollect
+POST    /user/addSubscribe               controllers.users.Users.addSubscribe
+POST    /user/removeSubscribe            controllers.users.Users.removeSubscribe
+POST    /user/addFollow                  controllers.users.Users.addFollow
+POST    /user/removeFollow               controllers.users.Users.removeFollow
 
 
 #user 用户登录注册

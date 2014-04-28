@@ -109,6 +109,7 @@ CREATE TABLE `user_static` (
   `fans_num`                  smallint(11) DEFAULT '0',
   `follow_num`                smallint(11) DEFAULT '0',
   `collect_num`            smallint(11) DEFAULT '0',
+  `subscribe_num`            smallint(11) DEFAULT '0',
   `post_diagram_num`            smallint(11) DEFAULT '0',
   `post_topic_num`           smallint(11) DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -128,7 +129,7 @@ DROP TABLE IF EXISTS `user_follow`;
 CREATE TABLE `user_follow` (
   `id`                int(10) NOT NULL AUTO_INCREMENT,
   `uid`               int(10) NOT NULL DEFAULT '0',
-  `fans_id`           int(10) NOT NULL DEFAULT '0',
+  `follow_id`           int(10) NOT NULL DEFAULT '0',
   `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
