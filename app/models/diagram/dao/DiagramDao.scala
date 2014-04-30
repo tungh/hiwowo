@@ -138,14 +138,20 @@ object DiagramDao {
         if c.id === id } yield (c,u)
       ).firstOption
   }
+  def findUserDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = database.withDynSession{
+    val totalRows = Query(diagrams.filter(_.uid === uid).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+  val list =  (for{
+      c <- diagrams
+      if c.uid === uid
+    } yield c).drop(startRow).take(pageSize).list()
+    Page[Diagram](list,currentPage,totalPages)
+  }
     def findDiagrams(sortBy:String,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
     val totalRows = Query(diagrams.filter(_.status ===status).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
-    val startRow = if (currentPage < 1 || currentPage > totalPages) {
-      0
-    } else {
-      (currentPage - 1) * pageSize
-    }
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
       var query = for{
         c<-diagrams
         u<-users
