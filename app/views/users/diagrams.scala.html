@@ -1,27 +1,25 @@
-@(user:Option[models.user.User],author:models.user.User)
-@views.html.template(user,Some(author),nav=if(!user.isEmpty && user.get.id.get == author.id.get){"my"}else{"userHome"},subNav="diagram")(css="/assets/css/template/userHome.css"){
+@(user:Option[models.user.User],userComponent:controllers.users.UserComponent)
+@views.html.template(user,userComponent.user.id,nav=if(!user.isEmpty && user.get.id.get == userComponent.user.id.get){"my"}else{"ta"},subNav="diagram")(css="/assets/css/template/userHome.css"){
 
 <div class="container my">
 
     <div class="my-header">
         <div class="userLeft">
             <ul>
-                <li >粉丝<a href="@controllers.users.routes.Users.fans(author.id.get)">0</a></li>
+                <li >关注/粉丝<a href="@controllers.users.routes.Users.follow(userComponent.user.id.get)">@(userComponent.stat.fansNum + userComponent.stat.followNum) </a></li>
                 <li >|</li>
-                <li >订阅<a href="@controllers.users.routes.Users.subscribes(author.id.get)">6</a></li>
+                <li >订阅<a href="@controllers.users.routes.Users.subscribes(userComponent.user.id.get)">@userComponent.stat.subscribeNum</a></li>
                 <li >|</li>
-                <li >收藏<a href="@controllers.users.routes.Users.collects(author.id.get)">4</a>
-                </li>
+                <li >收藏<a href="@controllers.users.routes.Users.collects(userComponent.user.id.get)">@userComponent.stat.collectNum</a> </li>
                 <li >|</li>
-                <li >神兽<a href="@controllers.users.routes.Users.diagrams(author.id.get)">0</a>
-                </li>
+                <li >神兽<a href="@controllers.users.routes.Users.diagrams(userComponent.user.id.get)">@userComponent.stat.postDiagramNum</a> </li>
             </ul>
         </div>
         <div class="userRight">
             <div class="usericon">
                 <ul>
-                    <li ><img  src="@author.pic" alt="@author.name"></li>
-                    <li ><a title="正牌七公" href="@controllers.users.routes.Users.home(author.id.get)">@author.name</a></li>
+                    <li ><img  src="@userComponent.user.pic" alt="@userComponent.user.name"></li>
+                    <li ><a title="正牌七公" href="@controllers.users.routes.Users.home(userComponent.user.id.get)">@userComponent.user.name</a></li>
                     <li class="sns" ><a href="javascript:void(0);" class="follow" style="">关注</a>
                         <a href="javascript:void(0);" class="unfollow" style="display:none;">已关注</a>
                         <a href="javascript:void(0);" class="mail" style="">私信</a>
@@ -34,7 +32,126 @@
    <!-- blog -->
     <div class="my-body">
         <div class="main">
-            todo
+            <div class="box">
+                <div class="bd">
+                    <a class="cont">
+                        <div class="pic">
+                            <img src="http://eachcloudcn.blob.core.chinacloudapi.cn/titlepic/Y1U3R.jpg" class="js_ieonLoad">
+                        </div>
+                        <h3><span>对象，什么叫做合适？</span></h3>
+                        <p class="intro">
+                            心理学家认为，判断男女两个人是否适合,应考虑以下10个因素。 &nbsp;&nbsp;&nbsp; 第一、彼此都是对方的好朋友，不带任何条件，喜欢与对方在一起。&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;第二、彼此很容易沟通、互相可以很敞开地坦白任何事情，而不
+                        </p>
+                    </a>
+
+                    <div class="info">
+                        <ul>
+                            <li class="on"><a href="/home/3fc064dac3b54df48a7934df4e7a0ac8.clip" class="js_touser">
+                                <img alt="" src="http://eachcloudcn.blob.core.chinacloudapi.cn/userimg/3fc064dac3b54df48a7934df4e7a0ac8.png"></a>
+                            </li>
+                            <li>
+                                宝贝m从<a href="/board/2a90bde88a9b4368a9a42688efea54c5.clip">《只想爱你》</a>
+                                收集到<a href="/board/3acdc0c0ee034ff58da1a192b4632164.clip">《谈 恋爱》</a>
+                            </li>
+                        </ul>
+                        <div class="num" id="J_num">
+                            <a href="javascript:void(0)" class="pvCount js_pvCount">1416</a>
+                            <a  href="javascript:void(0)" class="commentCount js_commentCount">3</a>
+                            <a   href="javascript:void(0)" class="markCount js_markCount">4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="bd">
+                    <a class="cont">
+                        <div class="pic">
+                            <img src="http://eachcloudcn.blob.core.chinacloudapi.cn/titlepic/Y1U3R.jpg" class="js_ieonLoad">
+                        </div>
+                        <h3><span>对象，什么叫做合适？</span></h3>
+                        <p class="intro">
+                            心理学家认为，判断男女两个人是否适合,应考虑以下10个因素。 &nbsp;&nbsp;&nbsp; 第一、彼此都是对方的好朋友，不带任何条件，喜欢与对方在一起。&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;第二、彼此很容易沟通、互相可以很敞开地坦白任何事情，而不
+                        </p>
+                    </a>
+
+                    <div class="info">
+                        <ul>
+                            <li class="on"><a href="/home/3fc064dac3b54df48a7934df4e7a0ac8.clip" class="js_touser">
+                                <img alt="" src="http://eachcloudcn.blob.core.chinacloudapi.cn/userimg/3fc064dac3b54df48a7934df4e7a0ac8.png"></a>
+                            </li>
+                            <li>
+                                宝贝m从<a href="/board/2a90bde88a9b4368a9a42688efea54c5.clip">《只想爱你》</a>
+                                收集到<a href="/board/3acdc0c0ee034ff58da1a192b4632164.clip">《谈 恋爱》</a>
+                            </li>
+                        </ul>
+                        <div class="num" id="J_num">
+                            <a href="javascript:void(0)" class="pvCount js_pvCount">1416</a>
+                            <a  href="javascript:void(0)" class="commentCount js_commentCount">3</a>
+                            <a   href="javascript:void(0)" class="markCount js_markCount">4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="bd">
+                    <a class="cont">
+                        <div class="pic">
+                            <img src="http://eachcloudcn.blob.core.chinacloudapi.cn/titlepic/Y1U3R.jpg" class="js_ieonLoad">
+                        </div>
+                        <h3><span>对象，什么叫做合适？</span></h3>
+                        <p class="intro">
+                            心理学家认为，判断男女两个人是否适合,应考虑以下10个因素。 &nbsp;&nbsp;&nbsp; 第一、彼此都是对方的好朋友，不带任何条件，喜欢与对方在一起。&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;第二、彼此很容易沟通、互相可以很敞开地坦白任何事情，而不
+                        </p>
+                    </a>
+
+                    <div class="info">
+                        <ul>
+                            <li class="on"><a href="/home/3fc064dac3b54df48a7934df4e7a0ac8.clip" class="js_touser">
+                                <img alt="" src="http://eachcloudcn.blob.core.chinacloudapi.cn/userimg/3fc064dac3b54df48a7934df4e7a0ac8.png"></a>
+                            </li>
+                            <li>
+                                宝贝m从<a href="/board/2a90bde88a9b4368a9a42688efea54c5.clip">《只想爱你》</a>
+                                收集到<a href="/board/3acdc0c0ee034ff58da1a192b4632164.clip">《谈 恋爱》</a>
+                            </li>
+                        </ul>
+                        <div class="num" id="J_num">
+                            <a href="javascript:void(0)" class="pvCount js_pvCount">1416</a>
+                            <a  href="javascript:void(0)" class="commentCount js_commentCount">3</a>
+                            <a   href="javascript:void(0)" class="markCount js_markCount">4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="bd">
+                    <a class="cont">
+                        <div class="pic">
+                            <img src="http://eachcloudcn.blob.core.chinacloudapi.cn/titlepic/Y1U3R.jpg" class="js_ieonLoad">
+                        </div>
+                        <h3><span>对象，什么叫做合适？</span></h3>
+                        <p class="intro">
+                            心理学家认为，判断男女两个人是否适合,应考虑以下10个因素。 &nbsp;&nbsp;&nbsp; 第一、彼此都是对方的好朋友，不带任何条件，喜欢与对方在一起。&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;第二、彼此很容易沟通、互相可以很敞开地坦白任何事情，而不
+                        </p>
+                    </a>
+
+                    <div class="info">
+                        <ul>
+                            <li class="on"><a href="/home/3fc064dac3b54df48a7934df4e7a0ac8.clip" class="js_touser">
+                                <img alt="" src="http://eachcloudcn.blob.core.chinacloudapi.cn/userimg/3fc064dac3b54df48a7934df4e7a0ac8.png"></a>
+                            </li>
+                            <li>
+                                宝贝m从<a href="/board/2a90bde88a9b4368a9a42688efea54c5.clip">《只想爱你》</a>
+                                收集到<a href="/board/3acdc0c0ee034ff58da1a192b4632164.clip">《谈 恋爱》</a>
+                            </li>
+                        </ul>
+                        <div class="num" id="J_num">
+                            <a href="javascript:void(0)" class="pvCount js_pvCount">1416</a>
+                            <a  href="javascript:void(0)" class="commentCount js_commentCount">3</a>
+                            <a   href="javascript:void(0)" class="markCount js_markCount">4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="side">
             <div class="qr">

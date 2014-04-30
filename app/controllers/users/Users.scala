@@ -40,59 +40,36 @@ object Users extends Controller {
 
 
   /*user 首页*/
-  def home(id:Long) =UserAction { user => implicit request =>
-   val author = UserDao.findById(id)
-    Ok(views.html.users.home(user,author) )
+  def home(uid:Long) =UserAction { user => implicit request =>
+    Redirect(controllers.users.routes.Users.diagrams(uid,1))
   }
 
   /* 我的图说 */
-  def diagrams(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def diagrams(uid:Long,p:Int) = UserAction{ user => implicit request =>
 
-    val author = UserDao.findById(id)
-    Ok(views.html.users.diagrams(user,author) )
+    val author = UserDao.findUser(uid)
+    Ok(views.html.users.diagrams(user,UserComponent(author._1,author._2,author._3)) )
   }
 
   /* 我收藏的 */
-  def collects(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(id)
+  def collects(uid:Long,p:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findById(uid)
     Ok(views.html.users.collects(user,author) )
   }
   /* 我订阅的 */
-  def subscribes(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(id)
+  def subscribes(uid:Long,p:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findById(uid)
     Ok(views.html.users.subscribes(user,author) )
   }
 
-  /* 我讨论的 */
-  def discusses(id:Long,p:Int) = UserAction{ user => implicit request =>
-
-    val author = UserDao.findById(id)
-    Ok(views.html.users.discusses(user,author) )
-   
-  }
-
-  /* 我喜欢的 */
-  def loves(id:Long,p:Int) = UserAction{ user => implicit request =>
-
-    val author = UserDao.findById(id)
-    Ok(views.html.users.loves(user,author) )
-  }
 
   /* 我关注的 */
-  def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(id)
+  def follow(uid:Long,p:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findById(uid)
     Ok(views.html.users.follow(user,author) )
   }
-  def fans(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(id)
-    Ok(views.html.users.fans(user,author) )
-  }
 
-  /* 我的动态 */
-  def records(id:Long,p:Int)  = UserAction{ user => implicit request =>
-    val author = UserDao.findById(id)
-    Ok(views.html.users.records(user,author) )
-  }
+
 
 
   /* 添加收藏 */

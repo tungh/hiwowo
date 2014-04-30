@@ -139,6 +139,157 @@
     margin: 0 6px 0 0;
 }
 
+/* my box */
+.my .my-body .box {
+    width: 340px;
+    height: 370px;
+    float: left;
+    margin: 10px 0;
+    position: relative;
+}
+.my .my-body .box .bd{
+    width: 300px;
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+    border: #d8d8d8 1px solid;
+    border-radius: 3px;
+    border-bottom: #b4b4b4 solid 2px;
+}
+.my .my-body .box .bd a.cont{
+    background-color: #fff;
+    color: #009bba;
+    cursor: pointer;
+    height: 285px;
+    overflow: hidden;
+    margin-bottom: 23px;
+    border-radius: 3px 3px 0 0;
+    display: block;
+}
+.my .my-body .box .bd a:hover{
+    text-decoration: none;
+    color: #009bba;
+}
+.my .my-body .box .bd .pic{
+    height: 170px;
+    width: 300px;
+    overflow: hidden;
+}
+.pets. mod-body .box .bd .pic img {
+    display: block;
+    width: 300px;
+    background: #eee;
+}
+.my .my-body .box .bd h3{
+    line-height: 28px;
+    font-size: 18px;
+    color: #333;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 15px;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-weight: normal;
+    text-shadow: 0 0 2px rgba(0,0,0,0.4);
+    max-height: 80px;
+    overflow: hidden;
+}
+.my .my-body .box .bd h3 span{
+    display: block;
+    font-weight: bold;
+}
+.my .my-body .box .bd .intro {
+    padding: 0 20px 0 20px;
+    line-height: 24px;
+    height: 142px;
+    overflow: hidden;
+    color: #888;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.my .my-body .box .info {
+    overflow: auto;
+    border-top: solid #b4b4b4 1px;
+    padding: 8px 4px;
+    height: 43px
+}
+
+.my .my-body .box .info li {
+    float: left;
+    width: 210px;
+    line-height: 17px;
+    padding: 5px 5px 0 10px;
+    font-family: "宋体";
+    color: #666;
+    height: 34px;
+    overflow: hidden
+}
+
+.my .my-body .box .info li a {
+    color: #666;
+    padding: 0 2px;
+    word-break: break-all;
+    word-wrap: normal;
+    font-family: "宋体";
+    font-weight: bold
+}
+
+.my .my-body .box .info li.on {
+    width: 44px;
+    height: 39px;
+    padding: 0
+}
+
+
+
+.my .my-body .box .info li.on a img {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 8px 0 0 8px;
+    display: inline;
+    border: #ccc solid 1px;
+    border-radius: 25px
+}
+
+.my .my-body .box .info .num {
+    height: 45px;
+    width: 248px;
+    position: absolute;
+    background: #fff;
+    bottom: 5px;
+    left: 50px;
+    display: block;
+}
+
+.my .my-body .box .info .num a {
+    float: left;
+    color: #ababab;
+    height: 45px;
+    line-height: 45px;
+    text-align: right;
+    cursor: default;
+    font-weight: bold;
+    width: 40px;
+    font-family: Arial
+}
+
+.my .my-body .box .info .num a.pvCount {
+    background: url(images/amount_read.png) no-repeat right;
+    padding-right: 34px
+}
+
+.my .my-body .box .info .num a.commentCount {
+    background: url(images/amount_comment.png) no-repeat right 15px;
+    padding-right: 25px
+}
+
+.my .my-body .box .info .num a.markCount {
+    background: url(images/amount_mark.png) no-repeat right 15px;
+    padding-right: 22px
+}
+
 
 
 
