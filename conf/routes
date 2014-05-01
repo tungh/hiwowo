@@ -44,8 +44,8 @@ POST  /discuss/disfavor                       controllers.Diagrams.disfavorDiscu
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/diagrams                   controllers.users.Users.diagrams(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /user/$id<[0-9]+>/collects                   controllers.users.Users.collects(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/subscribes                   controllers.users.Users.subscribes(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/collects                   controllers.users.Users.collects(id:Long,p:Int ?=1,size:Int ?=10)
+GET    /user/$id<[0-9]+>/subscribes                   controllers.users.Users.subscribes(id:Long,p:Int ?=1,size:Int ?=10)
 
 # user 账号设定
 GET   /user/account/base           controllers.users.UsersAccount.base

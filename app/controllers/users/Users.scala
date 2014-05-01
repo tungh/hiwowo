@@ -46,21 +46,22 @@ object Users extends Controller {
 
   /* 我的图说 */
   def diagrams(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
-
     val author = UserDao.findUser(uid)
     val page = DiagramDao.findUserDiagrams(uid,p,1)
     Ok(views.html.users.diagrams(user,UserComponent(author._1,author._2,author._3),page))
   }
 
   /* 我收藏的 */
-  def collects(uid:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(uid)
-    Ok(views.html.users.collects(user,author) )
+  def collects(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findUser(uid)
+    val page = UserDao.findCollectDiagrams(uid,p,size)
+    Ok(views.html.users.collects(user,UserComponent(author._1,author._2,author._3),page))
   }
   /* 我订阅的 */
-  def subscribes(uid:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(uid)
-    Ok(views.html.users.subscribes(user,author) )
+  def subscribes(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findUser(uid)
+    val page = UserDao.findSubscribeDiagrams(uid,p,size)
+    Ok(views.html.users.subscribes(user,UserComponent(author._1,author._2,author._3),page))
   }
 
 

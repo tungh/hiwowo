@@ -10,6 +10,8 @@ import play.api.Play.current
 import models.Page
 import models.user._
 import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import models.diagram.{Diagrams, Diagram}
+import models.label.{LabelDiagrams, Label, Labels}
 
 /*
 *
@@ -28,6 +30,9 @@ object UserDao {
   val userFollows = TableQuery[UserFollows]
   val userSubscribes = TableQuery[UserSubscribes]
   val userRecords = TableQuery[UserRecords]
+  val diagrams = TableQuery[Diagrams]
+  val labels = TableQuery[Labels]
+  val labelDiagrams = TableQuery[LabelDiagrams]
 
   /* 验证 */
   def authenticate(email: String, password: String): Option[User] = database.withDynSession {
@@ -239,6 +244,23 @@ object UserDao {
     (for( c<- userCollects if c.uid === uid if c.typeId === typeId if c.collectId === collectId )yield c ).delete
   }
 
+  /* 查找用户收集的 */
+  def findCollectDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = database.withDynSession{
+    val totalRows = Query(userCollects.filter(_.uid === uid).filter(_.typeId === 0).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list = (for{
+      u<-userCollects
+      c<-diagrams
+      if u.collectId === c.id
+      if u.uid === uid
+      if u.typeId === 0
+    } yield c ).drop(startRow).take(pageSize).list()
+
+    Page[Diagram](list,currentPage,totalPages)
+
+  }
+
   /* user subscribe 用户订阅 */
   def addUserSubscribe(uid:Long,labelId:Long) = database.withDynSession{
     val userSubscribeAutoInc = userSubscribes.map(c => (c.uid, c.labelId)) returning userCollects.map(_.id) into {
@@ -253,6 +275,32 @@ object UserDao {
 
   def deleteUserSubscribe(uid:Long,labelId:Long) = database.withDynSession{
     ( for(c <- userSubscribes if c.uid === uid if c.labelId === labelId )yield c ).delete
+  }
+  /* 查找订阅的label */
+  def findSubscribeLabels(uid:Long):List[Label] = database.withDynSession{
+    ( for{
+      u <- userSubscribes
+      c <- labels
+      if u.labelId === c.id
+      if u.uid === uid
+    } yield c ).list()
+  }
+
+  def findSubscribeDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = database.withDynSession{
+      val query = for{
+      s <- userSubscribes
+      ld <- labelDiagrams
+      d <- diagrams
+      if  s.labelId === ld.labelId
+      if  ld.diagramId === d.id
+      if s.uid === uid
+    }yield d
+
+    val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+
+    Page[Diagram](query.drop(startRow).take(pageSize).list(),currentPage,totalPages)
   }
 
   /* user subscribe 用户关注 */
