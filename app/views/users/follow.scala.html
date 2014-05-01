@@ -1,30 +1,28 @@
-@(user:Option[models.user.User],author:models.user.User)
-@views.html.template(user,Some(1),nav=if(!user.isEmpty && user.get.id.get == author.id.get){"my"}else{"ta"},subNav="love")(css="/assets/css/template/userHome.css"){
+@(user:Option[models.user.User],userComponent:controllers.users.UserComponent,page:Page[models.user.User])
+@views.html.template(user,userComponent.user.id,nav=if(!user.isEmpty && user.get.id.get == userComponent.user.id.get){"my"}else{"ta"},subNav="follow")(css="/assets/css/template/userHome.css"){
 
 <div class="container my">
 
     <div class="my-header">
         <div class="userLeft">
             <ul>
-                <li >粉丝<a href="@controllers.users.routes.Users.follow(author.id.get)"></a></li>
+                <li >关注/粉丝<a href="@controllers.users.routes.Users.follow(userComponent.user.id.get)">@(userComponent.stat.fansNum + userComponent.stat.followNum) </a></li>
                 <li >|</li>
-                <li >订阅<a href="@controllers.users.routes.Users.subscribes(author.id.get)"></a></li>
+                <li >订阅<a href="@controllers.users.routes.Users.subscribes(userComponent.user.id.get)">@userComponent.stat.subscribeNum</a></li>
                 <li >|</li>
-                <li >收藏<a href="@controllers.users.routes.Users.collects(author.id.get)"></a>
-                </li>
+                <li >收藏<a href="@controllers.users.routes.Users.collects(userComponent.user.id.get)">@userComponent.stat.collectNum</a> </li>
                 <li >|</li>
-                <li >神兽<a href="@controllers.users.routes.Users.diagrams(author.id.get)"></a>
-                </li>
+                <li >神兽<a href="@controllers.users.routes.Users.diagrams(userComponent.user.id.get)">@userComponent.stat.postDiagramNum</a> </li>
             </ul>
         </div>
         <div class="userRight">
             <div class="usericon">
                 <ul>
-                    <li ><img  src="@author.pic" alt="@author.name"></li>
-                    <li ><a title="正牌七公" href="@controllers.users.routes.Users.home(author.id.get)">@author.name</a></li>
+                    <li ><img  src="@userComponent.user.pic" alt="@userComponent.user.name"></li>
+                    <li ><a title="@userComponent.user.name" href="@controllers.users.routes.Users.home(userComponent.user.id.get)">@userComponent.user.name</a></li>
                     <li class="sns" ><a href="javascript:void(0);" class="follow" style="">关注</a>
                         <a href="javascript:void(0);" class="unfollow" style="display:none;">已关注</a>
-                        <a href="javascript:void(0);" class="mail" style="">私信</a>
+                        <a href="javascript:void(0);" class="mail" style="">小纸条</a>
 
                     </li>
                 </ul>
@@ -33,7 +31,50 @@
     </div>
     <div class="my-body">
         <div class="main">
-            todo
+           <ul id="followTab" class="nav-tabs clearfix">
+              <li>
+                  <a href="#follow" data-toggle="tab">关注的</a>
+              </li>
+               <li>
+                   <a href="#fans" data-toggle="tab">粉丝</a>
+               </li>
+           </ul>
+            <div class="clear"></div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="follow">
+                    @for(user<-page.items){
+                    <div class="section clearfix">
+                        <div class="user-pic">
+                            <a href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name">
+                                <img src="@user.pic" alt="@user.name" title="@user.name" width="50" height="50">
+                            </a>
+                        </div>
+                        <div class="user-info">
+                            <p class="user-intro">
+                                <a href="@controllers.users.routes.Users.home(user.id.get)" class="g-daren">@user.name</a>&nbsp;&nbsp;来自@models.user.ComeFrom(user.comeFrom)
+                            </p>
+                            @if(user.status==4){
+                            <p class="user-data">
+                                <span class="oc">该用户由于发广告，正在小黑屋中反省。</span>
+                            </p>
+                            }else {
+                            <p class="user-data">
+                                @user.credits 个喔喔叫
+                            </p>
+                            }
+                        </div>
+                        <div class="follow">
+
+                            <div  class="followed-btn">已关注<span class="mr5 ml5">|</span>
+                                <a rel="removeFollow"href="javascript:;" data-followtype="2" data-userid="@user.id.get" data-usernick="@user.name">取消</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    }
+                </div>
+                <div class="tab-pane fade" id="fans">fans</div>
+            </div>
         </div>
         <div class="side">
             <div class="qr">

@@ -66,9 +66,10 @@ object Users extends Controller {
 
 
   /* 我关注的 */
-  def follow(uid:Long,p:Int) = UserAction{ user => implicit request =>
-    val author = UserDao.findById(uid)
-    Ok(views.html.users.follow(user,author) )
+  def follow(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
+    val author = UserDao.findUser(uid)
+    val page = UserDao.findUserFollows(uid,p,size)
+    Ok(views.html.users.follow(user,UserComponent(author._1,author._2,author._3),page) )
   }
 
 

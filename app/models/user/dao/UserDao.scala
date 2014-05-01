@@ -319,4 +319,29 @@ object UserDao {
     ( for(c <- userFollows if c.uid === uid if c.followId === followId )yield c ).delete
   }
 
+ def findUserFollows(uid:Long,currentPage:Int,pageSize:Int):Page[User] = database.withDynSession{
+   val totalRows = Query(userFollows.filter(_.uid === uid).length).first
+   val totalPages = (totalRows + pageSize - 1) / pageSize
+   val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+   val list = (for{
+          c <- userFollows
+          u <- users
+         if c.uid === u.id
+         if c.uid === uid
+   }yield u).drop(startRow).take(pageSize).list()
+   Page[User](list,currentPage,totalPages)
+ }
+
+  def findUserFans(uid:Long,currentPage:Int,pageSize:Int):Page[User] = database.withDynSession{
+    val totalRows = Query(userFollows.filter(_.followId === uid).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list = (for{
+      c <- userFollows
+      u <- users
+      if c.followId === u.id
+      if c.followId === uid
+    }yield u).drop(startRow).take(pageSize).list()
+    Page[User](list,currentPage,totalPages)
+  }
 }

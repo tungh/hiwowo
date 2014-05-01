@@ -15,8 +15,9 @@ define(function(require) {
 
 
 
-
-
+   $(function(){
+       $('#followTab a:first').tab('show')
+   })
 
 
 });

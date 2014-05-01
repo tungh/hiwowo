@@ -249,6 +249,15 @@
     padding-right: 22px
 }
 
+/* tab */
+#followTab{
+    margin-top: 10px;
+    padding-left: 50px;
+}
+.tab-content{
+    padding: 10px;
+}
+
 
 
 
