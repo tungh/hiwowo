@@ -82,8 +82,6 @@ GET   /user/:snsType/registed/:backType/:i      controllers.users.UsersSnsLogin.
 
 #user   用户消息
 GET     /user/msg/system          controllers.users.UsersMsg.system(p:Int)
-GET     /user/msg/comment          controllers.users.UsersMsg.comment
-GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
 
 #常用的upload
