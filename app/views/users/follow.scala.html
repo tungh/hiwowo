@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],userComponent:controllers.users.UserComponent,page:Page[models.user.User])
+@(user:Option[models.user.User],userComponent:controllers.users.UserComponent,followPage:Page[models.user.User],fansPage:Page[models.user.User])
 @views.html.template(user,userComponent.user.id,nav=if(!user.isEmpty && user.get.id.get == userComponent.user.id.get){"my"}else{"ta"},subNav="follow")(css="/assets/css/template/userHome.css"){
 
 <div class="container my">
@@ -42,7 +42,31 @@
             <div class="clear"></div>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="follow">
-                    @for(user<-page.items){
+                    <div class="section clearfix">
+                        <div class="user-pic">
+                            <a href="" title="">
+                                <img src="/assets/user/default.jpg" alt="" title="" width="50" height="50">
+                            </a>
+                        </div>
+                        <div class="user-info">
+                            <p class="user-intro">
+                                <a href="sss" class="g-daren">a嗨喔喔</a>&nbsp;&nbsp;来自腾讯
+                            </p>
+
+                            <p class="user-data">
+                                11 个喔喔叫
+                            </p>
+
+                        </div>
+                        <div class="follow">
+
+                            <div  class="followed-btn">已关注<span class="mr5 ml5">|</span>
+                                <a rel="removeFollow"href="javascript:;" data-followtype="2" data-userid="" data-usernick="">取消</a>
+                            </div>
+                        </div>
+                    </div>
+                    @for(user <- followPage.items){
+
                     <div class="section clearfix">
                         <div class="user-pic">
                             <a href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name">
@@ -70,10 +94,41 @@
                             </div>
                         </div>
                     </div>
-
                     }
+                    <!-- 翻页 todo -->
                 </div>
-                <div class="tab-pane fade" id="fans">fans</div>
+                <div class="tab-pane fade" id="fans">
+                    @for(user <- fansPage.items){
+                    <div class="section clearfix">
+                        <div class="user-pic">
+                            <a href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name">
+                                <img src="@user.pic" alt="@user.name" title="@user.name" width="50" height="50">
+                            </a>
+                        </div>
+                        <div class="user-info">
+                            <p class="user-intro">
+                                <a href="@controllers.users.routes.Users.home(user.id.get)" class="g-daren">@user.name</a>&nbsp;&nbsp;来自@models.user.ComeFrom(user.comeFrom)
+                            </p>
+                            @if(user.status==4){
+                            <p class="user-data">
+                                <span class="oc">该用户由于发广告，正在小黑屋中反省。</span>
+                            </p>
+                            }else {
+                            <p class="user-data">
+                                @user.credits 个喔喔叫
+                            </p>
+                            }
+                        </div>
+                        <div class="follow">
+
+                            <div  class="followed-btn">已关注<span class="mr5 ml5">|</span>
+                                <a rel="removeFollow"href="javascript:;" data-followtype="2" data-userid="@user.id.get" data-usernick="@user.name">取消</a>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <!-- 翻页 todo -->
+                </div>
             </div>
         </div>
         <div class="side">

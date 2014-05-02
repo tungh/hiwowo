@@ -259,6 +259,59 @@
 }
 
 
+.tab-content .section {
+    padding: 15px 0;
+    background: #fff;
+    cursor: default;
+    position: relative;
+    border-bottom: 1px dotted #ececec
+}
+
+.tab-content .section .user-pic {
+    width: 50px;
+    float: left
+}
+
+.tab-content .section .user-info {
+    margin-left: 60px;
+    padding-right: 110px;
+    height: 50px
+}
+
+.tab-content .section .user-intro {
+    line-height: 25px
+}
+
+.tab-content .section .user-intro a {
+    font-size: 14px
+}
+
+.tab-content .section .user-data  {
+    color: #999;
+    line-height: 25px;
+}
+
+.tab-content .section .follow {
+    width: 110px;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 15px
+}
+
+.tab-content .section .remove-fans {
+    display: none;
+    padding-top: 8px;
+    color: #666;
+    white-space: nowrap
+}
+
+.tab-content .section:hover .remove-fans {
+    display: inline-block
+}
+
+
+
 
 
 

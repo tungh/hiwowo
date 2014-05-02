@@ -65,11 +65,12 @@ object Users extends Controller {
   }
 
 
-  /* 我关注的 */
+  /* 我关注的  翻页以后出来  */
   def follow(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
     val author = UserDao.findUser(uid)
-    val page = UserDao.findUserFollows(uid,p,size)
-    Ok(views.html.users.follow(user,UserComponent(author._1,author._2,author._3),page) )
+    val followPage = UserDao.findUserFollows(uid,p,size)
+    val fansPage  = UserDao.findUserFans(uid,p,size)
+    Ok(views.html.users.follow(user,UserComponent(author._1,author._2,author._3),followPage,fansPage) )
   }
 
 
