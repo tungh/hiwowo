@@ -164,6 +164,4 @@ GET   /admin/msgs/discussMsgs              controllers.admin.Msgs.discussMsgs(p:
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
-GET     /uploadImage/*file               controllers.Assets.at(path="/public/uploadImage", file)
-GET     /uploadVideo/*file               controllers.Assets.at(path="/public/uploadVideo", file)
 GET     /admin/assets/*file         controllers.Assets.at(path="/public/admin/assets", file)

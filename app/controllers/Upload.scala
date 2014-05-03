@@ -39,7 +39,7 @@ object Upload extends Controller {
     request.body.file("fileData").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
+        picture.ref.moveTo(new File("/opt/static/images/diagram/"+filename),true)
         val src ="/uploadImage/temp/"+filename
        // println(src)
 
@@ -58,8 +58,8 @@ object Upload extends Controller {
     request.body.file("fileData").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("public/uploadImage/temp/"+filename),true)
-        val picSrc ="/uploadImage/temp/"+filename
+        picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
+        val picSrc ="/images/editor/"+filename
        Ok(Json.obj("code"->"100","src"->picSrc,"message"->"success","title"->"嗨喔喔"))
 
       }else{
@@ -78,12 +78,9 @@ object Upload extends Controller {
         picture =>
           val filename = System.currentTimeMillis() + picture.filename.substring(picture.filename.lastIndexOf("."))
           if (Utils.isImage(filename)) {
-          //  picture.ref.moveTo(new File("/opt/static/images/temp/" + filename), true)
-          //  Thumbnails.of(new File("/opt/static/images/temp/" + filename)).size(300, 300).toFile(new File("/opt/static/images/temp/" + filename))
-          //  val picSrc = "/images/temp/" + filename
-              picture.ref.moveTo(new File("public/uploadImage/temp/" + filename), true)
-              Thumbnails.of(new File("public/uploadImage/temp/" + filename)).size(300, 300).toFile(new File("public/uploadImage/temp/" + filename))
-              val picSrc = "/uploadImage/temp/" + filename
+              picture.ref.moveTo(new File("/opt/static/images/user/" + filename), true)
+              Thumbnails.of(new File("/opt/static/images/user/" + filename)).size(300, 300).toFile(new File("public/uploadImage/temp/" + filename))
+              val picSrc = "/images/user/" + filename
             Ok(views.html.common.uploadImageSelectSuccess(true, picSrc))
           } else {
             Ok(views.html.common.uploadImageSelectSuccess(false, "亲，服务器欧巴桑了，请重试"))
@@ -103,7 +100,7 @@ object Upload extends Controller {
           val picName: String = fields._1.substring(fields._1.lastIndexOf("/"))
           val src = "public" + fields._1
           Thumbnails.of(src).sourceRegion(fields._2, fields._3, (fields._4 - fields._2), (fields._5 - fields._3)).size((fields._4 - fields._2), (fields._5 - fields._3)).toFile("public/uploadImage/" + picName)
-          val picSrc: String = "/uploadImage/" + picName
+          val picSrc: String = "/images/user/" + picName
           UserDao.modifyPic(user.get.id.get, picSrc)
           Ok(Json.obj("code" -> "100", "src" -> picSrc))
         }
