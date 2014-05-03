@@ -250,7 +250,7 @@ def addDiagramDiscuss(uid:Long,diagramId:Long,quoteContent:Option[String],conten
   diagramDiscussAutoInc.insert(uid,diagramId,quoteContent,content,checkState)
 }
 
-def findDiagramDiscusses(diagramId:Long,sortBy:String,currentPage:Int,pageSize:Int):Page[(DiagramDiscuss,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>d
+def findDiagramDiscusses(diagramId:Long,sortBy:String,currentPage:Int,pageSize:Int):Page[(DiagramDiscuss,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
   val totalRows = Query(diagramDiscusses.filter(_.diagramId === diagramId).filter(_.checkState === 1).length).first
   val totalPages = (totalRows + pageSize - 1) / pageSize
   val startRow = if (currentPage < 1 || currentPage > totalPages) { 0} else {(currentPage - 1) * pageSize }

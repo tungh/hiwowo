@@ -1,8 +1,6 @@
 package models.weixin.dao
 
 
-
-import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import models.user._
 import models.diagram._

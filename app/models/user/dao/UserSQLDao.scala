@@ -1,9 +1,8 @@
 package models.user.dao
 
-import play.api.db.slick.Config.driver.simple._
+
 import scala.slick.jdbc.{GetResult, StaticQuery => Q}
 import Q.interpolation
-import play.api.db._
 import play.api.Play.current
 import play.api.db.slick.Config.driver.simple._
 /**

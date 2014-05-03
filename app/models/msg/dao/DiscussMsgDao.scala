@@ -1,7 +1,7 @@
 package models.msg.dao
 
 
-import play.api.db.slick.Config.driver.simple._
+
 import play.api.Play.current
 import models.msg._
 import models.Page

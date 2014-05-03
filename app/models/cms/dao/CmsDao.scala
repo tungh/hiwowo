@@ -14,12 +14,12 @@ import play.api.db.slick.Config.driver.simple._
  * Time: 下午5:43
  */
 object CmsDao {
-
+  val cmses = TableQuery[Cmses]
   def deleteCms(id:Long) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
-    ( for( c <- Cmses if c.id === id) yield c).delete
+    ( for( c <- cmses if c.id === id) yield c).delete
   }
   def modifyCms(cms:Cms) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    (for( c <- Cmses if c.id === cms.id) yield c ).update(cms)
+    (for( c <- cmses if c.id === cms.id) yield c ).update(cms)
   }
 
 }

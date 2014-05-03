@@ -7,6 +7,7 @@ import models.user.User
 import models.user.dao.{UserSQLDao, UserDao}
 import models.Page
 import models.diagram.dao.{DiagramDao, DiagramSQLDao}
+import play.api.db.slick.DBAction
 
 
 /**
@@ -30,7 +31,7 @@ object Users extends Controller {
 
   /*每个页面 每次访问，都需要知道用户状态，比如是否登录*/
   def UserAction(f:Option[User] => Request[AnyContent] => Result) = {
-      Action{ request =>
+    Action{ request =>
        val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
         f(user)(request)
       }
