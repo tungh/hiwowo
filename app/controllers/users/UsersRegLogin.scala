@@ -108,7 +108,6 @@ object UsersRegLogin extends Controller {
         val inviteId=user._3
         val name =email.split("@").head
      val id= UserDao.addHiwowoUser(name,password,email,inviteId,request.remoteAddress)
-        println("id ********  "+id)
         val u=UserDao.authenticate(email,password)
         Cache.set(u.get.id.get.toString,u)
         Ok(views.html.users.regLogin.doRegist(u)).withSession("user" -> u.get.id.get.toString) }

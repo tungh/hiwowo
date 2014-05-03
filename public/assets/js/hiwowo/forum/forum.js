@@ -1,8 +1,14 @@
 /**
- * Created with IntelliJ IDEA.
- * User: zuosanshao
- * Date: 14-2-1
- * Time: 下午10:49
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
  *
  */
 

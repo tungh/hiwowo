@@ -65,30 +65,4 @@ object Infos extends Controller {
 
 
 
-
-
-
-
-  // 淘宝客的验证
-  def xtaoAuth =Action{
-    Ok(views.html.infos.xtaoAuth())
-  }
-  /*微博验证*/
-  def weiboAuth =Action{
-    Ok(views.html.infos.weiboAuth())
-  }
-  /*qzone 验证*/
-  def qzone =Action{
-    Ok(views.html.infos.qzone())
-  }
-
-  /* baidu sitemap*/
-  def baiduSiteMap=Action{
-    Ok(views.html.infos.baiduSiteMap())
-  }
-
-  def alimama=Action{
-    Ok(views.html.infos.alimama())
-  }
-
 }

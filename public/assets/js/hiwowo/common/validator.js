@@ -1,4 +1,18 @@
-       /* 通用表单校验 add by @Jeffer on 2012-05-29 */
+/**
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain:  通用表单校验
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
+ *
+ */
+
+
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
 //(function($) { 

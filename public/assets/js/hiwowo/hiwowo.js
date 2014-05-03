@@ -1,6 +1,6 @@
 /**
  * Created by zuosanshao.
- * User: Administrator
+ * User: hiwowo.com
  * Date: 12-10-22
  * Time: 下午8:58
  * Email:zuosanshao@qq.com
@@ -10,7 +10,7 @@
  * Since: 2014-01-18
  * ModifyTime : 2014-01-18
  * ModifyContent: 基础功能
- * http://www.hiwow.com/
+ * http://hiwow.com/
  *
  */
 

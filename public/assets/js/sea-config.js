@@ -1,8 +1,15 @@
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-7-8
- * Time: 下午9:28
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain: sea.js config
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
+ *
  */
 seajs.config({
     // Sea.js 的基础路径

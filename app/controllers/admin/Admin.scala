@@ -25,12 +25,10 @@ object Admin extends Controller {
     Action {
       request =>
         val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
-        if (user.isEmpty)
-          Redirect(controllers.users.routes.UsersRegLogin.login())
+        if (user.isEmpty) { Redirect(controllers.users.routes.UsersRegLogin.login()) }
         else if(user.get.isAdmin == 0){
              Ok("不是管理员账号")
-        }
-        else  f(user.get)(request)
+        } else { f(user.get)(request) }
     }
   }
 

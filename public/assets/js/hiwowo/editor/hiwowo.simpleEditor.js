@@ -1,8 +1,17 @@
-/*
- * @contain: textarea编辑器
- * @depends: jquery.js
+/**
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
  *
  */
+
  define(function(require, exports) {
  	var $  = require("jquery");
  

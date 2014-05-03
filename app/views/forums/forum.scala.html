@@ -86,7 +86,7 @@ title="讨论吧"
 
                         <div class="topic-preview">
                             <a class="pic-list clearfix gc" href="@controllers.routes.Forums.view(t.id.get)" target="_blank">
-                                @for(src <- t.pics.get.split(",")){
+                                @for(src <- t.pics.getOrElse("").split(",")){
                                 @if(src.trim !=""){
                                 <div class="d-out"><img src="@src"></div>
                                 }
