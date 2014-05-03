@@ -1,6 +1,6 @@
 package models.label
 
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 /**
  * Created with IntelliJ IDEA.
  * User: zuosanshao

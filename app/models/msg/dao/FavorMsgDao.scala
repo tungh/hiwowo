@@ -1,10 +1,10 @@
 package models.msg.dao
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+
+import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import models.msg.{FavorMsg, FavorMsgs}
 import models.Page
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,16 +13,16 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
  * Time: 下午3:59
  */
 object FavorMsgDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
+
   val favorMsgs = TableQuery[FavorMsgs]
 
- def addMsg(loverId:Long,loverName:String,favorType:Int,thirdId:Long,content:String,lovedId:Long)  = database.withDynSession {
+ def addMsg(loverId:Long,loverName:String,favorType:Int,thirdId:Long,content:String,lovedId:Long)  = play.api.db.slick.DB.withSession{ implicit session:Session =>
    val favorMsgsAutoInc = favorMsgs.map( u => (u.loverId, u.loverName,u.favorType, u.thirdId, u.content, u.lovedId)) returning favorMsgs.map(_.id) into {
      case (_, id) => id
    }
    favorMsgsAutoInc.insert(loverId, loverName,favorType,thirdId,content,lovedId)
 }
-  def findMsgByLovedId(lovedId:Long,currentPage:Int,pageSize:Int):Page[FavorMsg]  = database.withDynSession {
+  def findMsgByLovedId(lovedId:Long,currentPage:Int,pageSize:Int):Page[FavorMsg]  = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows=Query(favorMsgs.filter(_.lovedId === lovedId ).length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -32,7 +32,7 @@ object FavorMsgDao {
     Page[FavorMsg](msgs,currentPage,totalPages)
   }
 
-  def findAll(currentPage:Int,pageSize:Int) =  database.withDynSession {
+  def findAll(currentPage:Int,pageSize:Int) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows=Query(favorMsgs.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/

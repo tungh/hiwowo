@@ -1,6 +1,6 @@
 package models.diagram
 import java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 /**
  * Created with IntelliJ IDEA.
  * User: 01345096

@@ -8,7 +8,7 @@ package models.label
  */
 
 import java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 case class Group (
                    id: Option[Long],

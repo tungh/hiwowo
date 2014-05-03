@@ -1,7 +1,7 @@
 package models.msg
 
 import java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
  /*
  * discuss type 0 帖子回复 1 宝贝回复 2 主题回复
  * */

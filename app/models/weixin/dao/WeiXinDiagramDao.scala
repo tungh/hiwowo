@@ -1,13 +1,13 @@
 package models.weixin.dao
 
 
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+
+import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import models.user._
 import models.diagram._
 import models.weixin.{WeixinDiagrams, WeixinDiagram}
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 import models.Page
 /**
  * Created with IntelliJ IDEA.
@@ -16,23 +16,23 @@ import models.Page
  * Time: 下午2:26
  */
 object WeiXinDiagramDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
+
   val weixinDiagrams = TableQuery[WeixinDiagrams]
   val diagrams = TableQuery[Diagrams]
   val users = TableQuery[Users]
 
   /* 专门为微信挑选的diagram */
-  def addDiagram(diagramId:Long,period:Int) = database.withDynSession{
+  def addDiagram(diagramId:Long,period:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-weixinDiagrams)yield(diagramId,period)).insert(diagramId,period)
   }
-  def deleteDiagram(id:Long) = database.withDynSession{
+  def deleteDiagram(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-weixinDiagrams if c.id === id) yield c).delete
   }
-  def updateDiagram(id:Long,diagramId:Long) = database.withDynSession{
+  def updateDiagram(id:Long,diagramId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-weixinDiagrams if c.id === id) yield c.diagramId ).update(diagramId)
   }
   /* 根据期数来查找diagram */
-  def findDiagrams(period:Int) = database.withDynSession{
+  def findDiagrams(period:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
    ( for{
       c<-weixinDiagrams
       d<-diagrams
@@ -43,7 +43,7 @@ object WeiXinDiagramDao {
     }yield(d,u)).list()
   }
 
-  def findDiagrams(currentPage:Int,pageSize:Int):Page[(Diagram,User)] = database.withDynSession{
+  def findDiagrams(currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(weixinDiagrams.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {

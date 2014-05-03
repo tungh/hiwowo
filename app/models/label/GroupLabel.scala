@@ -6,7 +6,7 @@ package models.label
  * Date: 14-4-17
  * Time: 下午11:09
  */
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 
 case class GroupLabel(

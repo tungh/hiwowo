@@ -3,13 +3,13 @@ package models.forum.dao
 import java.sql.Timestamp
 import play.api.Play.current
 import play.api.libs.Codecs
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+
+import play.api.db.slick.Config.driver.simple._
 import play.api.cache.Cache
 import play.api.Play.current
 import models.Page
 import models.user._
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 import models.forum._
 
 /**
@@ -24,13 +24,13 @@ import models.forum._
  */
 object TopicDao {
 
-  lazy val database = Database.forDataSource(DB.getDataSource())
+  
   val topics = TableQuery[Topics]
   val topicDiscusses = TableQuery[TopicDiscusses]
   val users = TableQuery[Users]
 
   /* 增加一个话题 */
-  def addTopic(uid: Long, title: String, content: String, intro: String, pics: String, typeId: Int, checkState: Int) = database.withDynSession {
+  def addTopic(uid: Long, title: String, content: String, intro: String, pics: String, typeId: Int, checkState: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val topicsAutoInc = topics.map(t => (t.uid, t.title, t.content, t.intro, t.pics, t.typeId, t.checkState)) returning topics.map(_.id) into {
       case (_, id) => id
     }
@@ -38,39 +38,39 @@ object TopicDao {
   }
 
   /*删除topic的同时，需要把topic 下的 discuss 给删除*/
-  def deleteTopic(id: Long) = database.withDynSession {
+  def deleteTopic(id: Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topics if c.id === id) yield c).delete
     (for (c <- topicDiscusses if c.topicId === id) yield c).delete
   }
 
   /* 修改 topic */
-  def modifyTopic(topic: Topic) = database.withDynSession {
+  def modifyTopic(topic: Topic) = play.api.db.slick.DB.withSession{ implicit session:Session =>
       (for (c <- topics if c.id === topic.id) yield c).update(topic)
   }
 
-  def modifyTopicCheckState(id: Long, checkState: Int) = database.withDynSession {
+  def modifyTopicCheckState(id: Long, checkState: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topics if c.id === id) yield c.checkState).update(checkState)
   }
 
-  def modifyTopicTop(id: Long, isTop: Boolean) = database.withDynSession {
+  def modifyTopicTop(id: Long, isTop: Boolean) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topics if c.id === id) yield c.isTop).update(isTop)
   }
 
-  def modifyTopicBest(id: Long, isBest: Boolean) = database.withDynSession {
+  def modifyTopicBest(id: Long, isBest: Boolean) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topics if c.id === id) yield c.isBest).update(isBest)
   }
 
   /* 统计 topic  */
-  def countTopic = database.withDynSession {
+  def countTopic = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(topics.length).first()
   }
 
-  def countTopic(time: Timestamp) = database.withDynSession {
+  def countTopic(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(topics.filter(_.addTime > time).length).first()
   }
 
   /* find byid with user*/
-  def findById(topicId: Long): (Topic, User) = database.withDynSession {
+  def findById(topicId: Long): (Topic, User) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for {
       c <- topics
       u <- users
@@ -79,7 +79,7 @@ object TopicDao {
     } yield (c, u)).first
   }
   /* 查找 topic ，分页显示*/
-  def findTopics(currentPage: Int, pageSize: Int): Page[Topic] = database.withDynSession {
+  def findTopics(currentPage: Int, pageSize: Int): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(topics.filter(_.checkState === 1).length).first()
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -93,7 +93,7 @@ object TopicDao {
   }
 
   /* user topics 分页显示*/
-  def findUserTopics(uid: Long, currentPage: Int = 1, pageSize: Int = 10): Page[Topic] = database.withDynSession {
+  def findUserTopics(uid: Long, currentPage: Int = 1, pageSize: Int = 10): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(topics.filter(_.uid === uid).length).first()
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -108,7 +108,7 @@ object TopicDao {
 
 
   /*查找*/
-  def findAll(currentPage: Int, pageSize: Int): Page[Topic] = database.withDynSession {
+  def findAll(currentPage: Int, pageSize: Int): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(topics.length).first()
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -122,7 +122,7 @@ object TopicDao {
   }
 
   /* search */
-  def search( title:String,currentPage: Int = 1, pageSize: Int = 10) = database.withDynSession {
+  def search( title:String,currentPage: Int = 1, pageSize: Int = 10) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(topics.filter(_.title like ("%" + title + "%")).length).first()
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -136,7 +136,7 @@ object TopicDao {
 
   }
      /* forum 页面筛选 */
-  def filterTopics(typeId:Int,sortBy:String,currentPage:Int =1,pageSize:Int =10) =  database.withDynSession {
+  def filterTopics(typeId:Int,sortBy:String,currentPage:Int =1,pageSize:Int =10) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for {
       c <- topics
       u <- users
@@ -160,7 +160,7 @@ object TopicDao {
 
   }
    /* 管理后台 筛选 */
-  def filterTopics(title: Option[String], checkState: Option[Int], typeId: Option[Int], isBest: Option[Boolean], isTop: Option[Boolean], currentPage: Int, pageSize: Int) = database.withDynSession {
+  def filterTopics(title: Option[String], checkState: Option[Int], typeId: Option[Int], isBest: Option[Boolean], isTop: Option[Boolean], currentPage: Int, pageSize: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for (c <- topics) yield c
     if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
     if(!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
@@ -183,7 +183,7 @@ object TopicDao {
 
   /* topic discuss */
 
-  def addDiscuss(uid: Long, topicId: Long, quoteContent: Option[String], content: String, checkState: Int) = database.withDynSession {
+  def addDiscuss(uid: Long, topicId: Long, quoteContent: Option[String], content: String, checkState: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     TopicSQLDao.updateDiscussNum(topicId,1)
     val discussesAutoInc = topicDiscusses.map(t => (t.uid, t.topicId, t.quoteContent, t.content, t.checkState)) returning topicDiscusses.map(_.id) into {
       case (_, id) => id
@@ -192,25 +192,25 @@ object TopicDao {
 
   }
 
-  def countDiscuss = database.withDynSession {
+  def countDiscuss = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(topicDiscusses.length).first()
   }
 
-  def countDiscuss(time: Timestamp) = database.withDynSession {
+  def countDiscuss(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(topicDiscusses.filter(_.addTime > time).length).first()
   }
 
 
-  def deleteDiscuss(id: Long) = database.withDynSession {
+  def deleteDiscuss(id: Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topicDiscusses if c.id === id) yield c).delete
   }
 
-  def modifyDiscussCheckState(id: Long, checkState: Int) = database.withDynSession {
+  def modifyDiscussCheckState(id: Long, checkState: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for (c <- topicDiscusses if c.id === id) yield c.checkState).update(checkState)
   }
 
   /*根据topic 分页显示*/
-  def findDiscusses(topicId: Long, currentPage: Int, pageSize: Int): Page[(TopicDiscuss,User)] = database.withDynSession {
+  def findDiscusses(topicId: Long, currentPage: Int, pageSize: Int): Page[(TopicDiscuss,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
 
     val query = for {
       c <- topicDiscusses
@@ -226,7 +226,7 @@ object TopicDao {
 
   }
 
-  def findAllDiscusses(currentPage: Int, pageSize: Int): Page[TopicDiscuss] = database.withDynSession {
+  def findAllDiscusses(currentPage: Int, pageSize: Int): Page[TopicDiscuss] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(topicDiscusses.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -243,7 +243,7 @@ object TopicDao {
   }
 
 
-  def filterDiscusses(checkState: Option[Int], currentPage: Int, pageSize: Int) = database.withDynSession {
+  def filterDiscusses(checkState: Option[Int], currentPage: Int, pageSize: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for (c <- topicDiscusses) yield c
     if (!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
     query = query.sortBy(_.id desc)

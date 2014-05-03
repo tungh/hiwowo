@@ -1,7 +1,7 @@
 package models.admin
 
 import java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 /**
  * Created by zuosanshao.
  * email:zuosanshao@qq.com

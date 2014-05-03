@@ -1,11 +1,11 @@
 package models.diagram.dao
 
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 import scala.slick.jdbc.{StaticQuery => Q}
 import Q.interpolation
 import play.api.db._
 import play.api.Play.current
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 
 /**
 * Created by zuosanshao.
@@ -17,12 +17,12 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 *
 */
 object DiagramDiscussSQLDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
 
-  def updateLoveNum(discussId:Long,num:Int)=database.withDynSession{
+
+  def updateLoveNum(discussId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram_discuss set love_num =love_num+$num where id =$discussId".first
   }
-  def updateHateNum(discussId:Long,num:Int)=database.withDynSession{
+  def updateHateNum(discussId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram_discuss set hate_num =hate_num+$num where id =$discussId".first
   }
 }

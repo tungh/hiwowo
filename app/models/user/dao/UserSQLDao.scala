@@ -1,11 +1,11 @@
 package models.user.dao
 
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 import scala.slick.jdbc.{GetResult, StaticQuery => Q}
 import Q.interpolation
 import play.api.db._
 import play.api.Play.current
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 /**
 * Created by zuosanshao.
 * Email:zuosanshao@qq.com
@@ -16,35 +16,32 @@ import scala.slick.driver.MySQLDriver.simple._
 *
 */
 object UserSQLDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
+ 
 
 
-
-
-
-  def updateFansNum(uid:Long,num:Int)=database.withDynSession {
+  def updateFansNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set fans_num = fans_num+$num where id =$uid".first
   }
-  def updateFollowNum(uid:Long,num:Int)=database.withDynSession {
+  def updateFollowNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set follow_num =follow_num+$num where id =$uid".first
   }
 
-  def updateCollectNum(uid:Long,num:Int)=database.withDynSession {
+  def updateCollectNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set collect_num =collect_num+$num where id =$uid".first
   }
 
-  def updateSubscribeNum(uid:Long,num:Int)=database.withDynSession {
+  def updateSubscribeNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set subscribe_num = subscribe_num+$num where id =$uid".first
   }
 
-  def updatePostDiagramNum(uid:Long,num:Int)=database.withDynSession {
+  def updatePostDiagramNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set post_diagram_num =post_diagram_num+$num where id =$uid".first
   }
-  def updatePostTopicNum(uid:Long,num:Int)=database.withDynSession {
+  def updatePostTopicNum(uid:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_static set post_topic_num =post_topic_num+$num where id =$uid".first
   }
 
-  def loginRecord(uid:Long,ip:String,num:Int)=database.withDynSession {
+  def loginRecord(uid:Long,ip:String,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update user_profile  set login_ip=$ip ,login_num = login_num+$num where uid =$uid".first
   }
 

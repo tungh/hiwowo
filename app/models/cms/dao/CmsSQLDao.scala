@@ -1,10 +1,10 @@
 package models.cms.dao
-import scala.slick.driver.MySQLDriver.simple._
+
 import scala.slick.jdbc.{StaticQuery => Q}
 import Q.interpolation
 import play.api.db._
 import play.api.Play.current
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 /**
  * Created with IntelliJ IDEA.
  * User: zuosanshao
@@ -12,10 +12,10 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
  * Time: 下午5:43
  */
 object CmsSQLDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
 
 
-  def updateViewNum(id:Long,num:Int)=database.withDynSession{
+
+  def updateViewNum(id:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update cms set view_num = view_num+$num where id =$id".first
 
   }

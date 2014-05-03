@@ -1,6 +1,6 @@
 package models.diagram.dao
 
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 import scala.slick.jdbc.{StaticQuery => Q}
 import Q.interpolation
 import play.api.db._
@@ -17,25 +17,25 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 *
 */
 object DiagramSQLDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
 
-  def updateViewNum(diagramId:Long,num:Int)=database.withDynSession{
+
+  def updateViewNum(diagramId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram set view_num = view_num+$num where id =$diagramId".first
 
   }
 
-  def updateDiscussNum(diagramId:Long,num:Int)=database.withDynSession{
+  def updateDiscussNum(diagramId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
    sqlu"update diagram set discuss_num =discuss_num+$num where id =$diagramId".first
   }
 
-  def updateCollectNum(diagramId:Long,num:Int)=database.withDynSession{
+  def updateCollectNum(diagramId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram set collect_num =collect_num+$num where id =$diagramId".first
   }
 
-  def updateLoveNum(diagramId:Long,num:Int)=database.withDynSession{
+  def updateLoveNum(diagramId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram set love_num =love_num+$num where id =$diagramId".first
   }
-  def updateHateNum(diagramId:Long,num:Int)=database.withDynSession{
+  def updateHateNum(diagramId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
     sqlu"update diagram set hate_num =hate_num+$num where id =$diagramId".first
   }
 }
