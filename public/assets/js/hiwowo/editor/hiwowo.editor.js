@@ -400,7 +400,7 @@ define(function (require, exports) {
                             if(data.code =="100"){
 
                                 if (self.isIE678) {
-                                    self.insertHTML("<img unselectable='on'class='img-upload'  src='" +data.src + "'/>");
+                                    self.insertHTML("<img class='img-upload'  src='" +data.src + "'/>");
                                 } else {
                                     var imgDom = self.iframeDocument.createElement("img");
                                     imgDom.src = data.src;
