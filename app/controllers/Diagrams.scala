@@ -130,7 +130,8 @@ object  Diagrams extends Controller {
         var intro =Jsoup.clean(diagramContent.get,Whitelist.none())
         if(intro.length()>100) intro =intro.substring(0,140)+"..."
         val pic =Jsoup.parseBodyFragment(diagramContent.get).body().getElementsByTag("img").first().attr("src")
-        val tags = extractTags(diagramTitle.get,intro)
+       // val tags = extractTags(diagramTitle.get,intro)
+          val tags =List("wowo","ceshi")
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
           val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId,"tags"->Json.toJson(tags)))
