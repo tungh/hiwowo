@@ -17,7 +17,7 @@
                 @for((diagram,user)<-page.items ){
                 <dl class="diagram clearfix">
                     <dt class="diagram-content fl">
-                    <div class="pics pics-too-high">
+                    <div class="pics">
                         <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
                             @for(src <- diagram.pics.getOrElse("").split(",")){
                             @if(src.trim !=""){

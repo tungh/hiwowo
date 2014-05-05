@@ -53,7 +53,7 @@ object Diagrams extends Controller {
       batch => {
         if(batch.action == 2){
           for(id<-batch.ids){
-            println("update" + id)
+          //  println("update" + id)
             DiagramDao.modifyDiagramStatus(id,2)
           }
         }else if (batch.action ==3){

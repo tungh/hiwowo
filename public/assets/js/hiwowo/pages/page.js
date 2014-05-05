@@ -16,6 +16,13 @@ define(function (require) {
     var pin = require("pin")
 
     $(function(){
+        $(".pics-list").each(function(){
+            var picsHeight = $(this).height()
+            if(picsHeight>700){
+               $(this).parent(".pics").addClass("pics-too-high")
+            }
+        })
+
        /* 处理长图片 */
         $(".pics-hidden").click(function(){
             $(this).parent(".pics").removeClass("pics-too-high")
