@@ -73,10 +73,6 @@
                 <li class=' @("on".when(subNav == "pets")) '><a href="/pets/1" title="神兽乐园">神兽乐园</a></li>
             </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div> }
 
@@ -88,10 +84,6 @@
                 <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
             </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div> }
     case "ta" => { <div id="J_subbar" class="subbar">
@@ -103,10 +95,6 @@
 
             </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div>}
 
@@ -119,11 +107,6 @@
                 <li class=' @("on".when(subNav == "2")) '><a href='@controllers.routes.Forums.forum(2,"new",1,10)' title="问答">问答</a></li>
                 <li class=' @("on".when(subNav == "3")) '><a href='@controllers.routes.Forums.forum(3,"new",1,10)' title="活动">活动</a></li>
             </ul>
-
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div> }
 

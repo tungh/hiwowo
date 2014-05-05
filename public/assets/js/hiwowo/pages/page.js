@@ -16,6 +16,12 @@ define(function (require) {
     var pin = require("pin")
 
     $(function(){
+        // 右侧内容定位
+        $(".pin").pin({
+            containerSelector: ".diagram",
+            padding: {top: 10, bottom: 10}
+        })
+         // 隐藏长图片
         $(".pics-list").each(function(){
             var picsHeight = $(this).height()
             if(picsHeight>700){
@@ -31,10 +37,6 @@ define(function (require) {
         $(".pics-too-high-close").click(function(){
             $(this).hide()
             $(this).prev(".pics").addClass("pics-too-high")
-        })
-        // 右侧内容定位
-        $(".pin").pin({
-            containerSelector: ".diagram"
         })
 
 
