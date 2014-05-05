@@ -19,19 +19,54 @@
     border-bottom: 1px solid #999;
 }
 .main .diagrams .diagram .diagram-content{
+    position: relative;
     width: 460px;
     min-height: 280px;
     float: left;
     margin-right: 20px;
     margin-bottom: 10px;
 }
-.main .diagrams .diagram .diagram-content .pic{
+.main .diagrams .diagram .diagram-content .pics{
+    width: 460px;
+    position: relative;
+}
+.main .diagrams .diagram .diagram-content .pics-list{
+    position: relative;
+    display: block;
+    width: 460px;
+}
+
+.main .diagrams .diagram .diagram-content .pics-list img{
+    max-width: 460px;
+    padding-bottom: 10px;
+}
+.main .diagrams .diagram .diagram-content  .pics-hidden{
+    display: none;
+    height: 32px;
+    background: url(images/pics-hidden.png) center 0;
+    width: 100%;
+    text-indent: -9999px;
+}
+
+.main .diagrams .diagram .diagram-content .pics-too-high .pics-list{
+    position: relative;
     display: block;
     position: relative;
     width: 460px;
+    height: 700px;
+    overflow: hidden;
 }
-.main .diagrams .diagram .diagram-content .pic img{
-    max-width: 460px;
+.main .diagrams .diagram .diagram-content .pics-too-high .pics-hidden{
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+.main .diagrams .diagram .diagram-content .pics-too-high-close {
+    font-size: 10px;
+    text-align: right;
+    display: none;
 }
 .main .diagrams .diagram .diagram-content .intro{
     padding: 10px;

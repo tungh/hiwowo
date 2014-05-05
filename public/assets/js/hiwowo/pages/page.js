@@ -16,6 +16,16 @@ define(function (require) {
     var pin = require("pin")
 
     $(function(){
+       /* 处理长图片 */
+        $(".pics-hidden").click(function(){
+            $(this).parent(".pics").removeClass("pics-too-high")
+            $(this).parent(".pics").next(".pics-too-high-close").show()
+        })
+        $(".pics-too-high-close").click(function(){
+            $(this).hide()
+            $(this).prev(".pics").addClass("pics-too-high")
+        })
+        // 右侧内容定位
         $(".pin").pin({
             containerSelector: ".diagram"
         })

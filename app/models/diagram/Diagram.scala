@@ -8,7 +8,6 @@ import java.sql.Timestamp
  * Date: 14-2-21
  * Time: 下午3:27
  * 图说
- * ps 后记 postscript
  * typeId 0:普通 ， 1 gif神兽 ， 2 神自白 ，3 视频      大于0 表示神兽
  * status 0 草稿 1 发布 2 审核成功 3 审核失败
  */
@@ -20,7 +19,7 @@ case class Diagram (
                    pic: String,
                    intro: Option[String],
                    content: Option[String],
-                   ps:Option[String],
+                   pics:Option[String],
                    labels:Option[String],
                    status:Int,
                    viewNum:Int,
@@ -42,7 +41,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def pic = column[String]("pic")
   def intro  = column[String]("intro")
   def content  = column[String]("content")
-  def ps  = column[String]("ps")
+  def pics  = column[String]("pics")
   def labels  = column[String]("labels")
   def status = column[Int]("status")
   def viewNum = column[Int]("view_num")
@@ -55,7 +54,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,ps.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,pics.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }
