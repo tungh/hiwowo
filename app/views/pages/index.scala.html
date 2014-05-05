@@ -13,70 +13,27 @@
         <section class="mod-body">
         <div class="main">
             <div class="diagrams">
-                <dl class="diagram clearfix">
-                     <dt class="diagram-content fl">
-                         <div class="pics pics-too-high">
-                          <a class="pics-list">
-                            <img src="/images/1.jpg">
-                             <img src="/images/2.jpg">
-                             <img src="/images/3.jpg">
-                             <img src="/images/4.jpg">
-                          </a>
-                    <div class="pics-hidden"></div>
-                         </div>
-                           <div class="pics-too-high-close">收起</div>
-                         <div class="intro">
-                          我是伟大的设计师上大幅度发地方地方大幅度发地方对地方大幅度大幅度
-                         </div>
-                     </dt>
-                    <dd class="diagram-info fr">
-                        <div class="pin">
-                            <h3 class="title"><a href="" target="_blank"> 生生死死对的 </a> </h3>
-                            <div class="user-info mb10">
-                                    <span class="user-img">
-                                        <a href="" target="_blank"><img src="/assets/user/default.jpg"width="36" height="36"></a>
-                                    </span>
-                                <span class="user-name"><a href=" " target="_blank"> dfd打发打发 </a> </span>
-                            </div>
-                            <div class="meta">
-                                <div class="like-common like-common-s" >
-                                    <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="2" title="喜欢"><i>喜欢</i></a>
-                                    <div class="like-num">
-                                        <dl class="J_scrollUp">
-                                            <dd class="J_FavorNum" data-val="3">3</dd>
-                                            <dd>+1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                                <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
 
-
-                                    <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
-                                    <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
-                                    <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
-                                    <a class="s-renren fl" href="javascript:;" data-type="s-renren" alt="分享到人人网"></a>
-                                    <a class="s-qq fl" href="javascript:;" data-type="s-qq" alt="分享到qq"></a>
-                                    <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
-                                </div>
-                                <div class="discuss">
-                                    <a href="对的" target="_blank">3 评论  </a>
-                                </div>
-                            </div>
-                        </div>
-                    </dd>
-                </dl>
                 @for((diagram,user)<-page.items ){
                 <dl class="diagram clearfix">
-
                     <dt class="diagram-content fl">
+                    <div class="pics pics-too-high">
+                        <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
+                            @for(src <- diagram.pics.getOrElse("").split(",")){
+                            @if(src.trim !=""){
+                           <img src="@src">
+                            }
+                            }
 
-                    <a class="pic" href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank">
-                        @Html(diagram.content.getOrElse(""))
-                    </a>
+                        </a>
+                        <div class="pics-hidden"></div>
+                    </div>
+                    <div class="pics-too-high-close">收起</div>
                     <div class="intro">
-                        @Html(diagram.intro.getOrElse(""))
+                       @diagram.intro.getOrElse("")
                     </div>
                     </dt>
+
                     <dd class="diagram-info fr">
                         <div class="pin">
                             <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.title </a> </h3>

@@ -129,14 +129,20 @@ object  Diagrams extends Controller {
       } else {
         var intro =Jsoup.clean(diagramContent.get,Whitelist.none())
         if(intro.length()>100) intro =intro.substring(0,140)+"..."
-        val pic =Jsoup.parseBodyFragment(diagramContent.get).body().getElementsByTag("img").first().attr("src")
+        val uploadImages =Jsoup.parseBodyFragment(diagramContent.get).body().getElementsByTag("img")
+        var pics =""
+        val it=uploadImages.iterator()
+        while(it.hasNext){
+          pics +=it.next().attr("src")+","
+        }
+        val pic =uploadImages.first().attr("src")
        // val tags = extractTags(diagramTitle.get,intro)
           val tags =List("可爱","有趣","萌","尼玛")
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-          val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
+          val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId,"tags"->Json.toJson(tags)))
         }else{
-          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
+          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
 
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->diagramId.get,"tags"->Json.toJson(tags)))
         }

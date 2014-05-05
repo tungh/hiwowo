@@ -20,14 +20,23 @@
                     @for((diagram,user)<-page.items ){
                     <dl class="diagram clearfix">
                         <dt class="diagram-content fl">
-                            <a class="pic" href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank">
-                           <img src="@diagram.pic">
-                        </a>
-                        <div class="intro">
-                            @Html(diagram.intro.getOrElse(""))
-                        </div>
+                        <div class="pics pics-too-high">
+                            <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
+                                @for(src <- diagram.pics.getOrElse("").split(",")){
+                                @if(src.trim !=""){
+                                <img src="@src">
+                                }
+                                }
 
+                            </a>
+                            <div class="pics-hidden"></div>
+                        </div>
+                        <div class="pics-too-high-close">收起</div>
+                        <div class="intro">
+                            @diagram.intro.getOrElse("")
+                        </div>
                         </dt>
+
                         <dd class="diagram-info fr">
                             <div class="pin">
                                 <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.title </a> </h3>
@@ -39,7 +48,7 @@
                                 </div>
                                 <div class="meta">
                                     <div class="like-common like-common-s" >
-                                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
+                                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="@diagram.id.get" title="喜欢"><i>喜欢</i></a>
                                         <div class="like-num">
                                             <dl class="J_scrollUp">
                                                 <dd class="J_FavorNum" data-val="@diagram.loveNum">@diagram.loveNum</dd>
