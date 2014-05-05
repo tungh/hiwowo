@@ -696,7 +696,7 @@ define(function(require, exports) {
         })
 
          /*subnav fixed 操作 */
-      /*  $(window).scroll(function () {
+        $(window).scroll(function () {
             var d = $(document).scrollTop();
             if (d > 40) {
                 $("#J_subbar").addClass("subbar-fixed");
@@ -705,7 +705,7 @@ define(function(require, exports) {
                 $("#J_subbar").removeClass("subbar-fixed");
                 $("#J_subbar").find("#J_subSearch").hide()
             }
-        });*/
+        });
 
 
 
