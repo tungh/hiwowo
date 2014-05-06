@@ -80,6 +80,11 @@
 .main .diagrams .diagram .diagram-info .pin{
     width: 170px;
 }
+.main .diagrams .diagram .diagram-info .pin .title{
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+}
 .main .diagrams .diagram .diagram-info .pin .user-info{
     padding-top: 5px;
     float: left;

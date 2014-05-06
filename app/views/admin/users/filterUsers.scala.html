@@ -37,22 +37,22 @@
                             <div class="control-group">
                                 <label class="control-label" >用户状态</label>
                                 <div class="controls">
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="status" value=""  @if(form("status").value.isEmpty){ checked="true" }> 所有
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio"  name="status" value="0"  @if(form("status").value.getOrElse("none")=="0"){ checked="true" }> 未通过
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="status" value="1" @if(form("status").value.getOrElse("none")=="1"){ checked="true" }> 正常状态
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="status" value="2" @if(form("status").value.getOrElse("none")=="2"){ checked="true" }> 活跃状态
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="status" value="3" @if(form("status").value.getOrElse("none")=="3"){ checked="true" }> 达人状态
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="status" value="4" @if(form("status").value.getOrElse("none")=="4"){ checked="true" }> 拉黑状态
                                     </div>
                                 </div>
@@ -68,19 +68,19 @@
                             <div class="control-group">
                                 <label class="control-label" >注册来源</label>
                                 <div class="controls">
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="comeFrom" value=""  @if(form("comeFrom").value.isEmpty){ checked="true" }> 所有
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio"  name="comeFrom" value="0" @if(form("comeFrom").value.getOrElse("none")=="0"){ checked="true" }> 嗨喔喔
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="comeFrom" value="1" @if(form("comeFrom").value.getOrElse("none")=="1"){ checked="true" }> 腾讯QQ
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="comeFrom" value="2" @if(form("comeFrom").value.getOrElse("none")=="2"){ checked="true" }> 新浪微博
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="comeFrom" value="3" @if(form("comeFrom").value.getOrElse("none")=="3"){ checked="true" }> 淘宝
                                     </div>
 
@@ -92,10 +92,10 @@
                                 <label class="control-label" >根据积分排序</label>
                                 <div class="controls">
 
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio"  name="creditsOrder" value="desc" @if(form("creditsOrder").value.getOrElse("none")=="desc"){ checked="true" }>由高到低
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="creditsOrder" value="asc" @if(form("creditsOrder").value.getOrElse("none")=="asc"){ checked="true" }> 由低到高
                                     </div>
                                 </div>
@@ -105,10 +105,10 @@
                                 <label class="control-label" >根据注册时间排序</label>
                                 <div class="controls">
 
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio"  name="addTimeOrder" value="desc" @if(form("addTimeOrder").value.getOrElse("none")=="desc"){ checked="true" }>由高到低
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio" name="addTimeOrder" value="asc" @if(form("addTimeOrder").value.getOrElse("none")=="asc"){ checked="true" }> 由低到高
                                     </div>
                                 </div>

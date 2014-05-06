@@ -133,7 +133,7 @@ POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
 
 #管理后台 标签管理
 GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=20)
-GET   /admin/labels/core           controllers.admin.Labels.core
+GET   /admin/labels/core           controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=20)
 GET   /admin/labels/filter            controllers.admin.Labels.filter
 GET   /admin/labels/edit          controllers.admin.Labels.edit(id:Long ?=0L)
 POST  /admin/labels/save              controllers.admin.Labels.save
@@ -149,6 +149,18 @@ GET  /admin/users/edit            controllers.admin.Users.edit(uid:Long)
 GET  /admin/users/view            controllers.admin.Users.view(uid:Long)
 GET  /admin/users/filterUsers       controllers.admin.Users.filterUsers
 POST /admin/users/batchUsers       controllers.admin.Users.batchUsers
+
+#管理后台 内容管理
+GET   /admin/cmses/list           controllers.admin.Cmses.list(p:Int ?=1,size:Int ?=20)
+GET   /admin/cmses/edit           controllers.admin.Cmses.edit(id:Long ?=0l)
+POST  /admin/cmses/save           controllers.admin.Cmses.save
+POST  /admin/cmses/delete         controllers.admin.Cmses.delete
+
+#管理后台 广告管理
+GET   /admin/adverts/list           controllers.admin.Adverts.list(p:Int ?=1,size:Int ?=20)
+GET   /admin/adverts/edit           controllers.admin.Adverts.edit(id:Long ?=0l)
+POST  /admin/adverts/save           controllers.admin.Adverts.save
+POST  /admin/adverts/delete         controllers.admin.Adverts.delete
 
 #管理后台 站内信管理
 GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)

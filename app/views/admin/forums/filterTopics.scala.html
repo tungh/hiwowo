@@ -36,16 +36,16 @@
     <div class="control-group">
     <label class="control-label" >审核状态</label>
     <div class="controls">
-    <div class="radio">
+    <div class="radio-inline">
         <input type="radio"   name="checkState" value=""  @if(form("checkState").value.isEmpty){ checked="true" }> 所有
     </div>
-    <div class="radio">
+    <div class="radio-inline">
     <input type="radio"   name="checkState" value="0" @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" } > 未审核
 </div>
-<div class="radio">
+<div class="radio-inline">
     <input type="radio"   name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="1"){ checked="true" }> 审核通过
 </div>
-<div class="radio">
+<div class="radio-inline">
     <input type="radio"   name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="2"){ checked="true" }>  审核不通过
 </div>
 
@@ -57,11 +57,11 @@
                         <div class="control-group">
                             <label class="control-label">类型</label>
                             <div class="controls">
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio" name="typeId" value=""> 所有类型
                                 </div>
                                 @for(cate<-models.forum.TopicType.values){
-                                    <div class="radio">
+                                    <div class="radio-inline">
                                         <input type="radio"  name="typeId" value="@cate.id" @if(form("typeId").value.getOrElse("none")==cate.id.toString){ checked="true" }> @cate
                                     </div>
                                 }
@@ -72,13 +72,13 @@
                         <div class="control-group">
                             <label class="control-label" >是否置顶</label>
                             <div class="controls">
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio" name="isTop" value="" @if(form("isTop").value.isEmpty){ checked="true" }> 所有
                                 </div>
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio" name="isTop" value="true"  @if(form("isTop").value.getOrElse("none")=="true"){ checked="true" }> 置顶
                                 </div>
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio"  name="isTop" value="false" @if(form("isTop").value.getOrElse("none")=="false"){ checked="true" }> 不置顶
                                 </div>
 
@@ -89,14 +89,14 @@
                         <div class="control-group">
                             <label class="control-label" >是否精华</label>
                             <div class="controls">
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio" name="isBest" value="" @if(form("isBest").value.isEmpty){ checked="true" }> 所有
                                 </div>
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio" name="isBest" value="true" @if(form("isBest").value.getOrElse("none")=="false"){ checked="true" }> 精华
                                 </div>
 
-                                <div class="radio">
+                                <div class="radio-inline">
                                     <input type="radio"  name="isBest" value="false" @if(form("isBest").value.getOrElse("none")=="false"){ checked="true" }>不精华
                                 </div>
 

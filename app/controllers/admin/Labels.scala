@@ -14,12 +14,12 @@ import play.api.data.Forms._
 
 object Labels extends Controller {
 
-  def list(p:Int,pageSize:Int)  =  Admin.AdminAction{user => implicit request =>
+  def list(p:Int,size:Int)  =  Admin.AdminAction{user => implicit request =>
 
     Ok("todo")
   }
 
-  def core  = Admin.AdminAction{user => implicit request =>
+  def core(p:Int,size:Int)  = Admin.AdminAction{user => implicit request =>
     Ok("todo")
   }
 
