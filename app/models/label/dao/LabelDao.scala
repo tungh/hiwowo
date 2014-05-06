@@ -33,8 +33,17 @@ object LabelDao {
   def modifyGroupStatus(id:Long,status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-groups if c.id === id) yield c.status).update(status)
   }
-  def findGroups = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    (for(c<-groups)yield c).list()
+
+  def findGroup(id:Long):Group = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for(c<-groups if c.id === id) yield c ).first
+  }
+
+  def findGroups(currentPage:Int,pageSize:Int):Page[Group] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(groups.length).first()
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+   val list = (for( c<-groups )yield c).drop(startRow).take(pageSize).list()
+    Page[Group](list,currentPage,totalPages)
   }
 
   /* label dao */

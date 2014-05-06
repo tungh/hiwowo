@@ -140,6 +140,10 @@ POST  /admin/labels/save              controllers.admin.Labels.save
 POST   /admin/labels/delete         controllers.admin.Labels.delete
 POST   /admin/labels/check          controllers.admin.Labels.check
 POST  /admin/labels/batch             controllers.admin.Labels.batch
+GET   /admin/labels/groups           controllers.admin.Labels.groups(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/labels/editGroup        controllers.admin.Labels.editGroup(id:Long ?=0L)
+POST   /admin/labels/saveGroup        controllers.admin.Labels.saveGroup
+POST   /admin/labels/deleteGroup      controllers.admin.Labels.deleteGroup
 
 
 #管理后台 用户管理
