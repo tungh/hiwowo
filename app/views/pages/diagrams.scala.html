@@ -1,113 +1,24 @@
 @(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],sortBy:String)
-@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/page.css"){
+@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagrams.css"){
 
 
 <div class="container find">
 
     <div class="row">
-        <section class="mod-header">
-            <ul>
-
-                <li @if(sortBy =="new"){ class="on" } ><a href='@controllers.routes.Pages.diagrams("new",1,10)'>最新</a></li>
-                <li @if(sortBy =="hot"){ class="on" }><a href='@controllers.routes.Pages.diagrams("hot",1,10)'>最热</a></li>
-                <!--<li><a href="">最多评论</a></li>
-                <li><a href="">最多收藏</a></li>-->
-              <!--  <li class="sort">
-                    <a href="javascript:void(0)"  id="J_diagram_sort">类别</a>
-                    <dl class="dropdown find-diagram-dropdown">
-
-                        <dd><a href="#">动物世界</a></dd>
-
-                    </dl>
-                </li>-->
-            </ul>
-        </section>
-        <section class="mod-body">
-            <div class="main">
-                <div class="diagrams">
-                    @for((diagram,user)<-page.items ){
-                    <dl class="diagram clearfix">
-                        <dt class="diagram-content fl">
-                        <div class="pics pics-too-high">
-                            <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
-                                @for(src <- diagram.pics.getOrElse("").split(",")){
-                                @if(src.trim !=""){
-                                <img src="@src">
-                                }
-                                }
-
-                            </a>
-                            <div class="pics-hidden"></div>
-                        </div>
-                        <div class="pics-too-high-close">收起</div>
-                        <div class="intro">
-                            @diagram.intro.getOrElse("")
-                        </div>
-                        </dt>
-
-                        <dd class="diagram-info fr">
-                            <div class="pin">
-                                <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.title </a> </h3>
-                                <div class="user-info mb10">
-                                    <span class="user-img">
-                                        <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic"width="36" height="36"></a>
-                                    </span>
-                                    <span class="user-name"><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"> @user.name </a> </span>
-                                </div>
-                                <div class="meta">
-                                    <div class="like-common like-common-s" >
-                                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="@diagram.id.get" title="喜欢"><i>喜欢</i></a>
-                                        <div class="like-num">
-                                            <dl class="J_scrollUp">
-                                                <dd class="J_FavorNum" data-val="@diagram.loveNum">@diagram.loveNum</dd>
-                                                <dd>+1</dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                    <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
-
-
-                                        <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
-                                        <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
-                                        <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
-                                        <a class="s-renren fl" href="javascript:;" data-type="s-renren" alt="分享到人人网"></a>
-                                        <a class="s-qq fl" href="javascript:;" data-type="s-qq" alt="分享到qq"></a>
-                                        <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
-                                    </div>
-                                    <div class="discuss">
-                                        <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.discussNum 评论  </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    }
-                </div>
-                <div class="pagin inlineblock fr mt10" id="J_Pagination">
-                    @if(page.nums.length>1){
-                    @page.prev.map { page =>
-                    <a class="prev" href="@controllers.routes.Pages.diagrams(sortBy,page,10)">上一页</a>
-                    }
-                    @for(num <-page.nums){
-                    @if(num==page.currentPage){
-                    <span class="current" >@num</span>
-                    }else {
-                    <a href="@controllers.routes.Pages.diagrams(sortBy,num,10)">@num</a>
-                    }
-                    }
-                    @page.next.map { page =>
-                    <a class="next" href="@controllers.routes.Pages.diagrams(sortBy,page,10)">下一页</a>
-                    }
-                    }
-                </div>
-            </div>
-            <div class="side">
-                <div class="qr">
-                    <img src="/assets/images/qr_hiwowo.jpg" width="270" height="270" alt="嗨喔喔 微信号">
-                </div>
-            </div>
+       <!-- 热门图说 -->
+        <section class="diagrams-box">
+            <h2 class="box-title"></h2>
+            <div class="box-content"></div>
         </section>
 
+       <!-- 萌死人不偿命 -->
+        <section class=""> </section>
+
+        <!-- 爆笑江湖 -->
+        <section class=""></section>
+
+        <!--  神吐槽 -->
+        <section class=""></section>
 
     </div>
 
