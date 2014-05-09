@@ -1,13 +1,14 @@
 /**
  * Created by zuosanshao.
- * User: Administrator
+ * User: hiwowo.com
  * Email:zuosanshao@qq.com
- * @contain: 用户账号 选择地址
- * @depends: jquery.js
- * Since: 12-10-22    下午8:58
- * ModifyTime : 2012-12-30 22:00
- * ModifyContent:删除注释
- * http://www.hiwowo.com/
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
  *
  */
 

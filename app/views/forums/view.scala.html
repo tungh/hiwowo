@@ -22,7 +22,7 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
             <div class="f-con mt15">
                 <div class="f-con-main">
                     <div class="f-title clearfix">
-                        <h3 class="fl">标题</h3>
+                        <h3 class="fl">@topic._1.title</h3>
                     </div>
                     <ul class="con-list" id="J_forumTopic">
                         <li class="first clearfix">
@@ -52,13 +52,12 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
                             <div class="fr info">
                                 <div class="user-info clearfix">
                                     <span class="fl"><a class="J_UserNick" href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a>/ <em class="time">@utils.Utils.timestampFormat(cmt.addTime.get)</em></span>
-
                                 </div>
                                 <div class="topic">
                                     @if(!cmt.quoteContent.isEmpty && cmt.quoteContent.get.trim()!=""){
                                     <div class="topic-reply">
                                         <p class="topic-quoteContent mt5">
-                                           @Html(cmt.quoteContent.getOrElse(""))
+                                         回复：  @Html(cmt.quoteContent.getOrElse(""))
                                         </p>
                                     </div>
                                     }
@@ -99,17 +98,15 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
             <div class="topic-box clearfix">
                 <form id="J_topicDiscussForm" method="post" action="@controllers.routes.Forums.addDiscuss">
                     <input type="hidden" name="topicId" value="@topic._1.id.get" id="J_topicId">
-
-                    <div id="J_discussQuote" class="topic-reply"></div>
-
-
+                    <div id="J_discussQuote" class="topic-reply clearfix"></div>
                     <div class="clearfix">
                         <textarea  id="J_discussContent" name="content" placeholder="说两句~~"></textarea>
-
-
                     </div>
                     <div class="clearfix mt20">
                         <input type="button" class="bbl-btn pl30 pr30" id="J_discussPublishBtn" value="发表">
+                        <div id="J_FaceBtn">
+                            <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -143,7 +140,7 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
 </div>
 
 }{
-<script type="text/javascript" src="/assets/js/umeditor/discuss.umeditor.config.js"></script>
+
 <script type="text/javascript">
     seajs.use(['jquery','hiwowo/forum/forum'],function($,forum){
 

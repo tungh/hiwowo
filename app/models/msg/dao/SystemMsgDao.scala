@@ -1,12 +1,12 @@
 package models.msg.dao
 
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+
+
 import play.api.Play.current
 import models.msg.{SystemMsgReceivers, SystemMsg, SystemMsgs}
 import models.Page
 import java.sql.Timestamp
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,31 +15,31 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
  * Time: 下午10:43
  */
 object SystemMsgDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
+
   val systemMsgs = TableQuery[SystemMsgs]
   val systemMsgReceivers = TableQuery[SystemMsgReceivers]
 
-   def addMsg(title:String,content:String):Long = database.withDynSession {
+   def addMsg(title:String,content:String):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
      val systemMsgsAutoInc = systemMsgs.map( u => (u.title, u.content )) returning systemMsgs.map(_.id) into {
        case (_, id) => id
      }
      systemMsgsAutoInc.insert(title,content)
    }
-   def modifyMsg(id:Long,title:String,content:String) = database.withDynSession {
+   def modifyMsg(id:Long,title:String,content:String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
      (for(c <- systemMsgs if c.id === id )yield (c.title,c.content)).update(title,content)
    }
-  def deleteMsg(id:Long) = database.withDynSession {
+  def deleteMsg(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c <- systemMsgs if c.id === id) yield  c).delete
   }
-  def modifyMsgStatus(id:Long,status:Int) = database.withDynSession {
+  def modifyMsgStatus(id:Long,status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c <- systemMsgs if c.id === id)yield c.status).update(status)
   }
 
-  def findMsg(id:Long):Option[SystemMsg] = database.withDynSession {
+  def findMsg(id:Long):Option[SystemMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c <- systemMsgs if c.id === id)yield c ).firstOption
   }
 
-  def findAll(currentPage:Int,pageSize:Int):Page[SystemMsg] = database.withDynSession {
+  def findAll(currentPage:Int,pageSize:Int):Page[SystemMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows=Query(systemMsgs.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -50,7 +50,7 @@ object SystemMsgDao {
     Page[SystemMsg](msgs,currentPage,totalPages)
   }
 
-  def filterMsgs(title:Option[String],currentPage:Int,pageSize:Int):Page[SystemMsg] = database.withDynSession {
+  def filterMsgs(title:Option[String],currentPage:Int,pageSize:Int):Page[SystemMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query =for(c<-systemMsgs)yield c
     if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
     val totalRows=query.list().length
@@ -62,30 +62,30 @@ object SystemMsgDao {
 
 
   /* msg receiver */
-  def addMsgReceiver(msgId:Long,receiverId:Long):Long = database.withDynSession {
+  def addMsgReceiver(msgId:Long,receiverId:Long):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val systemMsgReceiversAutoInc = systemMsgReceivers.map( u => (u.msgId, u.receiverId )) returning systemMsgs.map(_.id) into {
       case (_, id) => id
     }
     systemMsgReceiversAutoInc.insert(msgId,receiverId)
   }
 
-  def modifyMsgReceiverStatus(id:Long,status:Int) = database.withDynSession {
+  def modifyMsgReceiverStatus(id:Long,status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for( c<- systemMsgReceivers if c.id === id )yield c.status ).update(status)
   }
 
-  def modifyMsgReceiverStatus(msgId:Long,receiverId:Long,status:Int) = database.withDynSession {
+  def modifyMsgReceiverStatus(msgId:Long,receiverId:Long,status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for( c<- systemMsgReceivers.filter(_.msgId === msgId ).filter(_.receiverId === receiverId ) )yield c.status ).update(status)
   }
 
-  def deleteMsgReceiver(id:Long) = database.withDynSession {
+  def deleteMsgReceiver(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for( c<- systemMsgReceivers if c.id === id  )yield c).delete
   }
 
-  def deleteMsgReceiver(msgId:Long,receiverId:Long) = database.withDynSession {
+  def deleteMsgReceiver(msgId:Long,receiverId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for( c<- systemMsgReceivers.filter(_.msgId === msgId ).filter(_.receiverId === receiverId ) )yield c ).delete
   }
  /* 查找所有的 system msg receiver */
-  def findAllMsgReceivers(currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] = database.withDynSession {
+  def findAllMsgReceivers(currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows=Query(systemMsgReceivers.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -100,7 +100,7 @@ object SystemMsgDao {
   }
 
   /* 查找某个receiver 收到的 信息 */
-    def findReceiverMsgs(receiverId:Long,currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] =  database.withDynSession {
+    def findReceiverMsgs(receiverId:Long,currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] =  play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows=Query(systemMsgReceivers.filter(_.receiverId === receiverId).length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/

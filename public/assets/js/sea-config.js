@@ -1,8 +1,15 @@
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-7-8
- * Time: 下午9:28
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain: sea.js config
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
+ *
  */
 seajs.config({
     // Sea.js 的基础路径
@@ -21,14 +28,7 @@ seajs.config({
         'uploadify':'sea-modules/jquery.uploadify.js',
         'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
-       'umeditor':'umeditor/umeditor.min.js',
-        'umeditor-lang':'umeditor/lang/zh-cn/zh-cn.js',
-        'umeditor-emotion':'umeditor/dialogs/emotion/emotion.js',
-        'umeditor-image':'umeditor/dialogs/image/image.js',
-        'umeditor-link':'umeditor/dialogs/link/link.js',
-        'umeditor-map':'umeditor/dialogs/map/map.js',
-        'umeditor-video':'umeditor/dialogs/video/video.js',
-        'jqueryte':'jqueryte/jquery-te-1.4.0.min.js',
+        'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
          'hiwowo':'hiwowo/hiwowo'
     },
 

@@ -1,0 +1,70 @@
+@(user:models.user.User,form:Form[(Option[Long],String,Option[String],Int)])
+@views.html.admin.template(user,"label") {
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> 标签管理 》编辑标签组</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                编辑标签组
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form  id="J_filterForm" method="POST" action="@controllers.admin.routes.Labels.saveGroup">
+                            <input type="hidden" name="id" id="J_id" value='@form("id").value'>
+                            <div class="error-row">
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="name">名称</label>
+                                <input class="form-control" type="text" id="name" name="name" value='@form("name").value' placeholder="名称">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="intro">简介</label>
+
+                                <textarea id="intro" class="form-control" name="intro">@form("intro").value</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">状态</label>
+
+                                <input class="form-control" type="text" id="status" name="status" value='@form("status").value'>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="submit" class="btn btn-info" value="筛选"/>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+       <script type="text/javascript">
+            $(function(){
+
+            })
+       </script>
+
+        }
+
+

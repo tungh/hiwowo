@@ -1,158 +1,260 @@
 /**
- * Created with IntelliJ IDEA.
- * User: zuosanshao
- * Date: 14-2-23
- * Time: 下午11:42
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
  *
  */
  define(function(require){
      var $ = jQuery = require("jquery")
-      require("jqueryte")
-     require("uploadify")
-     $(function(){
+     require("simpleEditor")
+     var DiagramReply = {
+         //评论与回复提交前校验
+         submit : function($this){
+             $this.attr('disabled',true);
+             var $postCommentForm = $("#J_postCommentForm");
+             var $textarea = $postCommentForm.find("textarea");
+             $("#J_quoteContent").val($("#J_postQuote").html())
 
-         $("#J_diagramIntro").jqte({
-             format: false,
-             fsize:false,
-             color:false
-         })
-         $("#J_psLabel").click(function(){
-             $("#J_diagramPs").jqte({
-                 format: false,
-                 fsize:false,
-                 color:false
-             })
-         })
-         $("#J_tagsLabel").click(function(){
-             $("#J_diagramTags").toggleClass("hidden")
-         })
-         /* 上传图片*/
-         $('#J_uploadify').uploadify({
-             'fileObjName' : 'fileData',
-             'swf'      : '/assets/js/sea-modules/uploadify.swf',
-             'uploader' : '/uploadDiagramPic',
-             'buttonText' : '添加图片，支持JPG, GIF, PNG，最多15张',
-             'fileSizeLimit' : '5MB',
-             'fileTypeExts' : '*.gif; *.jpg; *.png',
-             'uploadLimit' : 15,
-             'width'    : 580,
-             'height':60,
-             'itemTemplate' : '<div class="photo_box" id="${fileID}"><figure> </figure><div  class="uploadify-queue-item">\
-					<div class="cancel">\
-						<a href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')">X</a>\
-					</div>\
-					<span class="fileName">${fileName} (${fileSize})</span><span class="data"></span>\
-				</div> <div class="pic_intro"><textarea  class="b-textarea"></textarea> </div>\
-                 </div>',
-             'removeCompleted' : false,
-             'onUploadSuccess' : function(file, data, response) {
+             var comment = {
+                 "diagramId":parseInt($("#J_diagramId").val()),
+                 "quoteContent": $("#J_postQuote").html(),
+                 "content": $("#J_discussContent").val()
+             };
 
-                  $("#"+file.id).find("figure").html("<img src='"+JSON.parse(data).src+"'with='580'> ")
-                 $("#"+file.id).find(".uploadify-queue-item").hide()
-             }
-             // Put your options here
-         });
+             if($.hiwowo.loginDialog.isLogin()){
+                 if($.trim($textarea.val()) == ""){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"亲，评论内容不能为空哦！");
+                     $this.attr('disabled',false);
+                 }else if($.hiwowo.util.getStrLength($textarea.val()) >= 10){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"内容小于10字！");
+                     $this.attr('disabled',false);
+                 }else{
+                     $this.attr('disabled',false);
 
-         /* 获取所有图片和 说明*/
-         function getContent(){
-             var content ="";
-             $(".photo_box").each(function(){
-                 $(this).remove(".uploadify-queue-item")
-                 //  var intro= $(this).find("textarea").val()
-                 //  $(this).remove("textarea")
-                 //   $(this).find(".pic_intro").html(intro)
-                 alert($(this).html())
-                 content +=$(this).html()
-             })
-         }
-         /* 获取所有图片的Id */
-         function getPicIds(){
-             var ids="";
-             $(".photo_box").each(function(){
-                 ids +=$(this).data("picid")+","
-             })
-         }
+                     $.ajax({
+                         url: $("#J_discussForm").attr("action"),
+                         type : "POST",
+                         contentType:"application/json; charset=utf-8",
+                         dataType: "json",
+                         data: JSON.stringify(comment),
+                         beforeSend: function(){
+                             $this.disableBtn("bbl-btn");
+                         },
+                         success: function(data){
+                             if(data.code=="100"){
+                                 $this.enableBtn("bbl-btn");
 
-         /*保存图片 保存成功后，在pic-content 中生存pic-box 包含pic 和 intro,给diagram使用 */
-         function savePhoto($elm){
+                                 var html ='<li>';
+                                 html += '<div class="share-avt">';
+                                 html +='<a class="fl" href="/user/'+HIWOWO.userId+'"target="_blank">';
+                                 html +='<img class="avt32 fl" src="'+HIWOWO.userPhoto+'" width="38" height="38">';
+                                 html +='</a>';
+                                 html +="</div>";
+                                 html +=' <span class="arrow"></span>';
+                                 html +=' <div class="share-user">';
+                                 html +='<h3> <a class="J_userNick" href="/user/'+HIWOWO.userId+'" target="_blank">'+HIWOWO.nick+'</a> <p class="user-title"></p></h3>';
+                                 html +=' <p class="quote-content">'+comment.quoteContent+'</p>';
+                                 html +=' <p class="content J_commentCon">'+comment.content +'</p>';
+                                 html +='<div class="item-doing"> <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">刚刚</span> </div>';
+                                 html +='</div>';
+                                 html +='</li>';
 
-             var picUrl= $elm.find("figure").find("img").attr("src");
-             var picIntro = $elm.find("textarea").val();
-             var picId = $elm.data("picid");
-             $.ajax({
-                 url: "/diagram/savePic",
-                 type: "POST",
-                 contentType:"application/json; charset=utf-8",
-                 dataType: "json",
-                 data: JSON.stringify({
-                     picId:picId,
-                     picUrl: picUrl,
-                     picIntro: picIntro
-                 }),
-                 success: function(data) {
-                     if(data.code=="100"){
-                         var item ='<div class="pic_box" data-picid='+data.picId +'> <figure><img src="'+picUrl+'"></figure><div class="pic_intro">'+picIntro+'</div></div> '
-                       $("J_picContent").append(item)
-                     }
+                                 $("#J_items").append(html);
+
+                             }
+                         }
+                     });
+                     return false
                  }
+             }
+         },
+         //通用讨论组初始化
+         init : function(){
+             //评论与回复
+             var $postQuote = $("#J_postQuote");
+             var $postCommentForm = $("#J_postCommentForm");
+             //点击回复
+             $(document).on("click",".J_postReply",function(){
+                 var $li = $(this).closest("li");
+                 var userNick = $li.find(".J_userNick:first").html();
+                 var commentCon = $li.find(".J_commentCon").html();
+                 var time = $li.find(".time").html();
+                 var quoteHtml = "";
+                 quoteHtml += '<blockquote>';
+                 quoteHtml += '<span class="info">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
+                 quoteHtml += '<p>' + $.trim(commentCon) + '</p>';
+                 // quoteHtml +='<a class="close">X</a>';
+                 quoteHtml += '</blockquote>';
+
+                 $postQuote.html(quoteHtml);
+                 $("html, body").scrollTop($postCommentForm.offset().top -50);
+                 //删除引用回复
+                 $postQuote.find(".close:first").unbind("click").click(function(){
+                     $postQuote.html("");
+                 });
+             });
+
+             $("#J_postCommentSubmit").submit(function(event){
+                 event.preventDefault();
+                 DiagramReply.submit($(this));
+             });
+
+             $postCommentForm.find("textarea").focus(function(){
+                 $.hiwowo.loginDialog.isLogin()
+             });
+
+             //回车键提交评论
+             $postCommentForm.find("textarea").on("keyup",function(e){
+                 var $this = $(this);
+                 $.hiwowo.util.submitByEnter(e, function(){
+                     DiagramReply.submit($("#J_postCommentSubmit"));
+                 });
+             });
+
+         }
+
+
+     }
+
+     var diagramDiscuss={
+         submit:function($this){
+             $this.attr('disabled',true);
+             var discuss = {
+                 "diagramId":parseInt($("#J_diagramId").val()),
+                 "quoteContent": "",
+                 "content": $("#J_discussContent").val()
+             };
+
+             if($.hiwowo.loginDialog.isLogin()){
+                 if($.trim(discuss.content) == ""){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"亲，评论内容不能为空哦");
+                     $this.attr('disabled',false);
+                 }else if($.hiwowo.util.getStrLength(discuss.content) >= 140){
+                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
+                     $.hiwowo.tip.show($this,"内容不能大于140字哦");
+                     $this.attr('disabled',false);
+                 }else{
+
+                     $.ajax({
+                         url: $("#J_discussForm").attr("action"),
+                         type : "POST",
+                         contentType:"application/json; charset=utf-8",
+                         dataType: "json",
+                         data: JSON.stringify(discuss),
+                         beforeSend: function(){
+                             $this.disableBtn("bbl-btn");
+                         },
+                         success: function(data){
+                             if(data.code=="100"){
+                                 $this.enableBtn("bbl-btn");
+                                 $("#J_discussContent").val("")
+                                 var html ='<div class="item clearfix">';
+                                     html +='<div class="item-left">';
+                                     html += '<a href="/user/'+HIWOWO.userId+'"target="_blank"><img src="'+HIWOWO.userPhoto+'" width="40" height="40"></a>';
+                                     html +='</div>';
+                                     html +='<div class="item-right">';
+                                     html +='<div class="c-head"></div>';
+                                     html +='<div class="c-body">'+discuss.content +'</div>';
+                                     html +='<div class="c-meta"></div>';
+                                     html +='</div>';
+                                     html +='</div>';
+                                 $("#J_discussForm").append(html);
+
+                             }
+                         }
+                     });
+                     return false
+                 }
+             }
+         },
+         formatDiscuss:function(data){
+             $("#J_discusses").html(data);
+             $(".item .c-body").each(function(){
+                 var $this = $(this);
+                 var html = $this.html();
+                 $this.data("content",html)
+                 html = $.hiwowo.simpleEditor.decodeFace(html);
+                 $this.html(html);
+             })
+
+         },
+         init:function(){
+             var $discussForm = $("#J_discussForm");
+             $discussForm.find("textarea").focus(function(){
+                 $.hiwowo.loginDialog.isLogin()
+             });
+             $("#J_discussSubmit").click(function(event){
+                 event.preventDefault();
+                 diagramDiscuss.submit($(this));
+             });
+             //回车键提交评论
+             $discussForm.find("textarea").on("keyup",function(e){
+                 var $this = $(this);
+                 $.hiwowo.util.submitByEnter(e, function(){
+                    diagramDiscuss.submit($("#J_discussSubmit"));
+                 });
              });
          }
+         }
 
 
-         /* 保存到草稿 */
-         $("#J_diagramDraftBtn").click(function(){
-             /* 第一步 保存 photo_box */
-                $(".photo_box").each(function(){
-                   savePhoto($(this))
-                })
+    $(function(){
+        diagramDiscuss.init()
 
-             /*第二步判断标题是否为空 图片至少有一张  */
-             if($("#J_diagramTitle")==""){
-                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                 $.hiwowo.tip.show($(this),"内容不能为空哦！");
-                 $(this).attr('disabled',false);
-                 return;
-             }
-             if(getPicIds()==""){
-                 $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                 $.hiwowo.tip.show($(this),"至少需要上传一张图片哦");
-                 $(this).attr('disabled',false);
-                 return;
-             }
-             /* 第三步，保存 diagram */
-             var diagramId =$("#J_diagramId").val()
-             var diagramTitle =$("#J_diagramTitle").val()
-             var diagramPic = $(".photo_box").first().find("figure img").attr("src")
-             var diagramIntro =$("#J_diagramIntro").val()
-             var diagramContent=getContent()
-             var diagramPs =$("#J_diagramPs").val()
-             var diagramTags =$("#J_diagramTags").val()
-             var picIds =getPicIds()
-             $.ajax({
-                 url: "/diagram/saveDraft",
-                 type: "POST",
-                 contentType:"application/json; charset=utf-8",
-                 dataType: "json",
-                 data: JSON.stringify({
-                     diagramId:diagramId,
-                     diagramTitle: diagramTitle,
-                     diagramPic:diagramPic,
-                     diagramIntro:diagramIntro,
-                     diagramContent:diagramContent,
-                     diagramPs:diagramPs,
-                     diagramTags:diagramTags,
-                     picIds:picIds
-                 }),
-                 success: function(data) {
-                     if(data.code=="100"){
-                        $("#J_diagramId").val(data.diagramId)
-                         $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                         $.hiwowo.tip.show($(this),"保存成功");
-                     }
-                 }
-             });
-         })
 
-     })
+        /* ajax 加载 discuss*/
+        $.ajax({
+            url: "/diagram/getDiscusses",
+            type : "GET",
+            dataType:"html",
+            data:{diagramId:parseInt($("#J_diagramId").val())},
+            success: function(data){
+                diagramDiscuss.formatDiscuss(data)
+            }
+        });
+
+        /* 翻页 */
+        $(document).on("click","a.pager",function(){
+            $.ajax({
+                url:"/diagram/getDiscusses",
+                type:"get",
+                data:{
+                    diagramId:parseInt($(this).data("diagramid")),
+                    sortBy:$(".pagination span.active").data("order"),
+                    p:parseInt($(this).data("page"))
+                },
+                dataType:"html",
+                success:function (data) {
+                    diagramDiscuss.formatDiscuss(data)
+                }})
+        })
+        /* 排序查看 */
+          $(document).on("click","span.refresh",function(){
+              $.ajax({
+                  url:"/diagram/getDiscusses",
+                  type:"get",
+                  data:{
+                      diagramId:parseInt($(this).data("diagramid")),
+                      sortBy:$(this).data("order"),
+                      p:parseInt($(this).data("page"))
+                  },
+                  dataType:"html",
+                  success:function (data) {
+                      diagramDiscuss.formatDiscuss(data)
+                  }})
+          })
+
+
+    })
 
  })

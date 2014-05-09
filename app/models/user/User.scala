@@ -11,7 +11,7 @@ package models.user
  */
 import  java.sql.Timestamp
 
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 
 case class User(
@@ -29,7 +29,8 @@ case class User(
                  province:Option[String],
                  weixin:Option[String],
                  qrcode:Option[String],
-                 tags:Option[String],
+                 labels:Option[String],
+                 isAdmin:Int,
                  modifyTime:Option[Timestamp]
                  )
 
@@ -49,10 +50,11 @@ class Users(tag:Tag) extends Table[User](tag,"user") {
   def province     = column[String]("province")
   def weixin     = column[String]("weixin")
   def qrcode     = column[String]("qrcode")
-  def tags     = column[String]("tags")
+  def labels     = column[String]("labels")
+  def isAdmin    = column[Int]("is_admin")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, tags.?, modifyTime.?)  <>(User.tupled, User.unapply)
+  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, labels.?, isAdmin, modifyTime.?)  <>(User.tupled, User.unapply)
  
 
 

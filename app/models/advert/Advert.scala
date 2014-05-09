@@ -1,7 +1,7 @@
 package models.advert
 
 
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 import java.sql.Timestamp
 
 

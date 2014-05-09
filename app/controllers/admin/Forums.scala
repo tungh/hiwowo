@@ -49,18 +49,18 @@ object Forums extends Controller {
   )
 
 
-  def topics(p:Int) = Administrators.AdminAction{administrator => implicit request =>
+  def topics(p:Int) = Admin.AdminAction{user => implicit request =>
       val page=TopicDao.findAll(p,50)
-      Ok(views.html.admin.forums.topics(administrator,page))
+      Ok(views.html.admin.forums.topics(user,page))
   }
   
-  def delete(id:Long) = Administrators.AdminAction{administrator => implicit request =>
+  def delete(id:Long) = Admin.AdminAction{user => implicit request =>
     val result =TopicDao.deleteTopic(id)
     if (result >0) Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
     else Ok(Json.obj("code" -> "101", "message" -> "删除失败" ))
   }
   
-  def check(id:Long,checkState:Int) = Administrators.AdminAction{administrator => implicit request =>
+  def check(id:Long,checkState:Int) = Admin.AdminAction{user => implicit request =>
     val result =TopicDao.modifyTopicCheckState(id,checkState)
     if (result >0) Ok(Json.obj("code" -> "100", "message" ->"审核成功" ))
     else Ok(Json.obj("code" -> "101", "message" ->"审核不通过，请直接删除"))
@@ -68,24 +68,24 @@ object Forums extends Controller {
 
 
   
-  def discusses(p:Int)=  Administrators.AdminAction{administrator => implicit request =>
+  def discusses(p:Int)=  Admin.AdminAction{user => implicit request =>
     val page=TopicDao.findAllDiscusses(p,50)
-    Ok(views.html.admin.forums.discusses(administrator,page))
+    Ok(views.html.admin.forums.discusses(user,page))
   }
-  def deleteDiscuss(id:Long)  = Administrators.AdminAction{administrator => implicit request =>
+  def deleteDiscuss(id:Long)  = Admin.AdminAction{user => implicit request =>
     val result =TopicDao.deleteDiscuss(id)
     if (result >0) Ok(Json.obj("code" -> "100", "message" ->"删除成功"))
     else Ok(Json.obj("code" -> "101", "message" ->"删除失败" ))
   }
 
-  def checkDiscuss(id:Long,state:Int)= Administrators.AdminAction{administrator => implicit request =>
+  def checkDiscuss(id:Long,state:Int)= Admin.AdminAction{user => implicit request =>
     val result =TopicDao.modifyDiscussCheckState(id,state)
     if (result >0) Ok(Json.obj( "code" -> "100", "message" ->"审核成功" ))
     else Ok(Json.obj("code" -> "101", "message" -> "审核不通过，请直接删除"))
   }
 
   /* 批量处理 */
-  def batchTopics=Administrators.AdminAction{administrator => implicit request =>
+  def batchTopics=Admin.AdminAction{user => implicit request =>
     batchForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       batch => {
@@ -125,19 +125,19 @@ object Forums extends Controller {
   }
 
   /*用户过滤*/
-  def filterTopics = Administrators.AdminAction{ administrator => implicit request =>
+  def filterTopics = Admin.AdminAction{ user => implicit request =>
     topicFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       topic => {
         val page=TopicDao.filterTopics(topic.name,topic.checkState,topic.typeId,topic.isTop,topic.isBest,topic.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.forums.filterTopics(administrator,page,topicFilterForm.fill(topic)))
+        Ok(views.html.admin.forums.filterTopics(user,page,topicFilterForm.fill(topic)))
       }
     )
 
   }
 
   /* 批量处理 */
-  def batchDiscusses=Administrators.AdminAction{administrator => implicit request =>
+  def batchDiscusses=Admin.AdminAction{user => implicit request =>
     batchForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       batch => {
@@ -161,12 +161,12 @@ object Forums extends Controller {
   }
 
   /*用户过滤*/
-  def filterDiscusses = Administrators.AdminAction{ administrator => implicit request =>
+  def filterDiscusses = Admin.AdminAction{ user => implicit request =>
     discussFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       discuss => {
         val page=TopicDao.filterDiscusses(discuss.checkState,discuss.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.forums.filterDiscusses(administrator,page,discussFilterForm.fill(discuss)))
+        Ok(views.html.admin.forums.filterDiscusses(user,page,discussFilterForm.fill(discuss)))
       }
     )
 

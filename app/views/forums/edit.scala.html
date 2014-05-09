@@ -3,71 +3,88 @@
 user,
 nav="forum",
 title = "发布话题_讨论吧"
-)(css="/assets/css/template/forum.css") {
+)(css="/assets/css/template/editor.css") {
+<div class="container">
 
-<div class="container forum">
-      <div class="row">
-          <div class="forum-main">
-                 <div class="forum-create box-shadow">
-                  <h3 class="forum-title">创建话题</h3>
-                  <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_forumTopicEditForm">
-                      <input type="hidden" name="groupId" value="0">
-                      <input type="hidden" name="id" value='@form("id").value' id="J_topicId">
-                      @form.globalError.map { error =>
-                      <div class="error-row" style="display:block">
-                          <p class="error"> @error.message</p>
-                      </div>
-                      }
-                      <ul class="form-group">
-                          <li class="input-box"><label>话题标题：</label><input id="J_topicTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
-                          <li class="input-box"><label>话题类型：</label>
-                              <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") =="0") {"checked"}) value="0"/>吐槽</label>
-                              <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "1") {"checked"}) value="1"/>知识</label>
-                              <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "2") {"checked"}) value="2"/>问答</label>
-                              <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "3") {"checked"}) value="3"/>活动</label>
-                          </li>
-                          <li class="input-box clearfix">
+    <div class="row">
+        <div class="main">
+            <div class="editor-box" >
+                <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_editForm">
+                    <input type="hidden" name="id" id="J_id"  value='@form("id").value' />
+                    <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
+                    @if(form.hasErrors) {
+                    <div class="alert-message error">
+                        <p><strong>Oops</strong> Please fix all errors</p>
+                    </div>
+                    }
 
-                              <textarea id="J_topicContent" name="content" class="b-textarea" placeholder="请输入话题内容">
-                                  @form("content").value
-                              </textarea>
-                          </li>
-                          <li class="oper clearfix">
-                              <input id="J_topicEditBtn" type="submit" class="bbl-btn" value="发表"/>
-                              <input type="button" class="bgr-btn" onclick="window.history.back(-1)"  value="取消并返回" />
+                    @form.globalError.map { error =>
+                    <div class="error-row" style="display:block">
+                        <p class="error"> @error.message</p>
+                    </div>
+                    }
+                    <div class="editor-title">
+                        <label for="J_title">标题</label>
+                        <input type="text" name="title" class="input" id="J_title" value='@form("title").value'  maxlength='45' />
+                    </div>
+                    <div class="editor-select">
+                        <div class="main-select">
+                            <span>类型：</span>
+                            <a href="javascript:void(0);"  data-typeid="0"    @if(form("typeId").value.getOrElse("0") =="0") {class="selected"} ><em>吐槽</em></a>
+                            <a href="javascript:void(0);"  data-typeid="1"   @if(form("typeId").value.getOrElse("0") =="1") {class="selected"}><em>知识</em></a>
+                            <a href="javascript:void(0);"  data-typeid="2"  @if(form("typeId").value.getOrElse("0") =="2") {class="selected"}><em>问答</em></a>
+                            <a href="javascript:void(0);"  data-typeid="3"  @if(form("typeId").value.getOrElse("0") =="3") {class="selected"}><em>活动</em></a>
+                            <br class='clear' />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
 
-                          </li>
-                      </ul>
-                  </form>
-                 </div>
-          </div>
-          <div class="forum-side">
-              <div class="box">
-                  <div class="hd">
-                      <h3>公告栏</h3>
-                  </div>
-                  <p class="bd" id="J_NoticeCon">
-                      和谐社会，你我共建～
-                  </p>
+                    <div class="editor-area">
+                        <textarea id="J_editorContent"  name="content"  class="b-textarea">  @form("content").value </textarea>
+                    </div>
+                    <div class="clear"></div>
 
-              </div>
-          </div>
-      </div>
+
+                    <p class="func_buttons clearfix" >
+                        <input type="button" class="fl func_button"  onclick="window.history.back(-1)" value="取消并返回">
+
+                        <input type="button"  class="fr func_button func_publish" id="J_submit" value="发表" >
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+        <div class="side">
+            <div class="box  affix">
+                <div class="hd">
+                    <h3>公告栏</h3>
+                </div>
+                <p class="bd" id="J_NoticeCon">
+                    和谐社会，你我共建～
+                </p>
+
+            </div>
+        </div>
+    </div>
 
 
 </div>
 
 
-}{
-<script type="text/javascript" src="/assets/js/umeditor/forum.umeditor.config.js"></script>
-<script type="text/javascript">
-    seajs.use(['jquery','umeditor','umeditor-lang','umeditor-emotion','umeditor-image','umeditor-link','umeditor-map','umeditor-video','hiwowo/forum/forum'],function($,umeditor,emotion,image,link,map,video){
 
+}{
+
+
+
+<script type="text/javascript">
+    seajs.use(['jquery','hiwowo/forum/forumEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
         if(HIWOWO.userId == ""){
             $.hiwowo.loginDialog.isLogin();
         }
-        var editor = UM.getEditor('J_topicContent');
-
+        $.hiwowo.editor = $.hiwowo.Editor();
     })
 </script>
 

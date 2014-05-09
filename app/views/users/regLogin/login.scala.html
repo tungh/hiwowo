@@ -6,22 +6,24 @@ title =  "嗨喔喔——用户登录"
     <div class="container" id="regLogin">
         <div class="setting clearfix">
 
-            <div class="regBox">
+            <div class="regBox clearfix">
 
                 <div class="out-login">
-                    <legend>
+                    <legend class="mb15">
                        直接使用这些帐号登录：
                     </legend>
                     <div class="field-box">
-                        <div class="sns-login pt20 clearfix">
-                            <a class="l-qq" href="#" target="_blank">QQ帐号登录</a>
-                            <a class="l-sina" href="#" target="_blank">新浪微博登录</a>
-                            <a class="l-tao" href="#" target="_blank">淘宝帐号登录</a>
-                        </div>
 
+                        <div class="site-openid clearfix">
+                            <ul>
+                                <li class="weibo"><a id="weibo_auth" href='@controllers.users.routes.UsersSnsLogin.snsLogin("sina","syn",0)'><i></i><p>新浪微博</p></a></li>
+                                <li class="qq"><a id="qq_auth" href='@controllers.users.routes.UsersSnsLogin.snsLogin("qzone","syn",0)'><i></i><p>QQ</p></a></li>
+
+                            </ul>
+                        </div>
                         <div class="hiwowo-login">
-                            <p class="ml30 mb10 mt10">没有账号？</p>
-                            <a  class="follow-btn-big  " href="@controllers.users.routes.UsersRegLogin.regist(0)">免费注册</a>
+                            <p class="ml30 mb10 mt10">没有账号？ <a  class="follow-btn-big  " href="@controllers.users.routes.UsersRegLogin.regist(0)">免费注册</a></p>
+
                         </div>
 
                     </div>

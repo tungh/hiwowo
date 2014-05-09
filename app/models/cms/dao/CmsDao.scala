@@ -2,11 +2,10 @@ package models.cms.dao
 
 import java.sql.Timestamp
 import play.api.Play.current
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+
 import models.Page
-import models.cms._
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import models.cms.{Cmses, Cms}
+import play.api.db.slick.Config.driver.simple._
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,14 +14,12 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
  * Time: 下午5:43
  */
 object CmsDao {
-  lazy val database = Database.forDataSource(DB.getDataSource())
   val cmses = TableQuery[Cmses]
-
-  def deleteCms(id:Long) =  database.withDynSession {
-    ( for( c<- cmses if c.id === id) yield c).delete
+  def deleteCms(id:Long) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for( c <- cmses if c.id === id) yield c).delete
   }
-  def modifyCms(cms:Cms) = database.withDynSession {
-    (for( c<- cmses if c.id === cms.id) yield c ).update(cms)
+  def modifyCms(cms:Cms) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for( c <- cmses if c.id === cms.id) yield c ).update(cms)
   }
 
 }

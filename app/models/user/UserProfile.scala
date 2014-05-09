@@ -5,7 +5,7 @@ package models.user
 import play.api.db._
 import play.api.Play.current
 import  java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 /**
  * Created by zuosanshao.

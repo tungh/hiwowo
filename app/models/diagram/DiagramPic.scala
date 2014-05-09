@@ -1,5 +1,5 @@
 package models.diagram
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 import java.sql.Timestamp
 /**
@@ -12,15 +12,16 @@ import java.sql.Timestamp
 case class DiagramPic (
                         id: Option[Long],
                         diagramId:Long,
-                        picId:Long
+                        picId:Long,
+                        sortNum:Int
                         )
 
 class DiagramPics(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def diagramId = column[Long]("diagram_id")
   def picId = column[Long]("pic_id")
-
-  def * =(id.?,diagramId,picId) <> (DiagramPic.tupled, DiagramPic.unapply)
+  def sortNum = column[Int]("sort_num")
+  def * =(id.?,diagramId,picId,sortNum) <> (DiagramPic.tupled, DiagramPic.unapply)
 
 
 }

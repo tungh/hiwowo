@@ -40,14 +40,15 @@ CREATE TABLE `user` (
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
   `credits`              smallint(10) not null default '0',
-  `pic`                 varchar(255) NOT NULL default '/images/user/default.jpg',
+  `pic`                 varchar(255) NOT NULL default '/assets/user/default.jpg',
   `title`                varchar(64),
   `intro`                varchar(250),
   `status`                tinyint    not null default '0',
   `province`            varchar(20),
   `weixin`              varchar(20),
   `qrcode`              varchar(20),
-  `tags`                    varchar(250) ,
+  `labels`                    varchar(250) ,
+  `is_admin`                tinyint    not null default '0',
   `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -107,13 +108,10 @@ CREATE TABLE `user_static` (
   `uid`                 int(10) NOT NULL ,
   `fans_num`                  smallint(11) DEFAULT '0',
   `follow_num`                smallint(11) DEFAULT '0',
-  `love_diagram_num`            smallint(11) DEFAULT '0',
-  `love_pic_num`            smallint(11) DEFAULT '0',
-  `love_topic_num`           smallint(11) DEFAULT '0',
-  `own_diagram_num`            smallint(11) DEFAULT '0',
-  `own_pic_num`            smallint(11) DEFAULT '0',
-  `own_topic_num`           smallint(11) DEFAULT '0',
-  `collect_diagram_num`            smallint(11) DEFAULT '0',
+  `collect_num`            smallint(11) DEFAULT '0',
+  `subscribe_num`            smallint(11) DEFAULT '0',
+  `post_diagram_num`            smallint(11) DEFAULT '0',
+  `post_topic_num`           smallint(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -131,7 +129,7 @@ DROP TABLE IF EXISTS `user_follow`;
 CREATE TABLE `user_follow` (
   `id`                int(10) NOT NULL AUTO_INCREMENT,
   `uid`               int(10) NOT NULL DEFAULT '0',
-  `fans_id`           int(10) NOT NULL DEFAULT '0',
+  `follow_id`           int(10) NOT NULL DEFAULT '0',
   `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -194,6 +192,16 @@ CREATE TABLE `user_collect` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+DROP TABLE IF EXISTS `user_subscribe`;
+CREATE TABLE `user_subscribe` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL ,
+  `label_id` int(20) NOT NULL ,
+  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /* ***************************************************** */
 DROP TABLE IF EXISTS `album`;
 CREATE TABLE `album` (
@@ -213,27 +221,33 @@ DROP TABLE IF EXISTS `diagram`;
 CREATE TABLE `diagram` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) not null,
-  `type_id`            tinyint NOT NULL DEFAULT '0',
   `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
-  `intro`             text,
+  `intro`              text,
   `content`             text ,
-  `ps`                  text ,
-  `tags`             varchar(250) ,
+  `pics`                  text ,
+  `labels`              varchar(250) ,
+  `type_id`            tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',
-  `view_num`                 smallint(10) not null  DEFAULT '0',
-  `love_num`                 smallint(10) not null  DEFAULT '0',
-  `discuss_num`                 smallint(10) not null  DEFAULT '0',
+  `view_num`                 int(10) unsigned not null  DEFAULT '1',
+  `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
+  `discuss_num`                 int(10) unsigned not null  DEFAULT '0',
+  `collect_num`                 int(10) unsigned not null  DEFAULT '0',
+  `come_from_site`             varchar(64) ,
+  `come_from_url`             varchar(250) ,
   `modify_time`         timestamp default '2013-07-18 12:00:00',
   `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `diagram_pic`;
 CREATE TABLE `diagram_pic` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `diagram_id`                 int(10) ,
   `pic_id`               int(10) ,
+  `sort_num`             tinyint ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -244,25 +258,36 @@ CREATE TABLE `pic` (
   `url`               varchar(250) ,
   `intro`               varchar(200) ,
   `status`              tinyint  not null default  '0',
-  `sort_num`              tinyint  not null default  '0',
+  `type_id`              tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 
 DROP TABLE IF EXISTS `diagram_discuss`;
 CREATE TABLE IF NOT EXISTS `diagram_discuss`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
   `diagram_id`            int(10) NOT NULL ,
-  `discuss_id`            int(10) NOT NULL ,
-  `type_id`            tinyint NOT NULL DEFAULT '0',
   `quote_content`             text,
   `content`                  text ,
-  `status`            tinyint NOT NULL DEFAULT '0',
+  `love_num`                  int(10) unsigned not null  DEFAULT '0',
+  `hate_num`                  int(10) unsigned not null  DEFAULT '0',
+  `report_num`                 int(10) unsigned not null  DEFAULT '0',
+  `check_state`            tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `weixin_diagram`;
+CREATE TABLE  IF NOT EXISTS `weixin_diagram`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `diagram_id`            int(10) NOT NULL ,
+  `period`                 int NOT NULL ,
+  `add_time`               timestamp ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -298,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `topic`(
   `title`              varchar (128) NOT NULL ,
   `content`            text    NOT NULL ,
   `intro`             varchar(200)   NOT NULL ,
-  `pics`              text ,
+  `pics`              text,
   `type_id`          tinyint NOT NULL DEFAULT '0',
   `is_best`            tinyint(1) NOT NULL DEFAULT '0',
   `is_top`            tinyint(1) NOT NULL DEFAULT '0',
@@ -337,109 +362,55 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-
-
-
-
-
-
-
-/************************************************************
- * shop ，主要有
-  * shop 表                    小店
- * shop_discuss 表            小店讨论
- -- --------------------------------------------------------
-/*
-  -- 表的结构 `shop `
-     id                 表的ID
-     name              专题组名称
-     intro             介绍
-     is_visible       是否显示
-     uid         作者id
-     cid          分类  线上店铺 线下店铺
-     tags              标签组      2012.11.04 新增，用于简化处理shop_tag,
-     love_num        喜欢的人
-     pic               主题封面
-     modify_time      修改
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `shop`;
-CREATE TABLE IF NOT EXISTS `shop`(
-  `id`                      int(10) NOT NULL AUTO_INCREMENT,
-  `uid`                int(10) not null ,
-  `cid`                tinyint default '0' ,
-  `name`                    varchar(128) not null default '',
-  `intro`                   varchar(255) ,
-  `is_visible`              tinyint(1) not null default '0',
-  `pic`                varchar(128) not null default '/images/shop/default.jpg',
-  `province`             varchar(20),
-  `city`                 varchar(20) ,
-  `town`                 varchar(20),
-  `street`               varchar(50) ,
-  `modify_time`             timestamp,
-  `add_time`                timestamp ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-/*
-  -- 表的结构 `shop_discuss `
-     id                 表的ID
-     content            评论内容
-     shop_id              专题ID
-     uid                    评论人ID
-     is_delete              是否删除
-     add_time  添加时间
---
-*/
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `shop_discuss`;
-CREATE TABLE IF NOT EXISTS `shop_discuss`(
-  `id`                          int(10) NOT NULL AUTO_INCREMENT,
-  `shop_id`                      int(10) NOT NULL ,
-  `uid`                           int(10) NOT NULL ,
-  `quote_content`             text,
-  `content`                     text,
-  `check_state`          tinyint NOT NULL DEFAULT '0',
-  `add_time`                      timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-
-
  /************************************************************
- * term ，
- * term  表                    标签
- * term_relation 表               标签 关系表组
+ * label ，
+ * group    label 群
+ * group_label group 与 label 多对多关系
+ * label  表                    标签
+ * label_diagram 表               标签 关系表组
  **************************************************************/
 
 -- ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `term`;
-CREATE TABLE IF NOT EXISTS `term`(
+DROP TABLE IF EXISTS `group`;
+CREATE TABLE IF NOT EXISTS `group`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
   `name`                       varchar(64) not null ,
-  `alias`                     varchar(32) default '',
-  `intro`                     varchar(200) default '',
+  `intro`                     varchar(200),
   `status`                 tinyint not null default '0',
-  `count`                  int not null default '0',
-  `add_num`                int not null default '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `term_relation`;
-CREATE TABLE IF NOT EXISTS `term_relation`(
+DROP TABLE IF EXISTS `group_label`;
+CREATE TABLE IF NOT EXISTS `group_label`(
   `id`                   int(10) NOT NULL AUTO_INCREMENT,
-  `term_id`                   int(10) not null ,
-  `third_id`                   int(10) not null ,
-  `type_id`                     tinyint  not null default '0',
-  `sort_num`                int not null default '0',
+  `group_id`                   int(10) not null ,
+  `label_id`                   int(10) not null ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE IF NOT EXISTS `label`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `name`                       varchar(64) not null ,
+  `level`                     tinyint not null default '1',
+  `intro`                     text,
+  `is_hot`                 tinyint not null default '0',
+  `spell`                       varchar(32) default '' ,
+  `check_state`                 tinyint not null default '0',
+  `add_num`                int not null default '0',
+  `subscribe_num`                int not null default '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `label_diagram`;
+CREATE TABLE IF NOT EXISTS `label_diagram`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `label_id`                   int(10) not null ,
+  `diagram_id`                   int(10) not null ,
+  `check_state`                 tinyint not null default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -506,6 +477,7 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
   `receiver_id`                int(10) not null default '0',
   `receiver_name`             varchar(32) not null default '',
   `status`                tinyint not null default '0',
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

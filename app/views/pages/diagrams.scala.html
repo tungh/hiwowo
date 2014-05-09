@@ -1,0 +1,88 @@
+@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],sortBy:String)
+@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/page.css"){
+
+
+<div class="container picSay">
+
+    <div class="row">
+        <section class="mod-header">
+            <ul>
+                <!-- label group -->
+                <li><a href="">全部</a></li>
+                <li><a href="">萌死人不偿命</a></li>
+                <li><a href="">爆笑江湖</a></li>
+                <li><a href="">神吐槽</a></li>
+
+
+            </ul>
+        </section>
+        <section class="mod-body">
+       <!-- 热门图说 -->
+            <!-- 一共分为 4 栏 -->
+        <section class="box">
+            <!-- 轮播区域 占 2栏-->
+            <div class="box-slider">
+               <div class="slider">
+                   <dl>
+                       <dt> <img src="/images/say/slider1.jpg"> </dt>
+                       <dd class="pic-desc">是地方大幅度</dd>
+                   </dl>
+               </div>
+            </div>
+            <!-- 分为上下 -->
+            <div class="box-pics">
+                <dl class="pic">
+                    <dt><img src="/images/say/pics1.jpg" width="245" height="238"> </dt>
+                    <dd class="pic-desc">ddddd </dd>
+                </dl>
+                <dl class="pic">
+                    <dt><img src="/images/say/pics1.jpg" width="245" height="238"> </dt>
+                    <dd class="pic-desc">ddddd </dd>
+                </dl>
+            </div>
+            <!-- 文字 排行榜 -->
+            <div class="box-hot"></div>
+        </section>
+
+       <!-- 萌死人不偿命 -->
+        <section class="">
+            <h2 class="box-title">萌死人不偿命</h2>
+            <div class="box-content">
+                <div class="box-pic"></div>
+                <div class="box-pics"></div>
+                <div class="box-pics"></div>
+                <div class="box-pics"></div>
+            </div>
+        </section>
+
+        <!-- 爆笑江湖 -->
+        <section class="">
+            <div class="box-pic"></div>
+            <div class="box-pics"></div>
+            <div class="box-pic"></div>
+            <div class="box-pics"></div>
+        </section>
+
+        <!--  神吐槽 -->
+        <section class="">
+            <div class="box-pics"></div>
+            <div class="box-pics"></div>
+            <div class="box-pics"></div>
+            <div class="box-pics"></div>
+        </section>
+
+        </section>
+    </div>
+
+</div>
+
+
+
+
+}{
+<script type="text/javascript">
+    seajs.use("hiwowo/pages/page.js")
+</script>
+}
+
+

@@ -69,7 +69,7 @@ object UsersRegLogin extends Controller {
   /* 用户退出  清除缓存*/
   def logout=Action{ implicit  request =>
    // Cache.remove(session.get("user"))
-    Redirect(controllers.routes.Pages.index).withNewSession
+    Redirect("/").withNewSession
   }
 
   /*用户overlay dialog email 登陆*/
@@ -78,7 +78,7 @@ object UsersRegLogin extends Controller {
       formWithErrors => Ok(Json.obj("code" -> 101, "message" -> "密码或者email错误……")),
       user =>{
         val u=UserDao.authenticate(user._1,user._2).get
-        Cache.set(u.id.get.toString,u);
+        Cache.set(u.id.get.toString,u)
         /*记录登陆信息*/
    //     UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)
         Ok(Json.obj( "code" -> 100, "message" ->"success")).withSession("user" -> u.id.get.toString) }
@@ -97,7 +97,7 @@ object UsersRegLogin extends Controller {
      else Redirect(controllers.users.routes.Users.home(user.get.id.get))
   }
   /*用户注册 信息*/
-  def doRegist=Action{  implicit request =>
+  def doRegist = Action{  implicit request =>
     regForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors,0)),
       user =>{
@@ -107,13 +107,12 @@ object UsersRegLogin extends Controller {
         val password =user._2
         val inviteId=user._3
         val name =email.split("@").head
-     val id= UserDao.addHiwowoUser(name,password,email,inviteId,request.remoteAddress)
-        println("id ********  "+id)
-        val u=UserDao.authenticate(email,password)
-        Cache.set(u.get.id.get.toString,u)
-        Ok(views.html.users.regLogin.doRegist(u)).withSession("user" -> u.get.id.get.toString) }
+       val id= UserDao.addHiwowoUser(name,password,email,inviteId,request.remoteAddress)
+        Redirect(controllers.users.routes.Users.welcome(id)).withSession("user" ->id.toString) }
+      //  Ok(views.html.users.regLogin.doRegist(u)).withSession("user" -> u.get.id.get.toString) }
     )
   }
+
 
    /*检查email 是否存在*/
   def checkEmailExist =Action(parse.json) { implicit  request =>

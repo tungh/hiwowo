@@ -1,0 +1,27 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title =  "嗨喔喔—欢迎你来喔喔"
+)(css="/assets/css/template/userWelcome.css") {
+
+    <div class="container" id="regLogin">
+
+           <div class="setting clearfix">
+            <div class="confirm-box">
+
+                <div class="confirm">
+                    <p class="pt20 pb20 clearfix">
+                        非常感谢您注册嗨喔喔会员，我们竭诚为您服务。去<a href="/">首页</a>逛逛吧
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+        }{
+<script type="text/javascript">
+    seajs.use("hiwowo/user/welcome");
+</script>
+}

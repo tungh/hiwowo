@@ -13,7 +13,7 @@ package models
  */
 
 object CheckState extends Enumeration {
-  val UNCHECK = Value("未审核");
+  val UNCHECK = Value("未审核")
   val PASS = Value("审核通过")
   val UNPASS = Value("审核未通过")
 

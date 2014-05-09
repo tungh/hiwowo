@@ -139,94 +139,179 @@
     margin: 0 6px 0 0;
 }
 
-
-.my .site{
-    width: 320px;
-    height: 120px;
+/* my box */
+.my .my-body .box {
+    width: 340px;
+    height: 370px;
     float: left;
-    margin-top: 15px;
-    margin-right: 15px;
-    background: #fff;
-    border-bottom: #000 solid 2px;
+    margin: 10px 0;
     position: relative;
 }
-.my .site .pic{
-    float: left;
+.my .my-body .box .bd{
+    width: 300px;
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+    border: #d8d8d8 1px solid;
+    border-radius: 3px;
+    border-bottom: #b4b4b4 solid 2px;
+}
+.my .my-body .box .bd a.cont{
+    background-color: #fff;
+    color: #009bba;
+    cursor: pointer;
+    height: 285px;
+    overflow: hidden;
+    margin-bottom: 23px;
+    border-radius: 3px 3px 0 0;
     display: block;
-    height: 120px;
+}
+.my .my-body .box .bd a:hover{
+    text-decoration: none;
+    color: #009bba;
+}
+.my .my-body .box .bd .pic{
+    height: 170px;
+    width: 300px;
     overflow: hidden;
 }
-.my .site .pic img{
+.pets. mod-body .box .bd .pic img {
     display: block;
-    width: 120px;
-    height: 120px;
-    border-top: #ccc solid 1px;
+    width: 300px;
+    background: #eee;
 }
-.my .site .info{
-    float: right;
-    width: 180px;
-    padding: 10px;
-}
-.my .site .info p{
-    height: 50px;
-}
-.my .site .info p a {
-    font-size: 14px;
+.my .my-body .box .bd h3{
+    line-height: 28px;
+    font-size: 18px;
     color: #333;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 15px;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-weight: normal;
+    text-shadow: 0 0 2px rgba(0,0,0,0.4);
+    max-height: 80px;
     overflow: hidden;
-    max-height: 50px;
-    font-family: "微软雅黑";
+}
+.my .my-body .box .bd h3 span{
+    display: block;
     font-weight: bold;
 }
-
-.my .site .info .boardNum {
-    position: relative
+.my .my-body .box .bd .intro {
+    padding: 0 20px 0 20px;
+    line-height: 24px;
+    height: 142px;
+    overflow: hidden;
+    color: #888;
+    word-break: break-all;
+    word-wrap: break-word;
+    font-size: 14px;
 }
 
-.my .site .info .boardNum li {
-    height: 18px;
-    line-height: 18px;
-    color: #666;
-    overflow: hidden
+.my .my-body .box .info {
+    overflow: auto;
+    border-top: solid #b4b4b4 1px;
+    padding: 8px 4px;
 }
 
-.my .site .info .boardNum .operateBoard {
-    position: absolute;
+
+.my .my-body .box .info .num {
+    width: 248px;
+    background: #fff;
     bottom: 5px;
-    right: 10px;
-    height: 26px;
-    width: 75px
-}
-
-.my .site .info .boardNum .operateBoard a {
     display: block;
-    height: 26px;
-    width: 75px;
-    color: #fff;
-    border-radius: 2px;
-    text-align: center;
-    line-height: 26px;
-    background: #3c9200
 }
 
-.my .site .info .boardNum .operateBoard a.followBtn {
-    background: #3c9200
+.my .my-body .box .info .num a {
+    float: left;
+    color: #ababab;
+    height: 45px;
+    line-height: 45px;
+    text-align: right;
+    cursor: default;
+    font-weight: bold;
+    width: 40px;
+    font-family: Arial
 }
 
-.my .site .info .boardNum .operateBoard a.unfollowBtn {
-    background: #999
+.my .my-body .box .info .num a.pvCount {
+    background: url(images/amount_read.png) no-repeat right;
+    padding-right: 34px
 }
 
-.my .site .info .boardNum .operateBoard a.canyuBtn {
-    background: #3c9200
+.my .my-body .box .info .num a.commentCount {
+    background: url(images/amount_comment.png) no-repeat right 15px;
+    padding-right: 25px
 }
 
-.my .site .info .boardNum .operateBoard a:hover {
-    background: #999
+.my .my-body .box .info .num a.collectCount {
+    background: url(images/amount_collect.png) no-repeat right 15px;
+    padding-right: 22px
 }
-.my .last{
-    margin-right: 0;
+
+/* tab */
+#followTab{
+    margin-top: 10px;
+    padding-left: 50px;
 }
+.tab-content{
+    padding: 10px;
+}
+
+
+.tab-content .section {
+    padding: 15px 0;
+    background: #fff;
+    cursor: default;
+    position: relative;
+    border-bottom: 1px dotted #ececec
+}
+
+.tab-content .section .user-pic {
+    width: 50px;
+    float: left
+}
+
+.tab-content .section .user-info {
+    margin-left: 60px;
+    padding-right: 110px;
+    height: 50px
+}
+
+.tab-content .section .user-intro {
+    line-height: 25px
+}
+
+.tab-content .section .user-intro a {
+    font-size: 14px
+}
+
+.tab-content .section .user-data  {
+    color: #999;
+    line-height: 25px;
+}
+
+.tab-content .section .follow {
+    width: 110px;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 15px
+}
+
+.tab-content .section .remove-fans {
+    display: none;
+    padding-top: 8px;
+    color: #666;
+    white-space: nowrap
+}
+
+.tab-content .section:hover .remove-fans {
+    display: inline-block
+}
+
+
+
 
 
 

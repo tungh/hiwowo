@@ -1,0 +1,195 @@
+@(user:models.user.User,page:models.Page[models.label.Label])
+@views.html.admin.template(user,"label") {
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> 标签管理 》标签</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                标签筛选
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Labels.filter">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <div class="error-row">
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="title">名称</label>
+                                <input class="form-control" type="text" id="title" name="title" placeholder="名称">
+                            </div>
+                            <div class="form-group">
+                                <label  >审核状态</label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value=""> 所有
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio"  name="status" value="0"> 草稿
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="1"> 发布
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="2"> 审核通过
+                                </label>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="submit" class="btn btn-info" value="筛选"/>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+
+                    <form method="post" id="J_batchForm" action="@controllers.admin.routes.Labels.batch">
+                        <input type="hidden" id="J_url" name="url" value="">
+                        <div class="form-group">
+                            <select id="J_select" class="form-control" name="action">
+                                <option value="-1">批量动作</option>
+                                <option value="2">批量审核通过</option>
+                                <option value="3">批量审核不通过</option>
+                                <option value="4">批量删除</option>
+                            </select>
+                            <div class="form-group">
+                                <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
+                                    批量处理
+                                </button>
+                            </div>
+
+
+                        </div>
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+
+                                <tr>
+                                    <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                                    <th>ID</th>
+                                    <th>名称</th>
+                                    <th>级别</th>
+                                    <th>isHot</th>
+                                    <th>拼写</th>
+                                    <th>订阅数量</th>
+                                    <th>检查状态</th>
+                                    <th>简介</th>
+                                    <th style="width: 60px;">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for((item,i)<- page.items.view.zipWithIndex){
+                                <tr id="@item.id.get" @if(i%2==0){ class="even"} else{ class="odd" } >
+                                <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
+                                <td>@item.id</td>
+                                <td>@item.name</td>
+                                <td>@if(item.level==3){<span class="label label-success">核心</span> } </td>
+                                <td>@if(item.isHot ==1){<span class="label label-info">热门</span> }</td>
+                                <td><span class="label label-default">@item.spell</span> </td>
+                                <td>@item.subscribeNum </td>
+                                <td>@if(item.checkState==0){<span class="label label-warning">未审核</span>} @if(item.checkState ==1){<span class="label label-success">审核通过</span>}@if(item.checkState ==2){<span class="label ">审核不通过</span>}</td>
+
+                                <td>@item.intro.getOrElse("")</td>
+                                <td>
+                                    <a href="@controllers.admin.routes.Labels.edit(item.id.get)"><i class="icon-eye-open"></i>查看</a>
+
+                                </td>
+                                </tr>
+                                }
+
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_paginate">
+                            <ul class="pagination">
+                                @page.prev.map { page =>
+                                <li class="paginate_button previous">
+                                    <a href="controllers.admin.routes.Diagrams.list(page,20)">Prev</a>
+                                </li>
+                                }.getOrElse {
+                                <li class="paginate_button previous disabled">
+                                    <a href="#">Prev</a>
+                                </li>
+                                }
+                                @for(num <-page.nums){
+                                @if(num==page.currentPage){
+                                <li class="paginate_button active"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                }else {
+
+                                <li class="paginate_button"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                }
+
+                                }
+                                @page.next.map { page =>
+                                <li class="paginate_button next">
+                                    <a href="@controllers.admin.routes.Diagrams.list(page,20)">Next</a>
+                                </li>
+                                }.getOrElse {
+                                <li class="paginate_button next disabled">
+                                    <a>Next</a>
+                                </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+
+        </div>
+
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+
+
+
+</div>
+
+
+
+<script type="text/javascript">
+
+
+
+
+</script>
+
+        }

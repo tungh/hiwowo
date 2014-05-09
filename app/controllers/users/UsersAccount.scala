@@ -165,7 +165,7 @@ object UsersAccount  extends Controller {
 
   /* vip 认证 */
   def vip = Users.UserAction{ user => implicit request =>
-    Ok(views.html.users.vip(user) )
+    Ok(views.html.users.account.vip(user) )
   }
 
 

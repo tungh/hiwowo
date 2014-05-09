@@ -3,13 +3,13 @@ package models.user.dao
 import java.sql.Timestamp
 import play.api.Play.current
 import play.api.libs.Codecs
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
 import play.api.cache.Cache
 import play.api.Play.current
 import models.Page
 import models.user._
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+import play.api.db.slick.Config.driver.simple._
+import models.diagram.{Diagrams, Diagram}
+import models.label.{LabelDiagrams, Label, Labels}
 
 /*
 *
@@ -18,14 +18,20 @@ import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
 
 object UserDao {
 
-  /*从connection pool 中 获取jdbc的connection*/
-  implicit val database = Database.forDataSource(DB.getDataSource())
   val users = TableQuery[Users]
   val userStatics = TableQuery[UserStatics]
   val userProfiles = TableQuery[UserProfiles]
+  val userCollects = TableQuery[UserCollects]
+  val userLoves = TableQuery[UserLoves]
+  val userFollows = TableQuery[UserFollows]
+  val userSubscribes = TableQuery[UserSubscribes]
+  val userRecords = TableQuery[UserRecords]
+  val diagrams = TableQuery[Diagrams]
+  val labels = TableQuery[Labels]
+  val labelDiagrams = TableQuery[LabelDiagrams]
 
   /* 验证 */
-  def authenticate(email: String, password: String): Option[User] = database.withDynSession {
+  def authenticate(email: String, password: String): Option[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val user = (for (u <- users if u.email === email && u.password === Codecs.sha1("hiwowo" + password)) yield u).firstOption
     if (!user.isEmpty) {
       Cache.set("user_" + user.get.id.get, user.get)
@@ -35,7 +41,7 @@ object UserDao {
   }
 
   /*find By id*/
-  def findById(uid: Long): User = database.withDynSession {
+  def findById(uid: Long): User = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Cache.getOrElse[User]("user_" + uid) {
       val user = (for (u <- users if u.id === uid) yield u).firstOption
       if (!user.isEmpty) {
@@ -46,7 +52,7 @@ object UserDao {
   }
 
   /*find by email */
-  def findByEmail(email: String): Option[User] = database.withDynSession {
+  def findByEmail(email: String): Option[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val user = (for (u <- users if u.email === email) yield u).firstOption
     if (!user.isEmpty) {
       Cache.set("user_" + user.get.id.get, user.get)
@@ -54,28 +60,17 @@ object UserDao {
     user
   }
 
-  def findUserWithStatic(uid: Long): (User, UserStatic) = database.withDynSession {
-    val query = for {
-      c <- users
-      s <- userStatics
-      if c.id === s.uid
-      if c.id === uid
-    } yield (c, s)
- //   println(query.selectStatement)
-    query.first
-  }
-
 
   /* count user */
-  def countUser = database.withDynSession {
+  def countUser = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(users.length).first
   }
 
-  def countUser(time: Timestamp) = database.withDynSession {
+  def countUser(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Query(users.filter(_.modifyTime > time).length).first
   }
 
-  def countUser(days: Int): Int = database.withDynSession {
+  def countUser(days: Int): Int = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val now = new Timestamp(System.currentTimeMillis())
     val before = new Timestamp(now.getTime - 1000 * 60 * 60 * 24 * days)
 
@@ -85,7 +80,7 @@ object UserDao {
 
   /* 检查第三方用户是否存在 */
   /*查找sns 帐号的用户*/
-  def checkSnsUser(comeFrom: Int, openId: String): Option[User] = database.withDynSession {
+  def checkSnsUser(comeFrom: Int, openId: String): Option[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val user = (for (u <- users if u.comeFrom === comeFrom && u.openId === openId) yield u).firstOption
     if (!user.isEmpty) {
       Cache.set("user_" + user.get.id.get, user)
@@ -94,7 +89,7 @@ object UserDao {
   }
 
   /* 第三方用户初次登陆 */
-  def addSnsUser(name: String, comeFrom: Int, openId: String, pic: String, inviteId: Long) = database.withDynSession {
+  def addSnsUser(name: String, comeFrom: Int, openId: String, pic: String, inviteId: Long):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val usersAutoInc = users.map(u => (u.name, u.comeFrom, u.openId, u.pic)) returning users.map(_.id) into {
       case (_, id) => id
     }
@@ -105,7 +100,7 @@ object UserDao {
   }
 
   /*用户通过网站注册 * */
-  def addHiwowoUser(name: String, password: String, email: String, inviteId: Long, ip: String) = database.withDynSession {
+  def addHiwowoUser(name: String, password: String, email: String, inviteId: Long, ip: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val usersAutoInc = users.map(u => (u.name, u.password, u.email)) returning users.map(_.id) into {
       case (_, id) => id
     }
@@ -117,44 +112,44 @@ object UserDao {
   }
 
   /*修改密码*/
-  def modifyPassword(uid: Long, password: String) = database.withDynSession {
+  def modifyPassword(uid: Long, password: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Cache.remove("user_" + uid)
     (for (c <- users if c.id === uid) yield c.password).update(Codecs.sha1("hiwowo" + password))
   }
 
   /*保存地址*/
-  def modifyAddr(uid: Long, receiver: String, province: String, city: String, street: String, postCode: String, phone: String) = database.withDynSession {
+  def modifyAddr(uid: Long, receiver: String, province: String, city: String, street: String, postCode: String, phone: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
 
     (for (c <- userProfiles if c.uid === uid) yield (c.receiver, c.province, c.city, c.street, c.postCode, c.phone)).update((receiver, province, city, street, postCode, phone))
   }
 
   /*修改user pic*/
-  def modifyPic(uid: Long, pic: String) = database.withDynSession {
+  def modifyPic(uid: Long, pic: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Cache.remove("user_" + uid)
     (for (c <- users if c.id === uid) yield c.pic).update(pic)
   }
 
   /*修改 user email*/
-  def modifyEmail(uid: Long, email: String) = database.withDynSession {
+  def modifyEmail(uid: Long, email: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Cache.remove("user_" + uid)
     (for (c <- users if c.id === uid) yield c.email).update(email)
   }
 
   /*保存基本信息*/
-  def modifyBase(uid: Long, name: String, email: String, intro: String, gender: Int, birth: String, blog: String, qq: String, weixin: String) = database.withDynSession {
+  def modifyBase(uid: Long, name: String, email: String, intro: String, gender: Int, birth: String, blog: String, qq: String, weixin: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     Cache.remove("user_" + uid)
     (for (c <- users if c.id === uid) yield (c.name, c.email, c.intro,c.weixin)).update((name, email, intro, weixin))
     (for (c <- userProfiles if c.uid === uid) yield (c.birth, c.gender, c.blog, c.qq)).update((birth, gender, blog,qq))
   }
 
   /* 修改用户状态 */
-  def modifyStatus(uid: Long, status: Int) = database.withDynSession {
+  def modifyStatus(uid: Long, status: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
       Cache.remove("user_" + uid)
       (for (u <- users if u.id === uid) yield u.status).update(status)
   }
 
   /*  list  user */
-  def findAll(currentPage: Int, pageSize: Int): Page[User] = database.withDynSession {
+  def findAll(currentPage: Int, pageSize: Int): Page[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(users.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -167,7 +162,7 @@ object UserDao {
 
 
   /* find by id with profile */
-  def findWithProfile(uid: Long) = database.withDynSession {
+  def findWithProfile(uid: Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for {
       u <- users
       p <- userProfiles
@@ -176,14 +171,34 @@ object UserDao {
   }
 
   /* find profile*/
-  def findProfile(uid: Long): UserProfile = database.withDynSession {
+  def findProfile(uid: Long): UserProfile = play.api.db.slick.DB.withSession{ implicit session:Session =>
     {
       for (c <- userProfiles if c.uid === uid) yield c
     }.first
   }
+  def findUserWithStatic(uid: Long): (User,UserStatic) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val query = for {
+      c <- users
+      s <- userStatics
+      if c.id === s.uid
+      if c.id === uid
+    } yield (c,s)
+    //   println(query.selectStatement)
+    query.first
+  }
 
+  def findUser(uid:Long):(User,UserProfile,UserStatic) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for {
+        u <- users
+        p <- userProfiles
+        s <- userStatics
+      if u.id === p.uid
+      if u.id === s.uid
+      if u.id === uid
+    }yield(u,p,s) ).first
+  }
   /*用户筛选*/
-  def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], creditsOrder: String, addTimeOrder: String, currentPage: Int, pageSize: Int) = database.withDynSession {
+  def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], creditsOrder: String, addTimeOrder: String, currentPage: Int, pageSize: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for (u <- users) yield u
     if (!name.isEmpty) query = query.filter(_.name like "%" + name.get + "%")
     if (!status.isEmpty) query = query.filter(_.status === status.get)
@@ -204,4 +219,125 @@ object UserDao {
   }
 
 
+
+  /* user collect */
+  def addUserCollect(uid:Long,typeId:Int,collectId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val userCollectAutoInc = userCollects.map(c => (c.uid, c.typeId, c.collectId)) returning userCollects.map(_.id) into {
+      case (_, id) => id
+    }
+    userCollectAutoInc.insert(uid,typeId,collectId)
+  }
+
+  def findUserCollect(uid:Long,typeId:Int,collectId:Long):Option[UserCollect] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for( c<-userCollects if c.uid === uid  if c.typeId === typeId if c.collectId === collectId ) yield c ).firstOption
+  }
+
+  def deleteUserCollect(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for( c<- userCollects if c.id === id)yield c ).delete
+  }
+
+  def deleteUserCollect(uid:Long,typeId:Int,collectId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for( c<- userCollects if c.uid === uid if c.typeId === typeId if c.collectId === collectId )yield c ).delete
+  }
+
+  /* 查找用户收集的 */
+  def findCollectDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(userCollects.filter(_.uid === uid).filter(_.typeId === 0).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list = (for{
+      u<-userCollects
+      c<-diagrams
+      if u.collectId === c.id
+      if u.uid === uid
+      if u.typeId === 0
+    } yield c ).drop(startRow).take(pageSize).list()
+
+    Page[Diagram](list,currentPage,totalPages)
+
+  }
+
+  /* user subscribe 用户订阅 */
+  def addUserSubscribe(uid:Long,labelId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val userSubscribeAutoInc = userSubscribes.map(c => (c.uid, c.labelId)) returning userCollects.map(_.id) into {
+      case (_, id) => id
+    }
+    userSubscribeAutoInc.insert(uid,labelId)
+  }
+
+  def findUserSubscribe(uid:Long,labelId:Long):Option[UserSubscribe] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c <- userSubscribes if c.uid === uid if c.labelId === labelId )yield c ).firstOption
+  }
+
+  def deleteUserSubscribe(uid:Long,labelId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c <- userSubscribes if c.uid === uid if c.labelId === labelId )yield c ).delete
+  }
+  /* 查找订阅的label */
+  def findSubscribeLabels(uid:Long):List[Label] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for{
+      u <- userSubscribes
+      c <- labels
+      if u.labelId === c.id
+      if u.uid === uid
+    } yield c ).list()
+  }
+
+  def findSubscribeDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+      val query = for{
+      s <- userSubscribes
+      ld <- labelDiagrams
+      d <- diagrams
+      if  s.labelId === ld.labelId
+      if  ld.diagramId === d.id
+      if s.uid === uid
+    }yield d
+
+    val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+
+    Page[Diagram](query.drop(startRow).take(pageSize).list(),currentPage,totalPages)
+  }
+
+  /* user subscribe 用户关注 */
+  def addUserFollow(uid:Long,followId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val userFollowAutoInc = userFollows.map(c => (c.uid, c.followId)) returning userFollows.map(_.id) into {
+      case (_, id) => id
+    }
+    userFollowAutoInc.insert(uid,followId)
+  }
+
+  def findUserFollow(uid:Long,followId:Long):Option[UserFollow] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c <- userFollows if c.uid === uid if c.followId === followId )yield c ).firstOption
+  }
+
+  def deleteUserFollow(uid:Long,followId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c <- userFollows if c.uid === uid if c.followId === followId )yield c ).delete
+  }
+
+ def findUserFollows(uid:Long,currentPage:Int,pageSize:Int):Page[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+   val totalRows = Query(userFollows.filter(_.uid === uid).length).first
+   val totalPages = (totalRows + pageSize - 1) / pageSize
+   val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+   val list = (for{
+          c <- userFollows
+          u <- users
+         if c.uid === u.id
+         if c.uid === uid
+   }yield u).drop(startRow).take(pageSize).list()
+   Page[User](list,currentPage,totalPages)
+ }
+
+  def findUserFans(uid:Long,currentPage:Int,pageSize:Int):Page[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(userFollows.filter(_.followId === uid).length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list = (for{
+      c <- userFollows
+      u <- users
+      if c.followId === u.id
+      if c.followId === uid
+    }yield u).drop(startRow).take(pageSize).list()
+    Page[User](list,currentPage,totalPages)
+  }
 }

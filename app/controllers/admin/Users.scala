@@ -43,32 +43,32 @@ object Users  extends Controller {
   )
 
   /*用户管理*/
-def users(p:Int) = Administrators.AdminAction{ administrator => implicit request =>
+def users(p:Int) = Admin.AdminAction{ user => implicit request =>
     val page =UserDao.findAll(p,20)
-  Ok(views.html.admin.users.users(administrator,page))
+  Ok(views.html.admin.users.users(user,page))
 }
    /* 用户拉黑处理 */
-  def black(uid:Long)= Administrators.AdminAction{ administrator => implicit request =>
+  def black(uid:Long)= Admin.AdminAction{ user => implicit request =>
        val result = UserDao.modifyStatus(uid,4)
      if (result>0)Ok(Json.obj("code"->"100","message"->"success"))
      else Ok(Json.obj("code"->"104","message"->"更新失败"))
   }
 
   /* 用户信息修改 */
-  def edit(uid:Long)=Administrators.AdminAction{administrator => implicit request =>
+  def edit(uid:Long)=Admin.AdminAction{user => implicit request =>
        val user =UserDao.findById(uid)
     Ok("succsess")
   }
   /* 用户信息查看*/
-  def view(uid:Long)=Administrators.AdminAction{administrator => implicit request =>
-    val user =UserDao.findWithProfile(uid)
+  def view(uid:Long)=Admin.AdminAction{user => implicit request =>
+    val userWithProfile =UserDao.findWithProfile(uid)
    // val trends = UserDao.findUserTrends(uid)
-    Ok(views.html.admin.users.view(administrator,user))
+    Ok(views.html.admin.users.view(user,userWithProfile))
   }
 
 
   /* 批量处理 */
-  def batchUsers=Administrators.AdminAction{administrator => implicit request =>
+  def batchUsers=Admin.AdminAction{user => implicit request =>
     batchForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       batch => {
@@ -87,12 +87,12 @@ def users(p:Int) = Administrators.AdminAction{ administrator => implicit request
   }
 
   /*用户过滤*/
-  def filterUsers = Administrators.AdminAction{ administrator => implicit request =>
+  def filterUsers = Admin.AdminAction{ user => implicit request =>
     userFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       u => {
         val page=UserDao.filterUsers(u.name,u.status,u.title,u.comeFrom,u.creditsOrder,u.addTimeOrder,u.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.users.filterUsers(administrator,page,userFilterForm.fill(u)))
+        Ok(views.html.admin.users.filterUsers(user,page,userFilterForm.fill(u)))
       }
     )
   }

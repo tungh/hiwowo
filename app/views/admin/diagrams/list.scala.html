@@ -1,0 +1,208 @@
+@(user:models.user.User,page:models.Page[models.diagram.Diagram])
+@views.html.admin.template(user,"diagram") {
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> 图说管理 》图说</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                图说筛选
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Diagrams.filter">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <div class="error-row">
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="title">名称</label>
+                                <input class="form-control" type="text" id="title" name="title" placeholder="名称">
+                            </div>
+                            <div class="form-group">
+                                <label  >审核状态</label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value=""> 所有
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio"  name="status" value="0"> 草稿
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="1"> 发布
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="2"> 审核通过
+                                </label>
+
+
+                            </div>
+                            <div class="form-group">
+                                <label >类型</label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="typeId" value=""> 所有类型
+                                </label>
+
+                                @for(cate<-models.diagram.DiagramType.values){
+                                <label class="radio-inline">
+                                    <input type="radio"  name="typeId" value="@cate.id"> @cate
+                                </label>
+                                }
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="submit" class="btn btn-info" value="筛选"/>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+
+                        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Diagrams.batch">
+                            <input type="hidden" id="J_url" name="url" value="">
+                            <div class="form-group">
+                                <select id="J_select" class="form-control" name="action">
+                                    <option value="-1">批量动作</option>
+                                    <option value="2">批量审核通过</option>
+                                    <option value="3">批量审核不通过</option>
+                                    <option value="4">批量删除</option>
+                                </select>
+                                <div class="form-group">
+                                    <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
+                                        批量处理
+                                    </button>
+                                </div>
+
+
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+
+                        <tr>
+                            <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>图片</th>
+                            <th>类型</th>
+                            <th>状态</th>
+                            <th>添加时间</th>
+                            <th style="width: 60px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for((item,i)<- page.items.view.zipWithIndex){
+                        <tr id="@item.id.get" @if(i%2==0){ class="even"} else{ class="odd" } >
+                        <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
+                        <td>@item.id</td>
+                        <td>@item.title</td>
+                        <td><img src="@item.pic" width="80" height="80"> </td>
+                        <td>@models.diagram.DiagramType(item.typeId)</td>
+
+                        <td>@if(item.status==0){<span class="label label-primary">草稿</span>} @if(item.status ==1){<span class="label label-info">发布</span>}@if(item.status ==2){<span class="label label-success ">审核通过</span>}@if(item.status == 3){<span class="label label-warning ">审核不通过</span>}</td>
+
+                        <td>@item.addTime</td>
+                        <td>
+                            <a href="@controllers.admin.routes.Diagrams.view(item.id.get)"><i class="icon-eye-open"></i>查看</a>
+
+                        </td>
+                        </tr>
+                        }
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+                        </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_paginate">
+                            <ul class="pagination">
+                                @page.prev.map { page =>
+                                <li class="paginate_button previous">
+                                    <a href="controllers.admin.routes.Diagrams.list(page,20)">Prev</a>
+                                </li>
+                                }.getOrElse {
+                                <li class="paginate_button previous disabled">
+                                    <a href="#">Prev</a>
+                                </li>
+                                }
+                                @for(num <-page.nums){
+                                @if(num==page.currentPage){
+                                <li class="paginate_button active"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                }else {
+
+                                <li class="paginate_button"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                }
+
+                                }
+                                @page.next.map { page =>
+                                <li class="paginate_button next">
+                                    <a href="@controllers.admin.routes.Diagrams.list(page,20)">Next</a>
+                                </li>
+                                }.getOrElse {
+                                <li class="paginate_button next disabled">
+                                    <a>Next</a>
+                                </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+
+        </div>
+
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+
+
+
+    </div>
+
+
+
+<script type="text/javascript">
+
+
+
+
+</script>
+
+}
+
+

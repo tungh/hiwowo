@@ -1,0 +1,74 @@
+@(diagramId:Long,page:models.Page[(models.diagram.DiagramDiscuss,models.user.User)],sortBy:String)
+    <div class="pagination clearfix">
+        @if(page.nums.length>1){
+        <span class='refresh @if(sortBy=="new"){active} ' data-order="new" data-diagramid="@diagramId" data-page="@page.currentPage">最新</span>
+        <span class='refresh @if(sortBy=="hot"){active}' data-order="hot" data-diagramid="@diagramId" data-page="@page.currentPage">最热</span>
+        }
+        <div class="pagin inlineblock fl mt10" >
+            @if(page.nums.length>1){
+            @page.prev.map { page =>
+            <a class="pager prev" href="javascript:void(0)" data-page="@page" data-diagramid="@diagramId">上一页</a>
+            }
+            @for(num <-page.nums){
+            @if(num==page.currentPage){
+            <span class="current" >@num</span>
+            }else {
+            <a class="pager" href="javascript:void(0)" data-page="@num" data-diagramid="@diagramId">@num</a>
+            }
+            }
+            @page.next.map { page =>
+            <a class="pager next" href="javascript:void(0)" data-page="@page" data-diagramid="@diagramId">下一页</a>
+            }
+            }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="items clearfix" id="J_items">
+        @for((discuss,user)<-page.items ){
+        <div class="item clearfix">
+            <div class="item-left">
+                <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic"></a>
+            </div>
+            <div class="item-right">
+                <div class="c-head">
+                    <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a>
+                    <span class="fr">@discuss.id.get L</span>
+                </div>
+                <div class="c-body">  @discuss.content  </div>
+                <div class="c-meta">
+                                <span class="main-access fr"> <a class="gray-text">@discuss.addTime</a>
+                                <!--  <a href="javascript:void(0)"  class="report" data-id="@discuss.id.get">举报</a>-->
+                                    <a href="javascript:void(0);" rel="upDiscuss" class="c-up" data-val="@discuss.loveNum" data-id="@discuss.id.get">(@discuss.loveNum)</a>
+                                    <a href="javascript:void(0);" rel="downDiscuss" class="c-down" data-val="@discuss.hateNum" data-id="@discuss.id.get">(@discuss.hateNum)</a>
+                                   <!-- <a  href="javascript:void(0);" class="reply ">回复</a>-->
+                                </span>
+                </div>
+                <div class="c-form"></div>
+            </div>
+        </div>
+        }
+    </div>
+     <div class="clear"></div>
+<div class="pagination clearfix">
+    @if(page.nums.length>1){
+    <span class='refresh @if(sortBy=="new"){active} ' data-order="new" data-diagramid="@diagramId" data-page="@page.currentPage">最新</span>
+    <span class='refresh @if(sortBy=="hot"){active}' data-order="hot" data-diagramid="@diagramId" data-page="@page.currentPage">最热</span>
+    }
+    <div class="pagin inlineblock fl mt10" >
+        @if(page.nums.length>1){
+        @page.prev.map { page =>
+        <a class="pager prev" href="javascript:void(0)" data-page="@page" data-diagramid="@diagramId">上一页</a>
+        }
+        @for(num <-page.nums){
+        @if(num==page.currentPage){
+        <span class="current" >@num</span>
+        }else {
+        <a class="pager" href="javascript:void(0)" data-page="@num" data-diagramid="@diagramId">@num</a>
+        }
+        }
+        @page.next.map { page =>
+        <a class="pager next" href="javascript:void(0)" data-page="@page" data-diagramid="@diagramId">下一页</a>
+        }
+        }
+    </div>
+</div>

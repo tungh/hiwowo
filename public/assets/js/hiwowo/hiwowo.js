@@ -1,6 +1,6 @@
 /**
  * Created by zuosanshao.
- * User: Administrator
+ * User: hiwowo.com
  * Date: 12-10-22
  * Time: 下午8:58
  * Email:zuosanshao@qq.com
@@ -10,7 +10,7 @@
  * Since: 2014-01-18
  * ModifyTime : 2014-01-18
  * ModifyContent: 基础功能
- * http://www.hiwow.com/
+ * http://hiwow.com/
  *
  */
 
@@ -434,11 +434,10 @@ define(function(require, exports) {
                 html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
                 html += '</form></div>';
                 html += '<div class="bd-r">';
-                html += '<p>你也可以使用这些帐号登录</p>';
-                html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
-                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
-                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
+                html += '<p class="mb15">你也可以使用这些帐号登录</p>';
+                html += '<div class="site-openid clearfix"><ul class="fl mr20 outlogin-b">';
+                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
+                html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina&backType=asyn&i=0"><i></i><p>新浪微博</p></a></li>';
                 html += '</ul>';
                 html += '</div>';
                 html += '</div>';
@@ -617,9 +616,9 @@ define(function(require, exports) {
         $("#J_topbar_user").dropDown({
             classNm: ".topbar-dropdown"
         });
-        $("#J_bottombar_user").dropDown({
-            classNm: ".bottombar-dropdown"
-        });
+        $("#J_diagram_sort").dropDown({
+            classNm:".find-diagram-dropdown"
+        })
         $(".feed").hover(function(){
             $(this).find(".link-to-post-holder").show()
         },function(){
@@ -628,7 +627,6 @@ define(function(require, exports) {
         /* 用户登录弹出框 */
         if($("a[rel=loginD]")[0]){
             $("a[rel=loginD]").click(function(event){
-
                 event.preventDefault();
                 $.hiwowo.loginDialog.login();
             });
@@ -712,6 +710,58 @@ define(function(require, exports) {
 
 
 
+
+        ///同步授权登录后关注弹出层
+        window.followHiwowo = function(code,msg,site,flag,refresh){
+            if(code==444){
+                alert(msg);
+                return false;
+            }
+            if((site!="sina" && site!="qzone" ) || flag=="true" ){
+                if(refresh){
+                    window.location.reload();
+                }
+                return false;
+            }
+            var bdClass = "",
+                frameHtml = "";
+            if(site=="sina"){
+                bdClass = "sinaBd";
+                frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
+            }else if(site=="qzone"){
+                bdClass = "qzoneBd";
+                frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
+            }
+
+            if(!$("#followDialog")[0]){
+                var html = '<div id="J_followDialog" class="modal fade">';
+                html +=	'<div class="dialog-content">';
+                html +=	'<div class="hd"><h3></h3></div>';
+                html +=	'<div class="bd clearfix '+bdClass+'">';
+                html +=	'<div class="btnFrame">';
+                html +=	frameHtml;
+                html +=	'</div>';
+                html +=	'</div>';
+                html +=	'<i></i>';
+                html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
+                html +=	'<a class="close" href="javascript:;"></a>';
+                html +=	'</div>';
+                html +=	'</div>';
+                $("body").append(html);
+                $("#J_followDialog").modal('show')
+            }else{
+                $("#J_followDialog").modal('show');
+            }
+            $(document).on("click","#J_followDialog",function(){
+                if($("input[name=noMore]")[0].checked){
+                    Cookie.set("noMoreTip","n");
+                }
+                if(refresh){
+                    window.location.reload();
+                }
+            })
+
+        }
 
         /*异步授权登陆后*/
         window.refresh=function(){

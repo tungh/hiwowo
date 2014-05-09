@@ -1,43 +1,40 @@
 /**
- * Created with IntelliJ IDEA.
- * User: zuosanshao
- * Date: 14-2-1
- * Time: 下午10:49
+ * Created by zuosanshao.
+ * User: hiwowo.com
+ * Email:zuosanshao@qq.com
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
  *
  */
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-  var UM =  require("umeditor");
-    require("umeditor-lang")
-    require("umeditor-emotion")
-    require("umeditor-image")
-    require("umeditor-link")
-    require("umeditor-map")
-    require("umeditor-video")
-    var discussEditor = UM.getEditor('J_discussContent');
-    var topicEditor = UM.getEditor('J_topicContent');
+    require("simpleEditor")
+    isCommited = false;
     //讨论组组件
     $.hiwowo.forum = {
-
         //评论与回复提交前校验
         discussSubmit : function($this){
             $this.attr('disabled',true);
 
-
-                if(discussEditor.getContent()==""){
+                  var content =$("#J_discussContent").val()
+                if(content==""){
                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                     $.hiwowo.tip.show($this,"内容不能为空哦！");
                     $this.attr('disabled',false);
                     return;
                 }
-                if(discussEditor.getPlainTxt() >= 500){
+                if(content >= 500){
                     $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
                     $.hiwowo.tip.show($this,"内容不得超过500字");
                     $this.attr('disabled',false);
                     return;
                 }
-                $("#J_discussContent").val(discussEditor.getContent());
 
             var discuss = {
                 "topicId":parseInt($("#J_topicId").val()),
@@ -45,18 +42,10 @@ define(function(require, exports) {
                 "content": $("#J_discussContent").val()
             };
             var $topicDiscussForm = $("#J_topicDiscussForm");
-            var $textarea = $topicDiscussForm.find("textarea");
+
             $("#J_quoteContent").val($("#J_discussQuote").html())
             if($.hiwowo.loginDialog.isLogin()){
-                if($.trim($textarea.val()) == ""){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"亲，评论内容不能为空哦！");
-                    $this.attr('disabled',false);
-                }else if($.hiwowo.util.getStrLength($textarea.val()) >= 500){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"内容小于10000字！");
-                    $this.attr('disabled',false);
-                }else{
+
                     $this.attr('disabled',false);
 
                     $.ajax({
@@ -93,64 +82,37 @@ define(function(require, exports) {
                     });
                     return false
 
-                }
-            }
-        },
-
-        //帖子创建与编辑
-        editSubmit : function($this){
-            var title = $.trim($("#J_topicTitle").val());
-
-                if(topicEditor.getContent()==""){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"标题和内容不能为空哦！");
-                    $this.attr('disabled',false);
-                    return;
-                }
-                if(topicEditor.getPlainTxt() >= 10000){
-                    $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                    $.hiwowo.tip.show($this,"内容不得超过10000字");
-                    $this.attr('disabled',false);
-                    return;
-                }
-
-                $("#J_topicContent").val(topicEditor.getContent());
-
-            var content = $("#J_topicContent").val();
-            if(title == "" || $.trim(content) == ""){
-                $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.hiwowo.tip.show($this,"标题和内容不能为空哦！");
-            }else if($.hiwowo.util.getStrLength(title) > 50 || $.hiwowo.util.getStrLength(content) >= 10000){
-
-                $.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.hiwowo.tip.show($this,"亲，标题<50字，内容<10000字");
-            }else{
-                $("#J_forumTopicEditForm").submit();
 
             }
         },
-
         //通用讨论组初始化
         init : function(){
+            /* format emotion */
+            $(".J_discussCon").each(function(){
+                var $this = $(this);
+                var html = $this.html();
+                $this.data("content",html)
+                html = $.hiwowo.simpleEditor.decodeFace(html);
+                $this.html(html);
+            })
+
             //评论与回复
             var $discussQuote = $("#J_discussQuote");
             var $topicDiscussForm = $("#J_topicDiscussForm");
-
-
-
             //回复
             $(document).on("click",".J_discussReply",function(){
 
                 var $li = $(this).closest("li");
                 var userInfo = $li.find(".user-info").html();
                 var replyCon = $li.find(".J_discussCon").html();
-
+                alert(userInfo)
                 var segmentHtml = "";
-                segmentHtml += '<blockquote>';
+                segmentHtml += '<blockquote class="clearfix">';
                 segmentHtml += userInfo ;
-                segmentHtml += '<p>' + $.trim(replyCon) + '</p>';
+                segmentHtml += '<p class="fl ml10">' + $.trim(replyCon) + '</p>';
+                segmentHtml +='<a class="close">X</a>';
                 segmentHtml += '</blockquote>';
-                //console.log(segmentHtml);
+
 
                 $discussQuote.html(segmentHtml);
 
@@ -178,24 +140,15 @@ define(function(require, exports) {
                     $.hiwowo.forum.discussSubmit($("#J_discussPublishBtn"));
                 });
             });
-            //话题创建与编辑
-            if($("#J_topicEditBtn")[0]){
-                $("#J_topicTitle").focus(function(){
-                    $.hiwowo.loginDialog.isLogin();
-                });
-                $("#J_topicContent").focus(function(){
-                    $.hiwowo.loginDialog.isLogin();
-                });
-                $("#J_topicEditBtn").click(function(event){
-                    event.preventDefault();
-                    if($.hiwowo.loginDialog.isLogin()){
-                        $.hiwowo.forum.editSubmit($(this));
-                    }
-                });
-            }
+
+
         }
     }
-    $.hiwowo.forum.init();
+
+    $(function(){
+        $.hiwowo.forum.init();
+    })
+
 
 
 

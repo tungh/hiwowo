@@ -1,0 +1,70 @@
+@(user:Option[models.user.User],form:Form[(Option[Long],String,String,Int,Int)])
+@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/editor.css"){
+
+<div class="container">
+
+    <div class="row">
+        <div class="main">
+            <div class="editor-box" >
+                <form action="@controllers.routes.Diagrams.save" method="post" class="post-edit-form" id="J_editForm">
+                <input type="hidden" name="id"   value='@form("id").value' />
+                <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
+                <input type="hidden" name="status" id="J_status" value='@form("status").value'>
+                <div class="editor-title">
+                    <label for="J_title">标题</label>
+                    <input type="text" name="title" class="input" id="J_title" value='@form("title").value'  maxlength='45' />
+                </div>
+                <div class="editor-select">
+                    <div class="main-select">
+                        <span>类型：</span>
+                        <a href="javascript:void(0);"  data-typeid="0"    @if(form("typeId").value.getOrElse("0") =="0") { class="selected" } ><em>乖乖兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="1"   @if(form("typeId").value.getOrElse("0") =="1") { class="selected" }><em>Gif怪兽</em></a>
+                        <a href="javascript:void(0);"  data-typeid="2"  @if(form("typeId").value.getOrElse("0") =="2") { class="selected" }><em>神兽自白</em></a>
+                        <br class='clear' />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="editor-area">
+                    <textarea id="J_editorContent" name="content"   class="b-textarea"> @form("content").value </textarea>
+                </div>
+                <div class="clear"></div>
+
+
+                <p class="func_buttons clearfix" >
+                    <input type="button" class="fl func_button" id="J_saveDraft" value="保存草稿">
+                    <input type="button" class="fr func_button func_publish" id="J_editSubmit" value="发表" >
+
+                </p>
+
+             </form>
+
+            </div>
+          </div>
+        <div class="side">
+            <div class="box  affix">
+                <div class="hd">
+                    <h3>公告栏</h3>
+                </div>
+                <p class="bd" id="J_NoticeCon">
+                    和谐社会，你我共建～
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+}{
+<script type="text/javascript">
+            seajs.use(['jquery','hiwowo/diagram/diagramEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
+                if(HIWOWO.userId == ""){
+                    $.hiwowo.loginDialog.isLogin();
+                }
+                $.hiwowo.editor = $.hiwowo.Editor();
+            })
+</script>
+
+}

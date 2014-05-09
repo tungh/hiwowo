@@ -1,7 +1,7 @@
 package models.msg
 
 import java.sql.Timestamp
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
  /*
  * favorType 0 baobei 1 theme 2 post
  * */

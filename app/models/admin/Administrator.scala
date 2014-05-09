@@ -3,8 +3,7 @@ package models.admin
 
 import play.api.libs.Codecs
 import play.api.Play.current
-import play.api.db.DB
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 import java.sql.Timestamp
 /**
  * Created by zuosanshao.

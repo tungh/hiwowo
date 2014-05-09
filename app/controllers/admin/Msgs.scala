@@ -45,22 +45,22 @@ object Msgs extends Controller {
 
 
 
-  def systemMsgs(currentPage:Int)=Administrators.AdminAction{ administrator => implicit request =>
+  def systemMsgs(currentPage:Int)=Admin.AdminAction{ user => implicit request =>
     val page=SystemMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.systemMsgs(administrator,page))
+    Ok(views.html.admin.msgs.systemMsgs(user,page))
   }
   /*  编辑 系统站内信 */
-  def editSystemMsg(id:Long) = Administrators.AdminAction{ administrator => implicit request =>
-    if (id==0) Ok(views.html.admin.msgs.editSystemMsg(administrator,systemMsgForm))
+  def editSystemMsg(id:Long) = Admin.AdminAction{ user => implicit request =>
+    if (id==0) Ok(views.html.admin.msgs.editSystemMsg(user,systemMsgForm))
     else {
       val systemMsg=SystemMsgDao.findMsg(id)
-      if(systemMsg.isEmpty) Ok(views.html.admin.msgs.editSystemMsg(administrator,systemMsgForm))
-      else  Ok(views.html.admin.msgs.editSystemMsg(administrator,systemMsgForm.fill(SystemMsgFormData(systemMsg.get.id,systemMsg.get.title,systemMsg.get.content))))
+      if(systemMsg.isEmpty) Ok(views.html.admin.msgs.editSystemMsg(user,systemMsgForm))
+      else  Ok(views.html.admin.msgs.editSystemMsg(user,systemMsgForm.fill(SystemMsgFormData(systemMsg.get.id,systemMsg.get.title,systemMsg.get.content))))
     }
   }
-  def saveSystemMsg = Administrators.AdminAction{ administrator => implicit request =>
+  def saveSystemMsg = Admin.AdminAction{ user => implicit request =>
     systemMsgForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.admin.msgs.editSystemMsg(administrator,formWithErrors)),
+      formWithErrors => BadRequest(views.html.admin.msgs.editSystemMsg(user,formWithErrors)),
       systemMsg => {
         /*如果group id 为空，则保存数据 ，否则，则update数 */
         if(systemMsg.id.isEmpty){
@@ -75,18 +75,18 @@ object Msgs extends Controller {
   }
 
   /* 筛选 系统站内信 */
-   def filterSystemMsgs = Administrators.AdminAction{ administrator => implicit request =>
+   def filterSystemMsgs = Admin.AdminAction{ user => implicit request =>
     systemMsgFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       msg => {
         val page=SystemMsgDao.filterMsgs(msg.title,msg.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.msgs.filterSystemMsgs(administrator,page,systemMsgFilterForm.fill(msg)))
+        Ok(views.html.admin.msgs.filterSystemMsgs(user,page,systemMsgFilterForm.fill(msg)))
       }
     )
 
   }
   /* 批量处理站内信 */
-  def batchSystemMsgs  = Administrators.AdminAction{ administrator => implicit request =>
+  def batchSystemMsgs  = Admin.AdminAction{ user => implicit request =>
     batchForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       batch => {
@@ -108,23 +108,23 @@ object Msgs extends Controller {
     )
   }
 
-  def systemMsgReceivers(currentPage:Int) = Administrators.AdminAction{ administrator => implicit request =>
+  def systemMsgReceivers(currentPage:Int) = Admin.AdminAction{ user => implicit request =>
     val page = SystemMsgDao.findAllMsgReceivers(currentPage,50)
-    Ok(views.html.admin.msgs.systemMsgReceivers(administrator,page))
+    Ok(views.html.admin.msgs.systemMsgReceivers(user,page))
   }
 
-  def atMsgs(currentPage:Int)=Administrators.AdminAction{ administrator => implicit request =>
+  def atMsgs(currentPage:Int)=Admin.AdminAction{ user => implicit request =>
    val page = AtMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.atMsgs(administrator,page))
+    Ok(views.html.admin.msgs.atMsgs(user,page))
   }
-  def favorMsgs(currentPage:Int) =Administrators.AdminAction{ administrator => implicit request =>
+  def favorMsgs(currentPage:Int) =Admin.AdminAction{ user => implicit request =>
     val page = FavorMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.favorMsgs(administrator,page))
+    Ok(views.html.admin.msgs.favorMsgs(user,page))
   }
 
-  def discussMsgs(currentPage:Int) =Administrators.AdminAction{ administrator => implicit request =>
+  def discussMsgs(currentPage:Int) =Admin.AdminAction{ user => implicit request =>
     val page = DiscussMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.discussMsgs(administrator,page))
+    Ok(views.html.admin.msgs.discussMsgs(user,page))
   }
 
 

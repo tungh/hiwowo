@@ -1,9 +1,15 @@
 /**
  * Created by zuosanshao.
- * User: Administrator
- * Date: 12-10-2
- * Time: 下午6:52
+ * User: hiwowo.com
  * Email:zuosanshao@qq.com
+ * @contain:
+ * @depends:
+ * Includes:
+ * Since: 2014-5-3  上午11:35
+ * ModifyTime :
+ * ModifyContent:
+ * http://hiwowo.com/
+ *
  */
 define(function (require,exports) {
     var $ =jQuery = require("jquery");

@@ -5,7 +5,11 @@ import controllers.users.Users
 import models.user.dao.UserDao
 
 import models.user.User
-import models.term.dao.TermDao
+import models.label.dao.LabelDao
+import org.ansj.domain.Term
+import org.ansj.splitWord.analysis.ToAnalysis
+import java.util
+import org.ansj.app.keyword.{Keyword, KeyWordComputer}
 
 
 /**
@@ -26,8 +30,10 @@ object Test extends Controller {
 //    TermDao.addTerm("hiwowo","嗨喔喔","这里是简介，有可能会被用上，也可以用作为 备注",3)
 //val term   = TermDao.checkTerm("hiwowo")
 //  if(term.isEmpty) println("term not exists") else println("term exists")
-    TermDao.addTermRelation(1,1,0)
-    Ok(" Ok! ")
+//    TermDao.addTermRelation(1,1,0)
+
+    val result = UserDao.findUser(1)
+    Ok(" Ok! " + result.toString)
   }
 
 

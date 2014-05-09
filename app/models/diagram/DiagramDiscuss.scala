@@ -1,5 +1,5 @@
 package models.diagram
-import scala.slick.driver.MySQLDriver.simple._
+import play.api.db.slick.Config.driver.simple._
 
 import java.sql.Timestamp
 /**
@@ -13,10 +13,11 @@ case class DiagramDiscuss  (
                              id: Option[Long],
                              uid:Long,
                              diagramId:Long,
-                             thirdId:Long,
-                             typeId:Int,
                              quoteContent:Option[String],
                              content:String,
+                             loveNum:Int,
+                             hateNum:Int,
+                             reportNum:Int,
                              checkState:Int,
                              addTime:Option[Timestamp]
                              )
@@ -24,15 +25,16 @@ case class DiagramDiscuss  (
 class DiagramDiscusses(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def diagramId = column[Long]("uid")
-  def thirdId = column[Long]("third_id")
-  def typeId = column[Int]("type_id")
+  def diagramId = column[Long]("diagram_id")
   def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
+  def loveNum = column[Int]("love_num")
+  def hateNum = column[Int]("hate_num")
+  def reportNum = column[Int]("report_num")
   def checkState = column[Int]("check_state")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,diagramId,thirdId,typeId,quoteContent.?, content, checkState, addTime.? ) <> (DiagramDiscuss.tupled, DiagramDiscuss.unapply)
+  def * =(id.?,uid,diagramId,quoteContent.?, content, loveNum, hateNum, reportNum,checkState, addTime.? ) <> (DiagramDiscuss.tupled,DiagramDiscuss.unapply)
 
 
 }
