@@ -1,4 +1,4 @@
-@(user:models.user.User,labels:models.label.Label)
+@(user:models.user.User,labels:List[models.label.Label])
 @views.html.admin.template(user,"label") {
 
 <div class="row">
@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-lg-3">
-                <a href="@controllers.admin.routes.Labels.editGroup(0)"><button type="button" class="btn btn-primary btn-lg btn-block">创建新标签组</button></a>
+                <a href="#"><button type="button" class="btn btn-primary btn-lg btn-block">添加标签</button></a>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @for( item <- labels){
+                                    @for( (item,i) <- labels.view.zipWithIndex){
                                     <tr id="@item.id.get" @if(i%2==0){ class="even"} else{ class="odd" } >
                                     <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
                                     <td>@item.id</td>

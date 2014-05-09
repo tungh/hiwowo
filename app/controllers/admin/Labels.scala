@@ -29,12 +29,14 @@ object Labels extends Controller {
 
 
   def list(p:Int,size:Int)  =  Admin.AdminAction{ user => implicit request =>
-
-    Ok("todo")
+      val page =LabelDao.findAllLabels(p,size)
+    Ok(views.html.admin.labels.labels(user,page))
   }
 
   def core(p:Int,size:Int)  = Admin.AdminAction{user => implicit request =>
-    Ok("todo")
+    val page = LabelDao.findCoreLabels(3,p,size)
+    println(page.totalPages)
+     Ok(views.html.admin.labels.coreLabels(user,page))
   }
 
   def edit(id:Long)  = Admin.AdminAction{ user => implicit request =>

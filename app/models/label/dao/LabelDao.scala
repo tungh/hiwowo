@@ -34,7 +34,7 @@ object LabelDao {
     (for(c<-groups if c.id === id) yield c.status).update(status)
   }
 
-  def deleteGroup(id:Long):Group = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def deleteGroup(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-groups if c.id === id) yield c ).delete
   }
 
@@ -96,7 +96,27 @@ object LabelDao {
   def findLabelByName(name:String):Option[Label] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for(t <- labels if t.name === name ) yield t ).firstOption
   }
+ def  findAllLabels(currentPage:Int,pageSize:Int):Page[Label] =  play.api.db.slick.DB.withSession{ implicit session:Session =>
+   val totalRows = Query(labels.length).first()
+   val totalPages = (totalRows + pageSize - 1) / pageSize
+   val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+   val list = (for{
+    c <- labels
+ }yield c ).drop(startRow).take(pageSize).list()
 
+   Page[Label](list,currentPage,totalPages)
+ }
+  def findCoreLabels(level:Int,currentPage:Int,pageSize:Int):Page[Label] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(labels.filter(_.level === level).length).first()
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list =( for{
+      c <- labels
+      if c.level === level
+    }yield c ).drop(startRow).take(pageSize).list()
+    Page[Label](list,currentPage,totalPages)
+
+  }
 
   /* add group label */
   def addGroupLabel(groupId:Long,labelId:Long)= play.api.db.slick.DB.withSession{ implicit session:Session =>

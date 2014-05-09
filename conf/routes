@@ -134,7 +134,7 @@ POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
 
 #管理后台 标签管理
 GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=20)
-GET   /admin/labels/core           controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/labels/core           controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=100)
 GET   /admin/labels/filter            controllers.admin.Labels.filter
 GET   /admin/labels/edit          controllers.admin.Labels.edit(id:Long ?=0L)
 POST  /admin/labels/save              controllers.admin.Labels.save
