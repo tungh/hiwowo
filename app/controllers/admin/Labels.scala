@@ -35,7 +35,6 @@ object Labels extends Controller {
 
   def core(p:Int,size:Int)  = Admin.AdminAction{user => implicit request =>
     val page = LabelDao.findCoreLabels(3,p,size)
-    println(page.totalPages)
      Ok(views.html.admin.labels.coreLabels(user,page))
   }
 
