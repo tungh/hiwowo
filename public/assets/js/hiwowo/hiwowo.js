@@ -484,7 +484,7 @@ define(function(require, exports) {
                 return false;
             });
 
-            $(".snslogin a").unbind("click").click(function(){
+            $(".site-openid a").unbind("click").click(function(){
                 var snsurl = $(this).attr("href");
                 $.hiwowo.util.openWin(snsurl);
                 return false;

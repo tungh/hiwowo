@@ -34,7 +34,7 @@ object UsersSnsLogin extends Controller {
     if(snsType=="qzone"){
       Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101050057&state=qq&redirect_uri=http://hiwowo.com/user/qzone/registed/"+backType+"/"+id)
     }else if (snsType=="sina"){
-      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1905427044&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed/"+backType+"/"+id)
+      Redirect("https://api.weibo.com/oauth2/authorize?client_id=464981938&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed/"+backType+"/"+id)
     }
     else{
       Ok("亲，我们只支持qq帐号登录和新浪微博登陆哦…… ")
@@ -74,7 +74,7 @@ object UsersSnsLogin extends Controller {
        val entity2=resp2.getEntity
        //println("ssssssssssssssssssssssssssss"+EntityUtils.getContentCharSet(entity2))
        val info=EntityUtils.toString(entity2,"UTF-8")
-
+        println("info " + info)
        val json2 =Json.parse(info)
        val nickName= (json2 \ "nickname").as[String]
        val pic = (json2 \ "figureurl_1").as[String]
@@ -88,7 +88,8 @@ object UsersSnsLogin extends Controller {
        }
         /* 处理result */
        if (backType=="asyn"){
-         Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
+      //   Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
+        Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
        }else{
       //  Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
          Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
@@ -96,7 +97,7 @@ object UsersSnsLogin extends Controller {
      }
      /* 新浪微博登陆 */
      else if(snsType=="sina"){
-       val get = new HttpPost("https://api.weibo.com/oauth2/access_token?client_id=1905427044&client_secret=723d3b32fda467dcfe0414844d5848bb&grant_type=authorization_code&redirect_uri=http://hiwowo.com/user/sina/registed&state=sina&code="+code)
+       val get = new HttpPost("https://api.weibo.com/oauth2/access_token?client_id=464981938&client_secret=1d6a07dad61c1cac0e1dd27b1c073613&grant_type=authorization_code&redirect_uri=http://hiwowo.com/user/sina/registed&state=sina&code="+code)
        val client =new DefaultHttpClient()
        val resp= client.execute(get)
        val entity=resp.getEntity
@@ -104,15 +105,15 @@ object UsersSnsLogin extends Controller {
        val json =Json.parse(r)
        val assessToken=(json \ "access_token").as[String]
        val openId =(json \ "uid").as[String]
-       val getInfo = new HttpGet("https://api.weibo.com/2/users/show.json?access_token="+assessToken+"&uid="+openId)
+       val getInfo = new HttpGet("https://api.weibo.com/2/users/show.json?source=464981938&access_token"+assessToken+"&uid="+openId)
        val client2 =new DefaultHttpClient()
        val resp2= client2.execute(getInfo)
        val entity2=resp2.getEntity
        //println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity2))
        val r2=EntityUtils.toString(entity2)
-       //println(r2)
+       println(r2)
        val json2 =Json.parse(r2)
-       val nickName = (json2 \ "name").as[String]
+       val nickName = (json2 \ "screen_name").as[String]
        val pic = (json2 \ "profile_image_url").as[String]
 
         /* 查找用户信息 */
