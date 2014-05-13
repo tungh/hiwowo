@@ -1,4 +1,4 @@
-@(user:models.user.User,labels:List[models.label.Label])
+@(user:models.user.User,gid:Long,labels:List[models.label.Label])
 @views.html.admin.template(user,"label") {
 
 <div class="row">
@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-lg-3">
-                <a href="#"><button type="button" class="btn btn-primary btn-lg btn-block">添加标签</button></a>
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addModal">添加标签组-标签</button>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
 
                                     <td>@item.intro.getOrElse("")</td>
                                     <td>
-                                        <a href="@controllers.admin.routes.Labels.edit(item.id.get)"><i class="icon-eye-open"></i>查看</a>
+                                        <button class="btn btn-primary J_deleteGroupLabel" data-gid="@gid" data-lid="@item.id.get" data-toggle="modal" data-target="#deleteModal"><i class="icon-eye-open"></i>删除</button>
 
                                     </td>
                                     </tr>
@@ -90,14 +90,110 @@
 
 </div>
 
-
+<!-- delete Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addModalLabel"> 添加标签组-标签</h4>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="groupId" id="J_groupId" value="@gid">
+                <div class="form-group">
+                    <label  for="J_labelId">标签Id</label>
+                    <input class="form-control" type="number" id="J_labelId" name="labelId" placeholder="labelId">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="J_saveGroupLabel">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="deleteModalLabel"> 添加标签组-标签</h4>
+            </div>
+            <div class="modal-body">
+               你确信要删除吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="J_deleteGroupLabel">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <script type="text/javascript">
 
     //
+   $(function(){
+       $("#J_saveGroupLabel").click(function(){
+           var data={
+             groupId:parseInt($("#J_groupId").val()),
+             labelId:parseInt($("#J_labelId").val())
+           };
+           $.ajax({
+               url:"/admin/labels/addGroupLabel",
+               type : "POST",
+               contentType:"application/json; charset=utf-8",
+               dataType: "json",
+               data:JSON.stringify(data),
 
+               success: function(data){
+                   if(data.code=="100"){
+                       window.location.reload();
+                   }else if(data.code =="104"){
+                       alert(data.message)
+                   } else if(data.code =="103"){
+                      alert(data.message)
+                   } else if(data.code =="200"){
+                       alert(data.message)
+                   }else if(data.code=="204"){
+                       alert(data.message)
+                   }
+               }
+           });
+       })
+       $(".J_deleteGroupLabel").click(function(){
+           var data={
+               groupId:parseInt($(this).data("gid")),
+               labelId:parseInt($(this).data("lid"))
+           };
+           $.ajax({
+               url:"/admin/labels/deleteGroupLabel",
+               type : "POST",
+               contentType:"application/json; charset=utf-8",
+               dataType: "json",
+               data:JSON.stringify(data),
+
+               success: function(data){
+                   if(data.code=="100"){
+                       window.location.reload();
+                   }else if(data.code =="104"){
+                       alert(data.message)
+                   } else if(data.code =="103"){
+                       alert(data.message)
+                   } else if(data.code =="200"){
+                       alert(data.message)
+                   }else if(data.code=="204"){
+                       alert(data.message)
+                   }
+               }
+           });
+       })
+   })
 
 
 </script>
+
+
 
         }

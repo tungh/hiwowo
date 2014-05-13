@@ -181,7 +181,7 @@ object Labels extends Controller {
       /* 查看group 下面的 labels*/
   def groupLabels(gid:Long)  = Admin.AdminAction{ user => implicit request =>
         val labels= LabelDao.findGroupLabels(gid)
-        Ok(views.html.admin.labels.groupLabels(user,labels))
+        Ok(views.html.admin.labels.groupLabels(user,gid,labels))
       }
 
   def addGroupLabel  = Action(parse.json){  implicit request =>

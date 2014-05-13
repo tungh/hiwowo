@@ -51,7 +51,7 @@ object LabelDao {
     Page[Group](list,currentPage,totalPages)
   }
      /*  查找 group 下 的 标签 */
-  def findGroupLabels(gid:Long) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findGroupLabels(gid:Long):List[Label] =  play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for{
       g <- groups
       gl <- groupLabels
