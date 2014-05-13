@@ -8,7 +8,7 @@ import java.sql.Timestamp
  * Date: 14-2-21
  * Time: 下午3:27
  * 图说
- * typeId 0:图文  1 图说
+ * typeId 0:图文  1 图说  3 gif 4 video
  * status 0 草稿 1 发布 2 审核成功 3 审核失败
  */
 case class Diagram (

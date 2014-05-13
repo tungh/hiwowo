@@ -32,6 +32,7 @@ object Diagrams extends Controller {
   def view(id:Long)= Admin.AdminAction{user => implicit request =>
     Ok("todo")
   }
+
   def delete= Admin.AdminAction{user => implicit request =>
    Ok("todo")
   }
