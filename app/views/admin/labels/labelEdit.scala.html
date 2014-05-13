@@ -1,0 +1,111 @@
+@(user:models.user.User,form:Form[controllers.admin.LabelEditFormData])
+@views.html.admin.template(user,"label") {
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> 标签管理 》编辑标签</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                编辑标签
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form  id="J_filterForm" method="POST" action="@controllers.admin.routes.Labels.save">
+                            <input type="hidden" name="id" id="J_id" value='@form("id").value'>
+                            <div class="error-row">
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label  for="name">名称</label>
+                                <input class="form-control" type="text" id="name" name="name" value='@form("name").value' placeholder="名称">
+                            </div>
+                            <div class="form-group">
+                                <label  for="spell">拼写</label>
+                                <input class="form-control" type="text" id="spell" name="spell" value='@form("spell").value' placeholder="spell">
+                            </div>
+                            <div class="form-group">
+                                <label for="intro">简介</label>
+
+                                <textarea id="intro" class="form-control" name="intro">@form("intro").value</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>级别 </label>
+
+
+                                <label class="radio-inline">
+                                    <input type="radio"  name="level" value="1" @if(form("level").value.getOrElse("none")=="1"){ checked="true" }> 普通
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="level" value="2" @if(form("level").value.getOrElse("none")=="2"){ checked="true" }> 扩展
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="level" value="3" @if(form("level").value.getOrElse("none")=="3"){ checked="true" }> 核心
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>is hot </label>
+
+
+                                <label class="radio-inline">
+                                    <input type="radio"  name="isHot" value="0" @if(form("isHot").value.getOrElse("none")=="0"){ checked="true" }> No
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="isHot" value="1" @if(form("isHot").value.getOrElse("none")=="1"){ checked="true" }> Yes
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label  >审核状态</label>
+
+
+                                <label class="radio-inline">
+                                    <input type="radio"  name="checkState" value="0"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 未审核
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核成功
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核未通过
+                                </label>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="submit" class="btn btn-info" value="保存"/>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+       <script type="text/javascript">
+            $(function(){
+
+            })
+       </script>
+
+        }
+
+

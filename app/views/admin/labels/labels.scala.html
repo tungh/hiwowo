@@ -7,6 +7,11 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-lg-3">
+        <a href="@controllers.admin.routes.Labels.edit(0)"><button type="button" class="btn btn-primary btn-lg btn-block">创建新标签</button></a>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -22,23 +27,57 @@
                             </div>
 
                             <div class="form-group">
-                                <label  for="title">名称</label>
-                                <input class="form-control" type="text" id="title" name="title" placeholder="名称">
+                                <label  for="name">名称</label>
+                                <input class="form-control" type="text" id="name" name="name" placeholder="名称">
+                            </div>
+                            <div class="form-group">
+                                <label  for="spell">拼写</label>
+                                <input class="form-control" type="text" id="spell" name="spell" placeholder="spell">
+                            </div>
+                            <div class="form-group">
+                                <label>级别 </label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="level" value=""> 所有
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio"  name="level" value="1"> 普通
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="level" value="2"> 扩展
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="level" value="3"> 核心
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>is hot </label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="isHot" value=""> 所有
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio"  name="isHot" value="0"> No
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="isHot" value="1"> Yes
+                                </label>
+
                             </div>
                             <div class="form-group">
                                 <label  >审核状态</label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value=""> 所有
+                                    <input type="radio" name="checkState" value=""> 所有
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"  name="status" value="0"> 草稿
+                                    <input type="radio"  name="checkState" value="0"> 未审核
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="1"> 发布
+                                    <input type="radio" name="checkState" value="1"> 审核成功
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="status" value="2"> 审核通过
+                                    <input type="radio" name="checkState" value="2"> 审核未通过
                                 </label>
 
 
@@ -76,9 +115,9 @@
                         <div class="form-group">
                             <select id="J_select" class="form-control" name="action">
                                 <option value="-1">批量动作</option>
-                                <option value="2">批量审核通过</option>
-                                <option value="3">批量审核不通过</option>
-                                <option value="4">批量删除</option>
+                                <option value="1">批量审核通过</option>
+                                <option value="2">批量审核不通过</option>
+                                <option value="3">批量删除</option>
                             </select>
                             <div class="form-group">
                                 <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
@@ -112,8 +151,8 @@
                                 <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
                                 <td>@item.id</td>
                                 <td>@item.name</td>
-                                <td>@if(item.level==3){<span class="label label-success">核心</span> } </td>
-                                <td>@if(item.isHot ==1){<span class="label label-info">热门</span> }</td>
+                                <td>@if(item.level==3){<span class="label label-success">核心</span> }else{<span class="label label-info">普通</span> } </td>
+                                <td>@if(item.isHot ==1){<span class="label label-info">Yes</span> }else {<span class="label label-info">No</span> }</td>
                                 <td><span class="label label-default">@item.spell</span> </td>
                                 <td>@item.subscribeNum </td>
                                 <td>@if(item.checkState==0){<span class="label label-warning">未审核</span>} @if(item.checkState ==1){<span class="label label-success">审核通过</span>}@if(item.checkState ==2){<span class="label ">审核不通过</span>}</td>

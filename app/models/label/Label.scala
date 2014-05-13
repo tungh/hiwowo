@@ -25,7 +25,7 @@ case class Label(
                 level:Int,
                 intro:Option[String],
                 isHot:Int,
-                spell:String,
+                spell:Option[String],
                 checkState:Int,
                 addNum:Int,
                 subscribeNum:Long,
@@ -41,9 +41,9 @@ class Labels(tag:Tag) extends Table[Label](tag,"label") {
   def spell = column[String]("spell")
   def checkState = column[Int]("check_state")
   def addNum = column[Int]("add_num")
-  def subscibeNum = column[Long]("subscribe_num")
+  def subscribeNum = column[Long]("subscribe_num")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,name,level,intro.?,isHot,spell,checkState,addNum,subscibeNum,addTime.?) <> (Label.tupled, Label.unapply)
+  def * =(id.?,name,level,intro.?,isHot,spell.?,checkState,addNum,subscribeNum,addTime.?) <> (Label.tupled, Label.unapply)
 
 
 }

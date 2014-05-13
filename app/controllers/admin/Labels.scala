@@ -15,16 +15,51 @@ import play.api.libs.json.Json
  * Time: 下午11:35
  */
 
+case class LabelEditFormData(
+                              id: Option[Long],
+                              name: String,
+                              level: Int,
+                              intro: Option[String],
+                              isHot: Int,
+                              spell: Option[String],
+                              checkState: Int)
 
-
+case class LabelFilterFormData(
+                              name: Option[String],
+                              level: Option[Int],
+                              isHot: Option[Int],
+                              spell: Option[String],
+                              checkState: Option[Int],
+                              currentPage:Option[Int])
 object Labels extends Controller {
-  val editGroupForm =Form(
+  val groupEditForm =Form(
     tuple(
       "id"->optional(longNumber),
       "name" ->nonEmptyText ,
       "intro"->optional(text),
       "status"->number
     )
+  )
+  val labelFilterForm =Form(
+    mapping(
+      "name"->optional(text),
+      "level"->optional(number),
+      "isHot"->optional(number),
+      "spell"->optional(text),
+      "checkState"->optional(number),
+      "currentPage"->optional(number)
+    )(LabelFilterFormData.apply)(LabelFilterFormData.unapply)
+  )
+  val labelEditForm =Form(
+    mapping(
+      "id"->optional(longNumber),
+      "name"->text,
+      "level"->number,
+      "intro"->optional(text),
+      "isHot"->number,
+      "spell"->optional(text),
+      "checkState"->number
+    )(LabelEditFormData.apply)(LabelEditFormData.unapply)
   )
 
 
@@ -40,28 +75,67 @@ object Labels extends Controller {
 
   def edit(id:Long)  = Admin.AdminAction{ user => implicit request =>
 
-    Ok("todo")
+    if(id == 0) { Ok(views.html.admin.labels.labelEdit(user,labelEditForm)) }
+    else{
+      val label = LabelDao.findLabelById(id)
+      Ok(views.html.admin.labels.labelEdit(user,labelEditForm.fill(LabelEditFormData(label.get.id,label.get.name,label.get.level,label.get.intro,label.get.isHot,label.get.spell,label.get.checkState))))
+    }
 
+  }
+
+
+  def save  = Admin.AdminAction{ user => implicit request =>
+    labelEditForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      data => {
+        if(data.id.getOrElse(0) == 0) {
+          LabelDao.addLabel(data.name,data.level,data.intro,data.isHot,data.spell,data.checkState)
+        } else{
+          LabelDao.modifyLabel(data.id.get,data.name,data.level,data.intro,data.isHot,data.spell,data.checkState)
+        }
+        Redirect(controllers.admin.routes.Labels.list(1,20))
+      })
   }
   def check  = Admin.AdminAction{ user => implicit request =>
     Ok("todo")
   }
-
-  def save  = Admin.AdminAction{ user => implicit request =>
-   Ok("todo")
-  }
-
   def delete  = Admin.AdminAction{ user => implicit request =>
    Ok("todo")
   }
 
   def filter = Admin.AdminAction{ user => implicit request =>
-    Ok("todo")
+    labelFilterForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      filterCondition => {
+        val page=LabelDao.filterLabels(filterCondition.name,filterCondition.level,filterCondition.isHot,filterCondition.spell,filterCondition.checkState,filterCondition.currentPage.getOrElse(1),20)
+        Ok(views.html.admin.labels.filterLabels(user,page,labelFilterForm.fill(filterCondition)))
+      }
+    )
   }
 
   def batch = Admin.AdminAction{ user => implicit request =>
-    Ok("todo")
+    BatchFormData.batchForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      batch => {
+        if(batch.action == 1){
+          for(id<-batch.ids){
+            LabelDao.modifyLabelCheckState(id,1)
+          }
+        }else if (batch.action ==2){
+          for(id<-batch.ids){
+            LabelDao.modifyLabelCheckState(id,2)
+          }
+        } else if (batch.action ==3){
+          for(id<-batch.ids){
+            LabelDao.deleteLabel(id)
+          }
+        }
+
+        Redirect(batch.url.getOrElse("/admin/labels/list"))
+      }
+    )
   }
+
 
   /* 标签组管理  */
 
@@ -71,15 +145,15 @@ object Labels extends Controller {
   }
 
   def editGroup(id:Long) = Admin.AdminAction{ user => implicit request =>
-    if(id == 0) { Ok(views.html.admin.labels.editGroup(user,editGroupForm)) }
+    if(id == 0) { Ok(views.html.admin.labels.groupEdit(user,groupEditForm)) }
     else{
       val group = LabelDao.findGroup(id)
-      Ok(views.html.admin.labels.editGroup(user,editGroupForm.fill((group.id,group.name,group.intro,group.status))))
+      Ok(views.html.admin.labels.groupEdit(user,groupEditForm.fill((group.id,group.name,group.intro,group.status))))
     }
   }
 
   def saveGroup = Admin.AdminAction{ user => implicit request =>
-    editGroupForm.bindFromRequest.fold(
+    groupEditForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       groupData => {
         if(groupData._1.getOrElse(0) == 0) {
