@@ -89,7 +89,7 @@ object UsersSnsLogin extends Controller {
         /* 处理result */
        if (backType=="asyn"){
       //   Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
-        Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
+        Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
        }else{
       //  Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
          Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
