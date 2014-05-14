@@ -126,11 +126,14 @@ POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
 
 #管理后台  图说管理
 GET   /admin/diagrams/list           controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=20)
-GET   /admin/diagrams/view         controllers.admin.Diagrams.view(id:Long)
+GET   /admin/diagrams/edit         controllers.admin.Diagrams.edit(id:Long)
 GET  /admin/diagrams/filter            controllers.admin.Diagrams.filter
 POST   /admin/diagrams/delete         controllers.admin.Diagrams.delete
 POST   /admin/diagrams/check          controllers.admin.Diagrams.check
 POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
+POST  /admin/diagrams/saveDiagram       controllers.admin.Diagrams.saveDiagram
+POST  /admin/diagrams/saveDiagramPic     controllers.admin.Diagrams.saveDiagramPic
+
 
 #管理后台 标签管理
 GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=20)

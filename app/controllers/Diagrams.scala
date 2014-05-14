@@ -137,7 +137,7 @@ object  Diagrams extends Controller {
         }
         val pic =uploadImages.first().attr("src")
        // val tags = extractTags(diagramTitle.get,intro)
-          val tags =List("可爱","有趣","萌","尼玛")
+          val tags =List("萌宠","有趣","二货主人","神吐槽","喵星人","汪星人")
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
           val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId,"tags"->Json.toJson(tags)))

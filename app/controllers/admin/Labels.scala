@@ -77,9 +77,7 @@ object Labels extends Controller {
       Ok(views.html.admin.labels.coreLabels(user, page))
   }
 
-  def edit(id: Long) = Admin.AdminAction {
-    user => implicit request =>
-
+  def edit(id: Long) = Admin.AdminAction {  user => implicit request =>
       if (id == 0) {
         Ok(views.html.admin.labels.labelEdit(user, labelEditForm))
       }

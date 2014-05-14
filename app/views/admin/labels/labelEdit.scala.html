@@ -69,10 +69,10 @@
                                     <input type="radio"  name="checkState" value="0"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 未审核
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核成功
+                                    <input type="radio" name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="1"){ checked="true" }> 审核成功
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核未通过
+                                    <input type="radio" name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="2"){ checked="true" }> 审核未通过
                                 </label>
 
 
