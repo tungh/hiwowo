@@ -64,13 +64,13 @@ object LabelDao {
   }
 
   /* label dao */
-  def addLabel(name:String,level:Int,intro:Option[String],isHot:Int,spell:Option[String],checkState:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def addLabel(name:String,level:Int,intro:Option[String],isHot:Int,spell:Option[String],checkState:Int):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val labelsAutoInc = labels.map( t => (t.name, t.level, t.intro.?,t.isHot,t.spell.?,t.checkState)) returning labels.map(_.id) into {
       case (_, id) => id
     }
     labelsAutoInc.insert(name,level,intro,isHot,spell,checkState)
   }
-  def addLabel(name:String,checkState:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def addLabel(name:String,checkState:Int):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val labelsAutoInc = labels.map( t => (t.name,t.checkState)) returning labels.map(_.id) into {
       case (_, id) => id
     }
@@ -157,10 +157,19 @@ object LabelDao {
     (for(c<- labelDiagrams if c.labelId === labelId  if c.diagramId === diagramId) yield c ).firstOption
   }
 
+  def deleteLabelDiagramByDiagramId(diagramId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for( t<- labelDiagrams  if t.diagramId === diagramId) yield t ).delete
+  }
+
+  def deleteLabelDiagramByLabelId(labelId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for( t<- labelDiagrams if t.labelId === labelId) yield t ).delete
+  }
 
   def deleteLabelDiagram(labelId:Long,diagramId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for( t<- labelDiagrams if t.labelId === labelId if t.diagramId === diagramId) yield t ).delete
   }
+
+
 
 
 

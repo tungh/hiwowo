@@ -4,6 +4,8 @@ import play.api.mvc.Controller
 import models.diagram.dao.DiagramDao
 import play.api.data.Form
 import play.api.data.Forms._
+import org.jsoup.Jsoup
+import models.label.dao.LabelDao
 
 
 /**
@@ -15,7 +17,8 @@ import play.api.data.Forms._
 case class DiagramFilterFormData(title: Option[String], status: Option[Int], typeId: Option[Int], currentPage: Option[Int])
 
 case class DiagramEditFormData(
-                               id:Option[Long],
+                               id:Long,
+                               uid:Long,
                                typeId: Int,
                                title: String,
                                pic: String,
@@ -23,6 +26,12 @@ case class DiagramEditFormData(
                                content: Option[String],
                                labels: Option[String],
                                status: Int
+                                )
+case class DiagramPicsFormData(
+                                diagramId:Long,
+                                uid:Long,
+                                urls:Seq[String],
+                                intros: Seq[Option[String]]
                                 )
 
 object Diagrams extends Controller {
@@ -37,7 +46,8 @@ object Diagrams extends Controller {
   )
   val diagramEditForm = Form(
     mapping(
-      "id" -> optional(longNumber),
+      "id" -> longNumber,
+      "uid" -> longNumber,
       "typeId" -> number,
       "title" -> text,
       "pic" -> text,
@@ -47,26 +57,84 @@ object Diagrams extends Controller {
       "status" -> number
     )(DiagramEditFormData.apply)(DiagramEditFormData.unapply)
   )
+  val diagramPicsForm = Form(
+    mapping(
+      "diagramId" ->longNumber,
+      "uid" ->longNumber,
+      "urls" ->seq(text),
+      "intros" ->seq(optional(text))
+    )(DiagramPicsFormData.apply)(DiagramPicsFormData.unapply)
+  )
   def list(p: Int, pageSize: Int) = Admin.AdminAction {
     user => implicit request =>
       val pages = DiagramDao.findAllDiagrams(p, pageSize)
       Ok(views.html.admin.diagrams.list(user, pages))
   }
 
-  def edit(id: Long) = Admin.AdminAction { user => implicit request =>
+  def edit(id: Long,msg:String) = Admin.AdminAction { user => implicit request =>
       val (diagram,author) = DiagramDao.findDiagram(id).get
-      Ok(views.html.admin.diagrams.edit(user,author,diagramEditForm.fill(DiagramEditFormData(diagram.id,diagram.typeId,diagram.title,diagram.pic,diagram.intro,diagram.content,diagram.labels,diagram.status))))
+      val pics = DiagramDao.findDiagramPics(id)
+      Ok(views.html.admin.diagrams.edit(user,author,pics,diagram.id.get,diagramEditForm.fill(DiagramEditFormData(diagram.id.get,diagram.uid,diagram.typeId,diagram.title,diagram.pic,diagram.intro,diagram.content,diagram.labels,diagram.status)),msg))
 
   }
-
+     /*
+      * 1、首先保存diagram
+      * 2、处理labels 和 label-diagram，先删除所有的diagram的label，在保存diagram-label
+      * 3、如果保存的类型是图说，则需要抽取pic保存，然后删除所有的diagram pic,在保存diagram-pic
+      *  */
   def saveDiagram = Admin.AdminAction { user => implicit request =>
+    diagramEditForm.bindFromRequest.fold(
+      formWithErrors => Ok("something wrong"),
+      data => {
+        val images =Jsoup.parseBodyFragment(data.content.get).body().getElementsByTag("img")
+        var pics =""
+        val it=images.iterator()
+        while(it.hasNext){
+          pics +=it.next().attr("src")+","
+        }
+          DiagramDao.modifyDiagram(data.id,data.uid,data.title,data.pic,data.intro,data.content,Some(pics),2,data.typeId)
+        // 处理label
+        LabelDao.deleteLabelDiagramByDiagramId(data.id)
+        if(!data.labels.isEmpty){
+         for(name <- data.labels.get.split(",")){
+           var labelId = 0l
+            val label = LabelDao.findLabelByName(name)
+           if(label.isEmpty){ labelId = LabelDao.addLabel(name,1) }else{ labelId = label.get.id.get  }
+            LabelDao.addLabelDiagram(labelId,data.id)
+         }
+        }
 
-    Ok("todo")
+        /* 处理diagram pics */
+        if(data.typeId == 1){
+            DiagramDao.deleteDiagramPicByDiagramId(data.id)
+           for(url <- pics.split(",")){
+              val pic = DiagramDao.findPicByUrl(url)
+              var picId =0l
+             if(pic.isEmpty){ picId = DiagramDao.addPic(data.uid,url,1) }else{ picId = pic.get.id.get }
+             DiagramDao.addDiagramPic(data.id,picId)
+
+           }
+        }
+
+
+
+        Redirect(controllers.admin.routes.Diagrams.edit(data.id,"保存Diagram成功"))
+      }
+    )
   }
 
-  def saveDiagramPic = Admin.AdminAction { user => implicit request =>
+  def saveDiagramPics = Admin.AdminAction { user => implicit request =>
+   diagramPicsForm.bindFromRequest.fold(
+      formWithErrors => Ok("something wrong"),
+      data => {
+        for((url,i) <- data.urls.view.zipWithIndex){
+           DiagramDao.modifyPicIntro(url,data.intros.apply(i),1)
+        }
 
-    Ok("todo")
+        Redirect(controllers.admin.routes.Diagrams.edit(data.diagramId,"保存Diagram pic 成功"))
+      }
+    )
+
   }
 
   def delete = Admin.AdminAction {

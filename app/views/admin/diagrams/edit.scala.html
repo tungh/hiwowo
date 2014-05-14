@@ -1,8 +1,11 @@
-@(user:models.user.User,author:models.user.User,form:Form[controllers.admin.DiagramEditFormData])
+@(user:models.user.User,author:models.user.User,pics:List[models.diagram.Pic],diagramId:Long,form:Form[controllers.admin.DiagramEditFormData],msg:String)
 @views.html.admin.template(user,"label") {
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"> 图说管理 》编辑图说</h1>
+        <div class="alert">
+            @msg
+        </div>
     </div>
 </div>
 
@@ -14,12 +17,16 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                        <form  id="J_filterForm" method="POST" action="@controllers.admin.routes.Diagrams.saveDiagram">
+                        <form  id="J_editForm" method="POST" action="@controllers.admin.routes.Diagrams.saveDiagram">
                             <input type="hidden" name="id" id="J_id" value='@form("id").value'>
+                            <input type="hidden" name="uid" value='@form("uid").value'>
+                            <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>
-
+                             <div class="form-group">
+                                 <label>作者：<a href="@controllers.users.routes.Users.home(author.id.get)">@author.name </a></label>
+                             </div>
                             <div class="form-group">
                                 <label  for="title">名称</label>
                                 <input class="form-control" type="text" id="title" name="title" value='@form("title").value' placeholder="名称">
@@ -39,7 +46,7 @@
                             </div>
 
 
-                            <div class="form-group">
+                           <!-- <div class="form-group">
                                 <label> 类型 </label>
                                 <label class="radio-inline">
                                     <input type="radio"  name="typeId" value="0" @if(form("typeId").value.getOrElse("none")=="0"){ checked="true" }> 图文
@@ -48,7 +55,8 @@
                                     <input type="radio" name="typeId" value="1" @if(form("typeId").value.getOrElse("none")=="1"){ checked="true" }> 图说
                                 </label>
 
-                            </div>
+                            </div>-->
+
                             <div class="form-group">
                                 <label  >状态</label>
 
@@ -73,20 +81,21 @@
                                 <textarea id="content" class="form-control" name="content">@form("content").value</textarea>
 
                             </div>
-                             <div class="col-lg-6">
+
                             <div class="form-group">
+                                @if(form("typeId").value.getOrElse("none")=="0"){
+                                <div class="col-lg-6">
                                 <div class="controls">
-                                    <input type="submit" class="btn btn-info" value="保存图文"/>
+                                    <input type="button" class="btn btn-info" id="J_tuWen" value="保存图文"/>
                                 </div>
-                            </div>
-                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
+                                </div> }
+                                <div class="col-lg-6">
                                     <div class="controls">
-                                        <input type="submit" class="btn btn-info" value="保存图说"/>
+                                        <input type="button" class="btn btn-info" id="J_tuShuo" value="保存图说"/>
                                     </div>
                                 </div>
                             </div>
+
                         </form>
                 </div>
                 <!-- /.row (nested) -->
@@ -98,10 +107,48 @@
     <!-- /.col-lg-12 -->
 </div>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert"> 需要先保存图说，在保存图片编辑 </div>
+            </div>
+        </div>
+
+        <!-- 编辑 pics -->
+ <div class="row">
+         <div class="col-lg-12">
+             <h1 class="page-header"> 编辑图片</h1>
+             <form action="@controllers.admin.routes.Diagrams.saveDiagramPics" method="post">
+                 <input type="hidden" name="uid" value="@author.id.get">
+                 <input type="hidden" name="diagramId" value="@diagramId">
+                 @for((pic,i)<-pics.view.zipWithIndex ){
+                 <div class="form-group">
+                     <label  for="urls[@i]"><img src="@pic.url" with="300" height="300"></label>
+                     <input class="form-control" type="hidden" id="urls[@i]" name="urls[@i]" value='@pic.url'>
+                     <textarea class="form-control" name="intros[@i]"> @pic.intro</textarea>
+                 </div>
+                 }
+                 <div class="form-group">
+                     <div class="controls">
+                         <input type="submit" class="btn btn-info" value="保存"/>
+                     </div>
+                 </div>
+             </form>
+         </div>
+ </div>
 
        <script type="text/javascript">
             $(function(){
+                // 初始化编辑器
                 var um = UM.getEditor('content');
+
+                $("#J_tuWen").click(function(){
+                     $("#J_typeId").val(0);
+                     $("#J_editForm").submit()
+                })
+                $("#J_tuShuo").click(function(){
+                    $("#J_typeId").val(1);
+                    $("#J_editForm").submit()
+                })
             })
        </script>
 
