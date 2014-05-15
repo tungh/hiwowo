@@ -11,6 +11,7 @@ GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
 GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
 GET       /diagrams/:sortBy                             controllers.Pages.diagrams(sortBy:String,p:Int ?=1,size:Int ?=10)
+GET       /pics                             controllers.Pages.pics
 
 
 

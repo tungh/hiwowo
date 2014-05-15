@@ -187,31 +187,62 @@
 }
 
 /* 图说区域 */
-.picSay .box-title{
+/* pets */
+.pics .mod-header {
+    position: relative;
+    margin-bottom: 20px;
+    background-color: #fff;
+    height: 80px;
+}
+.pics .mod-header ul {
+    position: relative;
+    margin: 0 auto;
+    width: 500px;
+    height:80px
+}
+
+.pics .mod-header li {
+    width: 100px;
+    text-align: center;
+    float: left;
+    line-height:80px
+}
+
+.pics .mod-header li a {
+    color: #666;
+    font-size: 14px;
+    display: block
+}
+
+.pics .mod-header li.on a {
+    color: #009bab
+}
+
+.pics .box-title{
     height: 48px;
     line-height: 48px;
     position: relative;
     color: #616161;
     font-size: 18px;
 }
-.picSay .box-content{
+.pics .box-content{
     width: 990px;
     height: 280px;
     position: relative;
     overflow: hidden;
 }
-.picSay .box-content .box-slider{
+.pics .box-content .box-slider{
     float: left;
     width: 490px;
     height: 280px;
     margin-right:2.5px;
 }
-.picSay .box-content .box-hot{
+.pics .box-content .box-hot{
     margin-left: 10px;
     width: 235px;
    float:left;
 }
-.picSay .box-content .box-pics,.picSay .box-content .box-pic {
+.pics .box-content .box-pics,.pics .box-content .box-pic {
     float: left;
     width: 245px;
     height: 280px;
@@ -220,12 +251,14 @@
     position: relative;
 }
 
-.picSay .box-content .box-pics .pic {
+.pics .box-content .box-pics .pic {
     width: 245px;
+    height: 137px;
+    overflow: hidden;
 }
 
 
-.picSay .box-content .pic-desc{
+.pics .box-content .pic-desc{
     position: absolute;
     bottom: 0;
     height: 34px;

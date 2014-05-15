@@ -35,6 +35,12 @@ object Pages extends Controller {
     Ok(views.html.pages.diagrams(user,pages,sortBy))
   }
 
+  /* 图说频道 */
+  def pics = Users.UserAction{ user => implicit request =>
+
+    Ok(views.html.pages.pics(user))
+  }
+
   /* 宠物乐园 */
   def pets(typeId:Int,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
     val pages = DiagramDao.findDiagrams("new",typeId,2,currentPage,pageSize)
