@@ -57,6 +57,16 @@ object  Diagrams extends Controller {
      }
   }
 
+  /* 图文展示 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
+  def pic(id:Long) = Users.UserAction{ user => implicit request =>
+    val diagramWithUser = DiagramDao.findDiagram(id)
+    val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),0,None)
+    if(diagramWithUser.isEmpty || diagramWithUser.get._1.typeId!=1 ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
+      Ok(views.html.diagrams.diagramInvalid(user))
+    } else {
+      Ok(views.html.diagrams.pic(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
+    }
+  }
 
 
 
@@ -137,7 +147,7 @@ object  Diagrams extends Controller {
         }
         val pic =uploadImages.first().attr("src")
        // val tags = extractTags(diagramTitle.get,intro)
-          val tags =List("萌宠","有趣","二货主人","神吐槽","喵星人","汪星人")
+          val tags =List("萌宠","爆笑","二货主人","神吐槽","喵星人","汪星人")
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
           val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId,"tags"->Json.toJson(tags)))

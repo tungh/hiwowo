@@ -82,7 +82,6 @@
 }
 .main .diagrams .diagram .diagram-info .pin .title{
     height: 40px;
-    line-height: 40px;
     font-size: 14px;
 }
 .main .diagrams .diagram .diagram-info .pin .user-info{
@@ -187,91 +186,124 @@
 }
 
 /* 图说区域 */
-/* pets */
-.pics .mod-header {
-    position: relative;
-    margin-bottom: 20px;
-    background-color: #fff;
-    height: 80px;
-}
-.pics .mod-header ul {
-    position: relative;
-    margin: 0 auto;
-    width: 500px;
-    height:80px
-}
+/* pics */
 
-.pics .mod-header li {
-    width: 100px;
+.pics .mod-header {}
+.pics .row .coll, .pics .row .colm,.pics .row .colr{
+    width: 330px;
+    float: left;
+}
+.pics .title{
+    height: 92px;
+    padding: 30px 0 15px 0;
     text-align: center;
-    float: left;
-    line-height:80px
 }
-
-.pics .mod-header li a {
-    color: #666;
+.pics .title h1{
+    font-size: 32px;
+    height: 38px;
+    margin-bottom: 10px;
+}
+.pics .title span{
+    display: block;
     font-size: 14px;
-    display: block
+    color: #000;
+    font-family: Microsoft YaHei;
+    line-height: 24px;
+}
+.pics .title span em{
+    color: #57c5c1;
+    padding: 0px 10px;
+}
+.pics .colm .title, .pics .colr .title{
+    height: 92px;
+    background: url(images/index-col-bg.png) 0 10px no-repeat;
+}
+.pics  .wrap  dl{
+    border-bottom: 1px #ccc dashed;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.pics .coll .wrap{
+    min-height: 910px;
+}
+.pics .coll .wrap .box{
+    padding: 28px 20px;
+    margin-right: 22px;
+    background: #fff;
+    border: 1px #e5e5e5 solid;
 }
 
-.pics .mod-header li.on a {
-    color: #009bab
+
+.pics .colm .wrap{
+    min-height: 910px;
+    border-left: 1px #57c5c1 solid;
+
 }
 
-.pics .box-title{
-    height: 48px;
-    line-height: 48px;
+.pics .colm .wrap .box {
+    padding: 28px 20px;
+}
+.pics .colm dl .pic {
+    margin: 0 auto;
+    height: 250px;
     position: relative;
-    color: #616161;
-    font-size: 18px;
+    width: 256px;
 }
-.pics .box-content{
-    width: 990px;
-    height: 280px;
-    position: relative;
-    overflow: hidden;
-}
-.pics .box-content .box-slider{
-    float: left;
-    width: 490px;
-    height: 280px;
-    margin-right:2.5px;
-}
-.pics .box-content .box-hot{
-    margin-left: 10px;
-    width: 235px;
-   float:left;
-}
-.pics .box-content .box-pics,.pics .box-content .box-pic {
-    float: left;
-    width: 245px;
-    height: 280px;
-    margin-left: 2.5px;
-    overflow: hidden;
+.pics .colm dl .pic a{
+    text-align: center;
+    display: block;
+    width: 256px;
+    height: 250px;
     position: relative;
 }
+.pics .colm dl .pic a:hover {color: #c00;}
 
-.pics .box-content .box-pics .pic {
-    width: 245px;
-    height: 137px;
-    overflow: hidden;
-}
-
-
-.pics .box-content .pic-desc{
+.pics .colm  dl  .shadow{
     position: absolute;
-    bottom: 0;
-    height: 34px;
-    line-height: 34px;
+    left: 0px;
+    top: 0px;
+    background: url(images/raidus_bg.png) no-repeat;
     overflow: hidden;
-    left: 0;
-    right: 0;
-    _width: 217px;
-    padding: 0 10px;
-    color: #fff;
-    background: rgba(0,0,0,.5);
-    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#80000000', endColorStr='#80000000', gradientType='0')	9;
+    width:256px;
+    height:251px;
 }
+.pics .colm  dl.hover .shadow { background-position:  0px -249px;}
+
+
+/* index colm right */
+.pics .colr .wrap{
+    min-height: 910px;
+    border-left: 1px #57c5c1 solid;
+}
+
+
+.pics .colr .wrap .box{
+    padding: 28px 20px;
+    margin-left: 22px;
+    margin-right: 0px;
+    background: #fff;
+    border: 1px #e5e5e5 solid;
+}
+
+
+
+.pics .box .intro {
+    text-align: center;
+    font-size: 14px;
+    margin: 15px 0 10px 0;
+    line-height: 24px;
+}
+.pics .box  .intro a{
+    color: #333333;
+}
+.pics .box  .share{
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777777;
+}
+
 
 
 

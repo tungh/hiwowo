@@ -1,0 +1,136 @@
+@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
+@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagram.css"){
+
+<div class="container diagram">
+
+    <div class="row">
+        <div class="main">
+            <div class="sitebar">
+                <ul>
+                    <li>
+                        <a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)" title="@diagramComponent.user.name" target="_blank">
+                        <img class="img-circle" src="@diagramComponent.user.pic" width="60" height="60">
+                        </a>
+                    </li>
+                    <li><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
+                           title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>
+                    <li>浏览<strong>@diagramComponent.diagram.viewNum</strong>
+                        @if(!user.isEmpty && diagramComponent.diagram.uid == user.get.id.get){
+                        <a href="@controllers.routes.Diagrams.edit(diagramComponent.diagram.id.get)">编辑</a>
+                        }
+                    </li>
+                    <li></li>
+                    <li class="btn"><a href="javascript:void(0)" class="follow">+关注</a>
+                        <a href="javascript:void(0)" class="follow" style="display:none">已经关注</a>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="title"> @diagramComponent.diagram.title</h1>
+
+            <div class="desc">
+                @Html(diagramComponent.diagram.content.getOrElse(""))
+            </div>
+
+
+
+                <div class="discuss-textarea clearfix">
+                    @if(user.isEmpty){
+                    <div class="login">
+                        <p><a class="bbl-btn" rel="loginD">登陆</a>后可发表评论</p>
+                    </div>
+                    }
+                    <form action="@controllers.routes.Diagrams.saveDiscuss" id="J_discussForm" method="post">
+                        <input type="hidden" name="diagramId" value="@diagramComponent.diagram.id.get" id="J_diagramId">
+                        <h3>发表评价</h3>
+                        <div class="textarea clearfix">
+                            <textarea name="discussContent" id="J_discussContent" placeholder="请保持评论内容和谐"></textarea>
+                            <input type="submit"class="bbl-btn" id="J_discussSubmit" value="提交">
+                            <div id="J_FaceBtn">
+                                <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            <div class="discusses" id="J_discusses">
+
+             </div>
+        </div>
+        <!-- side -->
+        <div class="side">
+            <div class="box">
+                <div class="UserApp">
+                    <ul class="js_UserApp">
+                        <li class="espImg">
+                            <img src="/assets/images/qr_hiwowo.jpg">
+                        </li>
+                        <li class="espTxt">
+                            <a href="javascript:void(0)" class="appname">嗨喔喔微信公共帐号</a>
+
+                            <p>微信搜索公共帐号"<span>嗨喔喔</span>"，或者扫描二维码关注，每日获取精选图说。</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="recommendRead">
+                    <h2><span>推荐阅读</span><a href="javascript:void(0)" class="js_refresh">换一组试试</a></h2>
+
+                    <div class="rRead">
+                        <ul class="js_rRead">
+                            <!--<li><a href="">姚晨：最难的一件事，其实叫随遇而安！</a></li>
+                            <li><a href="">你的枕边书是什么？</a></li>
+                            <li><a href="">孟非：生活从下班开始</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+        </div>
+        <!-- left float -->
+        <div class="share-pin">
+            <div class="share-nav">
+                <ul>
+                    <li class="collect" rel="collectDiagram" data-val="@diagramComponent.diagram.collectNum" data-id="@diagramComponent.diagram.id.get">
+                        <div class="collectNum" style="display: block;">@diagramComponent.diagram.collectNum</div>
+                    </li>
+                    <li class="esp"></li>
+                </ul>
+            </div>
+            <div class="share-content">
+                <div class="ml15">
+                    <div class="like-common like-common-s" >
+                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
+                        <div class="like-num">
+                            <dl class="J_scrollUp">
+                                <dd class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</dd>
+                                <dd>+1</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
+
+
+                        <a class="s-sina fl" href="javascript:void(0)" data-type="s-sina" title="分享到新浪微博"></a>
+                        <a class="s-qzone fl" href="javascript:void(0)" data-type="s-qzone" title="分享到QQ空间"></a>
+                        <a class="s-tencent fl" href="javascript:void(0)" data-type="s-tencent" title="分享到腾讯微博"></a>
+                        <a class="s-renren fl" href="javascript:void(0)" data-type="s-renren" title="分享到人人网"></a>
+                        <a class="s-qq fl" href="javascript:void(0)" data-type="s-qq" title="分享到qq"></a>
+                        <a class="s-douban fl" href="javascript:void(0)" data-type="s-douban" title="分享到豆瓣"></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+}{
+<script type="text/javascript">
+
+    seajs.use(["jquery","hiwowo/diagram/diagram.js","hiwowo/diagram/diagram.favor.js","hiwowo/user/userOperate.js"],function($){
+
+    })
+</script>
+}

@@ -29,11 +29,7 @@ object Pages extends Controller {
      val pages = WeiXinDiagramDao.findDiagrams(currentPage,pageSize)
      Ok(views.html.pages.weixin(user,pages))
    }
-  /* 发现 图说 */
-  def diagrams(sortBy:String,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
-    val pages = DiagramDao.findDiagrams(sortBy,0,2,currentPage,pageSize)
-    Ok(views.html.pages.diagrams(user,pages,sortBy))
-  }
+
 
   /* 图说频道 */
   def pics = Users.UserAction{ user => implicit request =>

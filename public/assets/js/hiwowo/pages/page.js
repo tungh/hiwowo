@@ -38,7 +38,11 @@ define(function (require) {
             $(this).hide()
             $(this).prev(".pics").addClass("pics-too-high")
         })
-
-
+          /* 处理图说 中间的图片 */
+        $(".pics .colm  dl").hover(function(){
+            $(this).addClass("hover")
+        },function(){
+            $(this).removeClass("hover")
+        })
     })
 })

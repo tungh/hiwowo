@@ -10,7 +10,6 @@ GET       /                                     controllers.Pages.index(p:Int =1
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
 GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
-GET       /diagrams/:sortBy                             controllers.Pages.diagrams(sortBy:String,p:Int ?=1,size:Int ?=10)
 GET       /pics                             controllers.Pages.pics
 
 
@@ -26,6 +25,7 @@ GET    /forum                               controllers.Forums.forum(typeId:Int 
 
 #diagram
 GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
+GET   /pic/$id<[0-9]+>                controllers.Diagrams.pic(id:Long)
 GET   /diagram/create                     controllers.Diagrams.create
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
 POST  /diagram/save                       controllers.Diagrams.save
