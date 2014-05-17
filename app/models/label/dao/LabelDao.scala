@@ -7,6 +7,7 @@ import play.api.Play.current
 import models.Page
 import play.api.db.slick.Config.driver.simple._
 import models.label._
+import models.diagram.{Diagrams, Diagram}
 /**
  * Created with IntelliJ IDEA.
  * User: zuosanshao
@@ -19,6 +20,7 @@ object LabelDao {
   val groupLabels = TableQuery[GroupLabels]
   val labels = TableQuery[Labels]
   val labelDiagrams = TableQuery[LabelDiagrams]
+  val diagrams = TableQuery[Diagrams]
 
   /* label group */
   def addGroup(name:String,intro:Option[String],status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
@@ -167,6 +169,51 @@ object LabelDao {
 
   def deleteLabelDiagram(labelId:Long,diagramId:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for( t<- labelDiagrams if t.labelId === labelId if t.diagramId === diagramId) yield t ).delete
+  }
+   /* 查找label 下的所有diagram */
+  def findLabelDiagrams(labelId:Long,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(labelDiagrams.filter(_.labelId === labelId).length).first()
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list = ( for{
+         ld <- labelDiagrams
+         d <- diagrams
+        if ld.diagramId === d.id
+        if ld.labelId === labelId
+    } yield d ).drop(startRow).take(pageSize).list()
+    Page[Diagram](list,currentPage,totalPages)
+  }
+  /* 查找label 下 不同type 的 diagram */
+  def findLabelDiagrams(labelId:Long,typeId:Int,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+   val query =(for{
+      ld <- labelDiagrams
+     d <- diagrams
+     if ld.diagramId === d.id
+     if ld.labelId === labelId
+     if d.typeId === typeId
+   }yield d)
+     val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list= query.drop(startRow).take(pageSize).list()
+    Page[Diagram](list,currentPage,totalPages)
+  }
+
+  def findGroupDiagrams(groupId:Long,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+      val query = (for{
+            gl <- groupLabels
+            ld <- labelDiagrams
+            d <- diagrams
+          if gl.labelId === ld.labelId
+          if ld.diagramId === d.id
+          if gl.groupId === groupId
+  }yield d)
+      val totalRows = query.list().length
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
+    val list= query.drop(startRow).take(pageSize).list()
+
+    Page[Diagram](list,currentPage,totalPages)
   }
 
 

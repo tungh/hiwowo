@@ -23,7 +23,7 @@ define(function(require){
                   diagramId:id
               }
               $.ajax({
-                  url:"/diagram/up",
+                  url:"/diagram/favor",
                   type : "POST",
                   contentType:"application/json; charset=utf-8",
                   dataType: "json",

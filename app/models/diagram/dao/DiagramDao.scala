@@ -9,7 +9,6 @@ import play.api.Play.current
 import models.Page
 import models.user._
 import models.diagram._
-import play.api.db.slick.Config.driver.simple._
 /**
  * Created with IntelliJ IDEA.
  * User: zuosanshao

@@ -3,9 +3,8 @@ package models.diagram.dao
 import play.api.db.slick.Config.driver.simple._
 import scala.slick.jdbc.{StaticQuery => Q}
 import Q.interpolation
-import play.api.db._
 import play.api.Play.current
-import scala.slick.jdbc.JdbcBackend.Database.dynamicSession
+
 
 /**
 * Created by zuosanshao.

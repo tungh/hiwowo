@@ -11,9 +11,11 @@
     z-index: 3;
 }
 .main .diagrams{
+    position: relative;
     padding: 0 10px;
 }
 .main .diagrams .diagram{
+    position: relative;
     width: 660px;
     padding: 20px 0;
     border-bottom: 1px solid #999;
@@ -53,7 +55,7 @@
     display: block;
     position: relative;
     width: 460px;
-    height: 700px;
+    height: 500px;
     overflow: hidden;
 }
 .main .diagrams .diagram .diagram-content .pics-too-high .pics-hidden{
@@ -76,6 +78,10 @@
 .main .diagrams .diagram .diagram-info{
     width: 170px;
     float: left;
+    position: relative;
+}
+.main .diagrams .diagram .diagram-info .pin-wrapper{
+    position: relative;
 }
 .main .diagrams .diagram .diagram-info .pin{
     width: 170px;
@@ -94,6 +100,7 @@
     float: left;
     height: 36px;
     width: 36px;
+    display: none;
 }
 .main .diagrams .diagram .diagram-info .pin .user-info .user-img a{
     height: 30px;
@@ -112,7 +119,7 @@
     padding: 0 4px;
     overflow: hidden;
     float: left;
-    line-height: 36px;
+  /*  line-height: 36px;*/
 }
 .main .diagrams .diagram .diagram-info .pin .meta{
     clear: both;

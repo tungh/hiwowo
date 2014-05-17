@@ -2,7 +2,6 @@ package models.cms.dao
 
 import scala.slick.jdbc.{StaticQuery => Q}
 import Q.interpolation
-import play.api.db._
 import play.api.Play.current
 import play.api.db.slick.Config.driver.simple._
 /**
