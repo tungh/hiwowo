@@ -19,7 +19,7 @@ define(function (require) {
         // 右侧内容定位
       $(".pin").pin({
             containerSelector: ".diagram"
-         //   ,padding: {top: 60, bottom: 20}
+         ,padding: {top: 0, bottom: 20}
         })
          // 隐藏长图片
         $(".pics-list").each(function(){
@@ -34,26 +34,17 @@ define(function (require) {
         $(".pics-hidden").click(function(){
             $(this).parent(".pics").removeClass("pics-too-high")
             $(this).parent(".pics").next(".pics-too-high-close").show()
-          /* $(this).parent(".pics").parent(".diagram-content").parent(".diagram").find(".pin").pin({
-             containerSelector: ".diagram",
-             padding: {top: 60, bottom:0}
-             })*/
             $(".pin").pin({
                 containerSelector: ".diagram"
-              //  ,padding: {top: 60, bottom:20}
+              ,padding: {top: 0, bottom:0}
             })
         })
         $(".pics-too-high-close").click(function(){
             $(this).hide()
             $(this).prev(".pics").addClass("pics-too-high")
-
-         /*  $(this).parent(".diagram-content").parent(".diagram").find(".pin").pin({
-             containerSelector: ".diagram"
-             ,padding: {top: 60, bottom: 0}
-             })*/
             $(".pin").pin({
                 containerSelector: ".diagram"
-               // ,padding: {top: 60, bottom:20}
+               ,padding: {top: 0, bottom:20}
             })
         })
           /* 处理图说 中间的图片 */
