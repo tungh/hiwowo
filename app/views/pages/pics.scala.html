@@ -33,13 +33,15 @@
                 <div class="wrap">
 
                     <div class="box">
+                        @for(diagram <- mengPage.items){
                         <dl>
                             <dt>
-                                <a> <img width="250" height="250" src="/images/1.jpg"> </a>
+                                <a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title"> <img width="250" height="250" src="@diagram.pic" alt="@diagram.intro"> </a>
                             </dt>
-                            <dd class="intro ofh">美丽的人啊</dd>
+                            <dd class="intro ofh"><a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title">@diagram.title</a> </dd>
                             <dd class="share"></dd>
                         </dl>
+                        }
                     </div>
 
 
@@ -51,31 +53,19 @@
 
                 <div class="wrap">
                     <div class="box">
+                        @for(diagram <- xiaoPage.items){
                         <dl>
                             <dt class="pic">
-                                <a>
-                                    <img width="250" height="250" border="0"
-                                         src="http://mat1.gtimg.com/fashion/2014/02/11/aw5.jpg" alt="设计师Zac Posen">
+                                <a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title">
+                                    <img width="250" height="250" src="@diagram.pic" alt="@diagram.intro">
                                     <i class="shadow"></i>
                                 </a>
                             </dt>
-                            <dd class="intro ofh">嗨喔喔</dd>
-                            <dd class="share ofh"></dd>
-
+                            <dd class="intro ofh"><a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title">@diagram.title</a> </dd>
+                            <dd class="share"></dd>
                         </dl>
+                        }
 
-                        <dl>
-                            <dt class="pic">
-                                <a>
-                                    <img width="250" height="250" border="0"
-                                         src="http://mat1.gtimg.com/fashion/2014/02/11/aw5.jpg" alt="设计师Zac Posen">
-                                    <i class="shadow"></i>
-                                </a>
-                            </dt>
-                            <dd class="intro ofh">嗨喔喔</dd>
-                            <dd class="share ofh"></dd>
-
-                        </dl>
                     </div>
 
                 </div>
@@ -86,34 +76,38 @@
 
                 <div class="wrap">
                     <div class="box">
+                        @for(diagram <- shengPage.items){
                         <dl>
                             <dt>
-                                ddd
+                                <a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title"> <img width="250" height="250" src="@diagram.pic" alt="@diagram.intro"> </a>
                             </dt>
-                            <dd> sss</dd>
-                            <dd>sss</dd>
+                            <dd class="intro ofh"><a href="@controllers.routes.Diagrams.pic(diagram.id.get)" target="_blank" title="@diagram.title">@diagram.title</a> </dd>
+                            <dd class="share"></dd>
                         </dl>
-                        <dl>
-                            <dt>
-                                ddd
-                            </dt>
-                            <dd> sss</dd>
-                            <dd>sss</dd>
-                        </dl>
-                        <dl>
-                            <dt>
-                                ddd
-                            </dt>
-                            <dd> sss</dd>
-                            <dd>sss</dd>
-                        </dl>
+                        }
                     </div>
 
                 </div>
 
             </div>
         </section>
-
+        <div class="pagin inlineblock fr mt10" id="J_Pagination">
+            @if(mengPage.nums.length>1){
+            @mengPage.prev.map { page =>
+            <a class="prev" href="@controllers.routes.Pages.pics(page,5)">上一页</a>
+            }
+            @for(num <-mengPage.nums){
+            @if(num==mengPage.currentPage){
+            <span class="current" >@num</span>
+            }else {
+            <a href="@controllers.routes.Pages.pics(num,5)">@num</a>
+            }
+            }
+            @mengPage.next.map { page =>
+            <a class="next" href="@controllers.routes.Pages.pics(page,5)">下一页</a>
+            }
+            }
+        </div>
     </div>
 
 </div>

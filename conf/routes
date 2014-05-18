@@ -10,7 +10,7 @@ GET       /                                     controllers.Pages.index(p:Int =1
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
 GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
-GET       /pics/$p<[0-9]+>                             controllers.Pages.pics(p:Int,size:Int =5)
+GET       /pics/$p<[0-9]+>                             controllers.Pages.pics(p:Int,size:Int ?=5)
 
 
 
