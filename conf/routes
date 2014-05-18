@@ -161,7 +161,7 @@ POST  /admin/labels/batchLabelDiagrams                 controllers.admin.Labels.
 
 
 #管理后台 用户管理
-GET  /admin/users/users            controllers.admin.Users.users(p:Int ?=1)
+GET  /admin/users/users            controllers.admin.Users.users(p:Int ?=1,size:Int ?=50)
 GET  /admin/users/black           controllers.admin.Users.black(uid:Long)
 GET  /admin/users/edit            controllers.admin.Users.edit(uid:Long)
 GET  /admin/users/view            controllers.admin.Users.view(uid:Long)

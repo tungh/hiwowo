@@ -36,15 +36,15 @@ object Users  extends Controller {
       "status"->optional(number),
       "title"->optional(text),
       "comeFrom"->optional(number),
-      "creditsOrder"->nonEmptyText(),
-      "addTimeOrder"->nonEmptyText(),
+      "creditsOrder"->nonEmptyText,
+      "addTimeOrder"->nonEmptyText,
       "currentPage"->optional(number)
     )(UserFilterFormData.apply)(UserFilterFormData.unapply)
   )
 
   /*用户管理*/
-def users(p:Int) = Admin.AdminAction{ user => implicit request =>
-    val page =UserDao.findAll(p,20)
+def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
+    val page =UserDao.findAll(p,size)
   Ok(views.html.admin.users.users(user,page))
 }
    /* 用户拉黑处理 */
