@@ -151,7 +151,7 @@
                             <ul class="pagination">
                                 @page.prev.map { page =>
                                 <li class="paginate_button previous">
-                                    <a href="controllers.admin.routes.Diagrams.list(page,20)">Prev</a>
+                                    <a href="controllers.admin.routes.Diagrams.list(page,50)">Prev</a>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button previous disabled">
@@ -160,16 +160,16 @@
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
-                                <li class="paginate_button active"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
+                                <li class="paginate_button active"><a href="@controllers.admin.routes.Diagrams.list(num,50)">@num</a></li>
                                 }else {
 
-                                <li class="paginate_button"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
+                                <li class="paginate_button"><a href="@controllers.admin.routes.Diagrams.list(num,50)">@num</a></li>
                                 }
 
                                 }
                                 @page.next.map { page =>
                                 <li class="paginate_button next">
-                                    <a href="@controllers.admin.routes.Diagrams.list(page,20)">Next</a>
+                                    <a href="@controllers.admin.routes.Diagrams.list(page,50)">Next</a>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button next disabled">

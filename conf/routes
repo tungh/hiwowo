@@ -183,13 +183,9 @@ POST  /admin/adverts/delete         controllers.admin.Adverts.delete
 #管理后台 站内信管理
 GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
 POST  /admin/msgs/saveSystemMsg       controllers.admin.Msgs.saveSystemMsg
-GET   /admin/msgs/filterSystemMsgs     controllers.admin.Msgs.filterSystemMsgs
-POST   /admin/msgs/batchSystemMsgs       controllers.admin.Msgs.batchSystemMsgs
-GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
-GET   /admin/msgs/systemMsgReceivers   controllers.admin.Msgs.systemMsgReceivers(p:Int ?=1)
-GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
-GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
-GET   /admin/msgs/discussMsgs              controllers.admin.Msgs.discussMsgs(p:Int ?=1)
+GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1,size:Int ?=50)
+GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1,size:Int ?=50)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

@@ -183,10 +183,7 @@
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>站内信管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href='@controllers.admin.routes.Msgs.systemMsgs(1)'>系统站内信</a></li>
-                    <li><a href='@controllers.admin.routes.Msgs.systemMsgReceivers(1)'>系统站内信收件人</a></li>
                     <li><a href='@controllers.admin.routes.Msgs.atMsgs(1)'>小纸条</a></li>
-                    <li><a href='@controllers.admin.routes.Msgs.favorMsgs(1)'>喜欢站内信</a></li>
-                    <li><a href='@controllers.admin.routes.Msgs.discussMsgs(1)'>回复站内信</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -208,7 +205,7 @@
             <li class='@if(nav=="cms"){active}'>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>广告管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href='@controllers.admin.routes.Cmses.list(1,20)'>广告链接</a></li>
+                    <li><a href='@controllers.admin.routes.Adverts.list(1,20)'>广告链接</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

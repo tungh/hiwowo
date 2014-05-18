@@ -45,8 +45,8 @@ object Msgs extends Controller {
 
 
 
-  def systemMsgs(currentPage:Int)=Admin.AdminAction{ user => implicit request =>
-    val page=SystemMsgDao.findAll(currentPage,50)
+  def systemMsgs(p:Int,size:Int)=Admin.AdminAction{ user => implicit request =>
+    val page=SystemMsgDao.findAll(p,size)
     Ok(views.html.admin.msgs.systemMsgs(user,page))
   }
   /*  编辑 系统站内信 */
@@ -74,58 +74,16 @@ object Msgs extends Controller {
     )
   }
 
-  /* 筛选 系统站内信 */
-   def filterSystemMsgs = Admin.AdminAction{ user => implicit request =>
-    systemMsgFilterForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      msg => {
-        val page=SystemMsgDao.filterMsgs(msg.title,msg.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.msgs.filterSystemMsgs(user,page,systemMsgFilterForm.fill(msg)))
-      }
-    )
 
-  }
-  /* 批量处理站内信 */
-  def batchSystemMsgs  = Admin.AdminAction{ user => implicit request =>
-    batchForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      batch => {
-        if(batch.action == 0){
-          for(id<-batch.ids){
-            SystemMsgDao.modifyMsgStatus(id,0)
-          }
-        }else if (batch.action ==1){
-          for(id<-batch.ids){
-            SystemMsgDao.modifyMsgStatus(id,1)
-          }
-        }else if(batch.action==2){
-          for(id<-batch.ids){
-            SystemMsgDao.deleteMsg(id)
-          }
-        }
-        Redirect(request.headers.get("REFERER").getOrElse("/admin/msgs/systemMsgs"))
-      }
-    )
-  }
 
-  def systemMsgReceivers(currentPage:Int) = Admin.AdminAction{ user => implicit request =>
-    val page = SystemMsgDao.findAllMsgReceivers(currentPage,50)
-    Ok(views.html.admin.msgs.systemMsgReceivers(user,page))
-  }
 
-  def atMsgs(currentPage:Int)=Admin.AdminAction{ user => implicit request =>
-   val page = AtMsgDao.findAll(currentPage,50)
+
+
+  def atMsgs(p:Int,size:Int)=Admin.AdminAction{ user => implicit request =>
+   val page = AtMsgDao.findAll(p,size)
     Ok(views.html.admin.msgs.atMsgs(user,page))
   }
-  def favorMsgs(currentPage:Int) =Admin.AdminAction{ user => implicit request =>
-    val page = FavorMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.favorMsgs(user,page))
-  }
 
-  def discussMsgs(currentPage:Int) =Admin.AdminAction{ user => implicit request =>
-    val page = DiscussMsgDao.findAll(currentPage,50)
-    Ok(views.html.admin.msgs.discussMsgs(user,page))
-  }
 
 
 }
