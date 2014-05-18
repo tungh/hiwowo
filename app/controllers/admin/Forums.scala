@@ -49,8 +49,8 @@ object Forums extends Controller {
   )
 
 
-  def topics(p:Int) = Admin.AdminAction{user => implicit request =>
-      val page=TopicDao.findAll(p,50)
+  def topics(p:Int,size:Int) = Admin.AdminAction{user => implicit request =>
+      val page=TopicDao.findAll(p,size)
       Ok(views.html.admin.forums.topics(user,page))
   }
   
@@ -68,8 +68,8 @@ object Forums extends Controller {
 
 
   
-  def discusses(p:Int)=  Admin.AdminAction{user => implicit request =>
-    val page=TopicDao.findAllDiscusses(p,50)
+  def discusses(p:Int,size:Int)=  Admin.AdminAction{user => implicit request =>
+    val page=TopicDao.findAllDiscusses(p,size)
     Ok(views.html.admin.forums.discusses(user,page))
   }
   def deleteDiscuss(id:Long)  = Admin.AdminAction{user => implicit request =>

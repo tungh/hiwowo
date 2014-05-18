@@ -22,6 +22,14 @@ $(function() {
         $("#J_url").val(url)
         $("#J_batchForm").submit()
     })
+
+    /* filter page */
+    $(".pagination span").click(function(){
+        var page=$(this).data('page')
+        $("#J_currentPage").val(page)
+        $("#J_filterForm").submit()
+    })
+
 });
 
 

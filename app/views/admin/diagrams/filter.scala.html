@@ -151,29 +151,29 @@
                             <ul class="pagination">
                                 @page.prev.map { page =>
                                 <li class="paginate_button previous">
-                                    <a href="controllers.admin.routes.Diagrams.list(page,20)">Prev</a>
+                                    <span  data-page="@page">Prev</span>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button previous disabled">
-                                    <a href="#">Prev</a>
+                                    <a href="javascript:void(0)">Prev</a>
                                 </li>
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
-                                <li class="paginate_button active"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
+                                <li class="paginate_button active"><a  href="javascript:void(0)">@num</a></li>
                                 }else {
 
-                                <li class="paginate_button"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
+                                <li class="paginate_button"><span  data-page="@num">@num</span></li>
                                 }
 
                                 }
                                 @page.next.map { page =>
                                 <li class="paginate_button next">
-                                    <a href="@controllers.admin.routes.Diagrams.list(page,20)">Next</a>
+                                    <span  data-page="@page">next</span>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button next disabled">
-                                    <a>Next</a>
+                                    <a href="javascript:void(0)">Next</a>
                                 </li>
                                 }
 

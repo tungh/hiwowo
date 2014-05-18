@@ -114,10 +114,10 @@ GET   /admin/logout              controllers.admin.Admin.logout
 GET   /admin/index                controllers.admin.Admin.index
 
 #管理后台  讨论管理
-GET   /admin/forums/topics           controllers.admin.Forums.topics(p:Int ?=1)
+GET   /admin/forums/topics           controllers.admin.Forums.topics(p:Int ?=1,size:Int ?=50)
 GET   /admin/forums/delete         controllers.admin.Forums.delete(id:Long)
 GET   /admin/forums/check          controllers.admin.Forums.check(id:Long,state:Int ?=1)
-GET   /admin/forums/discusses         controllers.admin.Forums.discusses(p:Int ?=1)
+GET   /admin/forums/discusses         controllers.admin.Forums.discusses(p:Int ?=1,size:Int ?=50)
 GET   /admin/forums/deleteDiscuss          controllers.admin.Forums.deleteDiscuss(id:Long)
 GET   /admin/forums/checkDiscuss          controllers.admin.Forums.checkDiscuss(id:Long,state:Int ?=1)
 GET  /admin/forums/filterTopics       controllers.admin.Forums.filterTopics

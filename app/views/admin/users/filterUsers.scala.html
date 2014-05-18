@@ -175,28 +175,41 @@
                     </table>
                 </form>
             </div>
-            <div class="pagination">
-                <ul>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dataTables_paginate">
+                        <ul class="pagination">
+                            @page.prev.map { page =>
+                            <li class="paginate_button previous">
+                                <span  data-page="@page">Prev</span>
+                            </li>
+                            }.getOrElse {
+                            <li class="paginate_button previous disabled">
+                                <a href="javascript:void(0)">Prev</a>
+                            </li>
+                            }
+                            @for(num <-page.nums){
+                            @if(num==page.currentPage){
+                            <li class="paginate_button active"><a  href="javascript:void(0)">@num</a></li>
+                            }else {
 
-                    @page.prev.map { page =>
-                        <li class="prev">
-                            <span  data-page="@page">Prev</span>
-                        </li>
-                    }
-                    @for(num <-page.nums){
-                        @if(num==page.currentPage){
-                            <li class="active"><span  data-page="@num">@num</span></li>
-                        }else {
-                            <li><span data-page="@num">@num</span></li>
-                        }
-                    }
-                    @page.next.map { page =>
-                        <li class="next">
-                            <span href="#" data-page="@page" >Next</span>
-                        </li>
-                    }
+                            <li class="paginate_button"><span  data-page="@num">@num</span></li>
+                            }
 
-                </ul>
+                            }
+                            @page.next.map { page =>
+                            <li class="paginate_button next">
+                                <span  data-page="@page">next</span>
+                            </li>
+                            }.getOrElse {
+                            <li class="paginate_button next disabled">
+                                <a href="javascript:void(0)">Next</a>
+                            </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
             </div>
 
 
