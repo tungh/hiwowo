@@ -64,7 +64,8 @@ object  Diagrams extends Controller {
     if(diagramWithUser.isEmpty || diagramWithUser.get._1.typeId!=1 ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
       Ok(views.html.diagrams.diagramInvalid(user))
     } else {
-      Ok(views.html.diagrams.pic(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
+      var pics = DiagramDao.findDiagramPics(id)
+      Ok(views.html.diagrams.pic(user,pics,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
     }
   }
 

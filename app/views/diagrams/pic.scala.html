@@ -1,38 +1,28 @@
-@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
+@(user:Option[models.user.User],pics:List[models.diagram.Pic],diagramComponent:(controllers.DiagramComponent))
 @views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
 
-    <div class="row">
-        <div class="main">
-            <div class="sitebar">
+    <div class="row mb30">
+        <div class="slider">
+            <div class="banner">
+                <a class="unslider-arrow prev" href="javascript:void(0)"></a>
+                <a class="unslider-arrow next" href="javascript:void(0)"></a>
                 <ul>
+                    @for(pic <- pics){
                     <li>
-                        <a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)" title="@diagramComponent.user.name" target="_blank">
-                        <img class="img-circle" src="@diagramComponent.user.pic" width="60" height="60">
-                        </a>
+                        <img src="@pic.url">
+                        <h1>@pic.intro</h1>
                     </li>
-                    <li><a href="@controllers.users.routes.Users.home(diagramComponent.user.id.get)"
-                           title="@diagramComponent.user.name" style="color: #333">@diagramComponent.user.name</a></li>
-                    <li>浏览<strong>@diagramComponent.diagram.viewNum</strong>
-                        @if(!user.isEmpty && diagramComponent.diagram.uid == user.get.id.get){
-                        <a href="@controllers.routes.Diagrams.edit(diagramComponent.diagram.id.get)">编辑</a>
-                        }
-                    </li>
-                    <li></li>
-                    <li class="btn"><a href="javascript:void(0)" class="follow">+关注</a>
-                        <a href="javascript:void(0)" class="follow" style="display:none">已经关注</a>
-                    </li>
+                    }
                 </ul>
+
             </div>
-            <h1 class="title"> @diagramComponent.diagram.title</h1>
+        </div>
+    </div>
+    <div class="row">
 
-            <div class="desc">
-                @Html(diagramComponent.diagram.content.getOrElse(""))
-            </div>
-
-
-
+        <div class="main">
                 <div class="discuss-textarea clearfix">
                     @if(user.isEmpty){
                     <div class="login">
@@ -87,41 +77,7 @@
             </div>
         </div>
         <!-- left float -->
-        <div class="share-pin">
-            <div class="share-nav">
-                <ul>
-                    <li class="collect" rel="collectDiagram" data-val="@diagramComponent.diagram.collectNum" data-id="@diagramComponent.diagram.id.get">
-                        <div class="collectNum" style="display: block;">@diagramComponent.diagram.collectNum</div>
-                    </li>
-                    <li class="esp"></li>
-                </ul>
-            </div>
-            <div class="share-content">
-                <div class="ml15">
-                    <div class="like-common like-common-s" >
-                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
-                        <div class="like-num">
-                            <dl class="J_scrollUp">
-                                <dd class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</dd>
-                                <dd>+1</dd>
-                            </dl>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
 
-
-                        <a class="s-sina fl" href="javascript:void(0)" data-type="s-sina" title="分享到新浪微博"></a>
-                        <a class="s-qzone fl" href="javascript:void(0)" data-type="s-qzone" title="分享到QQ空间"></a>
-                        <a class="s-tencent fl" href="javascript:void(0)" data-type="s-tencent" title="分享到腾讯微博"></a>
-                        <a class="s-renren fl" href="javascript:void(0)" data-type="s-renren" title="分享到人人网"></a>
-                        <a class="s-qq fl" href="javascript:void(0)" data-type="s-qq" title="分享到qq"></a>
-                        <a class="s-douban fl" href="javascript:void(0)" data-type="s-douban" title="分享到豆瓣"></a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </div>
 
 </div>

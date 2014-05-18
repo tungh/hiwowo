@@ -26,6 +26,7 @@ seajs.config({
         'swfobject':'sea-modules/swfobject',
         'swfupload':'sea-modules/swfupload',
         'uploadify':'sea-modules/jquery.uploadify.js',
+        'unslider':'sea-modules/jquery.unslider.min.js',
         'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
         'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
