@@ -14,7 +14,12 @@ import models.label.dao.LabelDao
  * Date: 14-4-11
  * Time: 下午11:33
  */
-case class DiagramFilterFormData(title: Option[String], status: Option[Int], typeId: Option[Int], currentPage: Option[Int])
+case class DiagramFilterFormData(
+                                  title: Option[String],
+                                  status: Option[Int],
+                                  typeId: Option[Int],
+                                  currentPage: Option[Int]
+                                  )
 
 case class DiagramEditFormData(
                                id:Long,

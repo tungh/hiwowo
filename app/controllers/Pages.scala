@@ -36,9 +36,9 @@ object Pages extends Controller {
    *
     * */
   def pics(p:Int,size:Int) = Users.UserAction{ user => implicit request =>
-    val mengPage = LabelDao.findLabelDiagrams(1,1,p,size)
-    val xiaoPage = LabelDao.findLabelDiagrams(2,1,p,size)
-    val shengPage = LabelDao.findLabelDiagrams(3,1,p,size)
+    val mengPage = LabelDao.findLabelDiagrams(1,1,1,p,size)
+    val xiaoPage = LabelDao.findLabelDiagrams(2,1,1,p,size)
+    val shengPage = LabelDao.findLabelDiagrams(3,1,1,p,size)
     Ok(views.html.pages.pics(user,mengPage,xiaoPage,shengPage))
   }
 

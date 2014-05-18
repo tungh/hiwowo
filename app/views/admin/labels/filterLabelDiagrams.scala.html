@@ -1,88 +1,64 @@
-@(user:models.user.User,page:models.Page[models.label.Label])
-@views.html.admin.template(user,"label") {
+@(user:models.user.User,page:models.Page[(models.label.LabelDiagram,models.diagram.Diagram)],form: Form[controllers.admin.LabelDiagramsFilterFormData])
+@views.html.admin.template(user,"diagram") {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"> 标签管理 》标签</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-3">
-        <a href="@controllers.admin.routes.Labels.edit(0)"><button type="button" class="btn btn-primary btn-lg">创建新标签</button></a>
+        <h1 class="page-header"> 图说管理 》图说</h1>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                标签筛选
+                图说筛选
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Labels.filter">
-                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                        <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Labels.filterLabelDiagrams">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
+                            <input type="hidden" name="labelId" id="J_labelId" value='@form("labelId").value'>
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>
 
                             <div class="form-group">
-                                <label  for="name">名称</label>
-                                <input class="form-control" type="text" id="name" name="name" placeholder="名称">
-                            </div>
-                            <div class="form-group">
-                                <label  for="spell">拼写</label>
-                                <input class="form-control" type="text" id="spell" name="spell" placeholder="spell">
-                            </div>
-                            <div class="form-group">
-                                <label>级别 </label>
-
-                                <label class="radio-inline">
-                                    <input type="radio" name="level" value=""> 所有
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio"  name="level" value="1"> 普通
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="level" value="2"> 扩展
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="level" value="3"> 核心
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>is hot </label>
-
-                                <label class="radio-inline">
-                                    <input type="radio" name="isHot" value=""> 所有
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio"  name="isHot" value="0"> No
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="isHot" value="1"> Yes
-                                </label>
-
+                                <label  for="title">名称</label>
+                                <input class="form-control" type="text" id="title" name="title" value='@form("title").value' placeholder="名称">
                             </div>
                             <div class="form-group">
                                 <label  >审核状态</label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value=""> 所有
+                                    <input type="radio" name="checkState" value="" @if(form("checkState").value.isEmpty){ checked="true" }> 所有
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"  name="checkState" value="0"> 未审核
+                                    <input type="radio"  name="checkState" value="0" @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 草稿
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="1"> 审核成功
+                                    <input type="radio" name="checkState" value="1" @if(form("checkState").value.getOrElse("none")=="1"){ checked="true" }> 发布
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="2"> 审核未通过
+                                    <input type="radio" name="checkState" value="2" @if(form("checkState").value.getOrElse("none")=="2"){ checked="true" }> 审核通过
                                 </label>
 
 
                             </div>
+                            <div class="form-group">
+                                <label >类型</label>
 
+                                <label class="radio-inline">
+                                    <input type="radio" name="typeId" value=""> 所有类型
+                                </label>
+
+                                @for(cate<-models.diagram.DiagramType.values){
+                                <label class="radio-inline">
+                                    <input type="radio"  name="typeId" value="@cate.id" @if(form("typeId").value.getOrElse("none")==cate.id.toString){ checked="true" }> @cate
+                                </label>
+                                }
+
+
+                            </div>
                             <div class="form-group">
                                 <div class="controls">
                                     <input type="submit" class="btn btn-info" value="筛选"/>
@@ -110,8 +86,9 @@
             <div class="panel-body">
                 <div class="row">
 
-                    <form method="post" id="J_batchForm" action="@controllers.admin.routes.Labels.batch">
+                    <form method="post" id="J_batchForm" action="@controllers.admin.routes.Labels.batchLabelDiagrams">
                         <input type="hidden" id="J_url" name="url" value="">
+                        <input type="hidden" id="J_thirdId" name="thirdId" value='@form("labelId").value'>
                         <div class="form-group">
                             <select id="J_select" class="form-control" name="action">
                                 <option value="-1">批量动作</option>
@@ -136,31 +113,32 @@
                                     <th><input type="checkbox"  name="title-table-checkbox" /></th>
                                     <th>ID</th>
                                     <th>名称</th>
-                                    <th>级别</th>
-                                    <th>isHot</th>
-                                    <th>拼写</th>
-                                    <th>订阅数量</th>
-                                    <th>检查状态</th>
-                                    <th>简介</th>
+                                    <th>图片</th>
+                                    <th>diagram类型</th>
+                                    <th>label diagram状态</th>
+                                    <th>diagram状态</th>
+                                    <th>添加时间</th>
                                     <th style="width: 60px;">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @for((item,i)<- page.items.view.zipWithIndex){
-                                <tr id="@item.id.get" @if(i%2==0){ class="even"} else{ class="odd" } >
-                                <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
-                                <td>@item.id</td>
-                                <td>@item.name</td>
-                                <td>@if(item.level==3){<span class="label label-success">核心</span> }else{<span class="label label-info">普通</span> } </td>
-                                <td>@if(item.isHot ==1){<span class="label label-info">Yes</span> }else {<span class="label label-info">No</span> }</td>
-                                <td><span class="label label-default">@item.spell</span> </td>
-                                <td>@item.subscribeNum </td>
-                                <td>@if(item.checkState==0){<span class="label label-warning">未审核</span>} @if(item.checkState ==1){<span class="label label-success">审核通过</span>}@if(item.checkState ==2){<span class="label ">审核不通过</span>}</td>
-
-                                <td>@item.intro.getOrElse("")</td>
+                                <tr id="@item._2.id.get" @if(i%2==0){ class="even"} else{ class="odd" } >
+                                <td><input type="checkbox" name="ids[@i]" value="@item._2.id.get" /></td>
+                                <td>@item._2.id</td>
+                                <td>@item._2.title</td>
+                                <td><img src="@item._2.pic" width="80" height="80"> </td>
+                                <td>@models.diagram.DiagramType(item._2.typeId)</td>
                                 <td>
-                                    <a href="@controllers.admin.routes.Labels.edit(item.id.get)"><i class="icon-eye-open"></i>查看</a>
-                                    <a href="@controllers.admin.routes.Labels.labelDiagrams(item.id.get)" >图说</a>
+                                <td>@if(item._1.checkState==0){<span class="label label-warning">未审核</span>} @if(item._1.checkState ==1){<span class="label label-success">审核通过</span>}@if(item._1.checkState ==2){<span class="label ">审核不通过</span>}</td>
+
+                                </td>
+                                <td>@if(item._2.status==0){<span class="label label-primary">草稿</span>} @if(item._2.status ==1){<span class="label label-info">发布</span>}@if(item._2.status ==2){<span class="label label-success ">审核通过</span>}@if(item._2.status == 3){<span class="label label-warning ">审核不通过</span>}</td>
+
+                                <td>@item._2.addTime</td>
+                                <td>
+                                    <a href='@controllers.admin.routes.Diagrams.edit(item._2.id.get,"")'><i class="icon-eye-open"></i>编辑</a>
+
                                 </td>
                                 </tr>
                                 }
@@ -179,7 +157,7 @@
                             <ul class="pagination">
                                 @page.prev.map { page =>
                                 <li class="paginate_button previous">
-                                    <a href="controllers.admin.routes.Labels.core(page,100)">Prev</a>
+                                    <a href="controllers.admin.routes.Labels.labelDiagrams(page,20)">Prev</a>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button previous disabled">
@@ -188,16 +166,16 @@
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
-                                <li class="paginate_button active"><a href="@controllers.admin.routes.Labels.core(num,100)">@num</a></li>
+                                <li class="paginate_button active"><a href="@controllers.admin.routes.Labels.labelDiagrams(num)">@num</a></li>
                                 }else {
 
-                                <li class="paginate_button"><a href="@controllers.admin.routes.Labels.core(num,100)">@num</a></li>
+                                <li class="paginate_button"><a href="@controllers.admin.routes.Labels.labelDiagrams(num)">@num</a></li>
                                 }
 
                                 }
                                 @page.next.map { page =>
                                 <li class="paginate_button next">
-                                    <a href="@controllers.admin.routes.Labels.core(page,100)">Next</a>
+                                    <a href="@controllers.admin.routes.Labels.labelDiagrams(page,20)">Next</a>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button next disabled">
@@ -228,7 +206,30 @@
 
 
 
+    $(document).on("click",".remove",function(){
+        var id=$(this).data('id');
+        $("#J_deleteModal").modal('show');
+        $("#delete").click(function(){
 
+            $.ajax({
+                url:"/admin/labels/deleteLabelDiagram?id="+id,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    if(data.code =='100'){
+                        alert(data.message)
+                        $("#"+id).remove();
+                        $("#J_deleteModal").modal("hide")
+                    }else{
+                        alert(data.message)
+                    }
+                }
+            })
+
+        })
+    })
 </script>
 
-        }
+}
+
+

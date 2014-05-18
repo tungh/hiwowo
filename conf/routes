@@ -154,6 +154,10 @@ GET    /admin/labels/groupLabels       controllers.admin.Labels.groupLabels(gid:
 POST   /admin/labels/addGroupLabel     controllers.admin.Labels.addGroupLabel
 POST   /admin/labels/deleteGroupLabel  controllers.admin.Labels.deleteGroupLabel
 
+GET   /admin/labels/labelDiagrams/$labelId<[0-9]+>      controllers.admin.Labels.labelDiagrams(labelId:Long,p:Int ?=1,pageSize:Int ?=50)
+GET   /admin/labels/filterLabelDiagrams                 controllers.admin.Labels.filterLabelDiagrams
+POST  /admin/labels/batchLabelDiagrams                 controllers.admin.Labels.batchLabelDiagrams
+
 
 
 #管理后台 用户管理

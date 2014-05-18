@@ -160,10 +160,10 @@
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
-                                <li class="paginate_button active"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                <li class="paginate_button active"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
                                 }else {
 
-                                <li class="paginate_button"><a href="@controllers.admin.routes.Forums.topics(num)">@num</a></li>
+                                <li class="paginate_button"><a href="@controllers.admin.routes.Diagrams.list(num)">@num</a></li>
                                 }
 
                                 }
@@ -206,7 +206,7 @@
         $("#delete").click(function(){
 
             $.ajax({
-                url:"/admin/forums/delete?id="+id,
+                url:"/admin/diagrams/delete?id="+id,
                 type:'get',
                 dataType:'json',
                 success:function(data){

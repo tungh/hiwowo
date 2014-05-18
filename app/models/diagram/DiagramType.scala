@@ -10,8 +10,7 @@ package models.diagram
  */
 
 object DiagramType extends Enumeration{
-  val Common = Value("普通")
-  val Gif = Value("gif神兽")
-  val Confession  =  Value("神一样的自白")
-  val Video = Value("神一样的视频")
+  val TuWen = Value("图文")
+  val TuShuo = Value("图说")
+
 }

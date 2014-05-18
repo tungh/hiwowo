@@ -23,7 +23,8 @@ case class LabelEditFormData(
                               intro: Option[String],
                               isHot: Int,
                               spell: Option[String],
-                              checkState: Int)
+                              checkState: Int
+                              )
 
 case class LabelFilterFormData(
                                 name: Option[String],
@@ -31,8 +32,16 @@ case class LabelFilterFormData(
                                 isHot: Option[Int],
                                 spell: Option[String],
                                 checkState: Option[Int],
-                                currentPage: Option[Int])
+                                currentPage: Option[Int]
+                                )
 
+case class LabelDiagramsFilterFormData(
+                                  labelId:Long,
+                                  title: Option[String],
+                                  checkState: Option[Int],
+                                  typeId: Option[Int],
+                                  currentPage: Option[Int]
+                                  )
 object Labels extends Controller {
   val groupEditForm = Form(
     tuple(
@@ -64,6 +73,16 @@ object Labels extends Controller {
     )(LabelEditFormData.apply)(LabelEditFormData.unapply)
   )
 
+  val labelDiagramsFilterForm = Form(
+    mapping(
+      "labelId" -> longNumber,
+      "title" -> optional(text),
+      "checkState" -> optional(number),
+      "typeId" -> optional(number),
+      "currentPage" -> optional(number)
+    )(LabelDiagramsFilterFormData.apply)(LabelDiagramsFilterFormData.unapply)
+  )
+
 
   def list(p: Int, size: Int) = Admin.AdminAction {
     user => implicit request =>
@@ -89,8 +108,7 @@ object Labels extends Controller {
   }
 
 
-  def save = Admin.AdminAction {
-    user => implicit request =>
+  def save = Admin.AdminAction { user => implicit request =>
       labelEditForm.bindFromRequest.fold(
         formWithErrors => Ok("something wrong"),
         data => {
@@ -113,8 +131,7 @@ object Labels extends Controller {
       Ok("todo")
   }
 
-  def filter = Admin.AdminAction {
-    user => implicit request =>
+  def filter = Admin.AdminAction { user => implicit request =>
       labelFilterForm.bindFromRequest.fold(
         formWithErrors => Ok("something wrong"),
         filterCondition => {
@@ -202,8 +219,7 @@ object Labels extends Controller {
   }
 
   /* 查看group 下面的 labels*/
-  def groupLabels(gid: Long) = Admin.AdminAction {
-    user => implicit request =>
+  def groupLabels(gid: Long) = Admin.AdminAction { user => implicit request =>
       val labels = LabelDao.findGroupLabels(gid)
       Ok(views.html.admin.labels.groupLabels(user, gid, labels))
   }
@@ -234,8 +250,7 @@ object Labels extends Controller {
 
   }
 
-  def deleteGroupLabel = Action(parse.json) {
-    implicit request =>
+  def deleteGroupLabel = Action(parse.json) {  implicit request =>
       val user: Option[User] = request.session.get("user").map(u => UserDao.findById(u.toLong))
       if (user.isEmpty) Ok(Json.obj("code" -> "200", "message" -> "亲，你还没有登录哦"))
       else if (user.get.isAdmin == 0) {
@@ -254,4 +269,42 @@ object Labels extends Controller {
       }
   }
 
+  /* label diagrams */
+  def labelDiagrams(labelId:Long,p:Int,size:Int) = Admin.AdminAction { user => implicit request =>
+    val page = LabelDao.findLabelDiagrams(labelId,p,size)
+     Ok(views.html.admin.labels.labelDiagrams(user,page,labelId))
+  }
+
+  def filterLabelDiagrams  = Admin.AdminAction { user => implicit request =>
+    labelDiagramsFilterForm.bindFromRequest.fold(
+      formWithErrors => Ok("something wrong"),
+      data => {
+        val page = LabelDao.filterLabelDiagrams(data.labelId, data.title, data.checkState, data.typeId, data.currentPage.getOrElse(1),50)
+        Ok(views.html.admin.labels.filterLabelDiagrams(user, page,labelDiagramsFilterForm.fill(data)))
+      }
+    )
+  }
+
+  def batchLabelDiagrams = Admin.AdminAction {  user => implicit request =>
+      BatchFormData.batchForm.bindFromRequest.fold(
+        formWithErrors => Ok("something wrong"),
+        batch => {
+          if (batch.action == 1) {
+            for (id <- batch.ids) {
+              LabelDao.modifyLabelDiagramCheckState(batch.thirdId,id, 1)
+            }
+          } else if (batch.action == 2) {
+            for (id <- batch.ids) {
+              LabelDao.modifyLabelDiagramCheckState(batch.thirdId,id, 2)
+            }
+          } else if (batch.action == 3) {
+            for (id <- batch.ids) {
+              LabelDao.deleteLabelDiagram(batch.thirdId,id)
+            }
+          }
+
+          Redirect(batch.url.getOrElse("/admin/labels/labelDiagrams/"+batch.thirdId))
+        }
+      )
+  }
 }
