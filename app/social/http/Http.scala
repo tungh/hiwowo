@@ -1,31 +1,13 @@
 package utils.social.http
 
-import java.io.IOException
-import java.io.UnsupportedEncodingException
-import java.nio.charset.Charset
-import java.security.cert.CertificateException
-import java.security.cert.X509Certificate
-import java.util.ArrayList
-import java.util.List
-import javax.net.ssl.SSLContext
-import org.apache.commons.io.IOUtils
-import org.apache.commons.lang.StringUtils
-import org.apache.commons.lang.math.RandomUtils
-import org.apache.http.Header
-import org.apache.http.HttpEntity
-import org.apache.http.HttpResponse
-import org.apache.http.HttpStatus
-import org.apache.http.NameValuePair
-import org.apache.http.client.ClientProtocolException
+
+import org.apache.http.{HttpResponse, HttpEntity, NameValuePair}
+import java.util
 import org.apache.http.client.HttpClient
-import org.apache.http.client.entity.UrlEncodedFormEntity
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.client.methods.HttpRequestBase
-import org.apache.http.conn.ssl.SSLContexts
-import org.apache.http.conn.ssl.TrustStrategy
-import org.apache.http.entity.ContentType
-import org.apache.http.impl.client.HttpClientBuilder
+import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.util.EntityUtils
+import org.apache.http.client.methods.{HttpGet, HttpRequestBase}
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,9 +16,41 @@ import org.apache.http.impl.client.HttpClientBuilder
  * Time: 上午12:04
  */
 class Http {
+   /* 封装常用的方法 */
+  def get(url:String,params:util.ArrayList[NameValuePair]):String={
 
+     "todo"
+   }
+  def get(url:String):String ={
+    "todo"
+  }
+
+
+ def post(url: String, postBody: HttpEntity):String ={
+   "todo"
+ }
+  def post(url:String,params:util.ArrayList[NameValuePair]):String={
+
+    "todo"
+  }
 }
 
 object  Http{
+
+  /* 创建 httpClient */
+  def httpClient:HttpClient={ new DefaultHttpClient()  }
+
+  /* 以UTF-8方式 */
+  def responseToString(response:HttpResponse):String={
+    val entity: HttpEntity = response.getEntity
+    EntityUtils.toString(entity,"UTF-8")
+  }
+  /* execute request */
+ def  execute(request: HttpRequestBase)={
+        val response: HttpResponse = httpClient.execute(request)
+         responseToString(response)
+    }
+
+
 
 }
