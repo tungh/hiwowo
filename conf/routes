@@ -82,6 +82,10 @@ POST  /user/checkEmailExist          controllers.users.UsersRegLogin.checkEmailE
 GET   /user/snsLogin                            controllers.users.UsersSnsLogin.snsLogin(snsType:String,backType:String ?="syn",i:Long ?=0)
 GET   /user/:snsType/registed/:backType/:i      controllers.users.UsersSnsLogin.registed(snsType:String,code:String,backType:String,i:Long)
 
+GET   /user/sns/login/:comeFrom                             controllers.users.SnsLogin.login(comeFrom:String,backType:String ?="asyn")
+GET   /user/sns/redirect                           controllers.users.SnsLogin.redirect(code:String,comeFrom:String,backType:String ?="asyn")
+
+
 #user   用户消息
 GET     /user/msg/system          controllers.users.UsersMsg.system(p:Int)
 GET     /user/msg/at          controllers.users.UsersMsg.at
