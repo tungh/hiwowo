@@ -6,11 +6,8 @@ package social.weibo
  * Date: 14-5-20
  * Time: 下午11:46
  */
-class Weibo {
-
-}
+case class Weibo(appKey:String,appSecret:String,redirectUrl:String)
 
 object Weibo{
-  val appKey=""
-  val appSecret=""
+
 }

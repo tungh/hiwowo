@@ -10,6 +10,8 @@ import org.ansj.domain.Term
 import org.ansj.splitWord.analysis.ToAnalysis
 import java.util
 import org.ansj.app.keyword.{Keyword, KeyWordComputer}
+import play.mvc.Http
+import org.apache.http.NameValuePair
 
 
 /**
@@ -32,8 +34,12 @@ object Test extends Controller {
 //  if(term.isEmpty) println("term not exists") else println("term exists")
 //    TermDao.addTermRelation(1,1,0)
 
-    val result = UserDao.findUser(1)
-    Ok(" Ok! " + result.toString)
+ //   val result = UserDao.findUser(1)
+    val  params:util.ArrayList[NameValuePair] = new util.ArrayList[NameValuePair]()
+    social.http.Http.addParameter(params,"cookie","fffssss")
+    social.http.Http.addParameter(params,"cookie2","fffssssddd")
+  println(params.size() + "    "+params.toString)
+    Ok(" Ok! ")
   }
 
 
