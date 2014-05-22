@@ -147,4 +147,11 @@ diagram 是核心，需要花很多精力做哦
 
 
 
+5月22日
+1、调整user table 增加 access_token 和 expires_in
+2、remember me
+3、调整 social 开发包
+
+
+
 
