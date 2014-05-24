@@ -12,6 +12,7 @@ import java.util
 import org.ansj.app.keyword.{Keyword, KeyWordComputer}
 import play.mvc.Http
 import org.apache.http.NameValuePair
+import play.api.libs.Crypto
 
 
 /**
@@ -35,11 +36,10 @@ object Test extends Controller {
 //    TermDao.addTermRelation(1,1,0)
 
  //   val result = UserDao.findUser(1)
-    val  params:util.ArrayList[NameValuePair] = new util.ArrayList[NameValuePair]()
-    social.http.Http.addParameter(params,"cookie","fffssss")
-    social.http.Http.addParameter(params,"cookie2","fffssssddd")
-  println(params.size() + "    "+params.toString)
-    Ok(" Ok! ")
+   val code = Crypto.encryptAES("1")
+  println(code)
+   val uid = Crypto.decryptAES(code)
+    Ok(" Ok! code:  "+ code + " uid: " + uid)
   }
 
 
