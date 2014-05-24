@@ -12,16 +12,13 @@ title = "发布话题_讨论吧"
                 <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_editForm">
                     <input type="hidden" name="id" id="J_id"  value='@form("id").value' />
                     <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
-                    @if(form.hasErrors) {
-                    <div class="alert-message error">
-                        <p><strong>Oops</strong> Please fix all errors</p>
-                    </div>
-                    }
-
-                    @form.globalError.map { error =>
+                    @if(form.hasGlobalErrors) {
+                
+                    @form.globalError.foreach { error =>
                     <div class="error-row" style="display:block">
                         <p class="error"> @error.message</p>
                     </div>
+                    }
                     }
                     <div class="editor-title">
                         <label for="J_title">标题</label>

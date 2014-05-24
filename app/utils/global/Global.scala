@@ -15,7 +15,9 @@ import play.api.mvc.Results._
 import scala.concurrent.Future
 
 object Global extends GlobalSettings {
-
+  override def doFilter(next: EssentialAction): EssentialAction = {
+    Filters(super.doFilter(next), OauthFilter)
+  }
   override def onStart(app: Application) {
    val schedule = Play.maybeApplication.flatMap(_.configuration.getString("schedule")).getOrElse("off")
      if(schedule=="on"){
