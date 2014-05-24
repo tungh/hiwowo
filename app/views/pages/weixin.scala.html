@@ -52,16 +52,14 @@
                                             </dl>
                                         </div>
                                     </div>
-                                    <div class="share-link clearfix" data-sharetxt="" data-sharepic="" data-sharelink="">
-
-
-                                        <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
-                                        <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
-                                        <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
-                                        <a class="s-renren fl" href="javascript:;" data-type="s-renren" alt="分享到人人网"></a>
-                                        <a class="s-qq fl" href="javascript:;" data-type="s-qq" alt="分享到qq"></a>
-                                        <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
-                                    </div>
+                                    <dl class="share clearfix">
+                                        <dd class="weibo-share fl">
+                                            <wb:share-button appkey="KkU1Q" addition="simple" type="button" ralateUid="5109010234"></wb:share-button>
+                                        </dd>
+                                        <dd class="qzone-share fl">
+                                            <a href="javascript:void(0)" class="sh-qzone" data-url="@controllers.routes.Diagrams.diagram(diagram.id.get)" data-desc="@diagram.intro" data-summary="@diagram.intro" data-title="@diagram.title" data-site="嗨喔喔" data-pics="@diagram.pic" >分享</a>
+                                        </dd>
+                                    </dl>
                                     <div class="discuss">
                                         <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.discussNum 评论  </a>
                                     </div>

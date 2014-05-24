@@ -134,11 +134,14 @@
 .main .diagrams .diagram .diagram-info .pin .like-common{
     left:50px;
 }
-.main .diagrams .diagram .diagram-info .pin .share-link{
+.main .diagrams .diagram .diagram-info .pin .share{
     margin-top: 50px;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    padding: 5px;
+    padding:10px 5px;
+}
+.main .diagrams .diagram .diagram-info .pin .share dd{
+
 }
 .main .diagrams .diagram .diagram-info .pin .discuss{
     height: 30px;

@@ -446,8 +446,13 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 .ico-liked { background: url(images/liked.png) no-repeat; _background: url(images/ico_ilike.png) no-repeat -80px -0px;height: 15px; margin: 0}
 a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background: url(images/ico_ilike.png) no-repeat -3px -40px}
 /* 分享 */
-
-.share a { float:left;width:16px;height:16px;margin-left:5px;background-image:url(images/icons-share.png);background-repeat:no-repeat; }
+ .share .sh-qzone{
+     background: url(images/sh-qzone.png) no-repeat;
+     width: 57px;
+     height: 24px;
+     text-indent: -100px;
+      display: block;
+ }
 .share-link a { width: 16px;height: 16px; padding-left: 5px;display: block; background-image:url(images/icons-share.png);background-repeat:no-repeat; }
 .s-sina { background-position:0 -417px; }
 .s-renren { background-position:0 -80px; }
@@ -465,7 +470,7 @@ a:hover i.ico-likes { background: url(images/like_h.png) no-repeat; _background:
 
 
 .share32 a { background: url(images/share_32.png) no-repeat; width: 37px;height: 37px;display: block;float: left;padding-left: 5px;text-indent: -100em;cursor: pointer;}
-.sh-qzone { background-position: 0 -75px !important;}
+
 .sh-sina {background-position: 0 -115px !important;}
 .sh-bdhome { background-position: 0 -155px !important;}
 .sh-renren { background-position: 0 -195px !important;}

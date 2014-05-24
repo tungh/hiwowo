@@ -767,6 +767,21 @@ define(function(require, exports) {
         window.refresh=function(){
             window.location.reload();
         }
+        /*
+        *
+        * */
+
+        /* qzone 分享*/
+        $(".sh-qzone").unbind("click").click(function(){
+            var url ="http://hiwowo.com"+$(this).data("url")
+            var desc =$(this).data("desc")
+            var title =$(this).data("title")
+            var site=$(this).data("site")
+            var pics=$(this).data("pics")
+            var summary=$(this).data("summary")
+            window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&desc='+desc+'&summary='+summary+'&title='+title+'&site='+site+'&pics'+pics);
+
+        })
 
 
     });
