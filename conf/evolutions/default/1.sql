@@ -1,8 +1,8 @@
 ﻿# --- First database schema
 
 # --- !Ups
-#DROP DATABASE IF EXISTS `hiwowo`;
-#create database  hiwowo;
+DROP DATABASE IF EXISTS `hiwowo`;
+create database  hiwowo;
 /************************************************************
  * 用户是个大的结构  主要有以下几个表
  * user表                User常用的基本信息，包括常用的统计信息
@@ -36,7 +36,10 @@ CREATE TABLE `user` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `open_id`               varchar(64),
   `come_from`              tinyint    not null default '0',
-  `name`                varchar(64) NOT NULL ,
+  `access_token`         varchar(128),
+   `expires_in`        int(10) not null default '0',
+   `oauth_time`        timestamp not null DEFAULT '2014-5-22 12:00:00',
+   `name`                varchar(64) NOT NULL  ,
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
   `credits`              smallint(10) not null default '0',
@@ -615,5 +618,12 @@ create table administrator_role(
   modify_time     timestamp  ,
   add_time       timestamp default '2012-5-12 14:18:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# --- !Downs
+
+alter table  user add access_token varchar(128);
+alter table user add expires_in   varchar(128);
+alter table user add oauth_time    timestamp ;
 
 
