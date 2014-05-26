@@ -13,15 +13,18 @@ import models.Page
  * Date: 14-2-23
  * Time: 下午2:26
  */
-object WeiXinDiagramDao {
+object WeixinDiagramDao {
 
   val weixinDiagrams = TableQuery[WeixinDiagrams]
   val diagrams = TableQuery[Diagrams]
   val users = TableQuery[Users]
 
   /* 专门为微信挑选的diagram */
-  def addDiagram(diagramId:Long,period:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    (for(c<-weixinDiagrams)yield(diagramId,period)).insert(diagramId,period)
+  def addDiagram(diagramId:Long,period:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val weixinDiagramAutoInc = weixinDiagrams.map( c =>(c.diagramId,c.period))  returning weixinDiagrams.map(_.id) into {
+      case (_, id) => id
+    }
+    weixinDiagramAutoInc.insert(diagramId,period)
   }
   def deleteDiagram(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-weixinDiagrams if c.id === id) yield c).delete
@@ -30,7 +33,7 @@ object WeiXinDiagramDao {
     (for(c<-weixinDiagrams if c.id === id) yield c.diagramId ).update(diagramId)
   }
   /* 根据期数来查找diagram */
-  def findDiagrams(period:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findDiagrams(period:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
    ( for{
       c<-weixinDiagrams
       d<-diagrams
@@ -55,11 +58,29 @@ object WeiXinDiagramDao {
       u<-users
       if c.diagramId === d.id
       if d.uid === u.id
-    }yield(d,u)).drop(startRow).take(pageSize).sortBy(_._1.addTime desc).list()
+    }yield(d,u)).drop(startRow).take(pageSize).sortBy(_._1.id desc).list()
 
     Page[(Diagram,User)](list,currentPage,totalPages)
   }
 
+  def findWeixinDiagrams(id:Long):List[WeixinDiagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for(c<-weixinDiagrams if c.id === id )yield c).list()
+  }
+  def findWeixinDiagrams(currentPage:Int,pageSize:Int):Page[(WeixinDiagram,Diagram)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val totalRows = Query(weixinDiagrams.length).first
+    val totalPages = (totalRows + pageSize - 1) / pageSize
+    val startRow = if (currentPage < 1 || currentPage > totalPages) {
+      0
+    } else {
+      (currentPage - 1) * pageSize
+    }
+    val list =(for{
+      w <- weixinDiagrams
+      d <- diagrams
+      if w.diagramId === d.id
+    }yield(w,d)).drop(startRow).take(pageSize).sortBy(_._2.id desc).list()
 
+    Page[(WeixinDiagram,Diagram)](list,currentPage,totalPages)
+  }
 
 }

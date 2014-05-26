@@ -156,7 +156,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Labels.groups(1,50)"> 标签组管理 </a></li>
                     <li><a href="@controllers.admin.routes.Labels.core(1,100)">  核心标签管理 </a></li>
-                    <li><a href="@controllers.admin.routes.Labels.list(1,20)"> 标签管理 </a></li>
+                    <li><a href="@controllers.admin.routes.Labels.list(1,50)"> 标签管理 </a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -164,8 +164,8 @@
             <li class='@if(nav=="diagram"){active}'>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>图说管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="@controllers.admin.routes.Diagrams.list(1,20)">  图说管理 </a></li>
-
+                    <li><a href="@controllers.admin.routes.Diagrams.list(1,50)">  图说管理 </a></li>
+                    <li><a href="@controllers.admin.routes.Diagrams.weixin(1,50)">微信精选管理 </a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -197,7 +197,7 @@
             <li class='@if(nav=="cms"){active}'>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>CMS管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href='@controllers.admin.routes.Cmses.list(1,20)'>CMS链接</a></li>
+                    <li><a href='@controllers.admin.routes.Cmses.list(1,50)'>CMS链接</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -205,7 +205,7 @@
             <li class='@if(nav=="cms"){active}'>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>广告管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href='@controllers.admin.routes.Adverts.list(1,20)'>广告链接</a></li>
+                    <li><a href='@controllers.admin.routes.Adverts.list(1,50)'>广告链接</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

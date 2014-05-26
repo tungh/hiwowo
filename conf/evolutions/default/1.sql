@@ -287,7 +287,7 @@ DROP TABLE IF EXISTS `weixin_diagram`;
 CREATE TABLE  IF NOT EXISTS `weixin_diagram`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `diagram_id`            int(10) NOT NULL ,
-  `period`                 int NOT NULL ,
+  `period`                 int(10) NOT NULL ,
   `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

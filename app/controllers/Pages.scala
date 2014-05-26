@@ -4,7 +4,7 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import models.forum.dao.TopicDao
 import models.diagram.dao.DiagramDao
-import models.weixin.dao.WeiXinDiagramDao
+import models.weixin.dao.WeixinDiagramDao
 import models.label.dao.LabelDao
 
 /**
@@ -27,7 +27,7 @@ object Pages extends Controller {
 
    /* 微信精选 */
    def weixin(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
-     val pages = WeiXinDiagramDao.findDiagrams(currentPage,pageSize)
+     val pages = WeixinDiagramDao.findDiagrams(currentPage,pageSize)
      Ok(views.html.pages.weixin(user,pages))
    }
 

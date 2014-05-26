@@ -6,6 +6,9 @@ import play.api.data.Form
 import play.api.data.Forms._
 import org.jsoup.Jsoup
 import models.label.dao.LabelDao
+import models.weixin.dao.WeixinDiagramDao
+import scala.Some
+
 
 
 /**
@@ -38,6 +41,11 @@ case class DiagramPicsFormData(
                                 urls:Seq[String],
                                 intros: Seq[Option[String]]
                                 )
+case class WeixinDiagramsFormData(
+                                  id: Long,
+                                  diagramsId:String,
+                                  period:Long
+                                  )
 
 object Diagrams extends Controller {
   /*检索*/
@@ -69,6 +77,13 @@ object Diagrams extends Controller {
       "urls" ->seq(text),
       "intros" ->seq(optional(text))
     )(DiagramPicsFormData.apply)(DiagramPicsFormData.unapply)
+  )
+  val addWeixinDiagramsForm =Form(
+    mapping(
+      "id"->longNumber,
+      "diagramsId" ->text,
+      "period"->longNumber
+    )(WeixinDiagramsFormData.apply)(WeixinDiagramsFormData.unapply)
   )
   def list(p: Int, pageSize: Int) = Admin.AdminAction {
     user => implicit request =>
@@ -142,8 +157,7 @@ object Diagrams extends Controller {
 
   }
 
-  def delete = Admin.AdminAction {
-    user => implicit request =>
+  def delete = Admin.AdminAction { user => implicit request =>
       Ok("todo")
   }
 
@@ -187,4 +201,43 @@ object Diagrams extends Controller {
         }
       )
   }
+
+
+
+ /* 微信精选 */
+  def weixin(p:Int,size:Int) = Admin.AdminAction { user => implicit request =>
+      val page = WeixinDiagramDao.findWeixinDiagrams(p,size)
+     Ok(views.html.admin.diagrams.weixin(user,page))
+ }
+  def addWeixinDiagrams(id:Long) = Admin.AdminAction { user => implicit request =>
+    if(id!=0){
+       val weixinDiagrams = WeixinDiagramDao.findWeixinDiagrams(id)
+      var ids=""
+      weixinDiagrams.foreach(x =>{ ids += x.diagramId+" "}  )
+      Ok(views.html.admin.diagrams.addWeixinDiagrams(user,id,addWeixinDiagramsForm.fill(WeixinDiagramsFormData(id,ids,weixinDiagrams.head.period))))
+    }else{
+        Ok(views.html.admin.diagrams.addWeixinDiagrams(user,id,addWeixinDiagramsForm))
+    }
+
+  }
+  def saveWeixinDiagrams  = Admin.AdminAction { user => implicit request =>
+    addWeixinDiagramsForm.bindFromRequest.fold(
+      formWithErrors => {
+        Ok("something wrong")
+      },
+      data => {
+      if( data.id == 0 ){
+        for( id <- data.diagramsId.split(",")){
+          WeixinDiagramDao.addDiagram(id.toLong,data.period)
+        }
+      }else{
+        for( id <- data.diagramsId.split(",")){
+          WeixinDiagramDao.updateDiagram(data.id,id.toLong)
+        }
+      }
+        Redirect(controllers.admin.routes.Diagrams.weixin(1,50))
+      }
+    )
+  }
+
 }

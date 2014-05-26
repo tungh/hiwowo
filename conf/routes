@@ -130,7 +130,7 @@ GET  /admin/forums/filterDiscusses       controllers.admin.Forums.filterDiscusse
 POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
 
 #管理后台  图说管理
-GET   /admin/diagrams/list           controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/diagrams/list           controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=50)
 GET   /admin/diagrams/edit/$id<[0-9]+>         controllers.admin.Diagrams.edit(id:Long,msg:String ?="")
 GET  /admin/diagrams/filter            controllers.admin.Diagrams.filter
 POST   /admin/diagrams/delete         controllers.admin.Diagrams.delete
@@ -139,9 +139,13 @@ POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
 POST  /admin/diagrams/saveDiagram       controllers.admin.Diagrams.saveDiagram
 POST  /admin/diagrams/saveDiagramPics     controllers.admin.Diagrams.saveDiagramPics
 
+GET   /admin/diagrams/weixin           controllers.admin.Diagrams.weixin(p:Int ?=1,pageSize:Int ?=50)
+GET   /admin/diagrams/addWeixinDiagrams  controllers.admin.Diagrams.addWeixinDiagrams(id:Long ?=0)
+POST  /admin/diagrams/saveWeixinDiagrams  controllers.admin.Diagrams.saveWeixinDiagrams
+
 
 #管理后台 标签管理
-GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=50)
 GET   /admin/labels/core           controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=100)
 GET   /admin/labels/filter            controllers.admin.Labels.filter
 GET   /admin/labels/edit          controllers.admin.Labels.edit(id:Long ?=0L)
@@ -149,7 +153,7 @@ POST  /admin/labels/save              controllers.admin.Labels.save
 POST   /admin/labels/delete         controllers.admin.Labels.delete
 POST   /admin/labels/check          controllers.admin.Labels.check
 POST  /admin/labels/batch             controllers.admin.Labels.batch
-GET   /admin/labels/groups           controllers.admin.Labels.groups(p:Int ?=1,pageSize:Int ?=20)
+GET   /admin/labels/groups           controllers.admin.Labels.groups(p:Int ?=1,pageSize:Int ?=50)
 GET   /admin/labels/editGroup        controllers.admin.Labels.editGroup(id:Long ?=0L)
 POST   /admin/labels/saveGroup        controllers.admin.Labels.saveGroup
 POST   /admin/labels/deleteGroup      controllers.admin.Labels.deleteGroup
@@ -173,13 +177,13 @@ GET  /admin/users/filterUsers       controllers.admin.Users.filterUsers
 POST /admin/users/batchUsers       controllers.admin.Users.batchUsers
 
 #管理后台 内容管理
-GET   /admin/cmses/list           controllers.admin.Cmses.list(p:Int ?=1,size:Int ?=20)
+GET   /admin/cmses/list           controllers.admin.Cmses.list(p:Int ?=1,size:Int ?=50)
 GET   /admin/cmses/edit           controllers.admin.Cmses.edit(id:Long ?=0l)
 POST  /admin/cmses/save           controllers.admin.Cmses.save
 POST  /admin/cmses/delete         controllers.admin.Cmses.delete
 
 #管理后台 广告管理
-GET   /admin/adverts/list           controllers.admin.Adverts.list(p:Int ?=1,size:Int ?=20)
+GET   /admin/adverts/list           controllers.admin.Adverts.list(p:Int ?=1,size:Int ?=50)
 GET   /admin/adverts/edit           controllers.admin.Adverts.edit(id:Long ?=0l)
 POST  /admin/adverts/save           controllers.admin.Adverts.save
 POST  /admin/adverts/delete         controllers.admin.Adverts.delete

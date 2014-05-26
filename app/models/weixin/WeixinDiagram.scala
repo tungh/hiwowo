@@ -11,14 +11,14 @@ import java.sql.Timestamp
 case class WeixinDiagram (
                       id: Option[Long],
                       diagramId:Long,
-                      period:Int,
+                      period:Long,
                       addTime:Option[Timestamp]
                       )
 
 class WeixinDiagrams(tag:Tag) extends Table[WeixinDiagram](tag,"weixin_diagram") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def diagramId = column[Long]("diagram_id")
-  def period = column[Int]("period")
+  def period = column[Long]("period")
   def addTime = column[Timestamp]("add_time")
   def * =(id.?,diagramId,period,addTime.?) <> (WeixinDiagram.tupled, WeixinDiagram.unapply)
 

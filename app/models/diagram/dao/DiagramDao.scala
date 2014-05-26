@@ -168,7 +168,7 @@ object DiagramDao {
         if c.status === status
         if c.uid === u.id
       }yield(c,u)
-      if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
+      if(sortBy == "new") query = query.sortBy(_._1.id desc)
       if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
       val list = query.drop(startRow).take(pageSize).list()
     Page[(Diagram,User)](list,currentPage,totalPages)
