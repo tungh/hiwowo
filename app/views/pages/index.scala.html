@@ -53,14 +53,9 @@
                                         </dl>
                                     </div>
                                 </div>
-                                 <dl class="share clearfix">
-                                     <dd class="weibo-share fl">
-                                <wb:share-button appkey="KkU1Q" addition="simple" type="button" ralateUid="5109010234"></wb:share-button>
-                                     </dd>
-                                    <dd class="qzone-share fl">
-                                        <a href="javascript:void(0)" class="sh-qzone" data-url="@controllers.routes.Diagrams.diagram(diagram.id.get)" data-desc="@diagram.intro" data-summary="@diagram.intro" data-title="@diagram.title" data-site="嗨喔喔" data-pics="@diagram.pic" >分享</a>
-                                    </dd>
-                                 </dl>
+                                 <div class="share clearfix">
+                                     <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
+                                 </div>
                                 <div class="discuss">
                                     <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.discussNum 评论  </a>
                                 </div>

@@ -429,12 +429,13 @@
 .diagram .share-pin .share-content .like-common{
     left:50px;
 }
-.diagram .share-pin .share-content  .share-link{
+.diagram .share-pin .share-content  .share{
     margin-top: 50px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px dotted #ddd;
+    border-bottom: 1px dotted #ddd;
     padding: 5px;
 }
+
 
 
 
