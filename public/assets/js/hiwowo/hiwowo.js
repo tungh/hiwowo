@@ -695,20 +695,6 @@ define(function(require, exports) {
 
         })
 
-         /*subnav fixed 操作 */
-        $(window).scroll(function () {
-            var d = $(document).scrollTop();
-            if (d > 40) {
-                $("#J_subbar").addClass("subbar-fixed");
-                $("#J_subbar").find("#J_subSearch").show()
-            } else {
-                $("#J_subbar").removeClass("subbar-fixed");
-                $("#J_subbar").find("#J_subSearch").hide()
-            }
-        });
-
-
-
 
 
         ///同步授权登录后关注弹出层

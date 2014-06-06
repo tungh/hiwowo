@@ -74,10 +74,7 @@
                 <li class=' @("on".when(subNav == "diagrams")) '><a href="/pics/1" title="">图说</a></li>
             </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌宠">
-                <a  href="javascript:void(0);"></a>
-            </div>
+
         </div>
     </div> }
 
@@ -89,10 +86,7 @@
                 <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
             </ul>
 
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌宠">
-                <a  href="javascript:void(0);"></a>
-            </div>
+
         </div>
     </div> }
     case "ta" => { <div id="J_subbar" class="subbar">
@@ -101,16 +95,9 @@
                 <li class=' @("on".when(subNav == "home")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.home(authorId.get)}' title="TA的关注">TA的首页</a></li>
                 <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.diagrams(authorId.get)}' title="TA的神兽">TA的神兽</a></li>
                 <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.subscribes(authorId.get)}' title="我的订阅">TA的订阅</a></li>
-
             </ul>
-
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌宠">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div>}
-
 
     case "forum" => {<div id="J_subbar" class="subbar">
         <div class="container">
@@ -120,11 +107,6 @@
                 <li class=' @("on".when(subNav == "2")) '><a href='@controllers.routes.Forums.forum(2,"new",1,10)' title="问答">问答</a></li>
                 <li class=' @("on".when(subNav == "3")) '><a href='@controllers.routes.Forums.forum(3,"new",1,10)' title="活动">活动</a></li>
             </ul>
-
-            <div class="subSearch" id="J_subSearch">
-                <input type="text" class="" placeholder="萌宠">
-                <a  href="javascript:void(0);"></a>
-            </div>
         </div>
     </div> }
 
