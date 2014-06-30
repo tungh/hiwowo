@@ -1,0 +1,261 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-7
+ * Time: 上午10:08
+ * 维护人员:zuosanshao@qq.com
+ */
+
+/* navbar 模块 */
+
+.topbar section{display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;}
+.topbar {background: #282828;}
+.topbar .logo {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 156px;height: 40px;background: url("//mu4.bdstatic.com/static/i/eL38PCbx.png") no-repeat;overflow: hidden;float: left;text-indent: -999em;}
+.topbar .nav {float:left;height: 40px;line-height: 40px;position: relative;margin-left: 10px;}
+.topbar .nav li {display: inline;float: left;}
+.topbar .nav a {
+    padding: 0 15px;
+    float: left;
+    display: inline;
+    color: #999;
+    text-shadow: #2f353a 0 -1px 0;
+    font-size: 14px;
+}
+
+.topbar .nav a:hover {color: white;text-decoration:none}
+.topbar .nav .current {
+    height:40px;
+    text-shadow: none;
+    background: url(images/icon_triangle.png) no-repeat center bottom;
+    color: #fff;
+}
+
+.topbar .user-info {display: inline;float: right;height: 40px;line-height: 40px;}
+.topbar .user-info a{
+    color: #fff;
+}
+.topbar .user-info .login, .topbar .user-info .spacing, .topbar .user-info .signup, .topbar .user-info .avatar, .topbar .user-info .user {display: inline;float: left;}
+.topbar .user-info .spacing {margin: 0 10px;color: #3e3e3e;}
+.topbar .user-info .avatar {margin: 5px 10px 0 10px;}
+.topbar .user-info .avatar, .topbar .user-info .avatar img {width: 30px;height: 30px; -webkit-border-radius: 50%; -moz-border-radius: 50%;  -ms-border-radius: 50%;-o-border-radius: 50%;border-radius: 50%; behavior: url(PIE.htc);}
+.topbar .user-info .user {height: 40px;line-height: 40px;padding-right: 10px;}
+.topbar .user-info .user:hover {text-decoration: none;}
+.topbar .user-info .nav-item {display: inline;display: -moz-inline-stack;display: inline-block;float: left;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;position: relative;cursor: pointer;background: transparent;}
+.topbar .user-info .nav-item.on {background: #333;}
+.topbar .user-info .nav-item i {position: absolute;top: 50%;left: 50%;}
+.topbar .user-info .favorite, .topbar .user-info .follow {width: 45px;height: 40px;}
+.topbar .user-info .favorite {-webkit-box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;-moz-box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;border-left: 1px solid #222;border-right: 1px solid #222;}
+.topbar .user-info .favorite i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 17px;height: 14px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu4.bdstatic.com/static/i/aOCSihKL.png",sizingMethod="crop");margin-top: -7px;margin-left: -8.5px;}
+.topbar .user-info .follow i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 24px;height: 18px;background: url("images/follow.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu4.bdstatic.com/static/i/mxhqHaa3.png",sizingMethod="crop");margin-top: -9px;margin-left: -12px;}
+.topbar .user-info .menu .name {display: inline;float: left;cursor: pointer;}
+.topbar .user-info .menu .triangle {display: inline;float: left;width: 0;height: 0;margin: 19px 0 0 5px;overflow: hidden;border-style: solid dashed none dashed;border-width: 4px 4px 0 4px;border-color: white transparent transparent transparent;}
+.topbar .user-info .menu.on .triangle {border-style: none dashed solid dashed;border-width: 0 4px 4px 4px;border-color: transparent transparent white transparent;}
+.topbar .user-info .menu.on .dropdown {display: block;}
+.topbar .user-info .dropdown {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 5px #eee;-moz-box-shadow: 0 0 5px #eee;box-shadow: 0 0 5px #eee;display: none;position: absolute;z-index: 999;background: white;text-align: center;right: 0;border: 1px solid #e5e5e5;border-bottom: none;}
+.topbar .user-info .dropdown li {border-bottom: 1px solid #e6e6e6;}
+.topbar .user-info .dropdown li a {*zoom: 1;display: block;color: #282828;}
+.topbar .user-info .dropdown li a:hover {background-color: #f3f3f3;text-decoration: none;}
+.topbar-fixed-top,.topbar-fixed-bottom { position: fixed;right: 0;left: 0; z-index: 1030;}
+.topbar-fixed-top { top: 0; border-width: 0 0 1px;}
+.topbar-fixed-bottom { bottom: 0; margin-bottom: 0; border-width: 1px 0 0;}
+.topbar .user-info .topbar-dropdown{ top: 40px;}
+.topbar .user-info .bottombar-dropdown{bottom:40px}
+.topbar .msg {
+    float:left;
+    display: block;
+    width: 55px;
+    height: 45px;
+    color: #fff;
+    background: url(images/icon_message.png) no-repeat 15px;
+}
+.topbar .msg span {
+    display:block;
+    width: 12px;
+    height: 24px;
+    background: url(images/icon_message_num.png) no-repeat;
+    line-height: 22px;
+    margin-top: 5px;
+    margin-left: 30px;
+    overflow: hidden;
+    font-weight: bold;
+    font-family: Arial,Helvetica,sans-serif;
+    text-align: center;
+    padding: 0 6px 0 5px;
+}
+.subbar {
+    height: 34px;
+    line-height: 34px;
+    background: #f5f5f5;
+    width: 100%;
+    border-bottom: #b4b4b4 solid 1px;
+    position: relative;
+    z-index: 4
+}
+.subbar ul li{
+    list-style: none;
+}
+.subbar-fixed {
+    z-index: 6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    border-bottom: 0
+}
+
+.subbar .container {
+    color: #556069;
+    height: 35px;
+    position: relative
+}
+
+.subbar .container ul {
+    float: left;
+    height: 35px
+}
+
+.subbar .container a {
+    color: #333;
+    font-size: 12px;
+
+}
+
+.subbar .container li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    margin-right: 10px;
+    text-align: center
+}
+
+.subbar .container li.on {
+    color: #333;
+    font-weight: bold;
+    height: 33px;
+    line-height: 35px
+}
+
+.subbar .container li.new {
+    background: url(images/icon_new.gif) right 4px no-repeat
+}
+
+.subbar .container li.on a {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin-top: 0;
+    height: 33px;
+    line-height: 33px;
+    border-bottom: #444 solid 2px
+}
+
+.subbar .container li a span {
+    font-size: 12px;
+    padding-left: 4px
+}
+
+.subbar .topSearch {
+
+    display: inline;
+    float: right;
+    height: 40px;
+    line-height: 40px
+}
+
+.subbar .topSearch .searchBox {
+    border: 1px solid #aaa;
+    float: left;
+    width: 170px;
+    height: 24px;
+    padding-left: 13px;
+    zoom: 1;
+    margin: 5px 50px;
+    display: inline;
+    background: #FFF;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    -ms-border-radius: 13px;
+    -o-border-radius: 13px;
+    border-radius: 13px;
+}
+
+.subbar .topSearch .searchText {
+    float: left;
+    height: 22px;
+    width: 124px;
+    font-size: 12px;
+    line-height: 22px;
+    border: 0;
+    color: #556069;
+}
+
+.subbar .topSearch .searchBtn {
+    float: right;
+    width: 24px;
+    height: 28px;
+    background: url(images/icon_search.png) 0 2px no-repeat;
+}
+
+/* grid 格栅模块 */
+.container {
+    width:1200px; margin: 0 auto; padding: 0;
+}
+.container:before,
+.container:after {
+    display: table;
+    content: " ";
+}
+
+.container:after {
+    clear: both;
+}
+
+.container:before,
+.container:after {
+    display: table;
+    content: " ";
+}
+
+.container:after {
+    clear: both;
+}
+
+.row {
+    width: 100%;
+    *zoom: 1  ;
+
+}
+.row:before,
+.row:after {
+    content: " ";
+    display: table;
+}
+.row:after {
+    clear: both;
+}
+.container .main{
+    width: 680px;
+    float: left;
+    background: #fff;
+}
+
+.container .aside{
+    padding: 10px;
+    width: 270px;
+    float: right;
+    background: #fff;
+}
+
+
+/* comment 评论模块 */
+
+
+/*item 图说item模块 */
+
+/* 列表模块 */
+
+
+/* feed 模块 */
+
+

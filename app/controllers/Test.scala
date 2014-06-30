@@ -1,6 +1,6 @@
 package controllers
 
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import models.user.dao.UserDao
 
@@ -42,5 +42,8 @@ object Test extends Controller {
     Ok(" Ok! code:  "+ code + " uid: " + uid)
   }
 
+  def ui = Action{
+    Ok(views.html.test.ui())
+  }
 
 }

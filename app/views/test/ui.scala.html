@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Note there is no responsive meta tag here -->
+
+    <link rel="icon" href="/favicon.ico">
+
+    <title>Non-responsive Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap/3.2.0/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/hiwowo/hiwowo.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="topbar" class="topbar">
+    <div class="container">
+
+        <nav class="nav">
+            <ul class="clearfix">
+                <li><a href="/" class=" current ">嗨喔喔</a></li>
+                <li><a href="" rel="loginD" class="  ">我的喔喔</a></li>
+                <li><a href="/forum" class="  ">讨论吧</a></li>
+            </ul>
+        </nav>
+
+
+        <section class="user-info">
+            <a class="login need-login" href="javascript:void(0)" rel="loginD">登录</a><span class="spacing">|</span><a class="signup" href="/user/regist">注册</a>
+        </section>
+
+
+    </div>
+</div>
+<div id="J_subbar" class="subbar">
+    <div class="container">
+        <ul>
+            <li class=" on "><a href="/" title="首页">首页</a></li>
+            <li class="  new "><a href="/weixin/1" title="微信精选">微信精选</a></li>
+            <li class="  "><a href="/pets/1" title="神兽乐园">神兽乐园</a></li>
+            <li class="  "><a href="/pics/1" title="">图说</a></li>
+        </ul>
+
+        <section class="topSearch">
+            <div class="searchBox">
+                <input type="text" class="searchText" value="萌宠">
+                <a class="searchBtn" href="javascript:void(0);"></a>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Non-responsive Bootstrap</h1>
+        <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
+    </div>
+
+    <h3>What changes</h3>
+   <p>我是伟大的方靖，方靖</p>
+    <h3>Regarding navbars</h3>
+    <p>As a heads up, the navbar component is rather tricky here in that the styles for displaying it are rather specific and detailed. Overrides to ensure desktop styles display are not as performant or sleek as one would like. Just be aware there may be potential gotchas as you build on top of this example when using the navbar.</p>
+
+    <h3>Browsers, scrolling, and fixed elements</h3>
+    <p>Non-responsive layouts highlight a key drawback to fixed elements. <strong class="text-danger">Any fixed component, such as a fixed navbar, will not be scrollable when the viewport becomes narrower than the page content.</strong> In other words, given the non-responsive container width of 970px and a viewport of 800px, you'll potentially hide 170px of content.</p>
+    <p>There is no way around this as it's default browser behavior. The only solution is a responsive layout or using a non-fixed element.</p>
+
+    <h3>Non-responsive grid system</h3>
+    <div class="row">
+        <div class="col-xs-4">One third</div>
+        <div class="col-xs-4">One third</div>
+        <div class="col-xs-4">One third</div>
+    </div>
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="/assets/js/sea/sea.js"></script>
+<script type="text/javascript" src="/assets/js/sea/sea-config.js"></script>
+<script>
+    seajs.use("bootstrap")
+</script>
+
+</body></html>

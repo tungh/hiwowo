@@ -347,57 +347,7 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     font-size: 12px;
     padding-left: 4px
 }
-.switch {
 
-    height: 20px;
-    width: 180px;
-    float: right;
-    position: relative
-}
-
-.switch a {
-    float: right;
-    margin-left: 10px;
-    display: inline;
-    width: 32px;
-    height: 34px
-}
-
-.switch a.clipfloat {
-    background: url(images/icon_view_switcher.png) no-repeat 0 0
-}
-
-.switch a.cliplist {
-    background: url(images/icon_view_switcher.png) no-repeat 0 -68px
-}
-
-.switch a.clipboard {
-    background: url(images/icon_view_switcher.png) no-repeat 0 -204px
-}
-
-.switch a.board {
-    background: url(images/icon_view_switcher.png) no-repeat 0 -135px
-}
-
-.switch a.on {
-    background: url(images/icon_view_switcher.png) no-repeat 0 -190px
-}
-
-.switch a.clipfloat:hover {
-    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -33px
-}
-
-.switch a.cliplist:hover {
-    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -102px
-}
-
-.switch a.clipboard:hover {
-    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -238px
-}
-
-.switch a.board:hover {
-    background: #009fdd url(images/icon_view_switcher.png) no-repeat 0 -169px
-}
 .subSearch {
     border: 1px solid rgb(204, 204, 204);
     float: right;

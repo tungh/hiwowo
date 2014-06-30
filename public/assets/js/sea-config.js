@@ -30,6 +30,8 @@ seajs.config({
         'pin':'sea-modules/jquery.pin.min.js',
         'bootstrap':'flatui/bootstrap',
         'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
+
+        'bootstrap3.2':'bootstrap/3.2.0/bootstrap.min',
          'hiwowo':'hiwowo/hiwowo'
     },
 

@@ -4,6 +4,8 @@
 
 #TEST
 GET   /test                                controllers.Test.index
+GET   /ui                                  controllers.Test.ui
+
 
 # Home page
 GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
