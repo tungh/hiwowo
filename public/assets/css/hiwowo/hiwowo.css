@@ -5,6 +5,7 @@
  * 维护人员:zuosanshao@qq.com
  */
 
+/* base */
 body{
     background: url(images/bg_all.gif) repeat transparent 0 0;
     text-align: center;
@@ -15,24 +16,89 @@ body{
 .clearfix {*zoom: 1;}
 .clearfix:before,.clearfix:after {display: table;content: "";}
 .clearfix:after {clear: both;}
+ul, ol, li { list-style: none}
+a { text-decoration: none; color: #333;}
+a:focus { outline: thin dotted;}
+a:active,a:hover { outline: 0;text-decoration: none}
+h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
 .main .alert{
     margin: 20px 20px 0 20px;
 }
-.main .alert .top{
-    background: #ff9431;
-    padding: 3px 8px;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: normal;
-    margin-right: 10px;
+.main .alert{
+    font-size: 20px;
+}
+.main .alert .label{
+    font-size: 90%;
 }
 .main .alert .alert-link{
-    font-size: 20px;
+    font-size:16px;
     font-weight: bold;
     color: #333;
-    line-height: 30px;
+    line-height: 20px;
 }
+
+.main .select {
+    float: left;
+    width: 900px;
+    height: 60px;
+    border-bottom: 2px solid #44b2c3;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+
+.main .select h1 {
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+    color: #666;
+    line-height: 60px;
+    padding: 0;
+    margin: 0 20px 0;
+
+}
+
+.main .cat {
+    width: 860px;
+    margin-left: 20px;
+    float: left;
+    line-height: 35px;
+    height: 70px;
+    overflow: hidden;
+    _display: inline;
+}
+
+.main .cat b {
+    float: left;
+    font-weight: normal;
+    width: 45px;
+    height: 35px;
+    line-height: 35px;
+}
+
+
+.main .cat ul {
+    float: left;
+    width: 810px;
+    height: 70px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.main .cat ul li {
+    float: left;
+    height: 35px;
+}
+.main .cat ul li a {
+    float: left;
+    line-height: 35px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0 10px;
+    color: #474853;
+    font-size: 14px;
+}
+
+
 /* navbar 模块 */
 .headerbar{
     position: absolute;
@@ -267,7 +333,7 @@ body{
     z-index: 4
 }
 .subbar ul li{
-    list-style: none;
+
 }
 .subbar-fixed {
     z-index: 6;
@@ -455,68 +521,76 @@ body{
 /* comment 评论模块 */
 
 
-/*item 图说item模块 */
-.title {
-    float: left;
-    width: 900px;
-    height: 60px;
-    border-bottom: 2px solid #44b2c3;
-    line-height: 60px;
-    margin-bottom: 20px;
+/*items 模块 */
+  .items{
+     padding:0 20px;
+  }
+ .items .item{
+      float: left;
+      width: 860px;
+      position: relative;
+  }
+  .items .item .content{
+      float: left;
+      border-right: 2px solid #cecece;
+      width: 653px;
+  }
+  .items .item .content h2{
+      height:60px;
+      position: relative;
+      background: #f4f5f6;
+      font-size: 20px;
+      border-bottom-left-radius: 15px;
+      border-top-left-radius: 15px;
+  }
+  .items .item .content h2 .title{
+      padding-left: 20px;
+      float: left;
+      height: 60px;
+      line-height: 60px;
+  }
+
+.items .item .content .desc{
+    margin: 15px 20px 20px auto;
+    text-align: center;
 }
 
-.title h1 {
-    float: left;
-    font-size: 24px;
-    font-weight: normal;
-    color: #666;
-    line-height: 60px;
-    padding: 0;
-    margin: 0 20px 0;
+  .items .item .meta{
+      width: 205px;
+      float: left;
+  }
+  .items .item .meta .vs{
+      text-align: center;
+      background: #f4f5f6;
+      position: relative;
+      height: 60px;
+      line-height: 60px;
+      width: 205px;
+      border-bottom-right-radius: 15px;
+      border-top-right-radius: 15px;
+  }
+  .items .item .meta .user{
+      margin-top: 5px;
+      line-height: 35px;
+  }
+  .items .item .meta .user img{
+      width: 35px;
+      height: 35px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      margin-left:15px;
+  }
+  .items .item .meta .user span{
+      font-size: 12px;
+      color: #555;
+  }
+  .items .item .meta .user i{
+      float: right;
+      color: #999;
+      font-size: 12px;
+      margin-right: 15px;
+  }
 
-}
-
-.cat {
-    width: 860px;
-    margin-left: 20px;
-    float: left;
-    line-height: 35px;
-    height: 70px;
-    overflow: hidden;
-    _display: inline;
-}
-
-.cat b {
-    float: left;
-    font-weight: normal;
-    width: 45px;
-    height: 35px;
-    line-height: 35px;
-}
-
-
-.cat ul {
-    float: left;
-    width: 810px;
-    height: 70px;
-    overflow: hidden;
-    padding: 0;
-}
-
-.cat ul li {
-    float: left;
-    height: 35px;
-    list-style: none;
-}
-.cat ul li a {
-    float: left;
-    line-height: 35px;
-    height: 30px;
-    overflow: hidden;
-    margin: 0 10px;
-    color: #474853;
-    font-size: 14px;
-}
 /* items end */
 /* 列表模块 */
 
