@@ -5,13 +5,83 @@
  * 维护人员:zuosanshao@qq.com
  */
 
+body{
+    background: url(images/bg_all.gif) repeat transparent 0 0;
+    text-align: center;
+    font-size: 14px;
+    font-family: "微软雅黑",cursive;
+    color: #666;
+}
+.clearfix {*zoom: 1;}
+.clearfix:before,.clearfix:after {display: table;content: "";}
+.clearfix:after {clear: both;}
+.main .alert{
+    margin: 20px 20px 0 20px;
+}
+.main .alert .top{
+    background: #ff9431;
+    padding: 3px 8px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    margin-right: 10px;
+}
+.main .alert .alert-link{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    line-height: 30px;
+}
 /* navbar 模块 */
+.headerbar{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
 
-.topbar section{display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;}
-.topbar {background: #282828;}
-.topbar .logo {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 156px;height: 40px;background: url("//mu4.bdstatic.com/static/i/eL38PCbx.png") no-repeat;overflow: hidden;float: left;text-indent: -999em;}
-.topbar .nav {float:left;height: 40px;line-height: 40px;position: relative;margin-left: 10px;}
-.topbar .nav li {display: inline;float: left;}
+}
+
+.topbar section {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+}
+
+.topbar {
+    background: #282828;
+}
+
+.topbar .logo {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+    width: 156px;
+    height: 40px;
+    background: url("") no-repeat;
+    overflow: hidden;
+    float: left;
+    text-indent: -999em;
+}
+
+.topbar .nav {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.topbar .nav li {
+    display: inline;
+    float: left;
+}
 .topbar .nav a {
     padding: 0 15px;
     float: left;
@@ -33,32 +103,138 @@
 .topbar .user-info a{
     color: #fff;
 }
-.topbar .user-info .login, .topbar .user-info .spacing, .topbar .user-info .signup, .topbar .user-info .avatar, .topbar .user-info .user {display: inline;float: left;}
-.topbar .user-info .spacing {margin: 0 10px;color: #3e3e3e;}
-.topbar .user-info .avatar {margin: 5px 10px 0 10px;}
-.topbar .user-info .avatar, .topbar .user-info .avatar img {width: 30px;height: 30px; -webkit-border-radius: 50%; -moz-border-radius: 50%;  -ms-border-radius: 50%;-o-border-radius: 50%;border-radius: 50%; behavior: url(PIE.htc);}
-.topbar .user-info .user {height: 40px;line-height: 40px;padding-right: 10px;}
-.topbar .user-info .user:hover {text-decoration: none;}
-.topbar .user-info .nav-item {display: inline;display: -moz-inline-stack;display: inline-block;float: left;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;position: relative;cursor: pointer;background: transparent;}
-.topbar .user-info .nav-item.on {background: #333;}
-.topbar .user-info .nav-item i {position: absolute;top: 50%;left: 50%;}
-.topbar .user-info .favorite, .topbar .user-info .follow {width: 45px;height: 40px;}
-.topbar .user-info .favorite {-webkit-box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;-moz-box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;box-shadow: inset 1px 0 0 #303030,1px 0 0 #303030;border-left: 1px solid #222;border-right: 1px solid #222;}
-.topbar .user-info .favorite i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 17px;height: 14px;background: url("images/love.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu4.bdstatic.com/static/i/aOCSihKL.png",sizingMethod="crop");margin-top: -7px;margin-left: -8.5px;}
-.topbar .user-info .follow i {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 24px;height: 18px;background: url("images/follow.png") no-repeat;overflow: hidden;_background-image: none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="//mu4.bdstatic.com/static/i/mxhqHaa3.png",sizingMethod="crop");margin-top: -9px;margin-left: -12px;}
-.topbar .user-info .menu .name {display: inline;float: left;cursor: pointer;}
-.topbar .user-info .menu .triangle {display: inline;float: left;width: 0;height: 0;margin: 19px 0 0 5px;overflow: hidden;border-style: solid dashed none dashed;border-width: 4px 4px 0 4px;border-color: white transparent transparent transparent;}
-.topbar .user-info .menu.on .triangle {border-style: none dashed solid dashed;border-width: 0 4px 4px 4px;border-color: transparent transparent white transparent;}
-.topbar .user-info .menu.on .dropdown {display: block;}
-.topbar .user-info .dropdown {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 5px #eee;-moz-box-shadow: 0 0 5px #eee;box-shadow: 0 0 5px #eee;display: none;position: absolute;z-index: 999;background: white;text-align: center;right: 0;border: 1px solid #e5e5e5;border-bottom: none;}
-.topbar .user-info .dropdown li {border-bottom: 1px solid #e6e6e6;}
-.topbar .user-info .dropdown li a {*zoom: 1;display: block;color: #282828;}
-.topbar .user-info .dropdown li a:hover {background-color: #f3f3f3;text-decoration: none;}
-.topbar-fixed-top,.topbar-fixed-bottom { position: fixed;right: 0;left: 0; z-index: 1030;}
-.topbar-fixed-top { top: 0; border-width: 0 0 1px;}
-.topbar-fixed-bottom { bottom: 0; margin-bottom: 0; border-width: 1px 0 0;}
-.topbar .user-info .topbar-dropdown{ top: 40px;}
-.topbar .user-info .bottombar-dropdown{bottom:40px}
+
+.topbar .user-info .login, .topbar .user-info .spacing, .topbar .user-info .signup, .topbar .user-info .avatar, .topbar .user-info .user {
+    display: inline;
+    float: left;
+}
+
+.topbar .user-info .spacing {
+    margin: 0 10px;
+    color: #3e3e3e;
+}
+
+.topbar .user-info .avatar {
+    margin: 5px 10px 0 10px;
+}
+
+.topbar .user-info .avatar, .topbar .user-info .avatar img {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+}
+
+.topbar .user-info .user {
+    height: 40px;
+    line-height: 40px;
+    padding-right: 10px;
+}
+
+.topbar .user-info .user:hover {
+    text-decoration: none;
+}
+
+.topbar .user-info .nav-item {
+    display: inline;
+    display: -moz-inline-stack;
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+}
+
+.topbar .user-info .nav-item.on {
+    background: #333;
+}
+
+.topbar .user-info .nav-item i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.topbar .user-info .menu .name {
+    display: inline;
+    float: left;
+    cursor: pointer;
+}
+
+.topbar .user-info .menu .triangle {
+    display: inline;
+    float: left;
+    width: 0;
+    height: 0;
+    margin: 19px 0 0 5px;
+    overflow: hidden;
+    border-style: solid dashed none dashed;
+    border-width: 4px 4px 0 4px;
+    border-color: white transparent transparent transparent;
+}
+
+.topbar .user-info .menu.on .triangle {
+    border-style: none dashed solid dashed;
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent white transparent;
+}
+
+.topbar .user-info .menu.on .dropdown {
+    display: block;
+}
+
+.topbar .user-info .dropdown {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 0 5px #eee;
+    -moz-box-shadow: 0 0 5px #eee;
+    box-shadow: 0 0 5px #eee;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    background: white;
+    text-align: center;
+    right: 0;
+    border: 1px solid #e5e5e5;
+    border-bottom: none;
+}
+
+.topbar .user-info .dropdown li {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.topbar .user-info .dropdown li a {
+    *zoom: 1;
+    display: block;
+    color: #282828;
+}
+
+.topbar .user-info .dropdown li a:hover {
+    background-color: #f3f3f3;
+    text-decoration: none;
+}
+
+
+
+.topbar .user-info .topbar-dropdown {
+    top: 40px;
+}
+
+.topbar .user-info .bottombar-dropdown {
+    bottom: 40px
+}
 .topbar .msg {
     float:left;
     display: block;
@@ -96,7 +272,7 @@
 .subbar-fixed {
     z-index: 6;
     position: fixed;
-    top: 0;
+    top: 40px;
     left: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     background: #fff;
@@ -235,16 +411,44 @@
     clear: both;
 }
 .container .main{
-    width: 680px;
     float: left;
-    background: #fff;
+    width: 900px;
+    box-shadow: 6px 0 8px #f1f1f1;
 }
 
 .container .aside{
-    padding: 10px;
-    width: 270px;
-    float: right;
+    width: 300px;
+    float: left;
+}
+#content{
+    text-align: left;
     background: #fff;
+    border-radius: 10px;
+    margin: 10px auto 0;
+    display: inline-block;
+}
+/* carousel 模块 */
+/* Carousel base class */
+.carousel {
+    height:330px;
+    margin-bottom:30px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+    height: 330px;
+    background-color: #777;
+}
+.carousel-inner > .item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 330px;
 }
 
 
@@ -252,7 +456,68 @@
 
 
 /*item 图说item模块 */
+.title {
+    float: left;
+    width: 900px;
+    height: 60px;
+    border-bottom: 2px solid #44b2c3;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
 
+.title h1 {
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+    color: #666;
+    line-height: 60px;
+    padding: 0;
+    margin: 0 20px 0;
+
+}
+
+.cat {
+    width: 860px;
+    margin-left: 20px;
+    float: left;
+    line-height: 35px;
+    height: 70px;
+    overflow: hidden;
+    _display: inline;
+}
+
+.cat b {
+    float: left;
+    font-weight: normal;
+    width: 45px;
+    height: 35px;
+    line-height: 35px;
+}
+
+
+.cat ul {
+    float: left;
+    width: 810px;
+    height: 70px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.cat ul li {
+    float: left;
+    height: 35px;
+    list-style: none;
+}
+.cat ul li a {
+    float: left;
+    line-height: 35px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0 10px;
+    color: #474853;
+    font-size: 14px;
+}
+/* items end */
 /* 列表模块 */
 
 

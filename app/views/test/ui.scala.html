@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -10,7 +11,7 @@
 
     <link rel="icon" href="/favicon.ico">
 
-    <title>Non-responsive Template for Bootstrap</title>
+    <title>嗨喔喔</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap/3.2.0/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +27,7 @@
 </head>
 
 <body>
-
+<div class="headerBar">
 <div id="topbar" class="topbar">
     <div class="container">
 
@@ -64,34 +65,101 @@
 
     </div>
 </div>
-
-
-
-
-<div class="container">
-
-    <div class="page-header">
-        <h1>Non-responsive Bootstrap</h1>
-        <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
+</div>
+<!-- Carousel
+   ================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Example headline.</h1>
+                    <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Another example headline.</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>One more for good measure.</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                </div>
+            </div>
+        </div>
     </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<!-- /.carousel -->
 
-    <h3>What changes</h3>
-   <p>我是伟大的方靖，方靖</p>
-    <h3>Regarding navbars</h3>
-    <p>As a heads up, the navbar component is rather tricky here in that the styles for displaying it are rather specific and detailed. Overrides to ensure desktop styles display are not as performant or sleek as one would like. Just be aware there may be potential gotchas as you build on top of this example when using the navbar.</p>
 
-    <h3>Browsers, scrolling, and fixed elements</h3>
-    <p>Non-responsive layouts highlight a key drawback to fixed elements. <strong class="text-danger">Any fixed component, such as a fixed navbar, will not be scrollable when the viewport becomes narrower than the page content.</strong> In other words, given the non-responsive container width of 970px and a viewport of 800px, you'll potentially hide 170px of content.</p>
-    <p>There is no way around this as it's default browser behavior. The only solution is a responsive layout or using a non-fixed element.</p>
+<div id="content">
+    <div class="container">
+       <div class="main">
+           <div class="alert alert-info clearfix">
+               <a class="alert-link">
+                   <b class="top">置顶：</b>  我是伟大的方靖
+               </a>
 
-    <h3>Non-responsive grid system</h3>
-    <div class="row">
-        <div class="col-xs-4">One third</div>
-        <div class="col-xs-4">One third</div>
-        <div class="col-xs-4">One third</div>
+           </div>
+           <div class="title">
+                <h1>每日精选</h1>
+            </div>
+           <div class="cat">
+               <b>分类：</b>
+               <ul>
+                   <li><a href="javascript:void(0);" >全部</a></li>
+                   <li><a href="javascript:void(0);">白菜价</a></li>
+                   <li><a href="javascript:void(0);">促销活动</a></li>
+                   <li><a href="javascript:void(0);">凑单品</a></li>
+                   <li><a href="javascript:void(0);">图书</a></li>
+                   <li><a href="javascript:void(0);">石英表</a></li>
+                   <li><a href="javascript:void(0);">牛奶</a></li>
+                   <li><a href="javascript:void(0);">啤酒</a></li>
+                   <li><a href="javascript:void(0);">纸尿裤</a></li>
+                   <li><a href="javascript:void(0);">卫生巾</a></li>
+                   <li><a href="javascript:void(0);">键盘</a></li>
+                   <li><a href="javascript:void(0);">平板电视</a></li>
+                   <li><a href="javascript:void(0);">耳机</a></li>
+                   <li><a href="javascript:void(0);">单反相机</a></li>
+                   <li><a href="javascript:void(0);">手机</a></li>
+
+               </ul>
+           </div>
+
+
+           <div class="items"></div>
+       </div>
+        <div class="aside">
+
+
+        </div>
+
+
     </div>
+</div>
 
-</div> <!-- /container -->
+<!-- /container -->
 
 
 <!-- Bootstrap core JavaScript
