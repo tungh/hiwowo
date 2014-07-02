@@ -98,6 +98,67 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
     font-size: 14px;
 }
 
+/* notice 模块 */
+.notices{
+    margin: 20px 25px;
+}
+.notices dt,.notices dd{
+    float: left;
+}
+.notices dt i{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.notices dd ul{
+    margin: 0;
+    padding: 0;
+}
+/* i want post */
+.aside .i-want-post{
+    margin: auto 25px;
+}
+/* follow - us 模块 */
+.i-r-title{height:45px;line-height:45px;background:#f4f5f6;display:inline-block;width:300px;margin-top:25px;font-size:16px;color:#ff9431;overflow:hidden;}
+.i-r-title b{float:left;width:140px;font-weight:normal;}
+.i-r-title em{width:1px;height:45px;overflow:hidden;margin-right:24px; box-shadow:3px 0 8px #aaa;float:left;background:#f1f1f1;}
+.i-r-title a.tb-r-more{float:right;line-height:45px;margin-right:25px;font-size:14px;color:#999;}
+.follow-us{
+    margin: 15px 25px;
+    float: left;
+    position: relative;
+}
+
+
+.follow-us a.weixin {
+    background: url(images/follow_us.gif) no-repeat 7px 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.follow-us a.weibo {
+    background: url(images/follow_us.gif) no-repeat 7px -106px;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.follow-us a.qq-weibo {
+    background: url(images/follow_us.gif) no-repeat 7px -199px;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.follow-us a.qq-zone {
+    background: url(images/follow_us.gif) no-repeat 7px -293px;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
 
 /* navbar 模块 */
 .headerbar{
@@ -105,7 +166,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
     top:0;
     left:0;
     width: 100%;
-
+    z-index: 100;
 }
 
 .topbar section {
@@ -516,7 +577,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
     min-width: 100%;
     height: 330px;
 }
-
+.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+    top: 60%;
+}
 
 /* comment 评论模块 */
 
@@ -533,7 +596,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
   .items .item .content{
       float: left;
       border-right: 2px solid #cecece;
-      width: 653px;
+      width: 603px;
   }
   .items .item .content h2{
       height:60px;
@@ -551,34 +614,33 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
   }
 
 .items .item .content .desc{
-    margin: 15px 20px 20px auto;
+    margin: 15px 15px 20px auto;
     text-align: center;
 }
-
+.items .item .content .desc img{
+    width: 580px;
+    height: 100%;
+}
   .items .item .meta{
-      width: 205px;
+      width: 255px;
       float: left;
   }
-  .items .item .meta .vs{
-      text-align: center;
+  .items .item .meta .user{
       background: #f4f5f6;
       position: relative;
       height: 60px;
       line-height: 60px;
-      width: 205px;
+      width: 255px;
       border-bottom-right-radius: 15px;
       border-top-right-radius: 15px;
+      padding: 0 15px;
   }
-  .items .item .meta .user{
-      margin-top: 5px;
-      line-height: 35px;
-  }
+
   .items .item .meta .user img{
-      width: 35px;
-      height: 35px;
+      width: 45px;
+      height: 45px;
       border: 1px solid #fff;
       overflow: hidden;
-      margin-left:15px;
   }
   .items .item .meta .user span{
       font-size: 12px;
@@ -590,7 +652,50 @@ h1, h2, h3, h4, h5, h6 { margin: 0;padding: 0}
       font-size: 12px;
       margin-right: 15px;
   }
+  .items .item .meta .extra{
+      padding:10px 15px;
+      text-align: center;
+      margin: 20px 10px;
+      border: 1px solid #bce8f1;
+      border-radius: 4px;
+      color: #31708f;
+      background-color: #d9edf7;
+  }
+.items .item .meta .extra a {
+      color:#44b2c3;
+  }
+.items .item .meta .thumbs{
+    border-bottom: 1px solid #31708f;
+    padding-bottom: 10px;
+}
+.items .item .meta .thumbs .up{
+    margin-right: 15px;
+}
+.items .item .meta  span.glyphicon-thumbs-up{
+    color: red;
+    font-size: 36px;
+}
+.items .item .meta  span.glyphicon-thumbs-down{
+    color:#44b2c3;
+    font-size: 36px;
+}
+.items .item .meta .others{
+    margin-top: 10px;
+}
+.items .item .meta .others a.comment, .items .item .meta .others a.collect{
+    margin-right: 15px;
+}
+.items .item .meta span.glyphicon-edit{
+    font-size: 18px;
 
+}
+.items .item .meta span.glyphicon-heart{
+    font-size: 18px;
+
+}
+.items .item .meta span.glyphicon-share{
+    font-size: 18px;
+}
 /* items end */
 /* 列表模块 */
 
