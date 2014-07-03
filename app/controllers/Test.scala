@@ -42,8 +42,8 @@ object Test extends Controller {
     Ok(" Ok! code:  "+ code + " uid: " + uid)
   }
 
-  def ui = Action{
-    Ok(views.html.test.ui())
+  def ui =  Users.UserAction{ user => implicit request =>
+    Ok(views.html.test.ui(user))
   }
 
 }

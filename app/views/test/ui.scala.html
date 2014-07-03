@@ -1,71 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Note there is no responsive meta tag here -->
-
-    <link rel="icon" href="/favicon.ico">
-
-    <title>嗨喔喔</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap/3.2.0/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/hiwowo/hiwowo.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/assets/js/html5shiv.min.js"></script>
-    <script src="/assets/js/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-<div class="headerbar">
-<div id="topbar" class="topbar">
-    <div class="container">
-
-        <nav class="nav">
-            <ul class="clearfix">
-                <li><a href="/" class=" current ">嗨喔喔</a></li>
-                <li><a href="" rel="loginD" class="  ">我的喔喔</a></li>
-                <li><a href="/forum" class="  ">讨论吧</a></li>
-            </ul>
-        </nav>
+@(user:Option[models.user.User])
+@views.html.petTemplate(user,nav="index")(css="/assets/css/template/page.css"){
 
 
-        <section class="user-info">
-            <a class="login need-login" href="javascript:void(0)" rel="loginD">登录</a><span class="spacing">|</span><a class="signup" href="/user/regist">注册</a>
-        </section>
-
-
-    </div>
-</div>
-<div id="J_subbar" class="subbar">
-    <div class="container">
-        <ul>
-            <li class=" on "><a href="/" title="首页">首页</a></li>
-            <li class="  new "><a href="/weixin/1" title="微信精选">微信精选</a></li>
-            <li class="  "><a href="/pets/1" title="神兽乐园">神兽乐园</a></li>
-            <li class="  "><a href="/pics/1" title="">图说</a></li>
-        </ul>
-
-        <section class="topSearch">
-            <div class="searchBox">
-                <input type="text" class="searchText" value="萌宠">
-                <a class="searchBtn" href="javascript:void(0);"></a>
-            </div>
-        </section>
-
-    </div>
-</div>
-</div>
 <!-- Carousel
    ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -115,142 +51,142 @@
 
 <div id="content">
     <div class="container">
-       <div class="main">
-           <div class="alert alert-info clearfix">
-               <span class="label label-danger">置顶</span>
-               <a class="alert-link">
-                   我是伟大的方靖
-               </a>
+        <div class="main">
+            <div class="alert alert-info clearfix">
+                <span class="label label-danger">置顶</span>
+                <a class="alert-link">
+                    我是伟大的方靖
+                </a>
 
-           </div>
-           <div class="select">
+            </div>
+            <div class="select">
                 <h1>每日精选</h1>
             </div>
-           <div class="cat">
-               <b>分类：</b>
-               <ul>
-                   <li><a href="javascript:void(0);" >全部</a></li>
-                   <li><a href="javascript:void(0);">白菜价</a></li>
-                   <li><a href="javascript:void(0);">促销活动</a></li>
-                   <li><a href="javascript:void(0);">凑单品</a></li>
-                   <li><a href="javascript:void(0);">图书</a></li>
-                   <li><a href="javascript:void(0);">石英表</a></li>
-                   <li><a href="javascript:void(0);">牛奶</a></li>
-                   <li><a href="javascript:void(0);">啤酒</a></li>
-                   <li><a href="javascript:void(0);">纸尿裤</a></li>
-                   <li><a href="javascript:void(0);">卫生巾</a></li>
-                   <li><a href="javascript:void(0);">键盘</a></li>
-                   <li><a href="javascript:void(0);">平板电视</a></li>
-                   <li><a href="javascript:void(0);">耳机</a></li>
-                   <li><a href="javascript:void(0);">单反相机</a></li>
-                   <li><a href="javascript:void(0);">手机</a></li>
+            <div class="cat">
+                <b>分类：</b>
+                <ul>
+                    <li><a href="javascript:void(0);" >全部</a></li>
+                    <li><a href="javascript:void(0);">白菜价</a></li>
+                    <li><a href="javascript:void(0);">促销活动</a></li>
+                    <li><a href="javascript:void(0);">凑单品</a></li>
+                    <li><a href="javascript:void(0);">图书</a></li>
+                    <li><a href="javascript:void(0);">石英表</a></li>
+                    <li><a href="javascript:void(0);">牛奶</a></li>
+                    <li><a href="javascript:void(0);">啤酒</a></li>
+                    <li><a href="javascript:void(0);">纸尿裤</a></li>
+                    <li><a href="javascript:void(0);">卫生巾</a></li>
+                    <li><a href="javascript:void(0);">键盘</a></li>
+                    <li><a href="javascript:void(0);">平板电视</a></li>
+                    <li><a href="javascript:void(0);">耳机</a></li>
+                    <li><a href="javascript:void(0);">单反相机</a></li>
+                    <li><a href="javascript:void(0);">手机</a></li>
 
-               </ul>
-           </div>
+                </ul>
+            </div>
 
 
-           <div class="items clearfix">
-               <div class="item">
-                   <div class="content">
+            <div class="items clearfix">
+                <div class="item">
+                    <div class="content">
                         <h2>
                             <a class="title">hello world 我是伟大的方靖显示</a>
                         </h2>
-                       <div class="desc">
-                           <div class="pic"><img src="/images/2.jpg"></div>
-                           <div class="intro">dfdfdfdfdfd</div>
-                       </div>
+                        <div class="desc">
+                            <div class="pic"><img src="/images/2.jpg"></div>
+                            <div class="intro">dfdfdfdfdfd</div>
+                        </div>
 
-                   </div>
-                   <div class="meta">
+                    </div>
+                    <div class="meta">
 
-                       <div class="user">
-                           <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
-                       </div>
+                        <div class="user">
+                            <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
+                        </div>
 
-                       <div class="extra">
-                           <div class="thumbs">
-                               <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
-                               <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
-                           </div>
+                        <div class="extra">
+                            <div class="thumbs">
+                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
+                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
+                            </div>
                             <div class="others">
                                 <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
                                 <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
                                 <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
                             </div>
 
-                       </div>
+                        </div>
 
 
-                   </div>
-               </div>
-               <div class="item">
-                   <div class="content">
-                       <h2>
-                           <a class="title">hello world 我是伟大的方靖显示</a>
-                       </h2>
-                       <div class="desc">
-                           <div class="pic"><img src="/images/3.jpg"></div>
-                           <div class="intro">dfdfdfdfdfd</div>
-                       </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <h2>
+                            <a class="title">hello world 我是伟大的方靖显示</a>
+                        </h2>
+                        <div class="desc">
+                            <div class="pic"><img src="/images/3.jpg"></div>
+                            <div class="intro">dfdfdfdfdfd</div>
+                        </div>
 
-                   </div>
-                   <div class="meta">
+                    </div>
+                    <div class="meta">
 
-                       <div class="user">
-                           <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
-                       </div>
+                        <div class="user">
+                            <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
+                        </div>
 
-                       <div class="extra">
-                           <div class="thumbs">
-                               <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
-                               <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
-                           </div>
-                           <div class="others">
-                               <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
-                               <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
-                               <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
-                           </div>
+                        <div class="extra">
+                            <div class="thumbs">
+                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
+                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
+                            </div>
+                            <div class="others">
+                                <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
+                                <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
+                                <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
+                            </div>
 
-                       </div>
-
-
-                   </div>
-               </div>
-               <div class="item">
-                   <div class="content">
-                       <h2>
-                           <a class="title">hello world 我是伟大的方靖显示</a>
-                       </h2>
-                       <div class="desc">
-                           <div class="pic"><img src="/images/4.jpg"></div>
-                           <div class="intro">dfdfdfdfdfd</div>
-                       </div>
-
-                   </div>
-                   <div class="meta">
-
-                       <div class="user">
-                           <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
-                       </div>
-
-                       <div class="extra">
-                           <div class="thumbs">
-                               <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
-                               <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
-                           </div>
-                           <div class="others">
-                               <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
-                               <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
-                               <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
-                           </div>
-
-                       </div>
+                        </div>
 
 
-                   </div>
-               </div>
-           </div>
-       </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <h2>
+                            <a class="title">hello world 我是伟大的方靖显示</a>
+                        </h2>
+                        <div class="desc">
+                            <div class="pic"><img src="/images/4.jpg"></div>
+                            <div class="intro">dfdfdfdfdfd</div>
+                        </div>
+
+                    </div>
+                    <div class="meta">
+
+                        <div class="user">
+                            <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
+                        </div>
+
+                        <div class="extra">
+                            <div class="thumbs">
+                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
+                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
+                            </div>
+                            <div class="others">
+                                <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
+                                <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
+                                <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="aside">
             <!-- 公告 -->
             <dl class="notices clearfix">
@@ -266,8 +202,8 @@
                 <a><img src="/assets/images/i_post.gif"></a>
             </div>
             <!-- 关注我们 -->
-            <h3 class="i-r-title"><em></em><b>关注嗨喔喔</b>
-                <a href="" target="_blank" class="tb-r-more">更多 &gt;</a>
+            <h3 class="title"><em></em><b>关注嗨喔喔</b>
+                <a href="" target="_blank" class="more">更多 &gt;</a>
             </h3>
 
             <div class="follow-us">
@@ -283,16 +219,13 @@
     </div>
 </div>
 
-<!-- /container -->
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="/assets/js/sea/sea.js"></script>
-<script type="text/javascript" src="/assets/js/sea/sea-config.js"></script>
-<script>
-    seajs.use("bootstrap")
+
+}{
+<script type="text/javascript">
+    seajs.use(["hiwowo/pages/page.js","hiwowo/diagram/diagram.favor"])
 </script>
+}
 
-</body></html>
+
