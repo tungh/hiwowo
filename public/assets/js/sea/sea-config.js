@@ -19,7 +19,7 @@ seajs.config({
 
          'jquery': 'sea-modules/jquery/1.11.1/jquery',
         'bootstrap':'bootstrap/3.2.0/bootstrap.min',
-         'hiwowo':'hiwowo/hiwowo'
+         'hiwowo':'hiwowo/1.0/hiwowo'
     },
 
 

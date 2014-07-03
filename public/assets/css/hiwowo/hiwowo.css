@@ -50,6 +50,344 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0
 }
 
+.fl {
+    float: left;
+    display: inline;
+}
+
+.fr {
+    float: right;
+    display: inline;
+}
+
+.mt0 {
+    margin-top: 0;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt25 {
+    margin-top: 25px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt35 {
+    margin-top: 35px;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+
+.mr0 {
+    margin-right: 0;
+}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.mr15 {
+    margin-right: 15px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.mr25 {
+    margin-right: 25px;
+}
+
+.mr30 {
+    margin-right: 30px;
+}
+
+.mr35 {
+    margin-right: 35px;
+}
+
+.mr40 {
+    margin-right: 40px;
+}
+
+.mb0 {
+    margin-bottom: 0;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.mb25 {
+    margin-bottom: 25px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+.mb35 {
+    margin-bottom: 35px;
+}
+
+.ml0 {
+    margin-left: 0;
+}
+
+.ml5 {
+    margin-left: 5px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.ml15 {
+    margin-left: 15px;
+}
+
+.ml20 {
+    margin-left: 20px;
+}
+
+.ml25 {
+    margin-left: 25px;
+}
+
+.ml30 {
+    margin-left: 30px;
+}
+
+.ml35 {
+    margin-left: 35px;
+}
+
+.ml40 {
+    margin-left: 40px;
+}
+
+.mlr5 {
+    margin: 0 5px 0 5px;
+}
+
+.mlr10 {
+    margin: 0 10px 0 10px;
+}
+
+.pt0 {
+    padding-top: 0;
+}
+
+.pt5 {
+    padding-top: 5px;
+}
+
+.pt10 {
+    padding-top: 10px;
+}
+
+.pt15 {
+    padding-top: 15px;
+}
+
+.pt20 {
+    padding-top: 20px;
+}
+
+.pt25 {
+    padding-top: 25px;
+}
+
+.pt30 {
+    padding-top: 30px;
+}
+
+.pt40 {
+    padding-top: 40px;
+}
+
+.pr0 {
+    padding-right: 0;
+}
+
+.pr5 {
+    padding-right: 5px;
+}
+
+.pr10 {
+    padding-right: 10px;
+}
+
+.pr15 {
+    padding-right: 15px;
+}
+
+.pr20 {
+    padding-right: 20px;
+}
+
+.pr25 {
+    padding-right: 25px;
+}
+
+.pr30 {
+    padding-right: 30px;
+}
+
+.pr35 {
+    padding-right: 35px;
+}
+
+.pb0 {
+    padding-bottom: 0;
+}
+
+.pb5 {
+    padding-bottom: 5px;
+}
+
+.pb10 {
+    padding-bottom: 10px;
+}
+
+.pb15 {
+    padding-bottom: 15px;
+}
+
+.pb20 {
+    padding-bottom: 20px;
+}
+
+.pb25 {
+    padding-bottom: 25px;
+}
+
+.pb30 {
+    padding-bottom: 30px;
+}
+
+.pb35 {
+    padding-bottom: 35px;
+}
+
+.pl0 {
+    padding-left: 0;
+}
+
+.pl5 {
+    padding-left: 5px;
+}
+
+.pl10 {
+    padding-left: 10px;
+}
+
+.pl15 {
+    padding-left: 15px;
+}
+
+.pl20 {
+    padding-left: 20px;
+}
+
+.pl25 {
+    padding-left: 25px;
+}
+
+.pl30 {
+    padding-left: 30px;
+}
+
+.pl35 {
+    padding-left: 35px;
+}
+
+.pl40 {
+    padding-left: 40px;
+}
+
+.plr10 {
+    padding: 0 10px;
+}
+
+.plr15 {
+    padding: 0 15px;
+}
+
+.pd10 {
+    padding: 10px;
+}
+
+.pd20 {
+    padding: 20px;
+}
+
+.pd40 {
+    padding: 40px;
+}
+
+.rc {
+    color: #ee2266;
+}
+
+.bc {
+    color: #55aadd;
+}
+
+.yc {
+    color: #ee6633;
+}
+
+.gc {
+    color: #999;
+}
+
+.gc6 {
+    color: #666;
+}
+
+.gc9 {
+    color: #999;
+}
+
+.gcc {
+    color: #dedede;
+}
+
 .main .alert {
     margin: 20px 20px 0 20px;
 }
@@ -649,8 +987,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* sns login 模块 */
-/* sns login */
+#J_loginDialog .bd {
+    width: 570px;
+}
 
+#J_loginDialog .bd .control-label{
+    float: left;
+    line-height: 34px;
+    width: 50px;
+}
+#J_loginDialog .bd .form-control{
+    float: left;
+    width: 220px;
+}
+#J_loginDialog .bd .bd-l {
+    float: left;
+    width: 320px;
+    padding: 10px 10px 0 0;
+    border-right: 1px dotted #cdcdcd;
+}
+
+#J_loginDialog .bd .bd-r {
+    text-align: left;
+    float: right;
+    width: 230px;
+    padding: 10px 0 0 0;
+}
+#J_loginDialog .bd .bd-r ul{
+    margin: 0;
+    padding: 0;
+}
+#J_loginDialog .bd .noaccount {
+    text-align: center;
+    margin: 10px 30px 0 30px;
+    line-height: 18px;
+    padding: 10px 0 0 10px;
+    color: #666;
+    border-top: 1px dotted #cdcdcd;
+}
+
+
+#J_loginDialog .bd .bd-r  li {
+    margin-bottom: 20px;
+}
+
+
+#J_loginDialog .noaccount a:hover {
+    color: #ff7f00;
+    text-decoration: underline;
+}
 .site-openid li {
     float: left;
     display: inline
@@ -701,6 +1086,9 @@ h1, h2, h3, h4, h5, h6 {
 .site-openid li a p {
     padding: 10px 0 0 0
 }
+
+
+
 
 /* 列表模块 */
 
