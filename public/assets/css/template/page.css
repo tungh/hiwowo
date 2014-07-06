@@ -159,46 +159,61 @@
 
 }
 
-
-
-#content {
-    background: #f0f0f0;
-    position: relative;
-    z-index: 3;
+/*items 模块 */
+.items {
+    padding:10px;
 }
-.main .diagrams{
-    position: relative;
-    padding: 0 10px;
-}
-.main .diagrams .diagram{
-    position: relative;
+
+.items .item {
+    float: left;
     width: 660px;
-    padding: 20px 0;
-    border-bottom: 1px solid #999;
+    position: relative;
 }
-.main .diagrams .diagram .diagram-content{
+
+.items .item .content {
+    float: left;
+    border-right: 2px solid #cecece;
+    width: 460px;
+}
+
+.items .item .content h2 {
+    height: 60px;
+    position: relative;
+    background: #f4f5f6;
+    font-size: 20px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.items .item .content h2 .title {
+    padding-left: 20px;
+    float: left;
+    height: 60px;
+    line-height: 60px;
+}
+
+.items .item .content .desc{
     position: relative;
     width: 460px;
     min-height: 280px;
     float: left;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    margin: 10px auto;
 }
-.main .diagrams .diagram .diagram-content .pics{
+.items .item .content .desc .pics{
     width: 460px;
     position: relative;
 }
-.main .diagrams .diagram .diagram-content .pics-list{
+.items .item .content .desc .pics-list{
     position: relative;
     display: block;
     width: 460px;
 }
 
-.main .diagrams .diagram .diagram-content .pics-list img{
-    max-width: 460px;
+.items .item .content .desc .pics-list img{
+    max-width: 450px;
     padding-bottom: 10px;
 }
-.main .diagrams .diagram .diagram-content  .pics-hidden{
+.items .item .content .desc  .pics-hidden{
     display: none;
     height: 32px;
     background: url(images/pics-hidden.png) center 0;
@@ -206,7 +221,7 @@
     text-indent: -9999px;
 }
 
-.main .diagrams .diagram .diagram-content .pics-too-high .pics-list{
+.items .item .content .desc .pics-too-high .pics-list{
     position: relative;
     display: block;
     position: relative;
@@ -214,103 +229,121 @@
     height: 500px;
     overflow: hidden;
 }
-.main .diagrams .diagram .diagram-content .pics-too-high .pics-hidden{
+.items .item .content .desc .pics-too-high .pics-hidden{
     position: absolute;
     display: block;
     bottom: 0;
     left: 0;
     cursor: pointer;
 }
-.main .diagrams .diagram .diagram-content .pics-too-high-close {
+.items .item .content .desc .pics-too-high-close {
+    margin-right: 15px;
     font-size: 10px;
     text-align: right;
     display: none;
 }
-.main .diagrams .diagram .diagram-content .intro{
+.items .item .content .desc .intro{
     padding: 10px;
     max-height: 50px;
     overflow:hidden;
 }
-.main .diagrams .diagram .diagram-info{
-    width: 170px;
+
+.items .item .meta {
+    width: 198px;
     float: left;
+}
+
+.items .item .meta .user {
+    background: #f4f5f6;
     position: relative;
+    height: 60px;
+    line-height: 60px;
+    width: 198px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
 }
-.main .diagrams .diagram .diagram-info .pin-wrapper{
-    position: relative;
+
+.items .item .meta .user img {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #fff;
+    overflow: hidden;
 }
-.main .diagrams .diagram .diagram-info .pin{
-    width: 170px;
-}
-.main .diagrams .diagram .diagram-info .pin .title{
-    height: 40px;
-    font-size: 14px;
-}
-.main .diagrams .diagram .diagram-info .pin .user-info{
-    padding-top: 5px;
-    float: left;
+
+.items .item .meta .user span {
     font-size: 12px;
-    color: #bbb;
+    color: #555;
 }
-.main .diagrams .diagram .diagram-info .pin .user-info .user-img{
-    float: left;
-    height: 36px;
-    width: 36px;
-    display: none;
-}
-.main .diagrams .diagram .diagram-info .pin .user-info .user-img a{
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    display: block;
-    border: #FFF solid 3px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-}
-.main .diagrams .diagram .diagram-info .pin .user-info .user-img a img{
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-}
-.main .diagrams .diagram .diagram-info .pin .user-info .user-name{
-    padding: 0 4px;
-    overflow: hidden;
-    float: left;
-  /*  line-height: 36px;*/
-}
-.main .diagrams .diagram .diagram-info .pin .meta{
-    clear: both;
-    position: relative;
-    background-color: #F4F4F4;
-    border: 1px solid #DDDDDD;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px #FFFFFF inset, 0 1px 2px #EEEEEE;
-    margin: 0;
-    overflow: hidden;
-}
-.main .diagrams .diagram .diagram-info .pin .like-common{
-    left:50px;
-}
-.main .diagrams .diagram .diagram-info .pin .share{
-    margin-top: 50px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding:10px 5px;
-}
-.main .diagrams .diagram .diagram-info .pin .share dd{
 
+.items .item .meta .user i {
+    float: right;
+    color: #999;
+    font-size: 12px;
+    margin-right: 15px;
 }
-.main .diagrams .diagram .diagram-info .pin .discuss{
-    height: 30px;
-    line-height: 30px;
-    margin: 5px auto;
+
+.items .item .meta .extra {
+    padding: 10px 15px;
     text-align: center;
+    margin: 20px 10px;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
 }
 
-/* 首页 */
-.index .mod-header {overflow: hidden;padding: 15px 180px}
-.index .mod-header h1 {font-size: 100px;color: #c33;display: inline;float: left;margin-bottom: 0;}
-.index .mod-header p {font-size: 60px;line-height: 53px;overflow: hidden;height: 128px;display: inline;float: left;}
-.index .mod-header em {font-size: 18px;font-weight: normal;color: white;background: black;margin-left: 7px;padding: 2px;}
+.items .item .meta .extra a {
+    color: #44b2c3;
+}
+
+.items .item .meta .thumbs {
+    border-bottom: 1px solid #31708f;
+    padding-bottom: 10px;
+}
+
+.items .item .meta .thumbs .up {
+    margin-right: 15px;
+}
+
+.items .item .meta  span.glyphicon-thumbs-up {
+    color: red;
+    font-size: 36px;
+}
+
+.items .item .meta  span.glyphicon-thumbs-down {
+    color: #44b2c3;
+    font-size: 36px;
+}
+
+.items .item .meta .others {
+    margin-top: 10px;
+}
+
+.items .item .meta .others a.comment, .items .item .meta .others a.collect {
+    margin-right: 15px;
+}
+
+.items .item .meta span.glyphicon-edit {
+    font-size: 18px;
+
+}
+
+.items .item .meta span.glyphicon-heart {
+    font-size: 18px;
+
+}
+
+.items .item .meta span.glyphicon-share {
+    font-size: 18px;
+}
+/* items end*/
+
+#content {
+    background: #f0f0f0;
+    position: relative;
+    z-index: 3;
+}
+
 
 
 /* 微信精选 页面 */

@@ -13,15 +13,10 @@
  */
 define(function (require) {
     var $ = jQuery = require("jquery");
-    var pin = require("pin")
     require("unslider")
 
     $(function(){
-        // 右侧内容定位
-      $(".pin").pin({
-            containerSelector: ".diagram"
-         ,padding: {top: 0, bottom: 20}
-        })
+
          // 隐藏长图片
         $(".pics-list").each(function(){
             var picsHeight = $(this).height()
