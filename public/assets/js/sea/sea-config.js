@@ -34,7 +34,7 @@ seajs.config({
 
     // 预加载项
     preload: [
-        this.JSON ? '' : 'json'
+        this.JSON ? '' : 'json','hiwowo'
     ],
     // 调试模式
     debug: false,

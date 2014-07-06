@@ -1,69 +1,105 @@
 @(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)])
 @views.html.template(user,nav="index",subNav="weixin")(css="/assets/css/template/page.css"){
 
+<div class="banner">
+    <ul>
+        <li style="background-image: url('/images/sunset.jpg');">
+            <div class="inner">
+                <h1>The jQuery slider that just slides.</h1>
+                <p>No fancy effects or unnecessary markup, and it’s less than 3kb.</p>
 
-<div class="container weixin">
+                <a class="btn" href="#download">Download</a>
+            </div>
+        </li>
+
+        <li style="background-image: url('/images/wood.jpg');">
+            <div class="inner">
+                <h1>Fluid, flexible, fantastically minimal.</h1>
+                <p>Use any HTML in your slides, extend with CSS. You have full control.</p>
+
+                <a class="btn" href="#download">Download</a>
+            </div>
+        </li>
+
+        <li style="background-image: url('/images/subway.jpg');">
+            <div class="inner">
+                <h1>Open-source.</h1>
+                <p>Everything to do with Unslider is hosted on GitHub.</p>
+
+                <a class="btn" href="//github.com/idiot/unslider">Contribute</a>
+            </div>
+        </li>
+
+        <li style="background-image: url('/images/shop.jpg');">
+            <div class="inner">
+                <h1>Uh, that’s about it.</h1>
+                <p>I just wanted to show you another slide.</p>
+
+                <a class="btn" href="#download">Download</a>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="container">
 
     <div class="row">
-        <section class="mod-header">
-            <h1>嗨喔喔</h1>
 
-            <p><em>不疯狂 无极致</em><br>上帝也疯狂</p>
-        </section>
-        <section class="mod-body">
+
             <div class="main">
-                <div class="diagrams">
+
+                <div class="items clearfix">
                     @for((diagram,user)<-page.items ){
-                    <dl class="diagram clearfix">
-                        <dt class="diagram-content fl">
-                        <div class="pics pics-too-high">
-                            <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
-                                @for(src <- diagram.pics.getOrElse("").split(",")){
-                                @if(src.trim !=""){
-                                <img src="@src">
-                                }
-                                }
+                    <div class="item">
+                        <div class="content">
+                            <h2>
+                                <a class="title">hello world 我是伟大的方靖显示</a>
+                            </h2>
+                            <div class="desc">
+                                <div class="pics">
+                                    <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
+                                        @for(src <- diagram.pics.getOrElse("").split(",")){
+                                        @if(src.trim !=""){
+                                        <img src="@src">
+                                        }
+                                        }
 
-                            </a>
-                            <div class="pics-hidden"></div>
-                        </div>
-                        <div class="pics-too-high-close">收起</div>
-                        <div class="intro">
-                            @diagram.intro.getOrElse("")
-                        </div>
-                        </dt>
-
-                        <dd class="diagram-info fr">
-                            <div class="pin">
-                                <h3 class="title"><a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.title </a> </h3>
-                                <div class="user-info mb10">
-                                    <span class="user-img">
-                                        <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic"width="36" height="36"></a>
-                                    </span>
-                                    <span class="user-name"><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"> @user.name </a> </span>
+                                    </a>
+                                    <div class="pics-hidden"></div>
                                 </div>
-                                <div class="meta">
-                                    <div class="like-common like-common-s" >
-                                        <a  class="like" rel="upDiagram" href="javascript:void(0)" data-id="@diagram.id.get" title="喜欢"><i>喜欢</i></a>
-                                        <div class="like-num">
-                                            <dl class="J_scrollUp">
-                                                <dd class="J_FavorNum" data-val="@diagram.loveNum">@diagram.loveNum</dd>
-                                                <dd>+1</dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                    <div class="share clearfix">
-                                        <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
-                                    </div>
-                                    <div class="discuss">
-                                        <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank"> @diagram.discussNum 评论  </a>
-                                    </div>
+                                <div class="pics-too-high-close">收起</div>
+                                <div class="intro">
+                                    @diagram.intro.getOrElse("")
                                 </div>
                             </div>
-                        </dd>
-                    </dl>
+
+                        </div>
+                        <div class="meta">
+
+                            <div class="user">
+                                <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
+                            </div>
+
+                            <div class="extra">
+                                <div class="thumbs">
+                                    <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
+                                    <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
+                                </div>
+                                <div class="others">
+                                    <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
+                                    <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
+                                    <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
                     }
+
                 </div>
+
+
                 <div class="pagin inlineblock fr mt10" id="J_Pagination">
                     @if(page.nums.length>1){
                     @page.prev.map { page =>
@@ -87,7 +123,7 @@
                     <img src="/assets/images/qr_hiwowo.jpg" width="270" height="270" alt="嗨喔喔 微信号">
                 </div>
             </div>
-        </section>
+
 
     </div>
 

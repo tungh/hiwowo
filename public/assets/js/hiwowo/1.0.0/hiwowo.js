@@ -279,6 +279,51 @@ define(function(require, exports) {
                     }
                 }
             });
+        },
+        dropDown: function(options){
+            var settings = {
+                event: "mouseover",
+                classNm: ".dropdown",
+                timer: null,
+                fadeSpeed: 100,
+                duration: 500,
+                offsetX: 82,
+                offsetY: 8,
+                isLocation: false
+            };
+            if(options) {
+                $.extend(settings, options);
+            }
+
+            var triggers = this,
+                $dropDown = $(settings.classNm);
+            triggers.each(function() {
+                $this = $(this);
+                $this.hover(function(){
+                    clearTimeout(settings.timer);
+                    $(".dropdown:not("+settings.classNm+")").hide();
+                    if(settings.isLocation){
+                        var position = $.hiwowo.util.getPosition($(this)).rightBottom();
+                        $dropDown.css({
+                            left: position.x - settings.offsetX + "px",
+                            top: position.y + settings.offsetY + "px"
+                        });
+                    }
+                    $dropDown.fadeIn(settings.fadeSpeed);
+                },function(){
+                    settings.timer = setTimeout(function(){
+                        $dropDown.fadeOut(settings.fadeSpeed);
+                    },settings.duration);
+                });
+                $dropDown.hover(function(){
+                    clearTimeout(settings.timer);
+                    $dropDown.show();
+                },function(){
+                    settings.timer = setTimeout(function(){
+                        $dropDown.fadeOut(settings.fadeSpeed);
+                    },settings.duration);
+                });
+            });
         }
 
 
@@ -306,30 +351,27 @@ define(function(require, exports) {
                 html +='<h4 class="modal-title">登录</h4>';
                 html +='</div>';
                 html +='<div class="modal-body">';
-                html += '<div class="bd clearfix">';
-                html +='<div class="bd-l">',
+                html += '<div class="bd clearfix"><div class="bd-l">';
                 html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
                 html += '<div class="error-row"><p class="error"></p></div>';
-                html += '<div class="form-group clearfix"><label class="control-label">Email：</label>';
-                html += '<input type="email" class="form-control" name="email" id="email" value="" placeholder="" />';
+                html += '<div class="form-row"><label>Email：</label>';
+                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
                 html += '</div>';
-                html += '<div class="form-group clearfix"><label class="control-label">密码：</label>';
-                html += '<input type="password" class="form-control" name="password" id="password" value="" />';
+                html += '<div class="form-row"><label>密码：</label>';
+                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
                 html += '</div>';
-                html += '<div class="form-group"><label>&nbsp;</label>';
+                html += '<div class="form-row"><label>&nbsp;</label>';
                 html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
                 html += '<span>两周内自动登录</span>';
                 html += '</div>';
-                html += '<div class="form-group  clearfix"><label>&nbsp;</label>';
-                html += '<input type="submit" class="btn btn-info" value="登录" />';
+                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
+                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
                 html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
-                html += '</form>';
-                html += '</div>';
+                html += '</form></div>';
                 html += '<div class="bd-r">';
                 html += '<p class="mb15">你也可以使用这些帐号登录</p>';
-                html += '<div class="site-openid clearfix">';
-                html += '<ul class="clearfix">';
-                html += '<li class="qq mr30"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
+                html += '<div class="site-openid clearfix"><ul class="fl mr20 outlogin-b">';
+                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
                 html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina&backType=asyn&i=0"><i></i><p>新浪微博</p></a></li>';
                 html += '</ul>';
                 html += '</div>';
@@ -513,27 +555,6 @@ define(function(require, exports) {
             }
         })
 
-
-        /* 下拉框 */
-        $("#J_topbar_user").dropDown({
-            classNm: ".topbar-dropdown"
-        });
-        $("#J_diagram_sort").dropDown({
-            classNm:".find-diagram-dropdown"
-        })
-        $(".feed").hover(function(){
-            $(this).find(".link-to-post-holder").show()
-        },function(){
-            $(this).find(".link-to-post-holder").hide()
-        })
-        /* 用户登录弹出框 */
-        if($("a[rel=loginD]")[0]){
-            $("a[rel=loginD]").click(function(event){
-                event.preventDefault();
-                $.hiwowo.loginDialog.login();
-            });
-        }
-
         /* 搜索框效果 header 搜索框*/
         $(".header-search-button").bind("click",function(){
             var self=$(this);
@@ -589,6 +610,19 @@ define(function(require, exports) {
 
         /* 返回顶部 */
         $("#returnTop").returnTop();
+        /* 下拉框 */
+        $("#J_topbar_user").dropDown({
+            classNm: ".topbar-dropdown"
+        });
+
+
+        /* 用户登录弹出框 */
+        if($("a[rel=loginD]")[0]){
+            $("a[rel=loginD]").click(function(event){
+                event.preventDefault();
+                $.hiwowo.loginDialog.login();
+            });
+        }
 
         /* 用户喜欢操作 */
         $('.like-common .like').hover(function(){
@@ -599,66 +633,6 @@ define(function(require, exports) {
         })
 
 
-
-        ///同步授权登录后关注弹出层
-        window.followHiwowo = function(code,msg,site,flag,refresh){
-            if(code==444){
-                alert(msg);
-                return false;
-            }
-            if((site!="sina" && site!="qzone" ) || flag=="true" ){
-                if(refresh){
-                    window.location.reload();
-                }
-                return false;
-            }
-            var bdClass = "",
-                frameHtml = "";
-            if(site=="sina"){
-                bdClass = "sinaBd";
-                frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
-            }else if(site=="qzone"){
-                bdClass = "qzoneBd";
-                frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
-            }
-
-            if(!$("#followDialog")[0]){
-                var html = '<div id="J_followDialog" class="modal fade">';
-                html +=	'<div class="dialog-content">';
-                html +=	'<div class="hd"><h3></h3></div>';
-                html +=	'<div class="bd clearfix '+bdClass+'">';
-                html +=	'<div class="btnFrame">';
-                html +=	frameHtml;
-                html +=	'</div>';
-                html +=	'</div>';
-                html +=	'<i></i>';
-                html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
-                html +=	'<a class="close" href="javascript:;"></a>';
-                html +=	'</div>';
-                html +=	'</div>';
-                $("body").append(html);
-                $("#J_followDialog").modal('show')
-            }else{
-                $("#J_followDialog").modal('show');
-            }
-            $(document).on("click","#J_followDialog",function(){
-                if($("input[name=noMore]")[0].checked){
-                    Cookie.set("noMoreTip","n");
-                }
-                if(refresh){
-                    window.location.reload();
-                }
-            })
-
-        }
-
-        /*异步授权登陆后*/
-        window.refresh=function(){
-            window.location.reload();
-        }
-        /*
-         *
-         * */
 
         /* qzone 分享*/
         $(".sh-qzone").unbind("click").click(function(){
