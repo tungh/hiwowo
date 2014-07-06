@@ -156,6 +156,20 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
     float: right;
     background: #fff;
 }
+.container .side .box {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.container .side .box .hd {
+    line-height: 1.2;
+    padding: 0 0 6px 0;
+    margin: 0 0 5px;
+    border-bottom: 1px dotted #d1d1d1
+}
+.container .side .box .bd{
+    line-height: 22px
+}
 
 
 /*
@@ -1896,4 +1910,33 @@ input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
     width: 100%;
+}
+
+/* webuploader 模块 */
+.webuploader-container {
+    position: relative;
+}
+.webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #00b7ee;
+    padding: 10px 15px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.webuploader-pick-hover {
+    background: #00a2d4;
+}
+
+.webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events:none;
 }

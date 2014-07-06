@@ -41,6 +41,8 @@ POST  /diagram/disfavor                       controllers.Diagrams.disfavorDiagr
 POST  /discuss/favor                         controllers.Diagrams.favorDiscuss
 POST  /discuss/disfavor                       controllers.Diagrams.disfavorDiscuss
 
+GET   /diagram/create2                     controllers.Diagrams.create2
+
 
 
 # user

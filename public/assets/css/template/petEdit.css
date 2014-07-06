@@ -26,22 +26,10 @@
 /* side  */
 /* box notice*/
 .pet .side .box {
-    background-color: #fff;
     margin-bottom: 10px;
     padding: 10px;
-    text-align: center;
-    width: 288px;
 }
 
-.pet .side .box .hd {
-    line-height: 1.2;
-    padding: 0 0 6px 0;
-    margin: 0 0 5px;
-    border-bottom: 1px dotted #d1d1d1
-}
-.pet .side .box .bd{
-    line-height: 22px
-}
 
 /* 创建帖子页面*/
 

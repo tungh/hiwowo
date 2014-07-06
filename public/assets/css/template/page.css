@@ -338,13 +338,89 @@
 }
 /* items end*/
 
-#content {
-    background: #f0f0f0;
-    position: relative;
-    z-index: 3;
+
+/* side */
+.index .side{
+    padding: 0;
+    width: 290px;
+}
+.index .side .notices {
+    margin: 20px 25px;
 }
 
+.index .side .notices dt, .notices dd {
+    float: left;
+}
 
+.index .side .notices dt i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.index .side .notices dd ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* i want post */
+.index .side .i-want-post {
+    margin: auto 20px;
+}
+
+/* follow - us 模块 */
+.index .side .title {
+    height: 45px;
+    line-height: 45px;
+    background: #f4f5f6;
+    display: inline-block;
+    width: 290px;
+    margin-top: 25px;
+    font-size: 16px;
+    color: #333;
+    overflow: hidden;
+}
+
+.index .side .title b {
+    padding-left: 15px;
+    font-weight: normal;
+}
+
+.index .side .follow-us {
+    margin: 15px 15px 0 15px;
+    float: left;
+    position: relative;
+}
+
+.index .side .follow-us a.weixin {
+    background: url(images/follow_us.gif) no-repeat 7px 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.index .side .follow-us a.weibo {
+    background: url(images/follow_us.gif) no-repeat 7px -106px;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.index .side .follow-us a.qq-weibo {
+    background: url(images/follow_us.gif) no-repeat 7px -199px;
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    float: left;
+}
+
+.index .side .follow-us a.qq-zone {
+    background: url(images/follow_us.gif) no-repeat 7px -293px;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
 
 /* 图说区域 */
 /* pics */

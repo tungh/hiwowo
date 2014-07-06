@@ -16,18 +16,19 @@ seajs.config({
     base: '/assets/js/',
     // 别名配置
     alias: {
-        'json': 'sea-modules/json',
+         'json': 'sea-modules/json',
          'jquery': 'sea-modules/jquery/1.11.1/jquery',
-         'bootstrap':'bootstrap/3.2.0/bootstrap.min',
+         'cookie': 'sea-modules/cookie',
+         'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
+         'detector':'sea-modules/detector',
+         'unslider':'sea-modules/jquery.unslider.min.js',
+         'pin':'sea-modules/jquery.pin.min.js',
+        'swfupload':'sea-modules/swfupload',
 
-        'cookie': 'sea-modules/cookie',
-        'easing':'sea-modules/jquery.easing',
-        'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
-        'detector':'sea-modules/detector',
-        'unslider':'sea-modules/jquery.unslider.min.js',
-        'pin':'sea-modules/jquery.pin.min.js',
+        'bootstrap':'bootstrap/3.2.0/bootstrap.min',
+        'webuploader':'webuploader/0.1.5/webuploader.min',
+
         'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
-
          'hiwowo':'hiwowo/1.0.0/hiwowo'
     },
 

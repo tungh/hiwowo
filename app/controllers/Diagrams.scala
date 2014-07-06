@@ -310,4 +310,11 @@ object  Diagrams extends Controller {
     val kwc:KeyWordComputer = new KeyWordComputer(5)
      kwc.computeArticleTfidf(title, content).toList.map( x =>x.getName )
   }
+
+  /* 创建图说 */
+  def create2 = Users.UserAction{ user => implicit request =>
+    Ok(views.html.diagrams.create2(user,diagramForm))  // 只有是vip 用户才能创建
+  }
+
+
 }
