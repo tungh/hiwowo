@@ -50,12 +50,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0
 }
 
-.fl {
+.left {
     float: left;
     display: inline;
 }
 
-.fr {
+.right {
     float: right;
     display: inline;
 }
@@ -469,20 +469,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* notice 模块 */
-.notices {
+.aside .notices {
     margin: 20px 25px;
 }
 
-.notices dt, .notices dd {
+.aside .notices dt, .notices dd {
     float: left;
 }
 
-.notices dt i {
+.aside .notices dt i {
     font-size: 20px;
     margin-right: 10px;
 }
 
-.notices dd ul {
+.aside .notices dd ul {
     margin: 0;
     padding: 0;
 }
@@ -501,13 +501,12 @@ h1, h2, h3, h4, h5, h6 {
     width: 300px;
     margin-top: 25px;
     font-size: 16px;
-    color: #ff9431;
+    color: #333;
     overflow: hidden;
 }
 
 .aside .title b {
-    float: left;
-    width: 140px;
+    padding-left: 15px;
     font-weight: normal;
 }
 
@@ -580,7 +579,9 @@ h1, h2, h3, h4, h5, h6 {
     -o-border-radius: 50%;
     border-radius: 50%;
 }
-
+#J_hiwowoDropdown .dropdown-menu{
+    min-width: 120px;
+}
 /* grid 格栅模块 */
 .container {
     width: 1200px !important;
@@ -673,7 +674,7 @@ h1, h2, h3, h4, h5, h6 {
     top:55%;
 }
 
-/* comment 评论模块 */
+
 
 /*items 模块 */
 .items {
@@ -1087,11 +1088,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10px 0 0 0
 }
 
+/* forum 列表模块 */
 
 
-
-/* 列表模块 */
 
 /* feed 模块 */
 
 
+/* comment 评论模块 */

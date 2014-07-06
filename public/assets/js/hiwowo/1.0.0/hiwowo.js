@@ -172,31 +172,7 @@ define(function(require, exports) {
                 }
                 return domain;
             },
-            //校验合法网站
-            validSite: function(url){
-                var domain = $.hiwowo.util.getDomain(url);
-                if(url.indexOf("hiwowo.com") != -1){
-                    return (domain == "hiwowo.com" && url.indexOf("goods/") != -1) ? "hiwowo" : false;
-                }else if (url.indexOf("tmall.com") != -1) {
-                    var curBool=true, bool1, bool2, bool3, boo4;
-                    bool3 = (domain == "detail.tmall.com" || domain == "item.tmall.com") && (url.indexOf("item.htm?") != -1);
-                    bool4 = (domain == "detail.tmall.com" || domain == "item.tmall.com") && (url.indexOf("spu_detail.htm?") != -1);
-                    switch(curBool){
-                        case bool3 : {return "tmall3"} break;
-                        case bool4 : {return "tmall4"} break;
-                        default : {return false;} break;
-                    }
-                }else if (url.indexOf("taobao.com") != -1) {
-                    var curBool=true, bool1, bool2, bool3;
-                    bool1 = (domain == "item.taobao.com" || domain == "item.beta.taobao.com" || domain == "item.lp.taobao.com") && (url.indexOf("item.htm?") != -1);
-                    switch(curBool){
-                        case bool1 : {return "taobao"} break;
-                        default : {return false;} break;
-                    }
-                } else {
-                    return false;
-                }
-            },
+           /* 开小窗口 */
             openWin: function(url){
                 var top=190;
                 var whichsns = url.substr(url.lastIndexOf("snsType=")+8,1);
@@ -303,95 +279,9 @@ define(function(require, exports) {
                     }
                 }
             });
-        },
-        //文本框高度自适应
-        textareaAutoHeight: function(){
-            var obj = this;
-            var h = obj.outerHeight();
-            var func = function(){
-                h < 0 && (h = obj.outerHeight());
-                if($.browser.mozilla || $.browser.safari){
-                    obj.height(h);
-                }
-                var sh = obj[0].scrollHeight,
-                    autoHeight = sh < h ? h: sh,
-                    autoHeight = autoHeight < h * 1.5 ? h: sh;
-                obj.height(autoHeight);
-            }
-            obj.bind("keyup input propertychange focus",func);
-        },
-        //按钮置为灰色
-        disableBtn: function(str){
-            var $btn = this;
-            $btn[0].disabled = "disabled";
-            $btn.removeClass(str).addClass("disabled");
-        },
-        //开启按钮
-        enableBtn: function(str){
-            var $btn = this;
-            $btn[0].disabled = "";
-            $btn.removeClass("disabled").addClass(str);
-        },
-        //下拉菜单
-        dropDown: function(options){
-            var settings = {
-                event: "mouseover",
-                classNm: ".dropdown",
-                timer: null,
-                fadeSpeed: 100,
-                duration: 500,
-                offsetX: 82,
-                offsetY: 8,
-                isLocation: false
-            };
-            if(options) {
-                $.extend(settings, options);
-            }
-
-            var triggers = this,
-                $dropDown = $(settings.classNm);
-            triggers.each(function() {
-                $this = $(this);
-                $this.hover(function(){
-                    clearTimeout(settings.timer);
-                    $(".dropdown:not("+settings.classNm+")").hide();
-                    if(settings.isLocation){
-                        var position = $.hiwowo.util.getPosition($(this)).rightBottom();
-                        $dropDown.css({
-                            left: position.x - settings.offsetX + "px",
-                            top: position.y + settings.offsetY + "px"
-                        });
-                    }
-                    $dropDown.fadeIn(settings.fadeSpeed);
-                },function(){
-                    settings.timer = setTimeout(function(){
-                        $dropDown.fadeOut(settings.fadeSpeed);
-                    },settings.duration);
-                });
-                $dropDown.hover(function(){
-                    clearTimeout(settings.timer);
-                    $dropDown.show();
-                },function(){
-                    settings.timer = setTimeout(function(){
-                        $dropDown.fadeOut(settings.fadeSpeed);
-                    },settings.duration);
-                });
-            });
-        },
-        addToFav:function(o){
-            var url = "http://hiwowo.com";
-            var title = "hiwowo，Love for animal";
-            if (window.sidebar) { // Mozilla Firefox Bookmark
-                window.sidebar.addPanel(title, url,"");
-            } else if( window.external&&document.all) { // IE Favorite
-                window.external.AddFavorite( url, title);
-            } else if(window.opera) { // Opera 7+
-                return false; // do nothing
-            } else {
-                jQuery.hiwowo.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                jQuery.hiwowo.tip.show($(o),"您的浏览器不支持自动加收藏，请按 ctrl+d 加入收藏。");
-            }
         }
+
+
     });
 
     /* 对话框：用户登陆 和 判断是否为新用户 */
@@ -416,27 +306,30 @@ define(function(require, exports) {
                 html +='<h4 class="modal-title">登录</h4>';
                 html +='</div>';
                 html +='<div class="modal-body">';
-                html += '<div class="bd clearfix"><div class="bd-l">';
+                html += '<div class="bd clearfix">';
+                html +='<div class="bd-l">',
                 html += '<form id="J_loginDialogForm" action="/user/dialogEmailLogin" method="POST">';
                 html += '<div class="error-row"><p class="error"></p></div>';
-                html += '<div class="form-row"><label>Email：</label>';
-                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
+                html += '<div class="form-group clearfix"><label class="control-label">Email：</label>';
+                html += '<input type="email" class="form-control" name="email" id="email" value="" placeholder="" />';
                 html += '</div>';
-                html += '<div class="form-row"><label>密码：</label>';
-                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
+                html += '<div class="form-group clearfix"><label class="control-label">密码：</label>';
+                html += '<input type="password" class="form-control" name="password" id="password" value="" />';
                 html += '</div>';
-                html += '<div class="form-row"><label>&nbsp;</label>';
+                html += '<div class="form-group"><label>&nbsp;</label>';
                 html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
                 html += '<span>两周内自动登录</span>';
                 html += '</div>';
-                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
-                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
+                html += '<div class="form-group  clearfix"><label>&nbsp;</label>';
+                html += '<input type="submit" class="btn btn-info" value="登录" />';
                 html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
-                html += '</form></div>';
+                html += '</form>';
+                html += '</div>';
                 html += '<div class="bd-r">';
                 html += '<p class="mb15">你也可以使用这些帐号登录</p>';
-                html += '<div class="site-openid clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
+                html += '<div class="site-openid clearfix">';
+                html += '<ul class="clearfix">';
+                html += '<li class="qq mr30"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
                 html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina&backType=asyn&i=0"><i></i><p>新浪微博</p></a></li>';
                 html += '</ul>';
                 html += '</div>';
@@ -495,59 +388,6 @@ define(function(require, exports) {
     }
 
     /*
-     * 字数统计限制
-     * $.hiwowo.wordCount.init($wordCon,$wordNum,10)
-     */
-    $.hiwowo.wordCount = {
-        conf : {
-            okClk : function(){},
-            errorClk : function(){}
-        },
-        init : function($wordCon, $wordNum, limitNum, speed) {
-            //判断是否存在评论框，不存在则返回
-            var thelimit = limitNum;
-            var charDelSpeed = speed || 15;
-            var toggleCharDel = speed != -1;
-            var toggleTrim = true;
-            var that = $wordCon[0];
-            var getLen = function(){
-                var wordConVal = $.trim($wordCon.val());
-                return $.hiwowo.util.getStrLength(wordConVal);
-            }
-            updateCounter();
-            function updateCounter(){
-                $wordNum.text(thelimit - parseInt(getLen()));
-            };
-
-            $wordCon.bind("keypress", function(e) {
-                if (getLen() >= thelimit && e.charCode != '0') e.preventDefault()
-            });
-            $wordCon.bind("keyup", function(e) {
-                updateCounter();
-                if (getLen() >= thelimit && toggleTrim) {
-                    if (toggleCharDel) {
-                        that.value = that.value.substr(0, thelimit * 2 + 100);
-                        var init = setInterval(function() {
-                                if (getLen() <= thelimit) {
-                                    init = clearInterval(init);
-                                    updateCounter()
-                                } else {
-                                    that.value = that.value.substring(0, that.value.length - 1);
-                                    $.hiwowo.wordCount.conf.errorClk(that.value.length);
-                                    //$wordNum.text('trimming...  ' + (thelimit - that.value.length));
-                                };
-                            },
-                            charDelSpeed);
-                    } else {
-                        $wordCon[0].value = that.value.substr(0, thelimit);
-                    }
-                }
-            }).focus(function() {
-                    updateCounter();
-                });
-        }
-    }
-    /*
      * 提示框
      */
     $.hiwowo.tip = {
@@ -575,6 +415,68 @@ define(function(require, exports) {
             },$.hiwowo.tip.conf.timerLength);
         }
     }
+
+
+
+    ///同步授权登录后关注弹出层
+    window.followHiwowo = function(code,msg,site,flag,refresh){
+        if(code==444){
+            alert(msg);
+            return false;
+        }
+        if((site!="sina" && site!="qzone" ) || flag=="true" ){
+            if(refresh){
+                window.location.reload();
+            }
+            return false;
+        }
+        var bdClass = "",
+            frameHtml = "";
+        if(site=="sina"){
+            bdClass = "sinaBd";
+            frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
+        }else if(site=="qzone"){
+            bdClass = "qzoneBd";
+            frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
+        }
+
+        if(!$("#followDialog")[0]){
+            var html = '<div id="J_followDialog" class="modal fade">';
+            html +=	'<div class="dialog-content">';
+            html +=	'<div class="hd"><h3></h3></div>';
+            html +=	'<div class="bd clearfix '+bdClass+'">';
+            html +=	'<div class="btnFrame">';
+            html +=	frameHtml;
+            html +=	'</div>';
+            html +=	'</div>';
+            html +=	'<i></i>';
+            html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
+            html +=	'<a class="close" href="javascript:;"></a>';
+            html +=	'</div>';
+            html +=	'</div>';
+            $("body").append(html);
+            $("#J_followDialog").modal('show')
+        }else{
+            $("#J_followDialog").modal('show');
+        }
+        $(document).on("click","#J_followDialog",function(){
+            if($("input[name=noMore]")[0].checked){
+                Cookie.set("noMoreTip","n");
+            }
+            if(refresh){
+                window.location.reload();
+            }
+        })
+
+    }
+
+    /*异步授权登陆后*/
+    window.refresh=function(){
+        window.location.reload();
+    }
+
+
+    /* 初始化加载中的内容*/
     /* 初始化加载中的内容*/
     $(function(){
 
@@ -687,7 +589,8 @@ define(function(require, exports) {
 
         /* 返回顶部 */
         $("#returnTop").returnTop();
-         /* 用户喜欢操作 */
+
+        /* 用户喜欢操作 */
         $('.like-common .like').hover(function(){
             $(this).parent().children('.like-num').find('.J_scrollUp').animate({ top:"-24" }, 600)
         },function(){
@@ -754,8 +657,8 @@ define(function(require, exports) {
             window.location.reload();
         }
         /*
-        *
-        * */
+         *
+         * */
 
         /* qzone 分享*/
         $(".sh-qzone").unbind("click").click(function(){

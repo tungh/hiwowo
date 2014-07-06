@@ -14,6 +14,7 @@
 define(function (require) {
     var $ = jQuery = require("jquery");
     var pin = require("pin")
+    require("unslider")
 
     $(function(){
         // 右侧内容定位
@@ -53,5 +54,7 @@ define(function (require) {
         },function(){
             $(this).removeClass("hover")
         })
+
+        $('.banner').unslider();
     })
 })
