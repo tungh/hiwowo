@@ -312,8 +312,8 @@ object  Diagrams extends Controller {
   }
 
   /* 创建图说 */
-  def create2 = Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.create2(user,diagramForm))  // 只有是vip 用户才能创建
+  def add = Users.UserAction{ user => implicit request =>
+    Ok(views.html.diagrams.add(user,diagramForm))  // 只有是vip 用户才能创建
   }
 
 
