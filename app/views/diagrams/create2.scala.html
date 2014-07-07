@@ -5,39 +5,48 @@
 
     <div class="row">
         <div class="main">
+
             <div class="editor-box" >
                 <form action="#" method="post" class="post-edit-form" id="J_editForm">
-                <input type="hidden" name="id" id="J_id"  value="0" />
-                <div class="editor-title">
-                    <label for="J_title">标题</label>
-                    <input type="text" name="title" class="input" id="J_title" value='哎呀，我要个牛逼哄哄的名字'  maxlength='45' />
-                </div>
-                <div class="editor-select">
-                    <div class="main-select">
-                        <span>类型：</span>
-                        <a href="javascript:void(0);"  data-typeid="0" class="selected"><em>图片</em></a>
-                        <a href="javascript:void(0);"  data-typeid="1"><em>Gif动画</em></a>
-                        <a href="javascript:void(0);"  data-typeid="2"><em>视频</em></a>
-                        <br class='clear' />
+                    <input type="hidden" name="id" id="J_id"  value="0" />
+                    <div class="editor-title">
+                        <label for="J_title">标题</label>
+                        <input type="text" name="title" class="input" id="J_title" value='哎呀，我要个牛逼哄哄的名字'  maxlength='45' />
                     </div>
+
+                    <div id="uploader">
+                        <div class="queueList">
+                            <div id="dndArea" class="placeholder">
+                                <div id="filePicker"></div>
+                                <p>或将照片拖到这里，单次最多可选300张</p>
+                            </div>
+                        </div>
+                        <div class="statusBar" style="display:none;">
+                            <div class="progress">
+                                <span class="text">0%</span>
+                                <span class="percentage"></span>
+                            </div>
+                            <div class="info"></div>
+                            <div class="btns">
+                                <div id="filePicker2"></div>
+                                <div class="uploadBtn">开始上传</div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="clear"></div>
-                </div>
-
-                <div class="editor-area">
-                    <textarea id="J_editorContent"   class="b-textarea">偶的神啊，先介绍英明神武的我，再上传我的“艳照”吧^_^ </textarea>
-                </div>
-                <div class="clear"></div>
 
 
-                <p class="func_buttons clearfix" >
-                    <input type="button" class="fl func_button" id="J_saveDraft" value="保存草稿">
-                    <input type="button" class="fr func_button func_publish" id="J_createSubmit" value="发表" >
+                    <p class="func_buttons clearfix" >
+                        <input type="button" class="btn btn-default left" id="J_saveDraft" value="保存草稿">
+                        <input type="button" class="btn btn-info right" id="J_createSubmit" value="发表" >
 
-                </p>
+                    </p>
 
-             </form>
+                </form>
 
             </div>
+
 
         </div>
         <div class="side clearfix">
@@ -58,11 +67,12 @@
 
 }{
 <script type="text/javascript">
-            seajs.use(['jquery','hiwowo/diagram/diagramEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
+            seajs.use(['jquery','hiwowo/diagram/diagramEditor2'],function($){
+
                 if(HIWOWO.userId == ""){
                     $.hiwowo.loginDialog.isLogin();
                 }
-                $.hiwowo.editor = $.hiwowo.Editor();
+
             })
 </script>
 

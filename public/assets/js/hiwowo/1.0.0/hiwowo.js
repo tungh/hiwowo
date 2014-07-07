@@ -365,7 +365,7 @@ define(function(require, exports) {
                 html += '<span>两周内自动登录</span>';
                 html += '</div>';
                 html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
-                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
+                html += '<input type="submit" class="btn btn-info left" value="登录" />';
                 html += '<a class="ml10 l30" href="/user/resetPassword">忘记密码？</a></div>';
                 html += '</form></div>';
                 html += '<div class="bd-r">';

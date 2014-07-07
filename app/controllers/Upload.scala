@@ -36,7 +36,7 @@ object Upload extends Controller {
   )
 
   def uploadDiagramPic=Action(parse.multipartFormData) { request =>
-    request.body.file("fileData").map { picture =>
+    request.body.file("file").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/diagram/"+filename),true)
