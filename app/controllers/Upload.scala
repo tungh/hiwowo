@@ -41,8 +41,6 @@ object Upload extends Controller {
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/diagram/"+filename),true)
         val src ="/uploadImage/temp/"+filename
-       // println(src)
-
         Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
       }else{

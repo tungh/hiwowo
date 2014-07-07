@@ -46,8 +46,8 @@ define(function(require){
             ratio = window.devicePixelRatio || 1,
 
         // 缩略图大小
-            thumbnailWidth = 110 * ratio,
-            thumbnailHeight = 110 * ratio,
+            thumbnailWidth = 300 * ratio,
+            thumbnailHeight = 300 * ratio,
 
         // 可能有pedding, ready, uploading, confirm, done.
             state = 'pedding',
@@ -230,6 +230,7 @@ define(function(require){
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
                     '<p class="progress"><span></span></p>' +
+                    '<p class="intro"><textarea type="text" name="intro" placeholder="求介绍~"> </textarea> </p>' +
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
@@ -272,7 +273,7 @@ define(function(require){
                     }
 
                     if( isSupportBase64 ) {
-                        img = $('<img src="'+src+'">');
+                        img = $('<img src="'+src+'"><input type="hidden" name="src" value="'+src+'">  ');
                         $wrap.empty().append( img );
                     } else {
                         $.ajax('/uploadDiagramPic', {
