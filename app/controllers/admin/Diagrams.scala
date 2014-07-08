@@ -7,7 +7,7 @@ import play.api.data.Forms._
 import org.jsoup.Jsoup
 import models.label.dao.LabelDao
 import models.weixin.dao.WeixinDiagramDao
-import scala.Some
+
 
 
 
