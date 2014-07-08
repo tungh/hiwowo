@@ -228,7 +228,6 @@ CREATE TABLE `diagram` (
   `pic`                 varchar(250) not null ,
   `intro`              text,
   `content`             text ,
-  `pics`                  text ,
   `labels`              varchar(250) ,
   `type_id`            tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',

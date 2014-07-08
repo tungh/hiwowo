@@ -50,16 +50,12 @@
                 <div class="item">
                     <div class="content">
                         <h2>
-                            <a class="title">hello world 我是伟大的方靖显示</a>
+                            <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="title"> @diagram.title </a>
                         </h2>
                         <div class="desc">
                             <div class="pics">
                                 <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
-                                    @for(src <- diagram.pics.getOrElse("").split(",")){
-                                    @if(src.trim !=""){
-                                    <img src="@src">
-                                    }
-                                    }
+
 
                                 </a>
                                 <div class="pics-hidden"></div>

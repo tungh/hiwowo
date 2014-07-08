@@ -32,15 +32,6 @@ object Pages extends Controller {
    }
 
 
-  /* 图说频道
-   *
-    * */
-  def pics(p:Int,size:Int) = Users.UserAction{ user => implicit request =>
-    val mengPage = LabelDao.findLabelDiagrams(1,1,1,p,size)
-    val xiaoPage = LabelDao.findLabelDiagrams(2,1,1,p,size)
-    val shengPage = LabelDao.findLabelDiagrams(3,1,1,p,size)
-    Ok(views.html.pages.pics(user,mengPage,xiaoPage,shengPage))
-  }
 
   /* 宠物乐园 */
   def pets(typeId:Int,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>

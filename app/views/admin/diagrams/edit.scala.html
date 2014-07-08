@@ -1,4 +1,4 @@
-@(user:models.user.User,author:models.user.User,pics:List[models.diagram.Pic],diagramId:Long,form:Form[controllers.admin.DiagramEditFormData],msg:String)
+@(user:models.user.User,author:models.user.User,diagramId:Long,form:Form[controllers.admin.DiagramEditFormData],msg:String)
 @views.html.admin.template(user,"label") {
 <div class="row">
     <div class="col-lg-12">
@@ -120,13 +120,7 @@
              <form action="@controllers.admin.routes.Diagrams.saveDiagramPics" method="post">
                  <input type="hidden" name="uid" value="@author.id.get">
                  <input type="hidden" name="diagramId" value="@diagramId">
-                 @for((pic,i)<-pics.view.zipWithIndex ){
-                 <div class="form-group">
-                     <label  for="urls[@i]"><img src="@pic.url" with="300" height="300"></label>
-                     <input class="form-control" type="hidden" id="urls[@i]" name="urls[@i]" value='@pic.url'>
-                     <textarea class="form-control" name="intros[@i]"> @pic.intro</textarea>
-                 </div>
-                 }
+
                  <div class="form-group">
                      <div class="controls">
                          <input type="submit" class="btn btn-info" value="保存"/>

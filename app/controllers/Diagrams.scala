@@ -71,17 +71,6 @@ object  Diagrams extends Controller {
      }
   }
 
-  /* 图文展示 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
-  def pic(id:Long) = Users.UserAction{ user => implicit request =>
-    val diagramWithUser = DiagramDao.findDiagram(id)
-    val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),0,None)
-    if(diagramWithUser.isEmpty || diagramWithUser.get._1.typeId!=1 ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
-      Ok(views.html.diagrams.diagramInvalid(user))
-    } else {
-      var pics = DiagramDao.findDiagramPics(id)
-      Ok(views.html.diagrams.pic(user,pics,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
-    }
-  }
 
 
 
@@ -155,19 +144,14 @@ object  Diagrams extends Controller {
         var intro =Jsoup.clean(diagramContent.get,Whitelist.none())
         if(intro.length()>100) intro =intro.substring(0,140)+"..."
         val uploadImages =Jsoup.parseBodyFragment(diagramContent.get).body().getElementsByTag("img")
-        var pics =""
-        val it=uploadImages.iterator()
-        while(it.hasNext){
-          pics +=it.next().attr("src")+","
-        }
         val pic =uploadImages.first().attr("src")
        // val tags = extractTags(diagramTitle.get,intro)
           val tags =List("萌宠","爆笑","二货主人","神吐槽","喵星人","汪星人")
         if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
-          val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
+          val dId =DiagramDao.addDiagram(user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->dId,"tags"->Json.toJson(tags)))
         }else{
-          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,Some(pics),diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
+          DiagramDao.modifyDiagram(diagramId.get,user.get.id.get,diagramTitle.get,pic,Some(intro),diagramContent,diagramStatus.getOrElse(0),diagramTypeId.getOrElse(0))
 
           Ok(Json.obj("code" -> "100", "message" ->"success","diagramId"->diagramId.get,"tags"->Json.toJson(tags)))
         }
@@ -335,12 +319,12 @@ object  Diagrams extends Controller {
       formWithErrors => BadRequest(views.html.diagrams.add(user,formWithErrors)),
       data =>{
         val pic = data.urls.head
-        val pics = data.urls.mkString
+
         var content =""
          for((url,i) <- data.urls.view.zipWithIndex){
            content +="<img class='img-upload' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
          }
-        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.title,pic,data.intro,Some(content),Some(pics),1)
+        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.title,pic,data.intro,Some(content),1)
         for((url,i) <- data.urls.view.zipWithIndex){
 
             DiagramDao.addDiagramImage(user.get.id.get,diagramId,url,data.intros.get(i))

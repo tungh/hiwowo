@@ -19,7 +19,6 @@ case class Diagram (
                    pic: String,
                    intro: Option[String],
                    content: Option[String],
-                   pics:Option[String],
                    labels:Option[String],
                    status:Int,
                    viewNum:Int,
@@ -41,7 +40,6 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def pic = column[String]("pic")
   def intro  = column[String]("intro")
   def content  = column[String]("content")
-  def pics  = column[String]("pics")
   def labels  = column[String]("labels")
   def status = column[Int]("status")
   def viewNum = column[Int]("view_num")
@@ -54,7 +52,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,pics.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }

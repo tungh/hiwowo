@@ -93,8 +93,7 @@ object Diagrams extends Controller {
 
   def edit(id: Long,msg:String) = Admin.AdminAction { user => implicit request =>
       val (diagram,author) = DiagramDao.findDiagram(id).get
-      val pics = DiagramDao.findDiagramPics(id)
-      Ok(views.html.admin.diagrams.edit(user,author,pics,diagram.id.get,diagramEditForm.fill(DiagramEditFormData(diagram.id.get,diagram.uid,diagram.typeId,diagram.title,diagram.pic,diagram.intro,diagram.content,diagram.labels,diagram.status)),msg))
+      Ok(views.html.admin.diagrams.edit(user,author,diagram.id.get,diagramEditForm.fill(DiagramEditFormData(diagram.id.get,diagram.uid,diagram.typeId,diagram.title,diagram.pic,diagram.intro,diagram.content,diagram.labels,diagram.status)),msg))
 
   }
      /*
@@ -107,12 +106,9 @@ object Diagrams extends Controller {
       formWithErrors => Ok("something wrong"),
       data => {
         val images =Jsoup.parseBodyFragment(data.content.get).body().getElementsByTag("img")
-        var pics =""
-        val it=images.iterator()
-        while(it.hasNext){
-          pics +=it.next().attr("src")+","
-        }
-          DiagramDao.modifyDiagram(data.id,data.uid,data.title,data.pic,data.intro,data.content,Some(pics),2,data.typeId)
+
+
+          DiagramDao.modifyDiagram(data.id,data.uid,data.title,data.pic,data.intro,data.content,2,data.typeId)
         // 处理label
         LabelDao.deleteLabelDiagramByDiagramId(data.id)
         if(!data.labels.isEmpty){
@@ -123,19 +119,6 @@ object Diagrams extends Controller {
             LabelDao.addLabelDiagram(labelId,data.id)
          }
         }
-
-        /* 处理diagram pics */
-        if(data.typeId == 1){
-            DiagramDao.deleteDiagramPicByDiagramId(data.id)
-           for(url <- pics.split(",")){
-              val pic = DiagramDao.findPicByUrl(url)
-              var picId =0l
-             if(pic.isEmpty){ picId = DiagramDao.addPic(data.uid,url,1) }else{ picId = pic.get.id.get }
-             DiagramDao.addDiagramPic(data.id,picId)
-
-           }
-        }
-
 
 
         Redirect(controllers.admin.routes.Diagrams.edit(data.id,"保存Diagram成功"))
@@ -148,7 +131,7 @@ object Diagrams extends Controller {
       formWithErrors => Ok("something wrong"),
       data => {
         for((url,i) <- data.urls.view.zipWithIndex){
-           DiagramDao.modifyPicIntro(url,data.intros.apply(i),1)
+
         }
 
         Redirect(controllers.admin.routes.Diagrams.edit(data.diagramId,"保存Diagram pic 成功"))

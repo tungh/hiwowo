@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],pics:List[models.diagram.Pic],diagramComponent:(controllers.DiagramComponent))
+@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
 @views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
@@ -9,12 +9,7 @@
                 <a class="unslider-arrow prev" href="javascript:void(0)"></a>
                 <a class="unslider-arrow next" href="javascript:void(0)"></a>
                 <ul>
-                    @for(pic <- pics){
-                    <li>
-                        <img src="@pic.url">
-                        <h1>@pic.intro</h1>
-                    </li>
-                    }
+
                 </ul>
 
             </div>
