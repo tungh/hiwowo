@@ -34,7 +34,7 @@ case class DiagramComponent(
 case class TushuoFormData(
                                 id:Option[Long],
                                 title:String,
-                                 intro:String,
+                                intro:Option[String],
                                 urls:Seq[String],
                                 intros: Seq[Option[String]]
                                 )
@@ -54,7 +54,7 @@ object  Diagrams extends Controller {
     mapping(
       "id"->optional(longNumber),
       "title" ->nonEmptyText ,
-      "intro"->nonEmptyText,
+      "intro"->optional(text),
       "urls" ->seq(text),
       "intros" ->seq(optional(text))
     )(TushuoFormData.apply)(TushuoFormData.unapply)
@@ -334,13 +334,19 @@ object  Diagrams extends Controller {
     tushuoForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.diagrams.add(user,formWithErrors)),
       data =>{
-           println(data.title)
-          println(data.intro)
+        val pic = data.urls.head
+        val pics = data.urls.mkString
+        var content =""
          for((url,i) <- data.urls.view.zipWithIndex){
-           println(url + data.intros.get(i))
+           content +="<img class='img-upload' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
          }
-        Ok("hello")
-      }  )
+        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.title,pic,data.intro,Some(content),Some(pics),1)
+        for((url,i) <- data.urls.view.zipWithIndex){
+
+            DiagramDao.addDiagramImage(user.get.id.get,diagramId,url,data.intros.get(i))
+        }
+        Redirect(controllers.routes.Diagrams.diagram(diagramId))
+      })
   }
 
 }
