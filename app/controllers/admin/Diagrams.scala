@@ -92,7 +92,7 @@ object Diagrams extends Controller {
   }
 
   def edit(id: Long,msg:String) = Admin.AdminAction { user => implicit request =>
-      val (diagram,author) = DiagramDao.findDiagram(id).get
+      val (diagram,pics,author) = DiagramDao.findDiagram(id).get
       Ok(views.html.admin.diagrams.edit(user,author,diagram.id.get,diagramEditForm.fill(DiagramEditFormData(diagram.id.get,diagram.uid,diagram.typeId,diagram.title,diagram.pic,diagram.intro,diagram.content,diagram.labels,diagram.status)),msg))
 
   }

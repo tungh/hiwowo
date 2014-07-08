@@ -8,7 +8,7 @@ import java.sql.Timestamp
  * Date: 14-7-8
  * Time: 下午5:31
  */
-case class DiagramImage (
+case class DiagramPic (
                           id: Option[Long],
                           uid:Long,
                           diagramId:Long,
@@ -17,7 +17,7 @@ case class DiagramImage (
                           sortNum:Int,
                           addTime:Option[Timestamp]
                           )
-class DiagramImages(tag:Tag) extends Table[DiagramImage](tag,"diagram_image") {
+class DiagramPics(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def diagramId = column[Long]("diagram_id")
@@ -25,6 +25,6 @@ class DiagramImages(tag:Tag) extends Table[DiagramImage](tag,"diagram_image") {
   def intro  = column[String]("intro")
   def sortNum = column[Int]("sort_num")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,diagramId,url,intro.?,sortNum,addTime.?) <> (DiagramImage.tupled, DiagramImage.unapply)
+  def * =(id.?,uid,diagramId,url,intro.?,sortNum,addTime.?) <> (DiagramPic.tupled, DiagramPic.unapply)
 
 }

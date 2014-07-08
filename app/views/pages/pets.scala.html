@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],typeId:Int)
+@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.diagram.DiagramPic,models.user.User)],typeId:Int)
 @views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/page.css"){
 
 <div class="banner">
@@ -46,7 +46,7 @@
         <div class="main">
 
             <div class="items clearfix">
-                @for((diagram,user)<-page.items ){
+                @for((diagram,pics,user)<-page.items ){
                 <div class="item">
                     <div class="content">
                         <h2>

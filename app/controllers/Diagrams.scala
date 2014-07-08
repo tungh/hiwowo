@@ -5,12 +5,11 @@ import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.diagram.dao.{DiagramDiscussSQLDao, DiagramSQLDao, DiagramDao}
-import models.diagram.Diagram
+import models.diagram.{DiagramPic, Diagram}
 import play.api.cache.Cache
 import play.api.Play.current
 import play.api.data.Form
 import play.api.data.Forms._
-import models.diagram.Diagram
 import scala.Some
 import models.user.User
 
@@ -28,6 +27,7 @@ import models.label.dao.LabelDao
  */
 case class DiagramComponent(
                    diagram:Diagram,
+                   pics:DiagramPic,
                    user:User
                        )
 
@@ -67,7 +67,7 @@ object  Diagrams extends Controller {
      if(diagramWithUser.isEmpty ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
        Ok(views.html.diagrams.diagramInvalid(user))
      } else {
-    Ok(views.html.diagrams.diagram(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
+    Ok(views.html.diagrams.diagram(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2,diagramWithUser.get._3)))
      }
   }
 

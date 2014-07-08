@@ -10,7 +10,7 @@ package models.diagram
  */
 
 object DiagramType extends Enumeration{
-  val TuWen = Value("图文")
-  val TuShuo = Value("图说")
-
+  val erhuo = Value("二货")
+  val mengChong = Value("萌宠")
+  val other = Value("其他")
 }

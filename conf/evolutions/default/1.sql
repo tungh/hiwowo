@@ -244,28 +244,9 @@ CREATE TABLE `diagram` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
+
 DROP TABLE IF EXISTS `diagram_pic`;
 CREATE TABLE `diagram_pic` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `diagram_id`                 int(10) ,
-  `pic_id`               int(10) ,
-  `sort_num`             tinyint ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `pic`;
-CREATE TABLE `pic` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
-  `url`               varchar(250) ,
-  `intro`               varchar(200) ,
-  `status`              tinyint  not null default  '0',
-  `add_time`           timestamp,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `diagram_image`;
-CREATE TABLE `diagram_image` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `diagram_id`         int(10) ,
@@ -633,5 +614,13 @@ create table administrator_role(
 alter table  user add access_token varchar(128);
 alter table user add expires_in   varchar(128);
 alter table user add oauth_time    timestamp ;
+
+/* 2014 - 7 - 8 */
+
+DROP TABLE IF EXISTS `diagram_pic`;
+
+
+DROP TABLE IF EXISTS `pic`;
+
 
 

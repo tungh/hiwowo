@@ -17,6 +17,7 @@ object WeixinDiagramDao {
 
   val weixinDiagrams = TableQuery[WeixinDiagrams]
   val diagrams = TableQuery[Diagrams]
+  val diagramPics = TableQuery[DiagramPics]
   val users = TableQuery[Users]
 
   /* 专门为微信挑选的diagram */
@@ -33,18 +34,20 @@ object WeixinDiagramDao {
     (for(c<-weixinDiagrams if c.id === id) yield c.diagramId ).update(diagramId)
   }
   /* 根据期数来查找diagram */
-  def findDiagrams(period:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findDiagrams(period:Long):List[(Diagram,DiagramPic,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
    ( for{
       c<-weixinDiagrams
       d<-diagrams
+      p<-diagramPics
       u<-users
       if c.period === period
       if c.diagramId === d.id
+      if d.id === p.diagramId
       if d.uid === u.id
-    }yield(d,u)).list()
+    }yield(d,p,u)).list()
   }
 
-  def findDiagrams(currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findDiagrams(currentPage:Int,pageSize:Int):Page[(Diagram,DiagramPic,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(weixinDiagrams.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -55,12 +58,14 @@ object WeixinDiagramDao {
    val list= (for{
       c<-weixinDiagrams
       d<-diagrams
+      p<-diagramPics
       u<-users
       if c.diagramId === d.id
+      if d.id === p.diagramId
       if d.uid === u.id
-    }yield(d,u)).drop(startRow).take(pageSize).sortBy(_._1.id desc).list()
+    }yield(d,p,u)).drop(startRow).take(pageSize).sortBy(_._1.id desc).list()
 
-    Page[(Diagram,User)](list,currentPage,totalPages)
+    Page[(Diagram,DiagramPic,User)](list,currentPage,totalPages)
   }
 
   def findWeixinDiagrams(id:Long):List[WeixinDiagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
