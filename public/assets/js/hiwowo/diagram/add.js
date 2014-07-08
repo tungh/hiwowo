@@ -180,9 +180,10 @@ define(function(require){
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
-            fileNumLimit: 300,
-            fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-            fileSingleSizeLimit: 2 * 1024 * 1024    // 50 M
+            fileNumLimit: 30,// 文件总数量
+            fileSizeLimit: 100 * 1024 *1024,    // 100 M
+            fileSingleSizeLimit: 2 * 1024 * 1024,   // 2 M
+            duplicate:1
         });
 
         // 拖拽时不接受 js, txt 文件。
@@ -226,11 +227,13 @@ define(function(require){
 
         // 当有文件添加进来时执行，负责view的创建
         function addFile( file ) {
+            var nums = file.id.split("_")
+            var num = nums[nums.length-1]
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
                     '<p class="progress"><span></span></p>' +
-                    '<p class="intro"><textarea type="text" name="intro" placeholder="求介绍~"> </textarea> </p>' +
+                    '<p class="intro"><textarea type="text" placeholder="求介绍~"  name="intros['+ num +']" placeholder="求介绍~"> </textarea> </p>' +
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
@@ -273,7 +276,7 @@ define(function(require){
                     }
 
                     if( isSupportBase64 ) {
-                        img = $('<img src="'+src+'"><input type="hidden" name="src" value="'+src+'">  ');
+                        img = $('<img src="'+src+'"> ');
                         $wrap.empty().append( img );
                     } else {
                         $.ajax('/uploadDiagramPic', {
@@ -488,7 +491,10 @@ define(function(require){
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        alert( '上传成功' );
+                      //  alert( '上传成功' );
+                        $(".uploadBtn").html("上传成功")
+                        $("#J_saveDraft").removeClass("hidden").addClass("show")
+                        $("#J_addSubmit").removeClass("hidden").addClass("show")
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';
@@ -518,10 +524,18 @@ define(function(require){
                 $statusBar.show();
             }
 
-            addFile( file );
+           addFile( file );
             setState( 'ready' );
             updateTotalProgress();
         };
+
+        uploader.onUploadSuccess = function(file,response){
+            var nums = file.id.split("_")
+            var num = nums[nums.length-1]
+            var $li = $('#'+file.id);
+            var input ='<input type="hidden" name="urls['+ num +']"  value="'+response.src+'"> ';
+            $li.append(input)
+        }
 
         uploader.onFileDequeued = function( file ) {
             fileCount--;

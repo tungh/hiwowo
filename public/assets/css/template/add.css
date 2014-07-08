@@ -5,7 +5,12 @@
     margin: 10px auto 60px auto;
     border-radius: 4px;
 }
-
+.editor-box h2{
+    height: 60px;
+    font-size: 18px;
+    line-height: 60px;
+    text-align: center;
+}
 /*--标题样式--*/
 .editor-box .editor-title {
     margin-bottom: 15px;
@@ -15,7 +20,7 @@
     width: 645px;
 }
 
-.editor-box label {
+.editor-box .editor-title label {
     float: left;
     width: 50px;
     height: 46px;
@@ -24,11 +29,13 @@
     text-align: center;
     text-shadow: 0px 1px #fff;
     font-size: 14px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat left -628px;
+    background-color: #f1f1f1;
 }
 
-.editor-box .input {
-    padding: 16px 16px 13px 16px;
+.editor-box .editor-title input {
+    width: 565px;
+    padding-left: 15px;
+    line-height: 46px;
     float: left;
     font-size: 14px;
     outline: none;
@@ -38,364 +45,41 @@
     border-top-right-radius: 4px;
 }
 
-/*-- 选择样式--*/
-.editor-select {
-    width: 668px;
-    background: #fafafa;
-    border: 1px solid #D9D8D8;
-    border-bottom-width: 0px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
 
-.editor-select .main-select {
-    width: 555px;
-    height: 30px;
-    padding: 11px 0 11px 0;
-    float: left;
-}
 
-.editor-select .main-select span {
-    float: left;
-    margin-left: 12px;
-    margin-right: 10px;
-    border-top: 2px solid #fafafa;
-    border-bottom: 2px solid #fafafa;
-    width: 65px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    display: inline-block;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat;
-}
 
-.editor-select .main-select a {
-    height: 32px;
-    line-height: 32px;
-    color: #323232;
-    float: left;
-    display: inline-block;
-    padding-left: 13px;
-    text-align: right;
-    text-decoration: none;
-    border: 1px solid #d2d2d2;
-    border-radius: 6px;
-    margin-right: 12px;
-    color: #646464;
-    background-color: #fff;
-}
 
-.editor-select .main-select a:hover {
-    border: 2px solid #5f7a5b;
-    color: #5f7a5b;
-    height: 30px;
-    padding-left: 12px;
-    line-height: 30px;
-    text-decoration: none;
-}
-
-.editor-select .main-select a em {
-    height: 32px;
-    display: inline-block;
-    overflow: hidden;
-    padding-right: 13px;
-    line-height: 32px;
-    cursor: pointer;
-}
-
-.editor-select .main-select a:hover em {
-    height: 30px;
-    line-height: 30px;
-    padding-right: 12px;
-}
-
-.editor-select .main-select a.selected {
-    height: 32px;
-    border: none;
-    line-height: 32px;
-    padding-left: 13px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat left -722px;
-    outline: none;
-    color: #fff;
-}
-
-.editor-select .main-select a.selected:hover {
-    height: 32px;
-    line-height: 32px;
-    padding-left: 13px;
-    text-decoration: none;
-    color: #fff;
-    border: none;
-}
-
-.editor-select .main-select a.selected em {
-    height: 32px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat right -722px;
-    text-shadow: 0px 1px #3e513b;
-    line-height: 32px;
-    cursor: pointer;
-}
-
-.editor-select .main-select a.selected:hover em {
-    padding-right: 13px;
-}
-
-/*--其他板块样式--*/
-.editor-select .other-select {
-    float: right;
-    padding: 11px 10px 11px 0;
-}
-
-.editor-select .other-select a.selected{
-    height: 32px;
-    line-height: 32px;
-    padding: 0 0 0 13px;
-    border-radius: 6px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat left -758px;
-    outline: none;
-    color: #5f7a5b;
-    text-align: left;
-}
-
-.editor-select .other-select a.selected em {
-    height: 32px;
-    display: inline-block;
-    padding-right: 18px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat right -758px;
-    color: #fff;
-}
-
-.editor-select .other-btn {
-    display: inline-block;
-    text-decoration: none;
-    width: 76px;
-    height: 32px;
-    padding-left: 13px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat 0 -110px;
-}
-
-.editor-select .other-btn:hover {
-    background-position: 0 -150px;
-}
-
-.editor-select .other-list {
-    display: none;
-}
-
-.editor-select .other-list div.other_list_a {
-    width: 550px;
-    margin-left: 88px;
-    display: inline;
-    float: left;
-    padding-bottom: 5px;
-    *padding-bottom: 15px;
-    _padding-bottom: 15px;
-    word-wrap: break-word;
-    word-break: break-all;
-    white-space: nowrap;
-}
-
-.editor-select .other-list a {
-    height: 32px;
-    line-height: 32px;
-    color: #323232;
-    float: left;
-    display: inline-block;
-    padding-left: 13px;
-    text-align: right;
-    text-decoration: none;
-    border: 1px solid #d2d2d2;
-    border-radius: 6px;
-    margin: 8px 12px 8px 0;
-    color: #646464;
-    background-color: #fff;
-}
-
-.editor-select .other-list a:hover {
-    border: 2px solid #5f7a5b;
-    color: #5f7a5b;
-    height: 30px;
-    padding-left: 12px;
-    line-height: 30px;
-    text-decoration: none;
-}
-
-.editor-select .other-list a em {
-    height: 32px;
-    display: inline-block;
-    overflow: hidden;
-    padding-right: 13px;
-    line-height: 32px;
-    cursor: pointer;
-}
-
-.editor-select .other-list a:hover em {
-    height: 30px;
-    line-height: 30px;
-    padding-right: 12px;
-}
-
-.editor-select .other-list a.selected {
-    height: 34px;
-    border: none;
-    line-height: 34px;
-    padding-left: 13px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat left -722px;
-    outline: none;
-    color: #fff;
-}
-
-.editor-select .other-list a.selected:hover {
-    height: 34px;
-    line-height: 34px;
-    padding-left: 13px;
-    text-decoration: none;
-    color: #fff;
-    border: none;
-}
-
-.editor-select .other-list a.selected em {
-    height: 34px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat right -722px;
-    text-shadow: 0px 1px #3e513b;
-    line-height: 34px;
-    cursor: pointer;
-}
-
-.editor-select .other-list a.selected:hover em {
-    padding-right: 13px;
-}
  /* 简介区域 */
-.editor-intro {
-    width: 668px;
-    background: #fafafa;
+.editor-box .editor-intro {
+    margin-bottom: 15px;
     border: 1px solid #D9D8D8;
-    border-bottom-width: 0;
-    border-top-width: 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.editor-intro .textarea-intro{
-    width: 668px;
-    height: 60px;
-    line-height: 25px;
-    padding: 6px 0;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 0;
-    border-right: 0;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -webkit-transition: all 0.08s ease-in-out;
-    -moz-transition: all 0.08s ease-in-out;
-}
-
-/*--编辑区--*/
-.editor-area {
-
-    border-left: 1px solid #D1D1D1;
-    border-right: 1px solid #D1D1D1;
-    border-bottom: 1px solid #D1D1D1;
-    border-top:none;
-    overflow: hidden;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-/*--进度条--*/
-
-
-/*下方的三个按钮*/
-.func_buttons {
-    width: 668px;
-    margin: 15px auto;
-    text-align: center;
     border-radius: 5px;
-    padding: 0px;
-}
-
-.func_button {
-    width: 90px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    background-color: #F9F9F9;
-    border: 1px solid #D9D8D8;
-    margin-right: 10px;
-    text-decoration: none;
-    color: #646464;
-    border-radius: 6px;
-    font-size: 14px;
     overflow: hidden;
-    cursor: pointer;
+    width: 645px;
 }
-
-.func_button:link, .func_button:active {
-    color: #969696;
-    border: 1px solid #D9D8D8;
-    text-decoration: none;
-    color: #646464;
-}
-
-.func_button:hover {
-    background-color: #dcdcdc;
-    cursor: pointer;
-}
-
-#pdsubmit {
-    margin-right: 0px;
-}
-
-.func_publish {
-    background: url(images/editor/new_btns.png) no-repeat -102px -22px;
-    border: 0;
-   color:#fff;
-}
-
-.func_publish:hover {
-    background: url(images/editor/new_btns.png) no-repeat -102px -60px;
-    border: 0px;
-}
-
-
-
-.func_buttons .func_button_disabled, .func_buttons .func_button_disabled:link, .func_buttons .func_button_disabled:hover {
-    background-color: #f0f0f0;
-    color: #B8B4B4;
-    cursor: text;
-}
-
-.func_buttons .func_button_disabled:hover {
-    background-image: none;
-    border: 1px solid #D9D8D8;
-}
-
-/*--验证码--*/
-#chk_code_container {
-    height: 36px;
-    margin-right: 10px;
-    float: right;
-    display: inline-block;
-}
-
-#chk_code {
-    height: 12px;
-    padding: 8px;
-    width: 60px;
-    outline: none;
+.editor-box .editor-intro label{
+    float: left;
+    width: 50px;
+    height: 100px;
+    padding-right: 15px;
+    line-height: 100px;
+    text-align: center;
+    text-shadow: 0px 1px #fff;
     font-size: 14px;
-    float: right;
-    margin-top: 2px;
-    margin-left: 3px;
-    letter-spacing: 3px;
+    background-color: #f1f1f1;
+}
+.editor-box .editor-intro  textarea{
+    width: 565px;
+    height: 100px;
+    padding-left: 15px;
+    line-height: 46px;
+    float: left;
+    font-size: 14px;
+    outline: none;
+    color: #a0a0a0;
+    border: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-#change_r_img {
-    width: 100px;
-    height: 35px;
-    cursor: pointer;
-    float: right;
-}
+

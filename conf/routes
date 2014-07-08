@@ -42,6 +42,8 @@ POST  /discuss/favor                         controllers.Diagrams.favorDiscuss
 POST  /discuss/disfavor                       controllers.Diagrams.disfavorDiscuss
 
 GET   /diagram/add                     controllers.Diagrams.add
+POST  /diagram/saveTushuo             controllers.Diagrams.saveTushuo
+
 
 
 

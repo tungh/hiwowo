@@ -31,7 +31,13 @@ case class DiagramComponent(
                    user:User
                        )
 
-
+case class TushuoFormData(
+                                id:Option[Long],
+                                title:String,
+                                 intro:String,
+                                urls:Seq[String],
+                                intros: Seq[Option[String]]
+                                )
 object  Diagrams extends Controller {
 
   val diagramForm =Form(
@@ -44,7 +50,15 @@ object  Diagrams extends Controller {
     )
   )
 
-
+  val tushuoForm = Form(
+    mapping(
+      "id"->optional(longNumber),
+      "title" ->nonEmptyText ,
+      "intro"->nonEmptyText,
+      "urls" ->seq(text),
+      "intros" ->seq(optional(text))
+    )(TushuoFormData.apply)(TushuoFormData.unapply)
+  )
 
   /* 图说 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
@@ -313,8 +327,20 @@ object  Diagrams extends Controller {
 
   /* 创建图说 */
   def add = Users.UserAction{ user => implicit request =>
-    Ok(views.html.diagrams.add(user,diagramForm))  // 只有是vip 用户才能创建
+    Ok(views.html.diagrams.add(user,tushuoForm))  // 只有是vip 用户才能创建
   }
 
+  def saveTushuo  = Users.UserAction{ user => implicit request =>
+    tushuoForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.diagrams.add(user,formWithErrors)),
+      data =>{
+           println(data.title)
+          println(data.intro)
+         for((url,i) <- data.urls.view.zipWithIndex){
+           println(url + data.intros.get(i))
+         }
+        Ok("hello")
+      }  )
+  }
 
 }
