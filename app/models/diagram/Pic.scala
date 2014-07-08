@@ -23,5 +23,4 @@ class Pics(tag:Tag) extends Table[Pic](tag,"pic") {
   def addTime = column[Timestamp]("add_time")
   def * =(id.?,uid,url,intro.?,status,addTime.?) <> (Pic.tupled, Pic.unapply)
 
-
 }

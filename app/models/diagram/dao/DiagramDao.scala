@@ -22,6 +22,7 @@ object DiagramDao {
   val diagramDiscusses = TableQuery[DiagramDiscusses]
   val diagramPics = TableQuery[DiagramPics]
   val pics = TableQuery[Pics]
+  val diagramImages = TableQuery[DiagramImages]
   val users = TableQuery[Users]
 
   /*
@@ -90,6 +91,22 @@ object DiagramDao {
     ( for(c<-pics if c.url === url) yield c).firstOption
   }
 
+   /*
+   *
+   *  diagram images
+   *
+   * */
+
+  def addDiagramImage(uid:Long,diagramId:Long, url:String, intro: Option[String]):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val imageAutoInc = pics.map( c => (c.uid,c.diagramId,c.url,c.intro.?)) returning diagramImages.map(_.id) into {
+      case (_, id) => id
+    }
+    imageAutoInc.insert(uid,diagramId,url,intro)
+  }
+
+  def deleteDiagramImage(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c<-diagramImages if c.id === id) yield c ).delete
+  }
 
 
 

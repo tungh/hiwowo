@@ -261,12 +261,21 @@ CREATE TABLE `pic` (
   `url`               varchar(250) ,
   `intro`               varchar(200) ,
   `status`              tinyint  not null default  '0',
-  `type_id`              tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-
+DROP TABLE IF EXISTS `diagram_image`;
+CREATE TABLE `diagram_image` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `diagram_id`         int(10) ,
+  `url`                 varchar(250) ,
+  `intro`               varchar(200) ,
+  `sort_num`             tinyint ,
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `diagram_discuss`;
 CREATE TABLE IF NOT EXISTS `diagram_discuss`(
