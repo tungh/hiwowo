@@ -24,6 +24,7 @@ seajs.config({
          'unslider':'sea-modules/jquery.unslider.min.js',
          'pin':'sea-modules/jquery.pin.min.js',
         'swfupload':'sea-modules/swfupload',
+        'lazyload':'sea-modules/jquery.lazyload.min.js',
 
         'bootstrap':'bootstrap/3.2.0/bootstrap.min',
         'webuploader':'webuploader/0.1.5/webuploader.min',
