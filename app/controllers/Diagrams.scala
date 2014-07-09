@@ -55,12 +55,15 @@ object  Diagrams extends Controller {
 
   /* 图说 1 判断图说是否存在 ，不存在，则显示no-diagram,存在，如果是草稿状态，不是本人浏览，则显示no-diagram,否则显示diagram */
   def diagram(id:Long) = Users.UserAction{ user => implicit request =>
-    val diagramWithUser = DiagramDao.findDiagram(id)
-    val defaultUser = User(Some(0),Some("1"),1,"hiwowo","",Some(""),1,"",Some(""),Some(""),0,Some(""),Some(""),Some(""),Some(""),0,None)
-     if(diagramWithUser.isEmpty ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
+    val component = DiagramDao.findDiagram(id)
+     if(component.isEmpty){
        Ok(views.html.diagrams.diagramInvalid(user))
-     } else {
-    Ok(views.html.diagrams.diagram(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
+     }else if(component.get._1.status==1 && user.isEmpty){
+       Ok(views.html.diagrams.diagramInvalid(user))
+     }else if(component.get._1.status==1 && component.get._1.uid != user.get.id.get ){
+       Ok(views.html.diagrams.diagramInvalid(user))
+     }else {
+    Ok(views.html.diagrams.diagram(user,DiagramComponent(component.get._1,component.get._2),component.get._1.typeId))
      }
   }
 

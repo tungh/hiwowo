@@ -1,5 +1,5 @@
-@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
-@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/diagram.css"){
+@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent),typeId:Int)
+@views.html.template(user,nav="index",subNav=typeId.toString)(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
 
@@ -26,7 +26,7 @@
                 </ul>
             </div>
             <h1 class="title"> @diagramComponent.diagram.title</h1>
-
+             <div class="intro">@Html(diagramComponent.diagram.intro.getOrElse(""))</div>
             <div class="desc">
                 @Html(diagramComponent.diagram.content.getOrElse(""))
             </div>

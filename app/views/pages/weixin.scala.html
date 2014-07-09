@@ -43,77 +43,74 @@
 <div class="container">
 
     <div class="row">
+        <div class="main">
 
-
-            <div class="main">
-
-                <div class="items clearfix">
-                    @for((diagram,user)<-page.items ){
-                    <div class="item">
-                        <div class="content">
-                            <h2>
-                                <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="title">@diagram.title</a>
-                            </h2>
-                            <div class="desc">
-                                <div class="pics">
-                                    <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
-
-
-                                    </a>
-                                    <div class="pics-hidden"></div>
+            <div class="items clearfix">
+                @for((diagram,user)<-page.items ){
+                <div class="item">
+                    <div class="content">
+                        <h2>
+                            <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="title">@diagram.title</a>
+                        </h2>
+                        <div class="desc">
+                            <div class="pics">
+                                <div  class="pics-list">
+                                    @Html(diagram.content.getOrElse(""))
                                 </div>
-                                <div class="pics-too-high-close">收起</div>
-                                <div class="intro">
-                                    @diagram.intro.getOrElse("")
-                                </div>
+                                <div class="pics-hidden"></div>
                             </div>
-
+                            <div class="pics-too-high-close">收起</div>
+                            <div class="intro">
+                                @Html(diagram.intro.getOrElse(""))
+                            </div>
                         </div>
-                        <div class="meta">
 
-                            <div class="user">
-                                <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
-                            </div>
-
-                            <div class="extra">
-                                <div class="thumbs">
-                                    <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
-                                    <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
-                                </div>
-                                <div class="others">
-                                    <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
-                                    <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
-                                    <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
-                                </div>
-
-                            </div>
-
-
-                        </div>
                     </div>
-                    }
+                    <div class="meta">
 
+                        <div class="user">
+                            <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i> </a>
+                        </div>
+
+                        <div class="extra">
+                            <div class="thumbs">
+                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>@diagram.loveNum</i></a>
+                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>@diagram.hateNum</i> </a>
+                            </div>
+                            <div class="others">
+                                <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>@diagram.discussNum</i></a>
+                                <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>@diagram.collectNum</i></a>
+                                <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
                 </div>
+                }
 
-
-                <div class="pagin inlineblock fr mt10" id="J_Pagination">
-                    @if(page.nums.length>1){
-                    @page.prev.map { page =>
-                    <a class="prev" href="@controllers.routes.Pages.index(page,10)">上一页</a>
-                    }
-                    @for(num <-page.nums){
-                    @if(num==page.currentPage){
-                    <span class="current" >@num</span>
-                    }else {
-                    <a href="@controllers.routes.Pages.index(num,10)">@num</a>
-                    }
-                    }
-                    @page.next.map { page =>
-                    <a class="next" href="@controllers.routes.Pages.index(page,10)">下一页</a>
-                    }
-                    }
-                </div>
             </div>
+
+
+            <div class="pagin inlineblock fr mt10" id="J_Pagination">
+                @if(page.nums.length>1){
+                @page.prev.map { page =>
+                <a class="prev" href="@controllers.routes.Pages.index(page,10)">上一页</a>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <span class="current" >@num</span>
+                }else {
+                <a href="@controllers.routes.Pages.index(num,10)">@num</a>
+                }
+                }
+                @page.next.map { page =>
+                <a class="next" href="@controllers.routes.Pages.index(page,10)">下一页</a>
+                }
+                }
+            </div>
+        </div>
             <div class="side">
                 <div class="qr">
                     <img src="/assets/images/qr_hiwowo.jpg" width="270" height="270" alt="嗨喔喔 微信号">

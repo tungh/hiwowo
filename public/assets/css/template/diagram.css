@@ -37,7 +37,7 @@
 }
 .main .sitebar {
     height: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     background: url(images/dash_line_1x3.png) repeat-x bottom
 }
 
@@ -95,7 +95,7 @@
     color: #333;
     font-size: 32px;
     line-height: 48px;
-    padding: 0 50px 20px 50px;
+    padding: 0 50px 10px 50px;
     font-weight: normal;
     text-shadow: 0 0 3px rgba(0,0,0,0.4);
     text-align: center;
