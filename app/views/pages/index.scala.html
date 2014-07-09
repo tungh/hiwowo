@@ -72,7 +72,7 @@
                     <div class="meta">
 
                         <div class="user">
-                            <a><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i> </a>
+                            <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i> </a>
                         </div>
 
                         <div class="extra">
