@@ -27,7 +27,6 @@ import models.label.dao.LabelDao
  */
 case class DiagramComponent(
                    diagram:Diagram,
-                   pics:DiagramPic,
                    user:User
                        )
 
@@ -35,6 +34,7 @@ case class DiagramFormData(
                                 id:Option[Long],
                                 title:String,
                                 intro:Option[String],
+                                typeId:Int,
                                 urls:Seq[String],
                                 intros: Seq[Option[String]]
                                 )
@@ -47,6 +47,7 @@ object  Diagrams extends Controller {
       "id"->optional(longNumber),
       "title" ->nonEmptyText ,
       "intro"->optional(text),
+      "typeId"->number,
       "urls" ->seq(text),
       "intros" ->seq(optional(text))
     )(DiagramFormData.apply)(DiagramFormData.unapply)
@@ -59,7 +60,7 @@ object  Diagrams extends Controller {
      if(diagramWithUser.isEmpty ||( diagramWithUser.get._1.status==0 && diagramWithUser.get._1.uid != user.getOrElse(defaultUser).id.get)){
        Ok(views.html.diagrams.diagramInvalid(user))
      } else {
-    Ok(views.html.diagrams.diagram(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2,diagramWithUser.get._3)))
+    Ok(views.html.diagrams.diagram(user,DiagramComponent(diagramWithUser.get._1,diagramWithUser.get._2)))
      }
   }
 
@@ -82,12 +83,11 @@ object  Diagrams extends Controller {
       formWithErrors => BadRequest(views.html.diagrams.add(user,formWithErrors)),
       data =>{
         val pic = data.urls.head
-
         var content =""
         for((url,i) <- data.urls.view.zipWithIndex){
           content +="<img class='img-upload' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
         }
-        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.title,pic,data.intro,Some(content),1)
+        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
         for((url,i) <- data.urls.view.zipWithIndex){
 
           DiagramDao.addDiagramImage(user.get.id.get,diagramId,url,data.intros.get(i))

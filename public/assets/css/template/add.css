@@ -45,10 +45,6 @@
     border-top-right-radius: 4px;
 }
 
-
-
-
-
  /* 简介区域 */
 .editor-box .editor-intro {
     margin-bottom: 15px;
@@ -80,6 +76,104 @@
     border: 0;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+}
+.editor-select {
+    width: 645px;
+    background: #fafafa;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.editor-select .main-select {
+    width: 555px;
+    height: 30px;
+    padding: 11px 0 11px 0;
+    float: left;
+}
+
+.editor-select .main-select span {
+    float: left;
+    margin-left: 12px;
+    margin-right: 10px;
+    border-top: 2px solid #fafafa;
+    border-bottom: 2px solid #fafafa;
+    width: 65px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+    background: url(images/editor/editor_ico.gif) no-repeat;
+}
+
+.editor-select .main-select a {
+    height: 32px;
+    line-height: 32px;
+    color: #323232;
+    float: left;
+    display: inline-block;
+    padding-left: 13px;
+    text-align: right;
+    text-decoration: none;
+    border: 1px solid #d2d2d2;
+    border-radius: 6px;
+    margin-right: 12px;
+    color: #646464;
+    background-color: #fff;
+}
+
+.editor-select .main-select a:hover {
+    border: 2px solid #5f7a5b;
+    color: #5f7a5b;
+    height: 30px;
+    padding-left: 12px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.editor-select .main-select a em {
+    height: 32px;
+    display: inline-block;
+    overflow: hidden;
+    padding-right: 13px;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.editor-select .main-select a:hover em {
+    height: 30px;
+    line-height: 30px;
+    padding-right: 12px;
+}
+
+.editor-select .main-select a.selected {
+    height: 32px;
+    border: none;
+    line-height: 32px;
+    padding-left: 13px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat left -722px;
+    outline: none;
+    color: #fff;
+}
+
+.editor-select .main-select a.selected:hover {
+    height: 32px;
+    line-height: 32px;
+    padding-left: 13px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+}
+
+.editor-select .main-select a.selected em {
+    height: 32px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat right -722px;
+    text-shadow: 0px 1px #3e513b;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.editor-select .main-select a.selected:hover em {
+    padding-right: 13px;
 }
 
 

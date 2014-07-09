@@ -3,6 +3,7 @@
 # --- !Ups
 DROP DATABASE IF EXISTS `hiwowo`;
 create database  hiwowo;
+use hiwowo;
 /************************************************************
  * 用户是个大的结构  主要有以下几个表
  * user表                User常用的基本信息，包括常用的统计信息
@@ -36,9 +37,6 @@ CREATE TABLE `user` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `open_id`               varchar(64),
   `come_from`              tinyint    not null default '0',
-  `access_token`         varchar(128),
-   `expires_in`        int(10) not null default '0',
-   `oauth_time`        timestamp not null DEFAULT '2014-5-22 12:00:00',
    `name`                varchar(64) NOT NULL  ,
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
@@ -52,7 +50,10 @@ CREATE TABLE `user` (
   `qrcode`              varchar(20),
   `labels`                    varchar(250) ,
   `is_admin`                tinyint    not null default '0',
-  `modify_time`             timestamp NOT NULL DEFAULT '2014-2-22 12:00:00',
+  `modify_time`             timestamp,
+  `access_token`         varchar(128),
+  `expires_in`        int(10) not null default '0',
+  `oauth_time`        timestamp not null DEFAULT '2014-5-22 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `post_code`           varchar(16) ,
   `phone`               char(32) ,
   `blog`                varchar(200) ,
-  `login_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `login_time`          timestamp,
   `login_num`           smallint(10) NOT NULL default '1',
   `login_ip`            varchar(32) DEFAULT '0',
   `regist_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
@@ -133,7 +134,7 @@ CREATE TABLE `user_follow` (
   `id`                int(10) NOT NULL AUTO_INCREMENT,
   `uid`               int(10) NOT NULL DEFAULT '0',
   `follow_id`           int(10) NOT NULL DEFAULT '0',
-  `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -159,7 +160,7 @@ CREATE TABLE `user_record` (
   `action_id`         int(10) NOT NULL,
   `action_url`         varchar(128) NOT NULL DEFAULT 'http://hiwowo.com',
   `action_content`     varchar(128) NOT NULL DEFAULT 'hiwowo',
-  `add_time`           timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -181,7 +182,7 @@ CREATE TABLE `user_love` (
   `uid` int(10) NOT NULL ,
   `love_id` int(20) NOT NULL ,
   `type_id` tinyint NOT NULL ,
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time` timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -191,7 +192,7 @@ CREATE TABLE `user_collect` (
   `uid` int(10) NOT NULL ,
   `collect_id` int(20) NOT NULL ,
   `type_id` tinyint NOT NULL ,
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time` timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -202,7 +203,7 @@ CREATE TABLE `user_subscribe` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `uid` int(10) NOT NULL ,
   `label_id` int(20) NOT NULL ,
-  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time` timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /* ***************************************************** */
@@ -215,8 +216,8 @@ CREATE TABLE `album` (
   `intro`             varchar(250) ,
   `status`            tinyint  not null default  '0',
   `diagram_num`                 smallint(10) not null  DEFAULT '0',
-  `modify_time`         timestamp default '2013-07-18 12:00:00',
-  `add_time`           timestamp default '2013-07-18 12:00:00',
+  `modify_time`         timestamp,
+  `add_time`           timestamp default '2014-07-7 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -238,8 +239,8 @@ CREATE TABLE `diagram` (
   `collect_num`                 int(10) unsigned not null  DEFAULT '0',
   `come_from_site`             varchar(64) ,
   `come_from_url`             varchar(250) ,
-  `modify_time`         timestamp default '2013-07-18 12:00:00',
-  `add_time`           timestamp default '2013-07-18 12:00:00',
+  `modify_time`         timestamp ,
+  `add_time`           timestamp default '2014-07-7 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -252,7 +253,7 @@ CREATE TABLE `diagram_pic` (
   `diagram_id`         int(10) ,
   `url`                 varchar(250) ,
   `intro`               varchar(200) ,
-  `sort_num`             tinyint ,
+  `sort_num`             tinyint not null  default '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -323,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `topic`(
   `view_num`           smallint(10)  default '1',
   `love_num`           smallint(10)  default '0',
   `check_state`          tinyint NOT NULL DEFAULT '0',
-  `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -349,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `topic_discuss`(
   `quote_content`             text,
   `content`                 text ,
    `check_state`          tinyint NOT NULL DEFAULT '0',
-  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -369,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `group`(
   `name`                       varchar(64) not null ,
   `intro`                     varchar(200),
   `status`                 tinyint not null default '0',
-  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`               timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -393,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `label`(
   `check_state`                 tinyint not null default '0',
   `add_num`                int not null default '0',
   `subscribe_num`                int not null default '0',
-  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`               timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -434,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `at_msg`(
   `receiver_id`                int(10) not null default '0',
   `receiver_name`             varchar(32) not null default '',
   `status`               tinyint not null default '1',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`                timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
@@ -457,7 +458,7 @@ CREATE TABLE IF NOT EXISTS `system_msg`(
   `title`                varchar(32) not null default 'hiwowo',
   `content`                varchar(255) not null default '',
   `status`               tinyint not null default '1',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`                timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -469,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
   `receiver_id`                int(10) not null default '0',
   `receiver_name`             varchar(32) not null default '',
   `status`                tinyint not null default '0',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`                timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -485,7 +486,7 @@ CREATE TABLE IF NOT EXISTS `favor_msg`(
   `third_id`               int(10) not null ,
   `content`                varchar(200) not null,
   `loved_id`               int(10) not null,
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`                timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -502,7 +503,7 @@ CREATE TABLE IF NOT EXISTS `discuss_msg`(
   `third_id`               int(10) not null ,
   `content`                varchar(200) not null,
   `owner_id`               int(10) not null,
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`                timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -531,9 +532,9 @@ CREATE TABLE IF NOT EXISTS `cms`(
   `seo_title`                  varchar(128)  ,
   `seo_keywords`               varchar(128)  ,
   `seo_desc`                   varchar(255)  ,
-  `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `modify_time`                timestamp,
   `status`            tinyint NOT NULL DEFAULT '1',
-  `add_time`               timestamp ,
+  `add_time`               timestamp  NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -546,7 +547,7 @@ create table advert_position(
   name            varchar (64)  not null,
   code            varchar(32)   not null,
   advert_type       tinyint default 0,
-  add_time          timestamp default '2012-5-12 14:18:00',
+  add_time          timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*广告
@@ -599,8 +600,8 @@ create table administrator(
 /*
  * 数据表  userRole   用户角色
 */
-DROP TABLE IF EXISTS `administrator_role`;
-create table administrator_role(
+DROP TABLE IF EXISTS `user_role`;
+create table user_role(
   id             int  unsigned primary  key  auto_increment ,
   name           varchar(32) not null,
   note           varchar(128) not null default '',
@@ -610,17 +611,6 @@ create table administrator_role(
 
 
 # --- !Downs
-
-alter table  user add access_token varchar(128);
-alter table user add expires_in   varchar(128);
-alter table user add oauth_time    timestamp ;
-
-/* 2014 - 7 - 8 */
-
-DROP TABLE IF EXISTS `diagram_pic`;
-
-
-DROP TABLE IF EXISTS `pic`;
 
 
 
