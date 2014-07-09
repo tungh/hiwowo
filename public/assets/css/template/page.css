@@ -211,7 +211,10 @@
 
 .items .item .content .desc .pics-list img{
     max-width: 450px;
-    padding-bottom: 10px;
+}
+.items .item .content .desc .pics-list span{
+    display: inline-block;
+    line-height: 25px;
 }
 .items .item .content .desc  .pics-hidden{
     display: none;

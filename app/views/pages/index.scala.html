@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.diagram.DiagramPic,models.user.User)])
+@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)])
 @views.html.template(user,nav="index",subNav="index")(css="/assets/css/template/page.css"){
 
 
@@ -49,7 +49,7 @@
         <div class="main">
 
             <div class="items clearfix">
-                @for((diagram,pics,user)<-page.items ){
+                @for((diagram,user)<-page.items ){
                 <div class="item">
                     <div class="content">
                         <h2>
@@ -57,15 +57,14 @@
                         </h2>
                         <div class="desc">
                             <div class="pics">
-                                <a href="@controllers.routes.Diagrams.diagram(diagram.id.get)" target="_blank" class="pics-list">
-
-
-                                </a>
+                                <div  class="pics-list">
+                                   @Html(diagram.content.getOrElse(""))
+                                </div>
                                 <div class="pics-hidden"></div>
                             </div>
                             <div class="pics-too-high-close">收起</div>
                             <div class="intro">
-                                @diagram.intro.getOrElse("")
+                                @Html(diagram.intro.getOrElse(""))
                             </div>
                         </div>
 
@@ -73,17 +72,17 @@
                     <div class="meta">
 
                         <div class="user">
-                            <a><img src="/assets/user/default.jpg" class="img-circle" width="45" height="45"> <span>左三少</span> <i class="time"> 6分钟前</i> </a>
+                            <a><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i> </a>
                         </div>
 
                         <div class="extra">
                             <div class="thumbs">
-                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>100</i></a>
-                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>2</i> </a>
+                                <a class="up" href="" title="赞成"> <span class="glyphicon glyphicon-thumbs-up"></span><i>@diagram.loveNum</i></a>
+                                <a class="down" href=" " title="不喜欢"><span class="glyphicon glyphicon-thumbs-down"></span><i>@diagram.hateNum</i> </a>
                             </div>
                             <div class="others">
-                                <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>10</i></a>
-                                <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>10</i></a>
+                                <a class="comment" href="" title="评论"><span class="glyphicon glyphicon-edit"> </span><i>@diagram.discussNum</i></a>
+                                <a class="collect" href="" title="收藏"><span class="glyphicon glyphicon-heart"></span><i>@diagram.collectNum</i></a>
                                 <a class="share" title="分享"> <span class="glyphicon glyphicon-share"></span></a>
                             </div>
 

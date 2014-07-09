@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.diagram.DiagramPic,models.user.User)])
+@(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)])
 @views.html.template(user,nav="index",subNav="weixin")(css="/assets/css/template/page.css"){
 
 <div class="banner">
@@ -48,7 +48,7 @@
             <div class="main">
 
                 <div class="items clearfix">
-                    @for((diagram,pics,user)<-page.items ){
+                    @for((diagram,user)<-page.items ){
                     <div class="item">
                         <div class="content">
                             <h2>

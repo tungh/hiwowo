@@ -13,6 +13,7 @@ import org.ansj.app.keyword.{Keyword, KeyWordComputer}
 import play.mvc.Http
 import org.apache.http.NameValuePair
 import play.api.libs.Crypto
+import java.sql.Timestamp
 
 
 /**
@@ -23,7 +24,7 @@ import play.api.libs.Crypto
  */
 object Test extends Controller {
 
-  def index = Users.UserAction{ user => implicit request =>
+  def test = Users.UserAction{ user => implicit request =>
   /*  val users = UserDao.findAll(1,10)
     for(user <- users.items){
       println(user.name)
@@ -36,10 +37,8 @@ object Test extends Controller {
 //    TermDao.addTermRelation(1,1,0)
 
  //   val result = UserDao.findUser(1)
-   val code = Crypto.encryptAES("1")
-  println(code)
-   val uid = Crypto.decryptAES(code)
-    Ok(" Ok! code:  "+ code + " uid: " + uid)
+      val interval= utils.Utils.getInterval(new Timestamp(1000000000))
+    Ok(" Ok! code:  "+interval)
   }
 
   def ui =  Users.UserAction{ user => implicit request =>

@@ -3,7 +3,7 @@
 # ~~~~
 
 #TEST
-GET   /test                                controllers.Test.index
+GET   /test                                controllers.Test.test
 GET   /ui                                  controllers.Test.ui
 
 

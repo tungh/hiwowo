@@ -128,43 +128,39 @@ object DiagramDao {
     } yield c).drop(startRow).take(pageSize).list()
     Page[Diagram](list,currentPage,totalPages)
   }
-    def findDiagrams(sortBy:String,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,DiagramPic,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    def findDiagrams(sortBy:String,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(diagrams.filter(_.status ===status).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
       var query = for{
         c<-diagrams
-        p<-diagramPics
         u<-users
         if c.status === status
         if c.uid === u.id
-        if c.id === p.diagramId
-      }yield(c,p,u)
+      }yield(c,u)
       if(sortBy == "new") query = query.sortBy(_._1.id desc)
       if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
       val list = query.drop(startRow).take(pageSize).list()
-    Page[(Diagram,DiagramPic,User)](list,currentPage,totalPages)
+    Page[(Diagram,User)](list,currentPage,totalPages)
   }
 
 
 
-  def findDiagrams(sortBy:String,typeId:Int,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,DiagramPic,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findDiagrams(sortBy:String,typeId:Int,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(diagrams.filter(_.status === status).filter(_.typeId === typeId).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize}
     var query = for{
       c<-diagrams
-      p<-diagramPics
       u<-users
       if c.typeId === typeId
       if c.status === status
       if c.uid === u.id
-      if c.id  === p.diagramId
-    }yield(c,p,u)
+    }yield(c,u)
     if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
     if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
     val list = query.drop(startRow).take(pageSize).list()
-    Page[(Diagram,DiagramPic,User)](list,currentPage,totalPages)
+    Page[(Diagram,User)](list,currentPage,totalPages)
   }
   def findAllDiagrams(currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(diagrams.length).first
