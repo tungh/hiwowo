@@ -16,8 +16,10 @@ define(function(require) {
     require("hiwowo/common/validator")($);
     require("imgAreaSelect");
     require("bootstrap")
+    require("hiwowo/common/validator")($);
 	var DateSelector = require("hiwowo/common/dateSelect");
     var Detector = require("detector")
+    var Setup = require("hiwowo/common/area");
 $.hiwowo.photoarea = null;
 $.hiwowo.rotate = null;
 $.hiwowo.setting = {
@@ -224,6 +226,29 @@ $(function(){
         });
 
 	});
+
+    /* 修改 密码 */
+    $("#J_ModifyPwd").validator();
+
+    /* 修改地址 */
+    $("#J_Address").validator({fun:function(vali,inputs){
+        inputs.trigger("blur");
+        if($("#J_City").val().length<2){
+            vali.effects($("#J_City"), "请选择省份和城市", "error");
+            $("#J_province_city").data("vali", 0);
+        }else{
+            vali.effects($("#J_City"), "", "empty");
+            $("#J_province_city").data("vali", 1);
+        }
+    }})
+    var pro = "请选择";
+    var city = "请选择";
+    if(address != null){
+        var adds = address.split("|");
+        pro = adds[0];
+        city = adds[1];
+    }
+    var setup = new Setup(pro,city);
 });
 
 

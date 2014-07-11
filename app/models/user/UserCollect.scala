@@ -4,7 +4,7 @@ import play.api.db.slick.Config.driver.simple._
 
 import java.sql.Timestamp
   /*
-  * type id :0 图说
+  * type id :0 图说   1 forum topic
   * */
 case class UserCollect (
                     id: Option[Long],

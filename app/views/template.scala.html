@@ -81,7 +81,7 @@
     case "my" => {  <div id="J_subbar" class="subbar">
         <div class="container">
             <ul>
-                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的神兽">我的神兽</a></li>
+                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的收藏">我的神兽</a></li>
                 <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.subscribes(user.get.id.get)}' title="我的订阅">我的订阅</a></li>
                 <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
             </ul>

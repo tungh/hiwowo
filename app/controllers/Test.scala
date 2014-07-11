@@ -42,7 +42,7 @@ object Test extends Controller {
   }
 
   def ui =  Users.UserAction{ user => implicit request =>
-    Ok(views.html.test.ui(user))
+    Ok("ok")
   }
 
 }

@@ -37,7 +37,7 @@ POST  /discuss/favor                         controllers.Diagrams.favorDiscuss
 POST  /discuss/disfavor                       controllers.Diagrams.disfavorDiscuss
 
 GET   /diagram/add                     controllers.Diagrams.add
-POST  /diagram/save             controllers.Diagrams.save
+POST  /diagram/save                    controllers.Diagrams.save
 
 
 

@@ -6,13 +6,13 @@
     <div class="my-header">
         <div class="userLeft">
             <ul>
-                <li >关注/粉丝<a href="@controllers.users.routes.Users.follow(userComponent.user.id.get)">@(userComponent.stat.fansNum + userComponent.stat.followNum) </a></li>
+                <li ><a href="@controllers.users.routes.Users.follow(userComponent.user.id.get)">关注/粉丝 @(userComponent.stat.fansNum + userComponent.stat.followNum) </a></li>
                 <li >|</li>
-                <li >订阅<a href="@controllers.users.routes.Users.subscribes(userComponent.user.id.get)">@userComponent.stat.subscribeNum</a></li>
+                <li ><a href="@controllers.users.routes.Users.subscribes(userComponent.user.id.get)">订阅 @userComponent.stat.subscribeNum</a></li>
                 <li >|</li>
-                <li >收藏<a href="@controllers.users.routes.Users.collects(userComponent.user.id.get)">@userComponent.stat.collectNum</a> </li>
+                <li ><a href="@controllers.users.routes.Users.collects(userComponent.user.id.get)">收藏 @userComponent.stat.collectNum</a> </li>
                 <li >|</li>
-                <li >神兽<a href="@controllers.users.routes.Users.diagrams(userComponent.user.id.get)">@userComponent.stat.postDiagramNum</a> </li>
+                <li ><a href="@controllers.users.routes.Users.diagrams(userComponent.user.id.get)">图说 @userComponent.stat.postDiagramNum</a> </li>
             </ul>
         </div>
         <div class="userRight">

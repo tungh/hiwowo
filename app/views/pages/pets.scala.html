@@ -1,5 +1,5 @@
 @(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],typeId:Int)
-@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/page.css"){
+@views.html.template(user,nav="index",subNav=typeId.toString)(css="/assets/css/template/page.css"){
 
 <div class="banner">
     <ul>
@@ -69,7 +69,8 @@
                     <div class="meta">
 
                         <div class="user">
-                            <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i> </a>
+                            <a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank"><img src="@user.pic" class="img-circle" width="45" height="45"> <span>@user.name</span> </a>
+                            <i class="time"> @utils.Utils.getInterval(diagram.modifyTime.get) </i>
                         </div>
 
                         <div class="extra">
@@ -124,7 +125,7 @@
 
 }{
 <script type="text/javascript">
-    seajs.use("hiwowo/pages/page.js")
+    seajs.use(["hiwowo/pages/page","hiwowo/user/userOperate"])
 </script>
 }
 

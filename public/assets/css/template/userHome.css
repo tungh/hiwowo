@@ -41,8 +41,6 @@
 
 .my .my-header .userLeft li a {
     color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
     float: right;
     padding: 0 4px
 }
@@ -171,11 +169,10 @@
     color: #009bba;
 }
 .my .my-body .box .bd .pic{
-    height: 170px;
     width: 300px;
     overflow: hidden;
 }
-.pets. mod-body .box .bd .pic img {
+.my .my-body .box .bd .pic img {
     display: block;
     width: 300px;
     background: #eee;

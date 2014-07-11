@@ -52,7 +52,7 @@ object Users extends Controller {
   /* 我的图说 */
   def diagrams(uid:Long,p:Int,size:Int) = UserAction{ user => implicit request =>
     val author = UserDao.findUser(uid)
-    val page = DiagramDao.findUserDiagrams(uid,p,1)
+    val page = DiagramDao.findUserDiagrams(uid,p,10)
     Ok(views.html.users.diagrams(user,UserComponent(author._1,author._2,author._3),page))
   }
 
