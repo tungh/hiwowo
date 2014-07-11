@@ -18,7 +18,7 @@ define(function(require, exports) {
     var $ = jQuery = require("jquery");
     var Cookie = require("cookie");
     require("bootstrap")
-  var LazyLoad =  require("hiwowo/jquery.scrollLazyLoad.js")
+
     $.hiwowo = $.hiwowo || {
         version: "v1.0.0"
     };
@@ -522,13 +522,7 @@ define(function(require, exports) {
     /* 初始化加载中的内容*/
     /* 初始化加载中的内容*/
     $(function(){
-        $('.container').scrollLazyLoad({
-            scroller: $('.main'),
-            attr: 'data-original',
-            fn: function () {
-                console.log('DONE!!!');
-            }
-        });
+
         //标签输入框自动转换“,”
         $(document).on("keyup","input[rel=tagsInput]",function(){
             //限制每个标签的中文长度

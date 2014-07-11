@@ -345,22 +345,28 @@
     width: 290px;
 }
 .index .side .notices {
+    height: 20px;
+    width: 250px;
+    overflow: hidden;
     margin: 20px 25px;
 }
 
-.index .side .notices dt, .notices dd {
+.index .side .notices i, .notices .box {
     float: left;
 }
 
-.index .side .notices dt i {
+.index .side .notices  i {
     font-size: 20px;
     margin-right: 10px;
 }
 
-.index .side .notices dd ul {
-    margin: 0;
-    padding: 0;
+.index .side .notices .box {
+    width: 220px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
 }
+
 
 /* i want post */
 .index .side .i-want-post {
