@@ -5,19 +5,14 @@ import controllers.users.Users
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.diagram.dao.{DiagramDiscussSQLDao, DiagramSQLDao, DiagramDao}
-import models.diagram.{DiagramPic, Diagram}
-import play.api.cache.Cache
-import play.api.Play.current
+import models.diagram.Diagram
+
 import play.api.data.Form
 import play.api.data.Forms._
 import scala.Some
 import models.user.User
 
 import scala.collection.JavaConversions._
-import org.ansj.app.keyword.{Keyword, KeyWordComputer}
-import org.jsoup.Jsoup
-import org.jsoup.safety.Whitelist
-import models.label.dao.LabelDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -82,21 +77,35 @@ object  Diagrams extends Controller {
   }
 
   def save  = Users.UserAction{ user => implicit request =>
-    diagramForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.diagrams.add(user,formWithErrors)),
-      data =>{
-        val pic = data.urls.head
-        var content =""
-        for((url,i) <- data.urls.view.zipWithIndex){
-          content +="<img class='lazy' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
-        }
-        val diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
-        for((url,i) <- data.urls.view.zipWithIndex){
 
-          DiagramDao.addDiagramImage(user.get.id.get,diagramId,url,data.intros.get(i))
-        }
-        Redirect(controllers.routes.Diagrams.diagram(diagramId))
-      })
+      diagramForm.bindFromRequest.fold(
+        formWithErrors => BadRequest(formWithErrors.errors.toString),
+        data =>{
+          var diagramId:Long=0L
+          val pic = data.urls.head
+          var content =""
+          for((url,i) <- data.urls.view.zipWithIndex){
+            content +="<img class='img-upload' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
+          }
+          if(data.id.isEmpty){
+
+            diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
+            for((url,i) <- data.urls.view.zipWithIndex){
+              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.intros.get(i))
+            }
+          }else{
+            diagramId = data.id.get
+            DiagramDao.deleteDiagramPics(diagramId)
+            DiagramDao.modifyDiagram(data.id.get,user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
+            for((url,i) <- data.urls.view.zipWithIndex){
+              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.intros.get(i))
+            }
+          }
+
+          Redirect(controllers.routes.Diagrams.diagram(diagramId))
+        })
+
+
   }
 
    /* 编辑 图说 */
@@ -111,7 +120,8 @@ object  Diagrams extends Controller {
           if(diagram.isEmpty || diagram.get.uid != user.get.id.get){        // 只有图说的作者才能修改
               Ok("图说不存在，或者你没有权限编辑")
           }else{
-            Ok(views.html.diagrams.edit(user))
+            val pics = DiagramDao.findDiagramPics(diagram.get.id.get)
+            Ok(views.html.diagrams.edit(user,diagramForm,diagram.get,pics))
           }
         }
       } else{

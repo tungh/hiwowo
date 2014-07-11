@@ -108,7 +108,7 @@ object Diagrams extends Controller {
         val images =Jsoup.parseBodyFragment(data.content.get).body().getElementsByTag("img")
 
 
-          DiagramDao.modifyDiagram(data.id,data.uid,data.title,data.pic,data.intro,data.content,2,data.typeId)
+          DiagramDao.modifyDiagram(data.id,data.uid,data.typeId,data.title,data.pic,data.intro,data.content,2)
         // 处理label
         LabelDao.deleteLabelDiagramByDiagramId(data.id)
         if(!data.labels.isEmpty){

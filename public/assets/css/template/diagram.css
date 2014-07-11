@@ -104,12 +104,15 @@
    ;
 }
 
-
+.diagram .main .intro{
+    padding: 15px 50px 80px 50px;
+    font-size: 14px;
+    color: #444;
+}
 .diagram .main .desc {
     padding: 15px 50px 80px 50px;
-    font-size: 16px;
+    font-size: 14px;
     color: #444;
-    line-height: 26px;
 }
 .diagram .main .desc textarea{
     border: none;

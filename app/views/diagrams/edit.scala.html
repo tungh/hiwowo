@@ -1,16 +1,76 @@
-@(user:Option[models.user.User])
-@views.html.template(user,nav="index",subNav="pets")(css="/assets/css/template/editor.css"){
+@(user:Option[models.user.User],form:Form[controllers.DiagramFormData],diagram:models.diagram.Diagram,pics:List[models.diagram.DiagramPic])
+@views.html.template(user,nav="index",subNav="diagrams")(css="/assets/css/template/add.css"){
 
 <div class="container">
 
     <div class="row">
         <div class="main">
-          <div class="editor-box">
 
-          </div>
-          </div>
-        <div class="side">
-            <div class="box  affix">
+            <div class="editor-box" id="J_edit" >
+                <h2> 发布图说 </h2>
+                <form action="/diagram/save" method="post" class="post-edit-form" id="J_editForm">
+                    <input type="hidden" name="id" id="J_id"  value="@diagram.id.get" />
+                    <div class="editor-title">
+                        <label for="J_title">标题</label>
+                        <input type="text" name="title"  id="J_title" value='@diagram.title'  maxlength='45' />
+                    </div>
+                    <div class="editor-intro">
+                        <label for="J_title">简介</label>
+                        <textarea class="textarea-intro" name="intro" id="J_intro">@diagram.intro</textarea>
+
+                    </div>
+                    <div class="editor-select">
+                        <div class="main-select">
+                            <span>类型：</span>
+                            <a href="javascript:void(0);"  data-typeid="0" @if(diagram.typeId == 0){class="selected"} ><em>二货主人</em></a>
+                            <a href="javascript:void(0);"  data-typeid="1" @if(diagram.typeId == 1){class="selected"}><em>萌宠</em></a>
+                            <a href="javascript:void(0);"  data-typeid="2" @if(diagram.typeId == 2){class="selected"}><em>其他</em></a>
+                            <input type="hidden" name="typeId" value="@diagram.typeId" id="J_typeId">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="uploader">
+                        <div class="queueList">
+
+                            <ul class="filelist">
+                                @for( (pic,i) <-pics.view.zipWithIndex ){
+                                <li>
+
+
+                                    <p class="imgWrap">
+                                        <img src="@pic.url">
+                                        <input type="hidden" name="urls[@i]" value="@pic.url">
+                                    </p>
+                                    <p class="intro">
+                                        <textarea type="text" name="intros[@i]">@pic.intro</textarea>
+                                    </p>
+
+                                    <div class="file-panel">
+                                        <span class="cancel">删除</span>
+                                    </div>
+                                </li>
+                                  }
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div>
+
+
+                    <p class="clearfix" >
+                        <input type="button" class="btn btn-default left hidden" id="J_saveDraft" value="保存草稿">
+                        <input type="submit" class="btn btn-info right mr30" id="J_addSubmit" value="发表" >
+                    </p>
+
+                </form>
+
+            </div>
+
+
+        </div>
+        <div class="side clearfix">
+            <div class="box">
                 <div class="hd">
                     <h3>公告栏</h3>
                 </div>
@@ -27,12 +87,13 @@
 
 }{
 <script type="text/javascript">
-            seajs.use(['jquery','hiwowo/diagram/diagramEditor.js','hiwowo/editor/hiwowo.editor'],function($,editor){
-                if(HIWOWO.userId == ""){
-                    $.hiwowo.loginDialog.isLogin();
-                }
-                $.hiwowo.editor = $.hiwowo.Editor();
-            })
+    seajs.use(['jquery','hiwowo/diagram/edit'],function($){
+
+        if(HIWOWO.userId == ""){
+            $.hiwowo.loginDialog.isLogin();
+        }
+
+    })
 </script>
 
 }

@@ -14,7 +14,6 @@
  define(function(require){
      var $ = jQuery = require("jquery")
      require("simpleEditor")
-     require("unslider")
      var DiagramReply = {
          //评论与回复提交前校验
          submit : function($this){
@@ -211,18 +210,6 @@
 
     $(function(){
         diagramDiscuss.init()
-
-
-        var unslider = $('.banner').unslider({
-                fluid: true,
-                dots: true,
-                speed: 500
-            });
-        $('.unslider-arrow').click(function() {
-            var fn = this.className.split(' ')[1];
-            unslider.data('unslider')[fn]();
-        });
-
 
         /* ajax 加载 discuss*/
         $.ajax({

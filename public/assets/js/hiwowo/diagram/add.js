@@ -17,8 +17,7 @@ define(function(require){
 
     $(function() {
         $('.main-select a').click(function() {
-            $('.main-select a, .other-list a').removeClass('selected');
-            $('#J_otherBtn').removeClass('selected').addClass('other-btn').text('');
+            $('.main-select a').removeClass('selected');
             $(this).addClass('selected');
             $("#J_typeId").val($(this).data("typeid"))
         })

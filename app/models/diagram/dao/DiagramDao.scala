@@ -59,19 +59,26 @@ object DiagramDao {
    *
    * */
 
-  def addDiagramImage(uid:Long,diagramId:Long, url:String, intro: Option[String]):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def addDiagramPic(uid:Long,diagramId:Long, url:String, intro: Option[String]):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val imageAutoInc = diagramPics.map( c => (c.uid,c.diagramId,c.url,c.intro.?)) returning diagramPics.map(_.id) into {
       case (_, id) => id
     }
     imageAutoInc.insert(uid,diagramId,url,intro)
   }
 
-  def deleteDiagramImage(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def deleteDiagramPic(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for(c<-diagramPics if c.id === id) yield c ).delete
   }
+  def deleteDiagramPics(diagramId:Long) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c<-diagramPics if c.diagramId === diagramId) yield c ).delete
+  }
 
-  def modifyDiagramImageIntro(id:Long,intro:Option[String]) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def modifyDiagramPicIntro(id:Long,intro:Option[String]) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for(c<-diagramPics if c.id === id ) yield c.intro.? ).update(intro)
+  }
+
+  def findDiagramPics(diagramId:Long):List[DiagramPic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c<-diagramPics if c.diagramId === diagramId)yield c).list()
   }
 
   /*
@@ -91,15 +98,10 @@ object DiagramDao {
   def deleteDiagram(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for(c<-diagrams if c.id === id) yield c ).delete
   }
-  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.status) ).update(uid,title,pic,intro,content,status)
+  def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],content: Option[String],status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.content.?,c.status) ).update(uid,typeId,title,pic,intro,content,status)
   }
-  def modifyDiagram(id:Long,uid:Long,title: String,pic: String,intro: Option[String],content: Option[String],status:Int,typeId:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.title,c.pic,c.intro.?,c.content.?,c.status,c.typeId) ).update(uid,title,pic,intro,content,status,typeId)
-  }
-  def modifyDiagram(id:Long,uid:Long,typeId:Int,title: String,pic: String,intro: Option[String],status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    ( for(c<-diagrams if c.id === id) yield(c.uid,c.typeId,c.title,c.pic,c.intro.?,c.status) ).update(uid,typeId,title,pic,intro,status)
-  }
+
   def modifyDiagramLabels(id:Long,labels:String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for(c<-diagrams if c.id ===id)yield c.labels ).update(labels)
   }
