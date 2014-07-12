@@ -11,11 +11,9 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-
     <!-- SB Admin CSS - Include with every page -->
     <link href="/admin/assets/css/admin.css" rel="stylesheet">
+
     <!-- Core Scripts - Include with every page -->
     <script src="/admin/assets/js/jquery-1.10.2.js"></script>
     <script src="/admin/assets/js/bootstrap.min.js"></script>
@@ -40,99 +38,14 @@
 
 <div id="wrapper">
 
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" >
 <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
     <a class="navbar-brand" href="@controllers.admin.routes.Admin.index">Hiwowo管理后台</a>
 </div>
 <!-- /.navbar-header -->
 
-<ul class="nav navbar-top-links navbar-right">
 
 
-<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-    </a>
-    <ul class="dropdown-menu dropdown-alerts">
-        <li>
-            <a href="#">
-                <div>
-                    <i class="fa fa-comment fa-fw"></i> New Comment
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                </div>
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#">
-                <div>
-                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                    <span class="pull-right text-muted small">12 minutes ago</span>
-                </div>
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#">
-                <div>
-                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                </div>
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#">
-                <div>
-                    <i class="fa fa-tasks fa-fw"></i> New Task
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                </div>
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#">
-                <div>
-                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                    <span class="pull-right text-muted small">4 minutes ago</span>
-                </div>
-            </a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a class="text-center" href="#">
-                <strong>See All Alerts</strong>
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </li>
-    </ul>
-    <!-- /.dropdown-alerts -->
-</li>
-<!-- /.dropdown -->
-<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-    </a>
-    <ul class="dropdown-menu dropdown-user">
-        <li><a href="@controllers.users.routes.Users.home(user.id.get)"><i class="fa fa-user fa-fw"></i> @user.name</a>
-        </li>
-        <li><a href="@controllers.admin.routes.Users.edit(user.id.get)"><i class="fa fa-gear fa-fw"></i> 账号设置</a>
-        </li>
-        <li class="divider"></li>
-        <li><a href="@controllers.users.routes.UsersRegLogin.logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-        </li>
-    </ul>
-    <!-- /.dropdown-user -->
-</li>
-<!-- /.dropdown -->
-</ul>
-<!-- /.navbar-top-links -->
 
 </nav>
 <!-- /.navbar-static-top -->
@@ -143,7 +56,7 @@
 
 
             <li class='@if(nav=="home"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>控制中心<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>控制中心</a>
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Admin.index">后台首页</a></li>
 
@@ -152,7 +65,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li class='@if(nav=="label"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>标签管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>标签管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Labels.groups(1,50)"> 标签组管理 </a></li>
                     <li><a href="@controllers.admin.routes.Labels.core(1,100)">  核心标签管理 </a></li>
@@ -162,7 +75,7 @@
             </li>
 
             <li class='@if(nav=="diagram"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>图说管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>图说管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Diagrams.list(1,50)">  图说管理 </a></li>
                     <li><a href="@controllers.admin.routes.Diagrams.weixin(1,50)">微信精选管理 </a></li>
@@ -171,7 +84,7 @@
             </li>
 
             <li class='@if(nav=="forum"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>讨论吧管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>讨论吧管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Forums.topics(1)">话题管理</a></li>
                     <li><a href="@controllers.admin.routes.Forums.discusses(1)">评论管理</a></li>
@@ -180,7 +93,7 @@
             </li>
 
             <li class='@if(nav=="msg"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>站内信管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>站内信管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href='@controllers.admin.routes.Msgs.systemMsgs(1)'>系统站内信</a></li>
                     <li><a href='@controllers.admin.routes.Msgs.atMsgs(1)'>小纸条</a></li>
@@ -188,22 +101,22 @@
                 <!-- /.nav-second-level -->
             </li>
             <li class='@if(nav=="user"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>用户管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>用户管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Users.users(1)">用户管理</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
             <li class='@if(nav=="cms"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>CMS管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>CMS管理</a>
                 <ul class="nav nav-second-level">
-                    <li><a href='@controllers.admin.routes.Cmses.list(1,50)'>CMS链接</a></li>
+                    <li><a href='@controllers.admin.routes.Cmses.list(1,50)'>内容管理</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
             <li class='@if(nav=="advert"){active}'>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>广告管理<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>广告管理</a>
                 <ul class="nav nav-second-level">
                     <li><a href='@controllers.admin.routes.Adverts.edit(0)'>创建新广告</a></li>
                     <li><a href='@controllers.admin.routes.Adverts.list(1,50)'>广告管理</a></li>

@@ -38,6 +38,9 @@ object Utils {
   def timestampFormat3(time:Timestamp)={
     new java.text.SimpleDateFormat("yyyyMMdd").format(time)
   }
+  def yyyyMMddHHmmss(time:Timestamp)={
+    new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time)
+  }
    /* 截取字符串 */
   def subString(str:String,minLength:Int,maxLength:Int)={
      if(str.length>minLength) str.substring(0,maxLength)
@@ -82,7 +85,6 @@ object Utils {
 
   def getInterval(time:Timestamp) = {
     val interval = (System.currentTimeMillis() - time.getTime)/1000
-
     if( interval<60 ){
       interval +"秒之前"
     }else if(interval <3600){
@@ -94,4 +96,7 @@ object Utils {
     }
 
   }
+
+
+
 }

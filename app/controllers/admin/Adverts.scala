@@ -22,15 +22,15 @@ case class AdvertEditFormData(
                            pic: Option[String],
                            width: Int,
                            height: Int,
-                           startTime: Timestamp,
-                           endTime: Timestamp,
+                           startTime: String,
+                           endTime: String,
                            note: Option[String]
                            )
 object Adverts extends Controller {
 
   val advertEditForm = Form(
     mapping(
-      "id" -> longNumber,
+      "id" -> optional(longNumber),
       "code" -> nonEmptyText,
       "typeId" -> number,
       "title" -> nonEmptyText,
@@ -38,8 +38,8 @@ object Adverts extends Controller {
       "pic" ->optional(text),
       "width" ->number,
       "height" ->number,
-      "startTime" ->date,
-      "endTime" ->date,
+      "startTime" ->text,
+      "endTime" ->text,
       "note" -> optional(text)
     )(AdvertEditFormData.apply)(AdvertEditFormData.unapply)
   )
@@ -54,9 +54,9 @@ object Adverts extends Controller {
            Ok(views.html.admin.adverts.edit(user,advertEditForm,""))
        }else{
           val advert =AdvertDao.findAdvert(id)
-         Ok(views.html.admin.adverts.edit(user,advertEditForm.fill(AdvertEditFormData(advert.id,advert.code,advert.typeId,advert.title,advert.link,advert.pic,advert.width,advert.height,advert.startTime,advert.endTime,advert.note)),""))
+         Ok(views.html.admin.adverts.edit(user,advertEditForm.fill(AdvertEditFormData(advert.id,advert.code,advert.typeId,advert.title,advert.link,advert.pic,advert.width,advert.height,advert.startTime.toString,advert.endTime.toString,advert.note)),""))
        }
-    Ok("todo")
+
   }
 
   def save = Admin.AdminAction{user => implicit request =>
