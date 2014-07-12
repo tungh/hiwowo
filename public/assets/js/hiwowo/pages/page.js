@@ -31,14 +31,13 @@ define(function (require) {
         $(".pics-too-high-close").click(function(){
             $(this).hide()
             $(this).prev(".pics").addClass("pics-too-high")
-
         })
 
 
         $('.banner').unslider();
 
         $('#J_notices').vTicker({
-                speed: 500,        //滚动速度，单位毫秒。
+        speed: 500,        //滚动速度，单位毫秒。
         pause: 3000,       //暂停时间，就是滚动一条之后停留的时间，单位毫秒。
         showItems: 1,     //显示内容的条数。
         animation: 'fade', //动画效果，默认是fade，淡出。

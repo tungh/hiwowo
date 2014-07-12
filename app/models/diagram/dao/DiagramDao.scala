@@ -5,7 +5,6 @@ import play.api.libs.Codecs
 
 import play.api.db.slick.Config.driver.simple._
 import play.api.cache.Cache
-import play.api.Play.current
 import models.Page
 import models.user._
 import models.diagram._

@@ -186,6 +186,8 @@ GET   /admin/adverts/list           controllers.admin.Adverts.list(p:Int ?=1,siz
 GET   /admin/adverts/edit           controllers.admin.Adverts.edit(id:Long ?=0l)
 POST  /admin/adverts/save           controllers.admin.Adverts.save
 POST  /admin/adverts/delete         controllers.admin.Adverts.delete
+GET   /admin/adverts/filter           controllers.admin.Adverts.filter
+POST /admin/adverts/batch             controllers.admin.Adverts.batch
 
 #管理后台 站内信管理
 GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)

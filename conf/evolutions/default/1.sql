@@ -551,25 +551,28 @@ create table advert_position(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*广告
-* name  位置名称
+
+* code  编码，代表广告位置
+* type_id 类型：文字链接广告 图片链接广告
 * title 广告名称
+
 */
 DROP TABLE IF EXISTS `advert`;
 create table advert(
-  id              smallint (10) not null  auto_increment ,
-  position_code   varchar(32)  not null,
-  third_id          int,
-  name            varchar (64)  not null,
+  id              int (10) not null  auto_increment ,
+  code            varchar(32)  not null,
+  type_id         tinyint ,
   title           varchar(128),
-  content         text ,
+  link            varchar(128),
   pic             varchar(128),
-  spic           varchar(128),
   width           smallint(10) default '0',
   height          smallint(10) default '0',
-  link            varchar(128),
-  note              varchar(200) default 'note',
-  click_num       smallint(10) default '1',
-  add_time          timestamp default '2012-5-12 14:18:00',
+  start_time          timestamp default '2014-7-7 12:00:00',
+  end_time          timestamp default '2017-7-7 12:00:00',
+  sort_num           smallint default '1',
+  note              varchar(250) default 'note',
+  click_num       int(10) unsigned default '1',
+  add_time          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
