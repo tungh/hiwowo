@@ -25,7 +25,7 @@ seajs.config({
          'pin':'sea-modules/jquery.pin.min.js',
         'swfupload':'sea-modules/swfupload',
         'vticker':'sea-modules/jquery.vticker.min.js',
-
+        'headroom':'sea-modules/headroom.min.js',
         'bootstrap':'bootstrap/3.2.0/bootstrap.min',
         'webuploader':'webuploader/0.1.5/webuploader.min',
 

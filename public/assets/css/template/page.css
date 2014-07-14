@@ -27,7 +27,7 @@
     display: block;
     float: left;
     width: 33%;
-    min-height: 350px;
+    height: 350px;
     -o-background-size: 100% 100%;
     -ms-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
@@ -38,7 +38,7 @@
 }
 
 .banner .inner {
-    padding: 160px 0 110px;
+    padding: 100px 0 110px;
 }
 
 .banner h1, .banner h2 {
