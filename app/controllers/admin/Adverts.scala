@@ -5,7 +5,7 @@ import models.advert.dao.AdvertDao
 import java.sql.Timestamp
 import play.api.data.Form
 import play.api.data.Forms._
-import controllers.admin.DiagramEditFormData
+
 
 /**
  * Created with IntelliJ IDEA.

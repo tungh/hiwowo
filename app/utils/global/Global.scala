@@ -22,14 +22,6 @@ object Global extends GlobalSettings {
    val schedule = Play.maybeApplication.flatMap(_.configuration.getString("schedule")).getOrElse("off")
      if(schedule=="on"){
 
-       /* 邀请有奖，每天夜里3点-4点统计 发布的时候注意修改时间 */
-   //   val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
- //    Akka.system.scheduler.schedule(5 minutes, 8 hours, invitePrizeActor, "start")
-
-
-       /* 用户信息统计 每天夜里3点-4点统计 发布的时候注意修改时间，只修改24小时有变化的用户  这里可能不需要每天都操作*/
-         //  val userInfoActor = Akka.system.actorOf(Props[UserInfoStaticActor], name = "userInfoStaticActor")
-        //   Akka.system.scheduler.schedule(1 seconds, 30 seconds, userInfoActor, "start")
      }
 
   }
