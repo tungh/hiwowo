@@ -308,6 +308,21 @@
     overflow: hidden;
 }
 
+/* pets and weixin*/
+.pets{
+    margin-top: 30px;
+}
+.pets .alert{
+    height: 100px;
+    margin-bottom: 30px;
+}
+.pets .alert .notices-box{
+    height: 100px;
+    width: 990px;
+    float: left;
+    overflow: hidden;
+}
+
 
 /* i want post */
 .index .side .i-want-post {
