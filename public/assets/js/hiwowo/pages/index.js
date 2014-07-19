@@ -13,8 +13,8 @@
  */
 define(function (require) {
     var $ = jQuery = require("jquery");
+    require("vticker")
     require("unslider")
-  require("vticker")
     $(function(){
         $('.banner').unslider({
             dots:true

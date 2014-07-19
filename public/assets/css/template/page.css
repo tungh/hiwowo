@@ -9,7 +9,6 @@
 .banner {
     position: relative;
     width: 100%;
-    overflow: auto;
     font-size: 18px;
     line-height: 24px;
     text-align: center;
@@ -18,6 +17,8 @@
     background: #5b4d3d;
     box-shadow: 0 1px 2px rgba(0,0,0,.25);
     margin-bottom: 30px;
+    height: 350px;
+    overflow: hidden;
 }
 .banner ul {
     list-style: none;
@@ -44,43 +45,11 @@
 .banner h1, .banner h2 {
     font-size: 40px;
     line-height: 52px;
-
     color: #fff;
 }
 
-.banner .btn {
-    display: inline-block;
-    margin: 25px 0 0;
-    padding: 9px 22px 7px;
-    clear: both;
 
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
 
-    border: 2px solid rgba(255,255,255,.4);
-    border-radius: 5px;
-}
-.banner .btn:hover {
-    background: rgba(255,255,255,.05);
-}
-.banner .btn:active {
-    -webkit-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
-    -moz-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
-    -ms-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
-    -o-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
-    filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
-}
-
-.banner .btn, .banner .dot {
-    -webkit-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-    -moz-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-    -ms-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-    -o-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
-}
 
 .banner .dots {
     position: absolute;
@@ -128,6 +97,8 @@
     padding-left: 10px;
     cursor: pointer;
 }
+
+
 
 /*items 模块 */
 .items {

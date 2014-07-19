@@ -14,7 +14,9 @@
 define(function (require) {
     var $ = jQuery = require("jquery");
     require("unslider")
+
     $(function(){
+
         $('.banner').unslider({
             dots:true
         });

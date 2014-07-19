@@ -11,7 +11,8 @@ GET   /ui                                  controllers.Test.ui
 GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
-GET       /pets/$typeId<[0-9]+>                              controllers.Pages.pets(typeId:Int,p:Int ?=1,size:Int ?=10)
+GET       /owner/$p<[0-9]+>              controllers.Pages.pets(typeId:Int =0,p:Int,size:Int ?=10)
+GET       /pets/$p<[0-9]+>              controllers.Pages.pets(typeId:Int=1,p:Int,size:Int ?=10)
 
 
 
