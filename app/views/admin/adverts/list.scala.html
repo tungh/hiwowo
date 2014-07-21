@@ -1,4 +1,4 @@
-@(user:models.user.User,page:models.Page[models.advert.Advert])
+@(user:models.user.User,page:models.Page[models.advert.Advert],form:Form[controllers.admin.AdvertFilterFormData])
 @views.html.admin.template(user,"advert") {
 
 <div class="row">
@@ -16,18 +16,18 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Adverts.filter">
-                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>
 
                             <div class="form-group">
                                 <label  for="title">名称</label>
-                                <input class="form-control" type="text" id="title" name="title" placeholder="名称">
+                                <input class="form-control" type="text" id="title" name="title" value='@form("title").value' placeholder="名称">
                             </div>
                             <div class="form-group">
                                 <label  for="code">位置编码</label>
-                                <input class="form-control" type="text" id="code" name="code" placeholder="位置编码">
+                                <input class="form-control" type="text" id="code" name="code" value='@form("code").value' placeholder="位置编码">
                             </div>
                             <div class="form-group">
                                 <label >类型</label>
@@ -36,13 +36,14 @@
                                 </label>
                                 @for(cate<-models.advert.AdvertType.values){
                                 <label class="radio-inline">
-                                    <input type="radio"  name="typeId" value="@cate.id"> @cate
+                                    <input type="radio"  name="typeId" value="@cate.id" @if(form("typeId").value.getOrElse("none")== cate.id.toString){ checked="true" } > @cate
                                 </label>
                                 }
                             </div>
                             <div class="form-group">
                                 <div class="controls">
-                                  开始时间：<input type="datetime" name="startTime" value=""/> 结束时间：<input type="datetime" name="endTime" value=""/>
+                                  开始时间：<input type="datetime" name="startTime" value='@form("startTime").value' class="datetimepicker"/>
+                                    结束时间：<input type="datetime" name="endTime" value='@form("endTime").value' class="datetimepicker"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -78,9 +79,10 @@
                             <div class="form-group">
                                 <select id="J_select" class="form-control" name="action">
                                     <option value="-1">批量动作</option>
-                                    <option value="2">批量审核通过</option>
-                                    <option value="3">批量审核不通过</option>
-                                    <option value="4">批量删除</option>
+                                    <option value="0">批量下架</option>
+                                    <option value="1">批量上架</option>
+                                    <option value="3">批量删除</option>
+                                    <option value="4">批量修改排序</option>
                                 </select>
                                 <div class="form-group">
                                     <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
@@ -103,6 +105,7 @@
                             <th>名称</th>
                             <th>链接</th>
                             <th>图片</th>
+                            <th>状态</th>
                             <th>开始时间</th>
                             <th>结束时间</th>
                             <th>排序</th>
@@ -119,9 +122,10 @@
                         <td>@item.title</td>
                         <td>@item.link</td>
                         <td><img src="@item.pic" width="80" height="80"> </td>
+                        <td>@if(item.status == 0){<span class="label label-primary">下架</span>} @if(item.status == 1){<span class="label label-info">上架</span>}</td>
                         <td>@item.startTime</td>
                         <td>@item.endTime</td>
-                        <td>@item.sortNum</td>
+                        <td><input type="number" name="nums[@i]" value="@item.sortNum"></td>
                         <td>
                             <a href='#'><i class="icon-eye-open"></i>编辑</a>
 

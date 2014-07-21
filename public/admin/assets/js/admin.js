@@ -30,6 +30,20 @@ $(function() {
         $("#J_filterForm").submit()
     })
 
-});
+
+        $(".form_datetime").datetimepicker({
+            format: "yyyy-MM-dd HH:mm:ss",
+            autoclose: true,
+            todayBtn: true,
+            minuteStep: 10
+        });
+    $('.datetimepicker').datetimepicker({
+        lang:'ch',
+        format:'Y-m-d H:i'
+
+    });
+
+
+    });
 
 

@@ -25,8 +25,10 @@ case class Advert(
                    height:Int,
                    startTime:Timestamp,
                    endTime:Timestamp,
+                   intro:Option[String],
                    note:Option[String],
                    sortNum:Int,
+                   status:Int,
                    clickNum:Int,
                    addTime:Option[Timestamp]
                    )
@@ -41,11 +43,13 @@ class Adverts(tag: Tag) extends Table[Advert](tag,"advert") {
   def height = column[Int]("height")
   def startTime = column[Timestamp]("start_time")
   def endTime = column[Timestamp]("end_time")
+  def intro=column[String]("intro")
   def note=column[String]("note")
   def sortNum=column[Int]("sort_num")
+  def status=column[Int]("status")
   def clickNum=column[Int]("click_num")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = ( id.?,code,typeId,title,link,pic.?,width,height,startTime,endTime,note.?,clickNum,sortNum,addTime.? ) <> (Advert.tupled, Advert.unapply)
+  def * = ( id.?,code,typeId,title,link,pic.?,width,height,startTime,endTime,intro.?,note.?,sortNum,status,clickNum,addTime.? ) <> (Advert.tupled, Advert.unapply)
 }
 

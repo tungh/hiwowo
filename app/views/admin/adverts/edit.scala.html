@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"> 广告管理 》编辑广告</h1>
-        <div class="alert">@msg</div>
+        <div class="alert alert-info">@msg</div>
     </div>
 </div>
 
@@ -22,14 +22,14 @@
                                 <p class="error"></p>
                             </div>
                             <div class="form-group">
-                                <label>类型 </label>
-                                <label class="radio-inline">
-                                    <input type="radio"  name="typeId" value="0" @if(form("typeId").value.getOrElse("none")=="0"){ checked="true" }> 图片广告
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="typeId" value="1" @if(form("typeId").value.getOrElse("none")=="1"){ checked="true" }> 文字广告
-                                </label>
-                            </div>
+                            <label>类型 </label>
+                            <label class="radio-inline">
+                                <input type="radio"  name="typeId" value="0" @if(form("typeId").value.getOrElse("none")=="0"){ checked="true" }> 图片广告
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="typeId" value="1" @if(form("typeId").value.getOrElse("none")=="1"){ checked="true" }> 文字广告
+                            </label>
+                        </div>
                             <div class="form-group">
                                 <label  for="code">位置编码</label>
                                 <input class="form-control" type="text" id="code" name="code" value='@form("code").value' placeholder="位置编码">
@@ -44,14 +44,32 @@
                             </div>
                             <div class="form-group">
 
-                                开始时间： <input class="form-control" type="datetime"  name="startTime" value='@form("startTime").value'>
-                                结束时间： <input class="form-control" type="datetime"  name="endTime" value='@form("endTime").value'>
+                                开始时间：
+
+                                <input  type="text" name="startTime" value='@form("startTime").value' class="datetimepicker">
+
+
+
+                                结束时间：
+
+                                    <input type="text" name="endTime" value='@form("endTime").value' class="datetimepicker">
+
                             </div>
 
                             <div class="form-group">
                                 <label  for="width">图片</label>
+                                <input type="hidden" name="pic" id="pic" value='@form("pic").value'>
+                                <img id="picShow" src='@form("pic").value'>
+                                <input id="picUpload" class="picUpload" type="button" value="上传">
+                                <span class="error">上传图片时，需要保证与前台的尺寸一致</span>
                                 宽度：<input class="form-control" type="text" id="width" name="width" value='@form("width").value' placeholder="宽度">
                                 高度：<input class="form-control" type="text" id="height" name="height" value='@form("height").value' placeholder="高度">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note">简介</label>
+
+                                <textarea id="intro" class="form-control" name="note">@form("intro").value</textarea>
                             </div>
 
 
@@ -60,7 +78,15 @@
 
                                 <textarea id="note" class="form-control" name="note">@form("note").value</textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label>状态</label>
+                                <label class="radio-inline">
+                                    <input type="radio"  name="status" value="0" @if(form("status").value.getOrElse("none")=="0"){ checked="true" }> 下架
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="1" @if(form("status").value.getOrElse("none")=="1"){ checked="true" }> 上架
+                                </label>
+                            </div>
 
                             <div class="form-group">
 
@@ -85,7 +111,20 @@
 </div>
 
 
-
+    <script>
+        $("#picUpload").uploadify({
+            'fileObjName' : 'fileData',
+            'multi'    : false,
+            'swf'         : '/admin/assets/js/uploadify/uploadify.swf',
+            'uploader'    : '/advert/uploadPic',
+            'onUploadSuccess' : function(file, data, response) {
+                var obj = JSON && JSON.parse(data) || $.parseJSON(data)
+                var src =obj.src;
+                $("#picShow").attr("src",src)
+                $("#pic").val(src)
+            }
+        });
+    </script>
 
 
 

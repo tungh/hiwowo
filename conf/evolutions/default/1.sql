@@ -567,12 +567,14 @@ create table advert(
   pic             varchar(128),
   width           smallint(10) default '0',
   height          smallint(10) default '0',
-  start_time          timestamp default '2014-7-7 12:00:00',
-  end_time          timestamp default '2017-7-7 12:00:00',
   sort_num           smallint default '1',
+  intro              varchar(250) default 'note',
   note              varchar(250) default 'note',
   click_num       int(10) unsigned default '1',
   add_time          timestamp,
+  start_time          timestamp default '2014-7-7 12:00:00',
+  end_time          timestamp default '2017-7-7 12:00:00',
+  status           tinyint default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

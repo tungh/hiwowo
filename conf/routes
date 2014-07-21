@@ -93,6 +93,7 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 #常用的upload
 POST    /uploadDiagramPic                      controllers.Upload.uploadDiagramPic
 POST    /editor/uploadPic               controllers.Upload.uploadEditorPic
+POST    /advert/uploadPic               controllers.Upload.uploadAdvertPic
 POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST  /getVideo                           controllers.Upload.getVideo

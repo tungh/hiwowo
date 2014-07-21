@@ -69,6 +69,23 @@ object Upload extends Controller {
       Ok(Json.obj("code"->"500","message"->"亲，服务器欧巴桑了，请重试"))
     }
   }
+  /* 上传的广告图片 */
+  def uploadAdvertPic =Action(parse.multipartFormData)  {   request =>
+    request.body.file("fileData").map { picture =>
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("/opt/static/images/advert/"+filename),true)
+        val picSrc ="/images/advert/"+filename
+        Ok(Json.obj("code"->"100","src"->picSrc,"message"->"success","title"->"嗨喔喔"))
+
+      }else{
+        Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
+      }
+
+    }.getOrElse {
+      Ok(Json.obj("code"->"500","message"->"亲，服务器欧巴桑了，请重试"))
+    }
+  }
 
   /*上传 用户头像图片  */
   def uploadImageSelectPic = Action(parse.multipartFormData) {
