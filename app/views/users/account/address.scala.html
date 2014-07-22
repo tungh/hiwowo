@@ -11,6 +11,7 @@ user
                          <li> <a  href="@controllers.users.routes.UsersAccount.password">修改密码</a>  </li>
                          <li> <a class="on" href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
                          <li> <a  href="@controllers.users.routes.UsersAccount.myAward">我的奖品</a>  </li>
+                         <li> <a  href="@controllers.users.routes.UsersAccount.vip">VIP认证</a>  </li>
                      </ul>
                  </div>
                  <!--side nav end-->
@@ -65,6 +66,6 @@ user
         }{
 <script type="text/javascript">
     var address = '@addrForm("province").value|@addrForm("city").value';
-    seajs.use("hiwowo/user/userAccount");
+    seajs.use("hiwowo/user/userAddress");
 </script>
 }

@@ -35,6 +35,10 @@ case  class BaseFormData(
                           weixin:Option[String],
                           intro:Option[String]
                           )
+case class VipFormData(
+                        weixin:String,
+                        intro:String
+                        )
 
 object UsersAccount  extends Controller {
 
@@ -71,6 +75,12 @@ object UsersAccount  extends Controller {
     )(BaseFormData.apply)(BaseFormData.unapply)
   )
 
+  val vipForm =Form(
+    mapping(
+      "weixin"->nonEmptyText,
+      "intro" ->nonEmptyText
+    )(VipFormData.apply)(VipFormData.unapply)
+  )
 
 
 
@@ -165,8 +175,25 @@ object UsersAccount  extends Controller {
 
   /* vip 认证 */
   def vip = Users.UserAction{ user => implicit request =>
-    Ok(views.html.users.account.vip(user) )
+    if(user.isEmpty){
+      Redirect(controllers.users.routes.UsersRegLogin.login)
+    }else{
+      val profile =UserDao.findProfile(user.get.id.get)
+      Ok(views.html.users.account.vip(user,vipForm.fill(VipFormData(user.get.weixin.getOrElse(""),user.get.intro.getOrElse("")))) )
+    }
   }
 
+  def vipAuth  = Users.UserAction{ user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else  {
+      vipForm.bindFromRequest.fold(
+        formWithErrors => BadRequest(views.html.users.account.vip(user,formWithErrors)),
+        data =>{
+           UserDao.vipAuth(user.get.id.get,data.weixin,data.intro)
+          Ok(views.html.users.account.vip(user,vipForm.fill(data),"提交成功，我们将很快审核，非常感谢您") )
+        }
+      )
+    }
+  }
 
 }

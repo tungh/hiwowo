@@ -340,4 +340,8 @@ object UserDao {
     }yield u).drop(startRow).take(pageSize).list()
     Page[User](list,currentPage,totalPages)
   }
+
+  def vipAuth(uid:Long,weixin:String,intro:String)  = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    (for(c<-users if c.id === uid)yield (c.weixin,c.intro,c.status) ).update((weixin,intro,2))
+  }
 }

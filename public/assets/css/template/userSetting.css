@@ -70,7 +70,7 @@
 
 .set-info {
     float: left;
-    width: 430px
+    width: 450px
 }
 
 .set-pic {
@@ -261,33 +261,19 @@
 }
 
 
-/*我的集分宝*/
-.credits,.shiDou,.orders{
-    margin-left: 20px;
+.vip{
+    padding-left: 40px
 }
-.credits .credits_info, .shiDou .shiDou_info,.orders .orders_info, {
-    background: #fdf6ea;
-    padding: 0 0 0 20px;
-    display: block;
+.vip .alert {
+    background-color: #f9f9ef;
+    padding: 20px;
     margin-bottom: 20px;
-    height: 32px;
-    line-height: 32px;
-    color: #333
 }
 
-.credits .credits_info span,.shiDou .shiDou_info span,.orders .credits_info span {
-    font-size: 14px;
-    padding: 0 5px;
-    color: #f32a6b;
-    font-weight: 700;
+.vip .alert p {
+    line-height: 30px;
+    text-align: center
 }
-/* orders */
-  .orders .title{
-      float: left;
-      padding: 15px 10px 5px 0;
-      height: 20px;
-      line-height: 20px;
-  }
 
 /*help*/
 .help {

@@ -69,8 +69,8 @@
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "index")) '><a href="/" title="首页">首页</a></li>
-                <li class=' @("on".when(subNav == "0")) '><a href="/owner/1" title="主人">主人</a></li>
-                <li class=' @("on".when(subNav == "1")) '><a href="/pets/1" title="萌宠">萌宠</a></li>
+                <li class=' @("on".when(subNav == "owners")) '><a href="@controllers.routes.Pages.owners(1,10)" title="主人">主人</a></li>
+                <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets(1,10)" title="萌宠">萌宠</a></li>
                 <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin(1,10)" title="微信精选">微信精选</a></li>
             </ul>
 

@@ -43,6 +43,16 @@ object AdvertDao {
     (for(c<-adverts if c.id === id) yield sortNum ).update(sortNum)
   }
 
+ def findAdverts(code:String,size:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+   val now = new Timestamp( System.currentTimeMillis())
+   (for{
+     c<- adverts.sortBy(c =>(c.sortNum,c.addTime desc))
+     if c.code === code
+     if c.startTime < now
+     if c.endTime > now
+   } yield c).take(size).list()
+ }
+
   def findAdverts(currentPage:Int,pageSize:Int):Page[Advert]  = play.api.db.slick.DB.withSession{ implicit session:Session =>
   val totalRows = Query(adverts.length).first
   val totalPages = (totalRows + pageSize - 1) / pageSize
@@ -53,7 +63,6 @@ object AdvertDao {
 
   def filterAdverts(code:Option[String],typeId:Option[Int],title:Option[String],startTime:Option[Date],endTime:Option[Date],currentPage:Int,pageSize:Int)  = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for( c<- adverts ) yield c
-    val now = System.currentTimeMillis()
     if(!code.isEmpty) query = query.filter(_.code like "%"+code.get+"%")
     if(!typeId.isEmpty) query = query.filter(_.typeId === typeId.get)
     if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")

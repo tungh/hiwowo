@@ -6,6 +6,7 @@ import models.forum.dao.TopicDao
 import models.diagram.dao.DiagramDao
 import models.weixin.dao.WeixinDiagramDao
 import models.label.dao.LabelDao
+import models.advert.dao.AdvertDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,9 +20,9 @@ object Pages extends Controller {
 
   /* 首页 */
   def index(currentPage:Int,pageSize:Int)  = Users.UserAction{ user => implicit request =>
-    /* 在首页显示精华的帖子 */
+    val notices = AdvertDao.findAdverts("index-notices",3)
     val pages = DiagramDao.findDiagrams("new",2,currentPage,pageSize)
-    Ok(views.html.pages.index(user,pages))
+    Ok(views.html.pages.index(user,pages,notices))
   }
 
 
@@ -31,12 +32,17 @@ object Pages extends Controller {
      Ok(views.html.pages.weixin(user,pages))
    }
 
+  def owners(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+    val adverts = AdvertDao.findAdverts("owners-banner",5)
+    val pages = DiagramDao.findDiagrams("new",0,2,currentPage,pageSize)
+    Ok(views.html.pages.owners(user,pages,adverts))
+  }
 
-
-  /* 宠物乐园 */
-  def pets(typeId:Int,currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
-    val pages = DiagramDao.findDiagrams("new",typeId,2,currentPage,pageSize)
-    Ok(views.html.pages.pets(user,pages,typeId))
+  /* 宠物 */
+  def pets(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+    val adverts = AdvertDao.findAdverts("owners-banner",5)
+    val pages = DiagramDao.findDiagrams("new",1,2,currentPage,pageSize)
+    Ok(views.html.pages.pets(user,pages,adverts))
   }
 
 

@@ -11,8 +11,8 @@ GET   /ui                                  controllers.Test.ui
 GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
-GET       /owner/$p<[0-9]+>              controllers.Pages.pets(typeId:Int =0,p:Int,size:Int ?=10)
-GET       /pets/$p<[0-9]+>              controllers.Pages.pets(typeId:Int=1,p:Int,size:Int ?=10)
+GET       /owners/$p<[0-9]+>              controllers.Pages.owners(p:Int,size:Int ?=10)
+GET       /pets/$p<[0-9]+>              controllers.Pages.pets(p:Int,size:Int ?=10)
 
 
 
@@ -60,6 +60,7 @@ GET   /user/account/address           controllers.users.UsersAccount.address
 POST  /user/account/saveAddr          controllers.users.UsersAccount.saveAddress
 GET   /user/account/myAward           controllers.users.UsersAccount.myAward
 GET   /user/account/vip               controllers.users.UsersAccount.vip
+POST   /user/account/vipAuth               controllers.users.UsersAccount.vipAuth
 
 # user 操作
 POST    /user/addCollect                 controllers.users.Users.addCollect

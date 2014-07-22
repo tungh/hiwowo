@@ -2,7 +2,6 @@
  set character_set_results=utf8;
  set character_set_connection=utf8;
 
- insert into topic(uid,title,content,pics,intro,check_state) value(1,"意见反馈","todo"," ","todo",1);
 
  /* 初始化标签组 */
  insert into `group`(id,name,intro,status) value(1,"萌","关于萌的关键词集合，比如萌宠，萌主 萌等",1);
@@ -21,6 +20,13 @@
  insert into label(id,name,level,intro,is_hot,spell,check_state) value(6,"汪星人",3,"汪星人大集合",1,"w",1);
  insert into label(id,name,level,intro,is_hot,spell,check_state) value(7,"吱星人",3,"吱星人大集合",1,"z",1);
  insert into label(id,name,level,intro,is_hot,spell,check_state) value(8,"鸟星人",3,"鸟星人大集合",1,"n",1);
+
+
+ insert into topic(uid,title,content,pics,intro,check_state) value(1,"意见反馈","todo"," ","todo",1);
+
+ insert into topic(uid,title,content,pics,intro,check_state) value(1,"Hello，嗨喔喔","todo"," ","todo",1);
+ insert into topic(uid,title,content,pics,intro,check_state) value(1,"每天都是快乐的开始","todo"," ","todo",1);
+ insert into topic(uid,title,content,pics,intro,check_state) value(1,"招募宠物主人","todo"," ","todo",1);
 
 
 

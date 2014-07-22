@@ -140,7 +140,12 @@ define(function(require, exports) {
 	vali.fn("input[name=phone]", "请填写11位手机号码，方便我们及时提醒您集分宝到账成功", "info");
     vali.fn("input[name=weixin]", "请填写微信号，方便彼此联系哦", "info");
 
-
+    vali.fn("J_vipWeixin", "请填写微信号", "require", function(el, v) {
+        return $.hiwowo.util.isEmpty(v);
+    });
+    vali.fn("J_vipIntro", "请介绍一下自己哦", "require", function(el, v) {
+        return $.hiwowo.util.isEmpty(v);
+    });
 
 
 	
