@@ -12,7 +12,7 @@
  *
  */
 define(function(require){
-    var $ = jQuery = require("jquery")
+    require("hiwowo")
     $(function() {
 
         $('.main-select a').click(function() {

@@ -12,7 +12,7 @@
  *
  */
 define(function (require, exports) {
-    var $ = jQuery = require("jquery");
+    require("hiwowo")
     var SWFUpload = require("swfupload")
 
 //(function ($) {

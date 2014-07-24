@@ -12,7 +12,7 @@
  *
  */
  define(function(require){
-     var $ = jQuery = require("jquery")
+     require("hiwowo")
      require("simpleEditor")
      var DiagramReply = {
          //评论与回复提交前校验

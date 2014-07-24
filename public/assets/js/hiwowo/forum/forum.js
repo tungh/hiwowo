@@ -13,7 +13,7 @@
  */
 
 define(function(require, exports) {
-    var $ = jQuery = require("jquery");
+    require("hiwowo")
     require("simpleEditor")
     isCommited = false;
     //讨论组组件

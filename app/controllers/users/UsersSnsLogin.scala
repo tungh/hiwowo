@@ -34,11 +34,12 @@ object UsersSnsLogin extends Controller {
   /*
   * 第三方登录 目前只开发qq weibo taobao
   * */
-  def snsLogin(snsType:String,backType:String,id:Long)=Action{ implicit  request=>
+  def snsLogin(snsType:String)=Action{ implicit  request=>
+    val backUrl = request.headers.get("REFERER").getOrElse("/")
     if(snsType=="qzone"){
-      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101050057&state=qq&redirect_uri=http://hiwowo.com/user/qzone/registed/"+backType+"/"+id)
+      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101050057&state=qq&redirect_uri=http://hiwowo.com/user/qzone/registed?backUrl="+backUrl)
     }else if (snsType=="sina"){
-      Redirect("https://api.weibo.com/oauth2/authorize?client_id=464981938&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed/"+backType+"/"+id)
+      Redirect("https://api.weibo.com/oauth2/authorize?client_id=464981938&response_type=code&redirect_uri=http://hiwowo.com/user/sina/registed?backUrl="+backUrl)
     }
     else{
       Ok("亲，我们只支持qq帐号登录和新浪微博登陆哦…… ")
@@ -46,7 +47,7 @@ object UsersSnsLogin extends Controller {
 
   }
   /* i  inviteId */
-  def  registed(snsType:String,code:String,backType:String,i:Long): Action[AnyContent] =Action{   implicit request =>
+  def  registed(snsType:String,code:String,backUrl:String): Action[AnyContent] =Action{   implicit request =>
 
       /*
       * qzone 登录 第一步获取token 第二步 获取用户的openId  第三步 获取用户信息  第四步 处理用户信息
@@ -86,18 +87,13 @@ object UsersSnsLogin extends Controller {
        val user =UserDao.checkSnsUser(1,openId)
        var uid:Long = 0
        if (user.isEmpty){
-        uid = UserDao.addSnsUser(nickName,1,openId,pic,i)
+        uid = UserDao.addSnsUser(nickName,1,openId,pic,1)
        }else {
          uid = user.get.id.get
        }
         /* 处理result */
-       if (backType=="asyn"){
-      //   Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
-        Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
-       }else{
-      //  Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
-         Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
-       }
+
+         Redirect(backUrl).withSession("user" -> uid.toString)
      }
      /* 新浪微博登陆 */
      else if(snsType=="sina"){
@@ -135,17 +131,12 @@ object UsersSnsLogin extends Controller {
         val user =UserDao.checkSnsUser(2,openId)
        var uid:Long = 0
        if (user.isEmpty){
-       uid =  UserDao.addSnsUser(nickName,2,openId,pic,i)
+       uid =  UserDao.addSnsUser(nickName,2,openId,pic,1)
        }else {
          uid = user.get.id.get
        }
-       /* 处理result */
-       if (backType=="asyn"){
-         Ok(views.html.users.snsLogin.asynLogin("sina")).withSession("user" -> uid.toString)
-       }else{
-       //  Ok(views.html.users.snsLogin.synLogin("sina")).withSession("user" -> uid.toString)
-         Redirect(controllers.users.routes.Users.welcome(uid)).withSession("user" -> uid.toString)
-       }
+
+         Redirect(backUrl).withSession("user" -> uid.toString)
 
      } else{
        Ok("可能获取token出错了")

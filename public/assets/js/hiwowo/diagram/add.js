@@ -12,7 +12,7 @@
  *
  */
 define(function(require){
-    var $ = jQuery = require("jquery")
+    require("hiwowo")
     var WebUploader = require("webuploader")
 
     $(function() {

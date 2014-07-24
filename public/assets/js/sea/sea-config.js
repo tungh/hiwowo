@@ -22,7 +22,6 @@ seajs.config({
          'imgAreaSelect':'sea-modules/jquery.imgAreaSelect',
          'detector':'sea-modules/detector',
          'unslider':'sea-modules/jquery.unslider.min.js',
-         'pin':'sea-modules/jquery.pin.min.js',
         'swfupload':'sea-modules/swfupload',
         'vticker':'sea-modules/jquery.vticker.min.js',
         'headroom':'sea-modules/headroom.min.js',
@@ -36,7 +35,7 @@ seajs.config({
 
     // 预加载项
     preload: [
-        this.JSON ? '' : 'json','hiwowo'
+        this.JSON ? '' : 'json'
     ],
     // 调试模式
     debug: false,

@@ -12,7 +12,7 @@
  *
  */
 define(function(require, exports){
-    var $  = require("jquery");
+    require("hiwowo")
     require("hiwowo/common/validator")($);
     jQuery(function() {
         $("#J_ModifyPwd").validator();

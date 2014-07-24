@@ -14,7 +14,7 @@
 
 
 define(function(require, exports) {
-    var $ = jQuery = require("jquery");
+    require("hiwowo")
 //(function($) { 
 	$.hiwowo.validator = {
 		conf: {

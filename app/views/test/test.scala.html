@@ -1,0 +1,19 @@
+@(user:Option[models.user.User])
+@views.html.template(user,nav="index",subNav="index")(css="/assets/css/template/page.css"){
+      <div id="outer">
+          <p id="inner" >dddddddd</p>
+      </div>
+}{
+<script type="text/javascript">
+    seajs.use(["jquery"],function($){
+        $("#inner").click(function(e){
+            alert("hello inner")
+            e.stopPropagation()
+        })
+
+        $("#outer").click(function(){
+            alert("hello outer")
+        })
+    })
+</script>
+}

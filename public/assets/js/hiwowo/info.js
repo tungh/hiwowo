@@ -12,7 +12,7 @@
  *
  */
 define(function(require, exports) {
-    var $ = require("jquery");
+    require("hiwowo")
 
     $("#J_help").find("dt").click(function(){
         $(this).next("dd").toggle()

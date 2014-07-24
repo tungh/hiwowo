@@ -13,7 +13,7 @@
  */
 
  define(function(require, exports) {
- 	var $  = require("jquery");
+     require("hiwowo")
  
 //(function($){
 	//表情配对表

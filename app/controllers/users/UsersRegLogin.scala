@@ -93,8 +93,12 @@ object UsersRegLogin extends Controller {
 
   /*用户注册页面 */
   def regist(inviteId:Long) =Users.UserAction{   user => implicit request =>
-     if(user.isEmpty) Ok(views.html.users.regLogin.regist(regForm,inviteId))
-     else Redirect(controllers.users.routes.Users.home(user.get.id.get))
+     if(user.isEmpty) {
+       Ok(views.html.users.regLogin.regist(regForm,inviteId))
+     }
+     else {
+       Redirect(controllers.users.routes.Users.home(user.get.id.get))
+     }
   }
   /*用户注册 信息*/
   def doRegist = Action{  implicit request =>

@@ -12,10 +12,9 @@
  *
  */
 define(function(require) {
-	var $ = jQuery = require("jquery");
+    require("hiwowo")
     require("hiwowo/common/validator")($);
     require("imgAreaSelect");
-    require("bootstrap")
 	var DateSelector = require("hiwowo/common/dateSelect");
     var Detector = require("detector")
 $.hiwowo.photoarea = null;

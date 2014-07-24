@@ -25,35 +25,16 @@ define(function(require, exports) {
     /* 基础库*/
     $.extend($.hiwowo, {
         util: {
-            //获取url参数名
-            getUrlParam : function(paramName){
-                var reg = new RegExp("(^|\\?|&)"+ paramName +"=([^&]*)(\\s|&|$)", "i");
-                if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " ")); return "";
-            },
-            getUrlParam : function(url,paramName){
-                var reg = new RegExp("(^|\\?|&)"+ paramName +"=([^&]*)(\\s|&|$)", "i");
-                if (reg.test(url)) return unescape(RegExp.$2.replace(/\+/g, " ")); return "";
-            },
             //判断是否ie6
             isIE6: function() {
                 return navigator.userAgent.indexOf("MSIE 6.0") !== -1
             },
-            //判断是否是苹果手持设备
-            isIOS: function(){
-                return /\((iPhone|iPad|iPod)/i.test(navigator.userAgent)
-            },
+
             //去掉首尾空字符
             trim: function(str) {
                 return str.replace(/(^\s*)|(\s*$)/g,"");
             },
-            //去掉首空字符
-            lTrim: function(str){
-                return str.replace(/(^\s*)/g, "");
-            },
-            //去掉尾空字符
-            rTrim: function(str){
-                return str.replace(/(\s*$)/g, "");
-            },
+
             //获取字符串中文长度
             getStrLength: function(str) {
                 str = $.hiwowo.util.trim(str);
@@ -62,14 +43,7 @@ define(function(require, exports) {
                 theLen = parseInt(strLen/2)==strLen/2 ? strLen/2 : parseInt(strLen/2)+0.5;
                 return theLen;
             },
-            //截取一定长度的中英文字符串并转全角
-            substring4ChAndEn: function(str,maxLength){
-                var strTmp = str.substring(0,maxLength*2);
-                while($.hiwowo.util.getStrLength(strTmp)>maxLength){
-                    strTmp = strTmp.substring(0,strTmp.length-1);
-                }
-                return strTmp;
-            },
+
             //将<>"'&符号转换成全角
             htmlToTxt: function(str){
                 var RexStr = /\<|\>|\"|\'|\&/g;
@@ -163,47 +137,6 @@ define(function(require, exports) {
                 };
                 return position;
             },
-            //获取根域名
-            getDomain: function(url){
-                var domain = "null";
-                var regex = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
-                var match = regex.exec(url);
-                if (typeof match != "undefined" && null != match) {
-                    domain = match[0];
-                }
-                return domain;
-            },
-           /* 开小窗口 */
-            openWin: function(url){
-                var top=190;
-                var whichsns = url.substr(url.lastIndexOf("snsType=")+8,1);
-                if(whichsns==4 || whichsns==5){
-                    var left=document.body.clientWidth>820 ? (document.body.clientWidth-820)/2 : 0;
-                    window.open(url, 'connect_window', 'height=700, width=820, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top='+top+',left='+left+', location=no, status=no');
-                }else if(whichsns==8){
-                    var left=(document.body.clientWidth-580)/2;
-                    window.open(url, 'connect_window', 'height=620, width=580, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top='+top+',left='+left+', location=no, status=no');
-                }else if(whichsns==9){
-                    var left=document.body.clientWidth>900 ? (document.body.clientWidth-900)/2 : 0;
-                    window.open(url, 'connect_window', 'height=550, width=900, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top='+top+',left='+left+', location=no, status=no');
-                }else{
-                    var left=(document.body.clientWidth-580)/2;
-                    window.open(url, 'connect_window', 'height=420, width=580, toolbar=no, menubar=no, scrollbars=yes, resizable=no,top='+top+',left='+left+', location=no, status=no');
-                }
-
-            },
-            moveEnd : function(obj){
-                obj.focus();
-                var len = obj.value.length;
-                if (document.selection) {
-                    var sel = obj.createTextRange();
-                    sel.moveStart('character',len);
-                    sel.collapse();
-                    sel.select();
-                } else if (typeof obj.selectionStart == 'number' && typeof obj.selectionEnd == 'number') {
-                    obj.selectionStart = obj.selectionEnd = len;
-                }
-            },
             submitByEnter : function(e, clk) {
                 e = e || window.event;
                 var key = e ? (e.charCode || e.keyCode) : 0;
@@ -256,31 +189,6 @@ define(function(require, exports) {
             };
             $(window).bind("scroll", backToTopFun);
         },
-        //等比例缩放图片
-        resizeImage: function(width,height){
-            this.each(function(){
-                var obj = $(this)[0];
-                var w = obj.width;
-                var h = obj.height;
-                if (w <= width && h <= height) {
-                    return;
-                } else if (w <= width && h > height) {
-                    obj.width = w * height / h;
-                    obj.height = height;
-                } else if (w > width && h <= height) {
-                    obj.width = width;
-                    obj.height = h * width / w;
-                } else {
-                    obj.width = width;
-                    obj.height = h * width / w;
-                    var temp=h * width / w;
-                    if(temp>height) {
-                        obj.width = w * height / h;
-                        obj.height = height;
-                    }
-                }
-            });
-        },
         dropDown: function(options){
             var settings = {
                 event: "mouseover",
@@ -327,7 +235,6 @@ define(function(require, exports) {
             });
         }
 
-
     });
 
     /* 对话框：用户登陆 和 判断是否为新用户 */
@@ -372,8 +279,8 @@ define(function(require, exports) {
                 html += '<div class="bd-r">';
                 html += '<p class="mb15">你也可以使用这些帐号登录</p>';
                 html += '<div class="site-openid clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0"><i></i><p>QQ</p></a></li>';
-                html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina&backType=asyn&i=0"><i></i><p>新浪微博</p></a></li>';
+                html += '<li class="qq mr15"><a id="qq_auth" href="/user/snsLogin?snsType=qzone"><i></i><p>QQ</p></a></li>';
+                html += ' <li class="weibo"><a id="weibo_auth" href="/user/snsLogin?snsType=sina"><i></i><p>新浪微博</p></a></li>';
                 html += '</ul>';
                 html += '</div>';
                 html += '</div>';
@@ -420,12 +327,6 @@ define(function(require, exports) {
                 return false;
             });
 
-            $(".site-openid a").unbind("click").click(function(){
-                var snsurl = $(this).attr("href");
-                $.hiwowo.util.openWin(snsurl);
-                return false;
-            });
-
         }
 
     }
@@ -461,100 +362,12 @@ define(function(require, exports) {
 
 
 
-    ///同步授权登录后关注弹出层
-    window.followHiwowo = function(code,msg,site,flag,refresh){
-        if(code==444){
-            alert(msg);
-            return false;
-        }
-        if((site!="sina" && site!="qzone" ) || flag=="true" ){
-            if(refresh){
-                window.location.reload();
-            }
-            return false;
-        }
-        var bdClass = "",
-            frameHtml = "";
-        if(site=="sina"){
-            bdClass = "sinaBd";
-            frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
-        }else if(site=="qzone"){
-            bdClass = "qzoneBd";
-            frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
-        }
-
-        if(!$("#followDialog")[0]){
-            var html = '<div id="J_followDialog" class="modal fade">';
-            html +=	'<div class="dialog-content">';
-            html +=	'<div class="hd"><h3></h3></div>';
-            html +=	'<div class="bd clearfix '+bdClass+'">';
-            html +=	'<div class="btnFrame">';
-            html +=	frameHtml;
-            html +=	'</div>';
-            html +=	'</div>';
-            html +=	'<i></i>';
-            html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
-            html +=	'<a class="close" href="javascript:;"></a>';
-            html +=	'</div>';
-            html +=	'</div>';
-            $("body").append(html);
-            $("#J_followDialog").modal('show')
-        }else{
-            $("#J_followDialog").modal('show');
-        }
-        $(document).on("click","#J_followDialog",function(){
-            if($("input[name=noMore]")[0].checked){
-                Cookie.set("noMoreTip","n");
-            }
-            if(refresh){
-                window.location.reload();
-            }
-        })
-
-    }
-
-    /*异步授权登陆后*/
-    window.refresh=function(){
-        window.location.reload();
-    }
-
 
     /* 初始化加载中的内容*/
     /* 初始化加载中的内容*/
     $(function(){
 
-        //标签输入框自动转换“,”
-        $(document).on("keyup","input[rel=tagsInput]",function(){
-            //限制每个标签的中文长度
-            var MaxSingleTagLength = 14,
-                MaxAllTagsLength = 64,
-                thisVal = $(this).val();
-            if($.hiwowo.util.getStrLength($.hiwowo.util.htmlToTxt(thisVal))<=MaxAllTagsLength){
-                var $this = $(this);
-                thisVal = thisVal.replace(/\uff0c|\s+/g,",");
-                while(thisVal.indexOf(',,')>=0){
-                    thisVal = thisVal.replace(',,',',');
-                }
-                var thisValueArr = thisVal.split(","),
-                    thisValueArrIndex = 0,
-                    istoolong = false;
-                for(;thisValueArrIndex<thisValueArr.length;thisValueArrIndex++){
-                    var val = thisValueArr[thisValueArrIndex]
-                    if($.hiwowo.util.htmlToTxt(val).length>MaxSingleTagLength){
-                        istoolong = true;
-                        thisValueArr[thisValueArrIndex] = $.hiwowo.util.substring4ChAndEn(val,MaxSingleTagLength);
-                    }
-                }
-                if(istoolong){
-                    thisVal = thisValueArr.join(",");
-                }
-                if(thisVal != this.value){
-                    this.value = thisVal;
-                }
-            }else{
-                this.value = $.hiwowo.util.substring4ChAndEn(thisVal,64);
-            }
-        })
+
 
         /* 搜索框效果 header 搜索框*/
         $(".header-search-button").bind("click",function(){
@@ -624,15 +437,6 @@ define(function(require, exports) {
                 $.hiwowo.loginDialog.login();
             });
         }
-
-        /* 用户喜欢操作 */
-        $('.like-common .like').hover(function(){
-            $(this).parent().children('.like-num').find('.J_scrollUp').animate({ top:"-24" }, 600)
-        },function(){
-            $(this).parent().children('.like-num').find('.J_scrollUp').animate({  top:"0" },  600)
-
-        })
-
 
 
         /* qzone 分享*/

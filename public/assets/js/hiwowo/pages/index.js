@@ -12,7 +12,8 @@
  *
  */
 define(function (require) {
-    var $ = jQuery = require("jquery");
+  //  var $ = jQuery = require("jquery");
+    require("hiwowo")
     require("vticker")
     require("unslider")
     $(function(){

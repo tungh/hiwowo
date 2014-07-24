@@ -12,7 +12,7 @@
  *
  */
 define(function(require, exports){
-    var $  = require("jquery");
+    require("hiwowo")
     /* diagram favor */
     $.hiwowo.userDiagram={
         /* thumbs Up */
