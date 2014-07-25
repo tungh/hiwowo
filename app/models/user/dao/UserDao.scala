@@ -10,7 +10,7 @@ import models.user._
 import play.api.db.slick.Config.driver.simple._
 import models.diagram.{Diagrams, Diagram}
 import models.label.{LabelDiagrams, Label, Labels}
-
+import java.util.Date
 /*
 *
 * Dao 访问数据，可能来自数据库 也可能来自缓存
@@ -61,22 +61,6 @@ object UserDao {
   }
 
 
-  /* count user */
-  def countUser = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(users.length).first
-  }
-
-  def countUser(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(users.filter(_.modifyTime > time).length).first
-  }
-
-  def countUser(days: Int): Int = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val now = new Timestamp(System.currentTimeMillis())
-    val before = new Timestamp(now.getTime - 1000 * 60 * 60 * 24 * days)
-
-    Query(users.filter(_.modifyTime between(before, now)).length).first
-
-  }
 
   /* 检查第三方用户是否存在 */
   /*查找sns 帐号的用户*/
@@ -90,24 +74,24 @@ object UserDao {
 
   /* 第三方用户初次登陆 */
   def addSnsUser(name: String, comeFrom: Int, openId: String, pic: String, inviteId: Long):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val usersAutoInc = users.map(u => (u.name, u.comeFrom, u.openId, u.pic)) returning users.map(_.id) into {
+    val usersAutoInc = users.map(u => (u.name, u.comeFrom, u.openId, u.pic,u.registTime)) returning users.map(_.id) into {
       case (_, id) => id
     }
-    val id = usersAutoInc.insert(name, comeFrom, openId, pic)
+    val id = usersAutoInc.insert(name, comeFrom, openId, pic,new Timestamp(System.currentTimeMillis()))
     userStatics.map(u => u.uid).insert(id)
-    userProfiles.map(u => (u.uid, u.inviteId, u.loginTime, u.registTime, u.loginIP)).insert(id, inviteId, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), "sns")
+    userProfiles.map(u => (u.uid, u.inviteId, u.loginTime,u.loginIP)).insert(id, inviteId, new Timestamp(System.currentTimeMillis()), "sns")
     id
   }
 
   /*用户通过网站注册 * */
   def addHiwowoUser(name: String, password: String, email: String, inviteId: Long, ip: String) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val usersAutoInc = users.map(u => (u.name, u.password, u.email)) returning users.map(_.id) into {
+    val usersAutoInc = users.map(u => (u.name, u.password, u.email,u.registTime)) returning users.map(_.id) into {
       case (_, id) => id
     }
-    val id = usersAutoInc.insert(name, Codecs.sha1("hiwowo" + password), email)
+    val id = usersAutoInc.insert(name, Codecs.sha1("hiwowo" + password), email,new Timestamp(System.currentTimeMillis()))
 
     userStatics.map(u => u.uid).insert(id)
-    userProfiles.map(u => (u.uid, u.inviteId, u.loginTime, u.registTime, u.loginIP)).insert(id, inviteId, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), ip)
+    userProfiles.map(u => (u.uid, u.inviteId, u.loginTime, u.loginIP)).insert(id, inviteId, new Timestamp(System.currentTimeMillis()), ip)
     id
   }
 
@@ -198,14 +182,14 @@ object UserDao {
     }yield(u,p,s) ).first
   }
   /*用户筛选*/
-  def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], creditsOrder: String, addTimeOrder: String, currentPage: Int, pageSize: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def filterUsers(name: Option[String], status: Option[Int],title: Option[String], comeFrom: Option[Int], startTime:Option[Date],endTime:Option[Date], currentPage: Int, pageSize: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query = for (u <- users) yield u
     if (!name.isEmpty) query = query.filter(_.name like "%" + name.get + "%")
     if (!status.isEmpty) query = query.filter(_.status === status.get)
     if (!title.isEmpty) query = query.filter(_.title like "%" + title.get + "%")
     if (!comeFrom.isEmpty) query = query.filter(_.comeFrom === comeFrom.get)
-    if (addTimeOrder == "desc") query = query.sortBy(_.id desc) else query = query.sortBy(_.id asc)
-    if (creditsOrder == "desc") query = query.sortBy(_.credits desc) else query = query.sortBy(_.credits asc)
+    if(!startTime.isEmpty) query = query.filter(_.registTime > new Timestamp(startTime.get.getTime))
+    if(!endTime.isEmpty) query = query.filter(_.registTime < new Timestamp(endTime.get.getTime))
     //println("sql " +query.selectStatement)
     val totalRows = query.list().length
     val totalPages = (totalRows + pageSize - 1) / pageSize

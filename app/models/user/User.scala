@@ -26,12 +26,13 @@ case class User(
                  title:Option[String],
                  intro: Option[String],
                  status:Int,
-                 province:Option[String],
                  weixin:Option[String],
-                 qrcode:Option[String],
                  labels:Option[String],
                  isAdmin:Int,
-                 modifyTime:Option[Timestamp]
+                 accessToken:Option[String],
+                 expiresIn:Option[Int],
+                 oauthTime:Option[Timestamp],
+                 registTime:Option[Timestamp]
                  )
 
 
@@ -47,14 +48,15 @@ class Users(tag:Tag) extends Table[User](tag,"user") {
   def title = column[String]("title")
   def intro     = column[String]("intro")
   def status = column[Int]("status")
-  def province     = column[String]("province")
   def weixin     = column[String]("weixin")
-  def qrcode     = column[String]("qrcode")
   def labels     = column[String]("labels")
   def isAdmin    = column[Int]("is_admin")
-  def modifyTime = column[Timestamp]("modify_time")
+  def accessToken = column[String]("access_token")
+  def expiresIn = column[Int]("expires_in")
+  def oauthTime = column[Timestamp]("oauth_time")
+  def registTime = column[Timestamp]("regist_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status,province.?,weixin.?,qrcode.?, labels.?, isAdmin, modifyTime.?)  <>(User.tupled, User.unapply)
+  def * = (id.?,openId.?,comeFrom, name, password, email.?, credits, pic , title.? , intro.? , status, weixin.?,labels.?, isAdmin, accessToken.?,expiresIn.?,oauthTime.?,registTime.?)  <>(User.tupled, User.unapply)
  
 
 

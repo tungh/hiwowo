@@ -1,4 +1,4 @@
-@(u:models.user.User,user:(models.user.User,models.user.UserProfile))
+@(u:models.user.User,userComponent:controllers.users.UserComponent)
 @views.html.admin.template(u,"user") {
 <div class="row">
     <div class="col-lg-12">
@@ -9,40 +9,40 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="form-group">
-            <label  >名称  :  @user._1.name</label>
+            <label  >名称  :  @userComponent.user.name</label>
         </div>
         <div class="form-group">
-            <label  >头像  :  @user._1.pic</label>
+            <label  >头像  : @userComponent.user.pic</label>
         </div>
         <div class="form-group">
-            <label  >email  :  @user._1.email</label>
-        </div>
-
-        <div class="form-group">
-            <label  >状态  :  @models.user.UserStatus(user._1.status)</label>
-        </div>
-        <div class="form-group">
-            <label  >来源  :  @models.user.ComeFrom(user._1.comeFrom)</label>
-        </div>
-        <div class="form-group">
-            <label  >标签  :  @user._1.labels</label>
+            <label  >email  :  @userComponent.user.email</label>
         </div>
 
+        <div class="form-group">
+            <label  >状态  :  @models.user.UserStatus(userComponent.user.status)</label>
+        </div>
+        <div class="form-group">
+            <label  >来源  :  @models.user.ComeFrom(userComponent.user.comeFrom)</label>
+        </div>
+        <div class="form-group">
+            <label  >标签  :  @userComponent.user.labels</label>
+        </div>
+
 
         <div class="form-group">
-            <label  >性别  :  @user._2.gender</label>
+            <label  >性别  :  @userComponent.profile.gender</label>
         </div>
         <div class="form-group">
-            <label  >生日 :  @user._2.birth</label>
+            <label  >生日 :  @userComponent.profile.birth</label>
         </div>
         <div class="form-group">
-            <label  >上次登录时间  :  @user._2.loginTime / @user._2.loginIP</label>
+            <label  >上次登录时间  :  @userComponent.profile.loginTime / @userComponent.profile.loginIP</label>
         </div>
         <div class="form-group">
-            <label  >登录次数  :  @user._2.loginNum</label>
+            <label  >登录次数  :  @userComponent.profile.loginNum</label>
         </div>
         <div class="form-group">
-            <label  >收货信息  :  @user._2.receiver  / @user._2.province  @user._2.city @user._2.town @user._2.street  / @user._2.postCode  / @user._2.phone</label>
+            <label  >收货信息  :  @userComponent.profile.receiver  / @userComponent.profile.province  @userComponent.profile.city  @userComponent.profile.town  @userComponent.profile.street  / @userComponent.profile.postCode  / @userComponent.profile.phone</label>
         </div>
 
 

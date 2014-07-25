@@ -7,6 +7,7 @@ import play.api.data.Form
 import models.Page
 import play.api.libs.json.Json
 import models.user.dao.{UserSQLDao, UserDao}
+import java.util.Date
 
 
 import java.util.Date
@@ -15,18 +16,31 @@ import play.api.Play
 import scala.collection.JavaConverters._
 
 import java.sql.Timestamp
+import controllers.users.UserComponent
 
 
+case class UserBatchFormData(
+                              action: Int,
+                              ids: Seq[Long]
+                              )
 
-case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
-case  class UserFilterFormData(name:Option[String],status:Option[Int],title:Option[String],comeFrom:Option[Int],creditsOrder:String,addTimeOrder:String,currentPage:Option[Int])
+case class UserFilterFormData(
+                               name: Option[String],
+                               status: Option[Int],
+                               title: Option[String],
+                               comeFrom: Option[Int],
+                               creditsOrder: Option[String],
+                               startTime:Option[Date],
+                               endTime:Option[Date],
+                               currentPage: Option[Int],
+                               pageSize:Option[Int]
+                               )
 
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
       "action"->number,
-      "ids"->seq(longNumber),
-      "url"->optional(text)
+      "ids"->seq(longNumber)
     )(UserBatchFormData.apply)(UserBatchFormData.unapply)
   )
   /*检索标签*/
@@ -36,16 +50,18 @@ object Users  extends Controller {
       "status"->optional(number),
       "title"->optional(text),
       "comeFrom"->optional(number),
-      "creditsOrder"->nonEmptyText,
-      "addTimeOrder"->nonEmptyText,
-      "currentPage"->optional(number)
+      "creditsOrder"->optional(text),
+      "startTime" ->optional(date("yyyy-MM-dd HH:mm")),
+      "endTime" ->optional(date("yyyy-MM-dd HH:mm")),
+      "currentPage" ->optional(number),
+      "pageSize" ->optional(number)
     )(UserFilterFormData.apply)(UserFilterFormData.unapply)
   )
 
   /*用户管理*/
 def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
     val page =UserDao.findAll(p,size)
-  Ok(views.html.admin.users.users(user,page))
+  Ok(views.html.admin.users.list(user,page,userFilterForm))
 }
    /* 用户拉黑处理 */
   def black(uid:Long)= Admin.AdminAction{ user => implicit request =>
@@ -61,9 +77,8 @@ def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
   }
   /* 用户信息查看*/
   def view(uid:Long)=Admin.AdminAction{user => implicit request =>
-    val userWithProfile =UserDao.findWithProfile(uid)
-   // val trends = UserDao.findUserTrends(uid)
-    Ok(views.html.admin.users.view(user,userWithProfile))
+    val (user,profile,stat) =UserDao.findUser(uid)
+    Ok(views.html.admin.users.view(user,UserComponent(user,profile,stat)))
   }
 
 
@@ -81,7 +96,8 @@ def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
             UserDao.modifyStatus(id,1)
           }
         }
-        Redirect(batch.url.getOrElse("/admin/users/list"))
+       // Redirect(batch.url.getOrElse("/admin/users/list"))
+        Redirect(request.headers.get("REFERER").get)
       }
     )
   }
@@ -89,10 +105,10 @@ def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
   /*用户过滤*/
   def filterUsers = Admin.AdminAction{ user => implicit request =>
     userFilterForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      u => {
-        val page=UserDao.filterUsers(u.name,u.status,u.title,u.comeFrom,u.creditsOrder,u.addTimeOrder,u.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.users.filterUsers(user,page,userFilterForm.fill(u)))
+      formWithErrors =>Ok(formWithErrors.toString),
+     data => {
+        val page=UserDao.filterUsers(data.name,data.status,data.title,data.comeFrom,data.startTime,data.endTime,data.currentPage.getOrElse(1),data.pageSize.getOrElse(20))
+        Ok(views.html.admin.users.list(user,page,userFilterForm.fill(data)))
       }
     )
   }

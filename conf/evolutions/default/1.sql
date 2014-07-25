@@ -45,15 +45,13 @@ CREATE TABLE `user` (
   `title`                varchar(64),
   `intro`                varchar(250),
   `status`                tinyint    not null default '0',
-  `province`            varchar(20),
   `weixin`              varchar(20),
-  `qrcode`              varchar(20),
   `labels`                    varchar(250) ,
   `is_admin`                tinyint    not null default '0',
-  `modify_time`             timestamp,
   `access_token`         varchar(128),
   `expires_in`        int(10) not null default '0',
   `oauth_time`        timestamp not null DEFAULT '2014-5-22 12:00:00',
+  `regist_time`       timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -92,7 +90,6 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `login_time`          timestamp,
   `login_num`           smallint(10) NOT NULL default '1',
   `login_ip`            varchar(32) DEFAULT '0',
-  `regist_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

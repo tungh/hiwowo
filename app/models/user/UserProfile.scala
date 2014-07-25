@@ -33,8 +33,7 @@ case class UserProfile (
                          blog: Option[String],
                          loginTime:Option[Timestamp],
                          loginNum:Int,
-                         loginIP: Option[String],
-                         registTime: Option[Timestamp]
+                         loginIP: Option[String]
                          )
 class UserProfiles(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
@@ -54,9 +53,8 @@ class UserProfiles(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
   def loginTime = column[Timestamp]("login_time")
   def loginNum=column[Int]("login_num")
   def loginIP = column[String]("login_ip")
-  def registTime = column[Timestamp]("regist_time")
 
-  def * = (id.?, uid, inviteId.? , gender , birth.?, qq.?, receiver.?, province.?, city.?, town.?, street.?, postCode.?, phone.?, blog.?, loginTime.?, loginNum, loginIP.?, registTime.?) <>(UserProfile.tupled, UserProfile.unapply)
+  def * = (id.?, uid, inviteId.? , gender , birth.?, qq.?, receiver.?, province.?, city.?, town.?, street.?, postCode.?, phone.?, blog.?, loginTime.?, loginNum, loginIP.?) <>(UserProfile.tupled, UserProfile.unapply)
 
 }
 

@@ -35,7 +35,7 @@ object Test extends Controller {
 
  //   val result = UserDao.findUser(1)
       val interval= utils.Utils.getInterval(new Timestamp(1000000000))
-    Ok(" Ok! code:  "+interval)
+    Ok(" Ok! code:  "+interval + "  " + System.currentTimeMillis() )
   }
 
   def ui =  Users.UserAction{ user => implicit request =>

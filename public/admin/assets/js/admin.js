@@ -16,10 +16,7 @@ $(function() {
     });
 
 
-    /* 批量处理*/
     $("#J_batch").click(function(){
-        var url =window.location.href
-        $("#J_url").val(url)
         $("#J_batchForm").submit()
     })
 
