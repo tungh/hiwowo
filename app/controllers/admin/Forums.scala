@@ -51,7 +51,7 @@ object Forums extends Controller {
 
   def topics(p:Int,size:Int) = Admin.AdminAction{user => implicit request =>
       val page=TopicDao.findAll(p,size)
-      Ok(views.html.admin.forums.topics(user,page))
+      Ok(views.html.admin.forums.topics(user,page,topicFilterForm))
   }
   
   def delete(id:Long) = Admin.AdminAction{user => implicit request =>
@@ -70,7 +70,7 @@ object Forums extends Controller {
   
   def discusses(p:Int,size:Int)=  Admin.AdminAction{user => implicit request =>
     val page=TopicDao.findAllDiscusses(p,size)
-    Ok(views.html.admin.forums.discusses(user,page))
+    Ok(views.html.admin.forums.discusses(user,page,discussFilterForm))
   }
   def deleteDiscuss(id:Long)  = Admin.AdminAction{user => implicit request =>
     val result =TopicDao.deleteDiscuss(id)
@@ -131,7 +131,7 @@ object Forums extends Controller {
       formWithErrors =>Ok("something wrong"),
       topic => {
         val page=TopicDao.filterTopics(topic.name,topic.checkState,topic.typeId,topic.isTop,topic.isBest,topic.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.forums.filterTopics(user,page,topicFilterForm.fill(topic)))
+        Ok(views.html.admin.forums.topics(user,page,topicFilterForm.fill(topic)))
       }
     )
 
@@ -168,7 +168,7 @@ object Forums extends Controller {
       formWithErrors =>Ok("something wrong"),
       discuss => {
         val page=TopicDao.filterDiscusses(discuss.checkState,discuss.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.forums.filterDiscusses(user,page,discussFilterForm.fill(discuss)))
+        Ok(views.html.admin.forums.discusses(user,page,discussFilterForm.fill(discuss)))
       }
     )
 
