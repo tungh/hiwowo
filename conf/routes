@@ -139,7 +139,7 @@ POST   /admin/diagrams/delete         controllers.admin.Diagrams.delete
 POST   /admin/diagrams/check          controllers.admin.Diagrams.check
 POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
 POST  /admin/diagrams/saveDiagram       controllers.admin.Diagrams.saveDiagram
-POST  /admin/diagrams/saveDiagramPics     controllers.admin.Diagrams.saveDiagramPics
+
 
 GET   /admin/diagrams/weixin           controllers.admin.Diagrams.weixin(p:Int ?=1,pageSize:Int ?=50)
 GET   /admin/diagrams/addWeixinDiagrams  controllers.admin.Diagrams.addWeixinDiagrams(id:Long ?=0)

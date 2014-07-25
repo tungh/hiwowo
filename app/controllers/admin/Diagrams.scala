@@ -70,14 +70,7 @@ object Diagrams extends Controller {
       "status" -> number
     )(DiagramEditFormData.apply)(DiagramEditFormData.unapply)
   )
-  val diagramPicsForm = Form(
-    mapping(
-      "diagramId" ->longNumber,
-      "uid" ->longNumber,
-      "urls" ->seq(text),
-      "intros" ->seq(optional(text))
-    )(DiagramPicsFormData.apply)(DiagramPicsFormData.unapply)
-  )
+
   val addWeixinDiagramsForm =Form(
     mapping(
       "id"->longNumber,
@@ -85,10 +78,11 @@ object Diagrams extends Controller {
       "period"->longNumber
     )(WeixinDiagramsFormData.apply)(WeixinDiagramsFormData.unapply)
   )
+
   def list(p: Int, pageSize: Int) = Admin.AdminAction {
     user => implicit request =>
       val pages = DiagramDao.findAllDiagrams(p, pageSize)
-      Ok(views.html.admin.diagrams.list(user, pages))
+      Ok(views.html.admin.diagrams.list(user, pages, diagramFilterForm))
   }
 
   def edit(id: Long,msg:String) = Admin.AdminAction { user => implicit request =>
@@ -105,8 +99,6 @@ object Diagrams extends Controller {
     diagramEditForm.bindFromRequest.fold(
       formWithErrors => Ok("something wrong"),
       data => {
-        val images =Jsoup.parseBodyFragment(data.content.get).body().getElementsByTag("img")
-
 
           DiagramDao.modifyDiagram(data.id,data.uid,data.typeId,data.title,data.pic,data.intro,data.content,2)
         // 处理label
@@ -126,19 +118,7 @@ object Diagrams extends Controller {
     )
   }
 
-  def saveDiagramPics = Admin.AdminAction { user => implicit request =>
-   diagramPicsForm.bindFromRequest.fold(
-      formWithErrors => Ok("something wrong"),
-      data => {
-        for((url,i) <- data.urls.view.zipWithIndex){
 
-        }
-
-        Redirect(controllers.admin.routes.Diagrams.edit(data.diagramId,"保存Diagram pic 成功"))
-      }
-    )
-
-  }
 
   def delete = Admin.AdminAction { user => implicit request =>
       Ok("todo")
@@ -153,9 +133,9 @@ object Diagrams extends Controller {
     user => implicit request =>
       diagramFilterForm.bindFromRequest.fold(
         formWithErrors => Ok("something wrong"),
-        filterCondition => {
-          val page = DiagramDao.filterDiagrams(filterCondition.title, filterCondition.status, filterCondition.typeId, filterCondition.currentPage.getOrElse(1), 20)
-          Ok(views.html.admin.diagrams.filter(user, page, diagramFilterForm.fill(filterCondition)))
+        data => {
+          val page = DiagramDao.filterDiagrams(data.title, data.status, data.typeId, data.currentPage.getOrElse(1), 20)
+          Ok(views.html.admin.diagrams.list(user, page, diagramFilterForm.fill(data)))
         }
       )
   }
