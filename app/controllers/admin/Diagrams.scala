@@ -204,4 +204,9 @@ object Diagrams extends Controller {
     )
   }
 
+  /* 评价管理 */
+  def discusses  = Admin.AdminAction { user => implicit request =>
+   Ok("todo")
+  }
+
 }

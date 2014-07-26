@@ -85,6 +85,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="@controllers.admin.routes.Diagrams.list(1,50)">  图说管理 </a></li>
                     <li><a href="@controllers.admin.routes.Diagrams.weixin(1,50)">微信精选管理 </a></li>
+                    <li><a href="@controllers.admin.routes.Diagrams.weixin(1,50)">评价管理 </a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -126,6 +127,14 @@
                 <ul class="nav nav-second-level">
                     <li><a href='@controllers.admin.routes.Adverts.edit(0)'>创建新广告</a></li>
                     <li><a href='@controllers.admin.routes.Adverts.list(1,50)'>广告管理</a></li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class='@if(nav=="spider"){active}'>
+                <a href="#"><i class="glyphicon glyphicon-home"></i>爬虫管理</a>
+                <ul class="nav nav-second-level">
+                    <li><a href='@controllers.admin.routes.Spiders.list(1,50)'>爬虫管理</a></li>
+
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

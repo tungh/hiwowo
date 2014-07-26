@@ -1,4 +1,4 @@
-@(user:models.user.User,page:models.Page[models.label.Label])
+@(user:models.user.User,page:models.Page[models.label.Label],form:Form[controllers.admin.LabelFilterFormData])
 @views.html.admin.template(user,"label") {
 
 <div class="row">
@@ -21,46 +21,46 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <form  id="J_filterForm" method="get" action="@controllers.admin.routes.Labels.filter">
-                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>
 
                             <div class="form-group">
                                 <label  for="name">名称</label>
-                                <input class="form-control" type="text" id="name" name="name" placeholder="名称">
+                                <input class="form-control" type="text" id="name" name="name" value='@form("name").value' placeholder="名称">
                             </div>
                             <div class="form-group">
                                 <label  for="spell">拼写</label>
-                                <input class="form-control" type="text" id="spell" name="spell" placeholder="spell">
+                                <input class="form-control" type="text" id="spell" name="spell" value='@form("spell").value' placeholder="spell">
                             </div>
                             <div class="form-group">
                                 <label>级别 </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="level" value=""> 所有
+                                    <input type="radio" name="level" value="" @if(form("level").value.isEmpty){ checked="true" }> 所有
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"  name="level" value="1"> 普通
+                                    <input type="radio"  name="level" value="1" @if(form("level").value.getOrElse("none")=="1"){ checked="true" }> 普通
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="level" value="2"> 扩展
+                                    <input type="radio" name="level" value="2" @if(form("level").value.getOrElse("none")=="2"){ checked="true" }> 扩展
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="level" value="3"> 核心
+                                    <input type="radio" name="level" value="3" @if(form("level").value.getOrElse("none")=="3"){ checked="true" }> 核心
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label>is hot </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="isHot" value=""> 所有
+                                    <input type="radio" name="isHot" value="" @if(form("isHot").value.isEmpty){ checked="true" }> 所有
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"  name="isHot" value="0"> No
+                                    <input type="radio"  name="isHot" value="0" @if(form("isHot").value.getOrElse("none")=="0"){ checked="true" }> No
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isHot" value="1"> Yes
+                                    <input type="radio" name="isHot" value="1" @if(form("isHot").value.getOrElse("none")=="1"){ checked="true" }> Yes
                                 </label>
 
                             </div>
@@ -68,16 +68,16 @@
                                 <label  >审核状态</label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value=""> 所有
+                                    <input type="radio" name="checkState" value="" @if(form("checkState").value.isEmpty){ checked="true" }> 所有
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"  name="checkState" value="0"> 未审核
+                                    <input type="radio"  name="checkState" value="0"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 未审核
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="1"> 审核成功
+                                    <input type="radio" name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核成功
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="checkState" value="2"> 审核未通过
+                                    <input type="radio" name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" }> 审核未通过
                                 </label>
 
 
@@ -111,23 +111,25 @@
                 <div class="row">
 
                     <form method="post" id="J_batchForm" action="@controllers.admin.routes.Labels.batch">
-                        <input type="hidden" id="J_url" name="url" value="">
-                        <input type="hidden" name="thirdId" value="0">
+                       <div class="col-sm-3">
                         <div class="form-group">
                             <select id="J_select" class="form-control" name="action">
                                 <option value="-1">批量动作</option>
-                                <option value="1">批量审核通过</option>
-                                <option value="2">批量审核不通过</option>
-                                <option value="3">批量删除</option>
+                                <option value="2">批量审核通过</option>
+                                <option value="3">批量审核不通过</option>
+                                <option value="4">批量删除</option>
                             </select>
-                            <div class="form-group">
-                                <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
-                                    批量处理
-                                </button>
-                            </div>
-
 
                         </div>
+                       </div>
+                        <div class="col-sm-3">
+                        <div class="form-group">
+                                <a class="btn btn-info" id="J_batchAction" data-toggle="modal" href="#J_batchModal">
+                                    批量处理
+                                </a>
+                        </div>
+                        </div>
+
                         <div class="table-responsive">
 
                             <table class="table table-striped table-bordered table-hover">
@@ -152,15 +154,15 @@
                                 <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
                                 <td>@item.id</td>
                                 <td>@item.name</td>
-                                <td>@if(item.level==3){<span class="label label-success">核心</span> }else{<span class="label label-info">普通</span> } </td>
-                                <td>@if(item.isHot ==1){<span class="label label-info">Yes</span> }else {<span class="label label-info">No</span> }</td>
+                                <td>@if(item.level==3){<span class="label label-success">核心</span> } </td>
+                                <td>@if(item.isHot ==1){<span class="label label-info">热门</span> }</td>
                                 <td><span class="label label-default">@item.spell</span> </td>
                                 <td>@item.subscribeNum </td>
                                 <td>@if(item.checkState==0){<span class="label label-warning">未审核</span>} @if(item.checkState ==1){<span class="label label-success">审核通过</span>}@if(item.checkState ==2){<span class="label ">审核不通过</span>}</td>
 
                                 <td>@item.intro.getOrElse("")</td>
                                 <td>
-                                    <a href="@controllers.admin.routes.Labels.edit(item.id.get)"><i class="icon-eye-open"></i>查看</a>
+                                    <a href="@controllers.admin.routes.Labels.edit(item.id.get)"><i class="glyphicon glyphicon-eye-open mr10"></i>查看</a>
                                     <a href="@controllers.admin.routes.Labels.labelDiagrams(item.id.get)" >图说</a>
                                 </td>
                                 </tr>
@@ -180,29 +182,29 @@
                             <ul class="pagination">
                                 @page.prev.map { page =>
                                 <li class="paginate_button previous">
-                                    <a href="controllers.admin.routes.Labels.list(page,100)">Prev</a>
+                                    <span  data-page="@page">Prev</span>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button previous disabled">
-                                    <a href="#">Prev</a>
+                                    <a href="javascript:void(0)">Prev</a>
                                 </li>
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
-                                <li class="paginate_button active"><a href="@controllers.admin.routes.Labels.list(num,100)">@num</a></li>
+                                <li class="paginate_button active"><a  href="javascript:void(0)">@num</a></li>
                                 }else {
 
-                                <li class="paginate_button"><a href="@controllers.admin.routes.Labels.list(num,100)">@num</a></li>
+                                <li class="paginate_button"><span  data-page="@num">@num</span></li>
                                 }
 
                                 }
                                 @page.next.map { page =>
                                 <li class="paginate_button next">
-                                    <a href="@controllers.admin.routes.Labels.list(page,100)">Next</a>
+                                    <span  data-page="@page">next</span>
                                 </li>
                                 }.getOrElse {
                                 <li class="paginate_button next disabled">
-                                    <a>Next</a>
+                                    <a href="javascript:void(0)">Next</a>
                                 </li>
                                 }
 

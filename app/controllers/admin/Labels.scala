@@ -87,7 +87,7 @@ object Labels extends Controller {
   def list(p: Int, size: Int) = Admin.AdminAction {
     user => implicit request =>
       val page = LabelDao.findAllLabels(p, size)
-      Ok(views.html.admin.labels.labels(user, page))
+      Ok(views.html.admin.labels.labels(user, page,labelFilterForm))
   }
 
   def core(p: Int, size: Int) = Admin.AdminAction {
@@ -136,7 +136,7 @@ object Labels extends Controller {
         formWithErrors => Ok("something wrong"),
         filterCondition => {
           val page = LabelDao.filterLabels(filterCondition.name, filterCondition.level, filterCondition.isHot, filterCondition.spell, filterCondition.checkState, filterCondition.currentPage.getOrElse(1), 20)
-          Ok(views.html.admin.labels.filterLabels(user, page, labelFilterForm.fill(filterCondition)))
+          Ok(views.html.admin.labels.labels(user, page, labelFilterForm.fill(filterCondition)))
         }
       )
   }
@@ -272,7 +272,7 @@ object Labels extends Controller {
   /* label diagrams */
   def labelDiagrams(labelId:Long,p:Int,size:Int) = Admin.AdminAction { user => implicit request =>
     val page = LabelDao.findLabelDiagrams(labelId,p,size)
-     Ok(views.html.admin.labels.labelDiagrams(user,page,labelId))
+     Ok(views.html.admin.labels.labelDiagrams(user,page,labelDiagramsFilterForm,labelId))
   }
 
   def filterLabelDiagrams  = Admin.AdminAction { user => implicit request =>
@@ -280,7 +280,7 @@ object Labels extends Controller {
       formWithErrors => Ok("something wrong"),
       data => {
         val page = LabelDao.filterLabelDiagrams(data.labelId, data.title, data.checkState, data.typeId, data.currentPage.getOrElse(1),50)
-        Ok(views.html.admin.labels.filterLabelDiagrams(user, page,labelDiagramsFilterForm.fill(data)))
+        Ok(views.html.admin.labels.labelDiagrams(user, page,labelDiagramsFilterForm.fill(data),data.labelId))
       }
     )
   }
