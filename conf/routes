@@ -82,9 +82,8 @@ GET   /user/resetPassword              controllers.users.UsersRegLogin.resetPass
 POST  /user/checkEmailExist          controllers.users.UsersRegLogin.checkEmailExist
 
 #user sns 第三方登录注册
-GET   /user/snsLogin                            controllers.users.UsersSnsLogin.snsLogin(snsType:String,backType:String ?="syn",i:Long ?=0)
-GET   /user/:snsType/registed/:i      controllers.users.UsersSnsLogin.registed(snsType:String,code:String,backType:String,i:Long)
-
+GET   /user/snsLogin                            controllers.users.UsersSnsLogin.snsLogin(snsType:String)
+GET   /user/:snsType/registed     controllers.users.UsersSnsLogin.registed(snsType:String,code:String,backUrl:String)
 
 
 
