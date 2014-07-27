@@ -18,7 +18,7 @@ seajs.config({
     alias: {
         'jquery': 'sea-modules/jquery/1.11.1/jquery.js',
          'json': 'sea-modules/json/1.0.3/json.js',
-        'detector':'sea-modules/detector/2.0.1/dist/detector.js',
+        'detector':'sea-modules/detector/2.0.1/detector.js',
 
          'imgAreaSelect':'libs/imageselect/jquery.imgAreaSelect.js',
          'unslider':'libs/slider/jquery.unslider.min.js',

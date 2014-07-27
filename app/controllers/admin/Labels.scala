@@ -160,7 +160,8 @@ object Labels extends Controller {
             }
           }
 
-          Redirect(batch.url.getOrElse("/admin/labels/list"))
+
+          Redirect(request.headers.get("REFERER").getOrElse("/admin/labels/list"))
         }
       )
   }
@@ -291,19 +292,20 @@ object Labels extends Controller {
         batch => {
           if (batch.action == 1) {
             for (id <- batch.ids) {
-              LabelDao.modifyLabelDiagramCheckState(batch.thirdId,id, 1)
+              LabelDao.modifyLabelDiagramCheckState(batch.thirdId.get,id, 1)
             }
           } else if (batch.action == 2) {
             for (id <- batch.ids) {
-              LabelDao.modifyLabelDiagramCheckState(batch.thirdId,id, 2)
+              LabelDao.modifyLabelDiagramCheckState(batch.thirdId.get,id, 2)
             }
           } else if (batch.action == 3) {
             for (id <- batch.ids) {
-              LabelDao.deleteLabelDiagram(batch.thirdId,id)
+              LabelDao.deleteLabelDiagram(batch.thirdId.get,id)
             }
           }
 
-          Redirect(batch.url.getOrElse("/admin/labels/labelDiagrams/"+batch.thirdId))
+
+          Redirect(request.headers.get("REFERER").getOrElse("/admin/labels/labelDiagrams/"+batch.thirdId.get))
         }
       )
   }

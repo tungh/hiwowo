@@ -153,7 +153,8 @@ object Adverts extends Controller {
             }
           }
 
-          Redirect(batch.url.getOrElse("/admin/adverts/list"))
+
+          Redirect(request.headers.get("REFERER").getOrElse("/admin/adverts/list"))
         }
       )
   }

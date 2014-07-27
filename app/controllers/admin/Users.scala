@@ -96,8 +96,8 @@ def users(p:Int,size:Int) = Admin.AdminAction{ user => implicit request =>
             UserDao.modifyStatus(id,1)
           }
         }
-       // Redirect(batch.url.getOrElse("/admin/users/list"))
-        Redirect(request.headers.get("REFERER").get)
+
+        Redirect(request.headers.get("REFERER").getOrElse("/admin/users/list"))
       }
     )
   }

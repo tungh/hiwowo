@@ -119,8 +119,8 @@ object Forums extends Controller {
           }
         }
 
-     //   Redirect(batch.url.getOrElse("/admin/forums/list"))
-          Redirect(request.headers.get("REFERER").get)
+
+          Redirect(request.headers.get("REFERER").getOrElse("/admin/forums/list"))
       }
     )
   }
@@ -156,8 +156,8 @@ object Forums extends Controller {
           }
         }
 
-      //  Redirect(batch.url.getOrElse("/admin/forums/discusses"))
-        Redirect(request.headers.get("REFERER").get)
+
+        Redirect(request.headers.get("REFERER").getOrElse("/admin/forums/discusses"))
       }
     )
   }

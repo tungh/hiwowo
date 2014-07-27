@@ -160,8 +160,8 @@ object Diagrams extends Controller {
             }
           }
 
-       //   Redirect(batch.url.getOrElse("/admin/diagrams/list"))
-          Redirect(request.headers.get("REFERER").get)
+
+          Redirect(request.headers.get("REFERER").getOrElse("/admin/diagrams/list"))
         }
       )
   }
