@@ -174,12 +174,50 @@ button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-web
 /*
  *  navbar 组件 用户页面的头部和底部
  */
-.navbar-holder{position: relative; z-index: 3;}
-.navbar section{display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;}
-.navbar {background: #282828;}
-.navbar .logo {display: -moz-inline-stack;display: inline-block;vertical-align: middle;*vertical-align: auto;zoom: 1;*display: inline;width: 156px;height: 40px;background: url("//mu4.bdstatic.com/static/i/eL38PCbx.png") no-repeat;overflow: hidden;float: left;text-indent: -999em;}
-.navbar .nav {float:left;height: 40px;line-height: 40px;position: relative;margin-left: 10px;}
-.navbar .nav li {display: inline;float: left;}
+.navbar-holder {
+    position: relative;
+    z-index: 3;
+}
+
+.navbar section {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+}
+
+.navbar {
+    background: #282828;
+}
+
+.navbar .logo {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+    width: 156px;
+    height: 40px;
+    overflow: hidden;
+    float: left;
+    text-indent: -999em;
+}
+
+.navbar .nav {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.navbar .nav li {
+    display: inline;
+    float: left;
+}
 .navbar .nav a {
     padding: 0 15px;
     float: left;

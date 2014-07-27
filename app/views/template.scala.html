@@ -20,21 +20,17 @@
      <header class="navbar-holder" id="header">
     <div  id="topbar" class="navbar">
         <div class="container">
-
-            <nav class="nav">
-                <ul class="clearfix">
+                <ul class="nav clearfix">
                     <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
                     <li><a href="@if(!user.isEmpty){@controllers.users.routes.Users.home(user.get.id.get)}" rel='@if(user.isEmpty){loginD}' class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
                     <li><a href='/forum' class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
                 </ul>
-            </nav>
-
             @if(user.isEmpty){
-            <section class="user-info">
+            <div class="user-info">
                 <a class="login need-login" href="javascript:void(0)" rel="loginD">登录</a><span class="spacing">|</span><a class="signup"  href="/user/regist">注册</a>
-            </section>
+            </div>
             }else{
-            <section class="user-info">
+            <div class="user-info">
                 <a href="@controllers.users.routes.UsersMsg.at" class="msg" target="_blank"><span id="J_msgNum" style="display: none">9</span></a>
                 <div class="menu nav-item">
                     <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user" target="_blank">
@@ -50,14 +46,14 @@
                     </ul>
                 </div>
 
-            </section>
+            </div>
            }
-            <section class="topSearch">
+            <div class="topSearch">
                 <div class="searchBox">
                     <input type="text" class="searchText" value="萌宠">
                     <a class="searchBtn" href="javascript:void(0);"></a>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
      @nav match{
@@ -121,7 +117,7 @@
     <footer id="footer">
 
         <div class="container">
-            <section class="about">©Hiwowo &nbsp;<a target="_blank" href="/forum/topic/1">意见反馈</a> <a target="_blank" href="/aboutUs">关于我们</a><a href="http://www.miitbeian.gov.cn/">浙ICP备13018996号</a></section>
+            <div class="about">©Hiwowo &nbsp;<a target="_blank" href="/forum/topic/1">意见反馈</a> <a target="_blank" href="/aboutUs">关于我们</a><a href="http://www.miitbeian.gov.cn/">浙ICP备13018996号</a></div>
 
         </div>
     </footer>
