@@ -41,7 +41,7 @@ CREATE TABLE `user` (
   `password`              varchar(64) NOT NULL default '0',
   `email`               varchar(128),
   `credits`              smallint(10) not null default '0',
-  `pic`                 varchar(255) NOT NULL default '/assets/user/default.jpg',
+  `pic`                 varchar(255) NOT NULL default '/assets/images/user/default.jpg',
   `title`                varchar(64),
   `intro`                varchar(250),
   `status`                tinyint    not null default '0',

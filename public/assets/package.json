@@ -1,0 +1,66 @@
+{
+  "name": "hiwowo",
+  "version": "1.0.0",
+  "description": "for hiwowo.com",
+  "keywords": ["hiwowo","hiwowo.com"],
+  "homepage": "http://hiwowo.com",
+  "author": "zuosanshao@qq.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smeite/hiwowo"
+  },
+  "bugs": {
+    "url": "https://github.com/smeite/hiwowo"
+  },
+  "licenses": "MIT",
+  "spm": {
+    "dependencies": {
+        "jquery": "1.10.2"
+
+    },
+    "devDependencies": {
+      "expect.js": "0.3.1",
+        "grunt": "~0.4.5"
+    },
+      "engines": {
+          "seajs": "2.2.1"
+      },
+      "buildArgs": "--ignore bootstrap",
+      "output":[
+        "js/libs/bootstrap/3.2.0/bootstrap.min.js",
+         "js/libs/headroom/headroom.min.js",
+          "js/libs/imageselect/jquery.imgAreaSelect.js",
+          "js/libs/slider/3.2.0/jquery.unslider.min.js",
+          "js/libs/swfupload/swfupload.js",
+          "js/libs/vticker/bootstrap.min.js",
+          "js/libs/webuploader/0.1.5/webuploader.min.js",
+          "js/sea-modules/cookie.js",
+          "js/sea-modules/detector.js",
+          "js/sea-modules/json.js",
+          "js/hiwowo/1.0.0/hiwowo.js",
+          "js/hiwowo/common/area.js",
+          "js/hiwowo/common/dateSelect.js",
+          "js/hiwowo/common/validator.js",
+          "js/hiwowo/diagram/add.js",
+          "js/hiwowo/diagram/diagram.js",
+          "js/hiwowo/diagram/edit.js",
+          "js/hiwowo/editor/hiwowo.editor.js",
+          "js/hiwowo/editor/hiwowo.simpleEditor.js",
+          "js/hiwowo/forum/forum.js",
+          "js/hiwowo/forum/forumEditor.js",
+          "js/hiwowo/info/info.js",
+          "js/hiwowo/page/index.js",
+          "js/hiwowo/page/page.js",
+          "js/hiwowo/user/userAddress.js",
+          "js/hiwowo/user/userAward.js",
+          "js/hiwowo/user/userHome.js",
+          "js/hiwowo/user/userLogin.js",
+          "js/hiwowo/user/userOperate.js",
+          "js/hiwowo/user/userPassword.js",
+          "js/hiwowo/user/userSetting.js",
+          "js/hiwowo/user/userVip.js",
+          "js/hiwowo/user/welcome.js"
+
+     ]
+  }
+}

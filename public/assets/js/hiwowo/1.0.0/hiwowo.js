@@ -16,7 +16,6 @@
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-    var Cookie = require("cookie");
     require("bootstrap")
 
     $.hiwowo = $.hiwowo || {
