@@ -64,7 +64,7 @@
     text-align: center;
     text-shadow: 0px 1px #fff;
     font-size: 14px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat left -628px;
+    background: url(images/editor/editor_ico.gif) no-repeat left -628px;
 }
 
 .editor-box .input {
@@ -107,7 +107,7 @@
     line-height: 30px;
     text-align: center;
     display: inline-block;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat;
+    background: url(images/editor/editor_ico.gif) no-repeat;
 }
 
 .editor-select .main-select a {
@@ -155,7 +155,7 @@
     border: none;
     line-height: 32px;
     padding-left: 13px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat left -722px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat left -722px;
     outline: none;
     color: #fff;
 }
@@ -171,7 +171,7 @@
 
 .editor-select .main-select a.selected em {
     height: 32px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat right -722px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat right -722px;
     text-shadow: 0px 1px #3e513b;
     line-height: 32px;
     cursor: pointer;
@@ -192,7 +192,7 @@
     line-height: 32px;
     padding: 0 0 0 13px;
     border-radius: 6px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat left -758px;
+    background: url(images/editor/editor_ico.gif) no-repeat left -758px;
     outline: none;
     color: #5f7a5b;
     text-align: left;
@@ -202,7 +202,7 @@
     height: 32px;
     display: inline-block;
     padding-right: 18px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat right -758px;
+    background: url(images/editor/editor_ico.gif) no-repeat right -758px;
     color: #fff;
 }
 
@@ -212,7 +212,7 @@
     width: 76px;
     height: 32px;
     padding-left: 13px;
-    background: url(images/editor/pdeditor_ico.gif) no-repeat 0 -110px;
+    background: url(images/editor/editor_ico.gif) no-repeat 0 -110px;
 }
 
 .editor-select .other-btn:hover {
@@ -281,7 +281,7 @@
     border: none;
     line-height: 34px;
     padding-left: 13px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat left -722px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat left -722px;
     outline: none;
     color: #fff;
 }
@@ -297,7 +297,7 @@
 
 .editor-select .other-list a.selected em {
     height: 34px;
-    background: #fff url(images/editor/pdeditor_ico.gif) no-repeat right -722px;
+    background: #fff url(images/editor/editor_ico.gif) no-repeat right -722px;
     text-shadow: 0px 1px #3e513b;
     line-height: 34px;
     cursor: pointer;
