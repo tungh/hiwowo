@@ -14,23 +14,29 @@
    <link rel="stylesheet" href="/assets/css/global/global.css?v=2014011801">
 
     <link rel="stylesheet" href="@css?v=2014011801">
-
+    <!-- HTML5 Shim  support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <![endif]-->
 </head>
 <body id="J_Page">
      <header class="navbar-holder" id="header">
     <div  id="topbar" class="navbar">
         <div class="container">
+
                 <ul class="nav clearfix">
                     <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
                     <li><a href="@if(!user.isEmpty){@controllers.users.routes.Users.home(user.get.id.get)}" rel='@if(user.isEmpty){loginD}' class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
                     <li><a href='/forum' class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
                 </ul>
+
+
             @if(user.isEmpty){
-            <div class="user-info">
+            <section class="user-info">
                 <a class="login need-login" href="javascript:void(0)" rel="loginD">登录</a><span class="spacing">|</span><a class="signup"  href="/user/regist">注册</a>
-            </div>
+            </section>
             }else{
-            <div class="user-info">
+            <section class="user-info">
                 <a href="@controllers.users.routes.UsersMsg.at" class="msg" target="_blank"><span id="J_msgNum" style="display: none">9</span></a>
                 <div class="menu nav-item">
                     <a class="user" href="@controllers.users.routes.Users.home(user.get.id.get)" id="J_topbar_user" target="_blank">
@@ -46,14 +52,14 @@
                     </ul>
                 </div>
 
-            </div>
+            </section>
            }
-            <div class="topSearch">
+            <section class="topSearch">
                 <div class="searchBox">
                     <input type="text" class="searchText" value="萌宠">
                     <a class="searchBtn" href="javascript:void(0);"></a>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
      @nav match{
@@ -117,7 +123,7 @@
     <footer id="footer">
 
         <div class="container">
-            <div class="about">©Hiwowo &nbsp;<a target="_blank" href="/forum/topic/1">意见反馈</a> <a target="_blank" href="/aboutUs">关于我们</a><a href="http://www.miitbeian.gov.cn/">浙ICP备13018996号</a></div>
+            <section class="about">©Hiwowo &nbsp;<a target="_blank" href="/forum/topic/1">意见反馈</a> <a target="_blank" href="/aboutUs">关于我们</a><a href="http://www.miitbeian.gov.cn/">浙ICP备13018996号</a></section>
 
         </div>
     </footer>
@@ -169,11 +175,6 @@
 }
 
 
-     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-     <!--[if lt IE 9]>
-     <script src="/assets/js/html5shiv.min.js"></script>
-     <script src="/assets/js/respond.min.js"></script>
-     <![endif]-->
      <script type="text/javascript" src="/assets/js/sea-modules/seajs/2.2.1/sea.js" id="seajsnode"></script>
      <script type="text/javascript" src="/assets/js/sea-config.js"></script>
 
