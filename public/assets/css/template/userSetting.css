@@ -264,16 +264,7 @@
 .vip{
     padding-left: 40px
 }
-.vip .alert {
-    background-color: #f9f9ef;
-    padding: 20px;
-    margin-bottom: 20px;
-}
 
-.vip .alert p {
-    line-height: 30px;
-    text-align: center
-}
 
 /*help*/
 .help {

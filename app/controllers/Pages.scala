@@ -28,19 +28,20 @@ object Pages extends Controller {
 
    /* 微信精选 */
    def weixin(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
+     val adverts = AdvertDao.findAdverts("weixin-banner",3)
      val pages = WeixinDiagramDao.findDiagrams(currentPage,pageSize)
-     Ok(views.html.pages.weixin(user,pages))
+     Ok(views.html.pages.weixin(user,pages,adverts))
    }
 
   def owners(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
-    val adverts = AdvertDao.findAdverts("owners-banner",5)
+    val adverts = AdvertDao.findAdverts("owners-banner",3)
     val pages = DiagramDao.findDiagrams("new",0,2,currentPage,pageSize)
     Ok(views.html.pages.owners(user,pages,adverts))
   }
 
   /* 宠物 */
   def pets(currentPage:Int,pageSize:Int) = Users.UserAction{ user => implicit request =>
-    val adverts = AdvertDao.findAdverts("owners-banner",5)
+    val adverts = AdvertDao.findAdverts("owners-banner",3)
     val pages = DiagramDao.findDiagrams("new",1,2,currentPage,pageSize)
     Ok(views.html.pages.pets(user,pages,adverts))
   }

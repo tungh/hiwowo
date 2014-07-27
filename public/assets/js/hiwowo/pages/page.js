@@ -35,7 +35,7 @@ define(function (require) {
         })
 
 
-        $('#J_notices').vTicker({
+        $('#J_banner').vTicker({
             speed: 500,        //滚动速度，单位毫秒。
             pause: 3000,       //暂停时间，就是滚动一条之后停留的时间，单位毫秒。
             showItems: 1,     //显示内容的条数。
