@@ -10,7 +10,12 @@ import play.api.mvc.Controller
  */
 object Spiders extends Controller {
 
-  def list(p:Int,size:Int) =  Admin.AdminAction{user => implicit request =>
+  def diagrams(p:Int,size:Int) =  Admin.AdminAction{user => implicit request =>
     Ok("todo")
   }
+
+  def topics(p:Int,size:Int) =  Admin.AdminAction{user => implicit request =>
+    Ok("todo")
+  }
+
 }

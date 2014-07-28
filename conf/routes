@@ -147,7 +147,8 @@ GET   /admin/diagrams/addWeixinDiagrams  controllers.admin.Diagrams.addWeixinDia
 POST  /admin/diagrams/saveWeixinDiagrams  controllers.admin.Diagrams.saveWeixinDiagrams
 
 #管理后台 爬虫管理
-GET    /admin/spiders/list                  controllers.admin.Spiders.list(p:Int ?=1,size:Int ?=50)
+GET    /admin/spiders/diagrams                  controllers.admin.Spiders.diagrams(p:Int ?=1,size:Int ?=50)
+GET    /admin/spiders/topics                  controllers.admin.Spiders.topics(p:Int ?=1,size:Int ?=50)
 
 
 #管理后台 标签管理

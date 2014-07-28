@@ -9,6 +9,7 @@ title = "发布话题_讨论吧"
     <div class="row">
         <div class="main">
             <div class="editor-box" >
+                <h2> 编辑话题 </h2>
                 <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_editForm">
                     <input type="hidden" name="id" id="J_id"  value='@form("id").value' />
                     <input type="hidden" name="typeId" id="J_typeId" value='@form("typeId").value'>
