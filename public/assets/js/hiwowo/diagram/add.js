@@ -237,7 +237,7 @@ define(function(require){
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
                     '<p class="progress"><span></span></p>' +
-                    '<p class="intro"><textarea type="text" placeholder="求介绍~"  name="intros['+ num +']" placeholder="求介绍~"> </textarea> </p>' +
+                    '<p class="intro"><textarea type="text" placeholder="求介绍~"  name="alts['+ num +']" placeholder="求介绍~"> </textarea> </p>' +
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +

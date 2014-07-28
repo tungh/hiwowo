@@ -20,6 +20,12 @@ import play.api.libs.json.Json
  * Date: 14-1-22         hiwowo.com
  * Time: 下午11:29
  */
+
+case class TopicComponent(
+                     topic:Topic,
+                     user:User
+                           )
+
 object Forums extends Controller {
 
   val topicForm = Form(
@@ -50,7 +56,7 @@ object Forums extends Controller {
      } else {
         if (id == 0) Ok(views.html.forums.edit(user, topicForm))
         else {
-          val (t,u) = TopicDao.findById(id)
+          val (t,u) = TopicDao.findTopic(id)
           Ok(views.html.forums.edit(user, topicForm.fill((t.id, t.title, t.typeId, t.content))))
         }
       }
@@ -87,16 +93,10 @@ object Forums extends Controller {
  /* topic view */
   def view(id: Long,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
     /* 记录每个页面的点击次数，先放在cache里，当大于9时，记录到数据库中 */
-    val viewNum =  Cache.getOrElse[Int]("topic_"+id) { 1 }
-     Cache.set("topic_"+id,viewNum+1)
-  if(viewNum >9) {
-    TopicSQLDao.updateViewNum(id,viewNum)
-    Cache.remove("topic_"+id)
-  }
-      val topic=TopicDao.findById(id)
+      val (topic,author)=TopicDao.findTopic(id)
      val pageDiscusses = TopicDao.findDiscusses(id,p,size)
 
-      Ok(views.html.forums.view(user,topic,pageDiscusses))
+      Ok(views.html.forums.view(user,TopicComponent(topic,author),pageDiscusses))
 
   }
   /* add discuss */

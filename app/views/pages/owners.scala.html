@@ -1,5 +1,10 @@
 @(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],adverts:List[models.advert.Advert])
-@views.html.template(user,nav="index",subNav="owners")(css="/assets/css/template/page.css"){
+@views.html.template(
+user,
+nav="index",
+subNav="owners",
+title="主人的乐园"
+)(css="/assets/css/template/page.css"){
 
 
 

@@ -1,4 +1,12 @@
-@(user:Option[models.user.User]=None,authorId:Option[Long]=None,nav:String=" ",subNav:String =" ",title: String = " ",keywords:String = " ",description:String = "")(css:String)(content: Html)(js:Html)
+@(
+user:Option[models.user.User]=None,
+authorId:Option[Long]=None,
+nav:String=" ",
+subNav:String =" ",
+title: String = " ",
+keywords:String = "嗨喔喔 宠物 萌宠 主人 二货主人 喵星人 汪星人 神自白 神吐槽",
+description:String = "嗨喔喔,每天都是快乐的开始！每时每刻，都有一道身影唤醒我们对快乐的渴望"
+)(css:String)(content: Html)(js:Html)
 <!doctype html>
 <html>
 <head>
@@ -8,8 +16,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-    <meta name="keywords" content=@keywords>
-    <meta name="description" content=@description>
+    <meta name="keywords" content="@keywords">
+    <meta name="description" content="@description">
 
    <link rel="stylesheet" href="/assets/css/global/global.css?v=2014011801">
 

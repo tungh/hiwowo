@@ -1,7 +1,9 @@
-@(user:Option[models.user.User],topic:(models.forum.Topic,models.user.User),page:models.Page[(models.forum.TopicDiscuss,models.user.User)])
+@(user:Option[models.user.User],topicComponent:controllers.TopicComponent,page:models.Page[(models.forum.TopicDiscuss,models.user.User)])
 @views.html.template(user,
 nav="forum",
-title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
+title = topicComponent.topic.title,
+description = topicComponent.topic.intro
+)(css="/assets/css/template/forum.css"){
 
 
 <div class="container forum">
@@ -11,7 +13,7 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
                 <a class="fl back" href="/forum">&lt;返回话题列表</a>
                 <div class="fr">
                     <div class="clearfix fenye">
-                        <form action="@controllers.routes.Forums.view(topic._1.id.get)" method="get">
+                        <form action="@controllers.routes.Forums.view(topicComponent.topic.id.get)" method="get">
                                                 <span class="fl go ml5">
                               跳转:<input type="text" class="ml10" name="p" id="J_FPage" value="1">/1
                         </span>
@@ -22,20 +24,20 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
             <div class="f-con mt15">
                 <div class="f-con-main">
                     <div class="f-title clearfix">
-                        <h3 class="fl">@topic._1.title</h3>
+                        <h3 class="fl">@topicComponent.topic.title</h3>
                     </div>
                     <ul class="con-list" id="J_forumTopic">
                         <li class="first clearfix">
-                            <a href="@controllers.users.routes.Users.home(topic._2.id.get)" target="_blank" rel="usercard" data-id="@topic._2.id.get" class="fl">
-                                <img src="@topic._2.pic" alt="@topic._2.name" width="50" height="50">
+                            <a href="@controllers.users.routes.Users.home(topicComponent.user.id.get)" target="_blank" rel="usercard" data-id="@topicComponent.user.id.get" class="fl">
+                                <img src="@topicComponent.user.pic" alt="@topicComponent.user.name" width="50" height="50">
                             </a>
                             <div class="fr info">
                                 <div class="user-info clearfix">
-                                    <span class="fl"><a href="@controllers.users.routes.Users.home(topic._2.id.get)" target="_blank">@topic._2.name</a>/ @utils.Utils.timestampFormat(topic._1.addTime.get) </span>
+                                    <span class="fl"><a href="@controllers.users.routes.Users.home(topicComponent.user.id.get)" target="_blank">@topicComponent.user.name</a>/ @utils.Utils.timestampFormat(topicComponent.topic.addTime.get) </span>
                                     <span class="fr">楼主</span>
                                 </div>
                                 <div class="topic clearfix" id="J_topicArtical">
-                                    @Html(topic._1.content)
+                                    @Html(topicComponent.topic.content)
                                 </div>
                                 <div class="opt clearfix">
                                     <a class="follower-btn fl" id="J_FollowerBtn" data-num="0">鲜花&nbsp;<span></span></a>
@@ -80,24 +82,24 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
             <div class="pagin inlineblock fr mt10" id="J_Pagination">
                 @if(page.nums.length>1){
                 @page.prev.map { page =>
-                <a class="prev" href="@controllers.routes.Forums.view(topic._1.id.get,page)">上一页</a>
+                <a class="prev" href="@controllers.routes.Forums.view(topicComponent.topic.id.get,page)">上一页</a>
                 }
                 @for(num <-page.nums){
                 @if(num==page.currentPage){
                 <span class="current" >@num</span>
                 }else {
-                <a href="@controllers.routes.Forums.view(topic._1.id.get,num)">@num</a>
+                <a href="@controllers.routes.Forums.view(topicComponent.topic.id.get,num)">@num</a>
                 }
                 }
                 @page.next.map { page =>
-                <a class="next" href="@controllers.routes.Forums.view(topic._1.id.get,page)">下一页</a>
+                <a class="next" href="@controllers.routes.Forums.view(topicComponent.topic.id.get,page)">下一页</a>
                 }
                 }
             </div>
             <div class="clearfix"></div>
             <div class="topic-box clearfix">
                 <form id="J_topicDiscussForm" method="post" action="@controllers.routes.Forums.addDiscuss">
-                    <input type="hidden" name="topicId" value="@topic._1.id.get" id="J_topicId">
+                    <input type="hidden" name="topicId" value="@topicComponent.topic.id.get" id="J_topicId">
                     <div id="J_discussQuote" class="topic-reply clearfix"></div>
                     <div class="clearfix">
                         <textarea  id="J_discussContent" name="content" placeholder="说两句~~"></textarea>
@@ -114,12 +116,12 @@ title = "发布话题_讨论吧")(css="/assets/css/template/forum.css"){
         <div class="forum-side">
             <div class="taolun-owner">
                 <div class="clearfix t-header">
-                    <a href="@controllers.users.routes.Users.home(topic._2.id.get)" target="_blank" rel="usercard" data-id="@topic._2.id.get" class="fl">
-                        <img src="@topic._2.pic" alt="@topic._2.name" width="40" height="40">
+                    <a href="@controllers.users.routes.Users.home(topicComponent.user.id.get)" target="_blank" rel="usercard" data-id="@topicComponent.user.id.get" class="fl">
+                        <img src="@topicComponent.user.pic" alt="@topicComponent.user.name" width="40" height="40">
                     </a>
                     <div class="fl ml10">
-                        <div class="u-info"><a class="u-name mr5" href="@controllers.users.routes.Users.home(topic._2.id.get)" target="_blank">@topic._2.name</a>楼主</div>
-                        <div class="gc"> @topic._2.intro.getOrElse("") </div>
+                        <div class="u-info"><a class="u-name mr5" href="@controllers.users.routes.Users.home(topicComponent.user.id.get)" target="_blank">@topicComponent.user.name</a>楼主</div>
+                        <div class="gc"> @topicComponent.user.intro.getOrElse("") </div>
                     </div>
                 </div>
 

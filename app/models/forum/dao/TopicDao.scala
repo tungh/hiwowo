@@ -69,7 +69,7 @@ object TopicDao {
   }
 
   /* find byid with user*/
-  def findById(topicId: Long): (Topic, User) = play.api.db.slick.DB.withSession{ implicit session:Session =>
+  def findTopic(topicId: Long): (Topic, User) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     (for {
       c <- topics
       u <- users

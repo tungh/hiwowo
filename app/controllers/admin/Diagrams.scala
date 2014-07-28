@@ -35,12 +35,7 @@ case class DiagramEditFormData(
                                labels: Option[String],
                                status: Int
                                 )
-case class DiagramPicsFormData(
-                                diagramId:Long,
-                                uid:Long,
-                                urls:Seq[String],
-                                intros: Seq[Option[String]]
-                                )
+
 case class WeixinDiagramsFormData(
                                   id: Long,
                                   diagramsId:String,

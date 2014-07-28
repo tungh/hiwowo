@@ -1,5 +1,12 @@
 @(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent),typeId:Int)
-@views.html.template(user,nav="index",subNav=typeId.toString)(css="/assets/css/template/diagram.css"){
+@views.html.template(
+user,
+nav="index",
+subNav=typeId.toString,
+title=diagramComponent.diagram.title,
+description=diagramComponent.diagram.intro.getOrElse("")
+
+)(css="/assets/css/template/diagram.css"){
 
 <div class="container diagram">
 

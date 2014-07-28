@@ -31,7 +31,7 @@ case class DiagramFormData(
                                 intro:Option[String],
                                 typeId:Int,
                                 urls:Seq[String],
-                                intros: Seq[Option[String]]
+                                alts: Seq[Option[String]]
                                 )
 object  Diagrams extends Controller {
 
@@ -44,7 +44,7 @@ object  Diagrams extends Controller {
       "intro"->optional(text),
       "typeId"->number,
       "urls" ->seq(text),
-      "intros" ->seq(optional(text))
+      "alts" ->seq(optional(text))
     )(DiagramFormData.apply)(DiagramFormData.unapply)
   )
 
@@ -85,20 +85,20 @@ object  Diagrams extends Controller {
           val pic = data.urls.head
           var content =""
           for((url,i) <- data.urls.view.zipWithIndex){
-            content +="<img class='img-upload' src='"+url+"'><span>"+data.intros.get(i).getOrElse("")+"</span>"
+            content +="<img class='img-upload' src='"+url+"'><span>"+data.alts.get(i).getOrElse("")+"</span>"
           }
           if(data.id.isEmpty){
 
             diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
             for((url,i) <- data.urls.view.zipWithIndex){
-              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.intros.get(i))
+              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.alts.get(i))
             }
           }else{
             diagramId = data.id.get
             DiagramDao.deleteDiagramPics(diagramId)
             DiagramDao.modifyDiagram(data.id.get,user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
             for((url,i) <- data.urls.view.zipWithIndex){
-              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.intros.get(i))
+              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.alts.get(i))
             }
           }
 
