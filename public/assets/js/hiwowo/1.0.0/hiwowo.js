@@ -438,35 +438,7 @@ define(function(require, exports) {
         }
 
 
-        window._bd_share_config = {
-            common : {
-                "bdSnsKey":{"tsina":"2918471608","tqq":"801278954"},
-                "bdStyle": "1",
-                "bdSize": "24",
-                onBeforeClick:function(cmd,config){
-                    var share = config.tag
-                    config.bdText = $("#"+share).data("title");
-                    config.bdDesc = $("#"+share).data("desc");
-                    config.bdUrl =  $("#"+share).data("url");
-                    config.bdPic = $("#"+share).data("pic");
-                    return config;
-                }
-            },
-            share : [{
-                "bdSize" : 24
-            }],
 
-            image : [{
-                viewType : 'list',
-                viewPos : 'top',
-                viewColor : 'black',
-                viewSize : '24',
-                viewList : ['qzone','tsina','weixin','sqq']
-            }],
-            selectShare : [{
-                "bdselectMiniList" : ['qzone','tsina','weixin','sqq']
-            }]
-        }
 
 
     });
