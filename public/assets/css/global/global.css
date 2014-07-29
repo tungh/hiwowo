@@ -90,9 +90,10 @@ p { line-height: 1.6; color: #666}
 button.close { padding: 0;cursor: pointer;background: transparent;border: 0;-webkit-appearance: none;}
 
 /* 百度统计 */
-.bds_more{
+.bds_more,.bds_count{
     display: none;!important
 }
+
 /*
 * grid 模块
 *  分为左右两栏 响应式布局，从 990px 740px 420px

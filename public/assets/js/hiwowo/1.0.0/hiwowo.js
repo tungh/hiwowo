@@ -438,17 +438,35 @@ define(function(require, exports) {
         }
 
 
-        /* qzone 分享*/
-        $(".sh-qzone").unbind("click").click(function(){
-            var url ="http://hiwowo.com"+$(this).data("url")
-            var desc =$(this).data("desc")
-            var title =$(this).data("title")
-            var site=$(this).data("site")
-            var pics=$(this).data("pics")
-            var summary=$(this).data("summary")
-            window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&desc='+desc+'&summary='+summary+'&title='+title+'&site='+site+'&pics'+pics);
+        window._bd_share_config = {
+            common : {
+                "bdSnsKey":{"tsina":"2918471608","tqq":"801278954"},
+                "bdStyle": "1",
+                "bdSize": "24",
+                onBeforeClick:function(cmd,config){
+                    var share = config.tag
+                    config.bdText = $("#"+share).data("title");
+                    config.bdDesc = $("#"+share).data("desc");
+                    config.bdUrl =  $("#"+share).data("url");
+                    config.bdPic = $("#"+share).data("pic");
+                    return config;
+                }
+            },
+            share : [{
+                "bdSize" : 24
+            }],
 
-        })
+            image : [{
+                viewType : 'list',
+                viewPos : 'top',
+                viewColor : 'black',
+                viewSize : '24',
+                viewList : ['qzone','tsina','weixin','sqq']
+            }],
+            selectShare : [{
+                "bdselectMiniList" : ['qzone','tsina','weixin','sqq']
+            }]
+        }
 
 
     });

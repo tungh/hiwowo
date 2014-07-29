@@ -201,13 +201,23 @@ var _hmt = _hmt || [];
 
 
      <script>
+         //  "bdSnsKey":{"tsina":"464981938","tqq":"101050057"},
          window._bd_share_config = {
              common : {
-                 "bdSnsKey":{"tsina":"2918471608","tqq":"801278954"},
+
                  "bdStyle": "1",
-                 "bdSize": "24"
+                 "bdSize": "24",
+                 onBeforeClick:function(cmd,config){
+                      console.log(config)
+                     config.bdText = document.getElementById(config.tag).getAttribute("data-title");
+                     config.bdDesc = document.getElementById(config.tag).getAttribute("data-desc");
+                     config.bdUrl =  document.getElementById(config.tag).getAttribute("data-url");
+                     config.bdPic = document.getElementById(config.tag).getAttribute("data-pic");
+                     return config;
+                 }
              },
              share : [{
+                 "tag":"share_1",
                  "bdSize" : 24
              }],
 
@@ -223,6 +233,18 @@ var _hmt = _hmt || [];
              }]
          }
          with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+
+         function initShare(id) {
+             if(window._bd_share_config) {
+                 window._bd_share_config.share.length = 0;
+                 window._bd_share_config.share.push({"tag":"share_"+id});
+             }
+             if(window._bd_share_main) {
+                 window._bd_share_main.init();
+             }
+             console.log(window._bd_share_config);
+         }
+
      </script>
 
 
