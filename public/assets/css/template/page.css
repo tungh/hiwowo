@@ -255,12 +255,13 @@ color: #fff;
     font-size: 36px;
 }
 
-.items .item .meta .others {
+.items .item .meta .share {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.items .item .meta .others a.comment, .items .item .meta .others a.collect {
-    margin-right: 15px;
+.items .item .meta .share a {
+    margin-right: 4px;
 }
 
 .items .item .meta span.glyphicon-edit {
