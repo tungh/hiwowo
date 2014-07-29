@@ -31,12 +31,11 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                        var $likeCount = o.next(".like-num").find(".J_FavorNum");
+                       var $likeCount = o.find(".J_FavorNum");
                         var  loveNum = parseInt($likeCount.data("val")) + 1;
                         $likeCount.text(loveNum);
                         $likeCount.data("val", loveNum);
-                        //  $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        //  $.hiwowo.tip.show(o,"喜欢了");
+
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
                         $.hiwowo.tip.show(o,"已经喜欢了");
@@ -61,13 +60,10 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                        var $likeCount = o.next(".like-num").find(".J_FavorNum");
+                        var $likeCount = o.find(".J_hateNum");
                         var  loveNum = parseInt($likeCount.data("val")) + 1;
                         $likeCount.text(loveNum);
                         $likeCount.data("val", loveNum);
-                        //   $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        //   $.hiwowo.tip.show(o,"不喜欢了");
-
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
                         $.hiwowo.tip.show(o,"已经不喜欢了");
@@ -112,7 +108,6 @@ define(function(require, exports){
         },
         /* thumbs down */
         thumbsDown:function(id,o){
-
             var params={
                 discussId:id
             }
@@ -168,11 +163,10 @@ define(function(require, exports){
                     }
                    else if(data.code=="100"){
                         var num = $this.data("val")+1;
-                        $this.find(".collectNum").text(num)
+                        $this.find(".J_collectNum").text(num)
                         $this.data("val",num)
-                        //  $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        //  $.hiwowo.tip.show($this,"收藏了");
-                    }else if(data.code =="101"){
+
+                    }else if(data.code =="102"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
                         $.hiwowo.tip.show($this,"已经收藏了");
                     }else{

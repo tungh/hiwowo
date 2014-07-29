@@ -94,7 +94,7 @@ object Users extends Controller {
       }else{
         val userCollect = UserDao.findUserCollect(user.get.id.get,typeId.get,collectId.get)
         if(!userCollect.isEmpty){
-          Ok(Json.obj("code" -> "101", "message" ->"exists"))
+          Ok(Json.obj("code" -> "102", "message" ->"exists"))
         }else{
           UserDao.addUserCollect(user.get.id.get,typeId.getOrElse(0),collectId.get) // 在user collect 中记录
           UserSQLDao.updateCollectNum(user.get.id.get,1)                             // update user_static 中的 collect num

@@ -185,7 +185,7 @@ object  Diagrams extends Controller {
         Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
       }else{
        if(!session.get("pet_"+diagramId.get).isEmpty){
-          Ok(Json.obj("code" -> "104", "message" ->"loved"))
+          Ok(Json.obj("code" -> "102", "message" ->"loved"))
         } else {
         DiagramSQLDao.updateLoveNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
@@ -203,7 +203,7 @@ object  Diagrams extends Controller {
       Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
     }else{
       if(!session.get("pet_"+diagramId.get).isEmpty){
-        Ok(Json.obj("code" -> "104", "message" ->"hated"))
+        Ok(Json.obj("code" -> "102", "message" ->"hated"))
       } else {
         DiagramSQLDao.updateHateNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
