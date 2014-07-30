@@ -104,20 +104,25 @@ description=diagramComponent.diagram.intro.getOrElse("")
                 </ul>
             </div>
             <div class="share-content">
-                <div class="ml15">
-                    <div class="like-common like-common-s" >
-                        <a  class="like" rel="thumbsUp" href="javascript:void(0)" data-id="" title="喜欢"><i>喜欢</i></a>
-                        <div class="like-num">
-                            <dl class="J_scrollUp">
-                                <dd class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</dd>
-                                <dd>+1</dd>
-                            </dl>
+                <div class="extra">
+                    <div class="thumbs">
+                        <a class="mr15" href="javascript:void(0)" rel="thumbsUp" title="赞成" data-id="@diagramComponent.diagram.id.get"> <span class="glyphicon glyphicon-thumbs-up"></span><i class="J_FavorNum" data-val="@diagramComponent.diagram.loveNum">@diagramComponent.diagram.loveNum</i></a>
+                        <a  href="javascript:void(0)" rel="thumbsDown" title="不喜欢" data-id="@diagramComponent.diagram.id.get"><span class="glyphicon glyphicon-thumbs-down"></span><i class="J_hateNum" data-val="@diagramComponent.diagram.hateNum">@diagramComponent.diagram.hateNum</i> </a>
+                    </div>
+                    <div class="share">
+                        <div class="bdsharebuttonbox" id="share_@diagramComponent.diagram.id.get" data-title="@diagramComponent.diagram.title" data-desc='@diagramComponent.diagram.intro.getOrElse("")' data-url="@controllers.routes.Diagrams.diagram(diagramComponent.diagram.id.get)" data-pic="@diagramComponent.diagram.pic" data-tag="share_@diagramComponent.diagram.id.get">
+
+                            <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_count" data-cmd="count"></a>
                         </div>
                     </div>
-                    <div class="clear"></div>
-                    <div class="share clearfix">
-                        <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
-                    </div>
+                    <!-- <div class="others">
+                         <a class="collect" rel="collectDiagram" href="javascript:void(0)" title="收藏" data-id="@diagramComponent.diagram.id.get"><span class="glyphicon glyphicon-star-empty"></span><i class="J_collectNum">@diagramComponent.diagram.collectNum</i></a>
+                     </div>-->
+
                 </div>
             </div>
         </div>

@@ -412,22 +412,35 @@
     border-bottom: #c8c8c8 solid 1px;
     border-top: #c8c8c8 solid 1px;
     background: #fff;
-    padding-bottom: 10px;
     margin-top: 78px;
     border-right: #c8c8c8 solid 1px;
     margin-right: 10px;
 }
-.diagram .share-pin .share-content .like-common{
-    left:50px;
+.diagram .share-pin .share-content .extra{
+    text-align: center;
 }
-.diagram .share-pin .share-content  .share{
-    margin-top: 50px;
-    border-top: 1px dotted #ddd;
-    border-bottom: 1px dotted #ddd;
-    padding: 5px;
+.diagram .share-pin .share-content .extra a {
+    color: #44b2c3;
 }
 
+.diagram .share-pin .share-content .thumbs {
+    border-bottom: 1px solid #31708f;
+    padding-bottom: 10px;
+}
+.diagram .share-pin .share-content .share{
+    text-align: center;
+    padding: 10px 0 10px 80px;
+}
 
+.diagram .share-pin .share-content  span.glyphicon-thumbs-up {
+    color: red;
+    font-size: 36px;
+}
+
+.diagram .share-pin .share-content  span.glyphicon-thumbs-down {
+    color: #44b2c3;
+    font-size: 36px;
+}
 
 
 /* diagram discuss*/
