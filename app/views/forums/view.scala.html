@@ -13,7 +13,7 @@ description = topicComponent.topic.intro
                 <a class="fl back" href="/forum">&lt;返回话题列表</a>
                 <div class="fr">
                     <div class="clearfix fenye">
-                        <form action="@controllers.routes.Forums.view(topicComponent.topic.id.get)" method="get">
+                        <form action="@controllers.routes.Forums.topic(topicComponent.topic.id.get)" method="get">
                                                 <span class="fl go ml5">
                               跳转:<input type="text" class="ml10" name="p" id="J_FPage" value="1">/1
                         </span>
@@ -40,7 +40,7 @@ description = topicComponent.topic.intro
                                     @Html(topicComponent.topic.content)
                                 </div>
                                 <div class="opt clearfix">
-                                    <a class="follower-btn fl" id="J_FollowerBtn" data-num="0">鲜花&nbsp;<span></span></a>
+                                    <a class="follower-btn fl" href="javascript:void(0)" rel="addTopicFavor" id="J_followerBtn" data-id="@topicComponent.topic.id.get" data-val="@topicComponent.topic.loveNum">鲜花&nbsp;<span class="J_favorNum">@topicComponent.topic.loveNum</span></a>
                                     <a class="share-btn fl ml15" id="J_ShareBtn"><span class="share-icon">分享</span></a>
                                     <a class="J_discussReply fr mt50">回复</a>
                                 </div>
@@ -82,17 +82,17 @@ description = topicComponent.topic.intro
             <div class="pagin inlineblock fr mt10" id="J_Pagination">
                 @if(page.nums.length>1){
                 @page.prev.map { page =>
-                <a class="prev" href="@controllers.routes.Forums.view(topicComponent.topic.id.get,page)">上一页</a>
+                <a class="prev" href="@controllers.routes.Forums.topic(topicComponent.topic.id.get,page)">上一页</a>
                 }
                 @for(num <-page.nums){
                 @if(num==page.currentPage){
                 <span class="current" >@num</span>
                 }else {
-                <a href="@controllers.routes.Forums.view(topicComponent.topic.id.get,num)">@num</a>
+                <a href="@controllers.routes.Forums.topic(topicComponent.topic.id.get,num)">@num</a>
                 }
                 }
                 @page.next.map { page =>
-                <a class="next" href="@controllers.routes.Forums.view(topicComponent.topic.id.get,page)">下一页</a>
+                <a class="next" href="@controllers.routes.Forums.topic(topicComponent.topic.id.get,page)">下一页</a>
                 }
                 }
             </div>
@@ -128,7 +128,7 @@ description = topicComponent.topic.intro
             </div>
             <div class="ad mt15">
                 <a href="" target="_blank">
-                    <img src="/images/2.jpg" width="240" height="130" alt="逛画报" title="逛画报">
+                    <img src="/images/2.jpg" width="240" height="130" alt="嗨喔喔" title="嗨喔喔">
                 </a>
             </div>
 
@@ -144,14 +144,8 @@ description = topicComponent.topic.intro
 }{
 
 <script type="text/javascript">
-    seajs.use(['jquery','hiwowo/forum/forum'],function($,forum){
 
-        if(HIWOWO.userId == ""){
-            $.hiwowo.loginDialog.isLogin();
-        }
-
-
-    })
+    seajs.use(['hiwowo/forum/forum.js','hiwowo/user/userOperate.js'])
 </script>
 }
 

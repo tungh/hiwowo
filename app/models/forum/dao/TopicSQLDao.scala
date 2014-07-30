@@ -23,6 +23,11 @@ object TopicSQLDao {
 
   }
 
+  def updateLoveNum(topicId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
+    sqlu"update topic set love_num = love_num+$num where id =$topicId".first
+
+  }
+
   def updateDiscussNum(topicId:Long,num:Int)=play.api.db.slick.DB.withSession{ implicit session:Session =>
    sqlu"update topic set discuss_num =discuss_num+$num where id =$topicId".first
 

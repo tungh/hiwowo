@@ -18,12 +18,14 @@ GET       /pets/$p<[0-9]+>              controllers.Pages.pets(p:Int,size:Int ?=
 
 
 #forum
+GET    /forum                            controllers.Forums.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
 GET    /forum/search                     controllers.Forums.search
-GET    /forum/topic/$id<[0-9]+>             controllers.Forums.view(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /forum/topic/edit                       controllers.Forums.edit(id:Long ?=0L)
-POST   /forum/topic/save                       controllers.Forums.save
-POST   /forum/addDiscuss                  controllers.Forums.addDiscuss
-GET    /forum                               controllers.Forums.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
+GET    /topic/$id<[0-9]+>                controllers.Forums.topic(id:Long,p:Int ?=1,size:Int ?=10)
+GET    /topic/edit                       controllers.Forums.editTopic(id:Long ?=0L)
+POST   /topic/save                       controllers.Forums.saveTopic
+POST   /topic/addDiscuss                  controllers.Forums.addDiscuss
+POST   /topic/favor                      controllers.Forums.topicFavor
+
 
 
 #diagram

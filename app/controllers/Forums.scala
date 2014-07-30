@@ -50,7 +50,7 @@ object Forums extends Controller {
     )
   )
   /*编辑或者新增一个topic*/
-  def edit(id: Long) = Users.UserAction { user => implicit request =>
+  def editTopic(id: Long) = Users.UserAction { user => implicit request =>
      if (user.isEmpty) {
        Redirect(controllers.users.routes.UsersRegLogin.login)
      } else {
@@ -64,7 +64,7 @@ object Forums extends Controller {
   }
 
   /*保存 帖子*/
-  def save = Users.UserAction{ user => implicit request =>
+  def saveTopic = Users.UserAction{ user => implicit request =>
     topicForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.forums.edit(user,formWithErrors)),
       fields =>{
@@ -79,10 +79,10 @@ object Forums extends Controller {
         }
         if (fields._1.isEmpty){
           val id= TopicDao.addTopic(user.get.id.get,fields._2,fields._4,intro,pics,fields._3,0)
-          Redirect(controllers.routes.Forums.view(id))
+          Redirect(controllers.routes.Forums.topic(id))
         }else{
           TopicDao.modifyTopic(Topic(fields._1,user.get.id.get,fields._2,fields._4,intro,Some(pics.trim),fields._3,false,false,0,0,0,0,None))
-          Redirect(controllers.routes.Forums.view(fields._1.get))
+          Redirect(controllers.routes.Forums.topic(fields._1.get))
         }
 
 
@@ -91,7 +91,7 @@ object Forums extends Controller {
 
   }
  /* topic view */
-  def view(id: Long,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
+  def topic(id: Long,p:Int,size:Int) = Users.UserAction{ user => implicit request =>
     /* 记录每个页面的点击次数，先放在cache里，当大于9时，记录到数据库中 */
       val (topic,author)=TopicDao.findTopic(id)
      val pageDiscusses = TopicDao.findDiscusses(id,p,size)
@@ -126,4 +126,23 @@ object Forums extends Controller {
   def search = Users.UserAction{ user => implicit request =>
          Ok(" forum search ")
   }
+
+
+  /* add like num 在一个session 里 只能 点击一次 */
+  def topicFavor = Action(parse.json){  implicit request =>
+    val topicId = (request.body \ "topicId").asOpt[Long]
+    if(topicId.isEmpty || topicId.getOrElse(0) ==0 ){
+      Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
+    }else{
+      if(!session.get("pet_"+topicId.get).isEmpty){
+        Ok(Json.obj("code" -> "102", "message" ->"loved"))
+      } else {
+        TopicSQLDao.updateLoveNum(topicId.get,1)
+        val key ="pet_"+topicId.get.toString
+        val value=topicId.get.toString
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+      }
+    }
+  }
+
 }

@@ -16,7 +16,7 @@ define(function(require, exports){
     /* diagram favor */
     $.hiwowo.userDiagram={
         /* thumbs Up */
-        thumbsUp:function(id,o){
+        thumbsUp:function(id,$this){
             /* 不存在，则保存 */
 
             var params={
@@ -31,14 +31,14 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                       var $likeCount = o.find(".J_FavorNum");
+                       var $likeCount = $this.find(".J_FavorNum");
                         var  loveNum = parseInt($likeCount.data("val")) + 1;
                         $likeCount.text(loveNum);
                         $likeCount.data("val", loveNum);
 
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        $.hiwowo.tip.show(o,"已经喜欢了");
+                        $.hiwowo.tip.show($this,"已经喜欢了");
                     }
                 }
             });
@@ -46,7 +46,7 @@ define(function(require, exports){
 
         },
         /* thumbs down */
-        thumbsDown:function(id,o){
+        thumbsDown:function(id,$this){
 
             var params={
                 diagramId:id
@@ -60,13 +60,13 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                        var $likeCount = o.find(".J_hateNum");
+                        var $likeCount = $this.find(".J_hateNum");
                         var  loveNum = parseInt($likeCount.data("val")) + 1;
                         $likeCount.text(loveNum);
                         $likeCount.data("val", loveNum);
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        $.hiwowo.tip.show(o,"已经不喜欢了");
+                        $.hiwowo.tip.show($this,"已经不喜欢了");
                     }
                 }
             });
@@ -77,7 +77,7 @@ define(function(require, exports){
     /* diagram discuss favor */
     $.hiwowo.userDiagramDiscuss={
         /* thumbs up */
-        thumbsUp:function(id,o){
+        thumbsUp:function(id,$this){
             /* 不存在，则保存 */
 
             var params={
@@ -92,14 +92,12 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                        var num = o.data("val")+1;
-                        o.text(num)
-                        o.data("val",num)
-                        // $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        //   $.hiwowo.tip.show(o,"支持了");
+                        var num = $this.data("val")+1;
+                        $this.text(num)
+                        $this.data("val",num)
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        $.hiwowo.tip.show(o,"已经支持了");
+                        $.hiwowo.tip.show($this,"已经赞了");
                     }
                 }
             });
@@ -107,7 +105,7 @@ define(function(require, exports){
 
         },
         /* thumbs down */
-        thumbsDown:function(id,o){
+        thumbsDown:function(id,$this){
             var params={
                 discussId:id
             }
@@ -120,15 +118,13 @@ define(function(require, exports){
 
                 success: function(data){
                     if(data.code=="100"){
-                        var num = o.data("val")+1;
-                        o.text(num)
-                        o.data("val",num)
-                        //  $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        //   $.hiwowo.tip.show(o,"反对");
+                        var num = $this.data("val")+1;
+                        $this.text(num)
+                        $this.data("val",num)
 
                     }else if(data.code =="104"){
                         $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
-                        $.hiwowo.tip.show(o,"已经不反对了");
+                        $.hiwowo.tip.show($this,"已经鄙视过了");
                     }
                 }
             });
@@ -329,6 +325,37 @@ define(function(require, exports){
         }
     }
 
+    $.hiwowo.userTopic={
+        favor:function(id,$this){
+            /* 不存在，则保存 */
+            var params={
+                topicId:id,
+                typeId:0
+            }
+            $.ajax({
+                url:"/topic/favor",
+                type : "POST",
+                contentType:"application/json; charset=utf-8",
+                dataType: "json",
+                data:JSON.stringify(params),
+
+                success: function(data){
+                    if(data.code=="100"){
+                        var $likeCount = $this.find(".J_favorNum");
+                        var  loveNum = parseInt($likeCount.data("val")) + 1;
+                        $likeCount.text(loveNum);
+                        $likeCount.data("val", loveNum);
+
+                    }else if(data.code =="104"){
+                        $.hiwowo.tip.conf.tipClass = "tipmodal-s tipmodal-ok";
+                        $.hiwowo.tip.show($this,"已经喜欢了");
+                    }
+                }
+            });
+
+        }
+    }
+
     $(function(){
 
         $(document).on("click","li[rel=collectDiagram]",function(){
@@ -390,6 +417,12 @@ define(function(require, exports){
         $(document).on("click","a[rel=downDiscuss]",function(){
             var id =$(this).data("id")
             $.hiwowo.userDiagramDiscuss.thumbsDown(id,$(this))
+        })
+
+       /* topic favor */
+        $(document).on("click","a[rel=addTopicFavor]",function(){
+            var id =$(this).data("id")
+            $.hiwowo.userTopic.favor(id,$(this))
         })
     })
 });
