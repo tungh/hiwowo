@@ -55,12 +55,12 @@
                                 <a  href="javascript:void(0)" rel="thumbsDown" title="不喜欢" data-id="@diagram.id.get"><span class="glyphicon glyphicon-thumbs-down"></span><i class="J_hateNum" data-val="@diagram.hateNum">@diagram.hateNum</i> </a>
                             </div>
                             <div class="share">
-                                <div class="bdsharebuttonbox" id="share_@diagram.id.get" data-title="@diagram.title" data-desc='@diagram.intro.getOrElse("")' data-url="@controllers.routes.Diagrams.diagram(diagram.id.get)" data-pic="@diagram.pic" data-tag="share_@diagram.id.get">
+                                <div class="bdsharebuttonbox" id="diagram_@diagram.id.get" data-title="@diagram.title" data-desc='@diagram.intro.getOrElse("")' data-url="@controllers.routes.Diagrams.diagram(diagram.id.get)" data-pic="@diagram.pic" data-tag="diagram_@diagram.id.get">
 
-                                    <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@diagram.id" onmousedown="initShare(@diagram.id.get);"></a>
-                                    <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@diagram.id" onmousedown="initShare(@diagram.id.get);"></a>
-                                    <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@diagram.id" onmousedown="initShare(@diagram.id.get);"></a>
-                                    <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@diagram.id" onmousedown="initShare(@diagram.id.get);"></a>
+                                    <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@diagram.id" onmousedown="diagramShare(@diagram.id.get);"></a>
+                                    <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@diagram.id" onmousedown="diagramShare(@diagram.id.get);"></a>
+                                    <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@diagram.id" onmousedown="diagramShare(@diagram.id.get);"></a>
+                                    <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@diagram.id" onmousedown="diagramShare(@diagram.id.get);"></a>
                                     <a href="#" class="bds_count" data-cmd="count"></a>
                                 </div>
                             </div>

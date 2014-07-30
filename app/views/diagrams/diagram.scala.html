@@ -110,12 +110,12 @@ description=diagramComponent.diagram.intro.getOrElse("")
                         <a  href="javascript:void(0)" rel="thumbsDown" title="不喜欢" data-id="@diagramComponent.diagram.id.get"><span class="glyphicon glyphicon-thumbs-down"></span><i class="J_hateNum" data-val="@diagramComponent.diagram.hateNum">@diagramComponent.diagram.hateNum</i> </a>
                     </div>
                     <div class="share">
-                        <div class="bdsharebuttonbox" id="share_@diagramComponent.diagram.id.get" data-title="@diagramComponent.diagram.title" data-desc='@diagramComponent.diagram.intro.getOrElse("")' data-url="@controllers.routes.Diagrams.diagram(diagramComponent.diagram.id.get)" data-pic="@diagramComponent.diagram.pic" data-tag="share_@diagramComponent.diagram.id.get">
+                        <div class="bdsharebuttonbox" id="diagram_@diagramComponent.diagram.id.get" data-title="@diagramComponent.diagram.title" data-desc='@diagramComponent.diagram.intro.getOrElse("")' data-url="@controllers.routes.Diagrams.diagram(diagramComponent.diagram.id.get)" data-pic="@diagramComponent.diagram.pic" data-tag="diagram_@diagramComponent.diagram.id.get">
 
-                            <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
-                            <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
-                            <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
-                            <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@diagramComponent.diagram.id" onmousedown="initShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@diagramComponent.diagram.id" onmousedown="diagramShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@diagramComponent.diagram.id" onmousedown="diagramShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@diagramComponent.diagram.id" onmousedown="diagramShare(@diagramComponent.diagram.id.get);"></a>
+                            <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@diagramComponent.diagram.id" onmousedown="diagramShare(@diagramComponent.diagram.id.get);"></a>
                             <a href="#" class="bds_count" data-cmd="count"></a>
                         </div>
                     </div>

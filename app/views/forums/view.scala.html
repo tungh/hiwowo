@@ -42,6 +42,24 @@ description = topicComponent.topic.intro
                                 <div class="opt clearfix">
                                     <a class="follower-btn fl" href="javascript:void(0)" rel="addTopicFavor" id="J_followerBtn" data-id="@topicComponent.topic.id.get" data-val="@topicComponent.topic.loveNum">鲜花&nbsp;<span class="J_favorNum">@topicComponent.topic.loveNum</span></a>
                                     <a class="share-btn fl ml15" id="J_ShareBtn"><span class="share-icon">分享</span></a>
+                                    <div class="share fl">
+                                        <div class="bdsharebuttonbox" id="topic_@topicComponent.topic.id.get"
+                                             data-title="@topicComponent.topic.title" data-desc='@topicComponent.topic.intro'
+                                             data-url="@controllers.routes.Forums.topic(topicComponent.topic.id.get)"
+                                             data-pic='@topicComponent.topic.pics.getOrElse("")' data-tag="topic_@topicComponent.topic.id.get">
+
+                                            <a href="#" class="bds_qzone" data-cmd="qzone" data-id="@topicComponent.topic.id.get"
+                                               onmousedown="topicShare(@topicComponent.topic.id.get);"></a>
+                                            <a href="#" class="bds_weixin" data-cmd="weixin" data-id="@topicComponent.topic.id.get"
+                                               onmousedown="topicShare(@topicComponent.topic.id.get);"></a>
+                                            <a href="#" class="bds_tsina" data-cmd="tsina" data-id="@topicComponent.topic.id.get"
+                                               onmousedown="topicShare(@topicComponent.topic.id.get);"></a>
+                                            <a href="#" class="bds_sqq" data-cmd="sqq" data-id="@topicComponent.topic.id.get"
+                                               onmousedown="topicShare(@topicComponent.topic.id.get);"></a>
+                                            <a href="#" class="bds_count" data-cmd="count"></a>
+                                        </div>
+                                    </div>
+
                                     <a class="J_discussReply fr mt50">回复</a>
                                 </div>
                             </div>

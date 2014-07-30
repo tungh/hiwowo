@@ -215,24 +215,39 @@ var _hmt = _hmt || [];
                      return config;
                  }
              },
-             share : [{
+             share : [
+                 {
                  "tag":"share_1",
                  "bdSize" : 32
-             }]
+             },
+                 {
+                     "tag":"topic_1",
+                     "bdSize" : 24
+                 }
+             ]
          }
          with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 
-         function initShare(id) {
+         function diagramShare(id) {
              if(window._bd_share_config) {
                  window._bd_share_config.share.length = 0;
-                 window._bd_share_config.share.push({"tag":"share_"+id});
+                 window._bd_share_config.share.push({"tag":"diagram_"+id});
              }
              if(window._bd_share_main) {
                  window._bd_share_main.init();
              }
              console.log(window._bd_share_config);
          }
-
+         function topicShare(id) {
+             if(window._bd_share_config) {
+                 window._bd_share_config.share.length = 0;
+                 window._bd_share_config.share.push({"tag":"topic_"+id});
+             }
+             if(window._bd_share_main) {
+                 window._bd_share_main.init();
+             }
+             console.log(window._bd_share_config);
+         }
      </script>
 
 
