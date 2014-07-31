@@ -58,7 +58,7 @@ object  Diagrams extends Controller {
      }else if(component.get._1.status==1 && component.get._1.uid != user.get.id.get ){
        Ok(views.html.diagrams.diagramInvalid(user))
      }else {
-    Ok(views.html.diagrams.diagram(user,DiagramComponent(component.get._1,component.get._2),component.get._1.typeId))
+    Ok(views.html.diagrams.diagram(user,DiagramComponent(component.get._1,component.get._2)))
      }
   }
 

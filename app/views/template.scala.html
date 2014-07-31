@@ -34,8 +34,10 @@ description:String = "嗨喔喔,每天都是快乐的开始！每时每刻，都
 
                 <ul class="nav clearfix">
                     <li ><a href="/" class=' @("current".when(nav == "index")) '>嗨喔喔</a></li>
-                    <li><a href="@if(!user.isEmpty){@controllers.users.routes.Users.home(user.get.id.get)}" rel='@if(user.isEmpty){loginD}' class=' @("current".when(nav == "my")) '>我的喔喔</a></li>
+                    <li><a href="@controllers.routes.Pages.pets(1,10)" class=' @("current".when(nav == "pet")) ' >萌宠</a></li>
+                    <li><a href="@controllers.routes.Pages.videos(1,10)" class=' @("current".when(nav == "video")) ' >视频</a></li>
                     <li><a href='/forum' class=' @("current".when(nav == "forum")) '>讨论吧</a></li>
+
                 </ul>
 
 
@@ -53,8 +55,8 @@ description:String = "嗨喔喔,每天都是快乐的开始！每时每刻，都
                         <span class="triangle"></span>
                     </a>
                     <ul class="dropdown topbar-dropdown" style="width: 132px;">
-                        <li><a href="@controllers.routes.Diagrams.add" target="_blank">发布图说</a></li>
-                        <li><a href="@controllers.users.routes.Users.home(user.get.id.get)" target="_blank">个人中心</a></li>
+                        <li><a href="@controllers.routes.Diagrams.add" target="_blank">我要制作</a></li>
+                        <li><a href="@controllers.users.routes.Users.home(user.get.id.get)" target="_blank">我的喔喔</a></li>
                         <li><a href="@controllers.users.routes.UsersAccount.base" target="_blank">账号设置</a></li>
                         <li><a class="logout" href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
@@ -75,35 +77,36 @@ description:String = "嗨喔喔,每天都是快乐的开始！每时每刻，都
         <div class="container">
             <ul>
                 <li class=' @("on".when(subNav == "index")) '><a href="/" title="首页">首页</a></li>
-                <li class=' @("on".when(subNav == "owners")) '><a href="@controllers.routes.Pages.owners(1,10)" title="主人">主人</a></li>
-                <li class=' @("on".when(subNav == "pets")) '><a href="@controllers.routes.Pages.pets(1,10)" title="萌宠">萌宠</a></li>
-                <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin(1,10)" title="微信精选">微信精选</a></li>
+                <li class=' @("on".when(subNav == "weixin")) new '><a href="@controllers.routes.Pages.weixin(1,10)" title="精选">精选</a></li>
+                <li class=' @("on".when(subNav == "album")) '><a href="@controllers.routes.Pages.album(1,10)" title="专辑">专辑</a></li>
+                <li class=' @("on".when(subNav == "daren")) '><a href="@controllers.routes.Pages.daren(1,10)" title="达人">达人</a></li>
             </ul>
 
 
         </div>
     </div> }
-
-    case "my" => {  <div id="J_subbar" class="subbar">
-        <div class="container">
-            <ul>
-                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.diagrams(user.get.id.get)}' title="我的图说">我的图说</a></li>
-                <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.subscribes(user.get.id.get)}' title="我的订阅">我的订阅</a></li>
-                <li class=' @("on".when(subNav == "collect")) '><a href='@if(!user.isEmpty){ @controllers.users.routes.Users.collects(user.get.id.get)}' title="我的收藏">我的收藏</a></li>
-            </ul>
-
-
-        </div>
-    </div> }
-    case "ta" => { <div id="J_subbar" class="subbar">
-        <div class="container">
-            <ul>
-                <li class=' @("on".when(subNav == "home")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.home(authorId.get)}' title="TA的关注">TA的首页</a></li>
-                <li class=' @("on".when(subNav == "diagram")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.diagrams(authorId.get)}' title="TA的神兽">TA的神兽</a></li>
-                <li class=' @("on".when(subNav == "subscribe")) '><a href='@if(!authorId.isEmpty){ @controllers.users.routes.Users.subscribes(authorId.get)}' title="我的订阅">TA的订阅</a></li>
-            </ul>
-        </div>
-    </div>}
+         case "pet" => {   <div id="J_subbar" class="subbar">
+         <div class="container">
+             <ul>
+                 <li class=' @("on".when(subNav == "pet")) '><a href="@controllers.routes.Pages.pets(1,10)" title="首页">首页</a></li>
+                 <li class=' @("on".when(subNav == "talk")) '><a href="@controllers.routes.Pages.talk(1,10)" title="自言自语"> 自言自语 </a></li>
+                 <li class=' @("on".when(subNav == "gif")) '><a href="@controllers.routes.Pages.gif(1,10)" title="gif神兽">gif神兽</a></li>
+                 <li class=' @("on".when(subNav == "emotion")) new '><a href="@controllers.routes.Pages.emotion(1,10)" title="表情帝">表情帝</a></li>
+             </ul>
+         </div>
+     </div>
+         }
+         case "video" => {   <div id="J_subbar" class="subbar">
+         <div class="container">
+             <ul>
+                 <li class=' @("on".when(subNav == "video")) '><a href="@controllers.routes.Pages.videos(1,10)" title="首页">首页</a></li>
+                 <li class=' @("on".when(subNav == "funny")) '><a href="@controllers.routes.Pages.funny(1,10)" title="自言自语">开心宠物 </a></li>
+                 <li class=' @("on".when(subNav == "kid")) '><a href="@controllers.routes.Pages.kid(1,10)" title="gif神兽">萌宝逗宠</a></li>
+                 <li class=' @("on".when(subNav == "adult")) new '><a href="@controllers.routes.Pages.adult(1,10)" title="表情帝">二货主人</a></li>
+             </ul>
+         </div>
+     </div>
+         }
 
     case "forum" => {<div id="J_subbar" class="subbar">
         <div class="container">

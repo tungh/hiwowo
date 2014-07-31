@@ -1,5 +1,5 @@
 @(user:Option[models.user.User],userComponent:controllers.users.UserComponent,followPage:Page[models.user.User],fansPage:Page[models.user.User])
-@views.html.template(user,userComponent.user.id,nav=if(!user.isEmpty && user.get.id.get == userComponent.user.id.get){"my"}else{"ta"},subNav="follow")(css="/assets/css/template/userHome.css"){
+@views.html.template(user,userComponent.user.id)(css="/assets/css/template/userHome.css"){
 
 <div class="container my">
 

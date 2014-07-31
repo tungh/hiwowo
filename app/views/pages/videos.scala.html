@@ -1,5 +1,10 @@
 @(user:Option[models.user.User],page:models.Page[(models.diagram.Diagram,models.user.User)],adverts:List[models.advert.Advert])
-@views.html.template(user,nav="pet",subNav="pet")(css="/assets/css/template/page.css"){
+@views.html.template(
+user,
+nav="video",
+subNav="video",
+title="主人的乐园"
+)(css="/assets/css/template/page.css"){
 
 
 
@@ -12,6 +17,7 @@
                     @for(advert <- adverts ){
                     <li><a href="@advert.link" target='_blank'><img src="@advert.pic.get"></a></li>
                     }
+
                 </ul>
             </div>
 

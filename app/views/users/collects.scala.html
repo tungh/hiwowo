@@ -1,5 +1,5 @@
 @(user:Option[models.user.User],userComponent:controllers.users.UserComponent,page:models.Page[models.diagram.Diagram])
-@views.html.template(user,userComponent.user.id,nav=if(!user.isEmpty && user.get.id.get == userComponent.user.id.get){"my"}else{"ta"},subNav="collect")(css="/assets/css/template/userHome.css"){
+@views.html.template(user,userComponent.user.id)(css="/assets/css/template/userHome.css"){
 
 <div class="container my">
 

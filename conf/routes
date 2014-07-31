@@ -11,8 +11,18 @@ GET   /ui                                  controllers.Test.ui
 GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
 GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
 GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
-GET       /owners/$p<[0-9]+>              controllers.Pages.owners(p:Int,size:Int ?=10)
+GET       /album/$p<[0-9]+>                 controllers.Pages.album(p:Int,size:Int ?=10)
+GET       /daren/$p<[0-9]+>              controllers.Pages.daren(p:Int,size:Int ?=10)
+
 GET       /pets/$p<[0-9]+>              controllers.Pages.pets(p:Int,size:Int ?=10)
+GET       /talk/$p<[0-9]+>              controllers.Pages.talk(p:Int,size:Int ?=10)
+GET       /gif/$p<[0-9]+>              controllers.Pages.gif(p:Int,size:Int ?=10)
+GET       /emotion/$p<[0-9]+>              controllers.Pages.emotion(p:Int,size:Int ?=10)
+
+GET       /videos/$p<[0-9]+>              controllers.Pages.videos(p:Int,size:Int ?=10)
+GET       /funny/$p<[0-9]+>              controllers.Pages.funny(p:Int,size:Int ?=10)
+GET       /kid/$p<[0-9]+>              controllers.Pages.kid(p:Int,size:Int ?=10)
+GET       /adult/$p<[0-9]+>              controllers.Pages.adult(p:Int,size:Int ?=10)
 
 
 
@@ -29,7 +39,7 @@ POST   /topic/favor                      controllers.Forums.topicFavor
 
 
 #diagram
-GET   /diagram/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
+GET   /pet/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
 GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
 POST  /diagram/delete                     controllers.Diagrams.delete
 POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss

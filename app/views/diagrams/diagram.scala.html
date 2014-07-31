@@ -1,8 +1,8 @@
-@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent),typeId:Int)
+@(user:Option[models.user.User],diagramComponent:(controllers.DiagramComponent))
 @views.html.template(
 user,
-nav="index",
-subNav=typeId.toString,
+nav="pet",
+subNav="index",
 title=diagramComponent.diagram.title,
 description=diagramComponent.diagram.intro.getOrElse("")
 
