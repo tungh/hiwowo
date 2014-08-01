@@ -9,7 +9,10 @@ package models.diagram
  * description:话题类型
  */
 
-object DiagramType extends Enumeration{
+object TushuoCatalog extends Enumeration{
   val TUSHUO = Value("图说")
-  val VIDEO = Value("视频")
+  val TALK = Value("自言自语")
+  val GIF = Value("gif神兽")
+  val EMOTION = Value("表情帝")
+  val OTHER = Value("其他")
 }

@@ -9,7 +9,7 @@ package models.diagram
  * description:话题类型
  */
 
-object VideoType extends Enumeration{
+object VideoCatalog extends Enumeration{
   val FUNNY = Value("开心宠物")
   val KID = Value("萌童逗宠")
   val ADULT = Value("二货主人")

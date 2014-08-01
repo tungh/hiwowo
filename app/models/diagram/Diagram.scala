@@ -15,6 +15,7 @@ case class Diagram (
                    id: Option[Long],
                    uid:Long,
                    typeId:Int,
+                   catalogId:Int,
                    title: String,
                    pic: String,
                    intro: Option[String],
@@ -36,6 +37,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def typeId = column[Int]("type_id")
+  def catalogId = column[Int]("catalog_id")
   def title = column[String]("title")
   def pic = column[String]("pic")
   def intro  = column[String]("intro")
@@ -52,7 +54,7 @@ class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def modifyTime = column[Timestamp]("modify_time")
   def addTime = column[Timestamp]("add_time")
 
-  def * =(id.?,uid,typeId,title,pic,intro.?,content.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
+  def * =(id.?,uid,typeId,catalogId,title,pic,intro.?,content.?,labels.?,status,viewNum,loveNum,hateNum,discussNum,collectNum,comeFromSite.?,comeFromUrl.?,modifyTime.?,addTime.?) <> (Diagram.tupled, Diagram.unapply)
 
 
 }

@@ -612,7 +612,42 @@ create table user_role(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-# --- !Downs
+# --- !up 20140801
 
+alter table diagram add column catalog_id smallint(10) default 0;
+alter table diagram_pic add column tags varchar(200);
+alter table label_diagram add column add_time timestamp;
 
+DROP TABLE IF EXISTS `diagram_video`;
+CREATE TABLE `diagram_video` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `diagram_id`         int(10) ,
+  `url`                 varchar(250) ,
+  `title`                 varchar(250) ,
+  `intro`               varchar(200) ,
+  `sort_num`             tinyint not null  default '0',
+  `come_from`               varchar(32) ,
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `label_pic`;
+CREATE TABLE IF NOT EXISTS `label_pic`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `label_id`                   int(10) not null ,
+  `pic_id`                   int(10) not null ,
+  `check_state`                 tinyint not null default '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `label_video`;
+CREATE TABLE IF NOT EXISTS `label_video`(
+  `id`                   int(10) NOT NULL AUTO_INCREMENT,
+  `label_id`                   int(10) not null ,
+  `video_id`                   int(10) not null ,
+  `check_state`                 tinyint not null default '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
