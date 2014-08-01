@@ -11,7 +11,8 @@ import play.mvc.Http
 import org.apache.http.NameValuePair
 import play.api.libs.Crypto
 import java.sql.Timestamp
-
+import java.io.File
+import com.sksamuel.scrimage.Image
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,8 +35,11 @@ object Test extends Controller {
 //    TermDao.addTermRelation(1,1,0)
 
  //   val result = UserDao.findUser(1)
-      val interval= utils.Utils.getInterval(new Timestamp(1000000000))
-    Ok(" Ok! code:  "+interval + "  " + System.currentTimeMillis() )
+  //    val interval= utils.Utils.getInterval(new Timestamp(1000000000))
+      val in = new File("public/assets/images/start.jpg")
+
+    Ok(" Ok! code:  "+ Image(in).width + "  " + Image(in).height )
+
   }
 
   def ui =  Users.UserAction{ user => implicit request =>
