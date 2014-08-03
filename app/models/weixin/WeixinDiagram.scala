@@ -15,7 +15,7 @@ case class WeixinDiagram (
                       addTime:Option[Timestamp]
                       )
 
-class WeixinDiagrams(tag:Tag) extends Table[WeixinDiagram](tag,"weixin_diagram") {
+class WeixinDiagramTable(tag:Tag) extends Table[WeixinDiagram](tag,"weixin_diagram") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def diagramId = column[Long]("diagram_id")
   def period = column[Long]("period")

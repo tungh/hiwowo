@@ -36,7 +36,7 @@ case class User(
                  )
 
 
-class Users(tag:Tag) extends Table[User](tag,"user") {
+class UserTable(tag:Tag) extends Table[User](tag,"user") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def openId = column[String]("open_id")
   def comeFrom = column[Int]("come_from")

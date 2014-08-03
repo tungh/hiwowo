@@ -35,7 +35,7 @@ case class UserProfile (
                          loginNum:Int,
                          loginIP: Option[String]
                          )
-class UserProfiles(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
+class UserProfileTable(tag:Tag) extends Table[UserProfile](tag,"user_profile") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def inviteId = column[Long]("invite_id")

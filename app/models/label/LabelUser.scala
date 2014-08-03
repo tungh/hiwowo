@@ -14,7 +14,7 @@ case class LabelUser (
                       checkState:Int,
                       addTime:Option[Timestamp]
                       )
-class LabelUsers(tag:Tag) extends Table[LabelUser](tag,"label_user") {
+class LabelUserTable(tag:Tag) extends Table[LabelUser](tag,"label_user") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def labelId = column[Long]("label_id")
   def userId = column[Long]("user_id")

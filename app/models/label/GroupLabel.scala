@@ -15,7 +15,7 @@ case class GroupLabel(
                        labelId: Long
                        )
 
-class GroupLabels(tag: Tag) extends Table[GroupLabel](tag, "group_label") {
+class GroupLabelTable(tag: Tag) extends Table[GroupLabel](tag, "group_label") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def groupId = column[Long]("group_id")
   def labelId = column[Long]("label_id")

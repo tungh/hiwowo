@@ -17,7 +17,7 @@ case class UserSubscribe(
                           labelId:Long,
                           addTime:Option[Timestamp]
                           )
-class UserSubscribes(tag:Tag) extends Table[UserSubscribe](tag,"user_subscribe") {
+class UserSubscribeTable(tag:Tag) extends Table[UserSubscribe](tag,"user_subscribe") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def labelId = column[Long]("label_id")

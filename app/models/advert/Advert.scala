@@ -32,7 +32,7 @@ case class Advert(
                    clickNum:Int,
                    addTime:Option[Timestamp]
                    )
-class Adverts(tag: Tag) extends Table[Advert](tag,"advert") {
+class AdvertTable(tag: Tag) extends Table[Advert](tag,"advert") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def code = column[String]("code")
   def typeId = column[Int]("type_id")

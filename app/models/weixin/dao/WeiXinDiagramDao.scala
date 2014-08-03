@@ -4,7 +4,7 @@ package models.weixin.dao
 import play.api.Play.current
 import models.user._
 import models.diagram._
-import models.weixin.{WeixinDiagrams, WeixinDiagram}
+import models.weixin.{WeixinDiagramTable, WeixinDiagram}
 import play.api.db.slick.Config.driver.simple._
 import models.Page
 /**
@@ -15,10 +15,10 @@ import models.Page
  */
 object WeixinDiagramDao {
 
-  val weixinDiagrams = TableQuery[WeixinDiagrams]
-  val diagrams = TableQuery[Diagrams]
-  val diagramPics = TableQuery[DiagramPics]
-  val users = TableQuery[Users]
+  val weixinDiagrams = TableQuery[WeixinDiagramTable]
+  val diagrams = TableQuery[DiagramTable]
+  val diagramPics = TableQuery[DiagramPicTable]
+  val users = TableQuery[UserTable]
 
   /* 专门为微信挑选的diagram */
   def addDiagram(diagramId:Long,period:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>

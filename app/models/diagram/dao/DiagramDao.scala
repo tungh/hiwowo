@@ -16,11 +16,11 @@ import models.diagram._
  */
 object DiagramDao {
 
-  val albums = TableQuery[Albums]
-  val diagrams = TableQuery[Diagrams]
-  val diagramPics = TableQuery[DiagramPics]
-  val diagramDiscusses = TableQuery[DiagramDiscusses]
-  val users = TableQuery[Users]
+  val albums = TableQuery[AlbumTable]
+  val diagrams = TableQuery[DiagramTable]
+  val diagramPics = TableQuery[DiagramPicTable]
+  val diagramDiscusses = TableQuery[DiagramDiscussTable]
+  val users = TableQuery[UserTable]
 
   /*
    *

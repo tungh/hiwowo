@@ -22,7 +22,7 @@ case class DiagramDiscuss  (
                              addTime:Option[Timestamp]
                              )
 
-class DiagramDiscusses(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discuss") {
+class DiagramDiscussTable(tag:Tag) extends Table[DiagramDiscuss](tag,"diagram_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def diagramId = column[Long]("diagram_id")

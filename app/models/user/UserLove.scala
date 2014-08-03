@@ -16,7 +16,7 @@ case class UserLove (
                           typeId:Int,
                           addTime:Option[Timestamp]
                           )
-class UserLoves(tag:Tag) extends Table[UserLove](tag,"user_love") {
+class UserLoveTable(tag:Tag) extends Table[UserLove](tag,"user_love") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def loveId = column[Long]("love_id")

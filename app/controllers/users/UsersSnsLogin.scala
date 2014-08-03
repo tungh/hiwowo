@@ -13,7 +13,9 @@ import play.api.Play
 import org.apache.http.client.methods.{HttpGet, HttpPost}
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
+import org.apache.http.message.BasicNameValuePair
 import org.apache.http.NameValuePair
+import org.apache.http.client.entity.UrlEncodedFormEntity
 import java.util
 
 
@@ -97,12 +99,12 @@ object UsersSnsLogin extends Controller {
      /* 新浪微博登陆 */
      else if(snsType=="sina"){
     val  formparams:util.ArrayList[NameValuePair] = new util.ArrayList[NameValuePair]()
-      formparams.add(new BasicNameValuePair("client_id", "464981938"));
-      formparams.add(new BasicNameValuePair("client_secret", "6589557baeff39a5129a89b6e3019ffa"));
+      formparams.add(new BasicNameValuePair("client_id", "464981938"))
+      formparams.add(new BasicNameValuePair("client_secret", "6589557baeff39a5129a89b6e3019ffa"))
       formparams.add(new BasicNameValuePair("grant_type", "authorization_code"))
       formparams.add(new BasicNameValuePair("redirect_uri", "http://hiwowo.com/user/sina/registed&state=sina"))
-      formparams.add(new BasicNameValuePair("code", code));
-      val entity22:UrlEncodedFormEntity = new UrlEncodedFormEntity(formparams);
+      formparams.add(new BasicNameValuePair("code", code))
+      val entity22:UrlEncodedFormEntity = new UrlEncodedFormEntity(formparams)
        val post = new HttpPost("https://api.weibo.com/oauth2/access_token")
           post.setEntity(entity22)
        val client =new DefaultHttpClient()

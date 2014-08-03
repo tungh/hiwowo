@@ -20,7 +20,7 @@ case class Album (
                    addTime:Option[Timestamp]
                    )
 
-class Albums(tag:Tag) extends Table[Album](tag,"album") {
+class AlbumTable(tag:Tag) extends Table[Album](tag,"album") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def title = column[String]("title")

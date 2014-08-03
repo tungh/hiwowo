@@ -12,7 +12,7 @@ case class SystemMsg(
                  status:Int,
                  addTime:Option[Timestamp]
                  )
-class SystemMsgs(tag:Tag) extends Table[SystemMsg](tag,"system_msg") {
+class SystemMsgTable(tag:Tag) extends Table[SystemMsg](tag,"system_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def title =column[String]("title")
   def content = column[String]("content")

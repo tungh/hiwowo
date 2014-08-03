@@ -31,7 +31,7 @@ case class Administrator (
                      )
 
 
-class Administrators(tag: Tag) extends Table[Administrator](tag,"administrator") {
+class AdministratorTable(tag: Tag) extends Table[Administrator](tag,"administrator") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def email = column[String]("email")
   def password = column[String]("password")

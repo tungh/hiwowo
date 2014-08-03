@@ -16,7 +16,7 @@ case class DiscussMsg(
                      addTime:Option[Timestamp]
                      )
 
-class DiscussMsgs(tag:Tag) extends Table[DiscussMsg](tag,"discuss_msg") {
+class DiscussMsgTable(tag:Tag) extends Table[DiscussMsg](tag,"discuss_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def discusserId =column[Long]("discusser_id")
   def discusserName =column[String]("discusser_name")

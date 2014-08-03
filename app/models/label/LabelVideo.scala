@@ -14,7 +14,7 @@ case class LabelVideo (
                       checkState:Int,
                       addTime:Option[Timestamp]
                       )
-class LabelVideos(tag:Tag) extends Table[LabelVideo](tag,"label_video") {
+class LabelVideoTable(tag:Tag) extends Table[LabelVideo](tag,"label_video") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def labelId = column[Long]("label_id")
   def videoId = column[Long]("video_id")

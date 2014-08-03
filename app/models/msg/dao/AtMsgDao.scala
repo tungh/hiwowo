@@ -2,7 +2,7 @@ package models.msg.dao
 
 
 import play.api.Play.current
-import models.msg.{AtMsg, AtMsgs}
+import models.msg.{AtMsg, AtMsgTable}
 import models.Page
 import java.sql.Timestamp
 import play.api.db.slick.Config.driver.simple._
@@ -15,7 +15,7 @@ import play.api.db.slick.Config.driver.simple._
  */
 object AtMsgDao {
  
-     val atMsgs = TableQuery[AtMsgs]
+     val atMsgs = TableQuery[AtMsgTable]
 
  def addMsg( senderId:Long,senderName:String,content:String,receiverId:Long,receiverName:String):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
    val atMsgsAutoInc = atMsgs.map( u => (u.senderId, u.senderName, u.content, u.receiverId, u.receiverName)) returning atMsgs.map(_.id) into {

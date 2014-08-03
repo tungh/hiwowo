@@ -15,7 +15,7 @@ import play.api.db.slick.Config.driver.simple._
  */
 object DiscussMsgDao {
   
-  val discussMsgs = TableQuery[DiscussMsgs]
+  val discussMsgs = TableQuery[DiscussMsgTable]
 
   def addMsg(discusserId:Long,discusserName:String,discussType:Int,thirdId:Long,content:String,ownerId:Long):Long  = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val discussMsgsAutoInc = discussMsgs.map( u => (u.discusserId, u.discusserName,u.discussType, u.thirdId, u.content, u.ownerId)) returning discussMsgs.map(_.id) into {

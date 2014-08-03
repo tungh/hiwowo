@@ -4,8 +4,9 @@ import java.sql.Timestamp
 import play.api.Play.current
 
 import models.Page
-import models.cms.{Cmses, Cms}
+import models.cms.{CmsTable, Cms}
 import play.api.db.slick.Config.driver.simple._
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +15,7 @@ import play.api.db.slick.Config.driver.simple._
  * Time: 下午5:43
  */
 object CmsDao {
-  val cmses = TableQuery[Cmses]
+  val cmses = TableQuery[CmsTable]
   def deleteCms(id:Long) =  play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for( c <- cmses if c.id === id) yield c).delete
   }

@@ -19,7 +19,7 @@ case class SystemMsgReceiver(
                         status:Int,
                         addTime:Option[Timestamp]
                         )
-class SystemMsgReceivers(tag:Tag) extends Table[SystemMsgReceiver](tag,"system_msg_receiver") {
+class SystemMsgReceiverTable(tag:Tag) extends Table[SystemMsgReceiver](tag,"system_msg_receiver") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def msgId =column[Long]("msg_id")
   def receiverId =column[Long]("receiver_id")

@@ -30,7 +30,7 @@ actionContent:String,
 addTime: Option[Timestamp]
 )
 
-class UserRecords(tag:Tag) extends Table[UserRecord](tag,"user_record") {
+class UserRecordTable(tag:Tag) extends Table[UserRecord](tag,"user_record") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def actionName = column[String]("action_name")

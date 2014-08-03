@@ -26,7 +26,7 @@ case class UserStatic(
                       postDiagramNum: Int,
                       postTopicNum: Int
                       )
-class UserStatics(tag:Tag) extends Table[UserStatic](tag,"user_static") {
+class UserStaticTable(tag:Tag) extends Table[UserStatic](tag,"user_static") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def fansNum = column[Int]("fans_num")

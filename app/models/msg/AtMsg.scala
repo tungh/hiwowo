@@ -25,7 +25,7 @@ case class AtMsg (
             addTime:Option[Timestamp]
             )
 
-class AtMsgs(tag:Tag) extends Table[AtMsg](tag,"at_msg") {
+class AtMsgTable(tag:Tag) extends Table[AtMsg](tag,"at_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def senderId =column[Long]("sender_id")
   def senderName =column[String]("sender_name")

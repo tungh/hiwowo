@@ -3,7 +3,7 @@ package models.advert.dao
 import java.sql.Timestamp
 import play.api.db.slick.Config.driver.simple._
 import models.Page
-import models.advert.{Advert, Adverts}
+import models.advert.{AdvertTable, Advert}
 import play.api.Play.current
 import play.api.libs.Codecs
 import  java.util.Date
@@ -14,7 +14,7 @@ import  java.util.Date
  * Time: 下午9:51
  */
 object AdvertDao {
-    val adverts = TableQuery[Adverts]
+    val adverts = TableQuery[AdvertTable]
 
   def addAdvert(code:String,typeId:Int,title:String,link:String,pic:Option[String],width:Int,height:Int,startTime:Timestamp,endTime:Timestamp,sortNum:Int,status:Int,note:Option[String],intro:Option[String]) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val advertAutoInc = adverts.map( c =>(c.code,c.typeId,c.title,c.link,c.pic.?,c.width,c.height,c.startTime,c.endTime,c.sortNum,c.status,c.note.?,c.intro.?))  returning adverts.map(_.id) into {

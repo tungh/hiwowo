@@ -24,7 +24,7 @@ case class UserFollow(
                        followId: Long,
                        addTime: Option[Timestamp]
                        )
-class UserFollows(tag:Tag) extends Table[UserFollow](tag,"user_follow") {
+class UserFollowTable(tag:Tag) extends Table[UserFollow](tag,"user_follow") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def followId = column[Long]("follow_id")

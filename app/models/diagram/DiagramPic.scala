@@ -17,7 +17,7 @@ case class DiagramPic (
                           sortNum:Int,
                           addTime:Option[Timestamp]
                           )
-class DiagramPics(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
+class DiagramPicTable(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def diagramId = column[Long]("diagram_id")

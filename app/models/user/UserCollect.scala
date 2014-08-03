@@ -13,7 +13,7 @@ case class UserCollect (
                     collectId:Long,
                     addTime:Option[Timestamp]
                     )
-class UserCollects(tag:Tag) extends Table[UserCollect](tag,"user_collect") {
+class UserCollectTable(tag:Tag) extends Table[UserCollect](tag,"user_collect") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def uid = column[Long]("uid")
   def typeId = column[Int]("type_id")

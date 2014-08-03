@@ -7,7 +7,7 @@ import play.api.Play.current
 import models.Page
 import play.api.db.slick.Config.driver.simple._
 import models.label._
-import models.diagram.{Diagrams, Diagram}
+import models.diagram.{DiagramTable, Diagram}
 /**
  * Created with IntelliJ IDEA.
  * User: zuosanshao
@@ -16,11 +16,11 @@ import models.diagram.{Diagrams, Diagram}
  */
 object LabelDao {
 
-  val groups = TableQuery[Groups]
-  val groupLabels = TableQuery[GroupLabels]
-  val labels = TableQuery[Labels]
-  val labelDiagrams = TableQuery[LabelDiagrams]
-  val diagrams = TableQuery[Diagrams]
+  val groups = TableQuery[GroupTable]
+  val groupLabels = TableQuery[GroupLabelTable]
+  val labels = TableQuery[LabelTable]
+  val labelDiagrams = TableQuery[LabelDiagramTable]
+  val diagrams = TableQuery[DiagramTable]
 
   /* label group */
   def addGroup(name:String,intro:Option[String],status:Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>

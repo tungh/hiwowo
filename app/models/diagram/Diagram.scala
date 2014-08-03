@@ -33,7 +33,7 @@ case class Diagram (
                    addTime:Option[Timestamp]
                    )
 
-class Diagrams(tag:Tag) extends Table[Diagram](tag,"diagram") {
+class DiagramTable(tag:Tag) extends Table[Diagram](tag,"diagram") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def typeId = column[Int]("type_id")

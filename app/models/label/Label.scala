@@ -32,7 +32,7 @@ case class Label(
                 addTime:Option[Timestamp]
                 )
 
-class Labels(tag:Tag) extends Table[Label](tag,"label") {
+class LabelTable(tag:Tag) extends Table[Label](tag,"label") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def level = column[Int]("level")

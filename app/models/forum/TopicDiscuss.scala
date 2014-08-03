@@ -25,7 +25,7 @@ case class TopicDiscuss (
                         checkState:Int,
                         addTime:Option[Timestamp]
                         )
-class TopicDiscusses(tag:Tag) extends Table[TopicDiscuss](tag,"topic_discuss") {
+class TopicDiscussTable(tag:Tag) extends Table[TopicDiscuss](tag,"topic_discuss") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def topicId = column[Long]("topic_id")

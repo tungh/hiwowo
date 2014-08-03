@@ -16,7 +16,7 @@ case class LabelPic (
                           checkState:Int,
                           addTime:Option[Timestamp]
                           )
-class LabelPics(tag:Tag) extends Table[LabelPic](tag,"label_pic") {
+class LabelPicTable(tag:Tag) extends Table[LabelPic](tag,"label_pic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def labelId = column[Long]("label_id")
   def picId = column[Long]("pic_id")

@@ -2,7 +2,7 @@ package models.msg.dao
 
 
 import play.api.Play.current
-import models.msg.{FavorMsg, FavorMsgs}
+import models.msg.{FavorMsg, FavorMsgTable}
 import models.Page
 import play.api.db.slick.Config.driver.simple._
 
@@ -14,7 +14,7 @@ import play.api.db.slick.Config.driver.simple._
  */
 object FavorMsgDao {
 
-  val favorMsgs = TableQuery[FavorMsgs]
+  val favorMsgs = TableQuery[FavorMsgTable]
 
  def addMsg(loverId:Long,loverName:String,favorType:Int,thirdId:Long,content:String,lovedId:Long)  = play.api.db.slick.DB.withSession{ implicit session:Session =>
    val favorMsgsAutoInc = favorMsgs.map( u => (u.loverId, u.loverName,u.favorType, u.thirdId, u.content, u.lovedId)) returning favorMsgs.map(_.id) into {

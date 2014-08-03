@@ -16,7 +16,7 @@ case class LabelDiagram (
                 checkState:Int,
                 addTime:Option[Timestamp]
                 )
-class LabelDiagrams(tag:Tag) extends Table[LabelDiagram](tag,"label_diagram") {
+class LabelDiagramTable(tag:Tag) extends Table[LabelDiagram](tag,"label_diagram") {
 def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
 def labelId = column[Long]("label_id")
 def diagramId = column[Long]("diagram_id")

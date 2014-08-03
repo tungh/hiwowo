@@ -24,9 +24,9 @@ import models.forum._
 object TopicDao {
 
   
-  val topics = TableQuery[Topics]
-  val topicDiscusses = TableQuery[TopicDiscusses]
-  val users = TableQuery[Users]
+  val topics = TableQuery[TopicTable]
+  val topicDiscusses = TableQuery[TopicDiscussTable]
+  val users = TableQuery[UserTable]
 
   /* 增加一个话题 */
   def addTopic(uid: Long, title: String, content: String, intro: String, pics: String, typeId: Int, checkState: Int) = play.api.db.slick.DB.withSession{ implicit session:Session =>

@@ -30,7 +30,7 @@ case class Topic(
                  addTime:Option[Timestamp]
                  )
 
-class Topics(tag:Tag) extends Table[Topic](tag,"topic") {
+class TopicTable(tag:Tag) extends Table[Topic](tag,"topic") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def title = column[String]("title")

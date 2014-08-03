@@ -23,7 +23,7 @@ case class Cms (
                  addTime:Option[Timestamp]
                  )
 
-class Cmses(tag:Tag) extends Table[Cms](tag,"cms") {
+class CmsTable(tag:Tag) extends Table[Cms](tag,"cms") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def aid = column[Long]("aid")
   def title = column[String]("title")

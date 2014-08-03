@@ -15,7 +15,7 @@ case class FavorMsg(
                       lovedId:Long,
                      addTime:Option[Timestamp]
                      )
-class FavorMsgs(tag:Tag) extends Table[FavorMsg](tag,"favor_msg") {
+class FavorMsgTable(tag:Tag) extends Table[FavorMsg](tag,"favor_msg") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def loverId =column[Long]("lover_id")
   def loverName =column[String]("lover_name")

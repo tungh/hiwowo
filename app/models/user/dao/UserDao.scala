@@ -8,9 +8,19 @@ import play.api.Play.current
 import models.Page
 import models.user._
 import play.api.db.slick.Config.driver.simple._
-import models.diagram.{Diagrams, Diagram}
-import models.label.{LabelDiagrams, Label, Labels}
+import models.diagram.{DiagramTable, Diagram}
+import models.label._
 import java.util.Date
+import models.user.UserSubscribe
+import models.user.UserStatic
+import models.diagram.Diagram
+import models.Page
+import models.user.UserFollow
+import models.user.UserCollect
+import models.user.User
+import models.label.Label
+import models.user.UserProfile
+
 /*
 *
 * Dao 访问数据，可能来自数据库 也可能来自缓存
@@ -18,17 +28,17 @@ import java.util.Date
 
 object UserDao {
 
-  val users = TableQuery[Users]
-  val userStatics = TableQuery[UserStatics]
-  val userProfiles = TableQuery[UserProfiles]
-  val userCollects = TableQuery[UserCollects]
-  val userLoves = TableQuery[UserLoves]
-  val userFollows = TableQuery[UserFollows]
-  val userSubscribes = TableQuery[UserSubscribes]
-  val userRecords = TableQuery[UserRecords]
-  val diagrams = TableQuery[Diagrams]
-  val labels = TableQuery[Labels]
-  val labelDiagrams = TableQuery[LabelDiagrams]
+  val users = TableQuery[UserTable]
+  val userStatics = TableQuery[UserStaticTable]
+  val userProfiles = TableQuery[UserProfileTable]
+  val userCollects = TableQuery[UserCollectTable]
+  val userLoves = TableQuery[UserLoveTable]
+  val userFollows = TableQuery[UserFollowTable]
+  val userSubscribes = TableQuery[UserSubscribeTable]
+  val userRecords = TableQuery[UserRecordTable]
+  val diagrams = TableQuery[DiagramTable]
+  val labels = TableQuery[LabelTable]
+  val labelDiagrams = TableQuery[LabelDiagramTable]
 
   /* 验证 */
   def authenticate(email: String, password: String): Option[User] = play.api.db.slick.DB.withSession{ implicit session:Session =>

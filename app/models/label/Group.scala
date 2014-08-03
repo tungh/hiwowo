@@ -18,7 +18,7 @@ case class Group (
                    addTime:Option[Timestamp]
                    )
 
-class Groups(tag:Tag) extends Table[Group](tag,"group") {
+class GroupTable(tag:Tag) extends Table[Group](tag,"group") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def name = column[String]("name")
   def intro = column[String]("intro")
