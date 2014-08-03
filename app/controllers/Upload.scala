@@ -3,15 +3,13 @@ package controllers
 import _root_.utils.Utils
 import play.api.mvc.{Action, Controller}
 import java.io.File
-import java.util.regex.Pattern
 import play.api.libs.json.Json
-import net.coobird.thumbnailator.Thumbnails
 import controllers.users.Users
-import java.net.URL
 import play.api.data.Form
 import play.api.data.Forms._
 import models.user.dao.UserDao
-
+import java.sql.Timestamp
+import com.sksamuel.scrimage.Image
 /**
  * Created by zuosanshao.
  * email:zuosanshao@qq.com
@@ -37,12 +35,26 @@ object Upload extends Controller {
 
   def uploadDiagramPic=Action(parse.multipartFormData) { request =>
     request.body.file("file").map { picture =>
-      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      val suffix = picture.filename.substring(picture.filename.lastIndexOf("."))
+      val name = System.currentTimeMillis()
+      val filename =name+suffix
+
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
-        Thumbnails.of(new File("/opt/static/images/temp/" + filename)).size(600, 600).toFile(new File("/opt/static/images/diagram/" + filename))
-        val src ="/images/diagram/"+filename
-        Ok(Json.obj("code"->"100","message"->"success","src"->src))
+        val  now = new Timestamp(System.currentTimeMillis())
+        val rawPic = new File( utils.Utils.typeDir(now,"diagram"),filename+suffix)
+        val smallPic = new File( utils.Utils.typeDir(now,"diagram"),filename)
+        val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/"+filename+suffix
+        val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/"+filename
+
+        picture.ref.moveTo(rawPic,true)
+        if(Image(rawPic).width > 600){
+          Image(rawPic).scaleToWidth(600).write(smallPic)
+        }else{
+          Image(rawPic).write(smallPic)
+        }
+
+
+        Ok(Json.obj("code"->"100","message"->"success","src"->smallUrl))
 
       }else{
         Ok(Json.obj("code"->"104","message"->"fail"))
@@ -55,11 +67,26 @@ object Upload extends Controller {
 
   def uploadEditorPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("fileData").map { picture =>
-      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      val suffix = picture.filename.substring(picture.filename.lastIndexOf("."))
+      val name = System.currentTimeMillis()
+      val filename =name+suffix
+
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
-        val picSrc ="/images/editor/"+filename
-       Ok(Json.obj("code"->"100","src"->picSrc,"message"->"success","title"->"嗨喔喔"))
+
+        val  now = new Timestamp(System.currentTimeMillis())
+        val rawPic = new File( utils.Utils.typeDir(now,"editor"),filename+suffix)
+        val smallPic = new File( utils.Utils.typeDir(now,"editor"),filename)
+        val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename+suffix
+        val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename
+
+        picture.ref.moveTo(rawPic,true)
+        if(Image(rawPic).width > 600){
+          Image(rawPic).scaleToWidth(600).write(smallPic)
+        }else{
+          Image(rawPic).write(smallPic)
+        }
+
+       Ok(Json.obj("code"->"100","src"->smallUrl,"message"->"success","title"->"嗨喔喔"))
 
       }else{
         Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
@@ -72,11 +99,20 @@ object Upload extends Controller {
   /* 上传的广告图片 */
   def uploadAdvertPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("fileData").map { picture =>
-      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      val suffix = picture.filename.substring(picture.filename.lastIndexOf("."))
+      val name = System.currentTimeMillis()
+      val filename =name+suffix
+
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("/opt/static/images/advert/"+filename),true)
-        val picSrc ="/images/advert/"+filename
-        Ok(Json.obj("code"->"100","src"->picSrc,"message"->"success","title"->"嗨喔喔"))
+        val  now = new Timestamp(System.currentTimeMillis())
+
+        val pic = new File( utils.Utils.typeDir(now,"advert"),filename)
+
+        val picUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename
+
+        picture.ref.moveTo(pic,true)
+
+        Ok(Json.obj("code"->"100","src"->picUrl,"message"->"success","title"->"嗨喔喔"))
 
       }else{
         Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
@@ -92,12 +128,18 @@ object Upload extends Controller {
     request =>
       request.body.file("filedata").map {
         picture =>
-          val filename = System.currentTimeMillis() + picture.filename.substring(picture.filename.lastIndexOf("."))
+          val suffix = picture.filename.substring(picture.filename.lastIndexOf("."))
+          val name = System.currentTimeMillis()
+          val filename =name+suffix
+
           if (Utils.isImage(filename)) {
-              picture.ref.moveTo(new File("/opt/static/images/temp/" + filename), true)
-              Thumbnails.of(new File("/opt/static/images/temp/" + filename)).size(300, 300).toFile(new File("/opt/static/images/user/" + filename))
-              val picSrc = "/images/user/" + filename
-            Ok(views.html.common.uploadImageSelectSuccess(true, picSrc))
+
+            val  now = new Timestamp(System.currentTimeMillis())
+            val pic = new File( utils.Utils.typeDir(now,"user"),filename)
+            val picUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/user/"+filename
+            picture.ref.moveTo(pic,true)
+
+            Ok(views.html.common.uploadImageSelectSuccess(true, picUrl))
           } else {
             Ok(views.html.common.uploadImageSelectSuccess(false, "亲，服务器欧巴桑了，请重试"))
           }
@@ -114,22 +156,23 @@ object Upload extends Controller {
         formWithErrors => BadRequest("something is wrong"),
         fields => {
           val picName: String = fields._1.substring(fields._1.lastIndexOf("/"))
-          val src = "public" + fields._1
-          Thumbnails.of(src).sourceRegion(fields._2, fields._3, (fields._4 - fields._2), (fields._5 - fields._3)).size((fields._4 - fields._2), (fields._5 - fields._3)).toFile("public/uploadImage/" + picName)
-          val picSrc: String = "/images/user/" + picName
-          UserDao.modifyPic(user.get.id.get, picSrc)
-          Ok(Json.obj("code" -> "100", "src" -> picSrc))
+          val pic = new File("/opt/static/" + fields._1)
+          Image(pic).subimage(fields._2, fields._3, (fields._4 - fields._2), (fields._5 - fields._3)).write(pic)
+
+          UserDao.modifyPic(user.get.id.get, fields._1)
+          Ok(Json.obj("code" -> "100", "src" -> fields._1))
         }
       )
   }
 
 
   /* 获得视频地址*/
-  def getVideo = Users.UserAction {
-    user => implicit request =>
+  def getVideo = Users.UserAction { user => implicit request =>
 
       Ok(Json.obj("code" -> "100", "src" -> "sss"))
   }
+
+
 
 
 }

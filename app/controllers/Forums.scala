@@ -123,6 +123,11 @@ object Forums extends Controller {
     Ok(views.html.forums.forum(user,typeId,sortBy,page))
   }
 
+  def topics(typeId:Int,p:Int,sortBy:String)  = Users.UserAction{ user => implicit request =>
+    val page = TopicDao.filterTopics(typeId,sortBy,p,10)
+    Ok(views.html.forums.forum(user,typeId,sortBy,page))
+  }
+
   def search = Users.UserAction{ user => implicit request =>
          Ok(" forum search ")
   }

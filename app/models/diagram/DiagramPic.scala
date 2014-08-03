@@ -13,6 +13,11 @@ case class DiagramPic (
                           uid:Long,
                           diagramId:Long,
                           url:String,
+                          width:Int,
+                          height:Int,
+                          rawUrl:String,
+                          rawWidth:Int,
+                          rawHeight:Int,
                           intro: Option[String],
                           sortNum:Int,
                           addTime:Option[Timestamp]
@@ -22,9 +27,14 @@ class DiagramPicTable(tag:Tag) extends Table[DiagramPic](tag,"diagram_pic") {
   def uid = column[Long]("uid")
   def diagramId = column[Long]("diagram_id")
   def url = column[String]("url")
+  def width = column[Int]("width")
+  def height = column[Int]("height")
+  def rawUrl = column[String]("rawUrl")
+  def rawWidth = column[Int]("rawWidth")
+  def rawHeight = column[Int]("rawHeight")
   def intro  = column[String]("intro")
   def sortNum = column[Int]("sort_num")
   def addTime = column[Timestamp]("add_time")
-  def * =(id.?,uid,diagramId,url,intro.?,sortNum,addTime.?) <> (DiagramPic.tupled, DiagramPic.unapply)
+  def * =(id.?,uid,diagramId,url,width,height,rawUrl,width,height,intro.?,sortNum,addTime.?) <> (DiagramPic.tupled, DiagramPic.unapply)
 
 }

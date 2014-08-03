@@ -12,6 +12,8 @@ import play.api.libs.Crypto
 import java.sql.Timestamp
 import java.io.File
 import com.sksamuel.scrimage.Image
+import utils.Utils
+import net.coobird.thumbnailator.Thumbnails
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,8 +38,27 @@ object Test extends Controller {
  //   val result = UserDao.findUser(1)
   //    val interval= utils.Utils.getInterval(new Timestamp(1000000000))
       val in = new File("public/assets/images/start.jpg")
+    val in2 = new File("public/assets/images/day.jpg")
+    val scaleImage =  new File("public/assets/images/scaleImage.jpg")
+     /* val rate=600*Image(in).height / Image(in).width
+      val scalaImage =  new File("public/assets/images/scalaImage.jpg")
+    val scalaImage2 =  new File("public/assets/images/scalaImage2.jpg")
+    val scalaImage3 =  new File("public/assets/images/scalaImage3.jpg")
+    val resizeImage =  new File("public/assets/images/resizeImage.jpg")
 
-    Ok(" Ok! code:  "+ Image(in).width + "  " + Image(in).height )
+
+    val day =  new File("public/assets/images/day2.jpg")
+      Image(in).resizeTo(600,400).write(resizeImage)
+      Image(in).scaleTo(600,400).write(scalaImage)
+      Image(in).scaleToWidth(600).write(scalaImage2)
+      Image(in).scaleTo(600,rate).write(scalaImage3)
+*/
+
+    Image(in2).scaleToWidth(600).write(scaleImage)
+
+
+      val dir = Utils.imageDir(new Timestamp(System.currentTimeMillis()),"diagram","raw")
+    Ok(" Ok! code:  "+ Image(in).width + "  " + Image(in).height + "   "+dir.getPath )
 
   }
 

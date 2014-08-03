@@ -11,6 +11,7 @@ package utils
 import java.util.regex.Pattern
 import java.sql.Timestamp
 import java.util.Calendar
+import java.io.File
 
 object Utils {
   /*正则表达式验证*/
@@ -19,8 +20,8 @@ object Utils {
   }
   /*验证是否为图片格式*/
   def isImage(str:String):Boolean={
-    val regex:String="(?i).+?\\.(jpg|JPG|jpeg|JPEG|gif|GIF|png|PNG|bmp|BMP)";
-    isMatch(regex,str);
+    val regex:String="(?i).+?\\.(jpg|JPG|jpeg|JPEG|gif|GIF|png|PNG|bmp|BMP)"
+    isMatch(regex,str)
   }
 
  def isNumber(str:String):Boolean={
@@ -71,7 +72,7 @@ object Utils {
     (currentTime.getTime- beforeTime.getTime())/(24*60*60*1000)
   }
   /* 例如 201305*/
-  def getYearMonth(date:Timestamp) ={
+  def getYearMonth(date:Timestamp):Int ={
     val calendar:Calendar = Calendar.getInstance()
     calendar.setTime(date)
     calendar.get(Calendar.YEAR)*100+calendar.get(Calendar.MONTH)+1
@@ -96,7 +97,48 @@ object Utils {
     }
 
   }
+     /*
+     * 生存的图片path 如下  /opt/static/images/201408/diagram/raw
+     *
+     * typePath 指 diagram  topic user 等
+     * sizePath 指 根据图片规格大小设置的文件夹，比如 raw ,small
+     *
+     * */
 
+
+  def monthDir(time:Timestamp):File = {
+    val month = Utils.getYearMonth(time).toString
+    val dir = new File("/opt/static/images/"+month)
+    if(!dir.exists()){
+      dir.mkdir()
+    }
+    dir
+  }
+
+  def typeDir(time:Timestamp,typePath:String):File = {
+    val month:File = monthDir(time)
+    val dir = new File(month,typePath)
+    if(!dir.exists()){
+      dir.mkdir()
+    }
+    dir
+  }
+
+  def imageDir(time:Timestamp,typeFile:String,sizeFile:String):File={
+    val monthPath = new File("/opt/static/images/"+getYearMonth(time).toString)
+    if(!monthPath.exists()){
+      monthPath.mkdir()
+    }
+    val typePath = new File(monthPath,typeFile)
+    if(!typePath.exists()){
+      typePath.mkdir()
+    }
+    val sizeDir = new File(typePath,sizeFile)
+    if(!sizeDir.exists()){
+      sizeDir.mkdir()
+    }
+    sizeDir
+  }
 
 
 }

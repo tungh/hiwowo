@@ -651,3 +651,11 @@ CREATE TABLE IF NOT EXISTS `label_video`(
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# 2014 - 08 -03
+
+alter table diagram_pic add  column width smallint unsigned ;
+alter table diagram_pic add  column height smallint unsigned ;
+alter table diagram_pic add  column raw_url varchar(250) ;
+alter table diagram_pic add  column raw_width smallint unsigned ;
+alter table diagram_pic add  column raw_height smallint unsigned ;

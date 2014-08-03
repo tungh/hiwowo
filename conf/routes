@@ -2,7 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+#TEST
+GET         /test                                               controllers.Test.test
+GET         /ui                                                 controllers.Test.ui
+
+
 # Home page
 GET         /                                                   controllers.Pages.index(p:Int =1,size:Int =10)
 GET         /hot/$p<[0-9]+>                                     controllers.Pages.index(p:Int,size:Int ?=10)
@@ -24,6 +28,8 @@ GET         /adult/$p<[0-9]+>                                   controllers.Page
 GET         /forum                                              controllers.Forums.forum(typeId:Int        ?=-1,        sortBy:        String        ?="new",        p:        Int ?=1,size        :        Int        ?=10)
 
 GET         /forum/search                                       controllers.Forums.search
+
+GET          /topics/$typeId<[0-9]+>/$p<[0-9]+>                   controllers.Forums.topics(typeId:Int,p:Int,sortBy:String)
 GET         /topic/$id<[0-9]+>                                  controllers.Forums.topic(id:Long,p:Int ?=1,size:Int ?=10)
 GET         /topic/edit                                         controllers.Forums.editTopic(id:Long ?=0L)
 POST        /topic/save                                         controllers.Forums.saveTopic
@@ -100,10 +106,9 @@ GET         /user/msg/system                                    controllers.user
 GET         /user/msg/at                                        controllers.users.UsersMsg.at
 
 # upload
-POST     /uploadDiagramPic                                     controllers.Upload.uploadDiagramPic
+POST      /uploadDiagramPic                                  controllers.Upload.uploadDiagramPic
 
-POST       /editor/uploadPic                                   controllers.Upload.uploadEditorPic
-
+POST        /editor/uploadPic                                    controllers.Upload.uploadEditorPic
 POST        /advert/uploadPic                                   controllers.Upload.uploadAdvertPic
 POST        /uploadPic/select                                   controllers.Upload.uploadImageSelectPic
 POST        /user/account/doUploadPic                           controllers.Upload.doUploadUserPic

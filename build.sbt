@@ -10,7 +10,6 @@ libraryDependencies ++= Seq(
   jdbc, cache
     ,"mysql" % "mysql-connector-java" % "5.1.9"
     ,"org.jsoup" % "jsoup" % "1.7.1"
-    ,"net.coobird" % "thumbnailator" % "0.4.7"
     ,"com.typesafe.play" %% "play-slick" % "0.8.0-RC3"
     ,"com.sksamuel.scrimage" %% "scrimage-core" % "1.4.1"
     ,"com.sksamuel.scrimage" %% "scrimage-canvas" % "1.4.1"
