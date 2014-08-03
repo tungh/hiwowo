@@ -11,7 +11,8 @@ import play.api.data.Form
 import play.api.data.Forms._
 import scala.Some
 import models.user.User
-
+import java.io.File
+import com.sksamuel.scrimage.Image
 import scala.collection.JavaConversions._
 
 /**
@@ -85,23 +86,34 @@ object  Diagrams extends Controller {
           val pic = data.urls.head
           var content =""
           for((url,i) <- data.urls.view.zipWithIndex){
-            content +="<img class='img-upload' src='"+url+"'><span>"+data.alts.get(i).getOrElse("")+"</span>"
+            val suffix = url.substring(url.lastIndexOf("."))
+           val pic = new File("/opt/static"+url)
+           val rawPicUrl = url+suffix
+           val rawPic = new File("/opt/static"+rawPicUrl)
+            content +="<img class='img-upload lazy' src='/assets/images/loading.gif' data-original='"+ url +"' width='"+Image(pic).width+"'height='"+Image(pic).height+"' data-raw='"+rawPicUrl+"'data-rawwidth='"+Image(rawPic).width+"'data-rawheight='"+Image(rawPic).height+" alt='"+ data.alts.get(i).getOrElse("") +"'  '><span>"+data.alts.get(i).getOrElse("")+"</span>"
+
           }
           if(data.id.isEmpty){
-
             diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
-            for((url,i) <- data.urls.view.zipWithIndex){
-              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.alts.get(i))
-            }
+
           }else{
             diagramId = data.id.get
             DiagramDao.deleteDiagramPics(diagramId)
             DiagramDao.modifyDiagram(data.id.get,user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
-            for((url,i) <- data.urls.view.zipWithIndex){
-              DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,data.alts.get(i))
-            }
-          }
 
+          }
+          /* 保存 diagram pic */
+          for((url,i) <- data.urls.view.zipWithIndex){
+            val suffix = url.substring(url.lastIndexOf("."))
+            val pic = new File("/opt/static"+url)
+            val width = Image(pic).width
+            val height = Image(pic).height
+            val rawPicUrl = url+suffix
+            val rawPic = new File("/opt/static"+rawPicUrl)
+            val rawWidth = Image(rawPic).width
+            val rawHeight = Image(rawPic).height
+            DiagramDao.addDiagramPic(user.get.id.get,diagramId,url,width,height,rawPicUrl,rawWidth,rawHeight,data.alts.get(i))
+          }
           Redirect(controllers.routes.Diagrams.diagram(diagramId))
         })
 

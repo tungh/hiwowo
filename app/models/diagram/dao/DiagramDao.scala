@@ -64,7 +64,12 @@ object DiagramDao {
     }
     imageAutoInc.insert(uid,diagramId,url,intro)
   }
-
+  def addDiagramPic(uid:Long,diagramId:Long, url:String,width:Int,height:Int,rawUrl:String,rawWidth:Int,rawHeight:Int,intro: Option[String]):Long = play.api.db.slick.DB.withSession{ implicit session:Session =>
+    val imageAutoInc = diagramPics.map( c => (c.uid,c.diagramId,c.url,c.width,c.height,c.rawUrl,c.rawWidth,c.rawHeight,c.intro.?)) returning diagramPics.map(_.id) into {
+      case (_, id) => id
+    }
+    imageAutoInc.insert(uid,diagramId,url,width,height,rawUrl,rawWidth,rawHeight,intro)
+  }
   def deleteDiagramPic(id:Long) = play.api.db.slick.DB.withSession{ implicit session:Session =>
     ( for(c<-diagramPics if c.id === id) yield c ).delete
   }

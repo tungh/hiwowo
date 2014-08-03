@@ -76,11 +76,12 @@ object Upload extends Controller {
         val  now = new Timestamp(System.currentTimeMillis())
         val rawPic = new File( utils.Utils.typeDir(now,"editor"),filename+suffix)
         val smallPic = new File( utils.Utils.typeDir(now,"editor"),filename)
-        val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename+suffix
+      //  val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename+suffix
         val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename
 
         picture.ref.moveTo(rawPic,true)
-        if(Image(rawPic).width > 600){
+
+        if(Image(rawPic).width > 600 ||  suffix !=".gif"){
           Image(rawPic).scaleToWidth(600).write(smallPic)
         }else{
           Image(rawPic).write(smallPic)
