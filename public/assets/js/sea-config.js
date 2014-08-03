@@ -29,6 +29,9 @@ seajs.config({
         'webuploader':'libs/webuploader/0.1.5/webuploader.min',
         'cookie': 'libs/cookies/1.4.1/cookie.js',
 
+        'lazyload': 'libs/lazyload/jquery.lazyload.js',
+
+
         'simpleEditor':'hiwowo/editor/hiwowo.simpleEditor',
         'hiwowo':'hiwowo/1.0.0/hiwowo'
     },

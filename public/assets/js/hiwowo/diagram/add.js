@@ -496,7 +496,7 @@ define(function(require){
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
                       //  alert( '上传成功' );
-                        $(".uploadBtn").html("上传成功")
+                        $(".uploadBtn").addClass("hidden")
                         $("#J_saveDraft").removeClass("hidden").addClass("show")
                         $("#J_addSubmit").removeClass("hidden").addClass("show")
                     } else {

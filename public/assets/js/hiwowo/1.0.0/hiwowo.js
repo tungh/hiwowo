@@ -17,6 +17,7 @@
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
     require("bootstrap")
+    require("lazyload")
 
     $.hiwowo = $.hiwowo || {
         version: "v1.0.0"
@@ -438,7 +439,7 @@ define(function(require, exports) {
         }
 
 
-
+        $("img.lazy").lazyload();
 
 
     });

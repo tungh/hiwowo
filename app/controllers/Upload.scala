@@ -10,6 +10,7 @@ import play.api.data.Forms._
 import models.user.dao.UserDao
 import java.sql.Timestamp
 import com.sksamuel.scrimage.Image
+import  com.sksamuel.scrimage.AsyncImage
 /**
  * Created by zuosanshao.
  * email:zuosanshao@qq.com
@@ -42,15 +43,19 @@ object Upload extends Controller {
       if(Utils.isImage(filename)){
         val  now = new Timestamp(System.currentTimeMillis())
         val rawPic = new File( utils.Utils.typeDir(now,"diagram"),filename+suffix)
-        val smallPic = new File( utils.Utils.typeDir(now,"diagram"),filename)
-        val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/"+filename+suffix
-        val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/"+filename
 
-        picture.ref.moveTo(rawPic,true)
-        if(Image(rawPic).width > 600){
-          Image(rawPic).scaleToWidth(600).write(smallPic)
+        val smallPic = new File( utils.Utils.typeDir(now,"diagram"),filename)
+    //    val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/diagram/"+filename+suffix
+        val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/diagram/"+filename
+
+       /* AsyncImage(picture.ref.file).onSuccess{
+          case image => image.toImage.write(rawPic)
+        }*/
+         Image(picture.ref.file).write(rawPic)
+        if(Image(picture.ref.file).width > 600){
+          Image(picture.ref.file).scaleToWidth(600).write(smallPic)
         }else{
-          Image(rawPic).write(smallPic)
+          Image(picture.ref.file).write(smallPic)
         }
 
 
@@ -75,19 +80,20 @@ object Upload extends Controller {
 
         val  now = new Timestamp(System.currentTimeMillis())
         val rawPic = new File( utils.Utils.typeDir(now,"editor"),filename+suffix)
+        val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename+suffix
         val smallPic = new File( utils.Utils.typeDir(now,"editor"),filename)
-      //  val rawUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename+suffix
+
+        Image(picture.ref.file).write(rawPic)
+
+        if(Image(picture.ref.file).width > 600 ||  suffix !=".gif"){
+          Image(picture.ref.file).scaleToWidth(600).write(smallPic)
+        }else{
+          Image(picture.ref.file).write(smallPic)
+        }
+        val img="<img class='img-upload lazy' data-original='"+Image(smallPic)+"'width='"+Image(smallPic).width+"'height='"+Image(smallPic).height+"'data-raw='"+rawUrl+"' data-rawwidth='"+Image(rawPic).width+"' data-rawheight='"+Image(rawPic).height+"' >"
         val smallUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename
 
-        picture.ref.moveTo(rawPic,true)
-
-        if(Image(rawPic).width > 600 ||  suffix !=".gif"){
-          Image(rawPic).scaleToWidth(600).write(smallPic)
-        }else{
-          Image(rawPic).write(smallPic)
-        }
-
-       Ok(Json.obj("code"->"100","src"->smallUrl,"message"->"success","title"->"嗨喔喔"))
+        Ok(Json.obj("code"->"100","src"->smallUrl,"img"->img,"message"->"success","title"->"嗨喔喔"))
 
       }else{
         Ok(Json.obj("code"->"104","message"->"亲，你确定是图片吗"))
@@ -109,7 +115,7 @@ object Upload extends Controller {
 
         val pic = new File( utils.Utils.typeDir(now,"advert"),filename)
 
-        val picUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/editor/"+filename
+        val picUrl = "/images/"+utils.Utils.getYearMonth(now).toString+"/advert/"+filename
 
         picture.ref.moveTo(pic,true)
 

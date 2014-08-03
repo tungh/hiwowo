@@ -1,4 +1,5 @@
 /**
+/**
  * Created by zuosanshao.
  * User: hiwowo.com
  * Email:zuosanshao@qq.com
@@ -383,7 +384,7 @@ define(function (require, exports) {
                            button_width:120,
                            button_height: 38,
                           //   Flash Settings
-                            flash_url: "/assets/js/sea-modules/swfupload.swf",
+                            flash_url: "/assets/js/libs/swfupload/swfupload.swf",
                             debug: false
                         });
 
@@ -401,11 +402,15 @@ define(function (require, exports) {
 
                                 if (self.isIE678) {
                                     self.insertHTML("<img class='img-upload'  src='" +data.src + "'/>");
+                                    selft.insertHTML(data.img)
                                 } else {
                                     var imgDom = self.iframeDocument.createElement("img");
                                     imgDom.src = data.src;
                                     imgDom.setAttribute("class","img-upload")
                                     imgDom.setAttribute("unselectable", "on")
+                                    var picDom = self.iframeDocument.createElement("div")
+                                    picDom.setAttribute("class",'lazy-wrap')
+                                    picDom.insertHTML(data.img)
                                     //    imgDom.setAttribute("title", $srcElement.attr("title"))
                                     //     imgDom.setAttribute("alt", $srcElement.attr("title"))
                                     self.insertHTML(imgDom);
@@ -655,9 +660,9 @@ define(function (require, exports) {
             self.iframeDocument.designMode = "on";
             self.iframeDocument.open();
             if (self.isIE678) {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;} .lazy-wrap{display: none} </style></head></html>');
             } else {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;} .img-upload { display: block;max-width: 200px;padding-right: 50px; max-height: 250px; _width: 200px;background:  url(/assets/css/template/images/editor/editor-img.gif) no-repeat bottom right transparent;} .lazy-wrap{display: none}</style></head></html>');
             }
             self.iframeDocument.close();
             var textareaVal = $("#" + self.config.textareaID).val();

@@ -90,8 +90,7 @@ object  Diagrams extends Controller {
            val pic = new File("/opt/static"+url)
            val rawPicUrl = url+suffix
            val rawPic = new File("/opt/static"+rawPicUrl)
-            content +="<img class='img-upload lazy' src='/assets/images/loading.gif' data-original='"+ url +"' width='"+Image(pic).width+"'height='"+Image(pic).height+"' data-raw='"+rawPicUrl+"'data-rawwidth='"+Image(rawPic).width+"'data-rawheight='"+Image(rawPic).height+" alt='"+ data.alts.get(i).getOrElse("") +"'  '><span>"+data.alts.get(i).getOrElse("")+"</span>"
-
+            content +="<img class='img-upload lazy'  data-original='"+ url +"' width='"+Image(pic).width+"'height='"+Image(pic).height+"' data-raw='"+rawPicUrl+"'data-rawwidth='"+Image(rawPic).width+"'data-rawheight='"+Image(rawPic).height+"'alt='"+ data.alts.get(i).getOrElse("") +"'  '><span>"+data.alts.get(i).getOrElse("")+"</span>"
           }
           if(data.id.isEmpty){
             diagramId = DiagramDao.addDiagram(user.get.id.get,data.typeId,data.title,pic,data.intro,Some(content),1)
