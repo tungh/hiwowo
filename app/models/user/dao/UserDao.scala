@@ -141,7 +141,7 @@ object UserDao {
     } else {
       (currentPage - 1) * pageSize
     }
-    Page[User](users.drop(startRow).take(pageSize).list(), currentPage, totalPages)
+    Page[User](users.drop(startRow).take(pageSize).list, currentPage, totalPages)
   }
 
 
@@ -191,14 +191,14 @@ object UserDao {
     if(!startTime.isEmpty) query = query.filter(_.registTime > new Timestamp(startTime.get.getTime))
     if(!endTime.isEmpty) query = query.filter(_.registTime < new Timestamp(endTime.get.getTime))
     //println("sql " +query.selectStatement)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val groups: List[User] = query.drop(startRow).take(pageSize).list()
+    val groups: List[User] = query.drop(startRow).take(pageSize).list
     Page[User](groups, currentPage, totalPages)
   }
 
@@ -235,7 +235,7 @@ object UserDao {
       if u.collectId === c.id
       if u.uid === uid
       if u.typeId === 0
-    } yield c ).drop(startRow).take(pageSize).list()
+    } yield c ).drop(startRow).take(pageSize).list
 
     Page[Diagram](list,currentPage,totalPages)
 
@@ -263,7 +263,7 @@ object UserDao {
       c <- labels
       if u.labelId === c.id
       if u.uid === uid
-    } yield c ).list()
+    } yield c ).list
   }
 
   def findSubscribeDiagrams(uid:Long,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
@@ -276,11 +276,11 @@ object UserDao {
       if s.uid === uid
     }yield d
 
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
 
-    Page[Diagram](query.drop(startRow).take(pageSize).list(),currentPage,totalPages)
+    Page[Diagram](query.drop(startRow).take(pageSize).list,currentPage,totalPages)
   }
 
   /* user subscribe 用户关注 */
@@ -308,7 +308,7 @@ object UserDao {
           u <- users
          if c.uid === u.id
          if c.uid === uid
-   }yield u).drop(startRow).take(pageSize).list()
+   }yield u).drop(startRow).take(pageSize).list
    Page[User](list,currentPage,totalPages)
  }
 
@@ -321,7 +321,7 @@ object UserDao {
       u <- users
       if c.followId === u.id
       if c.followId === uid
-    }yield u).drop(startRow).take(pageSize).list()
+    }yield u).drop(startRow).take(pageSize).list
     Page[User](list,currentPage,totalPages)
   }
 

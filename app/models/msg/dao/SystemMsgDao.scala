@@ -40,23 +40,23 @@ object SystemMsgDao {
   }
 
   def findAll(currentPage:Int,pageSize:Int):Page[SystemMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows=Query(systemMsgs.length).first()
+    val totalRows=Query(systemMsgs.length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<- systemMsgs.sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     //println(" q sql "+q.selectStatement)
-    val msgs:List[SystemMsg]=  q.list()
+    val msgs:List[SystemMsg]=  q.list
     Page[SystemMsg](msgs,currentPage,totalPages)
   }
 
   def filterMsgs(title:Option[String],currentPage:Int,pageSize:Int):Page[SystemMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     var query =for(c<-systemMsgs)yield c
     if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
-    val totalRows=query.list().length
+    val totalRows=query.list.length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val msgs:List[SystemMsg]=  query.drop(startRow).take(pageSize).list()
+    val msgs:List[SystemMsg]=  query.drop(startRow).take(pageSize).list
     Page[SystemMsg](msgs,currentPage,totalPages);
   }
 
@@ -86,7 +86,7 @@ object SystemMsgDao {
   }
  /* 查找所有的 system msg receiver */
   def findAllMsgReceivers(currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows=Query(systemMsgReceivers.length).first()
+    val totalRows=Query(systemMsgReceivers.length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -95,13 +95,13 @@ object SystemMsgDao {
       sm <- systemMsgs
       if sm.id === c.msgId
     }yield (c.id,c.receiverId,c.status,sm.title,sm.content,c.addTime)
-    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.drop(startRow).take(pageSize).list()
+    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.drop(startRow).take(pageSize).list
     Page[(Long,Long,Int,String,String,Timestamp)](msgs,currentPage,totalPages)
   }
 
   /* 查找某个receiver 收到的 信息 */
     def findReceiverMsgs(receiverId:Long,currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] =  play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows=Query(systemMsgReceivers.filter(_.receiverId === receiverId).length).first()
+    val totalRows=Query(systemMsgReceivers.filter(_.receiverId === receiverId).length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -111,7 +111,7 @@ object SystemMsgDao {
      if c.receiverId === receiverId
       if sm.id === c.msgId
     }yield (c.id,c.receiverId,c.status,sm.title,sm.content,c.addTime)
-    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.drop(startRow).take(pageSize).list()
+    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.drop(startRow).take(pageSize).list
     Page[(Long,Long,Int,String,String,Timestamp)](msgs,currentPage,totalPages)
   }
 }

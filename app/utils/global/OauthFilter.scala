@@ -9,7 +9,7 @@ import play.api.libs.Crypto
 
 
 object OauthFilter extends Filter {
-  def apply(nextFilter: (RequestHeader) => Future[SimpleResult])(requestHeader: RequestHeader): Future[SimpleResult] = {
+  def apply(nextFilter: (RequestHeader) => Future[Result])(requestHeader: RequestHeader): Future[SimpleResult] = {
 
     nextFilter(requestHeader).map {
       result =>

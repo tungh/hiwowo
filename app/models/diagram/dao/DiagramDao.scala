@@ -77,7 +77,7 @@ object DiagramDao {
   }
 
   def findDiagramPics(diagramId:Long):List[DiagramPic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    ( for(c<-diagramPics if c.diagramId === diagramId)yield c).list()
+    ( for(c<-diagramPics if c.diagramId === diagramId)yield c).list
   }
 
   /*
@@ -126,7 +126,7 @@ object DiagramDao {
   val list =  (for{
       c <- diagrams
       if c.uid === uid
-    } yield c).drop(startRow).take(pageSize).list()
+    } yield c).drop(startRow).take(pageSize).list
     Page[Diagram](list,currentPage,totalPages)
   }
     def findDiagrams(sortBy:String,status:Int,currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
@@ -141,7 +141,7 @@ object DiagramDao {
       }yield(c,u)
       if(sortBy == "new") query = query.sortBy(_._1.id desc)
       if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
-      val list = query.drop(startRow).take(pageSize).list()
+      val list = query.drop(startRow).take(pageSize).list
     Page[(Diagram,User)](list,currentPage,totalPages)
   }
 
@@ -160,7 +160,7 @@ object DiagramDao {
     }yield(c,u)
     if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
     if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
-    val list = query.drop(startRow).take(pageSize).list()
+    val list = query.drop(startRow).take(pageSize).list
     Page[(Diagram,User)](list,currentPage,totalPages)
   }
   def findAllDiagrams(currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
@@ -171,7 +171,7 @@ object DiagramDao {
     } else {
       (currentPage - 1) * pageSize
     }
-     val list =  ( for(c <- diagrams ) yield c).drop(startRow).take(pageSize).list()
+     val list =  ( for(c <- diagrams ) yield c).drop(startRow).take(pageSize).list
     Page[Diagram](list,currentPage,totalPages)
   }
 
@@ -182,14 +182,14 @@ object DiagramDao {
     if(!status.isEmpty) query = query.filter(_.status === status.get)
     if(!typeId.isEmpty) query = query.filter(_.typeId === typeId.get)
     query = query.sortBy(_.id desc)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val ts: List[Diagram] = query.drop(startRow).take(pageSize).list()
+    val ts: List[Diagram] = query.drop(startRow).take(pageSize).list
     Page[Diagram](ts, currentPage, totalPages)
   }
 
@@ -220,7 +220,7 @@ def findDiagramDiscusses(diagramId:Long,sortBy:String,currentPage:Int,pageSize:I
 
   if(sortBy == "new") query = query.sortBy(_._1.addTime desc)
   if(sortBy == "hot") query = query.sortBy(_._1.loveNum desc)
-  val list = query.drop(startRow).take(pageSize).list()
+  val list = query.drop(startRow).take(pageSize).list
   Page[(DiagramDiscuss,User)](list, currentPage,totalPages)
 }
 

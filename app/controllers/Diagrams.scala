@@ -184,13 +184,13 @@ object  Diagrams extends Controller {
       if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
         Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
       }else{
-       if(!session.get("pet_"+diagramId.get).isEmpty){
+       if(!request.session.get("pet_"+diagramId.get).isEmpty){
           Ok(Json.obj("code" -> "102", "message" ->"loved"))
         } else {
         DiagramSQLDao.updateLoveNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
         val value=diagramId.get.toString
-        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( request.session + (key -> value))
         }
       }
   }
@@ -202,13 +202,13 @@ object  Diagrams extends Controller {
     if(diagramId.isEmpty || diagramId.getOrElse(0) ==0 ){
       Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
     }else{
-      if(!session.get("pet_"+diagramId.get).isEmpty){
+      if(!request.session.get("pet_"+diagramId.get).isEmpty){
         Ok(Json.obj("code" -> "102", "message" ->"hated"))
       } else {
         DiagramSQLDao.updateHateNum(diagramId.get,1)
         val key ="pet_"+diagramId.get.toString
         val value=diagramId.get.toString
-        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( request.session + (key -> value))
       }
     }
   }
@@ -219,13 +219,13 @@ object  Diagrams extends Controller {
     if(discussId.isEmpty || discussId.getOrElse(0) ==0 ){
       Ok(Json.obj("code" -> "104", "message" ->"discuss id is not correct"))
     }else{
-      if(!session.get("discuss_"+discussId.get).isEmpty){
+      if(!request.session.get("discuss_"+discussId.get).isEmpty){
         Ok(Json.obj("code" -> "104", "message" ->"support"))
       } else {
         DiagramDiscussSQLDao.updateLoveNum(discussId.get,1)
         val key ="discuss_"+discussId.get.toString
         val value=discussId.get.toString
-        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( request.session + (key -> value))
       }
     }
   }
@@ -237,13 +237,13 @@ object  Diagrams extends Controller {
     if(discussId.isEmpty || discussId.getOrElse(0) ==0 ){
       Ok(Json.obj("code" -> "104", "message" ->"discuss id is not correct"))
     }else{
-      if(!session.get("discuss_"+discussId.get).isEmpty){
+      if(!request.session.get("discuss_"+discussId.get).isEmpty){
         Ok(Json.obj("code" -> "104", "message" ->"support"))
       } else {
         DiagramDiscussSQLDao.updateHateNum(discussId.get,1)
         val key ="discuss_"+discussId.get.toString
         val value=discussId.get.toString
-        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( request.session + (key -> value))
       }
     }
   }

@@ -50,14 +50,14 @@ object AdvertDao {
      if c.code === code
      if c.startTime < now
      if c.endTime > now
-   } yield c).take(size).list()
+   } yield c).take(size).list
  }
 
   def findAdverts(currentPage:Int,pageSize:Int):Page[Advert]  = play.api.db.slick.DB.withSession{ implicit session:Session =>
   val totalRows = Query(adverts.length).first
   val totalPages = (totalRows + pageSize - 1) / pageSize
   val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
-   val list = ( for(c<-adverts)yield c).drop(startRow).take(pageSize).list()
+   val list = ( for(c<-adverts)yield c).drop(startRow).take(pageSize).list
     Page[Advert](list,currentPage,totalPages)
   }
 
@@ -69,11 +69,11 @@ object AdvertDao {
     if(!startTime.isEmpty) query = query.filter(_.startTime > new Timestamp(startTime.get.getTime))
     if(!endTime.isEmpty) query = query.filter(_.endTime < new Timestamp(endTime.get.getTime))
     query = query.sortBy(_.sortNum desc)
-    val totalRows:Int = query.list().length
+    val totalRows:Int = query.list.length
     val totalPages:Int = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
 
-    val list:List[Advert] = query.drop(startRow).take(pageSize).list()
+    val list:List[Advert] = query.drop(startRow).take(pageSize).list
     Page[Advert](list,currentPage,totalPages)
 
   }

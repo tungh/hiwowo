@@ -68,7 +68,7 @@ object UsersRegLogin extends Controller {
   }
   /* 用户退出  清除缓存*/
   def logout=Action{ implicit  request =>
-   // Cache.remove(session.get("user"))
+   // Cache.remove(request.session.get("user"))
     Redirect("/").withNewSession
   }
 

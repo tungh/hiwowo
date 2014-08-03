@@ -61,11 +61,11 @@ object TopicDao {
 
   /* 统计 topic  */
   def countTopic = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(topics.length).first()
+    Query(topics.length).first
   }
 
   def countTopic(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(topics.filter(_.addTime > time).length).first()
+    Query(topics.filter(_.addTime > time).length).first
   }
 
   /* find byid with user*/
@@ -79,7 +79,7 @@ object TopicDao {
   }
   /* 查找 topic ，分页显示*/
   def findTopics(currentPage: Int, pageSize: Int): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(topics.filter(_.checkState === 1).length).first()
+    val totalRows = Query(topics.filter(_.checkState === 1).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -88,12 +88,12 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize) if c.checkState === 1) yield c
-    Page[Topic](q.list(), currentPage, totalPages)
+    Page[Topic](q.list, currentPage, totalPages)
   }
 
   /* user topics 分页显示*/
   def findUserTopics(uid: Long, currentPage: Int = 1, pageSize: Int = 10): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(topics.filter(_.uid === uid).length).first()
+    val totalRows = Query(topics.filter(_.uid === uid).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -102,13 +102,13 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize) if c.uid === uid) yield c
-    Page[Topic](q.list(), currentPage, totalPages)
+    Page[Topic](q.list, currentPage, totalPages)
   }
 
 
   /*查找*/
   def findAll(currentPage: Int, pageSize: Int): Page[Topic] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(topics.length).first()
+    val totalRows = Query(topics.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -117,12 +117,12 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.drop(startRow).take(pageSize)) yield c
-    Page[Topic](q.list(), currentPage, totalPages)
+    Page[Topic](q.list, currentPage, totalPages)
   }
 
   /* search */
   def search( title:String,currentPage: Int = 1, pageSize: Int = 10) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(topics.filter(_.title like ("%" + title + "%")).length).first()
+    val totalRows = Query(topics.filter(_.title like ("%" + title + "%")).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
@@ -131,7 +131,7 @@ object TopicDao {
       (currentPage - 1) * pageSize
     }
     val q = for (c <- topics.sortBy(c => (c.isBest, c.addTime, c.discussNum.desc)).drop(startRow).take(pageSize) if c.title.like("%" + title + "%") if c.checkState === 1) yield c
-    Page[Topic](q.list(), currentPage, totalPages)
+    Page[Topic](q.list, currentPage, totalPages)
 
   }
      /* forum 页面筛选 */
@@ -147,14 +147,14 @@ object TopicDao {
     if(sortBy == "discuss") query = query.sortBy(_._1.discussNum desc)
     if(sortBy == "love") query = query.sortBy(_._1.loveNum desc)
     query.sortBy(_._1.isBest desc)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val ts: List[(Topic,User)] = query.drop(startRow).take(pageSize).list()
+    val ts: List[(Topic,User)] = query.drop(startRow).take(pageSize).list
     Page[(Topic,User)](ts, currentPage, totalPages)
 
   }
@@ -168,14 +168,14 @@ object TopicDao {
     if(!isBest.isEmpty) query = query.filter(_.isBest === isBest.get)
     query = query.sortBy(_.id desc)
     //println("sql " +query.selectStatement)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val ts: List[Topic] = query.drop(startRow).take(pageSize).list()
+    val ts: List[Topic] = query.drop(startRow).take(pageSize).list
     Page[Topic](ts, currentPage, totalPages)
   }
 
@@ -192,11 +192,11 @@ object TopicDao {
   }
 
   def countDiscuss = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(topicDiscusses.length).first()
+    Query(topicDiscusses.length).first
   }
 
   def countDiscuss(time: Timestamp) = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    Query(topicDiscusses.filter(_.addTime > time).length).first()
+    Query(topicDiscusses.filter(_.addTime > time).length).first
   }
 
 
@@ -217,10 +217,10 @@ object TopicDao {
       if c.uid === u.id
       if c.topicId === topicId
     } yield (c,u)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0} else {(currentPage - 1) * pageSize }
-    val discusses: List[(TopicDiscuss,User)] = query.drop(startRow).take(pageSize).list()
+    val discusses: List[(TopicDiscuss,User)] = query.drop(startRow).take(pageSize).list
     Page[(TopicDiscuss,User)](discusses, currentPage, totalPages)
 
   }
@@ -236,7 +236,7 @@ object TopicDao {
     }
     val q = for (c <- topicDiscusses.drop(startRow).take(pageSize)) yield c
     //println(" q sql "+q.selectStatement)
-    val discusses: List[TopicDiscuss] = q.list()
+    val discusses: List[TopicDiscuss] = q.list
     Page[TopicDiscuss](discusses, currentPage, totalPages)
 
   }
@@ -247,14 +247,14 @@ object TopicDao {
     if (!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
     query = query.sortBy(_.id desc)
     //println("sql " +query.selectStatement)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val discusses: List[TopicDiscuss] = query.drop(startRow).take(pageSize).list()
+    val discusses: List[TopicDiscuss] = query.drop(startRow).take(pageSize).list
     Page[TopicDiscuss](discusses, currentPage, totalPages)
   }
 }

@@ -36,8 +36,8 @@ object Admin extends Controller {
 
   /* 用户退出  清除缓存*/
   def logout = Action {  implicit request =>
-      if (!session.get("user").isEmpty) {
-        Cache.remove(session.get("user").get)
+      if (!request.session.get("user").isEmpty) {
+        Cache.remove(request.session.get("user").get)
       }
       Redirect("/").withNewSession
   }

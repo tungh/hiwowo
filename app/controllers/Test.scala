@@ -8,7 +8,6 @@ import models.user.User
 import models.label.dao.LabelDao
 import java.util
 import play.mvc.Http
-import org.apache.http.NameValuePair
 import play.api.libs.Crypto
 import java.sql.Timestamp
 import java.io.File

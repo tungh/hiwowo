@@ -134,13 +134,13 @@ object Forums extends Controller {
     if(topicId.isEmpty || topicId.getOrElse(0) ==0 ){
       Ok(Json.obj("code" -> "104", "message" ->"diagram id is not correct"))
     }else{
-      if(!session.get("pet_"+topicId.get).isEmpty){
+      if(!request.session.get("pet_"+topicId.get).isEmpty){
         Ok(Json.obj("code" -> "102", "message" ->"loved"))
       } else {
         TopicSQLDao.updateLoveNum(topicId.get,1)
         val key ="pet_"+topicId.get.toString
         val value=topicId.get.toString
-        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( session + (key -> value))
+        Ok(Json.obj("code" -> "100", "message" ->"success")).withSession( request.session + (key -> value))
       }
     }
   }

@@ -2,221 +2,213 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-#TEST
-GET   /test                                controllers.Test.test
-GET   /ui                                  controllers.Test.ui
-
-
 # Home page
-GET       /                                     controllers.Pages.index(p:Int =1,size:Int =10)
-GET       /hot/$p<[0-9]+>                         controllers.Pages.index(p:Int,size:Int ?=10)
-GET       /weixin/$p<[0-9]+>                 controllers.Pages.weixin(p:Int,size:Int ?=10)
-GET       /album/$p<[0-9]+>                 controllers.Pages.album(p:Int,size:Int ?=10)
-GET       /daren/$p<[0-9]+>              controllers.Pages.daren(p:Int,size:Int ?=10)
+# Home page
+GET         /                                                   controllers.Pages.index(p:Int =1,size:Int =10)
+GET         /hot/$p<[0-9]+>                                     controllers.Pages.index(p:Int,size:Int ?=10)
+GET         /weixin/$p<[0-9]+>                                  controllers.Pages.weixin(p:Int,size:Int ?=10)
+GET         /album/$p<[0-9]+>                                   controllers.Pages.album(p:Int,size:Int ?=10)
+GET         /daren/$p<[0-9]+>                                   controllers.Pages.daren(p:Int,size:Int ?=10)
 
-GET       /pets/$p<[0-9]+>              controllers.Pages.pets(p:Int,size:Int ?=10)
-GET       /talk/$p<[0-9]+>              controllers.Pages.talk(p:Int,size:Int ?=10)
-GET       /gif/$p<[0-9]+>              controllers.Pages.gif(p:Int,size:Int ?=10)
-GET       /emotion/$p<[0-9]+>              controllers.Pages.emotion(p:Int,size:Int ?=10)
+GET         /pets/$p<[0-9]+>                                    controllers.Pages.pets(p:Int,size:Int ?=10)
+GET         /talk/$p<[0-9]+>                                    controllers.Pages.talk(p:Int,size:Int ?=10)
+GET         /gif/$p<[0-9]+>                                     controllers.Pages.gif(p:Int,size:Int ?=10)
+GET         /emotion/$p<[0-9]+>                                 controllers.Pages.emotion(p:Int,size:Int ?=10)
 
-GET       /videos/$p<[0-9]+>              controllers.Pages.videos(p:Int,size:Int ?=10)
-GET       /funny/$p<[0-9]+>              controllers.Pages.funny(p:Int,size:Int ?=10)
-GET       /kid/$p<[0-9]+>              controllers.Pages.kid(p:Int,size:Int ?=10)
-GET       /adult/$p<[0-9]+>              controllers.Pages.adult(p:Int,size:Int ?=10)
+GET         /videos/$p<[0-9]+>                                  controllers.Pages.videos(p:Int,size:Int ?=10)
+GET         /funny/$p<[0-9]+>                                   controllers.Pages.funny(p:Int,size:Int ?=10)
+GET         /kid/$p<[0-9]+>                                     controllers.Pages.kid(p:Int,size:Int ?=10)
+GET         /adult/$p<[0-9]+>                                   controllers.Pages.adult(p:Int,size:Int ?=10)
 
+# forum
+GET         /forum                                              controllers.Forums.forum(typeId:Int        ?=-1,        sortBy:        String        ?="new",        p:        Int ?=1,size        :        Int        ?=10)
 
+GET         /forum/search                                       controllers.Forums.search
+GET         /topic/$id<[0-9]+>                                  controllers.Forums.topic(id:Long,p:Int ?=1,size:Int ?=10)
+GET         /topic/edit                                         controllers.Forums.editTopic(id:Long ?=0L)
+POST        /topic/save                                         controllers.Forums.saveTopic
+POST        /topic/addDiscuss                                   controllers.Forums.addDiscuss
+POST        /topic/favor                                        controllers.Forums.topicFavor
 
-
-#forum
-GET    /forum                            controllers.Forums.forum(typeId:Int ?=-1,sortBy:String ?="new",p:Int ?=1,size:Int ?=10)
-GET    /forum/search                     controllers.Forums.search
-GET    /topic/$id<[0-9]+>                controllers.Forums.topic(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /topic/edit                       controllers.Forums.editTopic(id:Long ?=0L)
-POST   /topic/save                       controllers.Forums.saveTopic
-POST   /topic/addDiscuss                  controllers.Forums.addDiscuss
-POST   /topic/favor                      controllers.Forums.topicFavor
 
 
 
 #diagram
-GET   /pet/$id<[0-9]+>                controllers.Diagrams.diagram(id:Long)
-GET   /diagram/edit                       controllers.Diagrams.edit(id:Long ?=0L)
-POST  /diagram/delete                     controllers.Diagrams.delete
-POST  /diagram/saveDiscuss                controllers.Diagrams.saveDiscuss
-GET   /diagram/getDiscusses               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
-POST  /diagram/favor                         controllers.Diagrams.favorDiagram
-POST  /diagram/disfavor                       controllers.Diagrams.disfavorDiagram
-POST  /discuss/favor                         controllers.Diagrams.favorDiscuss
-POST  /discuss/disfavor                       controllers.Diagrams.disfavorDiscuss
+GET         /pet/$id<[0-9]+>                                    controllers.Diagrams.diagram(id:Long)
+GET         /diagram/edit                                       controllers.Diagrams.edit(id:Long ?=0L)
+POST        /diagram/delete                                     controllers.Diagrams.delete
+POST        /diagram/saveDiscuss                                controllers.Diagrams.saveDiscuss
+GET         /diagram/getDiscusses                               controllers.Diagrams.getDiscusses(diagramId:Long,sortBy:String ?="new",p:Int ?=1)
+POST        /diagram/favor                                      controllers.Diagrams.favorDiagram
+POST        /diagram/disfavor                                   controllers.Diagrams.disfavorDiagram
+POST        /discuss/favor                                      controllers.Diagrams.favorDiscuss
+POST        /discuss/disfavor                                   controllers.Diagrams.disfavorDiscuss
 
-GET   /diagram/add                     controllers.Diagrams.add
-POST  /diagram/save                    controllers.Diagrams.save
+GET         /diagram/add                                        controllers.Diagrams.add
+POST        /diagram/save                                       controllers.Diagrams.save
 
 
 
 
 # user
-GET    /welcome/$id<[0-9]+>                                 controllers.users.Users.welcome(id:Long)
-GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
-GET    /user/$id<[0-9]+>/follow                   controllers.users.Users.follow(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /user/$id<[0-9]+>/diagrams                   controllers.users.Users.diagrams(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /user/$id<[0-9]+>/collects                   controllers.users.Users.collects(id:Long,p:Int ?=1,size:Int ?=10)
-GET    /user/$id<[0-9]+>/subscribes                   controllers.users.Users.subscribes(id:Long,p:Int ?=1,size:Int ?=10)
+GET         /welcome/$id<[0-9]+>                                controllers.users.Users.welcome(id:Long)
+GET         /user/$id<[0-9]+>                                   controllers.users.Users.home(id:Long)
+GET         /user/$id<[0-9]+>/follow                            controllers.users.Users.follow(id:Long,p:Int ?=1,size:Int ?=10)
+GET         /user/$id<[0-9]+>/diagrams                          controllers.users.Users.diagrams(id:Long,p:Int ?=1,size:Int ?=10)
+GET         /user/$id<[0-9]+>/collects                          controllers.users.Users.collects(id:Long,p:Int ?=1,size:Int ?=10)
+GET         /user/$id<[0-9]+>/subscribes                        controllers.users.Users.subscribes(id:Long,p:Int ?=1,size:Int ?=10)
 
-# user 账号设定
-GET   /user/account/base           controllers.users.UsersAccount.base
-POST  /user/account/saveBase         controllers.users.UsersAccount.saveBase
-GET   /user/account/password           controllers.users.UsersAccount.password
-POST  /user/account/modifyPassword     controllers.users.UsersAccount.modifyPassword
-GET   /user/account/address           controllers.users.UsersAccount.address
-POST  /user/account/saveAddr          controllers.users.UsersAccount.saveAddress
-GET   /user/account/myAward           controllers.users.UsersAccount.myAward
-GET   /user/account/vip               controllers.users.UsersAccount.vip
-POST   /user/account/vipAuth               controllers.users.UsersAccount.vipAuth
-
-# user 操作
-POST    /user/addCollect                 controllers.users.Users.addCollect
-POST    /user/removeCollect              controllers.users.Users.removeCollect
-POST    /user/addSubscribe               controllers.users.Users.addSubscribe
-POST    /user/removeSubscribe            controllers.users.Users.removeSubscribe
-POST    /user/addFollow                  controllers.users.Users.addFollow
-POST    /user/removeFollow               controllers.users.Users.removeFollow
+# user account
+GET         /user/account/base                                  controllers.users.UsersAccount.base
+POST        /user/account/saveBase                              controllers.users.UsersAccount.saveBase
+GET         /user/account/password                              controllers.users.UsersAccount.password
+POST        /user/account/modifyPassword                        controllers.users.UsersAccount.modifyPassword
+GET         /user/account/address                               controllers.users.UsersAccount.address
+POST        /user/account/saveAddr                              controllers.users.UsersAccount.saveAddress
+GET         /user/account/myAward                               controllers.users.UsersAccount.myAward
+GET         /user/account/vip                                   controllers.users.UsersAccount.vip
+POST        /user/account/vipAuth                               controllers.users.UsersAccount.vipAuth
 
 
-#user 用户登录注册
-GET   /user/login                    controllers.users.UsersRegLogin.login
-GET   /user/logout                   controllers.users.UsersRegLogin.logout
-POST   /user/doEmailLogin             controllers.users.UsersRegLogin.doEmailLogin
-POST   /user/dialogEmailLogin             controllers.users.UsersRegLogin.dialogEmailLogin
-GET   /user/regist                    controllers.users.UsersRegLogin.regist(i:Long ?=0)
-POST  /user/doRegist                    controllers.users.UsersRegLogin.doRegist
-GET   /user/resetPassword              controllers.users.UsersRegLogin.resetPassword
-POST  /user/checkEmailExist          controllers.users.UsersRegLogin.checkEmailExist
-
-#user sns 第三方登录注册
-GET   /user/snsLogin                            controllers.users.UsersSnsLogin.snsLogin(snsType:String)
-GET   /user/:snsType/registed     controllers.users.UsersSnsLogin.registed(snsType:String,code:String,backUrl:String)
+# user operator
+POST        /user/addCollect                                    controllers.users.Users.addCollect
+POST        /user/removeCollect                                 controllers.users.Users.removeCollect
+POST        /user/addSubscribe                                  controllers.users.Users.addSubscribe
+POST        /user/removeSubscribe                               controllers.users.Users.removeSubscribe
+POST        /user/addFollow                                     controllers.users.Users.addFollow
+POST        /user/removeFollow                                  controllers.users.Users.removeFollow
 
 
+# user login
+GET         /user/login                                         controllers.users.UsersRegLogin.login
+GET         /user/logout                                        controllers.users.UsersRegLogin.logout
+POST        /user/doEmailLogin                                  controllers.users.UsersRegLogin.doEmailLogin
+POST        /user/dialogEmailLogin                              controllers.users.UsersRegLogin.dialogEmailLogin
+GET         /user/regist                                        controllers.users.UsersRegLogin.regist(id:Long ?=0)
+POST        /user/doRegist                                      controllers.users.UsersRegLogin.doRegist
+GET         /user/resetPassword                                 controllers.users.UsersRegLogin.resetPassword
+GET         /user/checkEmailExist                               controllers.users.UsersRegLogin.checkEmailExist
 
-#user   用户消息
-GET     /user/msg/system          controllers.users.UsersMsg.system(p:Int)
-GET     /user/msg/at          controllers.users.UsersMsg.at
-
-#常用的upload
-POST    /uploadDiagramPic                      controllers.Upload.uploadDiagramPic
-POST    /editor/uploadPic               controllers.Upload.uploadEditorPic
-POST    /advert/uploadPic               controllers.Upload.uploadAdvertPic
-POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
-POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
-POST  /getVideo                           controllers.Upload.getVideo
-
-#info 信息页面 新年 公告，帮助中心
-GET   /agreement                                       controllers.Infos.agreement
-GET   /aboutUs                                         controllers.Infos.aboutUs
-GET   /contactUs                                       controllers.Infos.contactUs
-GET   /friends                                         controllers.Infos.friends
-GET   /help                                            controllers.Infos.help
-GET   /cooperation                                     controllers.Infos.cooperation
-GET   /sitemap                                         controllers.Infos.siteMap
-GET   /credits                                         controllers.Infos.credits
-GET   /jiucuo                                          controllers.Infos.jiucuo
+#sns login
+GET         /user/snsLogin                                      controllers.users.UsersSnsLogin.snsLogin(snsType:String)
+GET         /user/:snsType/registed                             controllers.users.UsersSnsLogin.registed(snsType:String,code:String,backUrl:String)
 
 
 
+#user message
+GET         /user/msg/system                                    controllers.users.UsersMsg.system(p:Int)
+GET         /user/msg/at                                        controllers.users.UsersMsg.at
 
+# upload
+POST     /uploadDiagramPic                                     controllers.Upload.uploadDiagramPic
 
-#管理后台 管理员管理
+POST       /editor/uploadPic                                   controllers.Upload.uploadEditorPic
 
-GET   /admin/logout              controllers.admin.Admin.logout
-GET   /admin/index                controllers.admin.Admin.index
+POST        /advert/uploadPic                                   controllers.Upload.uploadAdvertPic
+POST        /uploadPic/select                                   controllers.Upload.uploadImageSelectPic
+POST        /user/account/doUploadPic                           controllers.Upload.doUploadUserPic
+POST        /getVideo                                           controllers.Upload.getVideo
 
-#管理后台  讨论管理
-GET   /admin/forums/topics           controllers.admin.Forums.topics(p:Int ?=1,size:Int ?=50)
-GET   /admin/forums/delete         controllers.admin.Forums.delete(id:Long)
-GET   /admin/forums/check          controllers.admin.Forums.check(id:Long,state:Int ?=1)
-GET   /admin/forums/discusses         controllers.admin.Forums.discusses(p:Int ?=1,size:Int ?=50)
-GET   /admin/forums/deleteDiscuss          controllers.admin.Forums.deleteDiscuss(id:Long)
-GET   /admin/forums/checkDiscuss          controllers.admin.Forums.checkDiscuss(id:Long,state:Int ?=1)
-GET  /admin/forums/filterTopics       controllers.admin.Forums.filterTopics
-POST /admin/forums/batchTopics       controllers.admin.Forums.batchTopics
-GET  /admin/forums/filterDiscusses       controllers.admin.Forums.filterDiscusses
-POST /admin/forums/batchDiscusses       controllers.admin.Forums.batchDiscusses
+# info
 
-#管理后台  图说管理
-GET   /admin/diagrams/list           controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=50)
-GET   /admin/diagrams/edit/$id<[0-9]+>         controllers.admin.Diagrams.edit(id:Long,msg:String ?="")
-GET  /admin/diagrams/filter            controllers.admin.Diagrams.filter
-POST   /admin/diagrams/delete         controllers.admin.Diagrams.delete
-POST   /admin/diagrams/check          controllers.admin.Diagrams.check
-POST /admin/diagrams/batch             controllers.admin.Diagrams.batch
-POST  /admin/diagrams/saveDiagram       controllers.admin.Diagrams.saveDiagram
-GET   /admin/diagrams/discusses         controllers.admin.Diagrams.discusses
+GET         /agreement                                          controllers.Infos.agreement
+GET         /aboutUs                                            controllers.Infos.aboutUs
+GET         /contactUs                                          controllers.Infos.contactUs
+GET         /friends                                            controllers.Infos.friends
+GET         /help                                               controllers.Infos.help
+GET         /cooperation                                        controllers.Infos.cooperation
+GET         /sitemap                                            controllers.Infos.siteMap
+GET         /credits                                            controllers.Infos.credits
+GET         /jiucuo                                             controllers.Infos.jiucuo
 
+# admin
+GET         /admin/logout                                       controllers.admin.Admin.logout
+GET         /admin/index                                        controllers.admin.Admin.index
 
-GET   /admin/diagrams/weixin             controllers.admin.Diagrams.weixin(p:Int ?=1,pageSize:Int ?=50)
-GET   /admin/diagrams/addWeixinDiagrams  controllers.admin.Diagrams.addWeixinDiagrams(id:Long ?=0)
-POST  /admin/diagrams/saveWeixinDiagrams  controllers.admin.Diagrams.saveWeixinDiagrams
+# admin forum
+GET         /admin/forums/topics                                controllers.admin.Forums.topics(p:Int ?=1,size:Int ?=50)
+GET         /admin/forums/delete                                controllers.admin.Forums.delete(id:Long)
+GET         /admin/forums/check                                 controllers.admin.Forums.check(id:Long,state:Int ?=1)
+GET         /admin/forums/discusses                             controllers.admin.Forums.discusses(p:Int ?=1,size:Int ?=50)
+GET         /admin/forums/deleteDiscuss                         controllers.admin.Forums.deleteDiscuss(id:Long)
+GET         /admin/forums/checkDiscuss                          controllers.admin.Forums.checkDiscuss(id:Long,state:Int ?=1)
+GET         /admin/forums/filterTopics                          controllers.admin.Forums.filterTopics
+POST        /admin/forums/batchTopics                           controllers.admin.Forums.batchTopics
+GET         /admin/forums/filterDiscusses                       controllers.admin.Forums.filterDiscusses
+POST        /admin/forums/batchDiscusses                        controllers.admin.Forums.batchDiscusses
 
-#管理后台 爬虫管理
-GET    /admin/spiders/diagrams                  controllers.admin.Spiders.diagrams(p:Int ?=1,size:Int ?=50)
-GET    /admin/spiders/topics                  controllers.admin.Spiders.topics(p:Int ?=1,size:Int ?=50)
+# admin  diagram
+GET         /admin/diagrams/list                                controllers.admin.Diagrams.list(p:Int ?=1,pageSize:Int ?=50)
+GET         /admin/diagrams/edit/$id<[0-9]+>                    controllers.admin.Diagrams.edit(id:Long,msg:String ?="")
+GET         /admin/diagrams/filter                              controllers.admin.Diagrams.filter
+POST        /admin/diagrams/delete                              controllers.admin.Diagrams.delete
+POST        /admin/diagrams/check                               controllers.admin.Diagrams.check
+POST        /admin/diagrams/batch                               controllers.admin.Diagrams.batch
+POST        /admin/diagrams/saveDiagram                         controllers.admin.Diagrams.saveDiagram
+GET         /admin/diagrams/discusses                           controllers.admin.Diagrams.discusses
+GET         /admin/diagrams/weixin                              controllers.admin.Diagrams.weixin(p:Int ?=1,pageSize:Int ?=50)
+GET         /admin/diagrams/addWeixinDiagrams                   controllers.admin.Diagrams.addWeixinDiagrams(id:Long ?=0)
+POST        /admin/diagrams/saveWeixinDiagrams                  controllers.admin.Diagrams.saveWeixinDiagrams
 
+# admin spiders
+GET         /admin/spiders/diagrams                             controllers.admin.Spiders.diagrams(p:Int ?=1,size:Int ?=50)
+GET         /admin/spiders/topics                               controllers.admin.Spiders.topics(p:Int ?=1,size:Int ?=50)
 
-#管理后台 标签管理
-GET   /admin/labels/list           controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=50)
-GET   /admin/labels/core           controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=100)
-GET   /admin/labels/filter            controllers.admin.Labels.filter
-GET   /admin/labels/edit          controllers.admin.Labels.edit(id:Long ?=0L)
-POST  /admin/labels/save              controllers.admin.Labels.save
-POST   /admin/labels/delete         controllers.admin.Labels.delete
-POST   /admin/labels/check          controllers.admin.Labels.check
-POST  /admin/labels/batch             controllers.admin.Labels.batch
-GET   /admin/labels/groups           controllers.admin.Labels.groups(p:Int ?=1,pageSize:Int ?=50)
-GET   /admin/labels/editGroup        controllers.admin.Labels.editGroup(id:Long ?=0L)
-POST   /admin/labels/saveGroup        controllers.admin.Labels.saveGroup
-POST   /admin/labels/deleteGroup      controllers.admin.Labels.deleteGroup
+# admin  label
 
-GET    /admin/labels/groupLabels       controllers.admin.Labels.groupLabels(gid:Long)
-POST   /admin/labels/addGroupLabel     controllers.admin.Labels.addGroupLabel
-POST   /admin/labels/deleteGroupLabel  controllers.admin.Labels.deleteGroupLabel
+GET         /admin/labels/list                                  controllers.admin.Labels.list(p:Int ?=1,pageSize:Int ?=50)
+GET         /admin/labels/core                                  controllers.admin.Labels.core(p:Int ?=1,pageSize:Int ?=100)
+GET         /admin/labels/filter                                controllers.admin.Labels.filter
+GET         /admin/labels/edit                                  controllers.admin.Labels.edit(id:Long ?=0L)
+POST        /admin/labels/save                                  controllers.admin.Labels.save
+POST        /admin/labels/delete                                controllers.admin.Labels.delete
+POST        /admin/labels/check                                 controllers.admin.Labels.check
+POST        /admin/labels/batch                                 controllers.admin.Labels.batch
+GET         /admin/labels/groups                                controllers.admin.Labels.groups(p:Int ?=1,pageSize:Int ?=50)
+GET         /admin/labels/editGroup                             controllers.admin.Labels.editGroup(id:Long ?=0L)
+POST        /admin/labels/saveGroup                             controllers.admin.Labels.saveGroup
+POST        /admin/labels/deleteGroup                           controllers.admin.Labels.deleteGroup
 
-GET   /admin/labels/labelDiagrams/$labelId<[0-9]+>      controllers.admin.Labels.labelDiagrams(labelId:Long,p:Int ?=1,pageSize:Int ?=50)
-GET   /admin/labels/filterLabelDiagrams                 controllers.admin.Labels.filterLabelDiagrams
-POST  /admin/labels/batchLabelDiagrams                 controllers.admin.Labels.batchLabelDiagrams
+GET         /admin/labels/groupLabels                           controllers.admin.Labels.groupLabels(gid:Long)
+POST        /admin/labels/addGroupLabel                         controllers.admin.Labels.addGroupLabel
+POST        /admin/labels/deleteGroupLabel                      controllers.admin.Labels.deleteGroupLabel
 
+GET         /admin/labels/labelDiagrams/$labelId<[0-9]+>        controllers.admin.Labels.labelDiagrams(labelId:Long,p:Int ?=1,pageSize:Int ?=50)
+GET         /admin/labels/filterLabelDiagrams                   controllers.admin.Labels.filterLabelDiagrams
+POST        /admin/labels/batchLabelDiagrams                    controllers.admin.Labels.batchLabelDiagrams
 
+# admin user
 
-#管理后台 用户管理
-GET  /admin/users/users            controllers.admin.Users.users(p:Int ?=1,size:Int ?=50)
-GET  /admin/users/black           controllers.admin.Users.black(uid:Long)
-GET  /admin/users/edit            controllers.admin.Users.edit(uid:Long)
-GET  /admin/users/view            controllers.admin.Users.view(uid:Long)
-GET  /admin/users/filterUsers       controllers.admin.Users.filterUsers
-POST /admin/users/batchUsers       controllers.admin.Users.batchUsers
+GET         /admin/users/users                                  controllers.admin.Users.users(p:Int ?=1,size:Int ?=50)
+GET         /admin/users/black                                  controllers.admin.Users.black(uid:Long)
+GET         /admin/users/edit                                   controllers.admin.Users.edit(uid:Long)
+GET         /admin/users/view                                   controllers.admin.Users.view(uid:Long)
+GET         /admin/users/filterUsers                            controllers.admin.Users.filterUsers
+POST        /admin/users/batchUsers                             controllers.admin.Users.batchUsers
 
-#管理后台 内容管理
-GET   /admin/cmses/list           controllers.admin.Cmses.list(p:Int ?=1,size:Int ?=50)
-GET   /admin/cmses/edit           controllers.admin.Cmses.edit(id:Long ?=0l)
-POST  /admin/cmses/save           controllers.admin.Cmses.save
-POST  /admin/cmses/delete         controllers.admin.Cmses.delete
+# admin cmses
+GET         /admin/cmses/list                                   controllers.admin.Cmses.list(p:Int ?=1,size:Int ?=50)
+GET         /admin/cmses/edit                                   controllers.admin.Cmses.edit(id:Long ?=0l)
+POST        /admin/cmses/save                                   controllers.admin.Cmses.save
+POST        /admin/cmses/delete                                 controllers.admin.Cmses.delete
 
-#管理后台 广告管理
-GET   /admin/adverts/list           controllers.admin.Adverts.list(p:Int ?=1,size:Int ?=50)
-GET   /admin/adverts/edit           controllers.admin.Adverts.edit(id:Long ?=0l)
-POST  /admin/adverts/save           controllers.admin.Adverts.save
-POST  /admin/adverts/delete         controllers.admin.Adverts.delete
-GET   /admin/adverts/filter           controllers.admin.Adverts.filter
-POST /admin/adverts/batch             controllers.admin.Adverts.batch
+# admin adverts
+GET         /admin/adverts/list                                 controllers.admin.Adverts.list(p:Int ?=1,size:Int ?=50)
+GET         /admin/adverts/edit                                 controllers.admin.Adverts.edit(id:Long ?=0l)
+POST        /admin/adverts/save                                 controllers.admin.Adverts.save
+POST        /admin/adverts/delete                               controllers.admin.Adverts.delete
+GET         /admin/adverts/filter                               controllers.admin.Adverts.filter
+POST        /admin/adverts/batch                                controllers.admin.Adverts.batch
 
-#管理后台 站内信管理
-GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
-POST  /admin/msgs/saveSystemMsg       controllers.admin.Msgs.saveSystemMsg
-GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1,size:Int ?=50)
-GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1,size:Int ?=50)
-
+# admin msg
+GET         /admin/msgs/editSystemMsg                           controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
+POST        /admin/msgs/saveSystemMsg                           controllers.admin.Msgs.saveSystemMsg
+GET         /admin/msgs/systemMsgs                              controllers.admin.Msgs.systemMsgs(p:Int ?=1,size:Int ?=50)
+GET         /admin/msgs/atMsgs                                  controllers.admin.Msgs.atMsgs(p:Int ?=1,size:Int ?=50)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
-GET     /images/*file               controllers.Assets.at(path="/public/images", file)
-GET     /admin/assets/*file         controllers.Assets.at(path="/public/admin/assets", file)
+GET         /assets/*file                                       controllers.Assets.at(path="/public/assets", file)
+GET         /images/*file                                       controllers.Assets.at(path="/public/images", file)
+GET         /admin/assets/*file                                 controllers.Assets.at(path="/public/admin/assets", file)
+
+

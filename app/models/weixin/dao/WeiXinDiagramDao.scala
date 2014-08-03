@@ -42,7 +42,7 @@ object WeixinDiagramDao {
       if c.period === period
       if c.diagramId === d.id
       if d.uid === u.id
-    }yield(d,u)).list()
+    }yield(d,u)).list
   }
 
   def findDiagrams(currentPage:Int,pageSize:Int):Page[(Diagram,User)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
@@ -59,13 +59,13 @@ object WeixinDiagramDao {
       u<-users
       if c.diagramId === d.id
       if d.uid === u.id
-    }yield(d,u)).drop(startRow).take(pageSize).sortBy(_._1.id desc).list()
+    }yield(d,u)).drop(startRow).take(pageSize).sortBy(_._1.id desc).list
 
     Page[(Diagram,User)](list,currentPage,totalPages)
   }
 
   def findWeixinDiagrams(id:Long):List[WeixinDiagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    (for(c<-weixinDiagrams if c.id === id )yield c).list()
+    (for(c<-weixinDiagrams if c.id === id )yield c).list
   }
   def findWeixinDiagrams(currentPage:Int,pageSize:Int):Page[(WeixinDiagram,Diagram)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
     val totalRows = Query(weixinDiagrams.length).first
@@ -79,7 +79,7 @@ object WeixinDiagramDao {
       w <- weixinDiagrams
       d <- diagrams
       if w.diagramId === d.id
-    }yield(w,d)).drop(startRow).take(pageSize).sortBy(_._2.id desc).list()
+    }yield(w,d)).drop(startRow).take(pageSize).sortBy(_._2.id desc).list
 
     Page[(WeixinDiagram,Diagram)](list,currentPage,totalPages)
   }

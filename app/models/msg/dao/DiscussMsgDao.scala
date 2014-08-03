@@ -24,23 +24,23 @@ object DiscussMsgDao {
     discussMsgsAutoInc.insert(discusserId, discusserName,discussType,thirdId,content,ownerId)
 }
   def findMsgByLovedId(ownerId:Long,currentPage:Int,pageSize:Int):Page[DiscussMsg]  = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows=Query(discussMsgs.filter(_.ownerId === ownerId ).length).first()
+    val totalRows=Query(discussMsgs.filter(_.ownerId === ownerId ).length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<- discussMsgs.filter(_.ownerId === ownerId).drop(startRow).take(pageSize)  )yield c
     //println(" q sql "+q.selectStatement)
-    val msgs:List[DiscussMsg]=  q.list()
+    val msgs:List[DiscussMsg]=  q.list
     Page[DiscussMsg](msgs,currentPage,totalPages)
   }
   def findAll(currentPage:Int,pageSize:Int):Page[DiscussMsg] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows=Query(discussMsgs.length).first()
+    val totalRows=Query(discussMsgs.length).first
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for( c<- discussMsgs.drop(startRow).take(pageSize)  )yield c
     //println(" q sql "+q.selectStatement)
-    val msgs:List[DiscussMsg]=  q.list()
+    val msgs:List[DiscussMsg]=  q.list
     Page[DiscussMsg](msgs,currentPage,totalPages)
   }
 }

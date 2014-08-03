@@ -46,10 +46,10 @@ object LabelDao {
 
 
   def findGroups(currentPage:Int,pageSize:Int):Page[Group] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(groups.length).first()
+    val totalRows = Query(groups.length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
-   val list = (for( c<-groups )yield c).drop(startRow).take(pageSize).list()
+   val list = (for( c<-groups )yield c).drop(startRow).take(pageSize).list
     Page[Group](list,currentPage,totalPages)
   }
      /*  查找 group 下 的 标签 */
@@ -61,7 +61,7 @@ object LabelDao {
      if g.id === gl.groupId
      if gl.labelId === l.id
      if g.id === gid
-    }yield l).list()
+    }yield l).list
 
   }
 
@@ -99,23 +99,23 @@ object LabelDao {
     ( for(t <- labels if t.name === name ) yield t ).firstOption
   }
  def  findAllLabels(currentPage:Int,pageSize:Int):Page[Label] =  play.api.db.slick.DB.withSession{ implicit session:Session =>
-   val totalRows = Query(labels.length).first()
+   val totalRows = Query(labels.length).first
    val totalPages = (totalRows + pageSize - 1) / pageSize
    val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
    val list = (for{
     c <- labels
- }yield c ).drop(startRow).take(pageSize).list()
+ }yield c ).drop(startRow).take(pageSize).list
 
    Page[Label](list,currentPage,totalPages)
  }
   def findCoreLabels(level:Int,currentPage:Int,pageSize:Int):Page[Label] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(labels.filter(_.level === level).length).first()
+    val totalRows = Query(labels.filter(_.level === level).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
     val list =( for{
       c <- labels
       if c.level === level
-    }yield c ).drop(startRow).take(pageSize).list()
+    }yield c ).drop(startRow).take(pageSize).list
     Page[Label](list,currentPage,totalPages)
 
   }
@@ -128,14 +128,14 @@ object LabelDao {
     if(!spell.isEmpty) query = query.filter(_.spell like "%"+spell.get+"%")
     if(!checkState.isEmpty) query = query.filter(_.checkState === checkState)
     query = query.sortBy(_.id desc)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val ts: List[Label] = query.drop(startRow).take(pageSize).list()
+    val ts: List[Label] = query.drop(startRow).take(pageSize).list
     Page[Label](ts, currentPage, totalPages)
   }
 
@@ -175,7 +175,7 @@ object LabelDao {
   }
    /* 查找label 下的所有diagram */
   def findLabelDiagrams(labelId:Long,currentPage:Int,pageSize:Int):Page[(LabelDiagram,Diagram)] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-     val totalRows = Query(labelDiagrams.filter(_.labelId === labelId).length).first()
+     val totalRows = Query(labelDiagrams.filter(_.labelId === labelId).length).first
      val totalPages = (totalRows + pageSize - 1) / pageSize
      val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
      val list = ( for{
@@ -183,11 +183,11 @@ object LabelDao {
        d <- diagrams
        if ld.diagramId === d.id
        if ld.labelId === labelId
-     } yield (ld,d) ).drop(startRow).take(pageSize).list()
+     } yield (ld,d) ).drop(startRow).take(pageSize).list
      Page[(LabelDiagram,Diagram)](list,currentPage,totalPages)
    }
   def findLabelDiagrams(labelId:Long,checkState:Int,currentPage:Int,pageSize:Int):Page[Diagram] = play.api.db.slick.DB.withSession{ implicit session:Session =>
-    val totalRows = Query(labelDiagrams.filter(_.labelId === labelId).filter(_.checkState === checkState).length).first()
+    val totalRows = Query(labelDiagrams.filter(_.labelId === labelId).filter(_.checkState === checkState).length).first
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
     val list = ( for{
@@ -196,7 +196,7 @@ object LabelDao {
         if ld.diagramId === d.id
         if ld.checkState === checkState
         if ld.labelId === labelId
-    } yield d ).drop(startRow).take(pageSize).list()
+    } yield d ).drop(startRow).take(pageSize).list
     Page[Diagram](list,currentPage,totalPages)
   }
   /* 查找label 下 不同type 的 diagram */
@@ -209,10 +209,10 @@ object LabelDao {
      if ld.checkState === checkState
      if d.typeId === typeId
    }yield d)
-     val totalRows = query.list().length
+     val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
-    val list= query.drop(startRow).take(pageSize).list()
+    val list= query.drop(startRow).take(pageSize).list
     Page[Diagram](list,currentPage,totalPages)
   }
 
@@ -227,14 +227,14 @@ object LabelDao {
     if(!title.isEmpty) query = query.filter(_._2.title like "%"+title.get+"%")
     if(!checkState.isEmpty) query = query.filter(_._1.checkState === checkState.get)
     if(!typeId.isEmpty) query = query.filter(_._2.typeId === typeId.get)
-    val totalRows = query.list().length
+    val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) {
       0
     } else {
       (currentPage - 1) * pageSize
     }
-    val ts: List[(LabelDiagram,Diagram)] = query.drop(startRow).take(pageSize).list()
+    val ts: List[(LabelDiagram,Diagram)] = query.drop(startRow).take(pageSize).list
     Page[(LabelDiagram,Diagram)](ts, currentPage, totalPages)
 
   }
@@ -249,10 +249,10 @@ object LabelDao {
           if ld.checkState === checkState
           if gl.groupId === groupId
   }yield d)
-      val totalRows = query.list().length
+      val totalRows = query.list.length
     val totalPages = (totalRows + pageSize - 1) / pageSize
     val startRow = if (currentPage < 1 || currentPage > totalPages) { 0 } else { (currentPage - 1) * pageSize }
-    val list= query.drop(startRow).take(pageSize).list()
+    val list= query.drop(startRow).take(pageSize).list
 
     Page[Diagram](list,currentPage,totalPages)
   }
